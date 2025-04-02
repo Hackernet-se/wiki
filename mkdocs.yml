@@ -1,0 +1,4 @@
+site_name: My Wiki
+site_url: https://hackernet-se.github.io
+theme:
+  name: material
