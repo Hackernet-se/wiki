@@ -1,6 +1,9 @@
-# Welcome to MkDocs
+# HämligaHackerWikin
+Här kommer alla hämliga hackerknep att läggas upp
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Har du tips, idéer eller feedback på det som skrivs, hör gärna av dig.
+
+Genom vårat Github repo https://github.com/Hackernet-se/wiki
 
 ## Commands
 
@@ -15,3 +18,4 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
     docs/
         index.md  # The documentation homepage.
         ...       # Other markdown pages, images and other files.
+
