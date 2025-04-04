@@ -1,12 +1,42 @@
 site_name: Hackernet
 site_url: https://hackernet-se.github.io/wiki/
+site_description: >-
+  Hackernet är en hemsida med lite guide, tips och idéer för nätverk, linux och annat.
+repo_name: Hackernet-se/wiki
+repo_url: https://github.com/Hackernet-se/wiki
+#edit_uri: ""
+nav:
+  - Home: index.md
+  - Linux:
+    - linux.md
+    - Distar: linux_os/
+    - Kickstart: linux_kickstart/
+    - Services: linux_services/
+    - Tools: linux_tools/
+  - Network:
+    - Arista: arista/
+    - Cisco: cisco/
+    - Cumulus: cumulus/
+    - Extreme Network: extreme/
+    - Juniper: juniper/
+    - Linux Networking: linux_networking/
+    - Unifi: unifi/
+  - VMware: vmware/
+  - Windows: windows/
+  - Hardware: hardware/
+
+
 theme:
   name: material
   font:
     text: Merriweather Sans
     code: Red Hat Mono
   features:
+    - navigation.top
+    - navigation.tabs
     - navigation.footer
+    - navigation.instant
+  language: en
   palette:
     # Dark Mode
     - scheme: slate
@@ -23,6 +53,10 @@ theme:
         name: Light mode
       primary: blue
       accent: deep orange
+# Plugins
+plugins:
+  - search
+  - include_dir_to_nav
 markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
