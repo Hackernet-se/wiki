@@ -1,1 +1,1 @@
-# hackernet.github.io
+# [Wiki](https://hackernet-se.github.io/wiki/)
