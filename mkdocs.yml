@@ -60,7 +60,11 @@ theme:
 plugins:
   - search
   - include_dir_to_nav
+  - glightbox
 markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid

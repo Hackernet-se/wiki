@@ -28,27 +28,15 @@ på [QoS](/Cisco_QoS "wikilink")-policy för self-generated packets. BFD
 inblandade enheterna.
 
 ### Paket
+![Cisco_BFD_Control.PNG](../img/Cisco_BFD_Control.PNG)
+/// caption
+Control packet
+///
 
-<div class="mw-collapsible mw-collapsed" style="width:210px">
-
-Control packet:
-
-<div class="mw-collapsible-content">
-
-[<File:Cisco_BFD_Control.PNG>](/File:Cisco_BFD_Control.PNG "wikilink")
-
-</div>
-</div>
-<div class="mw-collapsible mw-collapsed" style="width:210px">
-
-Echo packet:
-
-<div class="mw-collapsible-content">
-
-[<File:Cisco_BFD_Echo.PNG>](/File:Cisco_BFD_Echo.PNG "wikilink")
-
-</div>
-</div>
+![Cisco_BFD_Echo.PNG](../img/Cisco_BFD_Echo.PNG)
+/// caption
+Echo packet
+///
 
 Konfiguration
 =============
@@ -108,16 +96,10 @@ till andra sidan.
 `interface gi2`
 ` ip ospf bfd disable`
 
-<div class="mw-collapsible mw-collapsed" style="width:280px">
-
-Admin Down:
-
-<div class="mw-collapsible-content">
-
-[<File:Cisco_BFD_AdminDown.PNG>](/File:Cisco_BFD_AdminDown.PNG "wikilink")
-
-</div>
-</div>
+![Cisco_BFD_AdminDown](../img/Cisco_BFD_AdminDown.PNG)
+/// caption
+Admin Down
+///
 
 ### Echo mode
 
@@ -252,5 +234,3 @@ OSPF
 Verify
 
 `show bfd session`
-
-[Category:Cisco](/Category:Cisco "wikilink")
