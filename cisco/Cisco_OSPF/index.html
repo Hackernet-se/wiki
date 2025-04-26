@@ -1,0 +1,8540 @@
+
+<!doctype html>
+<html lang="sv" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Hackernet är en hemsida med lite guide, tips och idéer för nätverk, linux och annat.">
+      
+      
+      
+        <link rel="canonical" href="https://hackernet.se/cisco/Cisco_OSPF/">
+      
+      
+        <link rel="prev" href="../Cisco_Nexus/">
+      
+      
+        <link rel="next" href="../Cisco_OSPFv3/">
+      
+      
+      <link rel="icon" href="../../images/favicon.gif">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Cisco OSPF - Hackernet</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:300,300i,400,400i,700,700i%7CRed+Hat+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Merriweather Sans";--md-code-font:"Red Hat Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-DSRB6JMF85"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-DSRB6JMF85",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-DSRB6JMF85",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#metric" class="md-skip">
+          Gå till innehållet
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Sidhuvud">
+    <a href="../.." title="Hackernet" class="md-header__button md-logo" aria-label="Hackernet" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Hackernet
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cisco OSPF
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1M8 13h8v-2H8zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4a5 5 0 0 0 5-5 5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Sök" placeholder="Sök" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Sök">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Rensa" aria-label="Rensa" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialiserar sök
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Hackernet-se/wiki" title="Gå till datakatalog" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Hackernet-se/wiki
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Flikar" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../linux/" class="md-tabs__link">
+          
+  
+  
+  Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../arista/Arista_BGP/" class="md-tabs__link">
+          
+  
+  
+  Network
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../vmware/Distributed_Switch/" class="md-tabs__link">
+          
+  
+  
+  VMware
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../windows/Batch_script/" class="md-tabs__link">
+          
+  
+  
+  Windows
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hardware/HPE_BL460c_G7/" class="md-tabs__link">
+          
+  
+  
+  Hardware
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Hackernet" class="md-nav__button md-logo" aria-label="Hackernet" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Hackernet
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Hackernet-se/wiki" title="Gå till datakatalog" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Hackernet-se/wiki
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linux
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Distar
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Distar
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_os/Debian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Debian
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_os/Fedora/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fedora
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_os/Kali_Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kali Linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_os/OS_X/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OS X
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_os/Security_Onion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Security Onion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_os/Ubuntu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ubuntu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Kickstart
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Kickstart
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_kickstart/Kickstart_Debian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kickstart Debian
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_kickstart/Kickstart_Fedora/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kickstart Fedora
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_kickstart/Kickstart_Ubuntu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kickstart Ubuntu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Ansible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ansible
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Apache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Apache
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/AutoFS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AutoFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/BIND/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BIND
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Bcache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bcache
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Beeswarm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Beeswarm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Cacti/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cacti
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Certbot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Certbot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Clogin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Clogin
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Digitala_Certifikat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Digitala Certifikat
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/ELK/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ELK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/EVE-NG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    EVE-NG
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Emby_Server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Emby Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Fabric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fabric
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Fail2Ban/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fail2Ban
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/FastNetMon/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FastNetMon
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Flexget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flexget
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Foreman/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Foreman
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/FreeIPA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FreeIPA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/GNS3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GNS3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Gammu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gammu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Gitlab/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gitlab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/GlusterFS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GlusterFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Golang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Golang
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Google_Authenticator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Google Authenticator
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grafana
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Graylog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graylog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/HashiCorp_Vault/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HashiCorp Vault
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Hastebin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hastebin
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/IPXE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IPXE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/IRedMail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IRedMail
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/ISC_DHCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ISC DHCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Icinga/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Icinga
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/InspIRCd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    InspIRCd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Jumpgate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jumpgate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/KVM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    KVM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Kea/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kea
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/LAMP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LAMP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/LUKS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LUKS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/LXD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LXD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Let%27s_Encrypt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Let's Encrypt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/LibreNMS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LibreNMS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Logstash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logstash
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/MEAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MEAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Mailserver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mailserver
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/MediaWiki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MediaWiki
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/ModSecurity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ModSecurity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Multiarch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multiarch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/MySQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MySQL
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/NFS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/NIPAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NIPAP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Netdisco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Netdisco
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Nginx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nginx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Ntopng/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ntopng
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/OSSEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OSSEC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Ookla_Speedtest_Mini/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ookla Speedtest Mini
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/OpenLDAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenLDAP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/OpenShift/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenShift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/OpenVPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenVPN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Owncloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Owncloud
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Oxidized/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Oxidized
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/PXE-Deploy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PXE-Deploy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Pagespeed/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pagespeed
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/PhpIPAM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PhpIPAM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Pi-hole/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pi-hole
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Piwik/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Piwik
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Pmacct/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Pmacct
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/PowerDNS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PowerDNS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Prometheus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prometheus
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Puppet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Puppet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Quota/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quota
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Rancid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rancid
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Rar2fs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rar2fs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/RatticDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RatticDB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Realmd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Realmd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Roundcube/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Roundcube
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Rsyslog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rsyslog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/SELinux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SELinux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/SSH/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Shalt%C3%BAre/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Shaltúre
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/SmokePing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SmokePing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Spacewalk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spacewalk
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Squid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Squid
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Sshttp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sshttp
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Syntaxhighlight/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Syntaxhighlight
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/TFTP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TFTP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Tor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Transmission/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transmission
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Ulteo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ulteo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Vagrant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vagrant
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Vsftpd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vsftpd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Weechat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Weechat
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/Xming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Xming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_services/ZFS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ZFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tools
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Apt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Apt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bash
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Cron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cron
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/DNF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DNF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Dd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Dialog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dialog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Dnstracer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dnstracer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Dumpcap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dumpcap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/EFI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    EFI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/FirewallD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    FirewallD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Frandom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Frandom
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Hdparm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Hdparm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/IPMI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IPMI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Iperf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iperf
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Iproute2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iproute2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Iptables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Iptables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/JQ/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JQ
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Keepalived/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Keepalived
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Mdadm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mdadm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/NTP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    NTP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Nameif/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nameif
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Psql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Psql
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Rsync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rsync
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Scapy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scapy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/System_storage_manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    System storage manager
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Systemd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Systemd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Tcpdump/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tcpdump
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Tmux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tmux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_tools/Tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tree
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Arista
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Arista
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arista/Arista_BGP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arista BGP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arista/Arista_EOS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arista EOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arista/Arista_EVPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arista EVPN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arista/Arista_OSPF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arista OSPF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arista/Arista_VXLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arista VXLAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cisco
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Cisco
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_ACI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco ACI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_ASA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco ASA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_ASA_VPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco ASA VPN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_BFD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco BFD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_BGP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco BGP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_BIER/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco BIER
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_CEF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco CEF
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_CSR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco CSR
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_DHCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco DHCP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_DMVPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco DMVPN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_EIGRP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco EIGRP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_EVPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco EVPN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_EtherChannel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco EtherChannel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_FC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco FC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_FCoE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco FCoE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_FHRP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco FHRP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_FTD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco FTD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_GRE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco GRE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_HSRP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco HSRP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_IGMP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco IGMP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_IOS-XR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco IOS-XR
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_IOS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco IOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_IPsec/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco IPsec
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_IS-IS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco IS-IS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_L2VPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco L2VPN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_L2_Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco L2 Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_L3_Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco L3 Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_LISP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco LISP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_Logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco Logging
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_MPLS-TE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco MPLS-TE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_MPLS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco MPLS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_MST/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco MST
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_MVPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco MVPN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_Multicast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco Multicast
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_NAT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco NAT
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_NetFlow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco NetFlow
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_Nexus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco Nexus
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Cisco OSPF
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco OSPF
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Innehållsförteckning">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Innehållsförteckning
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#metric" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metric
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Packets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grannskap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grannskap
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lsa-typer" class="md-nav__link">
+    <span class="md-ellipsis">
+      LSA-typer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#area-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Area types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natverkstyper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nätverkstyper
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nätverkstyper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#designated-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      Designated Router
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#konfiguration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Konfiguration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Konfiguration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adjacency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adjacency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adjacency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiarea-adjacency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiarea Adjacency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default Routing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summarization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convergence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convergence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Convergence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lsdb-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      LSDB Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      LFA
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virtual-link" class="md-nav__link">
+    <span class="md-ellipsis">
+      Virtual Link
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redistribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redistribution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nx-os" class="md-nav__link">
+    <span class="md-ellipsis">
+      NX-OS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios-xr" class="md-nav__link">
+    <span class="md-ellipsis">
+      IOS-XR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_OSPFv3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco OSPFv3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_OTV/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco OTV
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_PCE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco PCE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_PE-CE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco PE-CE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_PIM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco PIM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_PfR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco PfR
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_QoS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco QoS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_RIP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco RIP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_Routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco Routing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_SNMP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco SNMP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_SPAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco SPAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_SR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco SR
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_STP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco STP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_Services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco Services
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_TCLSH/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco TCLSH
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_UDLD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco UDLD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_VLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco VLAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_VSS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco VSS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_VTP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco VTP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_VXLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco VXLAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_WAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco WAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_Wireless/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco Wireless
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cisco_pyATS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cisco pyATS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Nexus_1000V/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nexus 1000V
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Nexus_FabricPath/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nexus FabricPath
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Nexus_VDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nexus VDC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Nexus_vPC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Nexus vPC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Cumulus
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Cumulus
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cumulus/Cumulus_EVPN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cumulus EVPN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cumulus/Cumulus_Linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cumulus Linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Extreme Network
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Extreme Network
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extreme/Extreme_VLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extreme VLAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extreme/Extreme_XOS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extreme XOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Juniper
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Juniper
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../juniper/Juniper_Aggregated_Ethernet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Juniper Aggregated Ethernet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../juniper/Juniper_JunOS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Juniper JunOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../juniper/Juniper_VLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Juniper VLAN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../juniper/Juniper_VRRP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Juniper VRRP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Linux Networking
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Linux Networking
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/BIRD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BIRD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/Bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bridge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/ExaBGP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ExaBGP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/IPv6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IPv6
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/Mininet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mininet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/Netmiko/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Netmiko
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/Netsim-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Netsim-tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/OpenDaylight/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OpenDaylight
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/Open_vSwitch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Open vSwitch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/Quagga/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quagga
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/Suzieq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Suzieq
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/VPP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VPP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linux_networking/VyOS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VyOS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Unifi
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Unifi
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unifi/UniFi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UniFi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    VMware
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            VMware
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/Distributed_Switch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Distributed Switch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/ESXi_Secure_Boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ESXi Secure Boot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/ESXi_Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ESXi Security
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/ESXi_pktcap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ESXi pktcap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/Kickstart_ESXi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kickstart ESXi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/PSC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PSC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/PowerCLI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PowerCLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/Standard_vSwitch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Standard vSwitch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/VM_Encryption/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VM Encryption
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/VMware_ESXi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VMware ESXi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/VMware_Vsphere_Client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VMware Vsphere Client
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/VMware_vCenter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VMware vCenter
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../vmware/VSphere_Permissions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VSphere Permissions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Windows
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Windows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/Batch_script/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Batch script
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/BitLocker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BitLocker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/Chocolatey/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chocolatey
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/InSSIDer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    InSSIDer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/Sk%C3%A4rmsl%C3%A4ckare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Skärmsläckare
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Hardware
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Hardware
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/HPE_BL460c_G7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HPE BL460c G7
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/HPE_BL460c_Gen9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HPE BL460c Gen9
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/Lenovo_BIOS_update/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lenovo BIOS update
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Innehållsförteckning">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Innehållsförteckning
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#metric" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metric
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#packets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Packets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grannskap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grannskap
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lsa-typer" class="md-nav__link">
+    <span class="md-ellipsis">
+      LSA-typer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#area-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Area types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natverkstyper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nätverkstyper
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nätverkstyper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#designated-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      Designated Router
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#konfiguration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Konfiguration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Konfiguration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adjacency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adjacency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adjacency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiarea-adjacency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiarea Adjacency
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default Routing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summarization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convergence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convergence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Convergence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lsdb-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      LSDB Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      LFA
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#virtual-link" class="md-nav__link">
+    <span class="md-ellipsis">
+      Virtual Link
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redistribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redistribution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nx-os" class="md-nav__link">
+    <span class="md-ellipsis">
+      NX-OS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ios-xr" class="md-nav__link">
+    <span class="md-ellipsis">
+      IOS-XR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<p>Open Shortest Path First (RFC 2328) är ett link-state routingprotokoll
+standardiserat av Internet Engineering Task Force (IETF). Link-state
+innebär att enheterna känner till alla länkar i topologin och deras
+<em>operational states</em> och lagrar detta i en LSDB. OSPF konvergerar snabbt
+och har bra skalbarhet. Det kommunicerar med multicast som har ttl satt
+till 1 alternativt unicast på vissa nätverkstyper. OSPF använder IP
+protokoll #89. Se även <a href="/Cisco_OSPFv3" title="wikilink">Cisco OSPFv3</a> för
+IPv6-stöd.</p>
+<p><strong>Type:</strong> Link State</p>
+<p><strong>Algorithm:</strong> Dijkstra</p>
+<p><strong>AD:</strong> 110</p>
+<p><strong>Metric:</strong> Cost (Bandwidth)</p>
+<p><strong>Protocols:</strong> IP</p>
+<p><strong>Packets:</strong> 5</p>
+<h2 id="metric">Metric</h2>
+<p>OSPF i IOS använder 100MBit/s som referensbandbredd för att räkna ut
+cost på varje länk. Man kan ändra detta till t.ex. 100G.</p>
+<p><code>router ospf 1</code>
+<code>auto-cost reference-bandwidth 100000  #Mbits per second</code>
+<code>show ip ospf interface | i Cost</code></p>
+<p>Om man stänger av auto-cost får alla länkar samma cost (10) oavsett
+bandbredd, så som <a href="/Cisco_IS-IS" title="wikilink">IS-IS</a> fungerar.</p>
+<p><strong>Preferens</strong>
+Det är viktigt att känna till att olika typer av routes har olika
+preferens och detta går före metric för path selection. I vissa fall går
+detta att ändra.</p>
+<ol>
+<li>intra-area</li>
+<li>inter-area</li>
+<li>external</li>
+<li>nssa-external</li>
+</ol>
+<p>Routrar föredrar default N2 routes över E2 routes som injicerats av
+typ-7 till typ-5 translator men detta går att ändra.</p>
+<p><code>router ospf 1</code>
+<code>compatible rfc1587</code></p>
+<h2 id="packets">Packets</h2>
+<p>Alla paket kan vara unicast eller multicast, det avgörs av nätverkstyp.</p>
+<ul>
+<li><strong>Hello:</strong> Används för att upptäcka grannar. Innehåller mask,
+    timers, flaggor (capabilities), DR/BDR (om det finns) och router-ID
+    för grannar.</li>
+</ul>
+<div class="mw-collapsible mw-collapsed" style="width:250px">
+
+
+Exempel:
+
+<div class="mw-collapsible-content">
+
+[<File:Cisco_OSPF_Hello.PNG>](/File:Cisco_OSPF_Hello.PNG "wikilink")
+
+</div>
+</div>
+
+<ul>
+<li><strong>Database Description:</strong> Innehåller LSA headers under den initiala
+    topologi-synken. Används först för att avgöra master/slave i
+    grannskapet, högst router-id blir master.</li>
+</ul>
+<div class="mw-collapsible mw-collapsed" style="width:250px">
+
+
+Exempel:
+
+<div class="mw-collapsible-content">
+
+[<File:Cisco_OSPF_DD.PNG>](/File:Cisco_OSPF_DD.PNG "wikilink")
+
+</div>
+</div>
+
+<ul>
+<li><strong>Link-State Request:</strong> Innehåller vilka LSA:er som avsändaren vill
+    ha alla detaljer om.</li>
+</ul>
+<div class="mw-collapsible mw-collapsed" style="width:250px">
+
+
+Exempel:
+
+<div class="mw-collapsible-content">
+
+[<File:Cisco_OSPF_Request.PNG>](/File:Cisco_OSPF_Request.PNG "wikilink")
+
+</div>
+</div>
+
+<ul>
+<li><strong>Link-State Update:</strong> Innehåller alla typer och detaljer om LSA:er
+    och skickas på förfrågan eller vid topologiändring</li>
+</ul>
+<div class="mw-collapsible mw-collapsed" style="width:250px">
+
+
+Exempel:
+
+<div class="mw-collapsible-content">
+
+[<File:Cisco_OSPF_Update.PNG>](/File:Cisco_OSPF_Update.PNG "wikilink")
+
+</div>
+</div>
+
+<ul>
+<li><strong>Link-State Acknowledgment:</strong> LSU confirmation.</li>
+</ul>
+<div class="mw-collapsible mw-collapsed" style="width:250px">
+
+
+Exempel:
+
+<div class="mw-collapsible-content">
+
+[<File:Cisco_OSPF_Ack.PNG>](/File:Cisco_OSPF_Ack.PNG "wikilink")
+
+</div>
+</div>
+
+<h2 id="grannskap">Grannskap</h2>
+<p>OSPF-grannskap har bestämda tillstånd och neighbors måste komma överens
+om:</p>
+<ul>
+<li>Subnät/Mask</li>
+<li>Area</li>
+<li>Timers</li>
+<li>Olika router-ID</li>
+<li>Flaggor: Stub, NSSA</li>
+<li>MTU</li>
+<li>Authentication type</li>
+<li>Kompatibla nätverkstyper, DR-election eller ej</li>
+</ul>
+<p><strong>Neighbor states</strong>
+Kronologisk ordning</p>
+<ul>
+<li>Down: Initial state. Om det inte kommer in några OSPF-paket under
+    Dead interval blir grannen down.</li>
+<li>Attempt: Gäller endast NBMA och point-to-multipoint nonbroadcast.</li>
+<li>Init: Ett hello (utan mottagarens router-ID) har tagits emot.</li>
+<li>2-way: Ett hello med mottagarens router-ID har tagits emot.</li>
+<li>ExStart: Utbyta tomma DD för att bestämma master/slave.</li>
+<li>Exchange: Utbyta database description</li>
+<li>Loading: LSA:er tankas över</li>
+<li>Full: Allt klart</li>
+</ul>
+<h2 id="lsa-typer">LSA-typer</h2>
+<p>LSUer innehåller link-state advertisements, dessa beskriver länkar och
+enheter i nätverket. Det är endast den router som en LSA härstammar
+ifrån som får modifiera eller ta bort LSA:n. Andra routrar måste
+processa och skicka den omodifierad vidare inom sitt flodding scope, de
+får ej droppa den innan maximum lifetime har gått ut. Detta säkerställer
+att alla routrar har identiska LSDB men det medför också att man blir
+begränsad i var man kan aggregera och filtrera routes. För att ta bort
+en LSA snabbt sätts age till 3600 sekunder (maximum lifetime) och den
+kommer då att tas bort direkt. En LSA header är vanligtvis 20 bytes.</p>
+<p>De vanligaste LSAerna.</p>
+<ul>
+<li><strong>Type 1, Router:</strong>
+    Alla routrar skapar och floodar en LSA som representerar sig själv.
+    Det finns information om vilka interface och grannar som finns i den
+    arean. Floodas endast inom origin area. ABR sätter B-biten och ASBR
+    sätter E-biten för att informera arean om sin roll.</li>
+</ul>
+<p><code>show ip ospf database router</code>
+<code>show ip ospf database router | i Link</code></p>
+<ul>
+<li><strong>Type 2, Network:</strong>
+    Dessa representerar transit subnät och skapas endast om det finns en
+    DR på det subnätet, dvs multiaccess-segment. LSID sätts till DRs
+    interface IP på subnätet men innehåller också information (RID) om
+    alla grannar till DR på det subnätet. Floodas endast inom origin
+    area.</li>
+</ul>
+<p><code>show ip ospf database network</code></p>
+<p>Note: Typ 1 och 2 räcker för att alla routrar inom arean ska kunna känna
+till topologin och köra SPF för att bestämma bästa vägarna.</p>
+<ul>
+<li><strong>Type 3, Net Summary:</strong>
+    Typ 1 och 2 går ej till andra areor utan istället skapar ABR (router
+    med ben i 2 areor) typ 3 LSA:er (en ABR genererar aldrig summary LSA
+    om den inte har ett ben i area 0). Det som annonseras är samma men
+    den enda infon som skickas med är: subnät, mask och costen för ABR
+    att nå dit. Typ 3 LSA:er korsar aldrig areor, istället har ABR en
+    intern OSPF-routingtabell som innehåller allt som har kommit i
+    backbone-arean och för varje intra- eller inter-area route skapas
+    det nya typ 3 LSAer som floodas i nonbackbone-arean. OBS ABR
+    accepterar endast typ 3 LSA:er från backbone area, detta för att
+    förhindra routingloopar.</li>
+</ul>
+<p><code>show ip ospf border-routers</code>
+<code>show ip ospf database summary</code></p>
+<ul>
+<li><strong>Type 4, ASBR Summary:</strong>
+    När en ABR floodar vidare en typ 5 LSA in i sin area vet inte övriga
+    routrar i arean hur långt det är till ASBR. Därför skapar den en LSA
+    typ 4 som den också floodar. Den innehåller ASBRs RID och ABRs cost
+    till ASBR. Typ 4 LSA:er behöver inte finnas i samma area som ASBR
+    eftersom där berättar ASBR om sig själv med typ 1 LSA med E-biten
+    satt utan dessa behövs i övriga areor.</li>
+</ul>
+<p><code>show ip ospf database asbr-summary</code></p>
+<ul>
+<li><strong>Type 5, AS External:</strong>
+    När en ASBR skickar in en extern route skapar den en typ 5 LSA som
+    innehåller metric och metric type. Det som är intressant för övriga
+    routrar att veta är hur långt det är till ASBR och ifall det finns
+    flera vägar som är lika används alla. Finns det flera ASBR används
+    den som är närmast internt enligt SPF.</li>
+</ul>
+<p><code>show ip ospf border-routers</code>
+<code>show ip ospf database external</code></p>
+<p>Det finns två typer av externa routes, E1 (increment metric) och E2 (do
+not increment metric). Detta avgörs beroende på vad ASBR sätter för
+flagga på LSAn. Default på Cisco är E2 för redistribution, dock är E1
+prefered över E2. Externa routes måste även innehålla en <strong>Forwarding
+Address</strong>. Vanligtvis sätts 0.0.0.0, det innebär att det ska skickas
+till ASBR själv. Det finns dock situationer när man vill ha något annat
+(nonzero) för att undvika suboptimal routing. Denna adress måste kännas
+till intra- eller interarea annars installeras inte routen i
+routingtabellen.</p>
+<ul>
+<li><strong>Type 7, NSSA External:</strong></li>
+</ul>
+<p>Floodas inom egna NSSA-arean, översätts till LSA typ 5 av ABR med högst
+RID för att lämna arean OM Propagate-biten är satt till 1. Annars
+stannar LSA:n inom arean, detta konfigureras vid redistributionen med
+nyckelordet <strong>nssa-only</strong>. Om man vill att trafiken alltid ska gå igenom
+translator kan man suppressa forward address, <strong>area 1 nssa translate
+type7 suppress-fa</strong>.</p>
+<p><code>show ip ospf database nssa-external</code></p>
+<p><strong>Show</strong></p>
+<p>Se alla LSA:er och RIB.</p>
+<p><code>show ip ospf database</code>
+<code>show ip ospf rib</code>
+<code>show ip ospf topology-info</code></p>
+<p>Kolla vilka LSA:er en viss nod annonserar ut.</p>
+<p><code>show ip ospf database adv-router</code><RID></p>
+<ul>
+<li><strong>Others:</strong> Typ 6 (MOSPF) och 8 stöds inte på Cisco-routrar och 9-11
+    är Opaque.</li>
+</ul>
+<h2 id="area-types">Area types</h2>
+<p>Att dela upp sitt nätverk i OSPF-areor är grunden för att göra OSPF mer
+skalbart eftersom det sparar på SPF-beräkningar. Med dagens CPU:er kan
+dock areor bli rätt stora innan det blir nödvändigt att dela upp det.
+Förutom vanliga areor finns det flera andra typer av areor.</p>
+<p><strong>Stub</strong>
+Alla areor behöver inte känna till alla externa nätverk. Då kan man
+reducera overhead genom att ha areor där man endast skickar in LSA typ
+3. Dvs det finns ingen ASBR och LSA typ 4 och 5 stoppas vid ABR. Skulle
+det komma en LSA 4/5 från någon så ignoreras den. För att hitta ut ur
+arean så skickar ABR:er in default route med en LSA typ 3.</p>
+<p><code>router ospf 1</code>
+<code>area 1 stub</code></p>
+<p><em>Stub bit is sent in hello packets</em></p>
+<p><strong>Totally Stubby</strong>
+Totally stubby är samma som stubby fast alla LSA typ 3 blockas också
+förutom default routen. Inga LSA typ 3,4,5 gör att LSDB reduceras
+ytterligare.
+ABR</p>
+<p><code>area 1 stub no-summary</code></p>
+<p>Others</p>
+<p><code>area 1 stub</code></p>
+<p><strong>NSSA</strong>
+Om man vill effektivisera OSPF samtidigt som man behöver injicera in
+routes från något annat protokoll genom någon router i en stubby area så
+kommer det inte att funka eftersom LSA 4/5 ignoreras. Då kan man använda
+en not-so-stubby area. Då sätter routrarna N-biten i hellos och skapar
+ASBR typ 7 LSA:er istället. NSSA är en kompromiss som tillåter att
+externa routes kan laddas upp till backbone-arean medans all information
+från övriga areor ej behöver tas in i arean. I en NSSA kommer inte
+default routen att annonseras default som i övriga stubby areas.</p>
+<p><code>router ospf 1</code>
+<code>area 1 nssa</code>
+<code>area 1 nssa default-information-originate</code></p>
+<p><strong>NSSA Totally Stubby</strong>
+NSSA Totally Stubby är samma som NSSA fast alla LSA typ 3 blockas också
+förutom default routen, samt att default routen injiceras default. Inga
+LSA typ 3,4,5. Ett ben i area 0 krävs för detta kommando.</p>
+<p><code>area 1 nssa no-summary</code></p>
+<p><strong>Transit</strong>
+Non-backbone areas kan användas för inter-area transit om det finns en
+kortare väg igenom dem. Transit är på default men går att stänga av.</p>
+<p><code>router ospf 1</code>
+<code>no capability transit</code>
+<code>show ip ospf | i transit</code></p>
+<h2 id="natverkstyper">Nätverkstyper</h2>
+<p>Det finns olika typer av nätverk och pga hur OSPF fungerar måste man
+konfigurera det lite olika beroende på typ. T.ex. DR/BDR election hålls
+endast på broadcast och NBMA. Om frame relay används måste DR och BDR ha
+PVC till alla andra routrar annars får inte alla uppdateringar. På
+multiaccess och point-to-point (ethernet) används default nätverkstypen
+BROADCAST. Beroende på nätverkstyp behövs <strong>neighbor</strong>-kommandot
+användas eller ej, regel är non-broadcast needs neighbors.
+Point-to-multipoint interface annonseras som /32:or av effektivitetsskäl
+och lämpar sig väl om man kör OSPF över
+<a href="/Cisco_L2VPN#VPLS" title="wikilink">Cisco_L2VPN#VPLS</a>.</p>
+<p><code>show ip ospf interface | i protocol|Network Type</code></p>
+<p>Ändra nätverkstyp på ett interface. Det behöver tekniskt sett inte vara
+samma på båda sidor sålänge det som behövs matchar, t.ex. timers.</p>
+<p><code>interface gi0/0</code>
+<code>ip ospf network ?</code></p>
+<p>Loopback annonseras default som stub endpoint (/32), detta ändras med
+nätverkstyp point-to-point.</p>
+<p><code>interface lo0</code>
+<code>ip ospf network point-to-point</code></p>
+<h3 id="designated-router">Designated Router</h3>
+<p>OSPF optimerar flooding-processen på multiaccess-länkar genom att
+använda <em>designated routers</em> och <em>backup designated routers</em>. Annars
+hade varenda router på ett sådant segment behövt upprätta fulla
+grannskap med alla andra. Med en DR räcker det med att alla utbyter LSDB
+endast med den, detta resulterar i mindre trafik. Varje router har fullt
+grannskap med DR och BDR, 2-way med övriga. DR har två syften, det är
+också så att det är DRs som skapar typ 2 LSAn som representerar
+multiaccess-segmentet, annars hade det behövts för varje grannskap och
+det hade inte blivit någon vacker LSDB.</p>
+<p>Behöver en DR skicka ut en LSU gör den det till 224.0.0.5 som alla
+DROther lyssnar på. Behöver en DROther skicka en uppdatering gör den det
+till 224.0.0.6 som DR och BDR lyssnar på (det är av denna anledning det
+behövs en BDR). Alla enheter som får en LSU ackar den med en unicast
+LSAck till avsändaren, med undantag om LSUn kom från sig själv. I
+nätverkssegment utan DR används 224.0.0.5 för allt.</p>
+<p>DR election görs mellan 2-way och ExStart i och med att Hellos
+innehåller DR/BDR om det finns. Om det kommer in en Hello med DR satt
+till 0.0.0.0 betyder det att det inte finns någon DR än, t.ex. efter ett
+outage. Då väntar routern en liten stund för att ge andra en chans att
+komma upp. Detta kallas OSPF wait time och är ställt till samma som Dead
+time på det interfacet. Under wait time lyssnar routern in RID och
+prioritet från sina grannar. Val av DR/BDR görs först efter wait time är
+över. Election görs lokalt på routern utifrån de värden som kommit in.
+Dock slutar det alltid med att alla har samma.</p>
+<p>Finns det en DR RID i ett Hello som kommer in så har någon annat gjort
+valet och man kan direkt hoppa till election, dvs skippa resten av wait
+time. Det som görs då är att man fyller den roll som ej är fylld, t.ex.
+BDR genom att ta den högsta prioriteten och högsta router id som man
+känner till. Detta gör att det inte finns någon preemption. Däremot kan
+det tillfälligt existera routrar som är klara med election och som har
+kommit fram till olika slutsatser. Då hålls election igen och man byter
+DR och BDR till de med högst prio/id när man upptäckte krocken. Om man
+kör samma prio på alla och stöter på att det inte högsta RID som är DR
+är det för att den med lägre RID har kommit upp först. Det finns som
+sagt ingen preemption.</p>
+<p>Alla routrar med OSPF priority 1-255 är med i election, 1 är default och
+sätter man 0 ignoreras DR/BDR election på den enheten som därmed aldrig
+kan bli DR. Det är viktigt att DR kan nå alla andra vilket inte är
+fallet i en hub-and-spoke-topologi där en spoke är DR, se även <a href="/Cisco_DMVPN" title="wikilink">Cisco
+DMVPN</a>.</p>
+<p><code>interface gi0/0</code>
+<code>ip ospf priority 50</code></p>
+<p>Även om det inte upptäcks några grannar på ett interface där DR election
+vanligtvis hålls så kommer OSPF ändå hålla valet med sig själv som
+vinnare, det väntas alltså inte på grannskap först. Om det däremot
+endast finns en OSPF-router på ett segment så kallas detta stub network
+och ingen LSA typ 2 kommer att genereras för det är onödigt utan då blir
+nätverksadressen och subnätmasken en LSA typ 1 som floodas.</p>
+<h1 id="konfiguration">Konfiguration</h1>
+<p>Routrar måste ha ett OSPF-id för att kunna skicka meddelanden, på
+Ciscoenheter väljs ID enligt följande ordning:</p>
+<ol>
+<li>router-id kommandot</li>
+<li>Högsta IP-adressen på ett no-shut loopback interface (som ej är
+    assignat någon annan OSPF-process)</li>
+<li>Högsta IP-adressen på ett no-shut interface (som ej är assignat
+    någon annan OSPF-process)</li>
+</ol>
+<p>Interfacen behöver inte vara nåbara eller ha något med OSPF att göra
+utan alla interface jämförs. ID ändras endast när processen startas om.</p>
+<p>router-id for this OSPF process (in IPv4 address format)</p>
+<p><code>router ospf 1</code>
+<code>router-id 1.1.1.1</code></p>
+<p><strong>Administrative Distance</strong></p>
+<p><code>router ospf 1</code>
+<code>distance ospf intra-area 110 inter-area 110 external 110</code>
+<code>show ip protocols | i Distance</code></p>
+<p>Advertise a maximum metric so that other routers do not prefer the
+router as an intermediate hop for 60 seconds.</p>
+<p><code>max-metric router-lsa on-startup 60</code></p>
+<p><strong>MTU mismatch</strong></p>
+<p><code>ip ospf mtu-ignore</code></p>
+<p><strong>Allmänna rekommendationer</strong></p>
+<ul>
+<li>Set your maximum LSA settings to keep from killing weak boxes
+    (<strong>max-lsa</strong>)</li>
+<li>Baseline your network so you know how many LSAs normally float
+    around</li>
+<li>Configure LSA warnings to alert of problems</li>
+<li>Crash each type of box on your network in a lab environment so you
+    know what it will do under stress.</li>
+</ul>
+<p><strong>MPLS</strong>
+Om man kör OSPF kan man autoenablea LDP på alla OSPF-interface. Se även
+<a href="/Cisco_MPLS" title="wikilink">Cisco MPLS</a> och <a href="/Cisco_SR" title="wikilink">Segment
+Routing</a>.</p>
+<p><code>router ospf 1</code>
+<code>mpls ldp autoconfig</code>
+<code>show ip ospf mpls ldp interface</code></p>
+<p><strong>IP unnumbered</strong>
+Man kan köra IP unnumbered med OSPF och det finns ett network statement
+som matchar IP-adressen på primär-interfacet så kommer båda interfacen
+att användas av OSPF i den valda arean. När man använder unnumbered
+kommer routern att ignorera source IP address i hello-paketen vilket
+annars fungerar som en check så att inte vilket paket som helst
+accepteras utan det ska komma från det subnät som det mottagande
+interfacet sitter i. Man kan ha loopback och fysiska interface i olika
+areor, dock kommer man att annonsera samma prefix i fler än en area.</p>
+<p><code>interface gi0/1</code>
+<code>ip unnumbered Loopback0</code>
+<code>ip ospf network point-to-point</code>
+<code>ip ospf 1 area 1</code></p>
+<h2 id="adjacency">Adjacency</h2>
+<p>Logga ändringar i neighbor state, detta är på default.</p>
+<p><code>router ospf 1</code>
+<code>log-adjacency-changes</code>
+<code>show ip ospf events</code></p>
+<p>Styr grannskap/uppdateringar med passive-interface</p>
+<p><code>passive-interface default</code>
+<code>no passive-interface [interface]</code>
+<code>show ip ospf interface | i Ethernet|Passive</code></p>
+<p><strong>Unicast</strong>
+Specificera granne manuellt, detta måste göras på NBMA och
+point-to-multipoint nonbroadcast. Det räcker att göra detta på ena sidan
+för att grannskap ska bildas men best practice är att köra detta på båda
+sidor.</p>
+<p><code>router ospf 1</code>
+<code>neighbor 10.0.0.2</code></p>
+<p>Per neighbor cost/metric</p>
+<p><code>neighbor 10.0.0.5 cost 1000</code></p>
+<p>Man kan sätta prioritet på sina grannar om man kör unicast. Default är
+detta 0 men om man har flera neighbor statements och någon har icke-noll
+så kommer routern att först skicka Hellos till denna. Endast när DR/BDR
+election är klart så börjar det skickas Hellos till de övriga grannarna.
+Detta är en mekanism som ökar chansen att DR och BDR blir de routrar man
+vill. OBS detta har inget med vinnare av DR/BDR att göra.</p>
+<p><code>router ospf 1</code>
+<code>neighbor 10.0.0.5 priority &lt;0-255&gt;</code></p>
+<p><strong>Verify</strong></p>
+<p><code>show ip ospf neighbor</code>
+<code>show ip ospf interface brief</code>
+<code>show ip ospf neighbor detail | i interface</code>
+<code>ping 224.0.0.5</code></p>
+<p>Clearing routing process</p>
+<p><code>clear ip ospf process</code>
+<code>debug ip ospf adj</code></p>
+<p><strong>GTSM</strong>
+TTL Security Check kan konfigureras per process eller per interface och
+gäller både unicast och multicast. Dessa kommandon har ingen inverkan på
+virtual links eller sham links utan det görs med <em>area virtual-link
+ttl-security</em> och <em>area sham-link ttl-security</em>.</p>
+<p><code>router ospf 1</code>
+<code>ttl-security all-interfaces</code>
+<code>interface gi2</code>
+<code>ip ospf ttl-security</code></p>
+<p><strong>Graceful restart</strong>
+En router kan starta om OSPF-grannskap och ändå fortsätta forwarda paket
+som vanligt med hjälp av Graceful OSPF Restart (RFC 3623). Cisco har
+även en egen variant av detta som kallas NSF (Non Stop Forwarding) men
+IOS har stöd för båda varianterna. Den som restartar skickar grace-LSA
+och hamnar i <em>restart mode</em> och directly connected grannar måste stödja
+<em>helper mode</em> för att detta ska lira. Helpers måste ignorera att det
+uteblir Hellos under antydd period och låtsas som att grannskapet är
+uppe och DR är densamme. Överskrids tidsgränsen rivs adjacency direkt.
+NSF-aware (helper support) finns på de flesta enheter och är på default,
+<em>nsf ietf/cisco helper</em> medans NSF-capable finns på high-end
+plattformar. GR/NSF utnyttjar att modernare enheter sköter data plane
+och control plane i olika hårdvara.</p>
+<p><code>router ospf 1</code>
+<code>nsf ietf</code>
+<code>nsf cisco</code></p>
+<p><code>show ip ospf nsf</code></p>
+<p>NSR är en intern mekanism som låter standby RP ta över etablerade
+sessioner vid en switchover.</p>
+<p><code>nsr</code>
+<code>show ip ospf nsr</code></p>
+<p><strong>Graceful shutdown</strong>
+Droppa adjacencies, flusha LSA:er och skicka ut Hello med tom neighbor
+list för att trigga att grannens adjacency går direkt till Init state,
+kanske inte så graceful men det heter så ändå.</p>
+<p><code>router ospf 1</code>
+<code>shutdown</code></p>
+<p>Per interface</p>
+<p><code>int gi2</code>
+<code>ip ospf shutdown</code></p>
+<h3 id="authentication">Authentication</h3>
+<p>Klassisk OSPF authentication är none/null, clear-text eller MD5. Default
+är none och man slår på det per interface eller per area. Man kan ha
+multipla nycklar per interface, då skickas det multipla OSPF paket
+parallellt vilket gör att grannskap ej går ner under key rotation. Detta
+pågår tills båda sidor har samma nyckel som senast konfigurerad, dvs key
+ID måste matcha men det spelar ingen roll för vilken som är att föredra
+utan det är youngest key. Det går även att köra authentication på
+virtual links, se det stycket.</p>
+<p>Enable clear-text authentication on area 0</p>
+<p><code>router ospf 1</code>
+<code>area 0 authentication</code>
+<code>interface gi0/1</code>
+<code>ip ospf authentication-key [password]</code></p>
+<p>Enable MD5 authentication on area 0.</p>
+<p><code>router ospf 1</code>
+<code>area 0 authentication message-digest</code>
+<code>interface gi0/1</code>
+<code>ip ospf message-digest-key 10 md5 [password]</code></p>
+<p>Enable MD5 authentication on an interface</p>
+<p><code>interface gi0/1</code>
+<code>ip ospf authentication message-digest</code>
+<code>ip ospf message-digest-key 10 md5 [password]</code></p>
+<p>Verify</p>
+<p><code>show ip ospf interface | i Ethernet|authentication</code></p>
+<p><strong>Extended cryptographic authentication</strong> (RFC 5709) finns i modernare
+implementationer av OSPF och har stöd för key-chains och SHA-HMAC.
+Nyckel med högst id används ifall det finns flera nycklar som är aktiva.
+Cryptographic algorithm + key bildar SA.</p>
+<p><code>key chain HACKER</code>
+<code>key 1</code>
+<code>key-string SECRET</code>
+<code>cryptographic-algorithm hmac-sha-512</code></p>
+<p>Per interface, det finns inget area-kommando som slår på key-chain auth
+på alla interface som vid klassisk konfiguration.</p>
+<p><code>int gi2</code>
+<code>ip ospf authentication key-chain HACKER</code></p>
+<h3 id="multiarea-adjacency">Multiarea Adjacency</h3>
+<p>Med OSPFv2 Multiarea Adjacency kan man konfigurera en länk för optimal
+routing i flera areor. Varje multiarea interface annonseras som en
+point-to-point unnumbered link och fungerar som en logisk konstruktion
+över det primära interfacet. Det upprättas grannskap med multiarea
+interface på andra sidan och detta är oberoende av neighbor state på det
+primära interfacet. Alla OSPF-parametrar (t.ex. autentisering) ärvs från
+det primära. Det går endast att konfigurera multiarea adjacency på
+interface som har två OSPF speakers, så på ethernet måste det
+konfigureras som network point-to-point.</p>
+<p><code>interface gi2</code>
+<code>ip address 10.0.0.1 255.255.255.0</code>
+<code>ip ospf 1 area 0</code>
+<code>ip ospf network point-to-point</code>
+<code>ip ospf multi-area 2</code></p>
+<p><code>show ip ospf 2 multi-area</code></p>
+<h2 id="default-routing">Default Routing</h2>
+<p>Kräver gateway of last resort.</p>
+<p><code>default-information originate</code></p>
+<p>Om man inte har någon gateway of last resort kan man ändå annonsera ut
+en default route.</p>
+<p><code>default-information originate always</code></p>
+<p><strong>NSSA</strong>
+En NSSA ABR genererar inte en default route by default (om den inte
+konfas som totally stubby) eftersom man inte vet om gateway of last
+resort ska vara i en annan area eller externt (type 7). En NSSA ASBR
+måste ha en default route i routingtabellen för att kunna skicka ut en
+default route. En NSSA ABR behöver inte det:</p>
+<p><code>area 1 nssa default-information-originate</code></p>
+<p><strong>Conditional</strong>
+Med hjälp av en route map kan man annonsera en default route när ett
+visst kriterie är uppfyllt.</p>
+<p><code>default-information originate route-map TRACK_PREFIX</code></p>
+<h2 id="summarization">Summarization</h2>
+<p>OSPF-routrar inom samma area måste ha identiska LSDB efter att flooding
+är färdigt vilket gör att summering endast tillåts vid ABR eller ASBR.
+Med hjälp av <strong>not-advertise</strong> i slutet av kommandona kan man styra om
+summeringen ska fungera som filtrering, då varken de mer specifika
+prefixen eller aggregeringen annonseras.</p>
+<p><strong>ABR</strong></p>
+<p><code>router ospf 1</code>
+<code>area 10 range 10.10.0.0 255.255.252.0</code></p>
+<p>Area 10 säger var summeringen kommer ifrån så denna aggregering skickas
+till alla andra areor. Cost för summeringen tas från den component route
+med lägst metric om man inte anger något specifikt.</p>
+<p><strong>ASBR</strong></p>
+<p><code>router ospf 1</code>
+<code>summary-address 10.10.0.0 255.255.252.0</code></p>
+<p>Konfigureras vid redistributionspunkt och summeringar ärver attribut
+från component routes.</p>
+<p><strong>Discard</strong>
+Default installeras det en discard route när man summerar för att
+förhindra att det forwarderas trafik som man inte har någon specifik
+route för.</p>
+<p><code>no discard-route external|internal</code></p>
+<h2 id="convergence">Convergence</h2>
+<p>Tuning protocol parameters per interface.</p>
+<p><code>ip ospf hello-interval</code><em><code>seconds</code></em>
+<code>ip ospf dead-interval</code><em><code>seconds</code></em>
+<code>ip ospf retransmission-interval</code><em><code>seconds</code></em>
+<code>ip ospf transmit-delay</code><em><code>seconds</code></em></p>
+<p>Fast Hellos, dead-interval minimal = 1 sek.</p>
+<p><code>ip ospf dead-interval minimal hello-multiplier 3</code></p>
+<p>Timers: LSA &amp; SPF</p>
+<p><code>router ospf 1</code>
+<code>timers throttle spf 100 1000 10000</code>
+<code>timers pacing flood 50</code>
+<code>timers pacing retransmission 75</code>
+<code>timers throttle lsa all 10 4000 6000</code>
+<code>timers lsa arrival 2000</code>
+<code>show ip ospf | i msec</code></p>
+<p>Med Group Pacing kan LSA:er "samåka" i refresh-paket.</p>
+<p><strong>SPF Prefix Priority</strong>
+Man kan välja vilka prefix som SPF-algoritm ska köra först. Man skapar
+en route-map som matchar på route-type, prefix-list eller route-tag.</p>
+<p><code>route-map PREFIX-PRIORITY permit 10</code>
+<code>match tag 100</code></p>
+<p><code>router ospf 1</code>
+<code>prefix-priority high route-map PREFIX-PRIORITY</code></p>
+<p>Verify</p>
+<p><code>show ip ospf rib detail</code></p>
+<p><strong>iSPF</strong>
+SPF-algoritmen behöver inte köras för alla länkar varje gång det sker en
+topologi-förändring. Med incremental SPF körs endast algoritmen för de
+delar som har påverkats av förändringen för att spara CPU-cykler. Detta
+går att styra individuellt på enheterna med <em>ispf</em>-kommandot. Det kan
+vara svårt att veta exakt hur mycket skillnad detta gör men generellt ju
+större topologi ju större skillnad. OBS iSPF är inte längre supporterat
+i IOS.</p>
+<p><code>router ospf 1</code>
+<code>ispf</code>
+<code>show ip ospf | i Incremental</code></p>
+<p><strong>BFD</strong>
+Se även <a href="/Cisco_BFD" title="wikilink">BFD</a>.</p>
+<p><code>router ospf 1</code>
+<code>bfd all-interfaces</code></p>
+<p>Disable per interface</p>
+<p><code>int gig2</code>
+<code>ip ospf bfd disable</code></p>
+<h3 id="lsdb-optimization">LSDB Optimization</h3>
+<p><strong>Prefix Suppression</strong>
+För att få Loopback till Loopback-konnektivitet mellan alla routrar med
+minimal belastning på routingtabellen kan man skippa att ha med
+OSPF-länknäten i RIB. Alla noder bör stödja detta.</p>
+<p>Global</p>
+<p><code>router ospf 1</code>
+<code>prefix-suppression</code></p>
+<p>Per interface</p>
+<p><code>interface gi2</code>
+<code>ip ospf prefix-suppression</code></p>
+<p>Verify</p>
+<p><code>show ip ospf interface | i Ethernet|Prefix-suppression</code></p>
+<p><strong>Flooding Reduction</strong>
+OSPF flood reduction stoppar det normala floodandet av LSAer genom att
+sätta DoNotAge (DNA) biten vilket gör att de inte behöver refreshas med
+jämna mellanrum.</p>
+<p><code>interface Gi2</code>
+<code>ip ospf flood-reduction</code></p>
+<h3 id="lfa">LFA</h3>
+<p>Eftersom OSPF-databasen är identisk på alla routrar i samma area har man
+modifierat SPF så att man lokalt kan köra SPF-algoritmen men med en
+granne som rot. Detta gör att man kan hitta alternativa loopfria vägar
+även i komplexa topologier. Man kan specificera flera kriterier för
+vilka alternate path som ska väljas, t.ex. använd ej de som använder
+samma interface, next-hop eller SRLG. Man måste använda
+<a href="/Cisco_MPLS" title="wikilink">MPLS</a> för att kunna dra nytta av Loop-Free
+Alternate Fast Reroute och IOS supporterar endast per-link LFA. The high
+priority enables FRR for /32 prefixes only, the low priority enables FRR
+for all prefixes. The fast-reroute keep-all-paths option keeps all
+information in the table, including paths that were not chosen. When an
+area is specified, external routes are not a candidate for FRR. This is
+because they do not belong to an area.</p>
+<p>Single Hop LFA / IP FRR.</p>
+<p><code>router ospf 1</code>
+<code>fast-reroute per-prefix enable prefix-priority low</code>
+<code>fast-reroute per-prefix enable area 0 prefix-priority high</code>
+<code>fast-reroute keep-all-paths</code></p>
+<p><code>show ip ospf fast-reroute</code>
+<code>show ip ospf fast-reroute prefix-summary</code>
+<code>show ip route repair-paths</code></p>
+<p>Med hjälp av Remote LFA Tunnel kan man tunnla trafik loopfritt (i nästan
+alla topologier) till routrar flera hop bort utifrån lokala beräkningar.
+Detta stöds endast i default VRF:en och kräver MPLS.</p>
+<p><code>mpls ldp explicit-null</code>
+<code>mpls ldp discovery targeted-hello accept</code>
+<code>router ospf 1</code>
+<code>fast-reroute per-prefix remote-lfa tunnel mpls-ldp</code></p>
+<p><code>show ip ospf fast-reroute remote-lfa tunnels</code></p>
+<p>Interface options:
+Om ett interface inte ska kunna användas för backup paths.</p>
+<p><code>ip ospf fast-reroute per-prefix candidate disable</code></p>
+<p>Primary routes som pekar på detta interface kommer inte att bli
+skyddade.</p>
+<p><code>ip ospf fast-reroute per-prefix protection disable</code></p>
+<h2 id="filtering">Filtering</h2>
+<p>Non-local filtering för OSPF kan endast göras på ABR och ASBR.</p>
+<p><strong>Intra-area</strong>
+Filtering påverkar inte LSDB eller flooding utan endast det som hamnar i
+RIB. Det går att göra med en distribute-list dock bör alla routrar vara
+konfade likadant annars kan det bli blackholing.</p>
+<p><code>access-list 1 deny 172.16.3.1</code>
+<code>access-list 1 permit any</code>
+<code>router ospf 1</code>
+<code>distribute-list 1 in</code></p>
+<p>Alternativt</p>
+<p><code>summary-address 10.0.0.0 255.255.255.0 not-advertise</code></p>
+<p>Administrative Distance, filtrering kan göras på Advertising Router.</p>
+<p><code>access-list 10 permit 10.0.0.0 0.0.0.255</code>
+<code>router ospf 1</code>
+<code>distance 255</code><RID><code>0.0.0.0 10</code></p>
+<p>LSA Type-3 Filtering</p>
+<p><code>area 1 range 10.0.0.0 255.255.255.0 not-advertise</code></p>
+<p><strong>Inter-area</strong></p>
+<p><code>ip prefix-list PFXLIST seq 5 deny 10.10.0.0/24</code>
+<code>ip prefix-list PFXLIST seq 10 permit 0.0.0.0/0 le 32</code></p>
+<p><code>router ospf 1</code>
+<code>area 1 filter-list prefix PFXLIST out|in</code></p>
+<p>out betyder att det som lämnar area 1 filtreras, in betyder filtrering
+av det som skickas in i area 1.</p>
+<p><strong>Database Filtering</strong>
+Man kan stoppa OSPF-processen från att skicka LSA:er. Detta fungerar på
+network type point-to-multipoint och görs per interface alternativt
+neighbor. Det bör endast användas där all flooding är unnecessary, t.ex.
+NBMA subnets där det finns många routrar.</p>
+<p><code>interface gi2</code>
+<code>ip ospf database-filter all out</code></p>
+<p><strong>Route-Map</strong>
+Med en route-map kan man matcha på interface, ip-adress, ip next-hop, ip
+route-source, metric, tagging och route-type. Eftersom det är en
+distribute-list påverkar detta endast lokala routingtabellen.</p>
+<p><code>access-list 1 permit</code><prefix>
+<code>access-list 2 permit</code><RID></p>
+<p><code>route-map DENY_R2 deny 10</code>
+<code>match ip address 1</code>
+<code>match ip next-hop 2</code></p>
+<p><code>route-map DENY_R2 permit 20</code></p>
+<p><code>router ospf 1</code>
+<code>distribute-list route-map DENY_R2 in</code></p>
+<h2 id="virtual-link">Virtual Link</h2>
+<p>OSPF kräver att alla areor är anslutna till area 0. I vissa scenarior
+kan det vara svårlöst och då kan man använda sig av virtual links för
+att tunnla OSPF-paket över en annan nonbackbone-area. ABR:n som ej har
+en direktanslutning till area 0 kan på så sätt få en full kopia av
+LSDB:n i area 0. Det har inget med data plane att göra utan endast OSPF
+control plane. En virtual link syns i LSDB som en unnumbered
+point-to-point länk och LSU:er som skickas har DoNotAge-biten satt.
+Arean som tunneln går över blir en transit area och den måste vara en
+vanlig area, dvs ingen stub eller nssa. Detta pga av att data plane går
+därigenom som vanlig routad trafik så den arean måste känna till allt,
+intra-, inter- och external routes. VL fungerar som en demand circuit
+därför bör man ta ner och upp interfacet vid konfigurationsändringar.
+Interface MTU skickas ej med i DBD-paket över en VL. Virtual link är
+rekommenderat som backup- eller temporär anslutning. Man kan även
+använda VL för att koppla ihop area 0 om den finns på flera ställen.</p>
+<p><strong>R1</strong> ABR mellan area 0 och 1</p>
+<p><code>router ospf 1</code>
+<code>network 10.0.1.0 0.0.0.255 area 1</code>
+<code>network 1.1.1.0 0.0.0.255 area 0</code>
+<code>area 1 virtual-link 3.3.3.3  #Router-ID</code></p>
+<p><strong>R3</strong> ABR mellan area 1 och 2</p>
+<p><code>router ospf 1</code>
+<code>network 10.0.1.0 0.0.0.255 area 1</code>
+<code>network 10.0.2.0 0.0.0.255 area 2</code>
+<code>network 3.3.3.0 0.0.0.255 area 2</code>
+<code>area 1 virtual-link 1.1.1.1  #Router-ID</code></p>
+<p><strong>Verify</strong></p>
+<p><code>show ip ospf virtual-links</code>
+<code>show ip ospf border-routers</code></p>
+<p><strong>Authentication</strong></p>
+<p><code>area 2 virtual-link 2.2.2.2 authentication message-digest message-digest-key 10 md5 CISCO</code></p>
+<h2 id="redistribution">Redistribution</h2>
+<p>Default seed metric: 1 för BGP, 20 för övrigt.</p>
+<p><code>default-metric 20</code></p>
+<p>Med OSPF behövs ordet subnets annars redistribueras endast classful
+networks. I nyare IOSer kan "subnets" auto-konfas i vissa lägen, man får
+kolla konfigurationen.</p>
+<p><code>redistribute maximum-prefix 100</code></p>
+<p><strong>NSSA</strong>
+En NSSA-redistribution kan man styra om den ska nå endast NSSA-arean
+eller får göras om och skickas vidare till andra areor. Routrar som är
+med i flera areor gör detta automatiskt.</p>
+<p><code>redistribute isis nssa-only</code></p>
+<p><strong>Static</strong></p>
+<p><code>redistribute static</code></p>
+<p>Notera att default route inte kan redistribueras med <em>redistribute
+static</em>, inte ens om en route-map används utan <strong>default-information
+originate</strong> bör användas.</p>
+<p><strong><a href="/Cisco_RIP" title="wikilink">RIP</a></strong></p>
+<p><code>router ospf 1</code>
+<code>redistribute rip subnets</code></p>
+<p><strong><a href="/Cisco_EIGRP" title="wikilink">EIGRP</a></strong></p>
+<p><code>router ospf 1</code>
+<code>redistribute eigrp 1 subnets tag 90</code></p>
+<p><strong><a href="/Cisco_BGP" title="wikilink">BGP</a>,</strong> seed metric för bgp är 1. När man
+redistribuerar prefix från BGP så sätts senaste AS i pathen som route
+tag i LSA:n.</p>
+<p><code>router ospf 1</code>
+<code>redistribute bgp 100 subnets</code></p>
+<h2 id="nx-os">NX-OS</h2>
+<p>Här följer <a href="/Cisco_Nexus" title="wikilink">Nexus</a>-specifik syntax. Några
+grundläggande skillnader mot IOS är att referensbandbredden för cost
+default är 40Gbps, Loopback0 väljs som Router-ID oavsett IP, det finns
+inget network-kommando, loopbacks är passive default och man kan konfa
+flera VRF:er under samma OSPF-process.</p>
+<p><code>feature ospf</code></p>
+<p><code>router ospf 1</code>
+<code>log-adjacency-changes</code>
+<code>bfd</code></p>
+<p><code>interface loopback0</code>
+<code>ip router ospf 1</code></p>
+<p><code>interface Ethernet1/1</code>
+<code>ip router ospf 1</code></p>
+<p>Maintenance mode</p>
+<p><code>router ospf 1</code>
+<code>isolate</code></p>
+<p>Verify and troubleshoot</p>
+<p><code>show run ospf</code>
+<code>show ip ospf neighbors</code>
+<code>show ip ospf 1 event-history rib</code>
+<code>show ip ospf 1 event-history redistribution</code></p>
+<h2 id="ios-xr">IOS-XR</h2>
+<p>En skillnad emot IOS är att External LSA:er installeras i RIB även fast
+forwarding address inte är lärd av ospf.</p>
+<p>Här följer <a href="/Cisco_IOS-XR" title="wikilink">IOS-XR</a>-specifik syntax.</p>
+<p><code>router ospf 1</code>
+<code>log adjacency changes detail</code>
+<code>router-id 100.0.0.10</code>
+<code>bfd minimum-interval 100</code>
+<code>bfd fast-detect</code>
+<code>bfd multiplier 3</code>
+<code>mpls ldp sync</code>
+<code>mpls ldp auto-config</code>
+<code>max-lsa 12000</code>
+<code>security ttl</code>
+<code>auto-cost reference-bandwidth 1000000</code>
+<code>max-metric router-lsa on-startup 30</code>
+<code>max-metric router-lsa on-proc-restart 10</code>
+<code>area 0</code>
+<code>authentication message-digest</code>
+<code>message-digest-key 1 md5 encrypted 12411A1A0D13271D030A791111</code>
+<code>fast-reroute per-prefix remote-lfa tunnel mpls-ldp</code>
+<code>!</code>
+<code>interface Loopback0</code>
+<code>passive enable</code>
+<code>!</code>
+<code>interface HundredGigE0/0/0/0</code>
+<code>network point-to-point</code>
+<code>flood-reduction enable</code></p>
+<p>Verify</p>
+<p><code>show run router ospf</code>
+<code>show ospf</code>
+<code>show ospf neighbor</code>
+<code>show ospf interface brief</code>
+<code>show ospf database</code></p>
+<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Tillbaka till toppen
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Sidfot" >
+        
+          
+          <a href="../Cisco_Nexus/" class="md-footer__link md-footer__link--prev" aria-label="Föregående: Cisco Nexus">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Föregående
+              </span>
+              <div class="md-ellipsis">
+                Cisco Nexus
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Cisco_OSPFv3/" class="md-footer__link md-footer__link--next" aria-label="Nästa: Cisco OSPFv3">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Nästa
+              </span>
+              <div class="md-ellipsis">
+                Cisco OSPFv3
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Hackernets Riddare
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Acceptera</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Hantera inställningar</label>
+    
+  
+    
+    
+      <button type="reset" class="md-button md-button--primary">Acceptera inte</button>
+    
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.top", "navigation.tabs", "navigation.tabs.sticky", "navigation.footer", "navigation.instant"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Kopierat till urklipp", "clipboard.copy": "Kopiera till urklipp", "search.result.more.one": "1 till p\u00e5 denna sida", "search.result.more.other": "# till p\u00e5 denna sida", "search.result.none": "Inga s\u00f6kresultat", "search.result.one": "1 s\u00f6kresultat", "search.result.other": "# s\u00f6kresultat", "search.result.placeholder": "Skriv s\u00f6kord", "search.result.term.missing": "Saknas", "select.version": "V\u00e4lj version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
