@@ -1,21 +1,9 @@
-# HämligaHackerWikin
-Här kommer alla hämliga hackerknep att läggas upp
+---
+hide:
+  - navigation
+  - toc
+---
+# Hemliga Hacker Wikin
+Här kommer alla hemliga hackerknep att läggas upp
 
-Har du tips, idéer eller feedback på det som skrivs, hör gärna av dig.
-
-Genom vårat Github repo https://github.com/Hackernet-se/wiki
-
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
-
+Har du tips, idéer eller feedback på det som skrivs, hör gärna av dig via vår github länk i högrna hörnet.

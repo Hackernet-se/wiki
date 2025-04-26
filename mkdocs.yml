@@ -1,5 +1,5 @@
 site_name: Hackernet
-site_url: https://hackernet-se.github.io/wiki/
+site_url: https://hackernet.se/
 site_description: >-
   Hackernet är en hemsida med lite guide, tips och idéer för nätverk, linux och annat.
 repo_name: Hackernet-se/wiki
@@ -28,15 +28,18 @@ nav:
 
 theme:
   name: material
+  icon:
+    repo: fontawesome/brands/github
   font:
     text: Merriweather Sans
     code: Red Hat Mono
   features:
     - navigation.top
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.footer
     - navigation.instant
-  language: en
+  language: sv
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -82,3 +85,7 @@ extra:
     actions:
       - accept
       - manage 
+      - reject
+  analytics:
+    provider: google
+    property: G-DSRB6JMF85
