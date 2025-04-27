@@ -18,6 +18,7 @@ nav:
     - Cisco: cisco/
     - Cumulus: cumulus/
     - Extreme Network: extreme/
+    - F5: f5/
     - Juniper: juniper/
     - Linux Networking: linux_networking/
     - Unifi: unifi/
