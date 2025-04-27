@@ -1,7 +1,7 @@
 site_name: Hackernet
 site_url: https://hackernet.se/
 site_description: >-
-  Hackernet är en hemsida med lite guide, tips och idéer för nätverk, linux och annat.
+  Hackernet är en hemsida med lite guider, tips och idéer för nätverk, linux och annat.
 repo_name: Hackernet-se/wiki
 repo_url: https://github.com/Hackernet-se/wiki
 #edit_uri: ""
@@ -65,6 +65,7 @@ plugins:
   - search
   - include_dir_to_nav
   - glightbox
+  - git-revision-date-localized
 markdown_extensions:
   - attr_list
   - md_in_html
