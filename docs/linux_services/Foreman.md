@@ -21,51 +21,40 @@ ett API som foreman kan agera mot.
 
 Installation
 ============
+=== "CentOS 7"
 
--   <btn data-toggle="tab" class="">\#tab1\|CentOS 7</btn>
--   <btn data-toggle="tab" class="">\#tab2\|Ubuntu 16.04</btn>
+  Börja med att lägga till Puppet 5.X repot som är det rekommenderade.
+  
+  `yum -y install `[`https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm`](https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm)
+  
+  Installera sedan EPEL (Extra Packages for Enterprise Linux) och Foreman
+  repot.
+  
+  `yum -y install `[`http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm`](http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm)
+  `yum -y install `[`https://yum.theforeman.org/releases/1.16/el7/x86_64/foreman-release.rpm`](https://yum.theforeman.org/releases/1.16/el7/x86_64/foreman-release.rpm)
+  
+  Ladda sedan hem Foreman.
+  
+  `yum -y install foreman-installer`
 
-<div class="tab-content">
-<div id="tab1" class="tab-pane fade in active">
+=== "Ubuntu 16.04"
+  Börja med att lägga till Puppet 4.X repot som är det rekommenderade.
+  
+  `apt-get -y install ca-certificates`
+  `wget `[`https://apt.puppetlabs.com/puppet5-release-xenial.deb`](https://apt.puppetlabs.com/puppet5-release-xenial.deb)
+  `dpkg -i puppet5-release-xenial.deb`
+  
+  Lägg sedan till Foreman repot.
+  
+  `echo "deb `[`http://deb.theforeman.org/`](http://deb.theforeman.org/)` xenial 1.16" > /etc/apt/sources.list.d/foreman.list`
+  `echo "deb `[`http://deb.theforeman.org/`](http://deb.theforeman.org/)` plugins 1.16" >> /etc/apt/sources.list.d/foreman.list`
+  `apt-get -y install ca-certificates`
+  `wget -q `[`https://deb.theforeman.org/pubkey.gpg`](https://deb.theforeman.org/pubkey.gpg)` -O- | apt-key add -`
+  
+  Ladda sedan hem Foreman.
+  
+  `apt-get update && apt-get -y install foreman-installer`
 
-Börja med att lägga till Puppet 5.X repot som är det rekommenderade.
-
-`yum -y install `[`https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm`](https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm)
-
-Installera sedan EPEL (Extra Packages for Enterprise Linux) och Foreman
-repot.
-
-`yum -y install `[`http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm`](http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm)
-`yum -y install `[`https://yum.theforeman.org/releases/1.16/el7/x86_64/foreman-release.rpm`](https://yum.theforeman.org/releases/1.16/el7/x86_64/foreman-release.rpm)
-
-Ladda sedan hem Foreman.
-
-`yum -y install foreman-installer`
-`  `
-
-</div>
-<div id="tab2" class="tab-pane fade">
-
-Börja med att lägga till Puppet 4.X repot som är det rekommenderade.
-
-`apt-get -y install ca-certificates`
-`wget `[`https://apt.puppetlabs.com/puppet5-release-xenial.deb`](https://apt.puppetlabs.com/puppet5-release-xenial.deb)
-`dpkg -i puppet5-release-xenial.deb`
-
-Lägg sedan till Foreman repot.
-
-`echo "deb `[`http://deb.theforeman.org/`](http://deb.theforeman.org/)` xenial 1.16" > /etc/apt/sources.list.d/foreman.list`
-`echo "deb `[`http://deb.theforeman.org/`](http://deb.theforeman.org/)` plugins 1.16" >> /etc/apt/sources.list.d/foreman.list`
-`apt-get -y install ca-certificates`
-`wget -q `[`https://deb.theforeman.org/pubkey.gpg`](https://deb.theforeman.org/pubkey.gpg)` -O- | apt-key add -`
-
-Ladda sedan hem Foreman.
-
-`apt-get update && apt-get -y install foreman-installer`
-`  `
-
-</div>
-</div>
 Kör sedan Foreman installer.
 
 `foreman-installer -i \`

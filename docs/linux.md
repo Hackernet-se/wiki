@@ -1,6 +1,5 @@
 ---
 title: Linux
-permalink: /Linux/
 ---
 
 **Linux** är ett Unix-liknande operativsystem som till största delen,
@@ -84,7 +83,7 @@ kommando
 
 #### Ta reda på om det är något lokalt prestanda eller kapacitetsproblem med maskinen.
 
-Finns på Github och [PyPI](/Python#PIP "wikilink")
+Finns på Github och [PyPI](../scripting/Python/#pip)
 
 `glances `
 

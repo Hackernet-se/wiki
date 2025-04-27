@@ -48,10 +48,10 @@ Sätt ett X på en sida som är klar fixad så man vet vad som är kvar.
 - [ ] Review and process: arista\Arista_EVPN.md
 - [ ] Review and process: arista\Arista_OSPF.md
 - [ ] Review and process: arista\Arista_VXLAN.md
-- [X] Review and process: cisco\Cisco_ACI.md
+- [ ] Review and process: cisco\Cisco_ACI.md
 - [ ] Review and process: cisco\Cisco_ASA.md
 - [ ] Review and process: cisco\Cisco_ASA_VPN.md
-- [X] Review and process: cisco\Cisco_BFD.md
+- [ ] Review and process: cisco\Cisco_BFD.md
 - [ ] Review and process: cisco\Cisco_BGP.md
 - [ ] Review and process: cisco\Cisco_BIER.md
 - [ ] Review and process: cisco\Cisco_CEF.md

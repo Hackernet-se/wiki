@@ -3,8 +3,6 @@ title: F5 Big-IP
 permalink: /F5_Big-IP/
 ---
 
-[Category:F5](/Category:F5 "wikilink")
-
 F5 Big-IP är en plattform utfärdad av företaget F5 med möjlighet att
 köra lastbalancering, remote vpn, ddos skydd på olika nivåer. Alla
 funktionerna styrs till olika moduler på den Linuxbaserade enheten och

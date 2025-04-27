@@ -22,9 +22,14 @@ nav:
     - Juniper: juniper/
     - Linux Networking: linux_networking/
     - Unifi: unifi/
-  - VMware: vmware/
-  - Windows: windows/
-  - Hardware: hardware/
+  - Virtualisering:
+    - VMware: vmware/
+    - Linux: linux_virt/
+  - Scripting: scripting/
+  - Diverse:
+    - Windows: windows/
+    - Hardware: hardware/
+  - Om oss: om-oss.md
 
 
 theme:
@@ -41,6 +46,7 @@ theme:
     - navigation.tabs.sticky
     - navigation.footer
     - navigation.instant
+    - content.tabs.link
   language: sv
   palette:
     - media: "(prefers-color-scheme)"
@@ -66,11 +72,30 @@ plugins:
   - search
   - include_dir_to_nav
   - glightbox
-  - git-revision-date-localized
+  - git-committers:
+      repository: Hackernet-se/wiki
+      branch: main
+      enabled: !ENV [CI, false] # Disable this plugin for local builds to not risk getting rate limited towards Github.
+      exclude:
+        - index.md
+        - om-oss.md
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: timeago
+      timezone: Europe/Stockholm
+      locale: sv
+      exclude:
+        - index.md
+        - om-oss.md
 markdown_extensions:
+  - meta
   - attr_list
   - md_in_html
+  - admonition
+  - pymdownx.details
   - pymdownx.blocks.caption
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -92,3 +117,17 @@ extra:
   analytics:
     provider: google
     property: G-DSRB6JMF85
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >- 
+            Thanks for your feedback! Help us improve this page by
+            using our <a href="https://github.com/Hackernet-se/wiki/issues/new/?title=[Feedback]+{title}+-+{url}" target="_blank" rel="noopener">issue form</a>.

@@ -2,6 +2,7 @@
 hide:
   - navigation
   - toc
+  - feedback
 ---
 # Hemliga Hacker Wikin
 Här kommer alla hemliga hackerknep att läggas upp

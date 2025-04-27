@@ -1,9 +1,10 @@
 ---
 title: Arista BGP
-permalink: /Arista_BGP/
+description: BGP konfiguration för Arista enheter.
+keywords: Arista, BGP, Routing, Network, Nätverk
 ---
 
-Se även [Cisco BGP](/Cisco_BGP "wikilink")
+Se även [Cisco BGP](../cisco/Cisco_BGP.md)
 
 Konfiguration
 =============
@@ -30,10 +31,6 @@ Konfiguration
 `clear ip bgp *`
 `clear ip bgp `
 
-<address>
-
-soft
-
 ### BGP-LU
 
 BGP kan annonsera unicast routes med en associated mpls label (RFC
@@ -53,5 +50,3 @@ routers och inte P routers.
 Verify
 
 `show ip bgp labeled-unicast`
-
-[Category:Arista](/Category:Arista "wikilink")

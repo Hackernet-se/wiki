@@ -1,5 +1,7 @@
 # [Wiki](https://hackernet-se.github.io/wiki/)
 
+## Prerequisites
+* `pip install -r requirements.txt` - Install all requirements needed to build a local version.
 
 ## Commands
 
