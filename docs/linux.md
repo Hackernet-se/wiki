@@ -5,18 +5,6 @@ title: Linux
 **Linux** är ett Unix-liknande operativsystem som till största delen,
 och i några varianter helt, består av fri programvara.
 
-Tools
-=====
-
-<DynamicPageList> category = Tools ordermethod = sortkey order =
-ascending </DynamicPageList>
-
-Distar
-======
-
-<DynamicPageList> category = Distar ordermethod = sortkey order =
-ascending </DynamicPageList>
-
 Tips'n'trix
 ===========
 

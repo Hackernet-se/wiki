@@ -3,7 +3,7 @@ title: PowerDNS
 permalink: /PowerDNS/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") PowerDNS är en open
+PowerDNS är en open
 source DNS som skapades i slutet av 1990 talet. PowerDNS är väldigt
 anpassningsbart för man är inte bunden att använda enbart text filer
 utan man kan ha sina records i databaser också. Det har gjort att
@@ -14,9 +14,9 @@ supermaster, som gör att nya zoner som skapas automatiskt finns på alla
 slavar. PowerDNS har också ett väldigt bra DNSSEC stöd och driver 90% av
 Europas DNSSEC domäner.
 
-PowerDNS har delats upp i två delar, **[PowerDNS Authoritative
-Server](https://www.powerdns.com/auth.html)** och **[PowerDNS
-Recursor](https://www.powerdns.com/recursor.html)**.
+PowerDNS har delats upp i två delar:
+* [PowerDNS Authoritative Server](https://www.powerdns.com/auth.html)
+* [PowerDNS Recursor](https://www.powerdns.com/recursor.html)
 
 PowerDNS Authoritative Server
 =============================
@@ -33,89 +33,59 @@ hand om replikeringen. Att låta databaser ta hand om replication har
 visat sig väldigt stabilt enligt PowerDNS även vid dålig anslutning.
 Native väljs default på nya zoner.
 
-**Master operation**: PowerDNS skickar ut notifikationer till sina
-slavar vid en zone ändring och sköter själv replikeringen till en slav
-server.
+**Primary Replication**: PowerDNS skickar ut notifikationer till sina
+secondaries vid en zone ändring och sköter själv replikeringen med hjälp av AXFR/IXFR.
 
-**Slave operation**: Vid uppstart skickar PowerDNS en request till alla
-backends en lista med domäner som nyligen inte kollat om dom ändrats.
-Alla domäner som inte har senaste versionen kommer laddas ner.
+**Secondary operation**: Vid uppstart ber PowerDNS sina backends skicka en lista med domäner som nyligen inte kollat om dom ändrats.
+Alla domäner som inte har senaste versionen kommer därför refreshas
 
-**Supermaster**: En supermaster automatiskt konfigurerar slavar med nya
-zoner när dom skapas. För att det ska fungera krävs bla att slaven vet
-om vem som är supermaster, supermastern har ett SOA record i domänen och
-att ett NS record måste finnas som stämmer överens med supermastern IP'n
+**Autoprimary**: Autoprimaries konfigurerar secondaries med nya
+zoner när dom skapas. För att det ska fungera krävs bla att secondaries vet
+om vem som är autoprimarien. Autoprimaries har ett SOA record i domänen och
+att ett NS record måste finnas som stämmer överens med autoprimaries IP'n
 som konfigurerats på slaven.
 
--   <btn data-toggle="tab" class="">\#tab1\|CentOS 7</btn>
--   <btn data-toggle="tab" class="">\#tab2\|Ubuntu 16.04</btn>
 
-<div class="tab-content">
-<div id="tab1" class="tab-pane fade in active">
+Installation
+-------------
+För EL9 baserade system gör följande
+```shell
+dnf install epel-release
+curl -o /etc/yum.repos.d/powerdns-auth-49.repo https://repo.powerdns.com/repo-files/el-auth-49.repo
+dnf install pdns pdns-backend-$backend
+```
+Välj och installera sedan vilken backend du vill använda, olika backends har olika stöd se
+följande [lista](https://doc.powerdns.com/md/authoritative/).
 
-Lägg till PowerDNS repo och installera epel samt yum priority plugin.
+(BIND stöd är inbyggt)
 
-`yum install epel-release yum-plugin-priorities`
-`curl -o /etc/yum.repos.d/powerdns-auth-master.repo `[`https://repo.powerdns.com/repo-files/centos-auth-master.repo`](https://repo.powerdns.com/repo-files/centos-auth-master.repo)
-
-Installera sedan PowerDNS servern.
-
-`yum install pdns`
-
-</div>
-<div id="tab2" class="tab-pane fade">
-
-Börja med att lägga till PowerDNS repot:
-
-`echo "deb [arch=amd64] `[`http://repo.powerdns.com/ubuntu`](http://repo.powerdns.com/ubuntu)` xenial-auth-master main" > /etc/apt/sources.list.d/pdns.list`
-
-Skapa sedan **/etc/apt/preferences.d/pdns** med följande innehåll:
-
-`Package: pdns-*`
-`Pin: origin repo.powerdns.com`
-`Pin-Priority: 600`
-
-Kör sedan dessa kommandon:
-
-`curl `[`https://repo.powerdns.com/CBC8B383-pub.asc`](https://repo.powerdns.com/CBC8B383-pub.asc)` | sudo apt-key add - &&`
-`sudo apt-get update`
-
-Installera sedan PowerDNS servern.
-
-`sudo apt-get install pdns-server`
-`  `
-
-</div>
-</div>
-
-Välj vilken backend du vill använda, olika backends har olika stöd se
-följande [lista](https://doc.powerdns.com/md/authoritative/).(Bind stöd
-är inbyggt)
-
-`pdns-backend-geoip - geoip backend for PowerDNS`
-`pdns-backend-ldap - LDAP backend for PowerDNS`
-`pdns-backend-lua - Lua backend for PowerDNS`
-`pdns-backend-mydns - MyDNS compatibility backend for PowerDNS`
-`pdns-backend-mysql - generic MySQL backend for PowerDNS`
-`pdns-backend-pgsql - generic PostgreSQL backend for PowerDNS`
-`pdns-backend-pipe - pipe/coprocess backend for PowerDNS`
-`pdns-backend-remote - remote backend for PowerDNS`
-`pdns-backend-sqlite3 - sqlite 3 backend for PowerDNS`
-`pdns-backend-tinydns - tinydns compatibility backend for PowerDNS`
+```shell
+pdns-backend-geoip : Geo backend for pdns
+pdns-backend-ldap : LDAP backend for pdns
+pdns-backend-lmdb : LMDB backend for pdns
+pdns-backend-lua2 : Lua backend for pdns
+pdns-backend-mysql : MySQL backend for pdns
+pdns-backend-odbc : UnixODBC backend for pdns
+pdns-backend-pipe : Pipe backend for pdns
+pdns-backend-postgresql : PostgreSQL backend for pdns
+pdns-backend-remote : Remote backend for pdns
+pdns-backend-sqlite : SQLite backend for pdns
+pdns-backend-tinydns : TinyDNS backend for pdns
+```
 
 Konfiguration
 -------------
 
-**10.0.0.1** Supermaster.hackernet.se
+**10.0.0.1** autoprimary.hackernet.se
 
 **10.0.0.2** ns1.hackernet.se
 
 **10.0.0.3** ns2.hackernet.se
 
-I guiden har vi valt att använda [MySQL](/MySQL "wikilink") som backend.
-Och skapa en supermaster server som låter PowerDNS sköta replikeringen.
+I guiden har vi valt att använda MySQL som backend.
+Och skapa en autoprimary server som låter PowerDNS sköta replikeringen.
 
-### Master
+### Primary
 
 Lägg in följande i `/etc/powerdns/pdns.conf`:
 
@@ -130,9 +100,8 @@ Lägg in följande i `/etc/powerdns/pdns.conf`:
 `local-port=53`
 `log-dns-details=on`
 `loglevel=3`
-`module-dir=/usr/lib/x86_64-linux-gnu/pdns/`
-`master=yes`
-`slave=no`
+`primary=yes`
+`secondary=no`
 `setgid=pdns`
 `setuid=pdns`
 `socket-dir=/var/run`
@@ -155,11 +124,7 @@ under installationen så skapades det en databas och fylldes med default
 tables. Ifall du behöver skapa tables själv så kör följande MySQL
 kommando för att skapa dom.
 
-<div class="toccolours mw-collapsible mw-collapsed" style="width:800px">
-
 MySQL kommandon.
-
-<div class="mw-collapsible-content">
 
 ``` mysql
 CREATE TABLE domains (
