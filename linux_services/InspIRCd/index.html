@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8841,7 +8869,7 @@
   
 
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a> InspIRCd är en modulär
+<p>InspIRCd är en modulär
 IRC server. Servern är skriven från scratch för att vara stabil, modern
 och lättviktigt och stöd för många extra features som SSL stöd med
 GNUTLS eller OpenSSL, LDAP stöd för användare med mera. Servern går att
@@ -8849,31 +8877,37 @@ köra på Linux, Windows, BSD och Mac OSX.</p>
 <h1 id="installation">Installation</h1>
 <p>Börja med att installera paket för att kunna kompilera servern och kunna
 ladda ner moduler.</p>
-<p><code>apt-get&nbsp;install&nbsp;g++&nbsp;clang&nbsp;libwww-perl&nbsp;pkg-config</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;g++&nbsp;clang&nbsp;libwww-perl&nbsp;pkg-config
+</code></pre></div>
 <p>Clona ner senaste stabila releasen från Github.</p>
 <p><code>git&nbsp;clone&nbsp;-b&nbsp;insp20</code><a href="git://github.com/inspircd/inspircd.git"><code>git://github.com/inspircd/inspircd.git</code></a></p>
 <p>För att kolla vilka extra features det finns kör:</p>
-<p><code>./configure&nbsp;--list-extras</code></p>
+<div class="highlight"><pre><span></span><code>./configure&nbsp;--list-extras
+</code></pre></div>
 <p>För att lägga till en feature tex SSL stöd med GNUTLS skriv:</p>
-<p><code>./configure&nbsp;--enable-extras=m_ssl_gnutls.cpp</code></p>
+<div class="highlight"><pre><span></span><code>./configure&nbsp;--enable-extras=m_ssl_gnutls.cpp
+</code></pre></div>
 <p><strong>OpenSSL vs. GnuTLS</strong> Det har körts benchmarks mellan GnuTLS och
 OpenSSL där GnuTLS har varit snabbare än OpenSSL. Därför rekommenderas
 det att använda GnuTLS som SSL module.</p>
 <p>Om du vill lägga till nån extra modul använd. Det går också att lägga
 till moduler i efterhand med modulemanager.</p>
-<p><code>./modulemanager</code></p>
+<div class="highlight"><pre><span></span><code>./modulemanager
+</code></pre></div>
 <p>När du är klar kör följande kommando. Du kommer få en del frågor att
 svara på. Du behöver inte vara root för att kompilera eller starta
 servern.</p>
-<p><code>./configure</code>
-<code>make</code>
-<code>make&nbsp;install</code></p>
+<div class="highlight"><pre><span></span><code>./configure
+make
+make&nbsp;install
+</code></pre></div>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>Kopiera exempel conf filerna från exempel mappen och gör dom ändringar
 du känner för.</p>
-<p><code>cp&nbsp;modules.conf.example&nbsp;../modules.conf</code>
-<code>cp&nbsp;inspircd.conf.example&nbsp;../inspircd.conf</code>
-<code>cp&nbsp;opers.conf.example&nbsp;../opers.conf</code></p>
+<div class="highlight"><pre><span></span><code>cp&nbsp;modules.conf.example&nbsp;../modules.conf
+cp&nbsp;inspircd.conf.example&nbsp;../inspircd.conf
+cp&nbsp;opers.conf.example&nbsp;../opers.conf
+</code></pre></div>
 <h2 id="gnutls">GnuTLS</h2>
 <p>Om du vill att klienter ska kunna köra SSL behövs följande rader:</p>
 <p><bind address="" port="6667" type="clients" ssl="gnutls">
@@ -8885,18 +8919,21 @@ lösenord krävs följande module i <strong>modules.conf</strong> laddad:</p>
 <p>Använd denna <a href="http://www.xorbin.com/tools/sha256-hash-calculator">sida</a>
 för att generera en hash.</p>
 <p>För att använda en hash till något krävs denna raden inom samma block:</p>
-<p><code>&lt;...&nbsp;hash="sha256"&nbsp;password="SecretHash"&nbsp;...&gt;</code></p>
+<div class="highlight"><pre><span></span><code>&lt;...&nbsp;hash="sha256"&nbsp;password="SecretHash"&nbsp;...&gt;
+</code></pre></div>
 <h2 id="losenords-skydda-servern">Lösenords skydda servern</h2>
 <p>Om du vill lösenords skydda din IRC server så ange följande i connect
 blocket:</p>
-<p><code>password="SecretPW"</code></p>
+<div class="highlight"><pre><span></span><code>password="SecretPW"
+</code></pre></div>
 <h2 id="skapa-ett-operator-konto">Skapa ett operator konto</h2>
 <p>Ett operator konto kan vara bra att ha för att inte tappa kontrollen
 eller ladda om configen på servern utan att behöva starta om.</p>
 <p>I <strong>oper.conf</strong> anger du följande rad:</p>
 <p><oper name="username" hash="sha256" password="SecretHASH" host="*" type="netadmin"></oper></p>
 <p>För att bli operator skriver du följande i din IRC klient till servern:</p>
-<p><code>/oper&nbsp;Username&nbsp;password</code></p>
+<div class="highlight"><pre><span></span><code>/oper&nbsp;Username&nbsp;password
+</code></pre></div>
 <h1 id="tips-n-tricks">Tips n Tricks</h1>
 <p>Medans InspIRCd har många moduler och features så saknar den vissa saker
 som att kunna registrera sitt nickname, skydda sin kanal mot takeovers
@@ -8925,7 +8962,7 @@ IRC services.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

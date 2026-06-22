@@ -8793,6 +8793,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9173,22 +9201,26 @@ till flera olika typer av Ethernet-tjänster så som L2 point-to-point
 local connects, L2 point-to-point xconnects, L2 multipoint-to-multipoint
 VPLS och andra tjänster. Man kan genom att välja encapsulation även
 vlan-tagga, dubbel-tagga eller skriva om vlan-tag.</p>
-<p><code>interface&nbsp;GigabitEthernet2</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>service&nbsp;instance&nbsp;10&nbsp;ethernet</code>
-<code>encapsulation&nbsp;default</code>
-<code>xconnect&nbsp;19.19.19.19&nbsp;219&nbsp;encapsulation&nbsp;mpls</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet2
+&nbsp;no&nbsp;ip&nbsp;address
+&nbsp;service&nbsp;instance&nbsp;10&nbsp;ethernet
+&nbsp;&nbsp;encapsulation&nbsp;default
+&nbsp;&nbsp;xconnect&nbsp;19.19.19.19&nbsp;219&nbsp;encapsulation&nbsp;mpls
+</code></pre></div>
 <p>Verification</p>
-<p><code>show&nbsp;ethernet&nbsp;service&nbsp;instance&nbsp;summary</code>
-<code>show&nbsp;ethernet&nbsp;service&nbsp;instance&nbsp;id&nbsp;10&nbsp;interface&nbsp;gig2&nbsp;detail</code>
-<code>show&nbsp;l2vpn&nbsp;service&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ethernet&nbsp;service&nbsp;instance&nbsp;summary
+show&nbsp;ethernet&nbsp;service&nbsp;instance&nbsp;id&nbsp;10&nbsp;interface&nbsp;gig2&nbsp;detail
+show&nbsp;l2vpn&nbsp;service&nbsp;all&nbsp;
+</code></pre></div>
 <p><strong>BFD</strong>
 bfd-template multi-hop MH</p>
-<p><code>interval&nbsp;min-tx&nbsp;200&nbsp;min-rx&nbsp;200&nbsp;multiplier&nbsp;3</code>
-<code>bfd&nbsp;map&nbsp;ipv4&nbsp;1.1.1.0/24&nbsp;1.1.1.1/32&nbsp;MH</code></p>
-<p><code>pseudowire-class&nbsp;MPLS-BFD</code>
-<code>encapsulation&nbsp;mpls</code>
-<code>monitor&nbsp;peer&nbsp;bfd&nbsp;local&nbsp;interface&nbsp;Loopback0</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;interval&nbsp;min-tx&nbsp;200&nbsp;min-rx&nbsp;200&nbsp;multiplier&nbsp;3&nbsp;
+bfd&nbsp;map&nbsp;ipv4&nbsp;1.1.1.0/24&nbsp;1.1.1.1/32&nbsp;MH
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>pseudowire-class&nbsp;MPLS-BFD
+&nbsp;encapsulation&nbsp;mpls
+&nbsp;monitor&nbsp;peer&nbsp;bfd&nbsp;local&nbsp;interface&nbsp;Loopback0
+</code></pre></div>
 <h1 id="vpls">VPLS</h1>
 <p>Virtual Private LAN Service (VPLS) är ett sätt att tillhandahålla
 Ethernet-baserad multipoint-to-multipoint-kommunikation över IP eller
@@ -9206,65 +9238,78 @@ så age:ar VFI:er ut inaktiva MAC-adresser efter 5 minuter.</p>
 <p>Manual VPLS, legacy syntax. Bridge domain används för mac learning samt
 att binda ihop Ethernet UNI med LSP. Man kan ej blanda gammal och ny
 syntax pga att bridge-domain betyder olika beroende på config context.</p>
-<p><code>l2&nbsp;vfi&nbsp;VPLS&nbsp;manual</code>
-<code>vpn&nbsp;id&nbsp;100</code>
-<code>bridge-domain&nbsp;1</code>
-<code>neighbor&nbsp;10.0.0.2&nbsp;encapsulation&nbsp;mpls</code>
-<code>neighbor&nbsp;10.0.0.3&nbsp;encapsulation&nbsp;mpls</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>service&nbsp;instance&nbsp;10&nbsp;ethernet</code>
-<code>encapsulation&nbsp;default</code>
-<code>bridge-domain&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>l2&nbsp;vfi&nbsp;VPLS&nbsp;manual
+&nbsp;vpn&nbsp;id&nbsp;100
+&nbsp;bridge-domain&nbsp;1
+&nbsp;neighbor&nbsp;10.0.0.2&nbsp;encapsulation&nbsp;mpls
+&nbsp;neighbor&nbsp;10.0.0.3&nbsp;encapsulation&nbsp;mpls
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;service&nbsp;instance&nbsp;10&nbsp;ethernet
+&nbsp;&nbsp;encapsulation&nbsp;default
+&nbsp;&nbsp;bridge-domain&nbsp;1
+</code></pre></div>
 <p>Bridge Domain Centric (preferred syntax). Full mesh scaling är ett
 administrativt problem oavsett syntax.</p>
-<p><code>l2vpn&nbsp;vfi&nbsp;context&nbsp;VPLS</code>
-<code>vpn&nbsp;id&nbsp;100</code>
-<code>member&nbsp;10.0.0.2&nbsp;encapsulation&nbsp;mpls</code>
-<code>member&nbsp;10.0.0.3&nbsp;encapsulation&nbsp;mpls</code>
-<code>member&nbsp;10.0.0.4&nbsp;encapsulation&nbsp;mpls</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>service&nbsp;instance&nbsp;10&nbsp;ethernet</code>
-<code>encapsulation&nbsp;default</code></p>
-<p><code>bridge-domain&nbsp;1</code>
-<code>mac&nbsp;limit&nbsp;maximum&nbsp;addresses&nbsp;50</code>
-<code>member&nbsp;gi2&nbsp;service-instance&nbsp;10</code>
-<code>member&nbsp;vfi&nbsp;VPLS</code></p>
+<div class="highlight"><pre><span></span><code>l2vpn&nbsp;vfi&nbsp;context&nbsp;VPLS
+&nbsp;vpn&nbsp;id&nbsp;100
+&nbsp;member&nbsp;10.0.0.2&nbsp;encapsulation&nbsp;mpls
+&nbsp;member&nbsp;10.0.0.3&nbsp;encapsulation&nbsp;mpls
+&nbsp;member&nbsp;10.0.0.4&nbsp;encapsulation&nbsp;mpls
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;service&nbsp;instance&nbsp;10&nbsp;ethernet
+&nbsp;&nbsp;encapsulation&nbsp;default
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>bridge-domain&nbsp;1
+&nbsp;mac&nbsp;limit&nbsp;maximum&nbsp;addresses&nbsp;50
+&nbsp;member&nbsp;gi2&nbsp;service-instance&nbsp;10
+&nbsp;member&nbsp;vfi&nbsp;VPLS&nbsp;
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;l2vpn&nbsp;vfi</code>
-<code>show&nbsp;bridge-domain</code>
-<code>show&nbsp;l2vpn&nbsp;service&nbsp;all</code>
-<code>show&nbsp;mpls&nbsp;l2transport&nbsp;vc</code>
-<code>show&nbsp;mpls&nbsp;forwarding-table&nbsp;|&nbsp;i&nbsp;l2ckt</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;l2vpn&nbsp;vfi
+show&nbsp;bridge-domain
+show&nbsp;l2vpn&nbsp;service&nbsp;all&nbsp;
+show&nbsp;mpls&nbsp;l2transport&nbsp;vc
+show&nbsp;mpls&nbsp;forwarding-table&nbsp;|&nbsp;i&nbsp;l2ckt
+</code></pre></div>
 <p>Man kan även koppla in L3-interface på sin bridge-domain.</p>
-<p><code>interface&nbsp;BDI1</code>
-<code>ip&nbsp;address&nbsp;172.20.0.10&nbsp;255.255.255.0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;BDI1
+&nbsp;ip&nbsp;address&nbsp;172.20.0.10&nbsp;255.255.255.0
+</code></pre></div>
 <h3 id="bgp-autodiscovery">BGP Autodiscovery</h3>
 <p><strong>LDP</strong> based VPLS med BGP Autodiscovery (RFC 4762). BGP används för att
 upptäcka VPLS-endpoints automatiskt för varje VPN och VC-grannar
 konfigureras ej maneullt. Varje VPLS får en egen rd och detta går att
 använda i kombination med route reflector.</p>
-<p><code>l2vpn&nbsp;vfi&nbsp;context&nbsp;VPLS</code>
-<code>vpn&nbsp;id&nbsp;100</code>
-<code>autodiscovery&nbsp;bgp&nbsp;signaling&nbsp;ldp</code>
-<code>auto-route-target&nbsp;&nbsp;#på&nbsp;default</code></p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>address-family&nbsp;l2vpn&nbsp;vpls</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;activate</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;send-comunity&nbsp;extended</code></p>
+<div class="highlight"><pre><span></span><code>l2vpn&nbsp;vfi&nbsp;context&nbsp;VPLS
+&nbsp;vpn&nbsp;id&nbsp;100
+&nbsp;autodiscovery&nbsp;bgp&nbsp;signaling&nbsp;ldp
+&nbsp;&nbsp;auto-route-target&nbsp;&nbsp;#på&nbsp;default
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;address-family&nbsp;l2vpn&nbsp;vpls
+&nbsp;&nbsp;neighbor&nbsp;1.1.1.1&nbsp;activate
+&nbsp;&nbsp;neighbor&nbsp;1.1.1.1&nbsp;send-comunity&nbsp;extended
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bgp&nbsp;l2vpn&nbsp;vpls&nbsp;all&nbsp;summary</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bgp&nbsp;l2vpn&nbsp;vpls&nbsp;all&nbsp;summary
+</code></pre></div>
 <p><strong>BGP</strong> based VPLS med BGP Autodiscovery (RFC 4761). BGP används för att
 upptäcka VPLS-endpoints men också för att signalera labels. Man måste
 suppress ldp signaling för att slå på bgp signaling.</p>
-<p><code>l2vpn&nbsp;vfi&nbsp;context&nbsp;VPLS</code>
-<code>vpn&nbsp;id&nbsp;100</code>
-<code>autodiscovery&nbsp;bgp&nbsp;signaling&nbsp;bgp</code>
-<code>ve&nbsp;id&nbsp;11&nbsp;&nbsp;#unik&nbsp;per&nbsp;VPLS&nbsp;Edge&nbsp;device</code></p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>address-family&nbsp;l2vpn&nbsp;vpls</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;suppress-signaling-protocol&nbsp;ldp</code></p>
+<div class="highlight"><pre><span></span><code>l2vpn&nbsp;vfi&nbsp;context&nbsp;VPLS
+&nbsp;vpn&nbsp;id&nbsp;100
+&nbsp;autodiscovery&nbsp;bgp&nbsp;signaling&nbsp;bgp
+&nbsp;&nbsp;ve&nbsp;id&nbsp;11&nbsp;&nbsp;#unik&nbsp;per&nbsp;VPLS&nbsp;Edge&nbsp;device&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;address-family&nbsp;l2vpn&nbsp;vpls
+&nbsp;&nbsp;neighbor&nbsp;1.1.1.1&nbsp;suppress-signaling-protocol&nbsp;ldp
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bgp&nbsp;l2vpn&nbsp;vpls&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bgp&nbsp;l2vpn&nbsp;vpls&nbsp;all
+</code></pre></div>
 <h3 id="h-vpls">H-VPLS</h3>
 <p>VPLS skalar inte superbra eftersom det kräver full-mesh, detta går att
 bygga ut med Hierarchical VPLS. Det man gör då är att koppla ihop flera
@@ -9280,10 +9325,12 @@ Pseudowire Redundancy.</p>
 <p>För CDP, LACP, STP frames etc krävs l2 tunneling protocol. Detta finns
 det inte stöd för på alla plattformar, <em>l2protocol action not
 supported</em>.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>service&nbsp;instance&nbsp;100&nbsp;ethernet</code>
-<code>l2protocol&nbsp;tunnel</code></p>
-<p><code>show&nbsp;ethernet&nbsp;service&nbsp;instance&nbsp;detail&nbsp;|&nbsp;i&nbsp;L2protocol</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;service&nbsp;instance&nbsp;100&nbsp;ethernet
+&nbsp;&nbsp;l2protocol&nbsp;tunnel
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ethernet&nbsp;service&nbsp;instance&nbsp;detail&nbsp;|&nbsp;i&nbsp;L2protocol
+</code></pre></div>
 <h1 id="eomplsatom">EoMPLS/AToM</h1>
 <p>Ethernet-over-MPLS eller Any Transport over MPLS (RFC 4448). Requires
 end-to-end MPLS LSP. Notera att MTU på Access Circuits måste matcha för
@@ -9299,96 +9346,114 @@ att pseudowire ska gå upp. Det finns ingen MAC Learning med EoMPLS.</p>
 <p>Port mode använder VC type 5 (Ethernet) och VLAN mode använder VC type 5
 men med type 4 (Vlan) som fallback (<em>show mpls l2transport binding</em>).</p>
 <p>PW logging</p>
-<p><code>xconnect&nbsp;logging&nbsp;pseudowire&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>xconnect&nbsp;logging&nbsp;pseudowire&nbsp;status&nbsp;
+</code></pre></div>
 <p>PE1</p>
-<p><code>interface&nbsp;gi2</code>
-<code>xconnect&nbsp;2.2.2.2&nbsp;102&nbsp;encapsulation&nbsp;mpls</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;xconnect&nbsp;2.2.2.2&nbsp;102&nbsp;encapsulation&nbsp;mpls
+</code></pre></div>
 <p>PE2, VCID måste matcha på båda sidor</p>
-<p><code>interface&nbsp;gi2</code>
-<code>xconnect&nbsp;1.1.1.1&nbsp;102&nbsp;encapsulation&nbsp;mpls</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;xconnect&nbsp;1.1.1.1&nbsp;102&nbsp;encapsulation&nbsp;mpls
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;xconnect&nbsp;all</code>
-<code>show&nbsp;xconnect&nbsp;peer&nbsp;2.2.2.2&nbsp;vcid&nbsp;102</code>
-<code>show&nbsp;l2vpn&nbsp;service&nbsp;all</code>
-<code>show&nbsp;mpls&nbsp;l2transport&nbsp;vc&nbsp;102&nbsp;detail</code>
-<code>ping&nbsp;mpls&nbsp;pseudowire&nbsp;10.0.0.10&nbsp;102</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;xconnect&nbsp;all
+show&nbsp;xconnect&nbsp;peer&nbsp;2.2.2.2&nbsp;vcid&nbsp;102
+show&nbsp;l2vpn&nbsp;service&nbsp;all&nbsp;
+show&nbsp;mpls&nbsp;l2transport&nbsp;vc&nbsp;102&nbsp;detail
+ping&nbsp;mpls&nbsp;pseudowire&nbsp;10.0.0.10&nbsp;102
+</code></pre></div>
 <p>Segment 1 är de interface som kunden sitter på, segment 2 är core.</p>
 <p><strong>Pseudowire Redundancy</strong>
 Pseudowire redundancy innebär att man sätter upp en backup PW.</p>
-<p><code>l2vpn&nbsp;xconnect&nbsp;context&nbsp;Redundancy</code>
-<code>member&nbsp;1.1.1.1&nbsp;10&nbsp;encapsulation&nbsp;mpls&nbsp;group&nbsp;1&nbsp;priority&nbsp;1</code>
-<code>member&nbsp;2.2.2.2&nbsp;10&nbsp;encapsulation&nbsp;mpls&nbsp;group&nbsp;1&nbsp;priority&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>l2vpn&nbsp;xconnect&nbsp;context&nbsp;Redundancy
+&nbsp;member&nbsp;1.1.1.1&nbsp;10&nbsp;encapsulation&nbsp;mpls&nbsp;group&nbsp;1&nbsp;priority&nbsp;1
+&nbsp;member&nbsp;2.2.2.2&nbsp;10&nbsp;encapsulation&nbsp;mpls&nbsp;group&nbsp;1&nbsp;priority&nbsp;2
+</code></pre></div>
 <h2 id="evpn-vpws">EVPN-VPWS</h2>
-<p><code>l2vpn&nbsp;evpn</code>
-<code>replication-type&nbsp;ingress</code>
-<code>router-id&nbsp;Loopback0</code>
-<code>mpls&nbsp;label&nbsp;mode&nbsp;per-ce</code>
-<code>!</code>
-<code>l2vpn&nbsp;evpn&nbsp;instance&nbsp;10&nbsp;vlan-based</code>
-<code>route-distinguisher&nbsp;1.1.1.1:10</code>
-<code>route-target&nbsp;both&nbsp;10:10</code>
-<code>no&nbsp;auto-route-target</code>
-<code>!</code>
-<code>member&nbsp;evpn-instance&nbsp;10</code>
-<code>member&nbsp;GigabitEthernet0/0/1&nbsp;service-instance&nbsp;10</code>
-<code>!</code>
-<code>interface&nbsp;GigabitEthernet0/0/1</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>service&nbsp;instance&nbsp;10&nbsp;ethernet</code>
-<code>encapsulation&nbsp;dot1q&nbsp;100</code>
-<code>!</code>
-<code>router&nbsp;bgp&nbsp;1</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>neighbor&nbsp;IBGP&nbsp;activate</code>
-<code>neighbor&nbsp;IBGP&nbsp;send-community&nbsp;both</code></p>
+<div class="highlight"><pre><span></span><code>l2vpn&nbsp;evpn
+&nbsp;replication-type&nbsp;ingress
+&nbsp;router-id&nbsp;Loopback0
+&nbsp;mpls&nbsp;label&nbsp;mode&nbsp;per-ce
+!
+l2vpn&nbsp;evpn&nbsp;instance&nbsp;10&nbsp;vlan-based
+&nbsp;route-distinguisher&nbsp;1.1.1.1:10
+&nbsp;route-target&nbsp;both&nbsp;10:10
+&nbsp;no&nbsp;auto-route-target
+!&nbsp;
+member&nbsp;evpn-instance&nbsp;10
+&nbsp;member&nbsp;GigabitEthernet0/0/1&nbsp;service-instance&nbsp;10
+!
+interface&nbsp;GigabitEthernet0/0/1
+&nbsp;no&nbsp;ip&nbsp;address
+&nbsp;service&nbsp;instance&nbsp;10&nbsp;ethernet
+&nbsp;&nbsp;encapsulation&nbsp;dot1q&nbsp;100
+!&nbsp;
+router&nbsp;bgp&nbsp;1
+&nbsp;address-family&nbsp;l2vpn&nbsp;evpn&nbsp;
+&nbsp;&nbsp;neighbor&nbsp;IBGP&nbsp;activate
+&nbsp;&nbsp;neighbor&nbsp;IBGP&nbsp;send-community&nbsp;both
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;l2vpn&nbsp;evpn&nbsp;evi&nbsp;detail</code>
-<code>show&nbsp;l2vpn&nbsp;evpn&nbsp;mac</code>
-<code>show&nbsp;l2vpn&nbsp;l2route&nbsp;evpn&nbsp;mac</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;l2vpn&nbsp;evpn&nbsp;evi&nbsp;detail&nbsp;
+show&nbsp;l2vpn&nbsp;evpn&nbsp;mac&nbsp;
+show&nbsp;l2vpn&nbsp;l2route&nbsp;evpn&nbsp;mac
+</code></pre></div>
 <h2 id="l2tpv3">L2TPv3</h2>
 <p>Layer 2 Tunneling Protocol (RFC 3931, RFC 4719) kräver
 <a href="/Cisco_CEF" title="wikilink">CEF</a> och IP-konnektivitet end-to-end. Det är
 endast point-to-point. IP protocol: 115.</p>
-<p><code>pseudowire-class&nbsp;L2TP-PWCLASS</code>
-<code>encapsulation&nbsp;l2tpv3</code>
-<code>ip&nbsp;local&nbsp;interface&nbsp;Loopback0</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>xconnect&nbsp;2.2.2.2&nbsp;102&nbsp;pw-class&nbsp;L2TP-PWCLASS</code></p>
+<div class="highlight"><pre><span></span><code>pseudowire-class&nbsp;L2TP-PWCLASS
+&nbsp;encapsulation&nbsp;l2tpv3
+&nbsp;ip&nbsp;local&nbsp;interface&nbsp;Loopback0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;xconnect&nbsp;2.2.2.2&nbsp;102&nbsp;pw-class&nbsp;L2TP-PWCLASS
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;l2tp&nbsp;session&nbsp;all</code>
-<code>show&nbsp;l2tun&nbsp;tunnel&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;l2tp&nbsp;session&nbsp;all
+show&nbsp;l2tun&nbsp;tunnel&nbsp;all
+</code></pre></div>
 <p>Default kopieras inte DF bit som finns i paketen som kommer in ifrån CE
 när L2TPv3 IP header adderas. Man kan ändra det i pw-klassen.</p>
-<p><code>pseudowire-class&nbsp;L2TP-PWCLASS</code>
-<code>ip&nbsp;pmtu</code></p>
+<div class="highlight"><pre><span></span><code>pseudowire-class&nbsp;L2TP-PWCLASS
+&nbsp;ip&nbsp;pmtu
+</code></pre></div>
 <h2 id="inter-as-option-b">Inter-AS Option B</h2>
 <p>PE</p>
-<p><code>mpls&nbsp;ldp&nbsp;discovery&nbsp;targeted-hello&nbsp;accept</code></p>
-<p><code>l2vpn</code>
-<code>pseudowire&nbsp;routing</code>
-<code>terminating-pe&nbsp;tie-breaker</code></p>
-<p><code>l2vpn&nbsp;vfi&nbsp;context&nbsp;vfiA</code>
-<code>vpn&nbsp;id&nbsp;111</code>
-<code>autodiscovery&nbsp;bgp&nbsp;signaling&nbsp;ldp</code>
-<code>vpls-id&nbsp;111:111</code>
-<code>rd&nbsp;111:111</code>
-<code>route-target&nbsp;111:111</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;ldp&nbsp;discovery&nbsp;targeted-hello&nbsp;accept
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>l2vpn
+&nbsp;pseudowire&nbsp;routing&nbsp;
+&nbsp;&nbsp;terminating-pe&nbsp;tie-breaker
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>l2vpn&nbsp;vfi&nbsp;context&nbsp;vfiA
+&nbsp;vpn&nbsp;id&nbsp;111
+&nbsp;autodiscovery&nbsp;bgp&nbsp;signaling&nbsp;ldp
+&nbsp;vpls-id&nbsp;111:111
+&nbsp;rd&nbsp;111:111
+&nbsp;route-target&nbsp;111:111
+</code></pre></div>
 <p>ASBR</p>
-<p><code>mpls&nbsp;ldp&nbsp;discovery&nbsp;targeted-hello&nbsp;accept</code></p>
-<p><code>l2vpn</code>
-<code>pseudowire&nbsp;routing</code></p>
-<p><code>router&nbsp;bgp&nbsp;1</code>
-<code>no&nbsp;bgp&nbsp;default&nbsp;route-target&nbsp;filter</code>
-<code>address-family&nbsp;l2vpn&nbsp;vpls</code>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;ldp&nbsp;discovery&nbsp;targeted-hello&nbsp;accept
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>l2vpn
+&nbsp;pseudowire&nbsp;routing
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;1
+&nbsp;no&nbsp;bgp&nbsp;default&nbsp;route-target&nbsp;filter
+&nbsp;address-family&nbsp;l2vpn&nbsp;vpls
+</code></pre></div>
 <code>neighbor</code><ibgp><code>activate</code>
 <code>neighbor</code><ibgp><code>send-community&nbsp;extended</code>
 <code>neighbor</code><ibgp><code>next-hop-self</code>
 <code>neighbor</code><ebgp><code>activate</code>
-<code>neighbor</code><ebgp><code>send-community&nbsp;extended</code></ebgp></ebgp></ibgp></ibgp></ibgp></p>
-<p><code>interface&nbsp;GigabitEthernet1</code>
-<code>description&nbsp;ASBR-to-ASBR</code>
-<code>mpls&nbsp;ip</code>
-<code>mpls&nbsp;ldp&nbsp;discovery&nbsp;transport-address&nbsp;interface</code></p>
+<code>neighbor</code><ebgp><code>send-community&nbsp;extended</code><p></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet1
+&nbsp;description&nbsp;ASBR-to-ASBR
+&nbsp;mpls&nbsp;ip
+&nbsp;mpls&nbsp;ldp&nbsp;discovery&nbsp;transport-address&nbsp;interface
+</code></pre></div>
 <h1 id="ios-xr">IOS-XR</h1>
 <p>IOS-XR implementerar ett strukturerat CLI för EFP och EVC konfiguration.</p>
 <ul>
@@ -9398,52 +9463,59 @@ när L2TPv3 IP header adderas. Man kan ändra det i pw-klassen.</p>
 <li><strong>rewrite</strong>: används för att specificera rewrite av VLAN tag.</li>
 </ul>
 <p>Exempel:</p>
-<p><code>interface&nbsp;Bundle-Ether1.20&nbsp;l2transport</code>
-<code>encapsulation&nbsp;dot1q&nbsp;20</code>
-<code>rewrite&nbsp;ingress&nbsp;tag&nbsp;pop&nbsp;1&nbsp;symmetric</code>
-<code>mtu&nbsp;9022</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Bundle-Ether1.20&nbsp;l2transport
+&nbsp;encapsulation&nbsp;dot1q&nbsp;20
+&nbsp;rewrite&nbsp;ingress&nbsp;tag&nbsp;pop&nbsp;1&nbsp;symmetric
+&nbsp;mtu&nbsp;9022
+</code></pre></div>
 <p><strong>Loggning</strong></p>
-<p><code>l2vpn</code>
-<code>logging</code>
-<code>bridge-domain</code>
-<code>pseudowire</code>
-<code>vfi</code></p>
+<div class="highlight"><pre><span></span><code>l2vpn
+&nbsp;logging
+&nbsp;&nbsp;bridge-domain
+&nbsp;&nbsp;pseudowire
+&nbsp;&nbsp;vfi
+</code></pre></div>
 <p><strong>Static VPLS</strong></p>
-<p><code>l2vpn</code>
-<code>bridge&nbsp;group&nbsp;PROD</code>
-<code>bridge-domain&nbsp;101</code>
-<code>mtu&nbsp;9000</code>
-<code>interface&nbsp;Bundle-Ether1.101</code>
-<code>!</code>
-<code>vfi&nbsp;101</code>
-<code>neighbor&nbsp;10.0.10.15&nbsp;pw-id&nbsp;101</code>
-<code>neighbor&nbsp;10.0.10.16&nbsp;pw-id&nbsp;101</code></p>
+<div class="highlight"><pre><span></span><code>l2vpn
+&nbsp;bridge&nbsp;group&nbsp;PROD
+&nbsp;&nbsp;bridge-domain&nbsp;101
+&nbsp;&nbsp;&nbsp;mtu&nbsp;9000
+&nbsp;&nbsp;&nbsp;interface&nbsp;Bundle-Ether1.101
+&nbsp;&nbsp;&nbsp;!
+&nbsp;&nbsp;&nbsp;vfi&nbsp;101
+&nbsp;&nbsp;&nbsp;&nbsp;neighbor&nbsp;10.0.10.15&nbsp;pw-id&nbsp;101
+&nbsp;&nbsp;&nbsp;&nbsp;neighbor&nbsp;10.0.10.16&nbsp;pw-id&nbsp;101
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;l2vpn&nbsp;bridge-domain&nbsp;brief</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;l2vpn&nbsp;bridge-domain&nbsp;brief
+</code></pre></div>
 <p><strong>Static P2P</strong>
 EoMPLS tillhandahåller en tunnlingsmekanism för Ethernet-trafik över ett
 MPLS-enabled L3 core. Man enkapsulerar Ethernet PDUs i MPLS-paket.
 Notera att MTU på Access Circuits måste matcha för att pseudowire ska gå
 upp.</p>
 <p>"VC Type 5" = Port Based</p>
-<p><code>interface&nbsp;GigabitEthernet0/0/0/1</code>
-<code>l2transport</code>
-<code>no&nbsp;cdp</code>
-<code>!</code>
-<code>l2vpn</code>
-<code>!</code>
-<code>xconnect&nbsp;group&nbsp;GROUP1</code>
-<code>p2p&nbsp;TO_XR2</code>
-<code>interface&nbsp;GigabitEthernet0/0/0/1</code>
-<code>neighbor&nbsp;ipv4&nbsp;2.2.2.2&nbsp;pw-id&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet0/0/0/1
+&nbsp;l2transport
+&nbsp;no&nbsp;cdp
+!
+l2vpn
+&nbsp;!
+&nbsp;xconnect&nbsp;group&nbsp;GROUP1
+&nbsp;&nbsp;p2p&nbsp;TO_XR2
+&nbsp;&nbsp;&nbsp;interface&nbsp;GigabitEthernet0/0/0/1
+&nbsp;&nbsp;&nbsp;neighbor&nbsp;ipv4&nbsp;2.2.2.2&nbsp;pw-id&nbsp;100
+</code></pre></div>
 <p>"VC-Type 4" = VLAN based pseudowire</p>
-<p><code>l2vpn</code>
-<code>pw-class&nbsp;VLAN</code>
-<code>encapsulation&nbsp;mpls</code>
-<code>no&nbsp;transport-mode</code>
-<code>transport-mode&nbsp;vlan</code></p>
+<div class="highlight"><pre><span></span><code>l2vpn
+&nbsp;pw-class&nbsp;VLAN
+&nbsp;&nbsp;encapsulation&nbsp;mpls
+&nbsp;&nbsp;&nbsp;no&nbsp;transport-mode
+&nbsp;&nbsp;&nbsp;transport-mode&nbsp;vlan
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;l2vpn&nbsp;forwarding&nbsp;neighbor&nbsp;2.2.2.2&nbsp;pw-id&nbsp;100&nbsp;detail&nbsp;location&nbsp;0/0/CPU0</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;l2vpn&nbsp;forwarding&nbsp;neighbor&nbsp;2.2.2.2&nbsp;pw-id&nbsp;100&nbsp;detail&nbsp;location&nbsp;0/0/CPU0
+</code></pre></div>
 <h3 id="control-word">Control Word</h3>
 <p>Normalt sett kollar PE i packet header för att avgöra om det är ett
 IPv4- eller IPv6-paket och kollar sedan source/destination tuples för
@@ -9455,11 +9527,11 @@ kan routern titta på det för att avgöra om det är ett IP-paket eller ej
 och därmed finns det ingen risk att load sharing blir fel. Control-Word
 spelar en viktig roll för ECMP och det är rekommenderat att man slår på
 det.</p>
-<p><code>l2vpn</code>
-<code>pw-class&nbsp;CONTROL</code>
-<code>encapsulation&nbsp;mpls</code>
-<code>control-word</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>l2vpn
+&nbsp;pw-class&nbsp;CONTROL
+&nbsp;&nbsp;encapsulation&nbsp;mpls
+&nbsp;&nbsp;&nbsp;control-word
+</code></pre></div></ebgp></ebgp></ibgp></ibgp></ibgp>
 
 
 
@@ -9482,7 +9554,7 @@ det.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

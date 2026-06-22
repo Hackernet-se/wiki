@@ -8847,6 +8847,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9277,27 +9305,33 @@ blir snabbt utdaterad. Det smidigaste sättet att tanka hem den senaste
 iso:n är med ett powershell-script. Inget VMware-konto behövs heller!</p>
 <p><a href="http://vibsdepot.v-front.de/tools/ESXi-Customizer-PS-v2.5.ps1"></a><a href="http://vibsdepot.v-front.de/tools/ESXi-Customizer-PS-v2.5.ps1">http://vibsdepot.v-front.de/tools/ESXi-Customizer-PS-v2.5.ps1</a></p>
 <p>OBS Requirements: VMware PowerCLI version 5.1 or newer</p>
-<p><code>.\ESXi-Customizer-PS-v2.5.ps1&nbsp;-v65</code></p>
+<div class="highlight"><pre><span></span><code>.\ESXi-Customizer-PS-v2.5.ps1&nbsp;-v65
+</code></pre></div>
 <p>Planerar du att köra ESXi på ett konsumentmoderkort är det inte säkert
 att nätverkskortet fungerar med standard-iso:n. Vill du ha en iso med
 mer drivrutiner kör istället följande kommando:</p>
-<p><code>.\ESXi-Customizer-PS-v2.5.ps1&nbsp;-v60&nbsp;-vft&nbsp;-load&nbsp;net-e1000e,net55-r8168,net-r8169,sata-xahci</code></p>
+<div class="highlight"><pre><span></span><code>.\ESXi-Customizer-PS-v2.5.ps1&nbsp;-v60&nbsp;-vft&nbsp;-load&nbsp;net-e1000e,net55-r8168,net-r8169,sata-xahci
+</code></pre></div>
 <h2 id="patchhantering">Patchhantering</h2>
 <p>Detta är generell patchhantering.</p>
 <p><strong>Online</strong></p>
 <p>Börja med att kolla vad senaste imagen heter på <a href="https://esxi-patches.v-front.de/">patch
 tracker</a></p>
-<p><code>esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;set&nbsp;-e&nbsp;true&nbsp;-r&nbsp;httpClient</code>
+<p></p><div class="highlight"><pre><span></span><code>esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;set&nbsp;-e&nbsp;true&nbsp;-r&nbsp;httpClient
+</code></pre></div>
 <code>esxcli&nbsp;software&nbsp;profile&nbsp;update&nbsp;-d</code><a href="https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml"><code>https://hostupdate.vmware.com/software/VUM/PRODUCTION/main/vmw-depot-index.xml</code></a><code>-p&nbsp;ESXi-5.X.X-2015XXXXXXX-standard&nbsp;[--allow-downgrades]</code>
-<code>reboot</code></p>
+<div class="highlight"><pre><span></span><code>reboot
+</code></pre></div><p></p>
 <p><strong>Offline</strong></p>
 <p>Ladda ner zip från VMwares hemsida och lägg in på datastore</p>
-<p><code>esxcli&nbsp;software&nbsp;profile&nbsp;update&nbsp;-d&nbsp;/vmfs/volume/your_datastore/ESXi550-2015XXX.zip&nbsp;-p&nbsp;ESXi-5.5.0-2015XXX-standard</code>
-<code>reboot</code></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;software&nbsp;profile&nbsp;update&nbsp;-d&nbsp;/vmfs/volume/your_datastore/ESXi550-2015XXX.zip&nbsp;-p&nbsp;ESXi-5.5.0-2015XXX-standard&nbsp;
+reboot
+</code></pre></div>
 <p>Detta fungerar även mellan versioner, 5.1 -&gt; 5.5 -&gt; 6.0</p>
 <p><strong>vCenter</strong></p>
 <p>Har man vCenter bör man använda VMware Update Manager.</p>
-<p><code>.\ESXi-Customizer-PS-v2.5.ps1&nbsp;-v55&nbsp;-ozip</code></p>
+<div class="highlight"><pre><span></span><code>.\ESXi-Customizer-PS-v2.5.ps1&nbsp;-v55&nbsp;-ozip
+</code></pre></div>
 <p>Output an ESXi Offline Bundle that you can use for importing into Update
 Manager</p>
 <h2 id="logghantering">Logghantering</h2>
@@ -9311,63 +9345,77 @@ varianter för central ESXi-logghantering.</p>
 <p>Peka loggarna i ESXi: Advanced Settings -&gt; Syslog.global.logHost -&gt;
 <udp: %5bip%5d:514=""></udp:></p>
 <p>Verify</p>
-<p><code>esxcli&nbsp;system&nbsp;syslog&nbsp;config&nbsp;get</code></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;system&nbsp;syslog&nbsp;config&nbsp;get
+</code></pre></div>
 <h2 id="embedded-host-client">Embedded Host Client</h2>
 <p>Webgui till enskilda ESXi-hostar, likt vCenters. Detta är standard sedan
 ESXi 6.0u2.</p>
 <p><a href="https://%5BESXI-HOST%5D/ui"><code>https://[ESXI-HOST]/ui</code></a></p>
 <h2 id="ssh">SSH</h2>
 <p>Varningsmeddelande kan stängas av med:</p>
-<p><code>esxcli&nbsp;system&nbsp;settings&nbsp;advanced&nbsp;set&nbsp;-o&nbsp;/UserVars/SuppressShellWarning&nbsp;-i&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;system&nbsp;settings&nbsp;advanced&nbsp;set&nbsp;-o&nbsp;/UserVars/SuppressShellWarning&nbsp;-i&nbsp;1
+</code></pre></div>
 <p>Nyckelautentisering
 OBS med -O skriver man över existerande nycklar</p>
 <p><code>wget</code><a href="http://website/id_dsa.pub"><code>http://website/id_dsa.pub</code></a><code>-O&nbsp;/etc/ssh/keys-root/authorized_keys</code></p>
 <p>DCUI
 Skriv följande för att starta Direct Console direkt från din
 SSH-session:</p>
-<p><code>dcui</code></p>
+<div class="highlight"><pre><span></span><code>dcui
+</code></pre></div>
 <h2 id="snmp">SNMP</h2>
 <p>För att slå på SNMP och sätta communitys kan man göra det via CLI.</p>
 <p><code>esxcli&nbsp;system&nbsp;snmp&nbsp;set&nbsp;--communities</code><strong><code>community</code></strong></p>
 <p>Enable SNMP Service:</p>
-<p><code>esxcli&nbsp;system&nbsp;snmp&nbsp;set&nbsp;--enable&nbsp;true</code></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;system&nbsp;snmp&nbsp;set&nbsp;--enable&nbsp;true
+</code></pre></div>
 <p>Öppna upp i den interna brandväggen:</p>
-<p><code>esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;set&nbsp;--ruleset-id&nbsp;snmp&nbsp;--allowed-all&nbsp;true</code>
-<code>esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;set&nbsp;--ruleset-id&nbsp;snmp&nbsp;--enabled&nbsp;true</code></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;set&nbsp;--ruleset-id&nbsp;snmp&nbsp;--allowed-all&nbsp;true
+esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;set&nbsp;--ruleset-id&nbsp;snmp&nbsp;--enabled&nbsp;true
+</code></pre></div>
 <p>Om du vill öppna upp i brandväggen på ett säkert sätt och endast tillåta
 IP's ifrån 10.0.0.0/24:</p>
-<p><code>esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;set&nbsp;--ruleset-id&nbsp;snmp&nbsp;--allowed-all&nbsp;false</code>
-<code>esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;allowedip&nbsp;add&nbsp;--ruleset-id&nbsp;snmp&nbsp;--ip-address&nbsp;10.0.0.0/24</code>
-<code>esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;set&nbsp;--ruleset-id&nbsp;snmp&nbsp;--enabled&nbsp;true</code></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;set&nbsp;--ruleset-id&nbsp;snmp&nbsp;--allowed-all&nbsp;false
+esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;allowedip&nbsp;add&nbsp;--ruleset-id&nbsp;snmp&nbsp;--ip-address&nbsp;10.0.0.0/24
+esxcli&nbsp;network&nbsp;firewall&nbsp;ruleset&nbsp;set&nbsp;--ruleset-id&nbsp;snmp&nbsp;--enabled&nbsp;true
+</code></pre></div>
 <p>Starta sedan om SNMP tjänsten:</p>
-<p><code>/etc/init.d/snmpd&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>/etc/init.d/snmpd&nbsp;restart
+</code></pre></div>
 <h2 id="vib">VIB</h2>
 <p>VIB paket kan vara drivrutiner, third party software eller
 uppdateringar.</p>
 <p><strong>Installera</strong></p>
-<p><code>esxcli&nbsp;software&nbsp;vib&nbsp;install&nbsp;-d&nbsp;“/vmfs/volumes/Datastore/DirectoryName/PatchName.zip“</code></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;software&nbsp;vib&nbsp;install&nbsp;-d&nbsp;“/vmfs/volumes/Datastore/DirectoryName/PatchName.zip“
+</code></pre></div>
 <p><strong>Updatera</strong></p>
-<p><code>esxcli&nbsp;software&nbsp;vib&nbsp;update&nbsp;-d&nbsp;“/vmfs/volumes/Datastore/DirectoryName/PatchName.zip”</code></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;software&nbsp;vib&nbsp;update&nbsp;-d&nbsp;“/vmfs/volumes/Datastore/DirectoryName/PatchName.zip”
+</code></pre></div>
 <p><strong>Lista installerade VIB's</strong></p>
-<p><code>esxcli&nbsp;software&nbsp;vib&nbsp;list</code></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;software&nbsp;vib&nbsp;list
+</code></pre></div>
 <h2 id="network">Network</h2>
 <p>Undrar du vilket nätverkskort t.ex. vmnic2 är fysiskt kan du köra
 följande kommando om du loggar in med SSH på hosten. Porten börjar
 blinka i 60 sekunder förutsatt att det inte sitter någon kabel i.</p>
-<p><code>ethtool&nbsp;-p&nbsp;vmnic2&nbsp;60</code></p>
+<div class="highlight"><pre><span></span><code>ethtool&nbsp;-p&nbsp;vmnic2&nbsp;60
+</code></pre></div>
 <p>Lista NetStack-instanser (VRF)</p>
-<p><code>esxcfg-vmknic&nbsp;-l</code>
-<code>esxcli&nbsp;network&nbsp;ip&nbsp;interface&nbsp;list</code>
-<code>ping&nbsp;-S</code><netstackname><code>10.0.0.10</code></netstackname></p>
+<p></p><div class="highlight"><pre><span></span><code>esxcfg-vmknic&nbsp;-l
+esxcli&nbsp;network&nbsp;ip&nbsp;interface&nbsp;list&nbsp;
+</code></pre></div>
+<code>ping&nbsp;-S</code><netstackname><code>10.0.0.10</code><p></p>
 <p><strong>CDP</strong>
 Slå på CDP på en vSwitch</p>
-<p><code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;set&nbsp;--cdp-status&nbsp;both|listen&nbsp;--vswitch-name&nbsp;vSwitch1</code></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;set&nbsp;--cdp-status&nbsp;both|listen&nbsp;--vswitch-name&nbsp;vSwitch1
+</code></pre></div>
 <p><strong>Iperf</strong>
 Fr.o.m. ESXi 6.0 finns iperf inbyggt. Se även
 <a href="/Iperf" title="wikilink">Iperf</a>.</p>
 <p>Server</p>
-<p><code>cp&nbsp;/usr/lib/vmware/vsan/bin/iperf&nbsp;/usr/lib/vmware/vsan/bin/iperf.copy</code>
-<code>/usr/lib/vmware/vsan/bin/iperf.copy&nbsp;-s</code></p>
+<div class="highlight"><pre><span></span><code>cp&nbsp;/usr/lib/vmware/vsan/bin/iperf&nbsp;/usr/lib/vmware/vsan/bin/iperf.copy
+/usr/lib/vmware/vsan/bin/iperf.copy&nbsp;-s
+</code></pre></div>
 <p>Klient</p>
 <p><code>/usr/lib/vmware/vsan/bin/iperf&nbsp;-c</code><server-ip></server-ip></p>
 <p><strong>PXE</strong>
@@ -9375,23 +9423,26 @@ Använd Ventoy.</p>
 <h2 id="tips-n-tricks">Tips n Tricks</h2>
 <h3 id="ntp">NTP</h3>
 <p>NTP via SSH</p>
-<p><code>cat&nbsp;&gt;&nbsp;/etc/ntp.conf&nbsp;&lt;&lt;&nbsp;__EOF__</code>
-<code>restrict&nbsp;default&nbsp;kod&nbsp;nomodify&nbsp;notrap&nbsp;noquery&nbsp;nopeer</code>
-<code>restrict&nbsp;127.0.0.1</code>
-<code>driftfile&nbsp;/etc/ntp.drift</code>
-<code>server&nbsp;0.se.pool.ntp.org</code>
-<code>__EOF__</code>
-<code>/sbin/chkconfig&nbsp;ntpd&nbsp;on</code></p>
+<div class="highlight"><pre><span></span><code>cat&nbsp;&gt;&nbsp;/etc/ntp.conf&nbsp;&lt;&lt;&nbsp;__EOF__
+restrict&nbsp;default&nbsp;kod&nbsp;nomodify&nbsp;notrap&nbsp;noquery&nbsp;nopeer
+restrict&nbsp;127.0.0.1
+driftfile&nbsp;/etc/ntp.drift
+server&nbsp;0.se.pool.ntp.org
+__EOF__
+/sbin/chkconfig&nbsp;ntpd&nbsp;on
+</code></pre></div>
 <h3 id="nested-hypervisor">Nested Hypervisor</h3>
 <p>För att kunna köra en nested hypervisor (t.ex. Hyper-V, ESXi) på din
 ESXi-host måste det finns EPT/RVI-stöd i CPUn. Ett enkelt sätt att kolla
 det på din ESXi-host:</p>
-<p><code>vim-cmd&nbsp;hostsvc/advopt/update&nbsp;Config.HostAgent.plugins.solo.enableMob&nbsp;bool&nbsp;true</code>
-<a href="https://%5Besxi-ip-address%5D/mob/?moid=ha-host&amp;doPath=capability"><code>https://[esxi-ip-address]/mob/?moid=ha-host&amp;doPath=capability</code></a></p>
+<p></p><div class="highlight"><pre><span></span><code>vim-cmd&nbsp;hostsvc/advopt/update&nbsp;Config.HostAgent.plugins.solo.enableMob&nbsp;bool&nbsp;true
+</code></pre></div>
+<a href="https://%5Besxi-ip-address%5D/mob/?moid=ha-host&amp;doPath=capability"><code>https://[esxi-ip-address]/mob/?moid=ha-host&amp;doPath=capability</code></a><p></p>
 <p>logga in och kolla raden: nestedHVSupported</p>
 <p>Sedan måste hosten VHV enableas.</p>
-<p><code>grep&nbsp;-i&nbsp;"vhv.enable"&nbsp;/etc/vmware/config&nbsp;||&nbsp;echo&nbsp;"vhv.enable&nbsp;=&nbsp;\"TRUE\""&nbsp;&gt;&gt;&nbsp;/etc/vmware/config</code>
-<code>reboot</code></p>
+<div class="highlight"><pre><span></span><code>grep&nbsp;-i&nbsp;"vhv.enable"&nbsp;/etc/vmware/config&nbsp;||&nbsp;echo&nbsp;"vhv.enable&nbsp;=&nbsp;\"TRUE\""&nbsp;&gt;&gt;&nbsp;/etc/vmware/config
+reboot
+</code></pre></div>
 <h3 id="initializing-acpi">Initializing ACPI</h3>
 <p>Om uppstarten fastnar på detta steg, dubbelkolla att det inte bootar med
 UEFI och i så fall ta bort UEFI från boot-menyn.</p>
@@ -9399,18 +9450,21 @@ UEFI och i så fall ta bort UEFI från boot-menyn.</p>
 <p>För att backa en ESXi-uppgradering kan man göra en rollback. Starta om
 hosten, under boot när progressbaren kommer tryck: Shift+R
 <em>OBS bootbanken skrivs över var 60:e minut så man har en timme på sig</em></p>
-<p><code>Current&nbsp;hypervisor&nbsp;will&nbsp;permanently&nbsp;be&nbsp;replaced</code>
-<code>with&nbsp;build:&nbsp;X.X.X-XXXXXX.&nbsp;Are&nbsp;you&nbsp;sure?&nbsp;[Y/n]</code>
-<code>Shift+Y</code>
-<code>Enter&nbsp;to&nbsp;boot</code></p>
+<div class="highlight"><pre><span></span><code>Current&nbsp;hypervisor&nbsp;will&nbsp;permanently&nbsp;be&nbsp;replaced
+with&nbsp;build:&nbsp;X.X.X-XXXXXX.&nbsp;Are&nbsp;you&nbsp;sure?&nbsp;[Y/n]
+Shift+Y
+Enter&nbsp;to&nbsp;boot
+</code></pre></div>
 <h3 id="lista-maskiner">Lista maskiner</h3>
 <p>Lista virtuella maskiner som är på</p>
-<p><code>/usr/sbin/localcli&nbsp;vm&nbsp;process&nbsp;list</code></p>
+<div class="highlight"><pre><span></span><code>/usr/sbin/localcli&nbsp;vm&nbsp;process&nbsp;list
+</code></pre></div>
 <h3 id="lamna-tillbaka-oanvanda-blocks">Lämna tillbaka oanvända blocks</h3>
 <p>Om du har ett san, där du kör med tjocka diskar mot så kommer du behöva
 lämna tillbaka blocks ibland. för att enkelt göra detta kan du köra
 kommandot:</p>
-<p><code>for&nbsp;i&nbsp;in&nbsp;$(ls&nbsp;/vmfs/volumes/&nbsp;|&nbsp;grep&nbsp;datastorename)&nbsp;;&nbsp;do&nbsp;echo&nbsp;"Reclaiming&nbsp;on:&nbsp;"&nbsp;$i&nbsp;;&nbsp;time&nbsp;esxcli&nbsp;storage&nbsp;vmfs&nbsp;unmap&nbsp;-l&nbsp;$i&nbsp;;&nbsp;done</code></p>
+<div class="highlight"><pre><span></span><code>for&nbsp;i&nbsp;in&nbsp;$(ls&nbsp;/vmfs/volumes/&nbsp;|&nbsp;grep&nbsp;datastorename)&nbsp;;&nbsp;do&nbsp;echo&nbsp;"Reclaiming&nbsp;on:&nbsp;"&nbsp;$i&nbsp;;&nbsp;time&nbsp;esxcli&nbsp;storage&nbsp;vmfs&nbsp;unmap&nbsp;-l&nbsp;$i&nbsp;;&nbsp;done&nbsp;
+</code></pre></div>
 <p>Byt ut datastorename mot namnstandarden på dina datastores. tex ssd_ds
 om dina datastores heter ssd_ds001-8</p>
 <p>Detta behövs göra om du kör vmfs 5 och tjocka diskar. Har du 512kb
@@ -9418,15 +9472,15 @@ blocksize och vmfs 6 så sköts det automagiskt på DELL compellant</p>
 <h3 id="g5-g7-hp-proliant">G5-G7 HP ProLiant</h3>
 <p>Ladda ner från:
 <a href="http://www8.hp.com/us/en/products/servers/solutions.html?compURI=1499005#tab=TAB4">http://www8.hp.com/us/en/products/servers/solutions.html?compURI=1499005#tab=TAB4</a></p>
-<p><code>.\ESXi-Customizer-PS-v2.4.ps1&nbsp;-v55&nbsp;-izip&nbsp;.\VMware-ESXi-5.5.0-Update2-2403361-HP-550.9.2.27-Mar2015-depot.zip&nbsp;-update&nbsp;-remove&nbsp;hp-ams</code></p>
+<div class="highlight"><pre><span></span><code>.\ESXi-Customizer-PS-v2.4.ps1&nbsp;-v55&nbsp;-izip&nbsp;.\VMware-ESXi-5.5.0-Update2-2403361-HP-550.9.2.27-Mar2015-depot.zip&nbsp;-update&nbsp;-remove&nbsp;hp-ams
+</code></pre></div>
 <h3 id="lsi-raid">LSI RAID</h3>
 <p>Vill du monitorera ditt raidkort i vsphereklienten gör följande:
 Ladda upp följande fil till datastore</p>
 <p><a href="http://ds.karen.hj.se/~cameljoe/resources/VMW-ESX-5.5.0-lsiprovider-500.04.V0.55-0006-offline_bundle-2626932.zip"><code>http://ds.karen.hj.se/~cameljoe/resources/VMW-ESX-5.5.0-lsiprovider-500.04.V0.55-0006-offline_bundle-2626932.zip</code></a></p>
-<p><code>esxcli&nbsp;software&nbsp;vib&nbsp;install&nbsp;-d&nbsp;/vmfs/volumes/[DATASTORE]/VMW-ESX-5.5.0-lsiprovider-500.04.V0.55-0006-offline_bundle-2626932.zip</code>
-<code>reboot</code></p>
-<p><a href="/Category:VMware" title="wikilink">Category:VMware</a>
-<a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
+<div class="highlight"><pre><span></span><code>esxcli&nbsp;software&nbsp;vib&nbsp;install&nbsp;-d&nbsp;/vmfs/volumes/[DATASTORE]/VMW-ESX-5.5.0-lsiprovider-500.04.V0.55-0006-offline_bundle-2626932.zip
+reboot
+</code></pre></div></netstackname>
 
 
 
@@ -9449,7 +9503,7 @@ Ladda upp följande fil till datastore</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

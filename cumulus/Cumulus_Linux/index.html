@@ -8715,6 +8715,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9019,47 +9047,60 @@ men det krävs en licens för att aktivera front-panel interfaces.</p>
 Cumulus Networks hemsida. Det finns image för <a href="/KVM" title="wikilink">KVM</a> och
 <a href="/VMware_ESXi" title="wikilink">VMware</a>. Se även <a href="/EVE-NG" title="wikilink">EVE-NG</a>.</p>
 <h3 id="architecture">Architecture</h3>
-<p><a href="/File:Cumulus_Linux_Architecture.PNG" title="wikilink"><file:cumulus_linux_architecture.png></file:cumulus_linux_architecture.png></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cumulus_Linux_Architecture.PNG" data-desc-position="bottom"><img alt="Cumulus_Linux_Architecture.PNG" src="../../images/Cumulus_Linux_Architecture.PNG"></a></p>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Här nedan följer hur man gör grundläggande konfiguration av Cumulus
 Linux. Är man osäker på hur något konfas kan man alltid kolla exempel
 med hjälp av <strong>net example <em><feature></feature></em></strong>.</p>
 <p>Hostname</p>
-<p><code>net&nbsp;add&nbsp;hostname&nbsp;Cum01</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;hostname&nbsp;Cum01
+</code></pre></div>
 <p>Configuration, kan visas i olika format</p>
-<p><code>net&nbsp;show&nbsp;configuration</code>
-<code>net&nbsp;show&nbsp;configuration&nbsp;commands</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;show&nbsp;configuration
+net&nbsp;show&nbsp;configuration&nbsp;commands
+</code></pre></div>
 <p>Commit</p>
-<p><code>net&nbsp;pending</code>
-<code>net&nbsp;commit</code></p>
-<p><code>net&nbsp;show&nbsp;commit&nbsp;last</code>
-<code>net&nbsp;show&nbsp;commit&nbsp;history</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;pending
+net&nbsp;commit
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>net&nbsp;show&nbsp;commit&nbsp;last&nbsp;
+net&nbsp;show&nbsp;commit&nbsp;history
+</code></pre></div>
 <p>Switch upgrade</p>
-<p><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;upgrade</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;upgrade
+</code></pre></div>
 <p>Mgmt VRF. Notera att services som syslog, ntp etc default ligger i
 default-tabellen och måste bindas om ifall de ska nyttja mgmt-vrf:en.</p>
-<p><code>net&nbsp;add&nbsp;vrf&nbsp;mgmt</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;vrf&nbsp;mgmt
+</code></pre></div>
 <p>Skapa vlan. Cumulus reserverar default vlan 3000-3999 för internal usage
 men det går att ändra.</p>
-<p><code>net&nbsp;add&nbsp;vlan&nbsp;100-200</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;vlan&nbsp;100-200
+</code></pre></div>
 <p>Access port</p>
-<p><code>net&nbsp;add&nbsp;interface&nbsp;swp4&nbsp;bridge&nbsp;access&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;interface&nbsp;swp4&nbsp;bridge&nbsp;access&nbsp;100
+</code></pre></div>
 <p>SVI</p>
-<p><code>net&nbsp;add&nbsp;vlan&nbsp;100&nbsp;ip&nbsp;address&nbsp;192.168.10.1/24</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;vlan&nbsp;100&nbsp;ip&nbsp;address&nbsp;192.168.10.1/24
+</code></pre></div>
 <p>Switchport trunk allowed vlan</p>
-<p><code>net&nbsp;add&nbsp;interface&nbsp;swp3&nbsp;bridge&nbsp;vids&nbsp;200,205</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;interface&nbsp;swp3&nbsp;bridge&nbsp;vids&nbsp;200,205
+</code></pre></div>
 <p>Det spelar inte någon roll vad man väljer att konfigurera först. När man
 commitar något switchrelaterat så skapas det en global switch (bridge).</p>
 <p>Useful show commands</p>
-<p><code>net&nbsp;show&nbsp;version</code>
-<code>net&nbsp;show&nbsp;interface</code>
-<code>net&nbsp;show&nbsp;bridge&nbsp;vlan</code>
-<code>net&nbsp;show&nbsp;bridge&nbsp;macs</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;show&nbsp;version
+net&nbsp;show&nbsp;interface
+net&nbsp;show&nbsp;bridge&nbsp;vlan
+net&nbsp;show&nbsp;bridge&nbsp;macs
+</code></pre></div>
 <p>Factory reset, detta rensar ej mgmt vrf.</p>
-<p><code>net&nbsp;del&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;del&nbsp;all
+</code></pre></div>
 <p>Adding Question Mark Ability to NCLU. Logga ut, logga in för att
 ändringen ska läsas in.</p>
-<p><code>sed&nbsp;-i&nbsp;"s/#&nbsp;?:&nbsp;complete/&nbsp;?:&nbsp;complete/g"&nbsp;/home/cumulus/.inputrc</code></p>
+<div class="highlight"><pre><span></span><code>sed&nbsp;-i&nbsp;"s/#&nbsp;?:&nbsp;complete/&nbsp;?:&nbsp;complete/g"&nbsp;/home/cumulus/.inputrc
+</code></pre></div>
 <h3 id="prescriptive-topology-manager">Prescriptive Topology Manager</h3>
 <p>PTM används för att validera att man har kopplat kablar rätt. Man skapar
 en fil med hur det ska vara kopplat, denna distribuerar man sedan till
@@ -9084,12 +9125,13 @@ net<span class="w"> </span>commit
 </code></pre></div>
 <p>Ska man aktivera mgmt-vrf bör det göras sist.</p>
 <p>Enable ztp on next switch boot.</p>
-<p><code>sudo&nbsp;ztp&nbsp;-e</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;ztp&nbsp;-e
+</code></pre></div>
 <p>Status &amp; Debugging</p>
-<p><code>sudo&nbsp;ztp&nbsp;-s</code>
-<code>sudo&nbsp;systemctl&nbsp;-l&nbsp;status&nbsp;ztp.service</code>
-<code>sudo&nbsp;ztp&nbsp;-v&nbsp;-r</code><a href="http://192.168.0.50/ztp-script.sh"><code>http://192.168.0.50/ztp-script.sh</code></a></p>
-<p><a href="/Category:Cumulus" title="wikilink">Category:Cumulus</a></p>
+<p></p><div class="highlight"><pre><span></span><code>sudo&nbsp;ztp&nbsp;-s
+sudo&nbsp;systemctl&nbsp;-l&nbsp;status&nbsp;ztp.service
+</code></pre></div>
+<code>sudo&nbsp;ztp&nbsp;-v&nbsp;-r</code><a href="http://192.168.0.50/ztp-script.sh"><code>http://192.168.0.50/ztp-script.sh</code></a><p></p>
 
 
 
@@ -9112,7 +9154,7 @@ net<span class="w"> </span>commit
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

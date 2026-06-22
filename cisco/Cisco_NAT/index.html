@@ -8842,6 +8842,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9266,44 +9294,52 @@ använder <strong>log</strong> så det bör man ha i åtanke. För att accelerer
 NAT-processen finns <strong>ip nat create flow-entries</strong> som är påslaget
 default i <a href="/Cisco_IOS" title="wikilink">IOS</a>-routrar.</p>
 <p>Generell metod för att testa om NAT fungerar.</p>
-<p><code>debug&nbsp;ip&nbsp;nat</code>
-<code>telnet&nbsp;1.1.1.1</code>
-<code>who</code></p>
+<div class="highlight"><pre><span></span><code>debug&nbsp;ip&nbsp;nat
+telnet&nbsp;1.1.1.1&nbsp;
+who
+</code></pre></div>
 <h2 id="dynamic-nat">Dynamic NAT</h2>
 <h3 id="nat-overload">NAT Overload</h3>
 <p>Alla adresser göms bakom en IP-adress, kallas även PAT.</p>
-<p><code>access-list&nbsp;10&nbsp;permit&nbsp;[ip-address]&nbsp;[wildcard-mask]</code>
-<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;10&nbsp;interface&nbsp;[outside-interface]&nbsp;overload</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;10&nbsp;permit&nbsp;[ip-address]&nbsp;[wildcard-mask]
+ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;10&nbsp;interface&nbsp;[outside-interface]&nbsp;overload
+</code></pre></div>
 <p>Man kan även skapa en pool med endast en ip adress och köra overload på
 den.</p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;nat&nbsp;translations</code>
-<code>show&nbsp;ip&nbsp;nat&nbsp;statistics</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;nat&nbsp;translations
+show&nbsp;ip&nbsp;nat&nbsp;statistics
+</code></pre></div>
 <h3 id="default-interface">Default Interface</h3>
 <p>NAT Default interface innebär att all trafik som initieras utifrån och
 natas in går till en och samma IP men däremot kan trafik som initieras
 inifrån hide natas till interface IP (nat overload).</p>
-<p><code>ip&nbsp;access-list&nbsp;standard&nbsp;ALL</code>
-<code>permit&nbsp;any</code>
-<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;ALL&nbsp;interface&nbsp;Gi2&nbsp;overload</code>
-<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;172.16.0.20&nbsp;interface&nbsp;Gi2</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;standard&nbsp;ALL
+&nbsp;permit&nbsp;any
+ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;ALL&nbsp;interface&nbsp;Gi2&nbsp;overload
+ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;172.16.0.20&nbsp;interface&nbsp;Gi2
+</code></pre></div>
 <h3 id="nat-pool">NAT Pool</h3>
-<p><code>interface&nbsp;Gi0/1</code>
-<code>ip&nbsp;address&nbsp;100.10.10.10&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nat&nbsp;outside</code>
-<code>interface&nbsp;Gi0/2</code>
-<code>ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nat&nbsp;inside</code></p>
-<p><code>ip&nbsp;access-list&nbsp;standard&nbsp;CLIENT-LIST</code>
-<code>permit&nbsp;192.168.0.0&nbsp;0.0.0.15</code></p>
-<p><code>ip&nbsp;nat&nbsp;pool&nbsp;DYNAMIC&nbsp;100.10.10.17&nbsp;100.10.10.19&nbsp;prefix-length&nbsp;29</code>
-<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;CLIENT-LIST&nbsp;pool&nbsp;DYNAMIC</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/1
+&nbsp;ip&nbsp;address&nbsp;100.10.10.10&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nat&nbsp;outside
+interface&nbsp;Gi0/2
+&nbsp;ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nat&nbsp;inside
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;standard&nbsp;CLIENT-LIST
+&nbsp;permit&nbsp;192.168.0.0&nbsp;0.0.0.15
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;pool&nbsp;DYNAMIC&nbsp;100.10.10.17&nbsp;100.10.10.19&nbsp;prefix-length&nbsp;29
+ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;CLIENT-LIST&nbsp;pool&nbsp;DYNAMIC
+</code></pre></div>
 <p>Interface IP ska ej ingå i NAT-poolen däremot bör netmask/prefix-length
 inrymma alla adresser i poolen.</p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;nat&nbsp;translations</code>
-<code>show&nbsp;ip&nbsp;nat&nbsp;pool&nbsp;name&nbsp;DYNAMIC</code>
-<code>show&nbsp;ip&nbsp;nat&nbsp;translations&nbsp;filter&nbsp;range&nbsp;inside&nbsp;global&nbsp;100.10.10.17&nbsp;100.10.10.19&nbsp;total</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;nat&nbsp;translations
+show&nbsp;ip&nbsp;nat&nbsp;pool&nbsp;name&nbsp;DYNAMIC
+show&nbsp;ip&nbsp;nat&nbsp;translations&nbsp;filter&nbsp;range&nbsp;inside&nbsp;global&nbsp;100.10.10.17&nbsp;100.10.10.19&nbsp;total
+</code></pre></div>
 <h3 id="tcp-load-distribution">TCP Load Distribution</h3>
 <p>Man kan gömma flera servrar bakom en ip-adress för att tillhandahålla
 lastdelning. Det görs med en rotary address pool samt en acl som anger
@@ -9311,173 +9347,211 @@ den IP som man ska gå emot från outside. Både standard och extended acl
 fungerar. När paket/sessioner på ett NAT outside interface träffar
 acl:en så översätts det till en av adresserna från poolen enligt
 round-robin.</p>
-<p><code>ip&nbsp;nat&nbsp;pool&nbsp;ROTARY&nbsp;prefix-length&nbsp;24&nbsp;type&nbsp;rotary</code>
-<code>address&nbsp;10.0.0.10&nbsp;10.0.0.10</code>
-<code>address&nbsp;10.0.0.11&nbsp;10.0.0.11</code>
-<code>address&nbsp;10.0.0.12&nbsp;10.0.0.12</code></p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;DISTRIBUTE_LOAD</code>
-<code>permit&nbsp;tcp&nbsp;any&nbsp;host&nbsp;100.10.10.15&nbsp;eq&nbsp;www</code></p>
-<p><code>ip&nbsp;nat&nbsp;inside&nbsp;destination&nbsp;list&nbsp;DISTRIBUTE_LOAD&nbsp;pool&nbsp;ROTARY</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;pool&nbsp;ROTARY&nbsp;prefix-length&nbsp;24&nbsp;type&nbsp;rotary
+&nbsp;address&nbsp;10.0.0.10&nbsp;10.0.0.10
+&nbsp;address&nbsp;10.0.0.11&nbsp;10.0.0.11
+&nbsp;address&nbsp;10.0.0.12&nbsp;10.0.0.12
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;DISTRIBUTE_LOAD
+&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;host&nbsp;100.10.10.15&nbsp;eq&nbsp;www
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;inside&nbsp;destination&nbsp;list&nbsp;DISTRIBUTE_LOAD&nbsp;pool&nbsp;ROTARY
+</code></pre></div>
 <h2 id="static-nat">Static NAT</h2>
 <p>1:1 NAT</p>
-<p><code>interface&nbsp;Gi0/1</code>
-<code>ip&nbsp;address&nbsp;100.10.10.10&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nat&nbsp;outside</code>
-<code>interface&nbsp;Gi0/2</code>
-<code>ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nat&nbsp;inside</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/1
+&nbsp;ip&nbsp;address&nbsp;100.10.10.10&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nat&nbsp;outside
+interface&nbsp;Gi0/2
+&nbsp;ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nat&nbsp;inside
+</code></pre></div>
 <p>NAT</p>
-<p><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;192.168.0.20&nbsp;100.10.10.20&nbsp;[no-alias]</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;192.168.0.20&nbsp;100.10.10.20&nbsp;[no-alias]
+</code></pre></div>
 <p><em>Med no-alias besvaras inte ARP-förfrågningar för den IP-adressen på
 utsidan.</em></p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;nat&nbsp;translations</code>
-<code>show&nbsp;ip&nbsp;nat&nbsp;statistics</code>
-<code>show&nbsp;ip&nbsp;alias</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;nat&nbsp;translations
+show&nbsp;ip&nbsp;nat&nbsp;statistics
+show&nbsp;ip&nbsp;alias
+</code></pre></div>
 <p><em>DYNAMIC är IP-adresser som används för NAT.</em></p>
 <h3 id="static-pat">Static PAT</h3>
-<p><code>interface&nbsp;Gi0/1</code>
-<code>ip&nbsp;address&nbsp;100.10.10.10&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nat&nbsp;outside</code>
-<code>interface&nbsp;Gi0/2</code>
-<code>ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nat&nbsp;inside</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/1
+&nbsp;ip&nbsp;address&nbsp;100.10.10.10&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nat&nbsp;outside
+interface&nbsp;Gi0/2
+&nbsp;ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nat&nbsp;inside
+</code></pre></div>
 <p>PAT / port forward.</p>
-<p><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;tcp&nbsp;192.168.0.55&nbsp;80&nbsp;100.10.10.10&nbsp;80</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;tcp&nbsp;192.168.0.55&nbsp;80&nbsp;100.10.10.10&nbsp;80
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;nat&nbsp;translations</code>
-<code>show&nbsp;ip&nbsp;aliases</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;nat&nbsp;translations
+show&nbsp;ip&nbsp;aliases
+</code></pre></div>
 <h3 id="static-extendable-nat">Static Extendable NAT</h3>
 <p>Om man vill ha flera ip-adresser som ska natas till samma inside IP.</p>
-<p><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;10.1.1.1&nbsp;20.0.0.20&nbsp;extendable</code>
-<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;10.1.1.1&nbsp;20.0.0.30&nbsp;extendable</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;10.1.1.1&nbsp;20.0.0.20&nbsp;extendable
+ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;10.1.1.1&nbsp;20.0.0.30&nbsp;extendable
+</code></pre></div>
 <h3 id="static-policy-nat">Static Policy NAT</h3>
 <p>Policy NAT använder route-maps. Med set interface kan man bestämma
 vilket interface paketen ska skickas ut på och därmed natas.</p>
-<p><code>interface&nbsp;Gi0/0</code>
-<code>ip&nbsp;nat&nbsp;outside</code></p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;TO_OUTSIDE</code>
-<code>permit&nbsp;ip&nbsp;192.168.0.0&nbsp;0.0.0.255&nbsp;any</code></p>
-<p><code>route-map&nbsp;TO_ISP1&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;ip&nbsp;address&nbsp;TO_OUTSIDE</code>
-<code>set&nbsp;interface&nbsp;Gi0/0</code></p>
-<p><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;route-map&nbsp;TO_ISP1&nbsp;interface&nbsp;Gi0/0&nbsp;overload</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/0
+&nbsp;ip&nbsp;nat&nbsp;outside
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;TO_OUTSIDE
+&nbsp;permit&nbsp;ip&nbsp;192.168.0.0&nbsp;0.0.0.255&nbsp;any
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;TO_ISP1&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;ip&nbsp;address&nbsp;TO_OUTSIDE
+&nbsp;set&nbsp;interface&nbsp;Gi0/0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;route-map&nbsp;TO_ISP1&nbsp;interface&nbsp;Gi0/0&nbsp;overload
+</code></pre></div>
 <p>Man kan också låta routingtabellen styra och sedan NATa utifrån vilket
 interface som är egress.</p>
-<p><code>route-map&nbsp;TO_ISP1&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;interface&nbsp;Gi0/0</code></p>
-<p><code>route-map&nbsp;TO_ISP2&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;interface&nbsp;Gi0/1</code></p>
-<p><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;192.168.0.10&nbsp;100.10.10.10&nbsp;route-map&nbsp;TO_ISP1</code>
-<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;192.168.0.10&nbsp;100.20.20.20&nbsp;route-map&nbsp;TO_ISP2</code></p>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;TO_ISP1&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;interface&nbsp;Gi0/0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;TO_ISP2&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;interface&nbsp;Gi0/1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;192.168.0.10&nbsp;100.10.10.10&nbsp;route-map&nbsp;TO_ISP1
+ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;192.168.0.10&nbsp;100.20.20.20&nbsp;route-map&nbsp;TO_ISP2
+</code></pre></div>
 <h2 id="reversible-nat">Reversible NAT</h2>
 <p>Man kan konfigurera nat som endast funkar efter att ha blivit initierad
 från andra hållet.</p>
-<p><code>ip&nbsp;nat&nbsp;pool&nbsp;POOL&nbsp;100.10.10.15&nbsp;100.10.10.19&nbsp;netmask&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;route-map&nbsp;ROUTE-MAP&nbsp;pool&nbsp;POOL</code><strong><code>reversible</code></strong><code></code></p>
+<p></p><div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;pool&nbsp;POOL&nbsp;100.10.10.15&nbsp;100.10.10.19&nbsp;netmask&nbsp;255.255.255.0
+</code></pre></div>
+<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;route-map&nbsp;ROUTE-MAP&nbsp;pool&nbsp;POOL</code><strong><code>reversible</code></strong><code></code><p></p>
 <h2 id="dubbel-nat">Dubbel-NAT</h2>
 <p>Har man överlappande subnät får man antingen NATa på båda sidorna eller
 bara ena. I detta exemplet kommunicerar 172.20.0.10 (server1) mot ip
 172.20.0.50 som natas till 30.0.0.5 (server2) medans server2 ser server1
 från 30.0.0.50.</p>
-<p><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;172.20.0.10&nbsp;30.0.0.50</code>
-<code>ip&nbsp;nat&nbsp;outside&nbsp;source&nbsp;static&nbsp;30.0.0.5&nbsp;172.20.0.50&nbsp;add-route</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;static&nbsp;172.20.0.10&nbsp;30.0.0.50
+ip&nbsp;nat&nbsp;outside&nbsp;source&nbsp;static&nbsp;30.0.0.5&nbsp;172.20.0.50&nbsp;add-route
+</code></pre></div>
 <p>Utan add-route måste en statisk route användas för att peka 172.20.0.50
 till outside interface.</p>
-<p><code>show&nbsp;ip&nbsp;nat&nbsp;translations</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;nat&nbsp;translations
+</code></pre></div>
 <h2 id="stateful-nat">Stateful NAT</h2>
 <p>Stateful NAT with <a href="/Cisco_HSRP" title="wikilink">HSRP</a>. During failovers, NAT
 translated IP addresses on devices may be different from the IP address
 before the failover, because no state information is exchanged between
 active and standby devices. HSRP Virtual IP Address (VIP) cannot be used
 by NAT pools.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>standby&nbsp;100&nbsp;name&nbsp;SNAT</code>
-<code>ip&nbsp;nat&nbsp;stateful&nbsp;id&nbsp;1&nbsp;redundancy&nbsp;SNAT&nbsp;mapping-id&nbsp;10</code>
-<code>ip&nbsp;nat&nbsp;pool&nbsp;SNATPOOL&nbsp;10.1.1.1&nbsp;10.1.1.9&nbsp;prefix-length&nbsp;24</code>
-<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;route-map&nbsp;ROUTE-MAP&nbsp;pool&nbsp;SNATPOOL&nbsp;mapping-id&nbsp;10&nbsp;overload</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;standby&nbsp;100&nbsp;name&nbsp;SNAT
+ip&nbsp;nat&nbsp;stateful&nbsp;id&nbsp;1&nbsp;redundancy&nbsp;SNAT&nbsp;mapping-id&nbsp;10
+ip&nbsp;nat&nbsp;pool&nbsp;SNATPOOL&nbsp;10.1.1.1&nbsp;10.1.1.9&nbsp;prefix-length&nbsp;24
+ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;route-map&nbsp;ROUTE-MAP&nbsp;pool&nbsp;SNATPOOL&nbsp;mapping-id&nbsp;10&nbsp;overload
+</code></pre></div>
 <p>Primary</p>
-<p><code>ip&nbsp;nat&nbsp;stateful&nbsp;id&nbsp;1&nbsp;primary&nbsp;10.10.10.10&nbsp;peer&nbsp;10.22.22.22&nbsp;mapping-id&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;stateful&nbsp;id&nbsp;1&nbsp;primary&nbsp;10.10.10.10&nbsp;peer&nbsp;10.22.22.22&nbsp;mapping-id&nbsp;10
+</code></pre></div>
 <p>Backup</p>
-<p><code>ip&nbsp;nat&nbsp;stateful&nbsp;id&nbsp;1&nbsp;backup&nbsp;10.2.2.2&nbsp;peer&nbsp;10.10.10.10&nbsp;mapping-id&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;stateful&nbsp;id&nbsp;1&nbsp;backup&nbsp;10.2.2.2&nbsp;peer&nbsp;10.10.10.10&nbsp;mapping-id&nbsp;10
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;snat&nbsp;distributed&nbsp;verbose</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;snat&nbsp;distributed&nbsp;verbose
+</code></pre></div>
 <h2 id="nvi">NVI</h2>
 <p>Med Nat Virtual Interface kan man adressöversätta mellan VRF:er och man
 använder inte <em>inside</em> och <em>outside</em> med denna metod. NAT Virtual
 Interfaces are not supported in the Cisco IOS XE software.</p>
-<p><code>interface&nbsp;Gi0/1</code>
-<code>ip&nbsp;nat&nbsp;enable</code>
-<code>interface&nbsp;Gi0/2</code>
-<code>ip&nbsp;nat&nbsp;enable</code></p>
-<p><code>ip&nbsp;nat&nbsp;source&nbsp;static&nbsp;192.168.0.1&nbsp;100.10.10.10</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/1
+&nbsp;ip&nbsp;nat&nbsp;enable
+interface&nbsp;Gi0/2
+&nbsp;ip&nbsp;nat&nbsp;enable
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;source&nbsp;static&nbsp;192.168.0.1&nbsp;100.10.10.10
+</code></pre></div>
 <p>Show</p>
-<p><code>show&nbsp;ip&nbsp;nat&nbsp;nvi&nbsp;translations</code>
-<code>show&nbsp;ip&nbsp;nat&nbsp;translations&nbsp;verbose</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;nat&nbsp;nvi&nbsp;translations
+show&nbsp;ip&nbsp;nat&nbsp;translations&nbsp;verbose
+</code></pre></div>
 <h2 id="ipv6">IPv6</h2>
 <p>NAT – Protocol Translation kan användas vid IPv4 till IPv6 migreringar
 och ger bi-directional connectivity mellan domänerna.</p>
-<p><code>interface&nbsp;gi&nbsp;0/0</code>
-<code>ipv6&nbsp;nat</code>
-<code>interface&nbsp;gi&nbsp;0/1</code>
-<code>ipv6&nbsp;nat</code>
-<code>ipv6&nbsp;nat&nbsp;v6v4&nbsp;source&nbsp;3001:11:0:1::1&nbsp;150.11.3.1</code>
-<code>ipv6&nbsp;nat&nbsp;v4v6&nbsp;source&nbsp;static&nbsp;150.11.2.2&nbsp;2000::960b:0202</code>
-<code>ipv6&nbsp;nat&nbsp;prefix&nbsp;2000::/96</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi&nbsp;0/0
+&nbsp;ipv6&nbsp;nat
+interface&nbsp;gi&nbsp;0/1
+&nbsp;ipv6&nbsp;nat
+ipv6&nbsp;nat&nbsp;v6v4&nbsp;source&nbsp;3001:11:0:1::1&nbsp;150.11.3.1
+ipv6&nbsp;nat&nbsp;v4v6&nbsp;source&nbsp;static&nbsp;150.11.2.2&nbsp;2000::960b:0202
+ipv6&nbsp;nat&nbsp;prefix&nbsp;2000::/96
+</code></pre></div>
 <p>NAT-PT kräver ett /96 prefix</p>
 <p>Verify</p>
-<p><code>show&nbsp;ipv6&nbsp;nat&nbsp;translations</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;nat&nbsp;translations
+</code></pre></div>
 <p><strong>NPTv6</strong>
 IPv6-to-IPv6 Network Prefix Translation är NAT från IPv6 till IPv6.
 Eftersom det finns en 1:1-relation mellan inside och outside prefix
 behöver inte routern hålla något state i data plane för NAT:en. Detta
 underlättar multihoming.</p>
-<p><code>nat66&nbsp;prefix&nbsp;2002:ABC1::/64&nbsp;Outside&nbsp;2002:ABC2::/64</code></p>
-<p><code>interface&nbsp;GigabitEthernet0</code>
-<code>nat66&nbsp;inside</code>
-<code>interface&nbsp;GigabitEthernet1</code>
-<code>nat66&nbsp;outside</code></p>
+<div class="highlight"><pre><span></span><code>nat66&nbsp;prefix&nbsp;2002:ABC1::/64&nbsp;Outside&nbsp;2002:ABC2::/64
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet0
+&nbsp;nat66&nbsp;inside
+interface&nbsp;GigabitEthernet1
+&nbsp;nat66&nbsp;outside
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;nat66&nbsp;prefix</code>
-<code>show&nbsp;nat66&nbsp;statistics</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;nat66&nbsp;prefix
+show&nbsp;nat66&nbsp;statistics
+</code></pre></div>
 <h2 id="cgnat">CGNAT</h2>
 <p>Carrier-grade NAT är large-scale NAT (LSN), det kan vara NAT44, NAT64
 och/eller NAT66. Nyckeln till att kunna hantera fler NAT-sessioner än
 vanligt är att ingen information om destination lagras. CGNAT enableas
 globalt, dvs man kan inte köra annan NAT samtidigt.</p>
-<p><code>ip&nbsp;nat&nbsp;settings&nbsp;mode&nbsp;cgn</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;settings&nbsp;mode&nbsp;cgn
+</code></pre></div>
 <p>Dynamic Port Address CGNAT</p>
-<p><code>ip&nbsp;nat&nbsp;settings&nbsp;pap</code>
-<code>ip&nbsp;nat&nbsp;pool&nbsp;PUBLIC-POOL&nbsp;1.1.1.10&nbsp;1.1.1.20&nbsp;prefix-length&nbsp;24</code>
-<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;NAT-ACL&nbsp;pool&nbsp;PUBLIC-POOL&nbsp;overload</code>
-<code>ip&nbsp;access-list&nbsp;extended&nbsp;NAT-ACL</code>
-<code>permit&nbsp;ip&nbsp;10.0.0.0&nbsp;0.255.255.255&nbsp;any</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;settings&nbsp;pap
+ip&nbsp;nat&nbsp;pool&nbsp;PUBLIC-POOL&nbsp;1.1.1.10&nbsp;1.1.1.20&nbsp;prefix-length&nbsp;24
+ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;NAT-ACL&nbsp;pool&nbsp;PUBLIC-POOL&nbsp;overload
+ip&nbsp;access-list&nbsp;extended&nbsp;NAT-ACL
+&nbsp;permit&nbsp;ip&nbsp;10.0.0.0&nbsp;0.255.255.255&nbsp;any
+</code></pre></div>
 <h2 id="mpls-vpn">MPLS VPN</h2>
 <p>NAT-integration med MPLS VPN tillåter flera MPLS VPN att konfigureras
 att fungera tillsammans på samma enhet. NAT kan skilja på vilken VPN den
 får in trafik på även om alla använder samma IP-adresser. Detta låter
 flera kunder använda samma services men ändå vara skiljda logiskt. Se
 även <a href="/Cisco_MPLS" title="wikilink">Cisco MPLS</a>.</p>
-<p><code>interface&nbsp;Gi0/1</code>
-<code>ip&nbsp;address&nbsp;100.10.10.10&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nat&nbsp;outside</code>
-<code>interface&nbsp;Gi0/2</code>
-<code>vrf&nbsp;forwarding&nbsp;VPN1</code>
-<code>ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nat&nbsp;inside</code>
-<code>interface&nbsp;Gi0/3</code>
-<code>vrf&nbsp;forwarding&nbsp;VPN2</code>
-<code>ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nat&nbsp;inside</code></p>
-<p><code>access-list&nbsp;1&nbsp;permit&nbsp;192.168.0.0&nbsp;0.0.255.255</code>
-<code>ip&nbsp;nat&nbsp;pool&nbsp;SHARED&nbsp;100.10.10.20&nbsp;100.10.10.40&nbsp;netmask&nbsp;255.255.255.0</code></p>
-<p><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;1&nbsp;pool&nbsp;SHARED&nbsp;vrf&nbsp;VPN1&nbsp;overload</code>
-<code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;1&nbsp;pool&nbsp;SHARED&nbsp;vrf&nbsp;VPN2&nbsp;overload</code></p>
-<p><code>ip&nbsp;route&nbsp;vrf&nbsp;VPN1&nbsp;0.0.0.0&nbsp;0.0.0.0&nbsp;Gi0/1&nbsp;100.10.10.1</code>
-<code>ip&nbsp;route&nbsp;vrf&nbsp;VPN2&nbsp;0.0.0.0&nbsp;0.0.0.0&nbsp;Gi0/1&nbsp;100.10.10.1</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/1
+&nbsp;ip&nbsp;address&nbsp;100.10.10.10&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nat&nbsp;outside
+interface&nbsp;Gi0/2
+&nbsp;vrf&nbsp;forwarding&nbsp;VPN1
+&nbsp;ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nat&nbsp;inside
+interface&nbsp;Gi0/3
+&nbsp;vrf&nbsp;forwarding&nbsp;VPN2
+&nbsp;ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nat&nbsp;inside
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;1&nbsp;permit&nbsp;192.168.0.0&nbsp;0.0.255.255
+ip&nbsp;nat&nbsp;pool&nbsp;SHARED&nbsp;100.10.10.20&nbsp;100.10.10.40&nbsp;netmask&nbsp;255.255.255.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;1&nbsp;pool&nbsp;SHARED&nbsp;vrf&nbsp;VPN1&nbsp;overload
+ip&nbsp;nat&nbsp;inside&nbsp;source&nbsp;list&nbsp;1&nbsp;pool&nbsp;SHARED&nbsp;vrf&nbsp;VPN2&nbsp;overload
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;route&nbsp;vrf&nbsp;VPN1&nbsp;0.0.0.0&nbsp;0.0.0.0&nbsp;Gi0/1&nbsp;100.10.10.1
+ip&nbsp;route&nbsp;vrf&nbsp;VPN2&nbsp;0.0.0.0&nbsp;0.0.0.0&nbsp;Gi0/1&nbsp;100.10.10.1
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;nat&nbsp;translations&nbsp;vrf&nbsp;VPN1</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;nat&nbsp;translations&nbsp;vrf&nbsp;VPN1
+</code></pre></div>
 
 
 
@@ -9500,7 +9574,7 @@ flera kunder använda samma services men ändå vara skiljda logiskt. Se
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

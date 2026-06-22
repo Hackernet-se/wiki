@@ -9198,6 +9198,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9978,420 +10006,489 @@ Hårdvara och mjukvara
 <a href="http://www.cisco.com/c/en/us/td/docs/security/asa/compatibility/asamatrx.html">kompatibilitet</a></p>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Grunder</p>
-<p><code>conf&nbsp;t</code>
-<code>hostname&nbsp;ASA</code></p>
+<div class="highlight"><pre><span></span><code>conf&nbsp;t
+&nbsp;hostname&nbsp;ASA
+</code></pre></div>
 <p>IP adress</p>
-<p><code>int&nbsp;e0/0</code>
-<code>mac-address&nbsp;0011.2233.4455</code>
-<code>security-level&nbsp;100</code>
-<code>nameif&nbsp;inside</code>
-<code>ip&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.0</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;e0/0
+&nbsp;mac-address&nbsp;0011.2233.4455
+&nbsp;security-level&nbsp;100
+&nbsp;nameif&nbsp;inside
+&nbsp;ip&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.0
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <p>Default route och DNS</p>
-<p><code>route&nbsp;outside&nbsp;0.0.0.0&nbsp;0.0.0.0&nbsp;190.10.160.1&nbsp;1</code>
-<code>same-security-traffic&nbsp;permit&nbsp;inter-interface</code>
-<code>dns&nbsp;domain-lookup&nbsp;outside</code>
-<code>dns&nbsp;name-server&nbsp;8.8.8.8</code></p>
+<div class="highlight"><pre><span></span><code>route&nbsp;outside&nbsp;0.0.0.0&nbsp;0.0.0.0&nbsp;190.10.160.1&nbsp;1
+same-security-traffic&nbsp;permit&nbsp;inter-interface
+dns&nbsp;domain-lookup&nbsp;outside
+dns&nbsp;name-server&nbsp;8.8.8.8
+</code></pre></div>
 <h3 id="asdm">ASDM</h3>
 <p>ASDM är en javamjukvara man kan använda för GUI till ASA.</p>
-<p><code>asdm&nbsp;image&nbsp;disk0:/asdm-752.bin</code>
-<code>show&nbsp;asdm&nbsp;image</code></p>
+<div class="highlight"><pre><span></span><code>asdm&nbsp;image&nbsp;disk0:/asdm-752.bin
+show&nbsp;asdm&nbsp;image
+</code></pre></div>
 <p>Slå på det och vitlista IP/nät som får ansluta.</p>
-<p><code>http&nbsp;server&nbsp;enable</code>
-<code>http&nbsp;10.0.0.0&nbsp;255.255.255.0&nbsp;inside</code></p>
+<div class="highlight"><pre><span></span><code>http&nbsp;server&nbsp;enable
+http&nbsp;10.0.0.0&nbsp;255.255.255.0&nbsp;inside
+</code></pre></div>
 <p>Skapa användare så att det går att logga in. Peka autentisering mot
 lokal databas.</p>
-<p><code>username&nbsp;admin&nbsp;password&nbsp;cisco&nbsp;privilege&nbsp;15</code>
-<code>aaa&nbsp;authentication&nbsp;http&nbsp;console&nbsp;LOCAL</code></p>
+<div class="highlight"><pre><span></span><code>username&nbsp;admin&nbsp;password&nbsp;cisco&nbsp;privilege&nbsp;15
+aaa&nbsp;authentication&nbsp;http&nbsp;console&nbsp;LOCAL
+</code></pre></div>
 <h3 id="ssh">SSH</h3>
-<p><code>ssh&nbsp;10.0.0.0&nbsp;255.255.255.0&nbsp;inside</code>
-<code>ssh&nbsp;timeout&nbsp;60</code>
-<code>ssh&nbsp;version&nbsp;2</code>
-<code>aaa&nbsp;authentication&nbsp;ssh&nbsp;console&nbsp;LOCAL</code>
-<code>domain-name&nbsp;inhouse.local</code>
-<code>crypto&nbsp;key&nbsp;generate&nbsp;rsa&nbsp;modulus&nbsp;2048</code></p>
+<div class="highlight"><pre><span></span><code>ssh&nbsp;10.0.0.0&nbsp;255.255.255.0&nbsp;inside
+ssh&nbsp;timeout&nbsp;60
+ssh&nbsp;version&nbsp;2
+aaa&nbsp;authentication&nbsp;ssh&nbsp;console&nbsp;LOCAL
+domain-name&nbsp;inhouse.local
+crypto&nbsp;key&nbsp;generate&nbsp;rsa&nbsp;modulus&nbsp;2048
+</code></pre></div>
 <h3 id="mgmt-vrf">Mgmt VRF</h3>
 <p>Man kan sedan 9.5 lägga management-interface i en egen routingtabell.</p>
-<p><code>int&nbsp;gi0/1</code>
-<code>management-only</code>
-<code>show&nbsp;route&nbsp;management-only</code>
-<code>show&nbsp;asp&nbsp;table&nbsp;routing&nbsp;management-only</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;gi0/1
+&nbsp;management-only
+show&nbsp;route&nbsp;management-only
+show&nbsp;asp&nbsp;table&nbsp;routing&nbsp;management-only
+</code></pre></div>
 <h3 id="management-access">Management access</h3>
 <p>Vill man managera sin brandvägg genom en VPN-tunnel måste man
 komplettera ssh/http-kommandon med:</p>
-<p><code>management-access&nbsp;inside</code></p>
+<div class="highlight"><pre><span></span><code>management-access&nbsp;inside
+</code></pre></div>
 <h3 id="upgrade">Upgrade</h3>
 <p><code>copy</code><a href="http://"><code>http://</code></a><code>&lt;webbserver.se&gt;/filer/asa952-smp-k8.bin&nbsp;disk0:/</code>
-<code>boot&nbsp;system&nbsp;disk0:/asa952-smp-k8.bin</code>
-<code>show&nbsp;bootvar</code>
-<code>wr</code>
-<code>reload</code></p>
+</p><div class="highlight"><pre><span></span><code>boot&nbsp;system&nbsp;disk0:/asa952-smp-k8.bin
+show&nbsp;bootvar
+wr
+reload
+</code></pre></div><p></p>
 <h3 id="reset">Reset</h3>
-<p><code>clear&nbsp;configure&nbsp;all</code>
-<code>crypto&nbsp;key&nbsp;zeroize&nbsp;rsa</code></p>
+<div class="highlight"><pre><span></span><code>clear&nbsp;configure&nbsp;all
+crypto&nbsp;key&nbsp;zeroize&nbsp;rsa
+</code></pre></div>
 <p>Setup basic firewall</p>
-<p><code>configure&nbsp;factory-default</code></p>
+<div class="highlight"><pre><span></span><code>configure&nbsp;factory-default
+</code></pre></div>
 <h2 id="diverse">Diverse</h2>
 <p><strong>ICMP-inspection</strong>
 Default så är inte icmp-inspection påslaget.</p>
-<p><code>fixup&nbsp;protocol&nbsp;icmp</code></p>
+<div class="highlight"><pre><span></span><code>fixup&nbsp;protocol&nbsp;icmp
+</code></pre></div>
 <p>Alternativt</p>
-<p><code>policy-map&nbsp;global_policy</code>
-<code>class&nbsp;inspection_default</code>
-<code>inspect&nbsp;icmp</code></p>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;global_policy
+&nbsp;class&nbsp;inspection_default
+&nbsp;&nbsp;inspect&nbsp;icmp
+</code></pre></div>
 <p><strong>Traceroute</strong>
 Tillåt traceroute genom en ASA</p>
-<p><code>access-list&nbsp;ACL&nbsp;extended&nbsp;permit&nbsp;icmp&nbsp;any&nbsp;any&nbsp;time-exceeded</code>
-<code>access-list&nbsp;ACL&nbsp;extended&nbsp;permit&nbsp;icmp&nbsp;any&nbsp;any&nbsp;unreachable</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;ACL&nbsp;extended&nbsp;permit&nbsp;icmp&nbsp;any&nbsp;any&nbsp;time-exceeded
+access-list&nbsp;ACL&nbsp;extended&nbsp;permit&nbsp;icmp&nbsp;any&nbsp;any&nbsp;unreachable
+</code></pre></div>
 <p><strong>Accelerated Security Path</strong></p>
-<p><code>show&nbsp;asp&nbsp;drop</code>
-<code>capture&nbsp;asp-drop&nbsp;type&nbsp;asp-drop&nbsp;all</code>
-<code>show&nbsp;capture&nbsp;asp-drop</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;asp&nbsp;drop
+capture&nbsp;asp-drop&nbsp;type&nbsp;asp-drop&nbsp;all
+show&nbsp;capture&nbsp;asp-drop
+</code></pre></div>
 <p><strong>ARP Inspection</strong>
 Static entries</p>
-<p><code>arp&nbsp;inside&nbsp;193.10.161.37&nbsp;0c0c.0c0c.0c03&nbsp;alias</code>
-<code>---</code></p>
+<div class="highlight"><pre><span></span><code>arp&nbsp;inside&nbsp;193.10.161.37&nbsp;0c0c.0c0c.0c03&nbsp;alias
+---
+</code></pre></div>
 <p><strong>Botnet Filtering</strong></p>
-<p><code>#köp&nbsp;licens</code>
-<code>#Enable&nbsp;DNS&nbsp;Client</code></p>
+<div class="highlight"><pre><span></span><code>#köp&nbsp;licens
+#Enable&nbsp;DNS&nbsp;Client
+</code></pre></div>
 <p><strong>NTP</strong></p>
-<p><code>clock&nbsp;timezone&nbsp;CEST&nbsp;1&nbsp;0</code>
-<code>clock&nbsp;summer-time&nbsp;CEDT&nbsp;recurring&nbsp;last&nbsp;Sun&nbsp;Mar&nbsp;2:00&nbsp;last&nbsp;Sun&nbsp;Oct&nbsp;3:00&nbsp;60</code>
-<code>ntp&nbsp;server&nbsp;94.199.180.200&nbsp;source&nbsp;outside</code>
-<code>show&nbsp;ntp&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>clock&nbsp;timezone&nbsp;CEST&nbsp;1&nbsp;0
+clock&nbsp;summer-time&nbsp;CEDT&nbsp;recurring&nbsp;last&nbsp;Sun&nbsp;Mar&nbsp;2:00&nbsp;last&nbsp;Sun&nbsp;Oct&nbsp;3:00&nbsp;60
+ntp&nbsp;server&nbsp;94.199.180.200&nbsp;source&nbsp;outside
+show&nbsp;ntp&nbsp;status
+</code></pre></div>
 <p><strong>uRPF</strong></p>
-<p><code>ip&nbsp;verify&nbsp;reverse-path&nbsp;interface&nbsp;outside</code>
-<code>show&nbsp;run&nbsp;ip&nbsp;verify&nbsp;reverse-path</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;verify&nbsp;reverse-path&nbsp;interface&nbsp;outside
+show&nbsp;run&nbsp;ip&nbsp;verify&nbsp;reverse-path
+</code></pre></div>
 <p><strong>Logging</strong></p>
-<p><code>logging&nbsp;enable</code>
-<code>logging&nbsp;console&nbsp;4</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;enable
+logging&nbsp;console&nbsp;4
+</code></pre></div>
 <p>Om man kör syslog med TCP så slutar ASA:n att forwarda trafik om
 anslutning till syslog-servern tappas, ändra detta.</p>
-<p><code>logging&nbsp;permit-hostdown</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;permit-hostdown
+</code></pre></div>
 <p><strong>Jumbo Frames</strong></p>
-<p><code>jumbo&nbsp;frame-reservation</code>
-<code>mtu&nbsp;inside&nbsp;9000</code>
-<code>mtu&nbsp;outside&nbsp;9000</code></p>
+<div class="highlight"><pre><span></span><code>jumbo&nbsp;frame-reservation
+mtu&nbsp;inside&nbsp;9000
+mtu&nbsp;outside&nbsp;9000
+</code></pre></div>
 <p><strong>Global Timeouts</strong></p>
-<p><code>timeout&nbsp;xlate&nbsp;10:00:00</code>
-<code>timeout&nbsp;uauth&nbsp;10:00:00&nbsp;absolute</code>
-<code>timeout&nbsp;uauth&nbsp;09:00:00&nbsp;inactivity</code></p>
+<div class="highlight"><pre><span></span><code>timeout&nbsp;xlate&nbsp;10:00:00
+timeout&nbsp;uauth&nbsp;10:00:00&nbsp;absolute
+timeout&nbsp;uauth&nbsp;09:00:00&nbsp;inactivity
+</code></pre></div>
 <p><strong>Certificate Management</strong></p>
-<p><code>show&nbsp;crypto&nbsp;ca&nbsp;certificate</code>
-<code>(config)&nbsp;crypto&nbsp;ca&nbsp;export</code>
-<code>show&nbsp;crypto&nbsp;key&nbsp;mypubkey&nbsp;rsa</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;ca&nbsp;certificate
+(config)&nbsp;crypto&nbsp;ca&nbsp;export
+show&nbsp;crypto&nbsp;key&nbsp;mypubkey&nbsp;rsa
+</code></pre></div>
 <p><strong>Permanent Self-Signed Certificate</strong></p>
-<p><code>crypto&nbsp;ca&nbsp;trustpoint&nbsp;ASDM_TrustPoint0</code>
-<code>id-usage&nbsp;ssl-ipsec</code>
-<code>no&nbsp;fqdn</code>
-<code>subject-name&nbsp;CN=ASA</code>
-<code>enrollment&nbsp;self</code>
-<code>crypto&nbsp;ca&nbsp;enroll&nbsp;ASDM_TrustPoint0&nbsp;noconfirm</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ca&nbsp;trustpoint&nbsp;ASDM_TrustPoint0
+id-usage&nbsp;ssl-ipsec
+no&nbsp;fqdn
+subject-name&nbsp;CN=ASA
+enrollment&nbsp;self
+crypto&nbsp;ca&nbsp;enroll&nbsp;ASDM_TrustPoint0&nbsp;noconfirm
+</code></pre></div>
 <h2 id="snmp">SNMP</h2>
-<p><code>snmp-server&nbsp;host&nbsp;inside&nbsp;10.0.0.50&nbsp;community&nbsp;PUBLIC&nbsp;version&nbsp;2c</code>
-<code>show&nbsp;snmp-server&nbsp;oidlist&nbsp;&nbsp;&nbsp;#"hidden&nbsp;command"</code></p>
+<div class="highlight"><pre><span></span><code>snmp-server&nbsp;host&nbsp;inside&nbsp;10.0.0.50&nbsp;community&nbsp;PUBLIC&nbsp;version&nbsp;2c
+show&nbsp;snmp-server&nbsp;oidlist&nbsp;&nbsp;&nbsp;#"hidden&nbsp;command"
+</code></pre></div>
 <p>Se även <a href="/Cisco_SNMP" title="wikilink">Cisco SNMP</a>.</p>
 <h2 id="dhcp">DHCP</h2>
 <p><a href="/Cisco_DHCP" title="wikilink">Cisco DHCP</a></p>
 <h3 id="klient">Klient</h3>
-<p><code>int&nbsp;e0/0</code>
-<code>ip&nbsp;address&nbsp;dhcp&nbsp;setroute</code>
-<code>exit</code>
-<code>dhcp-client&nbsp;client-id&nbsp;interface&nbsp;outside</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;e0/0
+&nbsp;ip&nbsp;address&nbsp;dhcp&nbsp;setroute
+exit
+dhcp-client&nbsp;client-id&nbsp;interface&nbsp;outside
+</code></pre></div>
 <h3 id="server">Server</h3>
-<p><code>dhcpd&nbsp;address&nbsp;10.0.0.50-10.0.0.60&nbsp;inside</code>
-<code>dhcpd&nbsp;enable&nbsp;inside</code>
-<code>dhcpd&nbsp;dns&nbsp;8.8.8.8&nbsp;interface&nbsp;inside</code></p>
+<div class="highlight"><pre><span></span><code>dhcpd&nbsp;address&nbsp;10.0.0.50-10.0.0.60&nbsp;inside
+dhcpd&nbsp;enable&nbsp;inside
+dhcpd&nbsp;dns&nbsp;8.8.8.8&nbsp;interface&nbsp;inside
+</code></pre></div>
 <p><em>OBS ASA doesn't respond to unicast dhcp requests</em></p>
 <h3 id="relay">Relay</h3>
-<p><code>dhcprelay&nbsp;server&nbsp;192.168.10.11&nbsp;inside</code>
-<code>dhcprelay&nbsp;enable&nbsp;DMZ</code></p>
+<div class="highlight"><pre><span></span><code>dhcprelay&nbsp;server&nbsp;192.168.10.11&nbsp;inside
+dhcprelay&nbsp;enable&nbsp;DMZ
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;dhcpd&nbsp;state</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;dhcpd&nbsp;state
+</code></pre></div>
 <h2 id="nat">NAT</h2>
 <p>Se även <a href="/Cisco_NAT" title="wikilink">Cisco NAT</a>.</p>
 <h3 id="pat">PAT</h3>
-<p><code>nat&nbsp;(inside,outside)&nbsp;1&nbsp;source&nbsp;dynamic&nbsp;any&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>nat&nbsp;(inside,outside)&nbsp;1&nbsp;source&nbsp;dynamic&nbsp;any&nbsp;interface
+</code></pre></div>
 <h3 id="dynamic">Dynamic</h3>
-<p><code>object&nbsp;network&nbsp;outside-pool</code>
-<code>range&nbsp;193.10.161.190&nbsp;193.10.161.199</code>
-<code>object&nbsp;network&nbsp;inside_10</code>
-<code>subnet&nbsp;10.0.0.0&nbsp;255.255.255.0</code>
-<code>nat&nbsp;(inside,any)&nbsp;dynamic&nbsp;outside-pool</code></p>
+<div class="highlight"><pre><span></span><code>object&nbsp;network&nbsp;outside-pool
+&nbsp;range&nbsp;193.10.161.190&nbsp;193.10.161.199
+object&nbsp;network&nbsp;inside_10
+&nbsp;subnet&nbsp;10.0.0.0&nbsp;255.255.255.0
+&nbsp;nat&nbsp;(inside,any)&nbsp;dynamic&nbsp;outside-pool
+</code></pre></div>
 <h3 id="static">Static</h3>
-<p><code>object&nbsp;network&nbsp;dmz_global</code>
-<code>host&nbsp;193.10.161.31</code>
-<code>object&nbsp;network&nbsp;dmz_server</code>
-<code>host&nbsp;172.16.0.5</code>
-<code>nat&nbsp;(dmz,outside)&nbsp;static&nbsp;dmz_global</code></p>
+<div class="highlight"><pre><span></span><code>object&nbsp;network&nbsp;dmz_global
+&nbsp;host&nbsp;193.10.161.31
+object&nbsp;network&nbsp;dmz_server
+&nbsp;host&nbsp;172.16.0.5
+&nbsp;nat&nbsp;(dmz,outside)&nbsp;static&nbsp;dmz_global
+</code></pre></div>
 <h3 id="exempt">Exempt</h3>
-<p><code>object&nbsp;network&nbsp;LAN1</code>
-<code>subnet&nbsp;1.1.1.0&nbsp;255.255.255.0</code>
-<code>object&nbsp;network&nbsp;LAN2</code>
-<code>subnet&nbsp;2.2.2.0&nbsp;255.255.255.0</code>
-<code>nat&nbsp;(inside,outside)&nbsp;1&nbsp;source&nbsp;static&nbsp;LAN1&nbsp;LAN1&nbsp;destination&nbsp;static&nbsp;LAN2&nbsp;LAN2</code></p>
+<div class="highlight"><pre><span></span><code>object&nbsp;network&nbsp;LAN1
+&nbsp;subnet&nbsp;1.1.1.0&nbsp;255.255.255.0
+object&nbsp;network&nbsp;LAN2
+&nbsp;subnet&nbsp;2.2.2.0&nbsp;255.255.255.0
+nat&nbsp;(inside,outside)&nbsp;1&nbsp;source&nbsp;static&nbsp;LAN1&nbsp;LAN1&nbsp;destination&nbsp;static&nbsp;LAN2&nbsp;LAN2
+</code></pre></div>
 <p><em>1an är viktig så att regeln hamnar först</em></p>
 <p><strong>Verify</strong></p>
-<p><code>show&nbsp;run&nbsp;nat</code>
-<code>show&nbsp;nat&nbsp;proxy-arp</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;run&nbsp;nat
+show&nbsp;nat&nbsp;proxy-arp
+</code></pre></div>
 <h2 id="port-forwarding">Port Forwarding</h2>
-<p><code>object&nbsp;network&nbsp;websrv</code>
-<code>host&nbsp;10.1.1.3</code>
-<code>nat&nbsp;(inside,outside)&nbsp;static&nbsp;interface&nbsp;service&nbsp;tcp&nbsp;80&nbsp;80</code>
-<code>exit</code>
-<code>access-list&nbsp;outside_access_in&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;websrv&nbsp;eq&nbsp;http</code></p>
+<div class="highlight"><pre><span></span><code>object&nbsp;network&nbsp;websrv&nbsp;
+&nbsp;host&nbsp;10.1.1.3
+&nbsp;nat&nbsp;(inside,outside)&nbsp;static&nbsp;interface&nbsp;service&nbsp;tcp&nbsp;80&nbsp;80
+exit
+access-list&nbsp;outside_access_in&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;websrv&nbsp;eq&nbsp;http
+</code></pre></div>
 <h3 id="acl">ACL</h3>
-<p><code>access-list&nbsp;ACL1&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;dmz_server&nbsp;eq&nbsp;http</code>
-<code>access-list&nbsp;ACL1&nbsp;line&nbsp;15&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;dmz_server&nbsp;eq&nbsp;https</code>
-<code>access-group&nbsp;ACL1&nbsp;in&nbsp;interface&nbsp;outside</code>
-<code>show&nbsp;access-list&nbsp;ACL1</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;ACL1&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;dmz_server&nbsp;eq&nbsp;http
+access-list&nbsp;ACL1&nbsp;line&nbsp;15&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;dmz_server&nbsp;eq&nbsp;https
+access-group&nbsp;ACL1&nbsp;in&nbsp;interface&nbsp;outside
+show&nbsp;access-list&nbsp;ACL1
+</code></pre></div>
 <p>Matcha på DNS-namn</p>
-<p><code>object&nbsp;network&nbsp;hackernet.se</code>
-<code>fqdn&nbsp;v4&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>object&nbsp;network&nbsp;hackernet.se
+&nbsp;fqdn&nbsp;v4&nbsp;hackernet.se
+</code></pre></div>
 <h2 id="routing">Routing</h2>
 <p>Se även <a href="/Cisco_Routing" title="wikilink">Cisco Routing</a>.</p>
 <h3 id="static_1">Static</h3>
-<p><code>route&nbsp;inside&nbsp;10.0.1.0&nbsp;255.255.255.0&nbsp;{next&nbsp;hop&nbsp;address}&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>route&nbsp;inside&nbsp;10.0.1.0&nbsp;255.255.255.0&nbsp;{next&nbsp;hop&nbsp;address}&nbsp;10
+</code></pre></div>
 <h3 id="ospf">OSPF</h3>
-<p><code>router&nbsp;ospf&nbsp;1</code>
-<code>area&nbsp;1</code>
-<code>network&nbsp;10.0.0.0&nbsp;255.255.255.0&nbsp;area&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;ospf&nbsp;1
+&nbsp;area&nbsp;1
+&nbsp;network&nbsp;10.0.0.0&nbsp;255.255.255.0&nbsp;area&nbsp;1
+</code></pre></div>
 <h3 id="rip">RIP</h3>
-<p><code>router&nbsp;rip</code>
-<code>no&nbsp;auto-summary</code>
-<code>version&nbsp;2</code>
-<code>network&nbsp;10.0.0.0</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;rip
+&nbsp;no&nbsp;auto-summary
+&nbsp;version&nbsp;2
+&nbsp;network&nbsp;10.0.0.0
+</code></pre></div>
 <h3 id="eigrp">EIGRP</h3>
-<p><code>router&nbsp;eigrp&nbsp;1</code>
-<code>network&nbsp;10.0.0.0&nbsp;255.255.255.0</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;1
+&nbsp;network&nbsp;10.0.0.0&nbsp;255.255.255.0
+</code></pre></div>
 <h3 id="bgp">BGP</h3>
 <p>Ska man köra BGP genom en ASA måste man stänga av att TCP option 19
 strippas vilket det gör default. Samt måste TCP sequence number
 randomization stängas av.</p>
-<p><code>access-list&nbsp;BGP&nbsp;extended&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;eq&nbsp;bgp&nbsp;any</code>
-<code>access-list&nbsp;BGP&nbsp;extended&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;any&nbsp;eq&nbsp;bgp</code>
-<code>tcp-map&nbsp;BGP</code>
-<code>tcp-options&nbsp;range&nbsp;19&nbsp;19&nbsp;allow</code>
-<code>class-map&nbsp;BGP</code>
-<code>match&nbsp;access-list&nbsp;BGP</code>
-<code>policy-map&nbsp;global_policy</code>
-<code>class&nbsp;BGP</code>
-<code>set&nbsp;connection&nbsp;advanced-options&nbsp;BGP</code>
-<code>set&nbsp;connection&nbsp;random-sequence-number&nbsp;disable</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;BGP&nbsp;extended&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;eq&nbsp;bgp&nbsp;any
+access-list&nbsp;BGP&nbsp;extended&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;any&nbsp;eq&nbsp;bgp
+tcp-map&nbsp;BGP
+tcp-options&nbsp;range&nbsp;19&nbsp;19&nbsp;allow
+&nbsp;class-map&nbsp;BGP
+&nbsp;&nbsp;match&nbsp;access-list&nbsp;BGP
+policy-map&nbsp;global_policy
+&nbsp;class&nbsp;BGP
+&nbsp;&nbsp;set&nbsp;connection&nbsp;advanced-options&nbsp;BGP
+&nbsp;&nbsp;set&nbsp;connection&nbsp;random-sequence-number&nbsp;disable
+</code></pre></div>
 <h2 id="modular-policy-framework">Modular Policy Framework</h2>
 <p>Application Inspection</p>
-<p><code>access-list&nbsp;dmz_ftp&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;any&nbsp;eq&nbsp;ftp</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;dmz_ftp&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;any&nbsp;eq&nbsp;ftp
+</code></pre></div>
 <p>Class Map</p>
-<p><code>class-map&nbsp;FTP-class-MAP</code>
-<code>match&nbsp;access-list&nbsp;dmz_ftp</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;FTP-class-MAP
+match&nbsp;access-list&nbsp;dmz_ftp
+</code></pre></div>
 <p>Policy Map</p>
-<p><code>policy-map&nbsp;FTP-policy-MAP</code>
-<code>class&nbsp;FTP-class-MAP</code>
-<code>inspect&nbsp;ftp</code></p>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;FTP-policy-MAP
+class&nbsp;FTP-class-MAP
+inspect&nbsp;ftp
+</code></pre></div>
 <p>Service Policy</p>
-<p><code>service-policy&nbsp;FTP-policy-MAP&nbsp;interface&nbsp;dmz</code></p>
+<div class="highlight"><pre><span></span><code>service-policy&nbsp;FTP-policy-MAP&nbsp;interface&nbsp;dmz
+</code></pre></div>
 <h3 id="qos">QoS</h3>
-<p><code>priority-queue&nbsp;inside</code></p>
+<div class="highlight"><pre><span></span><code>priority-queue&nbsp;inside
+</code></pre></div>
 <p>Class Map</p>
-<p><code>class-map&nbsp;VOIP</code>
-<code>match&nbsp;dscp&nbsp;46</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;VOIP
+match&nbsp;dscp&nbsp;46
+</code></pre></div>
 <p>Policy Map</p>
-<p><code>policy-map&nbsp;inside-policy</code>
-<code>class&nbsp;VOIP</code>
-<code>priority</code></p>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;inside-policy
+class&nbsp;VOIP
+priority
+</code></pre></div>
 <p>Service Policy</p>
-<p><code>service-policy&nbsp;inside-policy&nbsp;interface&nbsp;inside</code></p>
+<div class="highlight"><pre><span></span><code>service-policy&nbsp;inside-policy&nbsp;interface&nbsp;inside
+</code></pre></div>
 <p>Se även <a href="/Cisco_QoS" title="wikilink">Cisco QoS</a>.</p>
 <h3 id="tweaking-connections">Tweaking Connections</h3>
-<p><code>access-list&nbsp;ACL1&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;dmz_server&nbsp;eq&nbsp;http</code>
-<code>class-map&nbsp;TCP-Sessions</code>
-<code>match&nbsp;access-list&nbsp;ACL1</code>
-<code>policy-map&nbsp;Conn-Limits</code>
-<code>class&nbsp;TCP-Sessions</code>
-<code>set&nbsp;connection&nbsp;conn-max&nbsp;500&nbsp;embryonic-conn-max&nbsp;50</code>
-<code>set&nbsp;connection&nbsp;timeout&nbsp;embryonic&nbsp;0:05:00&nbsp;half-closed&nbsp;0:10:00</code>
-<code>service-policy&nbsp;Conn-Limits&nbsp;interface&nbsp;outside</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;ACL1&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;dmz_server&nbsp;eq&nbsp;http
+class-map&nbsp;TCP-Sessions
+match&nbsp;access-list&nbsp;ACL1
+policy-map&nbsp;Conn-Limits
+class&nbsp;TCP-Sessions
+set&nbsp;connection&nbsp;conn-max&nbsp;500&nbsp;embryonic-conn-max&nbsp;50
+set&nbsp;connection&nbsp;timeout&nbsp;embryonic&nbsp;0:05:00&nbsp;half-closed&nbsp;0:10:00
+service-policy&nbsp;Conn-Limits&nbsp;interface&nbsp;outside
+</code></pre></div>
 <h3 id="tcp-intercept">TCP Intercept</h3>
-<p><code>access-list&nbsp;ACL1&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;dmz_server&nbsp;eq&nbsp;http</code>
-<code>class-map&nbsp;no-syn-flood-class</code>
-<code>match&nbsp;access-list&nbsp;ACL1</code>
-<code>policy-map&nbsp;NO-SYN-FLOOD</code>
-<code>class&nbsp;no&nbsp;syn-flood-class</code>
-<code>set&nbsp;connection&nbsp;embryonic-conn-max&nbsp;50</code>
-<code>service-policy&nbsp;NO-SYN-FLOOD&nbsp;interface&nbsp;outside</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;ACL1&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;dmz_server&nbsp;eq&nbsp;http
+class-map&nbsp;no-syn-flood-class
+match&nbsp;access-list&nbsp;ACL1
+policy-map&nbsp;NO-SYN-FLOOD
+class&nbsp;no&nbsp;syn-flood-class
+set&nbsp;connection&nbsp;embryonic-conn-max&nbsp;50
+service-policy&nbsp;NO-SYN-FLOOD&nbsp;interface&nbsp;outside&nbsp;
+</code></pre></div>
 <h3 id="advanced-application-inspection-http">Advanced Application Inspection - HTTP</h3>
-<p><code>policy-map&nbsp;type&nbsp;inspect&nbsp;http&nbsp;http-inspect-pmap</code>
-<code>parameters</code>
-<code>protocol-violation&nbsp;action&nbsp;dropconnection&nbsp;log</code>
-<code>match&nbsp;req-resp&nbsp;content-type&nbsp;mismatch</code>
-<code>drop-connection&nbsp;log</code>
-<code>policy-map&nbsp;global_policy</code>
-<code>class&nbsp;inspection_default</code>
-<code>inspect&nbsp;http&nbsp;http-inspect-pmap</code></p>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;type&nbsp;inspect&nbsp;http&nbsp;http-inspect-pmap
+parameters
+protocol-violation&nbsp;action&nbsp;dropconnection&nbsp;log
+match&nbsp;req-resp&nbsp;content-type&nbsp;mismatch
+drop-connection&nbsp;log
+policy-map&nbsp;global_policy
+class&nbsp;inspection_default
+inspect&nbsp;http&nbsp;http-inspect-pmap
+</code></pre></div>
 <h3 id="vlan-5505">VLAN - !5505</h3>
-<p><code>int&nbsp;e0/2</code>
-<code>no&nbsp;shut</code>
-<code>int&nbsp;e0/2.10</code>
-<code>vlan&nbsp;10</code>
-<code>security-level&nbsp;100</code>
-<code>nameif&nbsp;VLAN10</code>
-<code>ip&nbsp;add&nbsp;10.0.10.1&nbsp;255.255.255.0</code>
-<code>no&nbsp;shut</code>
-<code>exit</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;e0/2
+&nbsp;no&nbsp;shut
+int&nbsp;e0/2.10
+&nbsp;vlan&nbsp;10
+&nbsp;security-level&nbsp;100
+&nbsp;nameif&nbsp;VLAN10
+&nbsp;ip&nbsp;add&nbsp;10.0.10.1&nbsp;255.255.255.0
+&nbsp;no&nbsp;shut
+exit
+</code></pre></div>
 <h2 id="etherchannel">EtherChannel</h2>
 <p>Se även <a href="/Cisco_EtherChannel" title="wikilink">Cisco EtherChannel</a>.</p>
-<p><code>interface&nbsp;e0/2</code>
-<code>channel-group&nbsp;mode&nbsp;Active</code>
-<code>interface&nbsp;e0/3</code>
-<code>channel-group&nbsp;mode&nbsp;Active</code>
-<code>interface&nbsp;port-channel1</code>
-<code>port-channel&nbsp;load-balance&nbsp;src-port</code>
-<code>port-channel&nbsp;min-bundle&nbsp;1</code>
-<code>lacp&nbsp;max-bundle&nbsp;8</code>
-<code>duplex&nbsp;auto</code>
-<code>speed&nbsp;auto</code>
-<code>nameif&nbsp;DMZ</code>
-<code>security-level&nbsp;50</code>
-<code>ip&nbsp;add&nbsp;10.0.10.1&nbsp;255.255.255.0</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;e0/2
+&nbsp;channel-group&nbsp;mode&nbsp;Active
+interface&nbsp;e0/3
+&nbsp;channel-group&nbsp;mode&nbsp;Active
+interface&nbsp;port-channel1
+&nbsp;port-channel&nbsp;load-balance&nbsp;src-port
+&nbsp;port-channel&nbsp;min-bundle&nbsp;1
+&nbsp;lacp&nbsp;max-bundle&nbsp;8
+&nbsp;duplex&nbsp;auto
+&nbsp;speed&nbsp;auto
+&nbsp;nameif&nbsp;DMZ
+&nbsp;security-level&nbsp;50
+&nbsp;ip&nbsp;add&nbsp;10.0.10.1&nbsp;255.255.255.0
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <h3 id="redundancy">Redundancy</h3>
 <p>Samma som etherchannel fast endast ett ben är aktivt i taget. Användbart
 om asan är kopplad till 2 switchar utan <a href="/Arista_MLAG" title="wikilink">MLAG</a>
 (t.ex. <a href="/Nexus_vPC" title="wikilink">vPC</a>).</p>
-<p><code>interface&nbsp;e0/4</code>
-<code>no&nbsp;shut</code>
-<code>interface&nbsp;e0/5</code>
-<code>no&nbsp;shut</code>
-<code>interface&nbsp;redundant1</code>
-<code>member&nbsp;interface&nbsp;e0/4</code>
-<code>member&nbsp;interface&nbsp;e0/5</code>
-<code>nameif&nbsp;outside</code>
-<code>security-level</code>
-<code>ip&nbsp;address&nbsp;193.10.161.31</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;e0/4
+&nbsp;no&nbsp;shut
+interface&nbsp;e0/5
+&nbsp;no&nbsp;shut
+interface&nbsp;redundant1
+&nbsp;member&nbsp;interface&nbsp;e0/4
+&nbsp;member&nbsp;interface&nbsp;e0/5
+&nbsp;nameif&nbsp;outside
+&nbsp;security-level
+&nbsp;ip&nbsp;address&nbsp;193.10.161.31
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <h2 id="transparent-5505">Transparent - 5505</h2>
-<p><code>firewall&nbsp;transparent</code>
-<code>int&nbsp;BVI&nbsp;1</code>
-<code>ip&nbsp;add&nbsp;193.10.161.38&nbsp;255.255.255.0</code>
-<code>exit</code>
-<code>int&nbsp;e0/0</code>
-<code>switchport&nbsp;access&nbsp;vlan&nbsp;1</code>
-<code>no&nbsp;shut</code>
-<code>int&nbsp;e0/1</code>
-<code>switchport&nbsp;access&nbsp;vlan&nbsp;2</code>
-<code>no&nbsp;shut</code>
-<code>interface&nbsp;vlan&nbsp;1</code>
-<code>security-level&nbsp;100</code>
-<code>nameif&nbsp;inside</code>
-<code>bridge-group&nbsp;1</code>
-<code>no&nbsp;shut</code>
-<code>interface&nbsp;vlan&nbsp;2</code>
-<code>security-level&nbsp;0</code>
-<code>nameif&nbsp;outside</code>
-<code>bridge-group&nbsp;1</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>firewall&nbsp;transparent
+int&nbsp;BVI&nbsp;1
+ip&nbsp;add&nbsp;193.10.161.38&nbsp;255.255.255.0
+exit
+int&nbsp;e0/0
+switchport&nbsp;access&nbsp;vlan&nbsp;1
+no&nbsp;shut
+int&nbsp;e0/1
+switchport&nbsp;access&nbsp;vlan&nbsp;2
+no&nbsp;shut
+interface&nbsp;vlan&nbsp;1
+security-level&nbsp;100
+nameif&nbsp;inside
+bridge-group&nbsp;1
+no&nbsp;shut
+interface&nbsp;vlan&nbsp;2
+security-level&nbsp;0
+nameif&nbsp;outside
+bridge-group&nbsp;1
+no&nbsp;shut
+</code></pre></div>
 <h2 id="aaa">AAA</h2>
-<p><code>aaa-server&nbsp;OUR-GROUP&nbsp;protocol&nbsp;radius</code>
-<code>aaa-server&nbsp;OUR-GROUP&nbsp;(inside)&nbsp;host&nbsp;10.0.0.50</code>
-<code>key&nbsp;********</code>
-<code>radius-common-pw&nbsp;*********</code>
-<code>exit</code></p>
+<div class="highlight"><pre><span></span><code>aaa-server&nbsp;OUR-GROUP&nbsp;protocol&nbsp;radius
+aaa-server&nbsp;OUR-GROUP&nbsp;(inside)&nbsp;host&nbsp;10.0.0.50
+&nbsp;key&nbsp;********
+&nbsp;radius-common-pw&nbsp;*********
+&nbsp;exit
+</code></pre></div>
 <h3 id="cut-through-user-aaa">Cut-through User AAA</h3>
-<p><code>access-list&nbsp;outside_authentication&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;dmz-server&nbsp;eq&nbsp;http</code>
-<code>username&nbsp;bob&nbsp;password&nbsp;cisco&nbsp;priv&nbsp;2</code>
-<code>username&nbsp;bob&nbsp;attributes</code>
-<code>service-type&nbsp;remote-access</code>
-<code>exit</code>
-<code>aaa&nbsp;authentication&nbsp;match&nbsp;outside_authentication&nbsp;outside&nbsp;LOCAL</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;outside_authentication&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;object&nbsp;dmz-server&nbsp;eq&nbsp;http
+username&nbsp;bob&nbsp;password&nbsp;cisco&nbsp;priv&nbsp;2
+username&nbsp;bob&nbsp;attributes
+service-type&nbsp;remote-access
+exit
+aaa&nbsp;authentication&nbsp;match&nbsp;outside_authentication&nbsp;outside&nbsp;LOCAL
+</code></pre></div>
 <h2 id="failover">Failover</h2>
-<p><code>#Criteria</code>
-<code>ASA1</code>
-<code>int&nbsp;e0/0</code>
-<code>ip&nbsp;address&nbsp;193.10.161.38&nbsp;255.255.254.0&nbsp;standby&nbsp;193.10.161.39</code>
-<code>int&nbsp;e0/1</code>
-<code>ip&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.0&nbsp;standby&nbsp;10.0.0.2</code>
-<code>failover&nbsp;lan&nbsp;interface&nbsp;Fail-1&nbsp;e0/3</code>
-<code>failover&nbsp;interface&nbsp;ip&nbsp;Fail-1&nbsp;10.1.1.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.1.1.2</code>
-<code>failover&nbsp;key&nbsp;cisco</code>
-<code>failover&nbsp;link&nbsp;Fail-2&nbsp;e0/4</code>
-<code>failover&nbsp;interface&nbsp;ip&nbsp;Fail-2&nbsp;10.2.2.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.2.2.2</code>
-<code>failover&nbsp;replication&nbsp;http</code>
-<code>failover&nbsp;lan&nbsp;unit&nbsp;primary</code>
-<code>failover&nbsp;mac&nbsp;address&nbsp;e0/0&nbsp;0000.1111.2222&nbsp;0000.3333.4444</code>
-<code>failover</code></p>
-<p><code>ASA2</code>
-<code>int&nbsp;e0/3</code>
-<code>no&nbsp;shut</code>
-<code>exit</code>
-<code>failover&nbsp;lan&nbsp;interface&nbsp;Fail-1&nbsp;e0/3</code>
-<code>failover&nbsp;interface&nbsp;ip&nbsp;Fail-1&nbsp;10.1.1.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.1.1.2</code>
-<code>failover&nbsp;key&nbsp;cisco</code>
-<code>failover&nbsp;lan&nbsp;unit&nbsp;secondary</code>
-<code>failover</code></p>
+<div class="highlight"><pre><span></span><code>#Criteria
+ASA1
+int&nbsp;e0/0
+ip&nbsp;address&nbsp;193.10.161.38&nbsp;255.255.254.0&nbsp;standby&nbsp;193.10.161.39
+int&nbsp;e0/1
+ip&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.0&nbsp;standby&nbsp;10.0.0.2
+failover&nbsp;lan&nbsp;interface&nbsp;Fail-1&nbsp;e0/3
+failover&nbsp;interface&nbsp;ip&nbsp;Fail-1&nbsp;10.1.1.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.1.1.2
+failover&nbsp;key&nbsp;cisco
+failover&nbsp;link&nbsp;Fail-2&nbsp;e0/4
+failover&nbsp;interface&nbsp;ip&nbsp;Fail-2&nbsp;10.2.2.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.2.2.2
+failover&nbsp;replication&nbsp;http
+failover&nbsp;lan&nbsp;unit&nbsp;primary
+failover&nbsp;mac&nbsp;address&nbsp;e0/0&nbsp;0000.1111.2222&nbsp;0000.3333.4444
+failover
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ASA2
+int&nbsp;e0/3
+no&nbsp;shut
+exit
+failover&nbsp;lan&nbsp;interface&nbsp;Fail-1&nbsp;e0/3
+failover&nbsp;interface&nbsp;ip&nbsp;Fail-1&nbsp;10.1.1.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.1.1.2
+failover&nbsp;key&nbsp;cisco
+failover&nbsp;lan&nbsp;unit&nbsp;secondary
+failover
+</code></pre></div>
 <h2 id="virtual-firewall">Virtual Firewall</h2>
-<p><code>mode&nbsp;multiple</code>
-<code>changeto&nbsp;context&nbsp;admin</code>
-<code>changeto&nbsp;system</code>
-<code>mac-address&nbsp;auto</code>
-<code>class&nbsp;silver</code>
-<code>limit&nbsp;resource&nbsp;asdm&nbsp;3</code>
-<code>context&nbsp;newcontext</code>
-<code>member&nbsp;silver</code>
-<code>allocate-interface&nbsp;e0/3</code>
-<code>allocate-interface&nbsp;e0/4</code>
-<code>config-url&nbsp;disk0:/newcontext.cfg</code></p>
+<div class="highlight"><pre><span></span><code>mode&nbsp;multiple
+changeto&nbsp;context&nbsp;admin
+changeto&nbsp;system
+mac-address&nbsp;auto
+class&nbsp;silver
+limit&nbsp;resource&nbsp;asdm&nbsp;3
+context&nbsp;newcontext
+member&nbsp;silver
+allocate-interface&nbsp;e0/3
+allocate-interface&nbsp;e0/4
+config-url&nbsp;disk0:/newcontext.cfg
+</code></pre></div>
 <p>Save in all contexts</p>
-<p><code>wr&nbsp;mem&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>wr&nbsp;mem&nbsp;all
+</code></pre></div>
 <h3 id="activeactive-failover">Active/Active Failover</h3>
-<p><code>changeto&nbsp;system</code>
-<code>prompt&nbsp;hostname&nbsp;priority</code>
-<code>failover&nbsp;group&nbsp;1</code>
-<code>primary</code>
-<code>preempt&nbsp;120</code>
-<code>exit</code>
-<code>failover&nbsp;group&nbsp;2</code>
-<code>secondary</code>
-<code>preempt&nbsp;120</code>
-<code>exit</code>
-<code>context&nbsp;Ctx-1</code>
-<code>join-failover-group&nbsp;1</code>
-<code>exit</code>
-<code>context&nbsp;Ctx-2</code>
-<code>join-failover-group&nbsp;2</code>
-<code>exit</code>
-<code>int&nbsp;e0/4</code>
-<code>no&nbsp;shut</code>
-<code>int&nbsp;e0/5</code>
-<code>no&nbsp;shut</code>
-<code>exit</code>
-<code>failover&nbsp;lan&nbsp;unit&nbsp;primary</code>
-<code>failover&nbsp;lan&nbsp;interface&nbsp;Fail-1&nbsp;e0/4</code>
-<code>failover&nbsp;interface&nbsp;ip&nbsp;Fail-1&nbsp;10.1.1.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.1.1.2</code>
-<code>failover&nbsp;link&nbsp;Fail-2&nbsp;e0/4</code>
-<code>failover&nbsp;interface&nbsp;ip&nbsp;Fail-2&nbsp;10.2.2.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.2.2.2</code>
-<code>failover</code></p>
-<p><code>int&nbsp;e0/3</code>
-<code>no&nbsp;shut</code>
-<code>exit</code>
-<code>failover&nbsp;lan&nbsp;unit&nbsp;secondary</code>
-<code>failover&nbsp;lan&nbsp;interface&nbsp;Fail-1&nbsp;e0/3</code>
-<code>failover&nbsp;interface&nbsp;ip&nbsp;Fail-1&nbsp;10.1.1.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.1.1.2</code>
-<code>failover</code></p>
+<div class="highlight"><pre><span></span><code>changeto&nbsp;system
+prompt&nbsp;hostname&nbsp;priority
+failover&nbsp;group&nbsp;1
+primary
+preempt&nbsp;120
+exit
+failover&nbsp;group&nbsp;2
+secondary
+preempt&nbsp;120
+exit
+context&nbsp;Ctx-1
+join-failover-group&nbsp;1
+exit
+context&nbsp;Ctx-2
+join-failover-group&nbsp;2
+exit
+int&nbsp;e0/4
+no&nbsp;shut
+int&nbsp;e0/5
+no&nbsp;shut
+exit
+failover&nbsp;lan&nbsp;unit&nbsp;primary
+failover&nbsp;lan&nbsp;interface&nbsp;Fail-1&nbsp;e0/4
+failover&nbsp;interface&nbsp;ip&nbsp;Fail-1&nbsp;10.1.1.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.1.1.2
+failover&nbsp;link&nbsp;Fail-2&nbsp;e0/4
+failover&nbsp;interface&nbsp;ip&nbsp;Fail-2&nbsp;10.2.2.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.2.2.2
+failover
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>int&nbsp;e0/3
+no&nbsp;shut
+exit
+failover&nbsp;lan&nbsp;unit&nbsp;secondary
+failover&nbsp;lan&nbsp;interface&nbsp;Fail-1&nbsp;e0/3
+failover&nbsp;interface&nbsp;ip&nbsp;Fail-1&nbsp;10.1.1.1&nbsp;255.255.255.252&nbsp;standby&nbsp;10.1.1.2
+failover
+</code></pre></div>
 <h2 id="sla">SLA</h2>
-<p><code>route&nbsp;outside&nbsp;0.0.0.0&nbsp;0.0.0.0&nbsp;1.1.1.1&nbsp;1&nbsp;track&nbsp;1</code>
-<code>sla&nbsp;monitor&nbsp;10</code>
-<code>type&nbsp;echo&nbsp;protocol&nbsp;ipIcmpEcho&nbsp;1.1.1.1&nbsp;interface&nbsp;outside</code>
-<code>num-packets&nbsp;3</code>
-<code>frequency&nbsp;5</code>
-<code>sla&nbsp;monitor&nbsp;schedule&nbsp;10&nbsp;life&nbsp;forever&nbsp;start-time&nbsp;now</code>
-<code>track&nbsp;1&nbsp;rtr&nbsp;10&nbsp;reachability</code></p>
+<div class="highlight"><pre><span></span><code>route&nbsp;outside&nbsp;0.0.0.0&nbsp;0.0.0.0&nbsp;1.1.1.1&nbsp;1&nbsp;track&nbsp;1
+sla&nbsp;monitor&nbsp;10
+&nbsp;type&nbsp;echo&nbsp;protocol&nbsp;ipIcmpEcho&nbsp;1.1.1.1&nbsp;interface&nbsp;outside
+&nbsp;num-packets&nbsp;3
+&nbsp;frequency&nbsp;5
+sla&nbsp;monitor&nbsp;schedule&nbsp;10&nbsp;life&nbsp;forever&nbsp;start-time&nbsp;now
+track&nbsp;1&nbsp;rtr&nbsp;10&nbsp;reachability
+</code></pre></div>
 <h2 id="vpn">VPN</h2>
 <p>Se <a href="/Cisco_ASA_VPN" title="wikilink">ASA VPN</a></p>
 <h2 id="rest-api">REST API</h2>
 <p>Man kan lägga till en agent så att ASAn får ett REST API.</p>
 <p><code>copy</code><a href="http://"><code>http://</code></a><webbserver><code>/asa-restapi-122-lfbff-k8.SPA&nbsp;disk0:</code>
-<code>rest-api&nbsp;image&nbsp;disk0:/asa-restapi-122-lfbff-k8.SPA</code>
-<code>rest-api&nbsp;agent</code></webbserver></p>
+</webbserver></p><div class="highlight"><pre><span></span><code>rest-api&nbsp;image&nbsp;disk0:/asa-restapi-122-lfbff-k8.SPA
+rest-api&nbsp;agent
+</code></pre></div><p></p>
 <p>Sedan behöver webbservern konfigureras om inte det är gjort, se
 <a href="/Cisco_ASA#ASDM" title="wikilink">ASDM</a></p>
 <p>Använd en REST-klient (Firefox/Chrome)</p>
@@ -10399,7 +10496,6 @@ om asan är kopplad till 2 switchar utan <a href="/Arista_MLAG" title="wikilink"
 <h3 id="docs">Docs</h3>
 <p>Följer med agenten</p>
 <p><a href="https://"><code>https://</code></a><asa-ip><code>/doc/</code></asa-ip></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
 
 
 
@@ -10422,7 +10518,7 @@ om asan är kopplad till 2 switchar utan <a href="/Arista_MLAG" title="wikilink"
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

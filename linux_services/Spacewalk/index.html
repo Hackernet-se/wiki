@@ -8685,6 +8685,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8961,17 +8989,21 @@ CentOS, Fedora. Allt sköts i ett snyggt web interface.</p>
 <h2 id="forberedelse">Förberedelse</h2>
 <p>Lägg till lite nya repositories som behövs.</p>
 <p><strong>EPEL repository:</strong></p>
-<p><code>yum&nbsp;install&nbsp;epel-release</code></p>
+<div class="highlight"><pre><span></span><code>yum&nbsp;install&nbsp;epel-release
+</code></pre></div>
 <p><strong>JPackage repository:</strong></p>
-<p><code>cat&nbsp;&gt;&nbsp;/etc/yum.repos.d/jpackage-generic.repo&nbsp;&lt;&lt;&nbsp;EOF</code>
-<code>[jpackage-generic]</code>
-<code>name=JPackage&nbsp;generic</code>
+<p></p><div class="highlight"><pre><span></span><code>cat&nbsp;&gt;&nbsp;/etc/yum.repos.d/jpackage-generic.repo&nbsp;&lt;&lt;&nbsp;EOF
+[jpackage-generic]
+name=JPackage&nbsp;generic
+</code></pre></div>
 <code>#baseurl=</code><a href="http://mirrors.dotsrc.org/pub/jpackage/5.0/generic/free/"><code>http://mirrors.dotsrc.org/pub/jpackage/5.0/generic/free/</code></a>
 <code>mirrorlist=</code><a href="http://www.jpackage.org/mirrorlist.php?dist=generic&amp;type=free&amp;release=5.0"><code>http://www.jpackage.org/mirrorlist.php?dist=generic&amp;type=free&amp;release=5.0</code></a>
-<code>enabled=1</code>
-<code>gpgcheck=1</code>
+<div class="highlight"><pre><span></span><code>enabled=1
+gpgcheck=1
+</code></pre></div>
 <code>gpgkey=</code><a href="http://www.jpackage.org/jpackage.asc"><code>http://www.jpackage.org/jpackage.asc</code></a>
-<code>EOF</code></p>
+<div class="highlight"><pre><span></span><code>EOF
+</code></pre></div><p></p>
 <p><strong>Spacewalk repository:</strong></p>
 <p>Beror på vilket dist du kommer köra. I skrivande stund är version
 <strong>2.4</strong> den senaste.</p>
@@ -8984,31 +9016,36 @@ CentOS, Fedora. Allt sköts i ett snyggt web interface.</p>
 <p><strong>Fedora 22</strong></p>
 <p><code>rpm&nbsp;-Uvh</code><a href="http://yum.spacewalkproject.org/2.4/Fedora/22/x86_64/spacewalk-repo-2.4-3.fc22.noarch.rpm"><code>http://yum.spacewalkproject.org/2.4/Fedora/22/x86_64/spacewalk-repo-2.4-3.fc22.noarch.rpm</code></a></p>
 <p>Uppdatera repona.</p>
-<p><code>yum&nbsp;repolist&nbsp;&amp;&amp;&nbsp;yum&nbsp;update</code></p>
+<div class="highlight"><pre><span></span><code>yum&nbsp;repolist&nbsp;&amp;&amp;&nbsp;yum&nbsp;update
+</code></pre></div>
 <h2 id="installera">Installera</h2>
 <p>Spacewalk använder en databas för att spara sin data. Default så används
 en inbyggd PostgreSQL databas. Det går också att använda en Oracle RDBMS
 version 10g eller högre.</p>
 <p>Denna guiden använder den inbyggda databasen:</p>
-<p><code>yum&nbsp;install&nbsp;spacewalk-setup-postgresql</code></p>
+<div class="highlight"><pre><span></span><code>yum&nbsp;install&nbsp;spacewalk-setup-postgresql
+</code></pre></div>
 <p>Installera sedan Spacewalk:</p>
-<p><code>yum&nbsp;install&nbsp;spacewalk-postgresql</code></p>
+<div class="highlight"><pre><span></span><code>yum&nbsp;install&nbsp;spacewalk-postgresql
+</code></pre></div>
 <p>För att kunna nå web interfacet och kunna använda andra tjänster behöver
 man sätta på några portar.</p>
-<p><code>firewall-cmd&nbsp;--add-service=https&nbsp;--permanent</code>
-<code>firewall-cmd&nbsp;--add-service=http&nbsp;--permanent</code></p>
+<div class="highlight"><pre><span></span><code>firewall-cmd&nbsp;--add-service=https&nbsp;--permanent
+firewall-cmd&nbsp;--add-service=http&nbsp;--permanent
+</code></pre></div>
 <p>För att kunna pusha saker till dina klienter behöver man enabla port
 <strong>5222</strong>. Om man tänkt använda Spacewalk proxy behöver man porten
 <strong>5269</strong>. Port <strong>69 UDP</strong> behövs om man tänkt använda tftp.</p>
 <p>Ladda sedan om brandväggen.</p>
-<p><code>firewall-cmd&nbsp;--reload</code></p>
+<div class="highlight"><pre><span></span><code>firewall-cmd&nbsp;--reload
+</code></pre></div>
 <p>Spacewalk måste kunna resolva sitt FQDN. Går inte det så lägg in det i
 host filen <strong>/etc/hosts</strong></p>
 <p>Kör följande kommando och svara på frågorna.</p>
-<p><code>spacewalk-setup&nbsp;--disconnected</code></p>
+<div class="highlight"><pre><span></span><code>spacewalk-setup&nbsp;--disconnected
+</code></pre></div>
 <p>Surfa sedan in på din spacewalk server <strong><a href="https://hostname/">https://hostname/</a></strong> och skapa
 ett inlogg.</p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
 
 
 
@@ -9031,7 +9068,7 @@ ett inlogg.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

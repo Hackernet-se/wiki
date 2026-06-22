@@ -8691,6 +8691,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8967,86 +8995,106 @@ APIer för control plane processer. Se även <a href="/Cisco_CSR#Konfiguration" 
 CSR</a>.</p>
 <h1 id="konfiguration">Konfiguration</h1>
 <p><strong>Grundläggande</strong></p>
-<p><code>hostname&nbsp;[hostname]</code>
-<code>enable&nbsp;secret&nbsp;[password]</code>
-<code>service&nbsp;password-encryption</code>
-<code>service&nbsp;nagle</code>
-<code>no&nbsp;ip&nbsp;domain&nbsp;lookup</code>
-<code>no&nbsp;ip&nbsp;http&nbsp;server</code></p>
+<div class="highlight"><pre><span></span><code>hostname&nbsp;[hostname]
+enable&nbsp;secret&nbsp;[password]
+service&nbsp;password-encryption
+service&nbsp;nagle
+no&nbsp;ip&nbsp;domain&nbsp;lookup
+no&nbsp;ip&nbsp;http&nbsp;server
+</code></pre></div>
 <p>Se även Cisco <a href="/Cisco_Logging" title="wikilink">Logging</a>,
 <a href="/Cisco_Services" title="wikilink">Services</a> och
 <a href="/Cisco_Security" title="wikilink">Security</a>.</p>
 <p>Slå på loggmeddelanden i SSH terminal.</p>
-<p><code>terminal&nbsp;monitor</code></p>
+<div class="highlight"><pre><span></span><code>terminal&nbsp;monitor
+</code></pre></div>
 <p><strong>Resurser</strong></p>
-<p><code>show&nbsp;platform&nbsp;resources</code>
-<code>show&nbsp;platform&nbsp;hardware&nbsp;fed&nbsp;switch&nbsp;1&nbsp;fwd-asic&nbsp;resource&nbsp;tcam&nbsp;utilization</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;platform&nbsp;resources&nbsp;&nbsp;
+show&nbsp;platform&nbsp;hardware&nbsp;fed&nbsp;switch&nbsp;1&nbsp;fwd-asic&nbsp;resource&nbsp;tcam&nbsp;utilization
+</code></pre></div>
 <p><strong>Line</strong></p>
-<p><code>line&nbsp;con&nbsp;0</code>
-<code>logging&nbsp;synchronous</code>
-<code>exec-timeout&nbsp;[minutes]&nbsp;[seconds]</code>
-<code>login</code>
-<code>line&nbsp;vty&nbsp;0&nbsp;15</code>
-<code>logging&nbsp;synchronous</code>
-<code>exec-timeout&nbsp;[minutes]&nbsp;[seconds]</code>
-<code>login&nbsp;#local</code></p>
-<p><code>show&nbsp;line&nbsp;vty</code></p>
+<div class="highlight"><pre><span></span><code>line&nbsp;con&nbsp;0
+&nbsp;logging&nbsp;synchronous
+&nbsp;exec-timeout&nbsp;[minutes]&nbsp;[seconds]
+&nbsp;login
+line&nbsp;vty&nbsp;0&nbsp;15
+&nbsp;logging&nbsp;synchronous
+&nbsp;exec-timeout&nbsp;[minutes]&nbsp;[seconds]
+&nbsp;login&nbsp;#local
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;line&nbsp;vty
+</code></pre></div>
 <p>Reload</p>
-<p><code>reload&nbsp;in&nbsp;3</code>
-<code>reload&nbsp;cancel</code></p>
+<div class="highlight"><pre><span></span><code>reload&nbsp;in&nbsp;3
+reload&nbsp;cancel
+</code></pre></div>
 <p><strong>NETCONF</strong></p>
-<p><code>netconf&nbsp;ssh</code>
-<code>ssh&nbsp;-s&nbsp;cisco@10.0.0.10&nbsp;netconf</code></p>
+<div class="highlight"><pre><span></span><code>netconf&nbsp;ssh
+ssh&nbsp;-s&nbsp;cisco@10.0.0.10&nbsp;netconf
+</code></pre></div>
 <p>I nyare IOS-XE finns även restconf (XML eller JSON)</p>
-<p><code>restconf</code></p>
+<div class="highlight"><pre><span></span><code>restconf
+</code></pre></div>
 <p><strong>Users</strong>
 Kolla vilka som är inloggade.</p>
-<p><code>show&nbsp;users&nbsp;&nbsp;/&nbsp;&nbsp;who</code>
-<code>show&nbsp;tcp&nbsp;brief</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;users&nbsp;&nbsp;/&nbsp;&nbsp;who
+show&nbsp;tcp&nbsp;brief
+</code></pre></div>
 <p>Auto enable</p>
-<p><code>line&nbsp;vty&nbsp;0&nbsp;15</code>
-<code>privilege&nbsp;level&nbsp;15</code></p>
+<div class="highlight"><pre><span></span><code>line&nbsp;vty&nbsp;0&nbsp;15
+&nbsp;privilege&nbsp;level&nbsp;15
+</code></pre></div>
 <p>CLI history, lägg till <strong>all</strong> för att se alla kommandon dvs det som
 finns i crashinfo.</p>
-<p><code>show&nbsp;history</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;history&nbsp;&nbsp;&nbsp;
+</code></pre></div>
 <p>Disable Express Setup (mode button for 3 seconds)</p>
-<p><code>no&nbsp;setup&nbsp;express</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;setup&nbsp;express
+</code></pre></div>
 <p>Conditional Debugging är bra på busy routers.</p>
-<p><code>debug&nbsp;condition&nbsp;int&nbsp;gi2</code>
-<code>debug&nbsp;ip&nbsp;rip</code></p>
+<div class="highlight"><pre><span></span><code>debug&nbsp;condition&nbsp;int&nbsp;gi2
+debug&nbsp;ip&nbsp;rip
+</code></pre></div>
 <p><strong>COPP</strong></p>
-<p><code>cpp&nbsp;system-default</code>
-<code>show&nbsp;policy-map&nbsp;control-plane</code>
-<code>show&nbsp;policy-map&nbsp;system-cpp-policy</code>
-<code>show&nbsp;platform&nbsp;hardware&nbsp;fed&nbsp;switch&nbsp;1&nbsp;qos&nbsp;queue&nbsp;stats&nbsp;internal&nbsp;cpu&nbsp;policer</code></p>
+<div class="highlight"><pre><span></span><code>cpp&nbsp;system-default
+show&nbsp;policy-map&nbsp;control-plane
+show&nbsp;policy-map&nbsp;system-cpp-policy
+show&nbsp;platform&nbsp;hardware&nbsp;fed&nbsp;switch&nbsp;1&nbsp;qos&nbsp;queue&nbsp;stats&nbsp;internal&nbsp;cpu&nbsp;policer
+</code></pre></div>
 <h2 id="inbyggda-funktioner">Inbyggda Funktioner</h2>
 <p><strong>Meny</strong>
 Man kan skapa menyer med menu-kommandot och sedan binda users till
 menyn.</p>
-<p><code>menu&nbsp;Menu01&nbsp;line-mode</code>
-<code>menu&nbsp;Menu01&nbsp;prompt&nbsp;^R1#^</code>
-<code>menu&nbsp;Menu01&nbsp;single-space</code>
-<code>menu&nbsp;Menu01&nbsp;title&nbsp;^Actions&nbsp;for&nbsp;restricted&nbsp;user^</code>
-<code>menu&nbsp;Menu01&nbsp;text&nbsp;1&nbsp;Show&nbsp;routes</code>
-<code>menu&nbsp;Menu01&nbsp;command&nbsp;1&nbsp;show&nbsp;ip&nbsp;route</code>
-<code>menu&nbsp;Menu01&nbsp;text&nbsp;2&nbsp;Exit</code>
-<code>menu&nbsp;Menu01&nbsp;command&nbsp;2&nbsp;exit</code></p>
-<p><code>username&nbsp;User01&nbsp;autocommand&nbsp;menu&nbsp;Menu01</code></p>
+<div class="highlight"><pre><span></span><code>menu&nbsp;Menu01&nbsp;line-mode
+menu&nbsp;Menu01&nbsp;prompt&nbsp;^R1#^
+menu&nbsp;Menu01&nbsp;single-space
+menu&nbsp;Menu01&nbsp;title&nbsp;^Actions&nbsp;for&nbsp;restricted&nbsp;user^
+menu&nbsp;Menu01&nbsp;text&nbsp;1&nbsp;Show&nbsp;routes
+menu&nbsp;Menu01&nbsp;command&nbsp;1&nbsp;show&nbsp;ip&nbsp;route
+menu&nbsp;Menu01&nbsp;text&nbsp;2&nbsp;Exit
+menu&nbsp;Menu01&nbsp;command&nbsp;2&nbsp;exit
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>username&nbsp;User01&nbsp;autocommand&nbsp;menu&nbsp;Menu01
+</code></pre></div>
 <p><strong>Macro</strong>
 Med macros kan konfigurera att ett kommando gör många saker.</p>
-<p><code>define&nbsp;interface-range&nbsp;SERVERPORTS&nbsp;gi&nbsp;0/3-9</code>
-<code>show&nbsp;parser&nbsp;macro</code></p>
+<div class="highlight"><pre><span></span><code>define&nbsp;interface-range&nbsp;SERVERPORTS&nbsp;gi&nbsp;0/3-9
+show&nbsp;parser&nbsp;macro
+</code></pre></div>
 <p><strong>Schemaläggning</strong>
 Funkar endast med exec mode kommandon</p>
-<p><code>kron&nbsp;occurrence&nbsp;OCC&nbsp;in&nbsp;1&nbsp;recurring</code>
-<code>policy-list&nbsp;TEST</code>
-<code>kron&nbsp;policy-list&nbsp;TEST</code>
-<code>cli&nbsp;show&nbsp;vers</code></p>
-<p><code>show&nbsp;kron&nbsp;schedule</code></p>
+<div class="highlight"><pre><span></span><code>kron&nbsp;occurrence&nbsp;OCC&nbsp;in&nbsp;1&nbsp;recurring
+&nbsp;policy-list&nbsp;TEST
+kron&nbsp;policy-list&nbsp;TEST
+&nbsp;cli&nbsp;show&nbsp;vers
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;kron&nbsp;schedule
+</code></pre></div>
 <p><strong>Views</strong></p>
-<p><code>enable&nbsp;view</code>
-<code>parser&nbsp;view&nbsp;SHOWONLY</code>
-<code>show&nbsp;parser&nbsp;view</code></p>
+<div class="highlight"><pre><span></span><code>enable&nbsp;view
+parser&nbsp;view&nbsp;SHOWONLY
+show&nbsp;parser&nbsp;view
+</code></pre></div>
 <p><strong>Auto-install</strong>
 Auto-install är en feature som kan hämta konfiguration från en filserver
 första gången en enhet startar. Det går att göra med
@@ -9054,146 +9102,179 @@ första gången en enhet startar. Det går att göra med
 66, option 150, siaddr. Det försöker på alla tillgängliga interface. OBS
 för att auto-install ska triggas måste NVRAM vara helt tomt på
 konfigurationsfiler, <strong>erase nvram:</strong>.</p>
-<p><code>show&nbsp;auto&nbsp;install&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;auto&nbsp;install&nbsp;status
+</code></pre></div>
 <p><strong>Linux shell</strong>
 Man kan göra IOS lite mer likt ett Linux-skal och då får man tillgång
 till några basic linuxkommandon. Detta är en IOS 15 feature.</p>
-<p><code>terminal&nbsp;shell</code></p>
+<div class="highlight"><pre><span></span><code>terminal&nbsp;shell
+</code></pre></div>
 <p>Eller om man alltid vill ha det på.</p>
-<p><code>shell&nbsp;processing&nbsp;full</code></p>
+<div class="highlight"><pre><span></span><code>shell&nbsp;processing&nbsp;full
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;terminal&nbsp;|&nbsp;grep&nbsp;Shell</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;terminal&nbsp;|&nbsp;grep&nbsp;Shell
+</code></pre></div>
 <p><strong>XMCP</strong></p>
-<p><code>service-routing&nbsp;xmcp&nbsp;listen</code>
-<code>client&nbsp;username&nbsp;username&nbsp;password&nbsp;password</code>
-<code>domain&nbsp;domain-number&nbsp;{default&nbsp;|&nbsp;only}</code>
-<code>show&nbsp;service-routing&nbsp;xmcp&nbsp;clients</code>
-<code>show&nbsp;service-routing&nbsp;xmcp&nbsp;server</code></p>
+<div class="highlight"><pre><span></span><code>service-routing&nbsp;xmcp&nbsp;listen&nbsp;
+&nbsp;client&nbsp;username&nbsp;username&nbsp;password&nbsp;password&nbsp;
+&nbsp;domain&nbsp;domain-number&nbsp;{default&nbsp;|&nbsp;only}
+show&nbsp;service-routing&nbsp;xmcp&nbsp;clients&nbsp;
+show&nbsp;service-routing&nbsp;xmcp&nbsp;server&nbsp;
+</code></pre></div>
 <p>Character Generator Protocol, port 19</p>
-<p><code>service&nbsp;tcp-small-servers</code></p>
+<div class="highlight"><pre><span></span><code>service&nbsp;tcp-small-servers
+</code></pre></div>
 <h2 id="eem">EEM</h2>
 <p>Cisco IOS Embedded Event Manager är ett subsystem som möjliggör event
 detection och onboard automation. Det är flexibelt och kan triggas vid
 kommando, händelse eller klockslag, <strong>show event manager version</strong>.</p>
 <p>Exempel:</p>
-<p><code>event&nbsp;manager&nbsp;applet&nbsp;CLI_logger</code>
-<code>event&nbsp;cli&nbsp;pattern&nbsp;"show.*"&nbsp;sync&nbsp;no&nbsp;skip&nbsp;no</code>
-<code>action&nbsp;01&nbsp;syslog&nbsp;msg&nbsp;"$_cli_host&nbsp;executed:&nbsp;$_cli_msg"</code></p>
-<p><code>event&nbsp;manager&nbsp;applet&nbsp;NO_SH_RUN</code>
-<code>event&nbsp;cli&nbsp;pattern&nbsp;"show&nbsp;run"&nbsp;sync&nbsp;yes</code>
-<code>action&nbsp;01&nbsp;puts&nbsp;"CAN´T&nbsp;DO&nbsp;THAT"</code></p>
-<p><code>event&nbsp;manager&nbsp;applet&nbsp;Never_Back_Down</code>
-<code>event&nbsp;timer&nbsp;watchdog&nbsp;time&nbsp;5</code>
-<code>action&nbsp;01&nbsp;cli&nbsp;command&nbsp;"enable"</code>
-<code>action&nbsp;02&nbsp;cli&nbsp;command&nbsp;"conf&nbsp;t"</code>
-<code>action&nbsp;03&nbsp;cli&nbsp;command&nbsp;"interface&nbsp;gi2"</code>
-<code>action&nbsp;04&nbsp;cli&nbsp;command&nbsp;"no&nbsp;shut"</code></p>
-<p><code>debug&nbsp;event&nbsp;manager&nbsp;action&nbsp;cli</code></p>
+<div class="highlight"><pre><span></span><code>event&nbsp;manager&nbsp;applet&nbsp;CLI_logger
+&nbsp;event&nbsp;cli&nbsp;pattern&nbsp;"show.*"&nbsp;sync&nbsp;no&nbsp;skip&nbsp;no
+&nbsp;action&nbsp;01&nbsp;syslog&nbsp;msg&nbsp;"$_cli_host&nbsp;executed:&nbsp;$_cli_msg"
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>event&nbsp;manager&nbsp;applet&nbsp;NO_SH_RUN
+&nbsp;event&nbsp;cli&nbsp;pattern&nbsp;"show&nbsp;run"&nbsp;sync&nbsp;yes
+&nbsp;action&nbsp;01&nbsp;puts&nbsp;"CAN´T&nbsp;DO&nbsp;THAT"
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>event&nbsp;manager&nbsp;applet&nbsp;Never_Back_Down
+&nbsp;event&nbsp;timer&nbsp;watchdog&nbsp;time&nbsp;5
+&nbsp;action&nbsp;01&nbsp;cli&nbsp;command&nbsp;"enable"
+&nbsp;action&nbsp;02&nbsp;cli&nbsp;command&nbsp;"conf&nbsp;t"
+&nbsp;action&nbsp;03&nbsp;cli&nbsp;command&nbsp;"interface&nbsp;gi2"
+&nbsp;action&nbsp;04&nbsp;cli&nbsp;command&nbsp;"no&nbsp;shut"
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>debug&nbsp;event&nbsp;manager&nbsp;action&nbsp;cli&nbsp;
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;event&nbsp;manager&nbsp;policy&nbsp;registered</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;event&nbsp;manager&nbsp;policy&nbsp;registered
+</code></pre></div>
 <p>Trigga manuellt</p>
-<p><code>event&nbsp;manager&nbsp;run&nbsp;APPLET</code></p>
+<div class="highlight"><pre><span></span><code>event&nbsp;manager&nbsp;run&nbsp;APPLET
+</code></pre></div>
 <p>EEM kan använda sig utav environment variable, t.ex. för att konfigurera
 en mailserver som flera applets kan dra nytta av.</p>
-<p><code>event&nbsp;manager&nbsp;environment&nbsp;_mail_server&nbsp;172.22.0.10</code></p>
+<div class="highlight"><pre><span></span><code>event&nbsp;manager&nbsp;environment&nbsp;_mail_server&nbsp;172.22.0.10
+</code></pre></div>
 <p>Kolla alla inbyggda variabler, det finns en hel del.</p>
-<p><code>show&nbsp;event&nbsp;manager&nbsp;detector&nbsp;all&nbsp;detailed&nbsp;|&nbsp;i&nbsp;\$_</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;event&nbsp;manager&nbsp;detector&nbsp;all&nbsp;detailed&nbsp;|&nbsp;i&nbsp;\$_
+</code></pre></div>
 <h2 id="konfigurationshantering">Konfigurationshantering</h2>
 <p><strong>Archive and rollback</strong></p>
-<p><code>archive</code>
+<p></p><div class="highlight"><pre><span></span><code>archive
+</code></pre></div>
 <code>path</code><a href="tftp://1.2.3.4/test"><code>tftp://1.2.3.4/test</code></a>
-<code>write-memory</code>
-<code>time-period&nbsp;1440</code>
-<code>show&nbsp;archive</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;write-memory&nbsp;
+&nbsp;time-period&nbsp;1440
+show&nbsp;archive
+</code></pre></div><p></p>
 <p>Kolla skillnad mellan running och startup config.</p>
-<p><code>show&nbsp;archive&nbsp;config&nbsp;differences</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;archive&nbsp;config&nbsp;differences
+</code></pre></div>
 <p><code>alias&nbsp;exec</code><strong><code>diff</code></strong><code>show&nbsp;archive&nbsp;config&nbsp;differences</code>
 <code>alias&nbsp;configure</code><strong><code>diff</code></strong><code>do&nbsp;show&nbsp;archive&nbsp;config&nbsp;differences</code></p>
 <p><strong>Automatic Rollback</strong>
 Prereq.</p>
-<p><code>archive</code>
-<code>path&nbsp;bootflash:/</code>
-<code>maximum&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>archive
+&nbsp;path&nbsp;bootflash:/
+&nbsp;maximum&nbsp;1
+</code></pre></div>
 <p>Ta en snapshot av konfigen när man går in i global configuration mode.
 Tappar man konnektivitet så rullas konfigen tillbaka efter 1 minut.</p>
-<p><code>configure&nbsp;terminal&nbsp;revert&nbsp;timer&nbsp;idle&nbsp;1</code></p>
-<p><code>configure&nbsp;confirm</code></p>
+<div class="highlight"><pre><span></span><code>configure&nbsp;terminal&nbsp;revert&nbsp;timer&nbsp;idle&nbsp;1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>configure&nbsp;confirm
+</code></pre></div>
 <p><strong>Parser</strong>
 Parser cache är påslaget default för att göra konfig-hantering snabbare.</p>
-<p><code>parser&nbsp;cache</code>
-<code>show&nbsp;parser&nbsp;statistics</code></p>
+<div class="highlight"><pre><span></span><code>parser&nbsp;cache
+show&nbsp;parser&nbsp;statistics
+</code></pre></div>
 <p>Man kan reducera tiden det tar för ett kommando att exekvera.</p>
-<p><code>parser&nbsp;config&nbsp;cache&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>parser&nbsp;config&nbsp;cache&nbsp;interface
+</code></pre></div>
 <p>Man kan begränsa så att endast en user i taget kan managera en enhet.</p>
-<p><code>parser&nbsp;command&nbsp;serializer</code></p>
+<div class="highlight"><pre><span></span><code>parser&nbsp;command&nbsp;serializer
+</code></pre></div>
 <p><strong>Resilient Configuration</strong></p>
-<p><code>secure&nbsp;boot-image</code>
-<code>secure&nbsp;boot-config</code>
-<code>show&nbsp;secure&nbsp;bootset</code></p>
+<div class="highlight"><pre><span></span><code>secure&nbsp;boot-image
+secure&nbsp;boot-config
+show&nbsp;secure&nbsp;bootset
+</code></pre></div>
 <p>Restore</p>
-<p><code>secure&nbsp;boot-config&nbsp;restore&nbsp;flash:archived-config</code>
-<code>configure&nbsp;replace&nbsp;flash:archived-config</code></p>
+<div class="highlight"><pre><span></span><code>secure&nbsp;boot-config&nbsp;restore&nbsp;flash:archived-config
+configure&nbsp;replace&nbsp;flash:archived-config
+</code></pre></div>
 <h1 id="ethernet">Ethernet</h1>
-<p><code>show&nbsp;controllers&nbsp;ethernet-controller</code>
-<code>show&nbsp;interfaces&nbsp;counters&nbsp;errors</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;controllers&nbsp;ethernet-controller
+show&nbsp;interfaces&nbsp;counters&nbsp;errors
+</code></pre></div>
 <p>Default är Ethernet autonegotiation påslaget på switchportar. För att
 slå av det måste både speed och duplex ställas manuellt.</p>
-<p><code>int&nbsp;gi0/1</code>
-<code>speed&nbsp;1000</code>
-<code>duplex&nbsp;full</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;gi0/1
+&nbsp;speed&nbsp;1000
+&nbsp;duplex&nbsp;full
+</code></pre></div>
 <p>CDP kan upptäcka duplex mismatch men ej fixa det. Ifall fel kabel
 (korsad eller rak) används finns Auto-MDIX för att upptäcka detta och
 ändra rx och tx på switchporten.</p>
 <p>Testa kabel, Time Domain Reflection</p>
-<p><code>test&nbsp;cable-diagnostics&nbsp;tdr&nbsp;interface&nbsp;gi&nbsp;0/1</code>
-<code>show&nbsp;cable-diagnostics&nbsp;tdr&nbsp;interface&nbsp;gi&nbsp;0/1</code></p>
+<div class="highlight"><pre><span></span><code>test&nbsp;cable-diagnostics&nbsp;tdr&nbsp;interface&nbsp;gi&nbsp;0/1
+show&nbsp;cable-diagnostics&nbsp;tdr&nbsp;interface&nbsp;gi&nbsp;0/1
+</code></pre></div>
 <h2 id="cdp">CDP</h2>
 <p>CDP är ett l2-protokoll för att upptäcka och utbyta information med
 directly connected Cisco-enheter, destination address är
 01:00:0c:cc:cc:cc och det skickas var 60:e sekund. CDP går att använda
 för reliable policy routing och är ett prereq för Layer 2 traceroute.
 Aktuell version är CDPv2.</p>
-<p><code>cdp&nbsp;run</code>
-<code>cdp&nbsp;timer&nbsp;60</code>
-<code>cdp&nbsp;holdtime&nbsp;180</code></p>
+<div class="highlight"><pre><span></span><code>cdp&nbsp;run
+cdp&nbsp;timer&nbsp;60
+cdp&nbsp;holdtime&nbsp;180
+</code></pre></div>
 <p>Slå på per interface</p>
-<p><code>interface&nbsp;gi2</code>
-<code>cdp&nbsp;enable</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;cdp&nbsp;enable
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;cdp</code>
-<code>show&nbsp;cdp&nbsp;neighbor</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;cdp
+show&nbsp;cdp&nbsp;neighbor
+</code></pre></div>
 <p>Det finns även stöd för den öppna standarden LLDP som använder
 01:80:c2:00:00:0e. LLDP advertisements skickas var 30:e sekund och TTL
 är 120 sekunder.</p>
-<p><code>lldp&nbsp;run</code>
-<code>show&nbsp;lldp</code></p>
+<div class="highlight"><pre><span></span><code>lldp&nbsp;run
+show&nbsp;lldp
+</code></pre></div>
 <p>CDP/LLDP kan användas för att sätta interface descriptions automatiskt
 utifrån neighbor hostname och port-id.</p>
-<p><code>event&nbsp;manager&nbsp;applet&nbsp;AUTOMATIC-PORT-DESCRIPTION</code>
-<code>event&nbsp;neighbor-discovery&nbsp;interface&nbsp;regexp&nbsp;GigabitEthernet.*&nbsp;cdp&nbsp;add</code>
-<code>action&nbsp;10&nbsp;cli&nbsp;command&nbsp;"enable"</code>
-<code>action&nbsp;11&nbsp;cli&nbsp;command&nbsp;"config&nbsp;t"</code>
-<code>action&nbsp;12&nbsp;cli&nbsp;command&nbsp;"interface&nbsp;$_nd_local_intf_name"</code>
-<code>action&nbsp;13&nbsp;cli&nbsp;command&nbsp;"description&nbsp;$_nd_cdp_entry_name:$_nd_port_id"</code>
-<code>action&nbsp;14&nbsp;syslog&nbsp;msg&nbsp;"Updated&nbsp;description&nbsp;$_nd_cdp_entry_name:$_nd_port_id&nbsp;on&nbsp;$_nd_local_intf_name"</code></p>
+<div class="highlight"><pre><span></span><code>event&nbsp;manager&nbsp;applet&nbsp;AUTOMATIC-PORT-DESCRIPTION
+&nbsp;event&nbsp;neighbor-discovery&nbsp;interface&nbsp;regexp&nbsp;GigabitEthernet.*&nbsp;cdp&nbsp;add
+&nbsp;action&nbsp;10&nbsp;cli&nbsp;command&nbsp;"enable"
+&nbsp;action&nbsp;11&nbsp;cli&nbsp;command&nbsp;"config&nbsp;t"
+&nbsp;action&nbsp;12&nbsp;cli&nbsp;command&nbsp;"interface&nbsp;$_nd_local_intf_name"
+&nbsp;action&nbsp;13&nbsp;cli&nbsp;command&nbsp;"description&nbsp;$_nd_cdp_entry_name:$_nd_port_id"
+&nbsp;action&nbsp;14&nbsp;syslog&nbsp;msg&nbsp;"Updated&nbsp;description&nbsp;$_nd_cdp_entry_name:$_nd_port_id&nbsp;on&nbsp;$_nd_local_intf_name"
+</code></pre></div>
 <h1 id="dnac">DNAC</h1>
 <p>Cisco DNA Center är en kontroller- och analysplattform för Catalystnät.</p>
 <p><strong>Reset switch</strong>
 För att nollställa en switch som har varit managerad av DNAC måste man
 ta bort de certifikat som DNAC har installerat.</p>
-<p><code>conf&nbsp;t</code>
-<code>crypto&nbsp;key&nbsp;zeroize</code>
-<code>yes</code>
-<code>no&nbsp;crypto&nbsp;pki&nbsp;certificate&nbsp;pool</code>
-<code>yes</code>
-<code>end</code>
-<code>delete&nbsp;/force&nbsp;vlan.dat</code>
-<code>delete&nbsp;/force&nbsp;nvram:*.cer</code>
-<code>delete&nbsp;/force&nbsp;nvram:pnp*</code>
-<code>delete&nbsp;/force&nbsp;flash:pnp*</code>
-<code>write&nbsp;erase</code>
-<code>reload</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>conf&nbsp;t
+&nbsp;crypto&nbsp;key&nbsp;zeroize
+&nbsp;yes
+&nbsp;no&nbsp;crypto&nbsp;pki&nbsp;certificate&nbsp;pool
+&nbsp;yes
+&nbsp;end
+delete&nbsp;/force&nbsp;vlan.dat
+delete&nbsp;/force&nbsp;nvram:*.cer
+delete&nbsp;/force&nbsp;nvram:pnp*
+delete&nbsp;/force&nbsp;flash:pnp*
+write&nbsp;erase
+reload
+</code></pre></div>
 
 
 
@@ -9216,7 +9297,7 @@ ta bort de certifikat som DNAC har installerat.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8713,6 +8713,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9019,34 +9047,42 @@ sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"
 </code></pre></div>
 <h2 id="server">Server</h2>
 <p>Starta server</p>
-<p><code>vault&nbsp;server</code>
-<code>vault&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>vault&nbsp;server
+vault&nbsp;status
+</code></pre></div>
 <h2 id="klient">Klient</h2>
 <p><code>export&nbsp;VAULT_ADDR='</code><a href="http://127.0.0.1:8200"><code>http://127.0.0.1:8200</code></a><code>'</code>
-<code>export&nbsp;VAULT_TOKEN="s.Va50wjIqgl6zHReb4aLDb"</code></p>
+</p><div class="highlight"><pre><span></span><code>export&nbsp;VAULT_TOKEN="s.Va50wjIqgl6zHReb4aLDb"
+</code></pre></div><p></p>
 <p>Write simple secret</p>
-<p><code>vault&nbsp;kv&nbsp;put&nbsp;secret/hello&nbsp;foo=world</code></p>
+<div class="highlight"><pre><span></span><code>vault&nbsp;kv&nbsp;put&nbsp;secret/hello&nbsp;foo=world
+</code></pre></div>
 <p>Read secret</p>
-<p><code>vault&nbsp;secrets&nbsp;list</code>
-<code>vault&nbsp;kv&nbsp;get&nbsp;secret/hello</code>
-<code>vault&nbsp;kv&nbsp;get&nbsp;-format=json&nbsp;secret/hello&nbsp;|&nbsp;jq&nbsp;.</code></p>
+<div class="highlight"><pre><span></span><code>vault&nbsp;secrets&nbsp;list
+vault&nbsp;kv&nbsp;get&nbsp;secret/hello
+vault&nbsp;kv&nbsp;get&nbsp;-format=json&nbsp;secret/hello&nbsp;|&nbsp;jq&nbsp;.
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
 <h3 id="ldapad-login">LDAP/AD login</h3>
 <p>Enable LDAP login</p>
-<p><code>vault&nbsp;auth&nbsp;enable&nbsp;ldap</code></p>
+<div class="highlight"><pre><span></span><code>vault&nbsp;auth&nbsp;enable&nbsp;ldap
+</code></pre></div>
 <p>Konfa LDAP pluginet</p>
-<p><code>vault&nbsp;write&nbsp;auth/ldap/config&nbsp;\</code>
+<p></p><div class="highlight"><pre><span></span><code>vault&nbsp;write&nbsp;auth/ldap/config&nbsp;\
+</code></pre></div>
 <code>url="</code><a href="ldaps://ad.hackernet.se"><code>ldaps://ad.hackernet.se</code></a><code>"&nbsp;\</code>
-<code>userattr="sAMAccountName"&nbsp;\</code>
-<code>userdn="OU=users,DC=hackernet,DC=se"&nbsp;\</code>
-<code>groupdn="OU=groups,DC=hackernet,DC=se"&nbsp;\</code>
-<code>groupattr="cn"&nbsp;\</code>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;userattr="sAMAccountName"&nbsp;\
+&nbsp;&nbsp;&nbsp;&nbsp;userdn="OU=users,DC=hackernet,DC=se"&nbsp;\
+&nbsp;&nbsp;&nbsp;&nbsp;groupdn="OU=groups,DC=hackernet,DC=se"&nbsp;\
+&nbsp;&nbsp;&nbsp;&nbsp;groupattr="cn"&nbsp;\
+</code></pre></div>
 <code>binddn="CN=</code><binduser><code>,DC=hackernet,DC=se"&nbsp;\</code>
 <code>bindpass='</code><secret password=""><code>'&nbsp;\</code>
-<code>insecure_tls=false&nbsp;\</code>
-<code>starttls=true</code></secret></binduser></p>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;insecure_tls=false&nbsp;\
+&nbsp;&nbsp;&nbsp;&nbsp;starttls=true
+</code></pre></div><p></p>
 <p>Ge en AD/LDAP grupp login rättigheter samt default policyn.</p>
-<p><code>vault&nbsp;write&nbsp;auth/ldap/groups/</code><grupp namn=""><code>policies=default</code></grupp></p>
+<p><code>vault&nbsp;write&nbsp;auth/ldap/groups/</code><grupp namn=""><code>policies=default</code></grupp></p></secret></binduser>
 
 
 
@@ -9069,7 +9105,7 @@ sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

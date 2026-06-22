@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8841,7 +8869,7 @@
   
 
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a> Nginx används som
+<p>Nginx används som
 webbserver av mer än 60% av världens top 100,000 hemsidor. Men Nginx kan
 vara mycket mer än bara en webbserver. Ett litet urval vad Nginx kan
 användas som:</p>
@@ -8861,65 +8889,86 @@ användas som:</p>
 
 Börja med att installera epel-repot:
 
-`yum&nbsp;install&nbsp;epel-release:`
+<div class="highlight"><pre><span></span><code>yum&nbsp;install&nbsp;epel-release:
+</code></pre></div>
 
 Installera Nginx:
 
-`yum&nbsp;install&nbsp;nginx`
+<div class="highlight"><pre><span></span><code>yum&nbsp;install&nbsp;nginx
+</code></pre></div>
 
 Starta Nginx:
 
-`systemctl&nbsp;start&nbsp;nginx`
+<div class="highlight"><pre><span></span><code>systemctl&nbsp;start&nbsp;nginx
+</code></pre></div>
 
 Gör så Nginx startar automatiskt vid reboot:
 
-`systemctl&nbsp;enable&nbsp;nginx.service`
+<div class="highlight"><pre><span></span><code>systemctl&nbsp;enable&nbsp;nginx.service
+</code></pre></div>
 
 Lägg till firewalld regler om det behövs.
 
-`firewall-cmd&nbsp;--permanent&nbsp;--zone=public&nbsp;--add-service=http&nbsp;`
-`firewall-cmd&nbsp;--permanent&nbsp;--zone=public&nbsp;--add-service=https`
-`firewall-cmd&nbsp;--reload`
-`&nbsp;&nbsp;`
+<div class="highlight"><pre><span></span><code>firewall-cmd&nbsp;--permanent&nbsp;--zone=public&nbsp;--add-service=http&nbsp;
+firewall-cmd&nbsp;--permanent&nbsp;--zone=public&nbsp;--add-service=https
+firewall-cmd&nbsp;--reload
+&nbsp;&nbsp;
+</code></pre></div>
 
-</div>
+
 <div id="tab2" class="tab-pane fade">
 
 Installera Nginx:
 
-`apt-get&nbsp;update`
-`apt-get&nbsp;-y&nbsp;install&nbsp;nginx`
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;update
+apt-get&nbsp;-y&nbsp;install&nbsp;nginx
+</code></pre></div>
 
 Kolla så Nginx körs:
 
-`systemctl&nbsp;status&nbsp;nginx`
-`&nbsp;&nbsp;`
+<div class="highlight"><pre><span></span><code>systemctl&nbsp;status&nbsp;nginx
+&nbsp;&nbsp;
+</code></pre></div>
 
-</div>
-</div>
 
-<h1 id="kommandon">Kommandon</h1>
-<ul>
-<li>Testa om det är en giltig konfiguration innan man startar om
-    nginx:<code>nginx -t</code></li>
-<li>Ladda om confen utan att starta om nginx:<code>nginx -s reload</code></li>
-</ul>
-<h1 id="konfiguration">Konfiguration</h1>
-<h2 id="reverse-proxy">Reverse Proxy</h2>
-<p>Nginx fungerar utmärkt som en reverse proxy för webbtrafik.</p>
-<p>Exempel</p>
-<p><code>server&nbsp;{</code>
-<code>listen&nbsp;80;</code>
-<code>server_name&nbsp;sub.domän.se;</code>
-<code>location&nbsp;/&nbsp;{</code>
-<code>proxy_pass</code><a href="http://10.0.0.10:3000"><code>http://10.0.0.10:3000</code></a><code>;</code>
-<code>include&nbsp;/etc/nginx/proxy_params;</code>
-<code>}</code>
-<code>}</code></p>
-<h2 id="rewrite-redirect">Rewrite &amp; Redirect</h2>
-<h3 id="tabort-www">Tabort www</h3>
-<p>Om man inte vill ha www i sin URL så skapar man 2 servrar som man sedan
-kör en redirect till.</p>
+
+
+Kommandon
+=========
+
+-   Testa om det är en giltig konfiguration innan man startar om
+    nginx:`nginx -t`
+-   Ladda om confen utan att starta om nginx:`nginx -s reload`
+
+Konfiguration
+=============
+
+Reverse Proxy
+-------------
+
+Nginx fungerar utmärkt som en reverse proxy för webbtrafik.
+
+Exempel
+
+<div class="highlight"><pre><span></span><code>&nbsp;server&nbsp;{
+&nbsp;listen&nbsp;80;
+&nbsp;server_name&nbsp;sub.domän.se;
+&nbsp;location&nbsp;/&nbsp;{
+</code></pre></div>
+`&nbsp;proxy_pass&nbsp;`[`http://10.0.0.10:3000`](http://10.0.0.10:3000)`;`
+<div class="highlight"><pre><span></span><code>&nbsp;include&nbsp;/etc/nginx/proxy_params;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;}
+</code></pre></div>
+
+Rewrite &amp; Redirect
+------------------
+
+### Tabort www
+
+Om man inte vill ha www i sin URL så skapar man 2 servrar som man sedan
+kör en redirect till.
+
 <div class="highlight"><pre><span></span><code>server<span class="w"> </span><span class="o">{</span>
 <span class="w">    </span>listen<span class="w"> </span><span class="m">80</span><span class="p">;</span>
 <span class="w">    </span>server_name<span class="w"> </span>domän.se<span class="p">;</span>
@@ -8930,8 +8979,11 @@ kör en redirect till.</p>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">301</span><span class="w"> </span><span class="nv">$scheme</span>://domän.se<span class="nv">$request_uri</span><span class="p">;</span>
 <span class="w"> </span><span class="o">}</span>
 </code></pre></div>
-<h3 id="redirect-http-till-https">Redirect HTTP till HTTPS</h3>
-<p>Här behöver man också skapa 2st server delar.</p>
+
+### Redirect HTTP till HTTPS
+
+Här behöver man också skapa 2st server delar.
+
 <div class="highlight"><pre><span></span><code>server<span class="w"> </span><span class="o">{</span>
 <span class="w">  </span>listen<span class="w">      </span><span class="m">80</span><span class="p">;</span>
 <span class="w">  </span>server_name<span class="w"> </span>domän.se<span class="p">;</span>
@@ -8944,98 +8996,158 @@ server<span class="w"> </span><span class="o">{</span>
 <span class="w">  </span>add_header<span class="w"> </span>Strict-Transport-Security<span class="w"> </span>max-age<span class="o">=</span><span class="m">2592000</span><span class="p">;</span>
 <span class="o">}</span>
 </code></pre></div>
-<h3 id="redirect-http-till-https-ej-standardport">Redirect HTTP till HTTPS, ej standardport</h3>
-<p>Nginx har en egen HTTP-statuskod för detta.</p>
-<p><code>server&nbsp;{</code>
-<code>listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1234&nbsp;ssl;</code>
-<code>server_name&nbsp;sub.domän.se;</code>
-<code>...</code>
-<code>error_page&nbsp;&nbsp;497</code><a href="https://$host:1234$request_uri"><code>https://$host:1234$request_uri</code></a><code>;</code>
-<code>...</code>
-<code>}</code></p>
-<h2 id="https">HTTPS</h2>
-<p>Konfigurationsexempel med säkerhet i fokus.</p>
-<p><a href="https://syslink.pl/cipherlist/"><code>https://syslink.pl/cipherlist/</code></a></p>
-<p><code>server&nbsp;{</code>
-<code>listen&nbsp;443&nbsp;ssl;</code>
-<code>server_name&nbsp;secure.domän.se;</code>
-<code>add_header&nbsp;Strict-Transport-Security&nbsp;max-age=15768000;</code>
-<code>add_header&nbsp;X-Frame-Options&nbsp;DENY;</code>
-<code>add_header&nbsp;X-Content-Type-Options&nbsp;nosniff;</code>
-<code>ssl_certificate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/path/to/cert.crt;</code>
-<code>ssl_certificate_key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/path/to/key.pem;</code>
-<code>ssl_protocols&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TLSv1&nbsp;TLSv1.1&nbsp;TLSv1.2;</code>
-<code>ssl_ciphers&nbsp;'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!DSS:!RC4';</code>
-<code>ssl_prefer_server_ciphers&nbsp;on;</code>
-<code>ssl_dhparam&nbsp;/path/to/dhparam.pem;</code>
-<code>...</code>
-<code>}</code></p>
-<p>Generera DH-parametrar med tidtagning. Det tar lång tid!</p>
-<p><code>time&nbsp;openssl&nbsp;dhparam&nbsp;-out&nbsp;/path/to/dhparam.pem&nbsp;4096</code></p>
-<h3 id="nyckelsakerhet">Nyckelsäkerhet</h3>
-<p>Av säkerhetsskäl bör endast root har rätt att läsa de privata nycklarna.
-Nginx processer fungerar default enligt:</p>
-<ul>
-<li>1 nginx master process körs som root</li>
-<li>x nginx workers körs som www-data</li>
-</ul>
-<p>Nginx master process läser SSL-nycklarna, inte worker-processerna.
-Därför fungerar det utmärkt att köra följande.</p>
-<p><code>sudo&nbsp;chown&nbsp;root:root&nbsp;certificate.key</code>
-<code>sudo&nbsp;chmod&nbsp;400&nbsp;certificate.key</code></p>
-<h3 id="spdy">SPDY</h3>
-<p>SPDY är ett protokoll utvecklat av Google för att göra
+
+### Redirect HTTP till HTTPS, ej standardport
+
+Nginx har en egen HTTP-statuskod för detta.
+
+<div class="highlight"><pre><span></span><code>&nbsp;server&nbsp;{
+&nbsp;listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1234&nbsp;ssl;
+&nbsp;server_name&nbsp;sub.domän.se;
+&nbsp;...
+</code></pre></div>
+`&nbsp;error_page&nbsp;&nbsp;497&nbsp;`[`https://$host:1234$request_uri`](https://$host:1234$request_uri)`;`
+<div class="highlight"><pre><span></span><code>&nbsp;...
+&nbsp;}
+</code></pre></div>
+
+HTTPS
+-----
+
+Konfigurationsexempel med säkerhet i fokus.
+
+[`https://syslink.pl/cipherlist/`](https://syslink.pl/cipherlist/)
+
+<div class="highlight"><pre><span></span><code>&nbsp;server&nbsp;{
+&nbsp;listen&nbsp;443&nbsp;ssl;
+&nbsp;server_name&nbsp;secure.domän.se;
+&nbsp;add_header&nbsp;Strict-Transport-Security&nbsp;max-age=15768000;
+&nbsp;add_header&nbsp;X-Frame-Options&nbsp;DENY;
+&nbsp;add_header&nbsp;X-Content-Type-Options&nbsp;nosniff;
+&nbsp;ssl_certificate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/path/to/cert.crt;
+&nbsp;ssl_certificate_key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/path/to/key.pem;
+&nbsp;ssl_protocols&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TLSv1&nbsp;TLSv1.1&nbsp;TLSv1.2;
+&nbsp;ssl_ciphers&nbsp;'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!DSS:!RC4';
+&nbsp;ssl_prefer_server_ciphers&nbsp;on;
+&nbsp;ssl_dhparam&nbsp;/path/to/dhparam.pem;
+&nbsp;...
+&nbsp;}
+</code></pre></div>
+
+Generera DH-parametrar med tidtagning. Det tar lång tid!
+
+<div class="highlight"><pre><span></span><code>time&nbsp;openssl&nbsp;dhparam&nbsp;-out&nbsp;/path/to/dhparam.pem&nbsp;4096
+</code></pre></div>
+
+### Nyckelsäkerhet
+
+Av säkerhetsskäl bör endast root har rätt att läsa de privata nycklarna.
+Nginx processer fungerar default enligt:
+
+-   1 nginx master process körs som root
+-   x nginx workers körs som www-data
+
+Nginx master process läser SSL-nycklarna, inte worker-processerna.
+Därför fungerar det utmärkt att köra följande.
+
+<div class="highlight"><pre><span></span><code>sudo&nbsp;chown&nbsp;root:root&nbsp;certificate.key
+sudo&nbsp;chmod&nbsp;400&nbsp;certificate.key
+</code></pre></div>
+
+### SPDY
+
+SPDY är ett protokoll utvecklat av Google för att göra
 HTTPS-handskakning lite snabbare. Alla moderna webbläsare har stöd för
 det.
-Din nginx måste vara kompilerad med –with-http_spdy_module.</p>
-<p><code>nginx&nbsp;-V</code>
-<code>sudo&nbsp;sed&nbsp;-i&nbsp;-r&nbsp;'s/listen&nbsp;443&nbsp;ssl/listen&nbsp;443&nbsp;ssl&nbsp;spdy/g'&nbsp;/etc/nginx/sites-available/dinSSLsite</code>
-<code>sudo&nbsp;service&nbsp;nginx&nbsp;reload</code></p>
-<p><a href="http://SPDYCheck.org">http://SPDYCheck.org</a></p>
-<h2 id="rtmp">RTMP</h2>
-<p>Nginx rtmp modul fungerar utmärkt om man vill kunna streama något till 2
+Din nginx måste vara kompilerad med –with-http_spdy_module.
+
+<div class="highlight"><pre><span></span><code>nginx&nbsp;-V
+sudo&nbsp;sed&nbsp;-i&nbsp;-r&nbsp;'s/listen&nbsp;443&nbsp;ssl/listen&nbsp;443&nbsp;ssl&nbsp;spdy/g'&nbsp;/etc/nginx/sites-available/dinSSLsite
+sudo&nbsp;service&nbsp;nginx&nbsp;reload
+</code></pre></div>
+
+<http: spdycheck.org="">
+
+RTMP
+----
+
+Nginx rtmp modul fungerar utmärkt om man vill kunna streama något till 2
 platser samtidigt tex till Twitch och Hitbox utan att behöva ha igång 2
-instanser av tex OBS/Xsplit.</p>
-<p>För att få in RTMP modulen så måste man compilera nginx från början.</p>
-<p><code>apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;install&nbsp;build-essential&nbsp;libpcre3&nbsp;libpcre3-dev&nbsp;libssl-dev</code></p>
-<p>Hämta hem senaste versionen av nginx och rtmp modulen.</p>
-<p><code>wget</code><a href="http://nginx.org/download/nginx-1.7.9.tar.gz"><code>http://nginx.org/download/nginx-1.7.9.tar.gz</code></a>
-<code>wget</code><a href="https://github.com/arut/nginx-rtmp-module/archive/master.zip"><code>https://github.com/arut/nginx-rtmp-module/archive/master.zip</code></a></p>
-<p>Packa upp filerna</p>
-<p><code>tar&nbsp;-zxvf&nbsp;nginx-1.7.9.tar.gz</code>
-<code>unzip&nbsp;master.zip</code>
-<code>cd&nbsp;nginx-1.7.9</code></p>
-<p>Lägg sedan till rtmp modulen i nginx.</p>
-<p><code>./configure&nbsp;--add-module=../nginx-rtmp-module-master</code>
-<code>make</code>
-<code>make&nbsp;install</code></p>
-<p>Om du inte fått några error så är nginx med rtmp modulen installerade.</p>
-<p>Ändra och lägg till följande rader i din conf fil.
-<code>/usr/local/nginx/conf/nginx.conf</code></p>
-<p><code>rtmp&nbsp;{</code>
-<code>server&nbsp;{</code>
-<code>listen&nbsp;1935;</code>
-<code>chunk_size&nbsp;8192;</code></p>
-<p><code>application&nbsp;stream&nbsp;{</code>
-<code>live&nbsp;on;</code>
-<code>meta&nbsp;copy;</code>
-<code>push</code><a href="rtmp://live-ams.twitch.tv/app/live_XYZ_ZXY"><code>rtmp://live-ams.twitch.tv/app/live_XYZ_ZXY</code></a><code>;</code>
-<code>push</code><a href="rtmp://live.hitbox.tv/push/username?key=XYZ"><code>rtmp://live.hitbox.tv/push/username?key=XYZ</code></a><code>;</code>
-<code>}</code>
-<code>}</code>
-<code>}</code></p>
-<p>För att starta nginx server skriv</p>
-<p><code>/usr/local/nginx/sbin/nginx</code></p>
-<p>För att stoppa nginx servern.</p>
-<p><code>/usr/local/nginx/sbin/nginx&nbsp;-s</code></p>
-<p>Ställ in din klient att streama mot <rtmp:><ip>/stream</ip></rtmp:></p>
-<h2 id="php">PHP</h2>
-<p>För att kunna visa PHP sidor behövs PHP-FastCGI.</p>
-<p><code>apt-get&nbsp;install&nbsp;php5-cli&nbsp;php5-cgi&nbsp;spawn-fcgi&nbsp;php-pear</code>
-<code>wget&nbsp;-O&nbsp;/usr/bin/php-fastcgi</code><a href="http://www.linode.com/docs/assets/1548-php-fastcgi-deb.sh"><code>http://www.linode.com/docs/assets/1548-php-fastcgi-deb.sh</code></a><code>&amp;&amp;&nbsp;chmod&nbsp;+x&nbsp;/usr/bin/php-fastcgi</code>
-<code>wget&nbsp;-O&nbsp;/etc/init.d/php-fastcgi</code><a href="http://www.linode.com/docs/assets/1549-init-php-fastcgi-deb.sh"><code>http://www.linode.com/docs/assets/1549-init-php-fastcgi-deb.sh</code></a><code>&amp;&amp;&nbsp;chmod&nbsp;+x&nbsp;/etc/init.d/php-fastcgi&nbsp;&amp;&amp;&nbsp;update-rc.d&nbsp;php-fastcgi&nbsp;defaults</code>
-<code>/etc/init.d/php-fastcgi&nbsp;start</code></p>
-<p>Lägg till följande i din conf fil.</p>
+instanser av tex OBS/Xsplit.
+
+För att få in RTMP modulen så måste man compilera nginx från början.
+
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;install&nbsp;build-essential&nbsp;libpcre3&nbsp;libpcre3-dev&nbsp;libssl-dev
+</code></pre></div>
+
+Hämta hem senaste versionen av nginx och rtmp modulen.
+
+`wget&nbsp;`[`http://nginx.org/download/nginx-1.7.9.tar.gz`](http://nginx.org/download/nginx-1.7.9.tar.gz)
+`wget&nbsp;`[`https://github.com/arut/nginx-rtmp-module/archive/master.zip`](https://github.com/arut/nginx-rtmp-module/archive/master.zip)
+
+Packa upp filerna
+
+<div class="highlight"><pre><span></span><code>tar&nbsp;-zxvf&nbsp;nginx-1.7.9.tar.gz
+unzip&nbsp;master.zip
+cd&nbsp;nginx-1.7.9
+</code></pre></div>
+
+Lägg sedan till rtmp modulen i nginx.
+
+<div class="highlight"><pre><span></span><code>./configure&nbsp;--add-module=../nginx-rtmp-module-master
+make
+make&nbsp;install
+</code></pre></div>
+
+Om du inte fått några error så är nginx med rtmp modulen installerade.
+
+Ändra och lägg till följande rader i din conf fil.
+<div class="highlight"><pre><span></span><code>/usr/local/nginx/conf/nginx.conf
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>rtmp&nbsp;{
+&nbsp;&nbsp;&nbsp;server&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;listen&nbsp;1935;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chunk_size&nbsp;8192;
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;application&nbsp;stream&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;live&nbsp;on;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;meta&nbsp;copy;
+</code></pre></div>
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push&nbsp;`[`rtmp://live-ams.twitch.tv/app/live_XYZ_ZXY`](rtmp://live-ams.twitch.tv/app/live_XYZ_ZXY)`;`
+`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;push&nbsp;`[`rtmp://live.hitbox.tv/push/username?key=XYZ`](rtmp://live.hitbox.tv/push/username?key=XYZ)`;`
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+&nbsp;&nbsp;&nbsp;}
+}
+</code></pre></div>
+
+För att starta nginx server skriv
+
+<div class="highlight"><pre><span></span><code>/usr/local/nginx/sbin/nginx
+</code></pre></div>
+
+För att stoppa nginx servern.
+
+<div class="highlight"><pre><span></span><code>/usr/local/nginx/sbin/nginx&nbsp;-s
+</code></pre></div>
+
+Ställ in din klient att streama mot <rtmp:><ip>/stream
+
+PHP
+---
+
+För att kunna visa PHP sidor behövs PHP-FastCGI.
+
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;php5-cli&nbsp;php5-cgi&nbsp;spawn-fcgi&nbsp;php-pear
+</code></pre></div>
+`wget&nbsp;-O&nbsp;/usr/bin/php-fastcgi&nbsp;`[`http://www.linode.com/docs/assets/1548-php-fastcgi-deb.sh`](http://www.linode.com/docs/assets/1548-php-fastcgi-deb.sh)`&nbsp;&amp;&amp;&nbsp;chmod&nbsp;+x&nbsp;/usr/bin/php-fastcgi`
+`wget&nbsp;-O&nbsp;/etc/init.d/php-fastcgi&nbsp;`[`http://www.linode.com/docs/assets/1549-init-php-fastcgi-deb.sh`](http://www.linode.com/docs/assets/1549-init-php-fastcgi-deb.sh)`&nbsp;&amp;&amp;&nbsp;chmod&nbsp;+x&nbsp;/etc/init.d/php-fastcgi&nbsp;&amp;&amp;&nbsp;update-rc.d&nbsp;php-fastcgi&nbsp;defaults`
+<div class="highlight"><pre><span></span><code>/etc/init.d/php-fastcgi&nbsp;start
+</code></pre></div>
+
+Lägg till följande i din conf fil.
+
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nb">location</span><span class="w"> </span>~*<span class="w"> </span>\.php$<span class="w"> </span>{
 <span class="w">        </span><span class="nb">include</span><span class="w"> </span>fastcgi_params;
 <span class="w">        </span><span class="nb">try_files</span><span class="w"> </span>$uri<span class="w"> </span>=404;
@@ -9043,31 +9155,53 @@ instanser av tex OBS/Xsplit.</p>
 <span class="w">        </span><span class="nb">fastcgi_param</span><span class="w"> </span>SCRIPT_FILENAME<span class="w"> </span>$request_filename;
 <span class="w">    </span><span class="err">}</span>
 </code></pre></div>
-<p>skapa en php info fil i din rooten på webbservern för att testa din php
-conf.</p>
+
+skapa en php info fil i din rooten på webbservern för att testa din php
+conf.
+
 <div class="highlight"><pre><span></span><code><span class="x">echo "</span><span class="cp">&lt;?php</span> <span class="nb">phpinfo</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x">" &gt; info.php</span>
 </code></pre></div>
-<h2 id="naxsi">Naxsi</h2>
-<p>Third party Nginx-modul, motsvarighet till
-<a href="/ModSecurity" title="wikilink">ModSecurity</a>. Går att köra i learning mode.</p>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;nginx-naxsi</code></p>
-<h1 id="tips-n-trix">Tips n Trix</h1>
-<h2 id="fail2ban">Fail2ban</h2>
-<p><code>sudo&nbsp;nano&nbsp;/etc/fail2ban/jail.conf</code>
-<code>[nginx-http-auth]</code>
-<code>enabled&nbsp;=&nbsp;true</code></p>
-<h2 id="enable-directory-listing">Enable directory listing</h2>
-<p>Om du vill att nginx ska lista filerna i en mapp som inte har någon
-index fil. Lägg följande under <code>location</code> som du vill lista.</p>
-<p><code>autoindex&nbsp;on;</code></p>
-<h2 id="rate-limit">Rate Limit</h2>
-<p>Man kan begränsa bandbredden för en viss IP eller subnät.</p>
+
+Naxsi
+-----
+
+Third party Nginx-modul, motsvarighet till
+[ModSecurity](/ModSecurity "wikilink"). Går att köra i learning mode.
+
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;nginx-naxsi
+</code></pre></div>
+
+Tips n Trix
+===========
+
+Fail2ban
+--------
+
+<div class="highlight"><pre><span></span><code>sudo&nbsp;nano&nbsp;/etc/fail2ban/jail.conf
+[nginx-http-auth]&nbsp;
+enabled&nbsp;=&nbsp;true
+</code></pre></div>
+
+Enable directory listing
+------------------------
+
+Om du vill att nginx ska lista filerna i en mapp som inte har någon
+index fil. Lägg följande under `location` som du vill lista.
+
+<div class="highlight"><pre><span></span><code>autoindex&nbsp;on;
+</code></pre></div>
+
+Rate Limit
+----------
+
+Man kan begränsa bandbredden för en viss IP eller subnät.
+
 <div class="highlight"><pre><span></span><code><span class="w"> </span>location<span class="w"> </span>/<span class="w"> </span><span class="o">{</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="w"> </span><span class="nv">$remote_addr</span><span class="w"> </span>~*<span class="w"> </span><span class="m">192</span>.100.20.0/24<span class="w"> </span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span>limit_rate<span class="w"> </span>5k<span class="p">;</span>
 <span class="w">  </span><span class="o">}</span>
 <span class="w"> </span><span class="o">}</span>
-</code></pre></div>
+</code></pre></div></ip></rtmp:></http:></div></div></div>
 
 
 
@@ -9090,7 +9224,7 @@ index fil. Lägg följande under <code>location</code> som du vill lista.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8763,6 +8763,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9114,51 +9142,60 @@ manuellt kolla fingerprint för att säkerställa att man inte blir mitmad.
 Kolla först på servern, detta bör alltid göras med konsolen, för att
 sedan jämföra det med vad din SSH-klient själv räknar ut utifrån nyckeln
 den får.</p>
-<p><code>cd&nbsp;/etc/ssh</code>
-<code>for&nbsp;file&nbsp;in&nbsp;*sa_key.pub</code>
-<code>do&nbsp;&nbsp;&nbsp;ssh-keygen&nbsp;-lf&nbsp;$file</code>
-<code>done</code></p>
+<div class="highlight"><pre><span></span><code>cd&nbsp;/etc/ssh
+for&nbsp;file&nbsp;in&nbsp;*sa_key.pub
+do&nbsp;&nbsp;&nbsp;ssh-keygen&nbsp;-lf&nbsp;$file
+done
+</code></pre></div>
 <h3 id="sshfp">SSHFP</h3>
 <p>SSHFP är ett resource record i DNS som man använder för att svara
 klienter som väljer att fråga DNS om nycklarna klienten får är äkta.
 Såhär kan det se ut i din zon.</p>
-<p><code>sshserver&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2.3.4</code>
-<code>IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SSHFP&nbsp;&nbsp;&nbsp;1&nbsp;1&nbsp;b4b8f2e051a16f57f69590c7c06aeaad019a3882</code>
-<code>IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SSHFP&nbsp;&nbsp;&nbsp;2&nbsp;1&nbsp;ea35c2064a5fb2ec9f51da2e7c790967f9844e59</code></p>
+<div class="highlight"><pre><span></span><code>sshserver&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2.3.4
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SSHFP&nbsp;&nbsp;&nbsp;1&nbsp;1&nbsp;b4b8f2e051a16f57f69590c7c06aeaad019a3882
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SSHFP&nbsp;&nbsp;&nbsp;2&nbsp;1&nbsp;ea35c2064a5fb2ec9f51da2e7c790967f9844e59
+</code></pre></div>
 <h2 id="reverse-ssh-tunnel">Reverse SSH Tunnel</h2>
 <p>Kan användas om en server sitter bakom en brandvägg som du inte kan SSHa
 igenom.</p>
 <p>Skriv detta på servern bakom brandväggen.</p>
-<p><code>ssh&nbsp;-fN&nbsp;-R&nbsp;7000:localhost:22&nbsp;username@ip</code></p>
+<div class="highlight"><pre><span></span><code>ssh&nbsp;-fN&nbsp;-R&nbsp;7000:localhost:22&nbsp;username@ip
+</code></pre></div>
 <p>Anslut sedan till servern över tunnel med kommandot.</p>
-<p><code>ssh&nbsp;-p&nbsp;7000&nbsp;username@localhost</code></p>
+<div class="highlight"><pre><span></span><code>ssh&nbsp;-p&nbsp;7000&nbsp;username@localhost
+</code></pre></div>
 <h2 id="tunnla-trafik">Tunnla trafik</h2>
 <p>För att tunnla trafik och tex kunna RDPa eller VNC en maskin bakom din
 SSH host.</p>
 <h3 id="rdp-trafik">RDP Trafik</h3>
-<p><code>ssh&nbsp;-N&nbsp;-L&nbsp;13389:RDPhost:3389&nbsp;username@ip</code></p>
+<div class="highlight"><pre><span></span><code>ssh&nbsp;-N&nbsp;-L&nbsp;13389:RDPhost:3389&nbsp;username@ip
+</code></pre></div>
 <p>Starta sedan din RDP klient och anslut mot localhost:13389.</p>
-<p><code>rdesktop&nbsp;localhost:13389</code></p>
+<div class="highlight"><pre><span></span><code>rdesktop&nbsp;localhost:13389
+</code></pre></div>
 <h3 id="http-trafik">HTTP trafik</h3>
-<p><code>ssh&nbsp;-N&nbsp;-D&nbsp;8080&nbsp;username@ip</code></p>
+<div class="highlight"><pre><span></span><code>ssh&nbsp;-N&nbsp;-D&nbsp;8080&nbsp;username@ip
+</code></pre></div>
 <p>Ändra sedan din webbläsares socks proxy till localhost port 8080.</p>
-<p><code>export&nbsp;HTTPS_PROXY=socks5://127.0.0.1:8080</code></p>
+<div class="highlight"><pre><span></span><code>export&nbsp;HTTPS_PROXY=socks5://127.0.0.1:8080
+</code></pre></div>
 <h3 id="tunnel-i-en-reverse-tunnel">Tunnel i en reverse tunnel</h3>
 <p>Man kan skapa tunnlar i en reverse ssh tunnel.</p>
-<p><code>ssh&nbsp;-p&nbsp;7000&nbsp;-N&nbsp;-L&nbsp;13389:IPtillRDPhost:3389&nbsp;username@ip</code></p>
+<div class="highlight"><pre><span></span><code>ssh&nbsp;-p&nbsp;7000&nbsp;-N&nbsp;-L&nbsp;13389:IPtillRDPhost:3389&nbsp;username@ip
+</code></pre></div>
 <p>Och anslut på samma sätt localhost:13389.</p>
 <h2 id="autossh">Autossh</h2>
 <p>Om man vill att SSH-tunneln ska klara reboots och disconnects kan man
 autostarta autossh. Detta förutsätter att man gör autentiseringen med
 RSA-nycklar.</p>
-<p><code>sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;autossh</code>
-<code>sudo&nbsp;nano&nbsp;/etc/rc.local</code>
-<code>autossh&nbsp;-M&nbsp;10984&nbsp;-N&nbsp;-f&nbsp;-o&nbsp;"PubkeyAuthentication=yes"&nbsp;-o&nbsp;"PasswordAuthentication=no"&nbsp;-i&nbsp;/home/$USER/.ssh/id_rsa&nbsp;-R&nbsp;7000:localhost:22&nbsp;username@ip&nbsp;-p&nbsp;22&nbsp;&amp;</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;autossh
+sudo&nbsp;nano&nbsp;/etc/rc.local
+autossh&nbsp;-M&nbsp;10984&nbsp;-N&nbsp;-f&nbsp;-o&nbsp;"PubkeyAuthentication=yes"&nbsp;-o&nbsp;"PasswordAuthentication=no"&nbsp;-i&nbsp;/home/$USER/.ssh/id_rsa&nbsp;-R&nbsp;7000:localhost:22&nbsp;username@ip&nbsp;-p&nbsp;22&nbsp;&amp;
+</code></pre></div>
 <h2 id="ssh-key">SSH-Key</h2>
 <p>Läs följande del hur man kan autentisera sig med RSA nykel utan att
 behöva skriva lösenord, <a href="/Jumpgate#SSH_Autentisering" title="wikilink">SSH
-Autentisering</a>.
-<a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
+Autentisering</a>.</p>
 
 
 
@@ -9181,7 +9218,7 @@ Autentisering</a>.
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

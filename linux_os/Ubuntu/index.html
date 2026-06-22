@@ -8689,6 +8689,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8956,21 +8984,26 @@
 del paket synkas från Debians repos.</p>
 <h1 id="first-5-minutes">First 5 minutes</h1>
 <p>Gör följande för att öka säkerheten. Switch user till root:</p>
-<p><code>sed&nbsp;-i&nbsp;-r&nbsp;'s/PermitRootLogin&nbsp;yes/PermitRootLogin&nbsp;no/g'&nbsp;/etc/ssh/sshd_config</code>
-<code>systemctl&nbsp;restart&nbsp;ssh</code></p>
+<div class="highlight"><pre><span></span><code>sed&nbsp;-i&nbsp;-r&nbsp;'s/PermitRootLogin&nbsp;yes/PermitRootLogin&nbsp;no/g'&nbsp;/etc/ssh/sshd_config
+systemctl&nbsp;restart&nbsp;ssh
+</code></pre></div>
 <h3 id="hostname">Hostname</h3>
-<p><code>echo&nbsp;"hostname"&nbsp;&gt;&nbsp;/etc/hostname</code>
-<code>hostname&nbsp;-F&nbsp;/etc/hostname</code></p>
+<div class="highlight"><pre><span></span><code>echo&nbsp;"hostname"&nbsp;&gt;&nbsp;/etc/hostname
+hostname&nbsp;-F&nbsp;/etc/hostname
+</code></pre></div>
 <h3 id="tidszon">Tidszon</h3>
-<p><code>dpkg-reconfigure&nbsp;tzdata</code></p>
+<div class="highlight"><pre><span></span><code>dpkg-reconfigure&nbsp;tzdata
+</code></pre></div>
 <h3 id="andra-namn-pa-nic">Ändra namn på NIC</h3>
 <p>Ändra i filen <code>/etc/udev/rules.d/70-persistent-net.rules</code></p>
 <p>Finns inte filen kan man skapa den. Man måste köra alla 3 kommandon för
 varje interface man vill lägga till i
-<code>/etc/udev/rules.d/70-persistent-net.rules</code></p>
-<p><code>export&nbsp;INTERFACE=eth0</code>
-<code>export&nbsp;MATCHADDR=$(ip&nbsp;addr&nbsp;show&nbsp;$INTERFACE&nbsp;|&nbsp;grep&nbsp;ether&nbsp;|&nbsp;awk&nbsp;'{print&nbsp;$2}')</code>
-<code>/lib/udev/write_net_rules</code></p>
+</p><div class="highlight"><pre><span></span><code>/etc/udev/rules.d/70-persistent-net.rules
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>export&nbsp;INTERFACE=eth0
+export&nbsp;MATCHADDR=$(ip&nbsp;addr&nbsp;show&nbsp;$INTERFACE&nbsp;|&nbsp;grep&nbsp;ether&nbsp;|&nbsp;awk&nbsp;'{print&nbsp;$2}')
+/lib/udev/write_net_rules
+</code></pre></div>
 <h1 id="pakethanterare">Pakethanterare</h1>
 <p>Både Debian och Ubuntu tillhandahåller flera pakethanterare.</p>
 <h3 id="apt">Apt</h3>
@@ -8978,12 +9011,14 @@ varje interface man vill lägga till i
 <h3 id="dpkg">dpkg</h3>
 <p>Debian packaging tool
 <strong>Lista på installerade program</strong></p>
-<p><code>dpkg&nbsp;--get-selections</code>
-<code>dpkg&nbsp;-l</code></p>
+<div class="highlight"><pre><span></span><code>dpkg&nbsp;--get-selections
+dpkg&nbsp;-l
+</code></pre></div>
 <h2 id="tips-o-trix">Tips o trix</h2>
 <p><strong>Automatiska uppdateringar</strong></p>
-<p><code>sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;unattended-upgrades</code>
-<code>sudo&nbsp;dpkg-reconfigure&nbsp;-plow&nbsp;unattended-upgrades</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;unattended-upgrades
+sudo&nbsp;dpkg-reconfigure&nbsp;-plow&nbsp;unattended-upgrades
+</code></pre></div>
 <p><strong>Minimal Ubuntu Server</strong>
 Vill man reducera mängden CPU och RAM som behövs för ens vm kan man
 under installationen trycka f4 och välja att installera en minimal
@@ -8991,18 +9026,21 @@ variant av Ubuntu Server.</p>
 <p><strong>Mer funktionalitet</strong>
 Är man trött på att det saknas funktioner på sin maskin kan man lägga
 till alla paketen med följande kommando:</p>
-<p><code>sudo&nbsp;aptitude&nbsp;install&nbsp;'~T'</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;aptitude&nbsp;install&nbsp;'~T'
+</code></pre></div>
 <h2 id="diverse">Diverse</h2>
 <p>Network IDS - psad</p>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;-y&nbsp;psad&nbsp;&amp;&amp;&nbsp;sudo&nbsp;psad&nbsp;--sig-update</code>
-<code>sudo&nbsp;service&nbsp;psad&nbsp;restart&nbsp;&amp;&amp;&nbsp;sudo&nbsp;service&nbsp;psad&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;-y&nbsp;psad&nbsp;&amp;&amp;&nbsp;sudo&nbsp;psad&nbsp;--sig-update
+sudo&nbsp;service&nbsp;psad&nbsp;restart&nbsp;&amp;&amp;&nbsp;sudo&nbsp;service&nbsp;psad&nbsp;status
+</code></pre></div>
 <p>Host IDS - Aide</p>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;-y&nbsp;aide&nbsp;&amp;&amp;&nbsp;sudo&nbsp;aideinit</code>
-<code>sudo&nbsp;aide&nbsp;-u</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;-y&nbsp;aide&nbsp;&amp;&amp;&nbsp;sudo&nbsp;aideinit
+sudo&nbsp;aide&nbsp;-u
+</code></pre></div>
 <p>Log Reporting</p>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;-y&nbsp;logwatch</code>
-<code>sudo&nbsp;echo&nbsp;"/usr/sbin/logwatch&nbsp;--output&nbsp;mail&nbsp;--mailto&nbsp;${email_address}&nbsp;--detail&nbsp;high"&nbsp;&gt;&gt;&nbsp;/etc/cron.daily/00logwatch</code></p>
-<p><a href="/Category:Distar" title="wikilink">Category:Distar</a></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;-y&nbsp;logwatch
+sudo&nbsp;echo&nbsp;"/usr/sbin/logwatch&nbsp;--output&nbsp;mail&nbsp;--mailto&nbsp;${email_address}&nbsp;--detail&nbsp;high"&nbsp;&gt;&gt;&nbsp;/etc/cron.daily/00logwatch
+</code></pre></div>
 
 
 
@@ -9025,7 +9063,7 @@ till alla paketen med följande kommando:</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

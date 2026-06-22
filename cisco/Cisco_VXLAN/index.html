@@ -8743,6 +8743,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9085,29 +9113,35 @@ Interface. För att kunna använda multicast måste man köra
 frames som är VLAN-taggade måste man ta bort taggen när det skickas VLAN
 -&gt; VXLAN och sätta på den igen i andra riktningen, se exemplet
 (BD-oriented mode).</p>
-<p><code>interface&nbsp;lo0</code>
-<code>ip&nbsp;address&nbsp;11.11.11.11&nbsp;255.255.255.255</code></p>
-<p><code>interface&nbsp;nve1</code>
-<code>source-interface&nbsp;Loopback0</code>
-<code>member&nbsp;vni&nbsp;5001&nbsp;mcast-group&nbsp;239.0.10.10</code></p>
-<p><code>interface&nbsp;GigabitEthernet2</code>
-<code>service&nbsp;instance&nbsp;1&nbsp;ethernet</code>
-<code>encapsulation&nbsp;dot1q&nbsp;100</code>
-<code>rewrite&nbsp;ingress&nbsp;tag&nbsp;pop&nbsp;1&nbsp;symmetric</code></p>
-<p><code>bridge-domain&nbsp;1</code>
-<code>member&nbsp;vni&nbsp;5001</code>
-<code>member&nbsp;GigabitEthernet2&nbsp;service-instance&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;lo0
+&nbsp;ip&nbsp;address&nbsp;11.11.11.11&nbsp;255.255.255.255
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve1
+&nbsp;source-interface&nbsp;Loopback0
+&nbsp;member&nbsp;vni&nbsp;5001&nbsp;mcast-group&nbsp;239.0.10.10
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet2
+&nbsp;service&nbsp;instance&nbsp;1&nbsp;ethernet
+&nbsp;&nbsp;encapsulation&nbsp;dot1q&nbsp;100
+&nbsp;&nbsp;rewrite&nbsp;ingress&nbsp;tag&nbsp;pop&nbsp;1&nbsp;symmetric
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>bridge-domain&nbsp;1
+&nbsp;member&nbsp;vni&nbsp;5001
+&nbsp;member&nbsp;GigabitEthernet2&nbsp;service-instance&nbsp;1
+</code></pre></div>
 <p><strong>Unicast</strong>
 Om man inte kan köra multicast går det lösa med unicast och headend
 replication (HER). Då konfigurerar man <em>member vni</em> utan mcast-group och
 istället pekar ut andra sidan VTEP:s manuellt.</p>
-<p><code>interface&nbsp;nve1</code>
-<code>ingress-replication&nbsp;22.22.22.22</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve1
+&nbsp;ingress-replication&nbsp;22.22.22.22&nbsp;
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;nve&nbsp;vni</code>
-<code>show&nbsp;nve&nbsp;peers</code>
-<code>show&nbsp;bridge-domain&nbsp;1</code>
-<code>show&nbsp;mac&nbsp;address-table&nbsp;nve</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;nve&nbsp;vni
+show&nbsp;nve&nbsp;peers
+show&nbsp;bridge-domain&nbsp;1
+show&nbsp;mac&nbsp;address-table&nbsp;nve
+</code></pre></div>
 <h3 id="nexus">Nexus</h3>
 <p>VXLAN är en vanlig overlay-teknik i datacenter. Underlay ska lösa
 routing mellan IPv4-loopbacks samt ha stöd för jumbo frames (mtu 9216).
@@ -9115,25 +9149,29 @@ Man kan köra IP Unnumbered mellan leaf och spine. UDP port number är
 4789, detta går ej att ställa om. ARP suppression är supporterat. För
 tenants IGMP notera att interface nve1 default är en static
 mrouter-port.</p>
-<p><code>feature&nbsp;nv&nbsp;overlay</code>
-<code>feature&nbsp;vn-segment-vlan-based</code>
-<code>interface&nbsp;nve1</code>
-<code>no&nbsp;shutdown</code>
-<code>source-interface&nbsp;loopback0</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;nv&nbsp;overlay
+feature&nbsp;vn-segment-vlan-based
+interface&nbsp;nve1
+&nbsp;&nbsp;no&nbsp;shutdown
+&nbsp;&nbsp;source-interface&nbsp;loopback0
+</code></pre></div>
 <p>Bridge domain med static flood list.</p>
-<p><code>vlan&nbsp;100</code>
-<code>vn-segment&nbsp;10100</code></p>
-<p><code>interface&nbsp;nve1</code>
-<code>member&nbsp;vni&nbsp;10100</code>
-<code>ingress-replication&nbsp;protocol&nbsp;static</code>
-<code>peer-ip&nbsp;10.0.0.3</code>
-<code>peer-ip&nbsp;10.0.0.4</code>
-<code>peer-ip&nbsp;10.0.0.5</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;100
+&nbsp;vn-segment&nbsp;10100
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve1
+&nbsp;&nbsp;member&nbsp;vni&nbsp;10100
+&nbsp;&nbsp;&nbsp;&nbsp;ingress-replication&nbsp;protocol&nbsp;static
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;peer-ip&nbsp;10.0.0.3
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;peer-ip&nbsp;10.0.0.4
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;peer-ip&nbsp;10.0.0.5
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;nve&nbsp;int&nbsp;nve1</code>
-<code>show&nbsp;nve&nbsp;peers</code>
-<code>show&nbsp;nve&nbsp;vni</code>
-<code>show&nbsp;nve&nbsp;vni&nbsp;ingress-replication</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;nve&nbsp;int&nbsp;nve1
+show&nbsp;nve&nbsp;peers
+show&nbsp;nve&nbsp;vni
+show&nbsp;nve&nbsp;vni&nbsp;ingress-replication&nbsp;
+</code></pre></div>
 <p><strong>Multicast underlay</strong>
 Ingress replication supporteras på Nexus 9000 men inte Nexus 5600 eller
 Nexus 7000. Man får då lösa BUM med multicast. Alla noder måste routa
@@ -9142,17 +9180,20 @@ för lastdelning samt redundans. Notera att multicast kontra unicast är
 ett designval som innebär en trade-off mellan control plane scalability
 och data plane efficiency.</p>
 <p>Spine</p>
-<p><code>ip&nbsp;pim&nbsp;rp-address&nbsp;10.0.0.100&nbsp;group-list&nbsp;224.0.0.0/4</code>
-<code>ip&nbsp;pim&nbsp;anycast-rp&nbsp;10.0.0.100&nbsp;10.0.0.2</code>
-<code>ip&nbsp;pim&nbsp;anycast-rp&nbsp;10.0.0.100&nbsp;10.0.0.3</code></p>
-<p><code>show&nbsp;ip&nbsp;mroute</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;rp-address&nbsp;10.0.0.100&nbsp;group-list&nbsp;224.0.0.0/4&nbsp;
+ip&nbsp;pim&nbsp;anycast-rp&nbsp;10.0.0.100&nbsp;10.0.0.2&nbsp;
+ip&nbsp;pim&nbsp;anycast-rp&nbsp;10.0.0.100&nbsp;10.0.0.3&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;mroute
+</code></pre></div>
 <p><strong>Nexus 5600</strong>
 Nexus 5600 måste köra i store-and-forward switching mode för att
 supportera VXLAN encapsulation.</p>
-<p><code>hardware&nbsp;ethernet&nbsp;store-and-fwd-switching</code>
-<code>copy&nbsp;run&nbsp;start</code>
-<code>reload</code>
-<code>show&nbsp;switching-mode</code></p>
+<div class="highlight"><pre><span></span><code>hardware&nbsp;ethernet&nbsp;store-and-fwd-switching
+copy&nbsp;run&nbsp;start
+reload
+show&nbsp;switching-mode
+</code></pre></div>
 <h4 id="vpc">vPC</h4>
 <p>När man kör <a href="/Nexus_vPC" title="wikilink">vPC</a> med VXLAN måste man sätta en
 secondary IP address på det loopback som är source för NVE. Denna ska
@@ -9162,57 +9203,66 @@ gjort rätt. Däremot om peer-linken går ner så kommer loopback primary
 address att användas som source på de VXLAN-enkapsulerade paketen som
 skickas iväg.</p>
 <p>vPC Best practice när man kör VXLAN.</p>
-<p><code>vpc&nbsp;domain&nbsp;1</code>
-<code>peer-switch</code>
-<code>peer-keepalive&nbsp;destination&nbsp;10.0.0.2&nbsp;source&nbsp;10.0.0.1</code>
-<code>peer-gateway</code>
-<code>ipv6&nbsp;nd&nbsp;synchronize</code>
-<code>ip&nbsp;arp&nbsp;synchronize</code></p>
+<div class="highlight"><pre><span></span><code>vpc&nbsp;domain&nbsp;1
+&nbsp;peer-switch
+&nbsp;peer-keepalive&nbsp;destination&nbsp;10.0.0.2&nbsp;source&nbsp;10.0.0.1
+&nbsp;peer-gateway
+&nbsp;ipv6&nbsp;nd&nbsp;synchronize
+&nbsp;ip&nbsp;arp&nbsp;synchronize
+</code></pre></div>
 <p>Man bör också sätta upp ett nve-peer-link-vlan för att förhindra
 suboptimal routing. Detta vlan ska endast tillåtas på trunken som är
 peer-link.</p>
-<p><code>vlan&nbsp;10</code></p>
-<p><code>vpc&nbsp;nve&nbsp;peer-link-vlan&nbsp;10</code></p>
-<p><code>interface&nbsp;vlan10</code>
-<code>ip&nbsp;router&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0</code>
-<code>ip&nbsp;ospf&nbsp;cost&nbsp;2</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;10
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>vpc&nbsp;nve&nbsp;peer-link-vlan&nbsp;10
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;vlan10
+&nbsp;ip&nbsp;router&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0
+&nbsp;ip&nbsp;ospf&nbsp;cost&nbsp;2
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <h2 id="evpn">EVPN</h2>
 <p>Se <a href="/Cisco_EVPN" title="wikilink">Cisco EVPN</a>.</p>
 <h2 id="gpe">GPE</h2>
 <p>VXLAN Generic Protocol Extension finns till för att ge VXLAN tillägg
 såsom OAM och versionsmöjligheter.</p>
-<p><code>interface&nbsp;Tunnel1</code>
-<code>ip&nbsp;address&nbsp;192.168.1.1&nbsp;255.255.255.0</code>
-<code>tunnel&nbsp;source&nbsp;GigabitEthernet2</code>
-<code>tunnel&nbsp;mode&nbsp;vxlan-gpe&nbsp;ipv4</code>
-<code>tunnel&nbsp;destination&nbsp;10.0.0.20</code>
-<code>tunnel&nbsp;vxlan&nbsp;vni&nbsp;12345</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel1&nbsp;
+&nbsp;ip&nbsp;address&nbsp;192.168.1.1&nbsp;255.255.255.0&nbsp;
+&nbsp;tunnel&nbsp;source&nbsp;GigabitEthernet2&nbsp;
+&nbsp;tunnel&nbsp;mode&nbsp;vxlan-gpe&nbsp;ipv4&nbsp;
+&nbsp;tunnel&nbsp;destination&nbsp;10.0.0.20
+&nbsp;tunnel&nbsp;vxlan&nbsp;vni&nbsp;12345
+</code></pre></div>
 <h2 id="fhrp-over-vxlan">FHRP över VXLAN</h2>
 <p>Man kan använda <a href="/Cisco_FHRP" title="wikilink">FHRP</a>-protokoll tillsammans med
 VXLAN. De skickar hello packets som då floodas över VXLAN overlayet. Man
 måste ge tcam till detta, <em>hardware access-list tcam region arp-ether
 256</em>. Detta funkar endast med flood and learn VXLAN.</p>
-<p><code>interface&nbsp;vlan&nbsp;100</code>
-<code>ip&nbsp;address&nbsp;192.168.1.2/24</code>
-<code>hsrp&nbsp;100</code>
-<code>ip&nbsp;192.168.1.1</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;vlan&nbsp;100
+&nbsp;ip&nbsp;address&nbsp;192.168.1.2/24
+&nbsp;&nbsp;hsrp&nbsp;100
+&nbsp;&nbsp;&nbsp;ip&nbsp;192.168.1.1
+</code></pre></div>
 <h2 id="q-in-vni">Q-in-VNI</h2>
 <p>Endast VXLAN Bridging funkar med Q-in-VNI.</p>
-<p><code>interface&nbsp;nve1</code>
-<code>overlay-encapsulation&nbsp;vxlan-with-tag</code></p>
-<p><code>interface&nbsp;ethernet&nbsp;1/4</code>
-<code>switchport&nbsp;mode&nbsp;dot1q-tunnel</code>
-<code>switchport&nbsp;access&nbsp;vlan&nbsp;100</code>
-<code>spanning-tree&nbsp;bpdufilter&nbsp;enable</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve1
+&nbsp;overlay-encapsulation&nbsp;vxlan-with-tag
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;ethernet&nbsp;1/4
+&nbsp;switchport&nbsp;mode&nbsp;dot1q-tunnel
+&nbsp;switchport&nbsp;access&nbsp;vlan&nbsp;100
+&nbsp;spanning-tree&nbsp;bpdufilter&nbsp;enable
+</code></pre></div>
 <p>Man kan även släppa över LACPDU:er.</p>
-<p><code>interface&nbsp;nve1</code>
-<code>overlay-encapsulation&nbsp;vxlan-with-tag&nbsp;tunnel-control-frames&nbsp;lacp</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve1
+&nbsp;overlay-encapsulation&nbsp;vxlan-with-tag&nbsp;tunnel-control-frames&nbsp;lacp
+</code></pre></div>
 <p>QinQ-QinVNI</p>
-<p><code>interface&nbsp;Ethernet1/4</code>
-<code>switchport&nbsp;trunk&nbsp;allow-multi-tag</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Ethernet1/4
+&nbsp;switchport&nbsp;trunk&nbsp;allow-multi-tag
+</code></pre></div>
 
 
 
@@ -9235,7 +9285,7 @@ måste ge tcam till detta, <em>hardware access-list tcam region arp-ether
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

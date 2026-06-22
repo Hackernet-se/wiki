@@ -8800,6 +8800,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9190,53 +9218,64 @@ testsetup.</p>
 <h1 id="server">Server</h1>
 <h2 id="installation">Installation</h2>
 <p><strong>Fedora</strong></p>
-<p><code>sudo&nbsp;dnf&nbsp;-y&nbsp;install&nbsp;freeipa-server</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;dnf&nbsp;-y&nbsp;install&nbsp;freeipa-server
+</code></pre></div>
 <p><strong>CentOS</strong></p>
-<p><code>yum&nbsp;install&nbsp;ipa-server</code></p>
+<div class="highlight"><pre><span></span><code>yum&nbsp;install&nbsp;ipa-server
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Starta wizarden som automatiskt konfigurerar upp din FreeIPA med det
 nödvändigaste.</p>
-<p><code>sudo&nbsp;ipa-server-install</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;ipa-server-install
+</code></pre></div>
 <p>Kör kommandot <strong>kinit admin</strong> så får du en kerberos ticket som du
 behöver för att kunna köra IPA tools tex ipa user-add.</p>
 <h3 id="dns-records">DNS records</h3>
 <p>Skapa följande records om du kör en DNS server som inte FreeIPA sköter.
 Dessa records gör att autodiscovery fungerar och gör det mycket enklare
 att konfigurera upp klienter.</p>
-<p><code>;&nbsp;ldap&nbsp;servers</code>
-<code>_ldap._tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;389&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa</code></p>
-<p><code>;kerberos&nbsp;realm</code>
-<code>_kerberos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;TXT&nbsp;HACKERNET.SE</code></p>
-<p><code>;&nbsp;kerberos&nbsp;servers</code>
-<code>_kerberos._tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa</code>
-<code>_kerberos._udp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa</code>
-<code>_kerberos-master._tcp&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa</code>
-<code>_kerberos-master._udp&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa</code>
-<code>_kpasswd._tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;464&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa</code>
-<code>_kpasswd._udp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;464&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa</code></p>
-<p><code>;ntp&nbsp;server</code>
-<code>_ntp._udp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;123&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa</code></p>
-<p><code>;&nbsp;CNAME&nbsp;for&nbsp;IPA&nbsp;CA&nbsp;replicas&nbsp;(used&nbsp;for&nbsp;CRL,&nbsp;OCSP)</code>
-<code>ipa-ca&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP-to-FreeIPA</code></p>
+<div class="highlight"><pre><span></span><code>;&nbsp;ldap&nbsp;servers
+_ldap._tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;389&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>;kerberos&nbsp;realm
+_kerberos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;TXT&nbsp;HACKERNET.SE
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>;&nbsp;kerberos&nbsp;servers
+_kerberos._tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa
+_kerberos._udp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa
+_kerberos-master._tcp&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa
+_kerberos-master._udp&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;88&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa
+_kpasswd._tcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;464&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa
+_kpasswd._udp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;464&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>;ntp&nbsp;server
+_ntp._udp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;123&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freeipa
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>;&nbsp;CNAME&nbsp;for&nbsp;IPA&nbsp;CA&nbsp;replicas&nbsp;(used&nbsp;for&nbsp;CRL,&nbsp;OCSP)
+ipa-ca&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP-to-FreeIPA
+</code></pre></div>
 <h3 id="brandvaggsoppningar">Brandväggsöppningar</h3>
 <p>Beroende på vilken dist du använder kanske du inte behöver öppna portar
 i din egna brandvägg.</p>
-<p><code>firewall-cmd&nbsp;--permanent&nbsp;--add-service=ntp</code>
-<code>firewall-cmd&nbsp;--permanent&nbsp;--add-service=http</code>
-<code>firewall-cmd&nbsp;--permanent&nbsp;--add-service=https</code>
-<code>firewall-cmd&nbsp;--permanent&nbsp;--add-service=ldap</code>
-<code>firewall-cmd&nbsp;--permanent&nbsp;--add-service=ldaps</code>
-<code>firewall-cmd&nbsp;--permanent&nbsp;--add-service=kerberos</code>
-<code>firewall-cmd&nbsp;--permanent&nbsp;--add-service=kpasswd</code>
-<code>firewall-cmd&nbsp;--reload</code></p>
+<div class="highlight"><pre><span></span><code>firewall-cmd&nbsp;--permanent&nbsp;--add-service=ntp
+firewall-cmd&nbsp;--permanent&nbsp;--add-service=http
+firewall-cmd&nbsp;--permanent&nbsp;--add-service=https
+firewall-cmd&nbsp;--permanent&nbsp;--add-service=ldap
+firewall-cmd&nbsp;--permanent&nbsp;--add-service=ldaps
+firewall-cmd&nbsp;--permanent&nbsp;--add-service=kerberos
+firewall-cmd&nbsp;--permanent&nbsp;--add-service=kpasswd
+firewall-cmd&nbsp;--reload
+</code></pre></div>
 <h3 id="skapa-user">Skapa user</h3>
-<p><code>ipa&nbsp;user-add</code>
-<code>ipa&nbsp;passwd</code><user></user></p>
+<p></p><div class="highlight"><pre><span></span><code>ipa&nbsp;user-add
+</code></pre></div>
+<code>ipa&nbsp;passwd</code><user><p></p>
 <h3 id="web-ui">Web UI</h3>
 <p>Nås på <a href="https://IP-to-FreeIPA">https://IP-to-FreeIPA</a></p>
 <h3 id="replikering">Replikering</h3>
 <p>Det går att replikera datan mellan servrar.</p>
-<p><code>ipa-replica-manage&nbsp;list</code></p>
+<div class="highlight"><pre><span></span><code>ipa-replica-manage&nbsp;list
+</code></pre></div>
 <h3 id="system-account">System account</h3>
 <p>Vissa LDAP tjänster behöver ett förkonfat konto tex LDAP Autofs och
 sudo. Oftast så använder man en användares uppgifter när man bindar mot
@@ -9245,17 +9284,20 @@ man skapar ett service konto istället för ett vanligt användar konto är
 att ett system kontot endast finns för att binda mot LDAP servern och är
 alltså inget POSIX konto och kan därför inte logga in mot några system.</p>
 <p>Skapa ett system account så här:</p>
-<p><code>ldapmodify&nbsp;-x&nbsp;-D&nbsp;'cn=Directory&nbsp;Manager'&nbsp;-W</code></p>
-<p><code>dn:&nbsp;uid=system,cn=sysaccounts,cn=etc,dc=hackernet,dc=se</code>
-<code>changetype:&nbsp;add</code>
-<code>objectclass:&nbsp;account</code>
-<code>objectclass:&nbsp;simplesecurityobject</code>
-<code>uid:&nbsp;1337</code>
-<code>userPassword:&nbsp;secret</code>
-<code>passwordExpirationTime:&nbsp;20380119031407Z</code>
-<code>nsIdleTimeout:&nbsp;0</code>
+<div class="highlight"><pre><span></span><code>ldapmodify&nbsp;-x&nbsp;-D&nbsp;'cn=Directory&nbsp;Manager'&nbsp;-W
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>dn:&nbsp;uid=system,cn=sysaccounts,cn=etc,dc=hackernet,dc=se
+changetype:&nbsp;add
+objectclass:&nbsp;account
+objectclass:&nbsp;simplesecurityobject
+uid:&nbsp;1337
+userPassword:&nbsp;secret
+passwordExpirationTime:&nbsp;20380119031407Z
+nsIdleTimeout:&nbsp;0
+</code></pre></div>
 <blank line="">
-<code>^D(CTRL+D)</code></blank></p>
+<div class="highlight"><pre><span></span><code>^D(CTRL+D)
+</code></pre></div><p></p>
 <h3 id="groupofuniquenames">GroupOfUniqueNames</h3>
 <p>GroupOfUniqueNames är en objectclass som finns i grupper, vissa program
 söker i LDAP databasen efter denna class. Bland annat <a href="/VMware_vCenter" title="wikilink">VMware
@@ -9271,10 +9313,12 @@ vCenter</a>.</p>
 <p>Din FreeIPA domän och AD domän får inte vara samma för att det ska
 fungera.</p>
 <p>Installera AD trust paketet:</p>
-<p><code>yum&nbsp;install&nbsp;ipa-server-trust-ad</code></p>
+<div class="highlight"><pre><span></span><code>yum&nbsp;install&nbsp;ipa-server-trust-ad
+</code></pre></div>
 <p>Kör ipa ad trust install för att lägga till nödvändiga object och skapa
 nya DNS records:</p>
-<p><code>ipa-adtrust-install&nbsp;--netbios-name=IPA_NETBIOS&nbsp;-a&nbsp;admin_password</code></p>
+<div class="highlight"><pre><span></span><code>ipa-adtrust-install&nbsp;--netbios-name=IPA_NETBIOS&nbsp;-a&nbsp;admin_password
+</code></pre></div>
 <p>Ifall din freeipa inte kan uppdatera din DNS med nya records så behöver
 du skapa följande annars kan du skippa detta steget:</p>
 <p><code>_ldap._tcp.dc._msdc.</code><freeipa_domän><code>.&nbsp;3600&nbsp;IN&nbsp;SRV&nbsp;0&nbsp;100&nbsp;389</code><freeipa_server>
@@ -9286,28 +9330,34 @@ du skapa följande annars kan du skippa detta steget:</p>
 <p>För att en trust ska fungera så måste AD servern kunna slå upp FreeIPA
 domänen och tvärtom. Verifiera det med följande kommando.</p>
 <p><strong>AD DC</strong></p>
-<p><code>C:\&gt;&nbsp;nslookup</code>
-<code>set&nbsp;type=srv</code>
-<code>_ldap._tcp.ad_domain</code>
-<code>_ldap._tcp.ipa_domain</code></p>
+<div class="highlight"><pre><span></span><code>C:\&gt;&nbsp;nslookup
+set&nbsp;type=srv
+_ldap._tcp.ad_domain
+_ldap._tcp.ipa_domain
+</code></pre></div>
 <p><strong>IPA server</strong></p>
-<p><code>dig&nbsp;SRV&nbsp;_ldap._tcp.ipa_domain</code>
-<code>dig&nbsp;SRV&nbsp;_ldap._tcp.ad_domain</code></p>
+<div class="highlight"><pre><span></span><code>dig&nbsp;SRV&nbsp;_ldap._tcp.ipa_domain
+dig&nbsp;SRV&nbsp;_ldap._tcp.ad_domain
+</code></pre></div>
 <p>Om det inte fungerar så kan man behöva forwarda request direkt till
 motsvarande domäns dns server.</p>
 <p><strong>AD DC</strong></p>
-<p><code>C:\&gt;&nbsp;dnscmd&nbsp;127.0.0.1&nbsp;/ZoneAdd&nbsp;ipa_domain&nbsp;/Forwarder&nbsp;ipa_ip_address</code></p>
+<div class="highlight"><pre><span></span><code>C:\&gt;&nbsp;dnscmd&nbsp;127.0.0.1&nbsp;/ZoneAdd&nbsp;ipa_domain&nbsp;/Forwarder&nbsp;ipa_ip_address
+</code></pre></div>
 <p><strong>IPA server</strong></p>
 <ul>
 <li>IPA v3.x:</li>
 </ul>
-<p><code>ipa&nbsp;dnszone-add&nbsp;ad_domain&nbsp;--name-server=ad_hostname.ad_domain&nbsp;--admin-email='hostmaster@ad_domain'&nbsp;--force&nbsp;--forwarder=ad_ip_address&nbsp;--forward-policy=only&nbsp;--ip-address=ad_ip_address</code></p>
+<div class="highlight"><pre><span></span><code>ipa&nbsp;dnszone-add&nbsp;ad_domain&nbsp;--name-server=ad_hostname.ad_domain&nbsp;--admin-email='hostmaster@ad_domain'&nbsp;--force&nbsp;--forwarder=ad_ip_address&nbsp;--forward-policy=only&nbsp;--ip-address=ad_ip_address
+</code></pre></div>
 <ul>
 <li>IPA v4.x:</li>
 </ul>
-<p><code>ipa&nbsp;dnsforwardzone-add&nbsp;ad_domain&nbsp;--forwarder=ad_ip_address&nbsp;--forward-policy=only</code></p>
+<div class="highlight"><pre><span></span><code>ipa&nbsp;dnsforwardzone-add&nbsp;ad_domain&nbsp;--forwarder=ad_ip_address&nbsp;--forward-policy=only
+</code></pre></div>
 <h4 id="skapa-och-verifiera-cross-realm-trust">Skapa och verifiera cross-realm trust</h4>
-<p><code>ipa&nbsp;trust-add&nbsp;--type=ad&nbsp;ad_domain&nbsp;--admin&nbsp;Administrator&nbsp;--password</code></p>
+<div class="highlight"><pre><span></span><code>ipa&nbsp;trust-add&nbsp;--type=ad&nbsp;ad_domain&nbsp;--admin&nbsp;Administrator&nbsp;--password
+</code></pre></div>
 <p>Vid prompt ange lösenordet till AD domänens Administrator konto eller
 ett annat konto som är med i <strong>Domain Admins</strong> gruppen, om allt är
 uppsatt korekt så kommer IPA att sätta upp en two-way forest trust med
@@ -9320,13 +9370,15 @@ AD och validera den.</p>
     AD domän användare får ett group id(gid) som kan användas som
     default group.</li>
 </ul>
-<p><code>ipa&nbsp;group-add&nbsp;--desc='ad_domain&nbsp;admins&nbsp;external&nbsp;map'&nbsp;ad_admins_external&nbsp;--external</code>
-<code>ipa&nbsp;group-add&nbsp;--desc='ad_domain&nbsp;admins'&nbsp;ad_admins</code>
-<code>ipa&nbsp;group-add-member&nbsp;ad_admins_external&nbsp;--external&nbsp;'ad_netbios\Domain&nbsp;Admins'</code></p>
+<div class="highlight"><pre><span></span><code>ipa&nbsp;group-add&nbsp;--desc='ad_domain&nbsp;admins&nbsp;external&nbsp;map'&nbsp;ad_admins_external&nbsp;--external
+ipa&nbsp;group-add&nbsp;--desc='ad_domain&nbsp;admins'&nbsp;ad_admins
+ipa&nbsp;group-add-member&nbsp;ad_admins_external&nbsp;--external&nbsp;'ad_netbios\Domain&nbsp;Admins'
+</code></pre></div>
 <p>När den frågar om <strong>member user</strong> och <strong>member group</strong> så lämna det
 blankt och tryck enter.</p>
 <p>Lägg sedan till den externa gruppen i posix gruppen.</p>
-<p><code>ipa&nbsp;group-add-member&nbsp;ad_admins&nbsp;--groups&nbsp;ad_admins_external</code></p>
+<div class="highlight"><pre><span></span><code>ipa&nbsp;group-add-member&nbsp;ad_admins&nbsp;--groups&nbsp;ad_admins_external
+</code></pre></div>
 <p>För att verifera att det fungerar så ska det gå att logga in på en IPA
 ansluten server med ett AD konto. När du ansluter till en server måste
 du ange <strong>ad_user@ad_domain</strong> som username.</p>
@@ -9336,38 +9388,46 @@ importera deras root certifikat.</p>
 <p>Börja med att clona följande repo.</p>
 <p><code>git&nbsp;clone</code><a href="https://github.com/Hackernet-se/freeipa-letsencrypt"><code>https://github.com/Hackernet-se/freeipa-letsencrypt</code></a><code>&amp;&amp;&nbsp;cd&nbsp;freeipa-letsencrypt</code></p>
 <p>Importera root certen.</p>
-<p><code>ipa-cacert-manage&nbsp;install&nbsp;"DSTRootCAX3.pem"&nbsp;-n&nbsp;DSTRootCAX3&nbsp;-t&nbsp;C,,</code>
-<code>ipa-cacert-manage&nbsp;install&nbsp;"LetsEncryptAuthorityX3.pem"&nbsp;-n&nbsp;letsencryptx3&nbsp;-t&nbsp;C,,</code></p>
+<div class="highlight"><pre><span></span><code>ipa-cacert-manage&nbsp;install&nbsp;"DSTRootCAX3.pem"&nbsp;-n&nbsp;DSTRootCAX3&nbsp;-t&nbsp;C,,
+ipa-cacert-manage&nbsp;install&nbsp;"LetsEncryptAuthorityX3.pem"&nbsp;-n&nbsp;letsencryptx3&nbsp;-t&nbsp;C,,
+</code></pre></div>
 <p>Uppdatera sedan databasen.</p>
-<p><code>ipa-certupdate</code></p>
+<div class="highlight"><pre><span></span><code>ipa-certupdate
+</code></pre></div>
 <p>När dom två certifikaten är inlagda så kan man importera certifikaten
 man fått från Let's Encrypt.</p>
-<p><code>ipa-server-certinstall&nbsp;-w&nbsp;fullchain.pem&nbsp;privkey.pem</code></p>
+<div class="highlight"><pre><span></span><code>ipa-server-certinstall&nbsp;-w&nbsp;fullchain.pem&nbsp;privkey.pem
+</code></pre></div>
 <p>Starta sedan om http tjänsten och dirsrv.</p>
-<p><code>systemctl&nbsp;restart&nbsp;dirsrv@REALM.service</code>
-<code>systemctl&nbsp;restart&nbsp;httpd.service</code></p>
+<div class="highlight"><pre><span></span><code>systemctl&nbsp;restart&nbsp;dirsrv@REALM.service
+systemctl&nbsp;restart&nbsp;httpd.service
+</code></pre></div>
 <h1 id="klient">Klient</h1>
 <h2 id="installation_1">Installation</h2>
 <p>Varje klient måste ha ett fully qualified domain name. Default kerberos
 domain är din domän, t.ex. hackernet.se.</p>
 <p><strong>Ubuntu</strong></p>
-<p><code>apt-get&nbsp;install&nbsp;freeipa-client</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;freeipa-client
+</code></pre></div>
 <p><strong>Fedora</strong></p>
-<p><code>dnf&nbsp;install&nbsp;freeipa-client</code></p>
+<div class="highlight"><pre><span></span><code>dnf&nbsp;install&nbsp;freeipa-client
+</code></pre></div>
 <h2 id="enroll-host-till-freeipa">Enroll host till FreeIPA</h2>
 <p>Kör följande kommando för att starta en wizard som enrollar din klient i
 freeipa.</p>
-<p><code>sudo&nbsp;ipa-client-install</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;ipa-client-install
+</code></pre></div>
 <p>Om autodiscovery fungerar som det ska så är alla fält i fyllda och det
 enda du behöver ange är en användare som har behörighet att enrolla
 klinter till freeipa.</p>
 <p>Man kan fylla i användarnamn och lösenord i förväg så slipper svara på
 frågor.</p>
-<p><code>sudo&nbsp;ipa-client-install&nbsp;-p&nbsp;admin&nbsp;-w&nbsp;secretpw&nbsp;--unattended&nbsp;--mkhomedir</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;ipa-client-install&nbsp;-p&nbsp;admin&nbsp;-w&nbsp;secretpw&nbsp;--unattended&nbsp;--mkhomedir
+</code></pre></div>
 <h2 id="ipa-advise">IPA Advise</h2>
 <p>Med kommandot <code>ipa-advise</code> på servern kan du få konfigurations förslag
 på hur du konfigurerar en klient mot freeipa om du inte har tillgång
-till ipa klienten. <a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
+till ipa klienten. </p></blank></user>
 
 
 
@@ -9390,7 +9450,7 @@ till ipa klienten. <a href="/Category:Guider" title="wikilink">Category:Guider</
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

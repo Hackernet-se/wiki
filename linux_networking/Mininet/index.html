@@ -8743,6 +8743,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9067,13 +9095,14 @@
 <p>Projektets hemsida: <a href="http://mininet.org/">http://mininet.org/</a></p>
 <h2 id="installation">Installation</h2>
 <p><code>wget</code><a href="https://raw.github.com/mininet/mininet/master/util/vm/install-mininet-vm.sh"><code>https://raw.github.com/mininet/mininet/master/util/vm/install-mininet-vm.sh</code></a>
-<code>bash&nbsp;-v&nbsp;install-mininet-vm.sh&nbsp;master</code>
-<code>~/mininet/bin/mn&nbsp;--version</code>
-<code>cd&nbsp;~/mininet;&nbsp;git&nbsp;fetch&nbsp;--all;&nbsp;git&nbsp;checkout&nbsp;master;&nbsp;git&nbsp;pull&nbsp;--rebase&nbsp;origin&nbsp;master</code>
-<code>sudo&nbsp;-n&nbsp;make&nbsp;install</code>
-<code>sudo&nbsp;-n&nbsp;mn&nbsp;--test&nbsp;pingall</code>
-<code>sudo&nbsp;sed&nbsp;-i&nbsp;-e&nbsp;'s/^GRUB_TERMINAL=serial/#GRUB_TERMINAL=serial/'&nbsp;/etc/default/grub;&nbsp;sudo&nbsp;update-grub</code>
-<code>reboot</code></p>
+</p><div class="highlight"><pre><span></span><code>bash&nbsp;-v&nbsp;install-mininet-vm.sh&nbsp;master
+~/mininet/bin/mn&nbsp;--version
+cd&nbsp;~/mininet;&nbsp;git&nbsp;fetch&nbsp;--all;&nbsp;git&nbsp;checkout&nbsp;master;&nbsp;git&nbsp;pull&nbsp;--rebase&nbsp;origin&nbsp;master
+sudo&nbsp;-n&nbsp;make&nbsp;install
+sudo&nbsp;-n&nbsp;mn&nbsp;--test&nbsp;pingall
+sudo&nbsp;sed&nbsp;-i&nbsp;-e&nbsp;'s/^GRUB_TERMINAL=serial/#GRUB_TERMINAL=serial/'&nbsp;/etc/default/grub;&nbsp;sudo&nbsp;update-grub
+reboot
+</code></pre></div><p></p>
 <h3 id="ovf">OVF</h3>
 <p>Ladda ned ovf:n och importera till ditt vmware-system. HWversion ligger
 på 11 så det kanske du måste sänka i vmx-filen för att kunna starta
@@ -9082,7 +9111,8 @@ Credentials: mininet - mininet</p>
 <h2 id="basic">Basic</h2>
 <p><a href="http://mininet.org/walkthrough/">http://mininet.org/walkthrough/</a></p>
 <p>Kör igenom kommandona för att komma igång.</p>
-<p><code>sudo&nbsp;mn</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;mn
+</code></pre></div>
 <h2 id="setups">Setups</h2>
 <p><a href="http://sdnhub.org/resources/useful-mininet-setups/">http://sdnhub.org/resources/useful-mininet-setups/</a></p>
 <h2 id="controller">Controller</h2>
@@ -9094,16 +9124,18 @@ nätverk så man kan peka och klicka lite.</p>
 <p>Se <a href="/OpenDaylight" title="wikilink">OpenDaylight</a></p>
 <h3 id="floodlight">Floodlight</h3>
 <p><strong>Installation</strong></p>
-<p><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;build-essential&nbsp;default-jdk&nbsp;ant&nbsp;python-dev&nbsp;eclipse&nbsp;screen</code>
+<p></p><div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;build-essential&nbsp;default-jdk&nbsp;ant&nbsp;python-dev&nbsp;eclipse&nbsp;screen
+</code></pre></div>
 <code>git&nbsp;clone</code><a href="git://github.com/floodlight/floodlight.git"><code>git://github.com/floodlight/floodlight.git</code></a>
-<code>cd&nbsp;floodlight&nbsp;&amp;&amp;&nbsp;git&nbsp;checkout&nbsp;fl-last-passed-build</code>
-<code>ant;</code>
-<code>sudo&nbsp;mkdir&nbsp;/var/lib/floodlight&nbsp;&amp;&amp;&nbsp;sudo&nbsp;chmod&nbsp;777&nbsp;/var/lib/floodlight</code>
-<code>screen</code>
-<code>java&nbsp;-jar&nbsp;target/floodlight.jar</code></p>
+<div class="highlight"><pre><span></span><code>cd&nbsp;floodlight&nbsp;&amp;&amp;&nbsp;git&nbsp;checkout&nbsp;fl-last-passed-build
+ant;
+sudo&nbsp;mkdir&nbsp;/var/lib/floodlight&nbsp;&amp;&amp;&nbsp;sudo&nbsp;chmod&nbsp;777&nbsp;/var/lib/floodlight
+screen
+java&nbsp;-jar&nbsp;target/floodlight.jar
+</code></pre></div><p></p>
 <p><strong><a href="http://IP:8080/ui/index.html">http://IP:8080/ui/index.html</a></strong></p>
-<p><code>sudo&nbsp;mn&nbsp;--controller=remote,ip=127.0.0.1,port=6633&nbsp;--switch&nbsp;ovsk,protocols=OpenFlow13</code></p>
-<p><a href="/Category:Network" title="wikilink">Category:Network</a></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;mn&nbsp;--controller=remote,ip=127.0.0.1,port=6633&nbsp;--switch&nbsp;ovsk,protocols=OpenFlow13
+</code></pre></div>
 
 
 
@@ -9126,7 +9158,7 @@ nätverk så man kan peka och klicka lite.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

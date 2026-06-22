@@ -8621,6 +8621,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8857,94 +8885,115 @@ routing och MPLS. Det finns möjlighet att installera
 <a href="https://github.com/pavel-odintsov/fastnetmon/blob/master/docs/VyOS_INSTALL.md">1</a></p>
 <h1 id="installation">Installation</h1>
 <p>Ladda ner OVA alternativt installera från iso eller netbootxyz. PW: vyos</p>
-<p><code>vyos@vyos:~$&nbsp;install&nbsp;image</code></p>
+<div class="highlight"><pre><span></span><code>vyos@vyos:~$&nbsp;install&nbsp;image&nbsp;
+</code></pre></div>
 <h1 id="uppgradering">Uppgradering</h1>
 <p><code>add&nbsp;system&nbsp;image</code><a href="https://s3.amazonaws.com/s3-us.vyos.io/rolling/current/vyos-rolling-latest.iso"><code>https://s3.amazonaws.com/s3-us.vyos.io/rolling/current/vyos-rolling-latest.iso</code></a>
-<code>show&nbsp;system&nbsp;image</code></p>
+</p><div class="highlight"><pre><span></span><code>show&nbsp;system&nbsp;image
+</code></pre></div><p></p>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>Byt till konfigurationsläge.</p>
-<p><code>configure</code></p>
+<div class="highlight"><pre><span></span><code>configure
+</code></pre></div>
 <p>Ändringar måste commitas. För att spara till startup config används
 save.</p>
-<p><code>commit</code>
-<code>save</code></p>
+<div class="highlight"><pre><span></span><code>commit
+save
+</code></pre></div>
 <p>Show run</p>
-<p><code>show&nbsp;conf</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;conf
+</code></pre></div>
 <p>Show run kommandon</p>
-<p><code>show&nbsp;configuration&nbsp;commands</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;configuration&nbsp;commands
+</code></pre></div>
 <p><strong>SSH</strong></p>
-<p><code>set&nbsp;service&nbsp;ssh&nbsp;port&nbsp;'22'</code>
-<code>set&nbsp;service&nbsp;ssh&nbsp;listen-address&nbsp;'172.20.0.1'</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;service&nbsp;ssh&nbsp;port&nbsp;'22'
+set&nbsp;service&nbsp;ssh&nbsp;listen-address&nbsp;'172.20.0.1'
+</code></pre></div>
 <p>Logga in med ssh-nyckel</p>
-<p><code>set&nbsp;system&nbsp;login&nbsp;user&nbsp;vyos&nbsp;authentication&nbsp;public-keys&nbsp;user@mgm&nbsp;key&nbsp;'AAAAC3NzaC1lZAAAIGCW6VcUwAzbX0gipoiDYBxxxxxxxxx'</code>
-<code>set&nbsp;system&nbsp;login&nbsp;user&nbsp;vyos&nbsp;authentication&nbsp;public-keys&nbsp;user@mgm&nbsp;type&nbsp;'ssh-ed25519'</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;system&nbsp;login&nbsp;user&nbsp;vyos&nbsp;authentication&nbsp;public-keys&nbsp;user@mgm&nbsp;key&nbsp;'AAAAC3NzaC1lZAAAIGCW6VcUwAzbX0gipoiDYBxxxxxxxxx'
+set&nbsp;system&nbsp;login&nbsp;user&nbsp;vyos&nbsp;authentication&nbsp;public-keys&nbsp;user@mgm&nbsp;type&nbsp;'ssh-ed25519'
+</code></pre></div>
 <p><strong>Live logging</strong></p>
-<p><code>monitor&nbsp;log</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;log
+</code></pre></div>
 <p><strong>System</strong></p>
-<p><code>set&nbsp;system&nbsp;domain-name&nbsp;hackernet.se</code>
-<code>set&nbsp;system&nbsp;host-name&nbsp;vyos01</code>
-<code>set&nbsp;system&nbsp;name-server&nbsp;208.67.222.222</code>
-<code>set&nbsp;system&nbsp;name-server&nbsp;208.67.220.220</code>
-<code>set&nbsp;system&nbsp;time-zone&nbsp;Europe/Stockholm</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;system&nbsp;domain-name&nbsp;hackernet.se
+set&nbsp;system&nbsp;host-name&nbsp;vyos01
+set&nbsp;system&nbsp;name-server&nbsp;208.67.222.222
+set&nbsp;system&nbsp;name-server&nbsp;208.67.220.220
+set&nbsp;system&nbsp;time-zone&nbsp;Europe/Stockholm
+</code></pre></div>
 <p><strong>Backup</strong></p>
-<p><code>set&nbsp;system&nbsp;config-management&nbsp;commit-archive&nbsp;location&nbsp;scp://user@172.20.0.20:/vyos_backups/</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;system&nbsp;config-management&nbsp;commit-archive&nbsp;location&nbsp;scp://user@172.20.0.20:/vyos_backups/
+</code></pre></div>
 <p>Testa backuptagning manuellt.</p>
-<p><code>copy&nbsp;file&nbsp;running://config/config.boot&nbsp;to&nbsp;scp://user@172.20.0.20:/vyos_backups/</code></p>
+<div class="highlight"><pre><span></span><code>copy&nbsp;file&nbsp;running://config/config.boot&nbsp;to&nbsp;scp://user@172.20.0.20:/vyos_backups/
+</code></pre></div>
 <p><strong>Interface</strong></p>
-<p><code>configure</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;address&nbsp;'10.0.0.1/24'</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;description&nbsp;'INSIDE'</code>
-<code>show&nbsp;interfaces</code></p>
+<div class="highlight"><pre><span></span><code>configure
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;address&nbsp;'10.0.0.1/24'
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;description&nbsp;'INSIDE'
+show&nbsp;interfaces
+</code></pre></div>
 <p><strong>Default route</strong></p>
-<p><code>set&nbsp;protocols&nbsp;static&nbsp;route&nbsp;0.0.0.0/0&nbsp;next-hop&nbsp;10.0.10.1&nbsp;distance&nbsp;'1'</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;protocols&nbsp;static&nbsp;route&nbsp;0.0.0.0/0&nbsp;next-hop&nbsp;10.0.10.1&nbsp;distance&nbsp;'1'
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;route</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;route
+</code></pre></div>
 <p><strong>Comments</strong>
 Man kan lägga in kommentarer var som helst i konfigurationen.</p>
 <p><code>comment</code><em><code>path-config-section</code></em><code>"comment"</code></p>
 <p>Default editerar man från top level ([edit]) men för att undvika att
 alltid skriva långa kommandon kan man ställa sig var som helst i
 strukturen och använda relativa paths. "up" är för att backa.</p>
-<p><code>edit&nbsp;interfaces&nbsp;ethernet&nbsp;eth0</code>
-<code>set&nbsp;address&nbsp;'10.0.0.1/24'</code></p>
+<div class="highlight"><pre><span></span><code>edit&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;
+set&nbsp;address&nbsp;'10.0.0.1/24'
+</code></pre></div>
 <p><strong>Öka ring queue buffer size</strong></p>
-<p><code>sudo&nbsp;ethtool&nbsp;-g&nbsp;eth0</code>
-<code>sudo&nbsp;ethtool&nbsp;-G&nbsp;eth0&nbsp;tx&nbsp;4096&nbsp;rx&nbsp;4096</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;ethtool&nbsp;-g&nbsp;eth0
+sudo&nbsp;ethtool&nbsp;-G&nbsp;eth0&nbsp;tx&nbsp;4096&nbsp;rx&nbsp;4096
+</code></pre></div>
 <h2 id="nat">NAT</h2>
 <p>Overload/PAT</p>
-<p><code>set&nbsp;nat&nbsp;source&nbsp;rule&nbsp;10&nbsp;outbound-interface&nbsp;eth0</code>
-<code>set&nbsp;nat&nbsp;source&nbsp;rule&nbsp;10&nbsp;source&nbsp;address&nbsp;10.0.0.0/24</code>
-<code>set&nbsp;nat&nbsp;source&nbsp;rule&nbsp;10&nbsp;translation&nbsp;address&nbsp;masquerade</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;nat&nbsp;source&nbsp;rule&nbsp;10&nbsp;outbound-interface&nbsp;eth0
+set&nbsp;nat&nbsp;source&nbsp;rule&nbsp;10&nbsp;source&nbsp;address&nbsp;10.0.0.0/24
+set&nbsp;nat&nbsp;source&nbsp;rule&nbsp;10&nbsp;translation&nbsp;address&nbsp;masquerade
+</code></pre></div>
 <h2 id="ipv6">IPv6</h2>
 <p>Din ISP måste supporta IPv6 prefix delegation. Följande funkade för
 Bahnhof.</p>
 <p>Slå på prefix-delegation(pd) på ditt wan interface, och assigna ett
 prefix till ditt interface i detta fallet eth2.</p>
-<p><code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;address&nbsp;'dhcpv6'</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;description&nbsp;'WAN'</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;dhcpv6-options&nbsp;pd&nbsp;0&nbsp;interface&nbsp;eth2&nbsp;sla-id&nbsp;'2'</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;dhcpv6-options&nbsp;pd&nbsp;0&nbsp;length&nbsp;'56'</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;address&nbsp;'dhcpv6'
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;description&nbsp;'WAN'
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;dhcpv6-options&nbsp;pd&nbsp;0&nbsp;interface&nbsp;eth2&nbsp;sla-id&nbsp;'2'
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;dhcpv6-options&nbsp;pd&nbsp;0&nbsp;length&nbsp;'56'
+</code></pre></div>
 <p>Sätt sedan på router-advert på eth2 för att ge ut en IPv6 address och
 DNS server till klienterna.</p>
-<p><code>set&nbsp;service&nbsp;router-advert&nbsp;interface&nbsp;eth2&nbsp;name-server&nbsp;'2001:4860:4860::8888'</code>
-<code>set&nbsp;service&nbsp;router-advert&nbsp;interface&nbsp;eth2&nbsp;name-server&nbsp;'2001:4860:4860::8844'</code>
-<code>set&nbsp;service&nbsp;router-advert&nbsp;interface&nbsp;eth2&nbsp;prefix&nbsp;::/64</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;service&nbsp;router-advert&nbsp;interface&nbsp;eth2&nbsp;name-server&nbsp;'2001:4860:4860::8888'
+set&nbsp;service&nbsp;router-advert&nbsp;interface&nbsp;eth2&nbsp;name-server&nbsp;'2001:4860:4860::8844'
+set&nbsp;service&nbsp;router-advert&nbsp;interface&nbsp;eth2&nbsp;prefix&nbsp;::/64
+</code></pre></div>
 <h2 id="router-on-a-stick">Router-on-a-stick</h2>
 <p>Sub-interfaces</p>
-<p><code>set&nbsp;firewall&nbsp;name&nbsp;LOCAL&nbsp;default-action&nbsp;'drop'</code>
-<code>set&nbsp;firewall&nbsp;name&nbsp;LOCAL&nbsp;rule&nbsp;10&nbsp;action&nbsp;'accept'</code>
-<code>set&nbsp;firewall&nbsp;name&nbsp;LOCAL&nbsp;rule&nbsp;10&nbsp;state&nbsp;established&nbsp;'enable'</code>
-<code>set&nbsp;firewall&nbsp;name&nbsp;LOCAL&nbsp;rule&nbsp;10&nbsp;state&nbsp;related&nbsp;'enable'</code>
-<code>set&nbsp;firewall&nbsp;name&nbsp;OUTSIDE&nbsp;default-action&nbsp;'drop'</code>
-<code>set&nbsp;firewall&nbsp;name&nbsp;OUTSIDE&nbsp;rule&nbsp;10&nbsp;action&nbsp;'accept'</code>
-<code>set&nbsp;firewall&nbsp;name&nbsp;OUTSIDE&nbsp;rule&nbsp;10&nbsp;state&nbsp;established&nbsp;'enable'</code>
-<code>set&nbsp;firewall&nbsp;name&nbsp;OUTSIDE&nbsp;rule&nbsp;10&nbsp;state&nbsp;related&nbsp;'enable'</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;2&nbsp;address&nbsp;'172.20.0.1/24'</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;2&nbsp;description&nbsp;'LAN'</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;3&nbsp;address&nbsp;'dhcp'</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;3&nbsp;description&nbsp;'WAN'</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;3&nbsp;firewall&nbsp;in&nbsp;name&nbsp;'OUTSIDE'</code>
-<code>set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;3&nbsp;firewall&nbsp;local&nbsp;name&nbsp;'LOCAL'</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;firewall&nbsp;name&nbsp;LOCAL&nbsp;default-action&nbsp;'drop'
+set&nbsp;firewall&nbsp;name&nbsp;LOCAL&nbsp;rule&nbsp;10&nbsp;action&nbsp;'accept'
+set&nbsp;firewall&nbsp;name&nbsp;LOCAL&nbsp;rule&nbsp;10&nbsp;state&nbsp;established&nbsp;'enable'
+set&nbsp;firewall&nbsp;name&nbsp;LOCAL&nbsp;rule&nbsp;10&nbsp;state&nbsp;related&nbsp;'enable'
+set&nbsp;firewall&nbsp;name&nbsp;OUTSIDE&nbsp;default-action&nbsp;'drop'
+set&nbsp;firewall&nbsp;name&nbsp;OUTSIDE&nbsp;rule&nbsp;10&nbsp;action&nbsp;'accept'
+set&nbsp;firewall&nbsp;name&nbsp;OUTSIDE&nbsp;rule&nbsp;10&nbsp;state&nbsp;established&nbsp;'enable'
+set&nbsp;firewall&nbsp;name&nbsp;OUTSIDE&nbsp;rule&nbsp;10&nbsp;state&nbsp;related&nbsp;'enable'
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;2&nbsp;address&nbsp;'172.20.0.1/24'
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;2&nbsp;description&nbsp;'LAN'
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;3&nbsp;address&nbsp;'dhcp'
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;3&nbsp;description&nbsp;'WAN'
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;3&nbsp;firewall&nbsp;in&nbsp;name&nbsp;'OUTSIDE'
+set&nbsp;interfaces&nbsp;ethernet&nbsp;eth0&nbsp;vif&nbsp;3&nbsp;firewall&nbsp;local&nbsp;name&nbsp;'LOCAL'
+</code></pre></div>
 <h2 id="zerotier">Zerotier</h2>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>-i
 curl<span class="w"> </span>-s<span class="w"> </span>https://install.zerotier.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>bash
@@ -8957,15 +9006,16 @@ apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&a
 </code></pre></div>
 <h2 id="netbootxyz">netboot.xyz</h2>
 <p>DHCP-server + TFTP-server + netboot.xyz, all-in-one.</p>
-<p><code>set&nbsp;service&nbsp;dhcp-server&nbsp;shared-network-name&nbsp;LAN&nbsp;subnet&nbsp;172.20.0.0/24&nbsp;bootfile-server&nbsp;172.20.0.1</code>
-<code>set&nbsp;service&nbsp;dhcp-server&nbsp;shared-network-name&nbsp;LAN&nbsp;subnet&nbsp;172.20.0.0/24&nbsp;bootfile-name&nbsp;netboot.xyz.efi</code>
-<code>set&nbsp;service&nbsp;tftp-server&nbsp;directory&nbsp;/config/tftproot</code>
-<code>set&nbsp;service&nbsp;tftp-server&nbsp;listen-address&nbsp;172.20.0.1</code>
-<code>commit</code></p>
-<p><code>sudo&nbsp;-i</code>
-<code>mkdir&nbsp;/config/tftproot&nbsp;&amp;&amp;&nbsp;cd&nbsp;/config/tftproot/&nbsp;&amp;&amp;&nbsp;wget</code><a href="https://boot.netboot.xyz/ipxe/netboot.xyz.efi"><code>https://boot.netboot.xyz/ipxe/netboot.xyz.efi</code></a></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;service&nbsp;dhcp-server&nbsp;shared-network-name&nbsp;LAN&nbsp;subnet&nbsp;172.20.0.0/24&nbsp;bootfile-server&nbsp;172.20.0.1
+set&nbsp;service&nbsp;dhcp-server&nbsp;shared-network-name&nbsp;LAN&nbsp;subnet&nbsp;172.20.0.0/24&nbsp;bootfile-name&nbsp;netboot.xyz.efi
+set&nbsp;service&nbsp;tftp-server&nbsp;directory&nbsp;/config/tftproot
+set&nbsp;service&nbsp;tftp-server&nbsp;listen-address&nbsp;172.20.0.1
+commit
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>sudo&nbsp;-i
+</code></pre></div>
+<code>mkdir&nbsp;/config/tftproot&nbsp;&amp;&amp;&nbsp;cd&nbsp;/config/tftproot/&nbsp;&amp;&amp;&nbsp;wget</code><a href="https://boot.netboot.xyz/ipxe/netboot.xyz.efi"><code>https://boot.netboot.xyz/ipxe/netboot.xyz.efi</code></a><p></p>
 <p>OBS funkar endast med EFI-klienter (med Secure Boot avstängt).</p>
-<p><a href="/Category:Network" title="wikilink">Category:Network</a></p>
 
 
 
@@ -8988,7 +9038,7 @@ apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&a
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

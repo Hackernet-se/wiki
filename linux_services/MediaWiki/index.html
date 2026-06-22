@@ -97,7 +97,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#forberedelser" class="md-skip">
+        <a href="#valfria-program" class="md-skip">
           Gå till innehållet
         </a>
       
@@ -2288,18 +2288,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
-  <a href="#forberedelser" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Förberedelser
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Förberedelser">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#valfria-program" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2307,11 +2295,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -8730,6 +8713,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8939,18 +8950,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
-  <a href="#forberedelser" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Förberedelser
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Förberedelser">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#valfria-program" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8958,11 +8957,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -9038,14 +9032,7 @@
 
   <h1>MediaWiki</h1>
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a>
-<a href="/Category:Sparco" title="wikilink">Category:Sparco</a> MediaWiki är en
-open-source wiki application som driver två av dom största och bästa
-wiki hemsidorna på nätet <a href="http://hackernet.se">Hackernet</a> och
-<a href="https://www.wikipedia.org/">Wikipedia</a>.</p>
-<h2 id="forberedelser">Förberedelser</h2>
-<p>För att kunna köra mediawiki krävs det att du har
-<a href="/LAMP" title="wikilink">LAMP</a>.</p>
+<p>.</p>
 <h3 id="valfria-program">Valfria program</h3>
 <p>Man kan installera dom i efterhand också om man kommer på att man
 behöver dom.</p>
@@ -9084,7 +9071,8 @@ behöver dom.</p>
 </tbody>
 </table>
 <p>Exempel:</p>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;php-apc&nbsp;php5-intl&nbsp;imagemagick&nbsp;phpmyadmin&nbsp;vsftpd&nbsp;php5-cli</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;php-apc&nbsp;php5-intl&nbsp;imagemagick&nbsp;phpmyadmin&nbsp;vsftpd&nbsp;php5-cli
+</code></pre></div>
 <h2 id="installation">Installation</h2>
 <p>Tanka hem senaste eller LTS versionen från deras hemsida, packa upp
 filen och byt namn på foldern.</p>
@@ -9270,7 +9258,8 @@ rm<span class="w"> </span>-r<span class="w"> </span><span class="nv">$tempdir</s
 Scriptet funkar att köra som ett cronjob. Raden gör att det körs en
 backup kl 05:00 varje dag.
 
-`0&nbsp;05&nbsp;*&nbsp;*&nbsp;*&nbsp;cd&nbsp;/path/to/script&nbsp;&amp;&amp;&nbsp;sh&nbsp;Backup_script.sh`
+<div class="highlight"><pre><span></span><code>0&nbsp;05&nbsp;*&nbsp;*&nbsp;*&nbsp;cd&nbsp;/path/to/script&nbsp;&amp;&amp;&nbsp;sh&nbsp;Backup_script.sh
+</code></pre></div>
 
 Sitemap
 -------
@@ -9283,7 +9272,8 @@ Scriptet finns under `maintenance` och heter `generateSitemap.php`.
 
 Skapa en mapp att spara sitemapen i.
 
-`mkdir&nbsp;/var/www/mediawiki/sitemap`
+<div class="highlight"><pre><span></span><code>mkdir&nbsp;/var/www/mediawiki/sitemap
+</code></pre></div>
 
 Kör kommandot,
 
@@ -9316,8 +9306,9 @@ Ersätt dom gammla filerna med dom nya filerna. Via skalet kör sedan
 maintenance script för att uppdatera databas tabeller och bygg om
 filstrukturen för bla filer:
 
-`php&nbsp;/var/www/mediawiki/maintenance/update.php`
-`php&nbsp;/var/www/mediawiki/maintenance/rebuildall.php`
+<div class="highlight"><pre><span></span><code>php&nbsp;/var/www/mediawiki/maintenance/update.php
+php&nbsp;/var/www/mediawiki/maintenance/rebuildall.php
+</code></pre></div>
 
 Gå in på din wiki sida och kolla *Special:Version* för att verifiera att
 uppgraderingen.
@@ -9354,7 +9345,7 @@ uppgraderingen.
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

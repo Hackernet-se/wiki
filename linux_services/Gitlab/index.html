@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8841,10 +8869,7 @@
   
 
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a> Gitlab är ett webbaserad
-git repositry manager med bland annat en inbyggd wiki. Gitlab fungerar
-som Github gör och dom erbjuder att så man kan hosta sin egna lösning på
-sin egen server. Se även <a href="/Git" title="wikilink">Git</a>.</p>
+<p>.</p>
 <p>Det finns 2 version av Gitlab:</p>
 <ul>
 <li>Gitlab CE: Community Edition.</li>
@@ -8853,12 +8878,15 @@ sin egen server. Se även <a href="/Git" title="wikilink">Git</a>.</p>
 <h1 id="installation">Installation</h1>
 <p>Installera dom nödvändiga paketen. Postfix kan man skippa om man har en
 annan mailserver.</p>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;curl&nbsp;openssh-server&nbsp;ca-certificates&nbsp;postfix</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;curl&nbsp;openssh-server&nbsp;ca-certificates&nbsp;postfix
+</code></pre></div>
 <p>Lägg till Gitlab's repo och installera sedan Gitlab CE.</p>
 <p><code>curl&nbsp;-sS</code><a href="https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh"><code>https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh</code></a><code>|&nbsp;sudo&nbsp;bash</code>
-<code>sudo&nbsp;apt-get&nbsp;install&nbsp;gitlab-ce</code></p>
+</p><div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;gitlab-ce
+</code></pre></div><p></p>
 <p>Konfigurera sedan Gitlab och starta det.</p>
-<p><code>sudo&nbsp;gitlab-ctl&nbsp;reconfigure</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;gitlab-ctl&nbsp;reconfigure
+</code></pre></div>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>Att konfigurera är väldigt enkelt. Man gör sina ändringar i
 <code>/etc/gitlab/gitlab.rb</code> efter det kör man <code>sudo gitlab-ctl reconfigure</code>
@@ -8871,55 +8899,63 @@ private key och certificate filen som heter <strong>git.hackernet.se.key/crt</st
 under <code>/etc/gitlab/ssl/</code>.</p>
 <p>Om du behöver ändra vart cert filerna finns och vad dom heter ändra
 dessa 2 rader.</p>
-<p><code>nginx['ssl_certificate']&nbsp;=&nbsp;"/opt/cert/fullchain.pem"</code>
-<code>nginx['ssl_certificate_key']&nbsp;=&nbsp;"/opt/cert/privkey.pem"</code></p>
+<div class="highlight"><pre><span></span><code>nginx['ssl_certificate']&nbsp;=&nbsp;"/opt/cert/fullchain.pem"
+nginx['ssl_certificate_key']&nbsp;=&nbsp;"/opt/cert/privkey.pem"
+</code></pre></div>
 <p><strong>Redirect HTTP till HTTPS</strong>
 Ändra följande rad till true.</p>
-<p><code>nginx['redirect_http_to_https']&nbsp;=&nbsp;true</code></p>
+<div class="highlight"><pre><span></span><code>nginx['redirect_http_to_https']&nbsp;=&nbsp;true
+</code></pre></div>
 <h2 id="ldap-authentication">LDAP authentication</h2>
 <p>För mer info kolla <a href="https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/ldap.md">Gitlab LDAP
 document</a></p>
-<p><code>gitlab_rails['ldap_enabled']&nbsp;=&nbsp;true</code>
-<code>gitlab_rails['ldap_servers']&nbsp;=&nbsp;YAML.load&nbsp;&lt;&lt;-'EOS'&nbsp;#&nbsp;remember&nbsp;to&nbsp;close&nbsp;this&nbsp;block&nbsp;with&nbsp;'EOS'&nbsp;below</code>
-<code>main:&nbsp;#&nbsp;'main'&nbsp;is&nbsp;the&nbsp;GitLab&nbsp;'provider&nbsp;ID'&nbsp;of&nbsp;this&nbsp;LDAP&nbsp;server</code>
-<code>label:&nbsp;'Hackernet'</code>
-<code>host:&nbsp;'openldap.hackernet.se'</code>
-<code>port:&nbsp;389</code>
-<code>uid:&nbsp;'uid'</code>
-<code>method:&nbsp;'plain'</code>
-<code>bind_dn:&nbsp;'&gt;ldap&nbsp;bind&nbsp;username&gt;'</code>
+<p></p><div class="highlight"><pre><span></span><code>gitlab_rails['ldap_enabled']&nbsp;=&nbsp;true
+gitlab_rails['ldap_servers']&nbsp;=&nbsp;YAML.load&nbsp;&lt;&lt;-'EOS'&nbsp;#&nbsp;remember&nbsp;to&nbsp;close&nbsp;this&nbsp;block&nbsp;with&nbsp;'EOS'&nbsp;below
+main:&nbsp;#&nbsp;'main'&nbsp;is&nbsp;the&nbsp;GitLab&nbsp;'provider&nbsp;ID'&nbsp;of&nbsp;this&nbsp;LDAP&nbsp;server
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;'Hackernet'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;host:&nbsp;'openldap.hackernet.se'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;port:&nbsp;389
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uid:&nbsp;'uid'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method:&nbsp;'plain'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bind_dn:&nbsp;'&gt;ldap&nbsp;bind&nbsp;username&gt;'
+</code></pre></div>
 <code>password:&nbsp;'</code><ldap bind="" password=""><code>'</code>
-<code>active_directory:&nbsp;false</code>
-<code>allow_username_or_email_login:&nbsp;true</code>
-<code>block_auto_created_users:&nbsp;false</code>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active_directory:&nbsp;false
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow_username_or_email_login:&nbsp;true
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;block_auto_created_users:&nbsp;false
+</code></pre></div>
 <code>base:&nbsp;'</code><base dn=""><code>'</code>
-<code>user_filter:&nbsp;''</code>
-<code>attributes:</code>
-<code>username:&nbsp;['uid',&nbsp;'userid',&nbsp;'sAMAccountName']</code>
-<code>email:&nbsp;&nbsp;&nbsp;&nbsp;['mail',&nbsp;'email',&nbsp;'userPrincipalName']</code>
-<code>name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'cn'</code>
-<code>first_name:&nbsp;'givenName'</code>
-<code>last_name:&nbsp;&nbsp;'sn'</code>
-<code>##&nbsp;EE&nbsp;only</code>
-<code>group_base:&nbsp;'dc=hackernet,dc=se'</code>
-<code>admin_group:&nbsp;'cn=wiki'</code>
-<code>sync_ssh_keys:&nbsp;false</code>
-<code>EOS</code></ldap></p>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user_filter:&nbsp;''
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;username:&nbsp;['uid',&nbsp;'userid',&nbsp;'sAMAccountName']
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email:&nbsp;&nbsp;&nbsp;&nbsp;['mail',&nbsp;'email',&nbsp;'userPrincipalName']
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'cn'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;first_name:&nbsp;'givenName'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;last_name:&nbsp;&nbsp;'sn'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;EE&nbsp;only
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group_base:&nbsp;'dc=hackernet,dc=se'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;admin_group:&nbsp;'cn=wiki'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sync_ssh_keys:&nbsp;false
+&nbsp;EOS
+</code></pre></div><p></p>
 <p><strong>Gör LDAP användare till admin</strong>
 För att göra en LDAP användare till admin kör följande kommando i shell:</p>
-<p><code>sudo&nbsp;gitlab-rails&nbsp;console</code>
-<code>u&nbsp;=&nbsp;User.find_by_username("LDAPadmin")</code>
-<code>u.admin&nbsp;=&nbsp;true</code>
-<code>u.save</code>
-<code>exit</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;gitlab-rails&nbsp;console
+u&nbsp;=&nbsp;User.find_by_username("LDAPadmin")
+u.admin&nbsp;=&nbsp;true
+u.save
+exit
+</code></pre></div>
 <h2 id="schemalagd-backup">Schemalagd backup</h2>
 <p>Simpel backup görs mha crontab och /var/opt/gitlab/backups kan sedan
 <rsync:as> iväg till remote site.</rsync:as></p>
-<p><code>0&nbsp;4&nbsp;*&nbsp;*&nbsp;7&nbsp;/opt/gitlab/bin/gitlab-backup&nbsp;create&nbsp;CRON=1</code>
-<code>1&nbsp;4&nbsp;*&nbsp;*&nbsp;7&nbsp;cp&nbsp;/etc/gitlab/gitlab-secrets.json&nbsp;/var/opt/gitlab/backups/&nbsp;&gt;/dev/null</code>
-<code>1&nbsp;4&nbsp;*&nbsp;*&nbsp;7&nbsp;cp&nbsp;/etc/gitlab/gitlab.rb&nbsp;/var/opt/gitlab/backups/&nbsp;&gt;/dev/null</code></p>
+<div class="highlight"><pre><span></span><code>0&nbsp;4&nbsp;*&nbsp;*&nbsp;7&nbsp;/opt/gitlab/bin/gitlab-backup&nbsp;create&nbsp;CRON=1
+1&nbsp;4&nbsp;*&nbsp;*&nbsp;7&nbsp;cp&nbsp;/etc/gitlab/gitlab-secrets.json&nbsp;/var/opt/gitlab/backups/&nbsp;&gt;/dev/null
+1&nbsp;4&nbsp;*&nbsp;*&nbsp;7&nbsp;cp&nbsp;/etc/gitlab/gitlab.rb&nbsp;/var/opt/gitlab/backups/&nbsp;&gt;/dev/null
+</code></pre></div>
 <p>Limit backup lifetime to 60 days, /etc/gitlab/gitlab.rb.</p>
-<p><code>gitlab_rails['backup_keep_time']&nbsp;=&nbsp;5184000</code></p>
+<div class="highlight"><pre><span></span><code>gitlab_rails['backup_keep_time']&nbsp;=&nbsp;5184000
+</code></pre></div>
 <h1 id="cicd">CI/CD</h1>
 <p>I ditt gitlab repo kan du skapa en fil som heter <strong>.gitlab-ci.yml</strong>.</p>
 <p>Det är i denna filen som du specificerar vad din pipeline ska göra.</p>
@@ -8960,7 +8996,7 @@ configen så kan du skapa en fil i rooten på ditt repo som heter
 <span class="w">  </span><span class="c1">#                 - item</span>
 <span class="w">  </span><span class="nt">indentation</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">indent-sequences</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whatever</span>
-</code></pre></div>
+</code></pre></div></ldap>
 
 
 
@@ -8983,7 +9019,7 @@ configen så kan du skapa en fil i rooten på ditt repo som heter
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

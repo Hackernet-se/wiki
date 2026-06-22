@@ -8704,6 +8704,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9082,109 +9110,138 @@ modifiera MTU per VSAN, det kommer att förhandlas vid FLOGI.</p>
 <p>Nexus 5000. Default pratar bara Nexus-switchar FC med Cisco FC-switchar,
 detta går att ändra med interoperability mode.</p>
 <p>Prereqs</p>
-<p><code>feature&nbsp;fcoe</code></p>
-<p><code>slot&nbsp;1</code>
-<code>port&nbsp;44-48&nbsp;type&nbsp;fc</code></p>
-<p><code>copy&nbsp;run&nbsp;start</code>
-<code>reload</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;fcoe
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>slot&nbsp;1&nbsp;
+&nbsp;port&nbsp;44-48&nbsp;type&nbsp;fc
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>copy&nbsp;run&nbsp;start
+reload
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;int&nbsp;br</code>
-<code>show&nbsp;int&nbsp;e1/44&nbsp;trans</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;int&nbsp;br&nbsp;&nbsp;
+show&nbsp;int&nbsp;e1/44&nbsp;trans
+</code></pre></div>
 <p>VSAN och trunk</p>
-<p><code>feature&nbsp;fport-channel-trunk</code></p>
-<p><code>vsan&nbsp;database</code>
-<code>vsan&nbsp;100</code>
-<code>vsan&nbsp;100&nbsp;interface&nbsp;fc1/44&nbsp;-&nbsp;48</code></p>
-<p><code>interface&nbsp;fc1/44&nbsp;-&nbsp;45</code>
-<code>channel-group&nbsp;10</code></p>
-<p><code>interface&nbsp;san-port-channel&nbsp;10</code>
-<code>channel&nbsp;mode&nbsp;active</code>
-<code>switchport&nbsp;trunk&nbsp;mode&nbsp;on</code>
-<code>switchport&nbsp;trunk&nbsp;allowed&nbsp;vsan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;fport-channel-trunk
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>vsan&nbsp;database
+&nbsp;vsan&nbsp;100
+&nbsp;vsan&nbsp;100&nbsp;interface&nbsp;fc1/44&nbsp;-&nbsp;48
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;fc1/44&nbsp;-&nbsp;45
+&nbsp;channel-group&nbsp;10&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;san-port-channel&nbsp;10
+&nbsp;channel&nbsp;mode&nbsp;active
+&nbsp;switchport&nbsp;trunk&nbsp;mode&nbsp;on
+&nbsp;switchport&nbsp;trunk&nbsp;allowed&nbsp;vsan&nbsp;100
+</code></pre></div>
 <p>Noter att båda sidor bör konfas klart innan man gör no shutdown på
 port-channel.</p>
-<p><code>show&nbsp;san-port-channel&nbsp;database</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;san-port-channel&nbsp;database
+</code></pre></div>
 <p>TE port</p>
-<p><code>interface&nbsp;fc1/1&nbsp;-&nbsp;2</code>
-<code>switchport&nbsp;speed&nbsp;8000</code>
-<code>switchport&nbsp;mode&nbsp;E</code>
-<code>switchport&nbsp;trunk&nbsp;allowed&nbsp;vsan&nbsp;101</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;fc1/1&nbsp;-&nbsp;2
+&nbsp;switchport&nbsp;speed&nbsp;8000
+&nbsp;switchport&nbsp;mode&nbsp;E
+&nbsp;switchport&nbsp;trunk&nbsp;allowed&nbsp;vsan&nbsp;101
+</code></pre></div>
 <p>TE Port-channel</p>
-<p><code>interface&nbsp;fc2/1&nbsp;-&nbsp;2</code>
-<code>switchport&nbsp;speed&nbsp;8000</code>
-<code>switchport&nbsp;mode&nbsp;E</code>
-<code>channel-group&nbsp;11&nbsp;force</code>
-<code>no&nbsp;shutdown</code></p>
-<p><code>interface&nbsp;san-port-channel&nbsp;11</code>
-<code>channel&nbsp;mode&nbsp;active</code>
-<code>switchport&nbsp;mode&nbsp;E</code>
-<code>switchport&nbsp;trunk&nbsp;allowed&nbsp;vsan&nbsp;101</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;fc2/1&nbsp;-&nbsp;2
+&nbsp;switchport&nbsp;speed&nbsp;8000
+&nbsp;switchport&nbsp;mode&nbsp;E
+&nbsp;channel-group&nbsp;11&nbsp;force
+&nbsp;no&nbsp;shutdown
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;san-port-channel&nbsp;11
+&nbsp;channel&nbsp;mode&nbsp;active
+&nbsp;switchport&nbsp;mode&nbsp;E
+&nbsp;switchport&nbsp;trunk&nbsp;allowed&nbsp;vsan&nbsp;101
+</code></pre></div>
 <p><strong>Verify</strong>
 show flogi database</p>
-<p><code>show&nbsp;fcns&nbsp;database</code>
-<code>show&nbsp;fcdomain&nbsp;domain-list</code>
-<code>show&nbsp;fcroute&nbsp;unicast</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;fcns&nbsp;database
+show&nbsp;fcdomain&nbsp;domain-list
+show&nbsp;fcroute&nbsp;unicast
+</code></pre></div>
 <p>Traffic Engineering</p>
-<p><code>interface&nbsp;fc1/24</code>
-<code>fspf&nbsp;cost&nbsp;50&nbsp;vsan&nbsp;100</code></p>
-<p><code>show&nbsp;fspf&nbsp;vsan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;fc1/24
+&nbsp;fspf&nbsp;cost&nbsp;50&nbsp;vsan&nbsp;100
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;fspf&nbsp;vsan&nbsp;100
+</code></pre></div>
 <p>Persistent FC ID</p>
-<p><code>fcdomain&nbsp;fcid&nbsp;persistent&nbsp;vsan&nbsp;100</code>
-<code>fcdomain&nbsp;fcid&nbsp;database</code>
-<code>vsan&nbsp;100&nbsp;wwn&nbsp;11:22:11:22:33:44:33:44&nbsp;fcid&nbsp;0x66ee00</code></p>
-<p><code>show&nbsp;fcdomain&nbsp;fcid&nbsp;persistent&nbsp;vsan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>fcdomain&nbsp;fcid&nbsp;persistent&nbsp;vsan&nbsp;100
+fcdomain&nbsp;fcid&nbsp;database
+&nbsp;vsan&nbsp;100&nbsp;wwn&nbsp;11:22:11:22:33:44:33:44&nbsp;fcid&nbsp;0x66ee00
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;fcdomain&nbsp;fcid&nbsp;persistent&nbsp;vsan&nbsp;100
+</code></pre></div>
 <h4 id="zoning">Zoning</h4>
 <p>Zoning är en central del i FC, det är access control i fabricen. Ett
 zoneset är en eller flera zones. Zone-rekommendation är single target,
 single initiatior och att man använder pwwn eller alias. Det kan vara
 bra att känna till att vissa system är case sensitive när det gäller
 WWN:er. Hard zoning går ej att stänga av på Nexus.</p>
-<p><code>zoneset&nbsp;name&nbsp;PROD-A&nbsp;vsan&nbsp;100</code>
-<code>zone&nbsp;name&nbsp;Server1-to-SAN</code>
-<code>member&nbsp;pwwn&nbsp;10:00:00:23:45:00:00:10</code>
-<code>member&nbsp;pwwn&nbsp;10:00:00:23:45:00:00:20</code></p>
-<p><code>zoneset&nbsp;activate&nbsp;name&nbsp;PROD-A&nbsp;vsan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>zoneset&nbsp;name&nbsp;PROD-A&nbsp;vsan&nbsp;100
+&nbsp;zone&nbsp;name&nbsp;Server1-to-SAN
+&nbsp;&nbsp;member&nbsp;pwwn&nbsp;10:00:00:23:45:00:00:10
+&nbsp;&nbsp;member&nbsp;pwwn&nbsp;10:00:00:23:45:00:00:20
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>zoneset&nbsp;activate&nbsp;name&nbsp;PROD-A&nbsp;vsan&nbsp;100
+</code></pre></div>
 <p>Show</p>
-<p><code>show&nbsp;zone&nbsp;status&nbsp;vsan&nbsp;100</code>
-<code>show&nbsp;zoneset&nbsp;active</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;zone&nbsp;status&nbsp;vsan&nbsp;100
+show&nbsp;zoneset&nbsp;active
+</code></pre></div>
 <p>Permit all</p>
-<p><code>zone&nbsp;default-zone&nbsp;permit&nbsp;vsan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>zone&nbsp;default-zone&nbsp;permit&nbsp;vsan&nbsp;100
+</code></pre></div>
 <p><strong>Enhanced Zoning</strong>
 Gör att varje gång man konfar det så låses konfen fabric wide av CFS. Om
 t.ex. ett vsan isoleras på en länk kolla att zoning mode överenstämmer
 (tänk VTP).</p>
-<p><code>zone&nbsp;mode&nbsp;enhanced&nbsp;vsan&nbsp;100</code>
-<code>zone&nbsp;confirm-commit</code>
-<code>zoneset&nbsp;overwrite-control&nbsp;vsan&nbsp;100</code>
-<code>zone&nbsp;commit&nbsp;vsan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>zone&nbsp;mode&nbsp;enhanced&nbsp;vsan&nbsp;100
+zone&nbsp;confirm-commit
+zoneset&nbsp;overwrite-control&nbsp;vsan&nbsp;100
+zone&nbsp;commit&nbsp;vsan&nbsp;100
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;zone&nbsp;status&nbsp;vsan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;zone&nbsp;status&nbsp;vsan&nbsp;100
+</code></pre></div>
 <p>Man kan även distribuera sitt zoneset över fabricen</p>
-<p><code>zoneset&nbsp;distribute&nbsp;full&nbsp;vsan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>zoneset&nbsp;distribute&nbsp;full&nbsp;vsan&nbsp;100
+</code></pre></div>
 <p><strong>Smart Zoning</strong>
 För att förenkla sin konfig lite kan man använda taggar för att ange
 vilka pwwn som är initiators kontra targets. Detta måste vara påslaget
 på alla switchar i fabricen.</p>
-<p><code>zone&nbsp;smart-zone&nbsp;enable&nbsp;vsan&nbsp;100</code>
-<code>zone&nbsp;convert&nbsp;smart-zone&nbsp;vsan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>zone&nbsp;smart-zone&nbsp;enable&nbsp;vsan&nbsp;100
+zone&nbsp;convert&nbsp;smart-zone&nbsp;vsan&nbsp;100
+</code></pre></div>
 <p>ACLTCAM usage MDS</p>
-<p><code>show&nbsp;system&nbsp;internal&nbsp;acl&nbsp;tcam-usage</code>
-<code>show&nbsp;system&nbsp;internal&nbsp;acltcam-soc&nbsp;tcam-usage</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;system&nbsp;internal&nbsp;acl&nbsp;tcam-usage
+show&nbsp;system&nbsp;internal&nbsp;acltcam-soc&nbsp;tcam-usage
+</code></pre></div>
 <p><strong>Alias</strong>
 Man bör använda alias för att förenkla zonhantering och felsökning. Även
 detta kan distribueras mha CFS, det kallas då enhanced device aliases
 och valfri nod kan göra ändringar som propagerar genom nätet.</p>
-<p><code>device-alias&nbsp;mode&nbsp;enhanced</code>
-<code>device-alias&nbsp;database</code>
-<code>name&nbsp;Server1-HBA1&nbsp;pwwn&nbsp;00:11:11...</code>
-<code>name&nbsp;SAN-Array1-port1&nbsp;pwwn&nbsp;00:22:22...</code></p>
-<p><code>device-alias&nbsp;commit</code>
-<code>show&nbsp;device-alias&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>device-alias&nbsp;mode&nbsp;enhanced&nbsp;
+device-alias&nbsp;database
+&nbsp;name&nbsp;Server1-HBA1&nbsp;pwwn&nbsp;00:11:11...
+&nbsp;name&nbsp;SAN-Array1-port1&nbsp;pwwn&nbsp;00:22:22...
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>device-alias&nbsp;commit&nbsp;
+show&nbsp;device-alias&nbsp;status
+</code></pre></div>
 <p><strong>Zone Merge</strong>
 Om man ska koppla ihop två SAN kan man skydda sig mot felkonfad zoning
 genom att ställa merge-control till restrict. Kopplar man ihop två SAN
 med olika zonesets blir ISL:en isolated för de vsan som har mismatch.</p>
-<p><code>zone&nbsp;merge-control&nbsp;restrict&nbsp;vsan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>zone&nbsp;merge-control&nbsp;restrict&nbsp;vsan&nbsp;100
+</code></pre></div>
 <h4 id="port-security">Port Security</h4>
 <p>FC Port Security är utökad säkerhet jämfört med zoning, man låter inte
 ens obehöriga logga in i fabricen. Login requests från obehöriga FC
@@ -9198,19 +9255,24 @@ automatiskt över tid. Detta kan man använda när man aktiverar port
 security första gången eftersom det sparar arbete genom att man inte
 måste gå igenom alla portar manuellt, detta konfas per VSAN. När man
 aktiverar port security så aktiveras auto-learn automatiskt.</p>
-<p><code>feature&nbsp;fc-port-security</code>
-<code>fc-port-security&nbsp;activate&nbsp;vsan&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;fc-port-security
+fc-port-security&nbsp;activate&nbsp;vsan&nbsp;1
+</code></pre></div>
 <p>Lock vsan for new entries</p>
-<p><code>no&nbsp;fc-port-security&nbsp;auto-learn&nbsp;vsan&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;fc-port-security&nbsp;auto-learn&nbsp;vsan&nbsp;1
+</code></pre></div>
 <p>Diff</p>
-<p><code>fc-port-security&nbsp;database&nbsp;diff&nbsp;active&nbsp;vsan&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>fc-port-security&nbsp;database&nbsp;diff&nbsp;active&nbsp;vsan&nbsp;1
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;fc-port-security&nbsp;status</code>
-<code>show&nbsp;fc-port-security&nbsp;database&nbsp;active</code>
-<code>show&nbsp;fc-port-security&nbsp;database&nbsp;config</code>
-<code>show&nbsp;fc-port-security&nbsp;violations</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;fc-port-security&nbsp;status
+show&nbsp;fc-port-security&nbsp;database&nbsp;active
+show&nbsp;fc-port-security&nbsp;database&nbsp;config
+show&nbsp;fc-port-security&nbsp;violations
+</code></pre></div>
 <p>CFS</p>
-<p><code>fc-port-security&nbsp;distribute</code></p>
+<div class="highlight"><pre><span></span><code>fc-port-security&nbsp;distribute
+</code></pre></div>
 <h2 id="npv">NPV</h2>
 <p>N-Port Virtualisation är en teknik för att öka skalbarhet och
 simplicitet i FC-SAN. Man låter en enskild fysisk N_Port ha multipla
@@ -9224,10 +9286,12 @@ ingen zoning i NPV-enheten, den har ingen preferens i frågan utan
 slussar bara vidare inlogg till ovanliggande switch. Notera att
 ovanliggande switch måste ha NPIV enableat. Nested NPV är inte möjligt.
 Notera att "feature npv" kräver en write erase och reload.</p>
-<p><code>feature&nbsp;fcoe-npv</code>
-<code>feature&nbsp;npv</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;fcoe-npv
+feature&nbsp;npv
+</code></pre></div>
 <p>Ovanliggande switch</p>
-<p><code>feature&nbsp;npiv</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;npiv
+</code></pre></div>
 
 
 
@@ -9250,7 +9314,7 @@ Notera att "feature npv" kräver en write erase och reload.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

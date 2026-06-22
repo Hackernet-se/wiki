@@ -97,7 +97,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#konfiguration" class="md-skip">
           Gå till innehållet
         </a>
       
@@ -2762,17 +2762,6 @@
       Innehållsförteckning
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#konfiguration" class="md-nav__link">
@@ -8746,6 +8735,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8955,17 +8972,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#konfiguration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -9070,74 +9076,70 @@
 
   <h1>PXE-Deploy</h1>
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a> Preboot Execution
-Environment är en miljö som används för att boota datorer med hjälp av
-ett nätverkskort helt oberoende av lagringsenheter som hårddiskar eller
-installerade operativsystem. När du säger åt din maskin att
-PXE/Nätverksboota kommer den att skicka en DHCP-begäran som DHCP-servern
-kommer att svara på och det kommer att innehålla två speciella saker, en
-"next-server" och ett filnamn. "Next-server " är din TFTP-server och
-filen är det din server kommer att ladda ner och köra ifrån. Denna fil
-är vanligtvis en bootloader såsom pxelinux eller pxegrub. Se även
-<a href="/IPXE" title="wikilink">IPXE</a></p>
-<p>Valfri DHCP-server kan användas, det som ska pekas ut är tftp-servern.
-T.ex.</p>
-<p><code>next-server&nbsp;192.168.0.100;&nbsp;filename&nbsp;"pxelinux.0";</code></p>
-<p>Valfri tftp-server kan användas, den ska endast hålla filer.</p>
-<h2 id="installation">Installation</h2>
-<p>Här följer ett exempel på en pxelinux-setup (ej <a href="/TFTP" title="wikilink">TFTP</a>
-eller <a href="/ISC_DHCP" title="wikilink">DHCP</a>). Först gäller det att få tag på de
+<p>). Först gäller det att få tag på de
 nödvändiga filerna.</p>
-<p><code>apt-get&nbsp;-y&nbsp;install&nbsp;syslinux</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;-y&nbsp;install&nbsp;syslinux
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
-<p><code>mkdir&nbsp;-p&nbsp;/tftpboot/pxelinux.cfg</code>
-<code>cp&nbsp;/usr/lib/syslinux/pxelinux.0&nbsp;/tftpboot</code>
-<code>cp&nbsp;/usr/lib/syslinux/vesamenu.c32&nbsp;/tftpboot/pxelinux.cfg</code>
-<code>cp&nbsp;/usr/lib/syslinux/pxechain.com&nbsp;/tftpboot/pxelinux.cfg</code></p>
+<div class="highlight"><pre><span></span><code>mkdir&nbsp;-p&nbsp;/tftpboot/pxelinux.cfg
+cp&nbsp;/usr/lib/syslinux/pxelinux.0&nbsp;/tftpboot
+cp&nbsp;/usr/lib/syslinux/vesamenu.c32&nbsp;/tftpboot/pxelinux.cfg
+cp&nbsp;/usr/lib/syslinux/pxechain.com&nbsp;/tftpboot/pxelinux.cfg
+</code></pre></div>
 <p>Sedan ska huvudkonf-filen skapas, här bestämmer man hur pxe:n ska se ut.</p>
-<p><code>cat&lt;&lt;'__EOF__'&gt;/tftpboot/pxelinux.cfg/default</code>
-<code>default&nbsp;vesamenu.c32</code>
-<code>background&nbsp;pxelinux.cfg/badass.png</code>
-<code>prompt&nbsp;0</code>
-<code>timeout&nbsp;0</code></p>
-<p><code>label&nbsp;First&nbsp;label</code>
-<code>kernel&nbsp;firstkernel</code></p>
-<p><code>label&nbsp;Second&nbsp;label</code>
-<code>kernel&nbsp;secondkernel</code>
-<code>__EOF__</code></p>
+<div class="highlight"><pre><span></span><code>cat&lt;&lt;'__EOF__'&gt;/tftpboot/pxelinux.cfg/default
+default&nbsp;vesamenu.c32
+background&nbsp;pxelinux.cfg/badass.png
+prompt&nbsp;0
+timeout&nbsp;0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>label&nbsp;First&nbsp;label
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kernel&nbsp;firstkernel
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>label&nbsp;Second&nbsp;label
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kernel&nbsp;secondkernel
+__EOF__
+</code></pre></div>
 <p>Det som står efter kernel och initrd är sökvägar som är relativa till
 tftpboot</p>
 <h2 id="unattended">Unattended</h2>
 <p>Vill man automatisera sina installationer kan man göra det med
 kickstart-filer. T.ex.</p>
-<p><code>label&nbsp;InstallServer1404</code>
-<code>kernel&nbsp;server1404/linux</code>
-<code>append&nbsp;ks=</code><a href="http://192.168.0.100/ks.cfg"><code>http://192.168.0.100/ks.cfg</code></a><code>vga=normal&nbsp;initrd=server1404/initrd.gz&nbsp;ramdisk_size=16432&nbsp;root=/dev/rd/0&nbsp;rw&nbsp;&nbsp;--</code></p>
+<p></p><div class="highlight"><pre><span></span><code>label&nbsp;InstallServer1404
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kernel&nbsp;server1404/linux
+</code></pre></div>
+<code>append&nbsp;ks=</code><a href="http://192.168.0.100/ks.cfg"><code>http://192.168.0.100/ks.cfg</code></a><code>vga=normal&nbsp;initrd=server1404/initrd.gz&nbsp;ramdisk_size=16432&nbsp;root=/dev/rd/0&nbsp;rw&nbsp;&nbsp;--</code><p></p>
 <h3 id="skapa-ks-fil">Skapa ks-fil</h3>
 <p>I många distar kan man köra följande: (in graphical environment)</p>
-<p><code>system-config-kickstart</code></p>
+<div class="highlight"><pre><span></span><code>system-config-kickstart
+</code></pre></div>
 <h3 id="kickstartfiler">Kickstartfiler</h3>
 <p><categorytree mode="pages" hideroot="on">Kickstart</categorytree></p>
 <h2 id="liveboot">Liveboot</h2>
 <p>Det går även att liveboota med PXE, då kan man använda en NFS-share.
 T.ex.</p>
-<p><code>LABEL&nbsp;Kali&nbsp;Live</code>
-<code>KERNEL&nbsp;kali/live/vmlinuz</code>
-<code>APPEND&nbsp;boot=live&nbsp;netboot=nfs&nbsp;nfsroot=192.168.0.100:/mnt/tftpboot/kali&nbsp;initrd=kali/live/initrd.img&nbsp;quiet&nbsp;splash&nbsp;--</code></p>
+<div class="highlight"><pre><span></span><code>LABEL&nbsp;Kali&nbsp;Live
+KERNEL&nbsp;kali/live/vmlinuz
+APPEND&nbsp;boot=live&nbsp;netboot=nfs&nbsp;nfsroot=192.168.0.100:/mnt/tftpboot/kali&nbsp;initrd=kali/live/initrd.img&nbsp;quiet&nbsp;splash&nbsp;--
+</code></pre></div>
 <h2 id="flera-pxe-servrar">Flera PXE-servrar</h2>
 <p>Vill man hoppa till en annan PXE-server, t.ex. en windows.</p>
-<p><code>LABEL&nbsp;Jump&nbsp;to&nbsp;other&nbsp;PXE</code>
-<code>KERNEL&nbsp;pxelinux.cfg/pxechain.com</code>
-<code>APPEND&nbsp;192.168.0.10::pxelinux.0</code></p>
+<div class="highlight"><pre><span></span><code>LABEL&nbsp;Jump&nbsp;to&nbsp;other&nbsp;PXE
+KERNEL&nbsp;pxelinux.cfg/pxechain.com
+APPEND&nbsp;192.168.0.10::pxelinux.0
+</code></pre></div>
 <h2 id="exempel-pa-anvandbara-verktyg-att-ha-pa-en-pxe">Exempel på användbara verktyg att ha på en PXE</h2>
-<p><code>LABEL&nbsp;Auto&nbsp;^Nuke!&nbsp;DBAN&nbsp;No&nbsp;Questions&nbsp;Asked!</code>
-<code>KERNEL&nbsp;DBAN/DBAN.BZI</code>
-<code>APPEND&nbsp;nuke="dwipe&nbsp;--autonuke"&nbsp;silent</code></p>
-<p><code>label&nbsp;MemTest</code>
-<code>kernel&nbsp;memtest/mt86plus</code></p>
-<p><code>label&nbsp;GParted&nbsp;Live</code>
-<code>kernel&nbsp;gparted/vmlinuz</code>
-<code>append&nbsp;initrd=gparted/initrd.img&nbsp;boot=live&nbsp;config&nbsp;noswap&nbsp;noprompt&nbsp;nosplash&nbsp;netboot=nfs&nbsp;nfsroot=192.168.0.100:/mnt/tftpboot/gparted</code></p>
+<div class="highlight"><pre><span></span><code>LABEL&nbsp;Auto&nbsp;^Nuke!&nbsp;DBAN&nbsp;No&nbsp;Questions&nbsp;Asked!
+KERNEL&nbsp;DBAN/DBAN.BZI
+APPEND&nbsp;nuke="dwipe&nbsp;--autonuke"&nbsp;silent
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>label&nbsp;MemTest
+kernel&nbsp;memtest/mt86plus
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>label&nbsp;GParted&nbsp;Live
+kernel&nbsp;gparted/vmlinuz
+append&nbsp;initrd=gparted/initrd.img&nbsp;boot=live&nbsp;config&nbsp;noswap&nbsp;noprompt&nbsp;nosplash&nbsp;netboot=nfs&nbsp;nfsroot=192.168.0.100:/mnt/tftpboot/gparted
+</code></pre></div>
 
 
 
@@ -9160,7 +9162,7 @@ T.ex.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

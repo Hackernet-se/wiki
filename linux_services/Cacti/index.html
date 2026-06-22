@@ -8719,6 +8719,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9017,9 +9045,11 @@
 <p>Cacti är en grafningslösning för nätverk. <a href="http://www.cacti.net/">http://www.cacti.net/</a></p>
 <h2 id="installation">Installation</h2>
 <p>Ubuntu 14.04</p>
-<p><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;upgrade&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;snmpd&nbsp;snmp&nbsp;mysql-server&nbsp;\</code>
-<code>apache2&nbsp;libapache2-mod-php5&nbsp;php5-mysql&nbsp;php5-cli&nbsp;php5-snmp&nbsp;php5-gd&nbsp;ntp</code></p>
-<p><code>sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;cacti</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;upgrade&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;snmpd&nbsp;snmp&nbsp;mysql-server&nbsp;\
+apache2&nbsp;libapache2-mod-php5&nbsp;php5-mysql&nbsp;php5-cli&nbsp;php5-snmp&nbsp;php5-gd&nbsp;ntp
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;cacti
+</code></pre></div>
 <p>“libphp-adodb” = “Ok”. “Configuring Cacti” = “Apache2” “Configuring
 cacti” = dbconfig-common MySQL = lösenordet du skapa tidigare</p>
 <h1 id="konfiguration">Konfiguration</h1>
@@ -9042,7 +9072,8 @@ difficult”, I mean “just throw it away and start over”."</p>
 <p><strong>Spine</strong>
 Spine Polling Daemon är en ersättare för polling-scriptet som körs
 default.</p>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;cacti-spine</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;cacti-spine
+</code></pre></div>
 <p>“Settings” -&gt; “Configuration” -&gt; “Poller” -&gt; “Poller Type” och välj
 “Spine”.</p>
 <p><strong>Visual</strong>
@@ -9053,7 +9084,8 @@ Höj vissa standardvärden för att kunna se längre descriptions.
 <li>Maximum Field Length</li>
 </ul>
 <p><strong>Interface Description</strong></p>
-<p><code>|host_description|&nbsp;-&nbsp;|query_ifName|&nbsp;-&nbsp;|query_ifAlias|</code></p>
+<div class="highlight"><pre><span></span><code>|host_description|&nbsp;-&nbsp;|query_ifName|&nbsp;-&nbsp;|query_ifAlias|
+</code></pre></div>
 <h2 id="plugins">Plugins</h2>
 <p>Cacti har ett pluginsystem där man kan lägga de plugins man vill.
 Exempel på användbara plugins:</p>
@@ -9092,48 +9124,57 @@ sedan görs resten i Weathermap GUI Editor.</p>
 editorn.</p>
 <p><strong>wmap.conf</strong>
 Storlek i pixlar</p>
-<p><code>WIDTH&nbsp;1900</code>
-<code>HEIGHT&nbsp;900</code></p>
+<div class="highlight"><pre><span></span><code>WIDTH&nbsp;1900
+HEIGHT&nbsp;900
+</code></pre></div>
 <p>Tidsstämpel</p>
-<p><code>TIMEPOS&nbsp;1300&nbsp;40&nbsp;Created:&nbsp;%b&nbsp;%d&nbsp;%Y&nbsp;%H:%M:%S</code></p>
+<div class="highlight"><pre><span></span><code>TIMEPOS&nbsp;1300&nbsp;40&nbsp;Created:&nbsp;%b&nbsp;%d&nbsp;%Y&nbsp;%H:%M:%S
+</code></pre></div>
 <p>Template nodes</p>
-<p><code>NODE&nbsp;DEFAULT</code>
-<code>LABELBGCOLOR&nbsp;169&nbsp;5&nbsp;10</code>
-<code>LABELFONTCOLOR&nbsp;216&nbsp;248&nbsp;3</code>
-<code>MAXVALUE&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>NODE&nbsp;DEFAULT
+&nbsp;LABELBGCOLOR&nbsp;169&nbsp;5&nbsp;10
+&nbsp;LABELFONTCOLOR&nbsp;216&nbsp;248&nbsp;3
+&nbsp;MAXVALUE&nbsp;100
+</code></pre></div>
 <p>Template links</p>
-<p><code>LINK&nbsp;DEFAULT</code>
-<code>WIDTH&nbsp;5</code>
-<code>BANDWIDTH&nbsp;1000M</code></p>
+<div class="highlight"><pre><span></span><code>LINK&nbsp;DEFAULT
+&nbsp;WIDTH&nbsp;5
+&nbsp;BANDWIDTH&nbsp;1000M
+</code></pre></div>
 <p><strong>Noder</strong></p>
-<p><code>NODE&nbsp;Firewall01</code>
-<code>LABEL&nbsp;Firewall01</code>
-<code>LABELOFFSET&nbsp;W&nbsp;&nbsp;&nbsp;#Sätt&nbsp;label&nbsp;i&nbsp;förhållande&nbsp;till&nbsp;nod.&nbsp;N,&nbsp;S,&nbsp;W,&nbsp;E,&nbsp;C</code>
-<code>ICON&nbsp;images/Firewall.png</code>
-<code>POSITION&nbsp;500&nbsp;500</code></p>
+<div class="highlight"><pre><span></span><code>NODE&nbsp;Firewall01
+&nbsp;LABEL&nbsp;Firewall01
+&nbsp;LABELOFFSET&nbsp;W&nbsp;&nbsp;&nbsp;#Sätt&nbsp;label&nbsp;i&nbsp;förhållande&nbsp;till&nbsp;nod.&nbsp;N,&nbsp;S,&nbsp;W,&nbsp;E,&nbsp;C
+&nbsp;ICON&nbsp;images/Firewall.png
+&nbsp;POSITION&nbsp;500&nbsp;500
+</code></pre></div>
 <p><strong>Länkar</strong></p>
-<p><code>LINK&nbsp;Switch01-Firewall01</code>
-<code>WIDTH&nbsp;8&nbsp;&nbsp;&nbsp;#i&nbsp;pixlar</code>
-<code>INFOURL&nbsp;/cacti/graph.php?rra_id=all&amp;local_graph_id=101</code>
-<code>OVERLIBGRAPH&nbsp;/cacti/graph_image.php?local_graph_id=101&amp;rra_id=0&amp;graph_nolegend=true&amp;graph_height=100&amp;graph_width=300</code>
-<code>BWSTYLE&nbsp;angled&nbsp;&nbsp;&nbsp;#skriv&nbsp;längs&nbsp;med&nbsp;istället&nbsp;för&nbsp;horisontellt</code>
-<code>BWLABEL&nbsp;bits&nbsp;&nbsp;&nbsp;#byt&nbsp;från&nbsp;procent&nbsp;till&nbsp;bits</code>
-<code>BWFONT&nbsp;106&nbsp;&nbsp;&nbsp;#måste&nbsp;finnas&nbsp;definierade</code>
-<code>BWLABELPOS&nbsp;75&nbsp;25&nbsp;&nbsp;&nbsp;#placera&nbsp;label</code>
-<code>TARGET&nbsp;/var/www/cacti/rra/traffic_in_1000.rrd</code>
-<code>NODES&nbsp;Switch01&nbsp;Firewall01</code>
-<code>BANDWIDTH&nbsp;100M</code>
-<code>ARROWSTYLE&nbsp;compact</code></p>
+<div class="highlight"><pre><span></span><code>LINK&nbsp;Switch01-Firewall01
+&nbsp;WIDTH&nbsp;8&nbsp;&nbsp;&nbsp;#i&nbsp;pixlar
+&nbsp;INFOURL&nbsp;/cacti/graph.php?rra_id=all&amp;local_graph_id=101
+&nbsp;OVERLIBGRAPH&nbsp;/cacti/graph_image.php?local_graph_id=101&amp;rra_id=0&amp;graph_nolegend=true&amp;graph_height=100&amp;graph_width=300
+&nbsp;BWSTYLE&nbsp;angled&nbsp;&nbsp;&nbsp;#skriv&nbsp;längs&nbsp;med&nbsp;istället&nbsp;för&nbsp;horisontellt
+&nbsp;BWLABEL&nbsp;bits&nbsp;&nbsp;&nbsp;#byt&nbsp;från&nbsp;procent&nbsp;till&nbsp;bits
+&nbsp;BWFONT&nbsp;106&nbsp;&nbsp;&nbsp;#måste&nbsp;finnas&nbsp;definierade&nbsp;
+&nbsp;BWLABELPOS&nbsp;75&nbsp;25&nbsp;&nbsp;&nbsp;#placera&nbsp;label
+&nbsp;TARGET&nbsp;/var/www/cacti/rra/traffic_in_1000.rrd
+&nbsp;NODES&nbsp;Switch01&nbsp;Firewall01
+&nbsp;BANDWIDTH&nbsp;100M
+&nbsp;ARROWSTYLE&nbsp;compact
+</code></pre></div>
 <p><strong>Aggregera länkar</strong></p>
-<p><code>TARGET&nbsp;/var/www/cacti/rra/traffic_in_1000.rrd&nbsp;/var/www/cacti/rra/traffic_in_1001.rrd</code></p>
+<div class="highlight"><pre><span></span><code>TARGET&nbsp;/var/www/cacti/rra/traffic_in_1000.rrd&nbsp;/var/www/cacti/rra/traffic_in_1001.rrd
+</code></pre></div>
 <p><strong>Multiple via</strong></p>
-<p><code>VIA&nbsp;x&nbsp;y</code>
-<code>VIA&nbsp;x2&nbsp;y2</code></p>
+<div class="highlight"><pre><span></span><code>VIA&nbsp;x&nbsp;y
+VIA&nbsp;x2&nbsp;y2
+</code></pre></div>
 <p><strong>Visningssida för Weathermap</strong>
 Detta är ett exempel på en simpel visningssida för den nyskapade
 Weathermap:n Med lite html-kunskaper och fantasi går detta att utveckla
 väldigt mycket. <a href="http://forums.cacti.net/about24433.html">Inspiration</a></p>
-<p><code>sudo&nbsp;ln&nbsp;-s&nbsp;/usr/share/cacti/site/plugins/weathermap/output&nbsp;/var/www/html/</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;ln&nbsp;-s&nbsp;/usr/share/cacti/site/plugins/weathermap/output&nbsp;/var/www/html/
+</code></pre></div>
 <div class="highlight"><pre><span></span><code> sudo dd of=/var/www/html/index.html &lt;&lt; EOF
  &lt;html&gt;
  &lt;head&gt;
@@ -9146,8 +9187,9 @@ väldigt mycket. <a href="http://forums.cacti.net/about24433.html">Inspiration</
  &lt;/html&gt;
  EOF
 </code></pre></div>
-<p><code>sudo&nbsp;sed&nbsp;-i&nbsp;"s/12345/$(find&nbsp;/usr/share/cacti/site/plugins/weathermap/output/&nbsp;\</code>
-<code>-name&nbsp;"*.thumb.png"&nbsp;-exec&nbsp;basename&nbsp;\{}&nbsp;.thumb.png&nbsp;\;)/g"&nbsp;/var/www/html/index.html</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;sed&nbsp;-i&nbsp;"s/12345/$(find&nbsp;/usr/share/cacti/site/plugins/weathermap/output/&nbsp;\
+-name&nbsp;"*.thumb.png"&nbsp;-exec&nbsp;basename&nbsp;\{}&nbsp;.thumb.png&nbsp;\;)/g"&nbsp;/var/www/html/index.html
+</code></pre></div>
 <p><strong>Felsökning</strong>
 Om error codes i loggen:
 <a href="http://network-weathermap.com/manual/0.97b/pages/errorcodes.html">http://network-weathermap.com/manual/0.97b/pages/errorcodes.html</a></p>
@@ -9168,7 +9210,6 @@ cactin</p>
 <p><code>&lt;.img&nbsp;src="</code><a href="http://X.X.X.X/cacti/graph_image.php?action=edit&amp;local_graph_id=55&amp;rra_id=1"><code>http://X.X.X.X/cacti/graph_image.php?action=edit&amp;local_graph_id=55&amp;rra_id=1</code></a><code>"&gt;</code></p>
 <p>&amp;local_graph_id=55 där 55 är IDet på grafen, &amp;rra_id=1 1an betyder
 att den kör på en dag 2 är 1 vecka osv.</p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
 
 
 
@@ -9191,7 +9232,7 @@ att den kör på en dag 2 är 1 vecka osv.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

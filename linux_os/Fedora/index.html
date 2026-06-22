@@ -8729,6 +8729,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9044,40 +9072,47 @@ Kickstartfil: <a href="/Kickstart_Fedora" title="wikilink">Fedora</a>.</p>
 <p>Se <a href="/Yum" title="wikilink">Yum</a>
 Se <a href="/DNF" title="wikilink">DNF</a></p>
 <h2 id="network">Network</h2>
-<p><code>systemctl&nbsp;stop&nbsp;NetworkManager.service&nbsp;&amp;&amp;&nbsp;systemctl&nbsp;disable&nbsp;NetworkManager.service</code>
-<code>systemctl&nbsp;enable&nbsp;network.service&nbsp;&amp;&amp;&nbsp;systemctl&nbsp;start&nbsp;network.service</code></p>
+<div class="highlight"><pre><span></span><code>systemctl&nbsp;stop&nbsp;NetworkManager.service&nbsp;&amp;&amp;&nbsp;systemctl&nbsp;disable&nbsp;NetworkManager.service
+systemctl&nbsp;enable&nbsp;network.service&nbsp;&amp;&amp;&nbsp;systemctl&nbsp;start&nbsp;network.service
+</code></pre></div>
 <h2 id="uppgradering">Uppgradering</h2>
 <p>Till 23 med hjälp av fedup som tankar alla nödvändiga filer.</p>
-<p><code>sudo&nbsp;dnf&nbsp;-y&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;dnf&nbsp;-y&nbsp;install&nbsp;fedup&nbsp;&amp;&amp;&nbsp;sudo&nbsp;fedup&nbsp;--network&nbsp;23</code>
-<code>reboot</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;dnf&nbsp;-y&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;dnf&nbsp;-y&nbsp;install&nbsp;fedup&nbsp;&amp;&amp;&nbsp;sudo&nbsp;fedup&nbsp;--network&nbsp;23
+reboot
+</code></pre></div>
 <h2 id="auto-update">Auto update</h2>
-<p><code>sudo&nbsp;dnf&nbsp;-y&nbsp;install&nbsp;dnf-automatic</code>
-<code>sudo&nbsp;systemctl&nbsp;enable&nbsp;dnf-automatic.timer</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;dnf&nbsp;-y&nbsp;install&nbsp;dnf-automatic
+sudo&nbsp;systemctl&nbsp;enable&nbsp;dnf-automatic.timer
+</code></pre></div>
 <p><em>Default kollas det efter uppdateringar en gång per dygn</em></p>
 <h2 id="ssh">SSH</h2>
-<p><code>sudo&nbsp;systemctl&nbsp;enable&nbsp;sshd.service</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;systemctl&nbsp;enable&nbsp;sshd.service
+</code></pre></div>
 <h2 id="gnome">Gnome</h2>
 <p>I det grafiska gränsnittet går det bara att sätta 15 minuter som max på
 Blank screen under Power saving. Högre värde går att sätta med kommando.</p>
-<p><code>gsettings&nbsp;set&nbsp;org.gnome.desktop.session&nbsp;idle-delay&nbsp;3600&nbsp;&nbsp;&nbsp;#sekunder</code>
-<code>gsettings&nbsp;set&nbsp;org.gnome.desktop.screensaver&nbsp;lock-delay&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>gsettings&nbsp;set&nbsp;org.gnome.desktop.session&nbsp;idle-delay&nbsp;3600&nbsp;&nbsp;&nbsp;#sekunder
+gsettings&nbsp;set&nbsp;org.gnome.desktop.screensaver&nbsp;lock-delay&nbsp;10
+</code></pre></div>
 <p>Desktop</p>
-<p><code>gsettings&nbsp;set&nbsp;org.gnome.desktop.background&nbsp;show-desktop-icons&nbsp;true</code>
-<code>gsettings&nbsp;set&nbsp;org.gnome.nautilus.desktop&nbsp;home-icon-visible&nbsp;false</code></p>
+<div class="highlight"><pre><span></span><code>gsettings&nbsp;set&nbsp;org.gnome.desktop.background&nbsp;show-desktop-icons&nbsp;true
+gsettings&nbsp;set&nbsp;org.gnome.nautilus.desktop&nbsp;home-icon-visible&nbsp;false
+</code></pre></div>
 <h2 id="grub-menu">GRUB menu</h2>
 <p>Fedora använder GRUB2 som bootloader och default visas menyn i 5
 sekunder vid uppstart. Detta går att ta bort genom att ändra/lägga till
 följande.</p>
-<p><code>sudo&nbsp;nano&nbsp;/etc/default/grub</code>
-<code>GRUB_TIMEOUT=0</code>
-<code>GRUB_HIDDEN_TIMEOUT=1</code>
-<code>GRUB_HIDDEN_TIMEOUT_QUIET=true</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;nano&nbsp;/etc/default/grub
+GRUB_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT=1
+GRUB_HIDDEN_TIMEOUT_QUIET=true
+</code></pre></div>
 <p>Hidden timeout 1 ger möjligheten att komma åt menyn med ESC i 1 sekund
 under uppstart.</p>
 <p>Uppdatera GRUB</p>
-<p><code>sudo&nbsp;grub2-mkconfig&nbsp;-o&nbsp;/boot/grub2/grub.cfg</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;grub2-mkconfig&nbsp;-o&nbsp;/boot/grub2/grub.cfg
+</code></pre></div>
 <p>OBS Kör man UEFI kan filen heta /boot/efi/EFI/fedora/grub.cfg</p>
-<p><a href="/Category:Distar" title="wikilink">Category:Distar</a></p>
 
 
 
@@ -9100,7 +9135,7 @@ under uppstart.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

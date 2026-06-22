@@ -8689,6 +8689,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8966,66 +8994,79 @@ hjälp av Nagios plugins. LibreNMS är en fork av
 <p>LibreNMS har inte stöd för MySQL strict mode än, därför måste det
 stängas av.</p>
 <p>Öppna:</p>
-<p><code>vim&nbsp;/etc/mysql/mysql.conf.d/mysqld.cnf</code></p>
+<div class="highlight"><pre><span></span><code>vim&nbsp;/etc/mysql/mysql.conf.d/mysqld.cnf
+</code></pre></div>
 <p>Lägg till följande inom [mysqld] delen:</p>
-<p><code>innodb_file_per_table=1</code>
-<code>sql-mode=""</code></p>
+<div class="highlight"><pre><span></span><code>innodb_file_per_table=1
+sql-mode=""
+</code></pre></div>
 <p>Och starta om MySQL servern.</p>
 <h2 id="webserver">Webserver</h2>
 <p>Installera följande paket: <strong>Ubuntu 16.04</strong></p>
-<p><code>apt-get&nbsp;install&nbsp;libapache2-mod-php7.0&nbsp;php7.0-cli&nbsp;php7.0-mysql&nbsp;php7.0-gd&nbsp;php7.0-snmp&nbsp;php-pear&nbsp;php7.0-curl&nbsp;snmp&nbsp;graphviz&nbsp;php7.0-mcrypt&nbsp;php7.0-json&nbsp;apache2&nbsp;fping&nbsp;imagemagick&nbsp;whois&nbsp;mtr-tiny&nbsp;nmap&nbsp;python-mysqldb&nbsp;snmpd&nbsp;php-net-ipv4&nbsp;php-net-ipv6&nbsp;rrdtool&nbsp;git</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;libapache2-mod-php7.0&nbsp;php7.0-cli&nbsp;php7.0-mysql&nbsp;php7.0-gd&nbsp;php7.0-snmp&nbsp;php-pear&nbsp;php7.0-curl&nbsp;snmp&nbsp;graphviz&nbsp;php7.0-mcrypt&nbsp;php7.0-json&nbsp;apache2&nbsp;fping&nbsp;imagemagick&nbsp;whois&nbsp;mtr-tiny&nbsp;nmap&nbsp;python-mysqldb&nbsp;snmpd&nbsp;php-net-ipv4&nbsp;php-net-ipv6&nbsp;rrdtool&nbsp;git
+</code></pre></div>
 <p>I filerna <code>/etc/php/7.0/apache2/php.ini</code> och <code>/etc/php/7.0/cli/php.ini</code>
 se till att <strong>date.timezone</strong> är satt till din tidszon. Se <a href="http://php.net/manual/en/timezones.php">PHP
 tidszoner</a> vad som stöds.</p>
 <p>Kör följande kommandon för att enable och disable några php och apache
 moduler.</p>
-<p><code>a2enmod&nbsp;php7.0</code>
-<code>a2dismod&nbsp;mpm_event</code>
-<code>a2enmod&nbsp;mpm_prefork</code>
-<code>phpenmod&nbsp;mcrypt</code></p>
+<div class="highlight"><pre><span></span><code>a2enmod&nbsp;php7.0
+a2dismod&nbsp;mpm_event
+a2enmod&nbsp;mpm_prefork
+phpenmod&nbsp;mcrypt
+</code></pre></div>
 <h2 id="skapa-librenms-anvandaren">Skapa LibreNMS användaren</h2>
-<p><code>useradd&nbsp;librenms&nbsp;-d&nbsp;/opt/librenms&nbsp;-M&nbsp;-r</code>
-<code>usermod&nbsp;-a&nbsp;-G&nbsp;librenms&nbsp;www-data</code></p>
+<div class="highlight"><pre><span></span><code>useradd&nbsp;librenms&nbsp;-d&nbsp;/opt/librenms&nbsp;-M&nbsp;-r
+usermod&nbsp;-a&nbsp;-G&nbsp;librenms&nbsp;www-data
+</code></pre></div>
 <h1 id="installation">Installation</h1>
 <p>Clona ner repot.</p>
 <p><code>cd&nbsp;/opt&nbsp;&amp;&amp;&nbsp;git&nbsp;clone</code><a href="https://github.com/librenms/librenms.git"><code>https://github.com/librenms/librenms.git</code></a><code>librenms</code></p>
 <h2 id="webinterface">Webinterface</h2>
-<p><code>cd&nbsp;/opt/librenms</code>
-<code>mkdir&nbsp;rrd&nbsp;logs</code>
-<code>chmod&nbsp;775&nbsp;rrd</code>
-<code>vim&nbsp;/etc/apache2/sites-available/librenms.conf</code></p>
+<div class="highlight"><pre><span></span><code>cd&nbsp;/opt/librenms
+mkdir&nbsp;rrd&nbsp;logs
+chmod&nbsp;775&nbsp;rrd
+vim&nbsp;/etc/apache2/sites-available/librenms.conf
+</code></pre></div>
 <p>Lägg in följande rader:</p>
-<p><code>&lt;VirtualHost&nbsp;*:80&gt;</code>
-<code>DocumentRoot&nbsp;/opt/librenms/html/</code>
-<code>ServerName&nbsp;&nbsp;librenms.example.com</code>
-<code>CustomLog&nbsp;/opt/librenms/logs/access_log&nbsp;combined</code>
-<code>ErrorLog&nbsp;/opt/librenms/logs/error_log</code>
-<code>AllowEncodedSlashes&nbsp;NoDecode</code>
-<code>&lt;Directory&nbsp;"/opt/librenms/html/"&gt;</code>
-<code>Require&nbsp;all&nbsp;granted</code>
-<code>AllowOverride&nbsp;All</code>
-<code>Options&nbsp;FollowSymLinks&nbsp;MultiViews</code>
+<p></p><div class="highlight"><pre><span></span><code>&nbsp;&lt;VirtualHost&nbsp;*:80&gt;
+&nbsp;&nbsp;DocumentRoot&nbsp;/opt/librenms/html/
+&nbsp;&nbsp;ServerName&nbsp;&nbsp;librenms.example.com
+&nbsp;&nbsp;CustomLog&nbsp;/opt/librenms/logs/access_log&nbsp;combined
+&nbsp;&nbsp;ErrorLog&nbsp;/opt/librenms/logs/error_log
+&nbsp;&nbsp;AllowEncodedSlashes&nbsp;NoDecode
+&nbsp;&nbsp;&lt;Directory&nbsp;"/opt/librenms/html/"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;Require&nbsp;all&nbsp;granted
+&nbsp;&nbsp;&nbsp;&nbsp;AllowOverride&nbsp;All
+&nbsp;&nbsp;&nbsp;&nbsp;Options&nbsp;FollowSymLinks&nbsp;MultiViews
+</code></pre></div>
 <code></code>
-</p>
+<p></p>
 <p>Sätt LibreNMS användaren som ägare av mappen:</p>
-<p><code>chown&nbsp;-R&nbsp;librenms:librenms&nbsp;/opt/librenms</code></p>
+<div class="highlight"><pre><span></span><code>chown&nbsp;-R&nbsp;librenms:librenms&nbsp;/opt/librenms
+</code></pre></div>
 <p>Aktivera sidan och rewrite module och starta om apache.</p>
-<p><code>a2ensite&nbsp;librenms.conf</code>
-<code>a2enmod&nbsp;rewrite</code>
-<code>service&nbsp;apache2&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>a2ensite&nbsp;librenms.conf
+a2enmod&nbsp;rewrite
+service&nbsp;apache2&nbsp;restart
+</code></pre></div>
 <p>Om detta är den enda sidan du hostar glöm inte stänga av default sidan.</p>
-<p><code>a2dissite&nbsp;000-default.conf</code></p>
+<div class="highlight"><pre><span></span><code>a2dissite&nbsp;000-default.conf
+</code></pre></div>
 <h2 id="snmpd">Snmpd</h2>
 <p>Kopiera exempel filen från LibreNMS och ersätt raden
 <code>RANDOMSTRINGGOESHERE</code> med din egna commmunity sträng:</p>
-<p><code>cp&nbsp;/opt/librenms/snmpd.conf.example&nbsp;/etc/snmp/snmpd.conf</code>
-<code>vim&nbsp;/etc/snmp/snmpd.conf</code></p>
+<div class="highlight"><pre><span></span><code>cp&nbsp;/opt/librenms/snmpd.conf.example&nbsp;/etc/snmp/snmpd.conf
+vim&nbsp;/etc/snmp/snmpd.conf
+</code></pre></div>
 <p>Starta om snmp servicen:</p>
-<p><code>service&nbsp;snmpd&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>service&nbsp;snmpd&nbsp;restart
+</code></pre></div>
 <h2 id="cronjob">Cronjob</h2>
 <p>Lägg till cronjob scriptet som sköter discovery, alerts och
 övervakningen.</p>
-<p><code>cp&nbsp;librenms.nonroot.cron&nbsp;/etc/cron.d/librenms</code></p>
+<div class="highlight"><pre><span></span><code>cp&nbsp;librenms.nonroot.cron&nbsp;/etc/cron.d/librenms
+</code></pre></div>
 <h2 id="web-installer">Web installer</h2>
 <p>Gå sedan till <strong><a href="http://librenms.example.com/install.php">http://librenms.example.com/install.php</a></strong> och gå
 igenom stegen.</p>
@@ -9038,35 +9079,43 @@ görs direkt i <code>config.php</code> som också finns under <strong>/opt/libre
 <p><code>php&nbsp;addhost.php</code><ip></ip></p>
 <h2 id="irc-bot">IRC Bot</h2>
 <p>Lägg in följande rader i <code>config.php</code></p>
-<p><code>...</code>
-<code>$config['irc_host']&nbsp;=&nbsp;"irc.freenode.org";</code>
-<code>$config['irc_port']&nbsp;=&nbsp;6667;</code>
-<code>$config['irc_chan']&nbsp;=&nbsp;"#librenms,#otherchan,#noc";</code>
-<code>...</code></p>
+<div class="highlight"><pre><span></span><code>...
+$config['irc_host']&nbsp;=&nbsp;"irc.freenode.org";
+$config['irc_port']&nbsp;=&nbsp;6667;
+$config['irc_chan']&nbsp;=&nbsp;"#librenms,#otherchan,#noc";
+...
+</code></pre></div>
 <p>Om servern du vill ansluta mot kör SSL så kan du ange ett <strong>+</strong> före
 porten.</p>
-<p><code>...</code>
-<code>$config['irc_port']&nbsp;=&nbsp;"+6667";</code>
-<code>...</code></p>
+<div class="highlight"><pre><span></span><code>...
+$config['irc_port']&nbsp;=&nbsp;"+6667";
+...
+</code></pre></div>
 <p>Om servern har ett lösenord:</p>
-<p><code>$config['irc_pass']&nbsp;=&nbsp;"Passphrase123";</code></p>
+<div class="highlight"><pre><span></span><code>$config['irc_pass']&nbsp;=&nbsp;"Passphrase123";
+</code></pre></div>
 <p>För att ändra namn från LibreNMS till något annat:</p>
-<p><code>$config['irc_nick']&nbsp;=&nbsp;"NotLibreNMSbot"</code></p>
+<div class="highlight"><pre><span></span><code>$config['irc_nick']&nbsp;=&nbsp;"NotLibreNMSbot"
+</code></pre></div>
 <h3 id="systemd-service">Systemd service</h3>
-<p><code>cat&nbsp;&lt;&lt;'__EOF__'&gt;/etc/systemd/system/librenms-irc-bot.service</code>
-<code>[Unit]</code>
-<code>Description=IRC&nbsp;bot&nbsp;for&nbsp;LibreNMS</code>
-<code>After=network.target</code></p>
-<p><code>[Service]</code>
-<code>ExecStart=/usr/bin/php&nbsp;/opt/librenms/irc.php</code>
-<code>User=librenms</code>
-<code>Group=librenms</code></p>
-<p><code>[Install]</code>
-<code>WantedBy=multi-user.target</code>
-<code>__EOF__</code></p>
+<div class="highlight"><pre><span></span><code>cat&nbsp;&lt;&lt;'__EOF__'&gt;/etc/systemd/system/librenms-irc-bot.service
+[Unit]
+Description=IRC&nbsp;bot&nbsp;for&nbsp;LibreNMS
+After=network.target
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[Service]
+ExecStart=/usr/bin/php&nbsp;/opt/librenms/irc.php
+User=librenms
+Group=librenms
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[Install]
+WantedBy=multi-user.target
+__EOF__
+</code></pre></div>
 <p>Kör sedan följande kommando för att enable tjänsten vid omstart och för
 att starta tjänsten.</p>
-<p><code>systemctl&nbsp;enable&nbsp;librenms-irc-bot.service&nbsp;&amp;&amp;&nbsp;systemctl&nbsp;start&nbsp;librenms-irc-bot.service</code></p>
+<div class="highlight"><pre><span></span><code>systemctl&nbsp;enable&nbsp;librenms-irc-bot.service&nbsp;&amp;&amp;&nbsp;systemctl&nbsp;start&nbsp;librenms-irc-bot.service
+</code></pre></div>
 <h3 id="irc-kommandon">IRC kommandon</h3>
 <p>Note: Det går bara att autha sig mot boten om man använder MySQL som
 inloggning. LDAP stöd är förhoppningsvis påväg se
@@ -9132,18 +9181,22 @@ Github.</p>
 </table>
 <h2 id="ldap">LDAP</h2>
 <p>Kräver att paketet <code>php-ldap</code> är installerat. Lägg in följande rader i
-<code>config.php</code></p>
-<p><code>$config['auth_mechanism']&nbsp;=&nbsp;"ldap";</code></p>
-<p><code>$config['auth_ldap_version']&nbsp;=&nbsp;3;&nbsp;#&nbsp;v2&nbsp;or&nbsp;v3</code>
-<code>$config['auth_ldap_server']&nbsp;=&nbsp;"ldap.example.com";</code>
-<code>$config['auth_ldap_port']&nbsp;&nbsp;&nbsp;=&nbsp;389;</code>
-<code>$config['auth_ldap_prefix']&nbsp;=&nbsp;"uid=";</code>
-<code>$config['auth_ldap_suffix']&nbsp;=&nbsp;",ou=People,dc=example,dc=com";</code>
-<code>$config['auth_ldap_group']&nbsp;&nbsp;=&nbsp;"cn=groupname,ou=groups,dc=example,dc=com";</code></p>
-<p><code>$config['auth_ldap_groupbase']&nbsp;=&nbsp;"ou=group,dc=example,dc=com";</code>
-<code>$config['auth_ldap_groups']['admin']['level']&nbsp;=&nbsp;10;</code>
-<code>$config['auth_ldap_groups']['noc']['level']&nbsp;=&nbsp;5;</code>
-<code>$config['auth_ldap_groupmemberattr']&nbsp;=&nbsp;"memberUid";</code></p>
+</p><div class="highlight"><pre><span></span><code>config.php
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>$config['auth_mechanism']&nbsp;=&nbsp;"ldap";
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$config['auth_ldap_version']&nbsp;=&nbsp;3;&nbsp;#&nbsp;v2&nbsp;or&nbsp;v3
+$config['auth_ldap_server']&nbsp;=&nbsp;"ldap.example.com";
+$config['auth_ldap_port']&nbsp;&nbsp;&nbsp;=&nbsp;389;
+$config['auth_ldap_prefix']&nbsp;=&nbsp;"uid=";
+$config['auth_ldap_suffix']&nbsp;=&nbsp;",ou=People,dc=example,dc=com";
+$config['auth_ldap_group']&nbsp;&nbsp;=&nbsp;"cn=groupname,ou=groups,dc=example,dc=com";
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$config['auth_ldap_groupbase']&nbsp;=&nbsp;"ou=group,dc=example,dc=com";
+$config['auth_ldap_groups']['admin']['level']&nbsp;=&nbsp;10;
+$config['auth_ldap_groups']['noc']['level']&nbsp;=&nbsp;5;
+$config['auth_ldap_groupmemberattr']&nbsp;=&nbsp;"memberUid";
+</code></pre></div>
 <h3 id="user-levels">User levels</h3>
 <ul>
 <li>1: Normal användare. Kräver att en admin tilldelar devices och
@@ -9164,64 +9217,77 @@ devicen, detta är inställt default men går att stänga av.</p>
 <h3 id="konfiguration_1">Konfiguration</h3>
 <p>Börja med att sätta SNMP community eller användarnamn &amp; lösenord om du
 kör v3:</p>
-<p><code>//&nbsp;v1&nbsp;or&nbsp;v2c</code>
-<code>$config['snmp']['community'][]&nbsp;=&nbsp;"my_custom_public";</code>
-<code>$config['snmp']['community'][]&nbsp;=&nbsp;"another_public";</code></p>
-<p><code>//&nbsp;v3</code>
-<code>$config['snmp']['v3'][0]['authlevel']&nbsp;=&nbsp;'AuthPriv';</code>
-<code>$config['snmp']['v3'][0]['authname']&nbsp;=&nbsp;'my_username';</code>
-<code>$config['snmp']['v3'][0]['authpass']&nbsp;=&nbsp;'my_password';</code>
-<code>$config['snmp']['v3'][0]['authalgo']&nbsp;=&nbsp;'MD5';</code>
-<code>$config['snmp']['v3'][0]['cryptopass']&nbsp;=&nbsp;'my_crypto';</code>
-<code>$config['snmp']['v3'][0]['cryptoalgo']&nbsp;=&nbsp;'AES';</code></p>
+<div class="highlight"><pre><span></span><code>//&nbsp;v1&nbsp;or&nbsp;v2c
+$config['snmp']['community'][]&nbsp;=&nbsp;"my_custom_public";
+$config['snmp']['community'][]&nbsp;=&nbsp;"another_public";
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>//&nbsp;v3
+$config['snmp']['v3'][0]['authlevel']&nbsp;=&nbsp;'AuthPriv';
+$config['snmp']['v3'][0]['authname']&nbsp;=&nbsp;'my_username';
+$config['snmp']['v3'][0]['authpass']&nbsp;=&nbsp;'my_password';
+$config['snmp']['v3'][0]['authalgo']&nbsp;=&nbsp;'MD5';
+$config['snmp']['v3'][0]['cryptopass']&nbsp;=&nbsp;'my_crypto';
+$config['snmp']['v3'][0]['cryptoalgo']&nbsp;=&nbsp;'AES';
+</code></pre></div>
 <p>Ange vilka subnät som är dina:</p>
-<p><code>$config['nets'][]&nbsp;=&nbsp;'192.168.0.0/16';</code>
-<code>$config['nets'][]&nbsp;=&nbsp;'172.16.0.0/12';</code></p>
+<div class="highlight"><pre><span></span><code>$config['nets'][]&nbsp;=&nbsp;'192.168.0.0/16';
+$config['nets'][]&nbsp;=&nbsp;'172.16.0.0/12';
+</code></pre></div>
 <p>Det går även att utesluta nätverk om man vill:</p>
-<p><code>$config['autodiscovery']['nets-exclude'][]&nbsp;=&nbsp;'192.168.1.0/24';</code></p>
+<div class="highlight"><pre><span></span><code>$config['autodiscovery']['nets-exclude'][]&nbsp;=&nbsp;'192.168.1.0/24';
+</code></pre></div>
 <h3 id="discovery-methods">Discovery methods</h3>
 <p>Det finns fyra stycken alternativ för att lägga till devices och en
 manuell.</p>
 <p><strong>ARP</strong></p>
 <p>Disable by default.</p>
 <p>Kan slås på med följande kommando:</p>
-<p><code>$config['discovery_modules']['discovery-arp']&nbsp;=&nbsp;1;</code></p>
+<div class="highlight"><pre><span></span><code>$config['discovery_modules']['discovery-arp']&nbsp;=&nbsp;1;
+</code></pre></div>
 <p><strong>XDP</strong></p>
 <p>Enabled by default.</p>
 <p>För att stänga av:</p>
-<p><code>$config['autodiscovery']['xdp']&nbsp;=&nbsp;false;</code></p>
+<div class="highlight"><pre><span></span><code>$config['autodiscovery']['xdp']&nbsp;=&nbsp;false;
+</code></pre></div>
 <p>XDP inkluderar FDP, CDP och LLDP.</p>
 <p><strong>OSPF</strong></p>
 <p>Enabled by default.</p>
 <p>För att stänga av:</p>
-<p><code>$config['autodiscovery']['ospf']&nbsp;=&nbsp;false;</code></p>
+<div class="highlight"><pre><span></span><code>$config['autodiscovery']['ospf']&nbsp;=&nbsp;false;
+</code></pre></div>
 <p><strong>BGP</strong></p>
 <p>Enabled by default.</p>
 <p>För att stänga av:</p>
-<p><code>$config['autodiscovery']['bgp']&nbsp;=&nbsp;false;</code></p>
+<div class="highlight"><pre><span></span><code>$config['autodiscovery']['bgp']&nbsp;=&nbsp;false;
+</code></pre></div>
 <p><strong>SNMP Scan</strong></p>
 <p>Denna metod måste du starta själv. Om den bara körs direkt utan växlar
 så kommer den scanna näten i din config fil. Med växeln <strong>-r</strong> kan du
 säga till vilket nät den ska skanna.</p>
-<p><code>snmp-scan.php&nbsp;-r&nbsp;172.22.0.0/24</code></p>
+<div class="highlight"><pre><span></span><code>snmp-scan.php&nbsp;-r&nbsp;172.22.0.0/24
+</code></pre></div>
 <h4 id="korta-hostnamn">Korta hostnamn</h4>
 <p>Om dina devices vid en SNMP fråga svarar med sitt hostnamn istället för
 FQDN kan du lägga på din domän med följande kommando:</p>
-<p><code>$config['mydomain']&nbsp;=&nbsp;'hackernet.se';</code></p>
+<div class="highlight"><pre><span></span><code>$config['mydomain']&nbsp;=&nbsp;'hackernet.se';
+</code></pre></div>
 <h4 id="lagg-till-device-med-ip">Lägg till device med IP</h4>
 <p>Utifall LibreNMS inte kan göra reverse uppslag mot DNS så kommer inte
 devicen att läggas till. Det går att stänga av så att den läggs till
 ändå fast med IP istället.</p>
-<p><code>$config['discovery_by_ip']&nbsp;=&nbsp;true;</code></p>
+<div class="highlight"><pre><span></span><code>$config['discovery_by_ip']&nbsp;=&nbsp;true;
+</code></pre></div>
 <h2 id="nagios-plugins">Nagios plugins</h2>
 <p>LibreNMS kan köra Nagios plugins som inte använder Nagios NRPE klient.</p>
 <p>Börja med att sätta på services i LibreNMS och peka ut vart Nagios
 scripten ligger.</p>
-<p><code>$config['show_services']&nbsp;=&nbsp;1;</code>
-<code>$config['nagios_plugins']&nbsp;&nbsp;&nbsp;=&nbsp;"/usr/lib/nagios/plugins";</code></p>
+<div class="highlight"><pre><span></span><code>$config['show_services']&nbsp;=&nbsp;1;
+$config['nagios_plugins']&nbsp;&nbsp;&nbsp;=&nbsp;"/usr/lib/nagios/plugins";
+</code></pre></div>
 <p>Installera <strong>nagios-snmp-plugins</strong> paketet om du vill ha ett några
 färdiga script som fungerar.</p>
-<p><code>apt-get&nbsp;install&nbsp;nagios-snmp-plugins</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;nagios-snmp-plugins
+</code></pre></div>
 <p>I webbinterfacet så finns nu en ny knapp som heter <strong>Services</strong> där man
 kan lägga till vilken service som ska köras på vilken host.</p>
 <p>Ett tips är att köra scripten med <strong>-h</strong> på i skalet så att man ser
@@ -9251,20 +9317,25 @@ start med hjälp av snmp eller med deras klient check_mk.</p>
 <h2 id="agent-installation">Agent installation</h2>
 <p>Agenten pratar default på port 6556/TCP.</p>
 <p>Clona librenms-agent repot:</p>
-<p><code>cd&nbsp;/opt/</code>
+<p></p><div class="highlight"><pre><span></span><code>cd&nbsp;/opt/
+</code></pre></div>
 <code>git&nbsp;clone</code><a href="https://github.com/librenms/librenms-agent.git"><code>https://github.com/librenms/librenms-agent.git</code></a>
-<code>cd&nbsp;librenms-agent</code></p>
+<div class="highlight"><pre><span></span><code>cd&nbsp;librenms-agent
+</code></pre></div><p></p>
 <p>Kopiera check_mk_agent filen och gör den körbar:</p>
-<p><code>cp&nbsp;check_mk_agent&nbsp;/usr/bin/check_mk_agent&nbsp;&amp;&amp;&nbsp;chmod&nbsp;+x&nbsp;/usr/bin/check_mk_agent</code></p>
+<div class="highlight"><pre><span></span><code>cp&nbsp;check_mk_agent&nbsp;/usr/bin/check_mk_agent&nbsp;&amp;&amp;&nbsp;chmod&nbsp;+x&nbsp;/usr/bin/check_mk_agent
+</code></pre></div>
 <p>Skapa följande mappar där du sedan ska lägga scripten till tjänsterna du
 vill ha grafer på.</p>
-<p><code>mkdir&nbsp;-p&nbsp;/usr/lib/check_mk_agent/plugins&nbsp;/usr/lib/check_mk_agent/local</code></p>
+<div class="highlight"><pre><span></span><code>mkdir&nbsp;-p&nbsp;/usr/lib/check_mk_agent/plugins&nbsp;/usr/lib/check_mk_agent/local
+</code></pre></div>
 <p>Kopiera scripten från <strong>agent-local</strong> mappen till
 <strong>/usr/lib/check_mk_agent/local</strong> och gör dom körbara med <strong>chmod +x</strong></p>
 <p>Kopiera sedan systemd filen och gör att den startar vid boot och starta
 agenten.</p>
-<p><code>cp&nbsp;check_mk@.service&nbsp;check_mk.socket&nbsp;/etc/systemd/system</code>
-<code>systemctl&nbsp;enable&nbsp;check_mk.socket&nbsp;&amp;&amp;&nbsp;systemctl&nbsp;start&nbsp;check_mk.socket</code></p>
+<div class="highlight"><pre><span></span><code>cp&nbsp;check_mk@.service&nbsp;check_mk.socket&nbsp;/etc/systemd/system
+systemctl&nbsp;enable&nbsp;check_mk.socket&nbsp;&amp;&amp;&nbsp;systemctl&nbsp;start&nbsp;check_mk.socket
+</code></pre></div>
 <p>För att agenten ska fungera så måste man sätta på <strong>unix-agent</strong> under
 modules på varje device i web interfacet. Och enable dom tjänsterna man
 vill övervaka under <strong>application</strong>.</p>
@@ -9273,47 +9344,58 @@ vill övervaka under <strong>application</strong>.</p>
 lösenord till databasen som ska övervakas.</p>
 <p>Skapa följande fil <strong>/usr/lib/check_mk_agent/local/mysql.cnf</strong> med
 innehållet:</p>
-<p><code>&lt;?php</code>
-<code>$mysql_user&nbsp;=&nbsp;'root';</code>
-<code>$mysql_pass&nbsp;=&nbsp;'toor';</code>
-<code>$mysql_host&nbsp;=&nbsp;'localhost';</code>
-<code>$mysql_port&nbsp;=&nbsp;3306;</code></p>
+<div class="highlight"><pre><span></span><code>&lt;?php
+$mysql_user&nbsp;=&nbsp;'root';
+$mysql_pass&nbsp;=&nbsp;'toor';
+$mysql_host&nbsp;=&nbsp;'localhost';
+$mysql_port&nbsp;=&nbsp;3306;
+</code></pre></div>
 <p>Verifera att scriptet fungerar genom att köra</p>
-<p><code>/usr/lib/check_mk_agent/local/mysql</code></p>
+<div class="highlight"><pre><span></span><code>/usr/lib/check_mk_agent/local/mysql
+</code></pre></div>
 <p>Lägg sedan in en extend rad i <strong>/etc/snmp/snmpd.conf</strong>:</p>
-<p><code>extend&nbsp;mysql&nbsp;/usr/lib/check_mk_agent/local/mysql</code></p>
+<div class="highlight"><pre><span></span><code>extend&nbsp;mysql&nbsp;/usr/lib/check_mk_agent/local/mysql
+</code></pre></div>
 <h2 id="nginx">NGINX</h2>
 <p>Nginx kräver att status sidan är aktiverad för localhost.</p>
-<p><code>location&nbsp;/nginx-status&nbsp;{</code>
-<code>stub_status&nbsp;on;</code>
-<code>access_log&nbsp;&nbsp;&nbsp;off;</code>
-<code>allow&nbsp;127.0.0.1;</code>
-<code>deny&nbsp;all;</code>
-<code>}</code></p>
+<div class="highlight"><pre><span></span><code>location&nbsp;/nginx-status&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;stub_status&nbsp;on;
+&nbsp;&nbsp;&nbsp;&nbsp;access_log&nbsp;&nbsp;&nbsp;off;
+&nbsp;&nbsp;&nbsp;&nbsp;allow&nbsp;127.0.0.1;
+&nbsp;&nbsp;&nbsp;&nbsp;deny&nbsp;all;
+}
+</code></pre></div>
 <p>Verifera att scriptet fungerar genom att köra</p>
-<p><code>/usr/lib/check_mk_agent/local/nginx</code></p>
+<div class="highlight"><pre><span></span><code>/usr/lib/check_mk_agent/local/nginx
+</code></pre></div>
 <p>Lägg sedan in en extend rad i <strong>/etc/snmp/snmpd.conf</strong>:</p>
-<p><code>extend&nbsp;nginx&nbsp;/usr/lib/check_mk_agent/local/nginx</code></p>
+<div class="highlight"><pre><span></span><code>extend&nbsp;nginx&nbsp;/usr/lib/check_mk_agent/local/nginx
+</code></pre></div>
 <h2 id="apache">Apache</h2>
 <p>Flytta apache scriptet till <strong>/usr/lib/check_mk_agent/local/</strong></p>
 <p>Verifera att scriptet fungerar genom att köra:</p>
-<p><code>/usr/lib/check_mk_agent/local/apache</code></p>
+<div class="highlight"><pre><span></span><code>/usr/lib/check_mk_agent/local/apache
+</code></pre></div>
 <p>Och lägg sedan in en extend rad i <strong>/etc/snmp/snmpd.conf</strong>:</p>
-<p><code>extend&nbsp;apache&nbsp;/usr/lib/check_mk_agent/local/apache</code></p>
+<div class="highlight"><pre><span></span><code>extend&nbsp;apache&nbsp;/usr/lib/check_mk_agent/local/apache
+</code></pre></div>
 <h2 id="powerdns">PowerDNS</h2>
 <p>Flytta powerdns scriptet till <strong>/usr/lib/check_mk_agent/local/</strong></p>
 <p>Verifera att scriptet fungerar genom att köra:</p>
-<p><code>/usr/lib/check_mk_agent/local/powerdns</code></p>
+<div class="highlight"><pre><span></span><code>/usr/lib/check_mk_agent/local/powerdns
+</code></pre></div>
 <p>Och lägg sedan in en extend rad i <strong>/etc/snmp/snmpd.conf</strong>:</p>
-<p><code>extend&nbsp;powerdns&nbsp;/usr/lib/check_mk_agent/local/powerdns</code></p>
+<div class="highlight"><pre><span></span><code>extend&nbsp;powerdns&nbsp;/usr/lib/check_mk_agent/local/powerdns
+</code></pre></div>
 <h2 id="powerdns-recursor">PowerDNS Recursor</h2>
 <p>Flytta powerdns-recursor scriptet till
 <strong>/usr/lib/check_mk_agent/local/</strong></p>
 <p>Verifera att scriptet fungerar genom att köra:</p>
-<p><code>/usr/lib/check_mk_agent/local/powerdns-recursor</code></p>
+<div class="highlight"><pre><span></span><code>/usr/lib/check_mk_agent/local/powerdns-recursor
+</code></pre></div>
 <p>Och lägg sedan in en extend rad i <strong>/etc/snmp/snmpd.conf</strong>:</p>
-<p><code>extend&nbsp;apache&nbsp;/usr/lib/check_mk_agent/local/powerdns-recursor</code></p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
+<div class="highlight"><pre><span></span><code>extend&nbsp;apache&nbsp;/usr/lib/check_mk_agent/local/powerdns-recursor
+</code></pre></div>
 
 
 
@@ -9336,7 +9418,7 @@ innehållet:</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

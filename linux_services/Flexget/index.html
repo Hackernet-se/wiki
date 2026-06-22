@@ -8713,6 +8713,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9010,29 +9038,37 @@ eller sökmotorer som källa för att ladda hem. Det finns även plugins för
 vissa sidor som inte har någon bra feed att följa.</p>
 <h2 id="installation">Installation</h2>
 <p>För att installera Flexget verifera att du har Python<em>' 2.6.x - 2.7.x.</em>'</p>
-<p><code>python -v</code></p>
+<div class="highlight"><pre><span></span><code>python -v
+</code></pre></div>
 <p>Sedan behöver du pip.</p>
-<p><code>apt-get update &amp;&amp; apt-get install python-pip</code></p>
+<div class="highlight"><pre><span></span><code>apt-get update &amp;&amp; apt-get install python-pip
+</code></pre></div>
 <p>Installera sedan Flexget med kommandot.</p>
-<p><code>pip install flexget</code></p>
+<div class="highlight"><pre><span></span><code>pip install flexget
+</code></pre></div>
 <p>Verifera att Flexget är installerat med</p>
-<p><code>flexget -V</code></p>
+<div class="highlight"><pre><span></span><code>flexget -V
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Flexget använder sig av en configurations fil som man skriver i YAML.</p>
 <p>Se <a href="http://flexget.com/wiki/Cookbook">Flexgets Cookbook</a> för flera olika
 exempel på hur man kan skriva.</p>
 <h2 id="tips-n-trix">Tips n Trix</h2>
 <p>Har du conf filen i din hemmapp måste du använda växeln <code>-c</code> tex,
-<code>flexget -c /home/user/flexget.yml</code></p>
+</p><div class="highlight"><pre><span></span><code>flexget -c /home/user/flexget.yml
+</code></pre></div><p></p>
 <p>För att validera din conf fil att den fungerar använd kommandot.</p>
-<p><code>flexget -c flexget.yml check</code></p>
+<div class="highlight"><pre><span></span><code>flexget -c flexget.yml check
+</code></pre></div>
 <p>För att köra flexget använd kommandot</p>
-<p><code>flexget -c flexget.yml execute</code></p>
+<div class="highlight"><pre><span></span><code>flexget -c flexget.yml execute
+</code></pre></div>
 <h3 id="crontab">Crontab</h3>
 <p>Flexget kan både köras som en deamon och använda ett inbyggt schema för
 när den ska kolla efter saker eller så kan man använda crontab.</p>
 <p>För att köra Flexget var 30e minut.</p>
-<p><code>*/30 * * * * /usr/local/bin/flexget -c /root/flexget.yml execute</code></p>
+<div class="highlight"><pre><span></span><code>*/30 * * * * /usr/local/bin/flexget -c /root/flexget.yml execute
+</code></pre></div>
 <h3 id="pushover">Pushover</h3>
 <p><a href="https://pushover.net/">Pushover</a> är en tjänst för att kunna skicka
 pushnotiser till din Android, IOS eller webbläsare. Man kan få Flexget
@@ -9040,13 +9076,13 @@ att skicka en pushnotis varje gång den laddar hem något för att inte
 missa nerladdningen.</p>
 <p>Enda man behöver är några få rader i din YAML fil och ett konto hos
 pushover.</p>
-<p><code>pushover:</code>
-<code>userkey:</code>
-<code>-&nbsp;uasdfVQ</code>
-<code>apikey:&nbsp;aasdf6</code>
-<code>title:&nbsp;Downloading&nbsp;{{series_name}}</code>
-<code>message:&nbsp;Episode&nbsp;{{series_id}}</code></p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
+<div class="highlight"><pre><span></span><code>pushover:
+userkey:
+-&nbsp;uasdfVQ
+apikey:&nbsp;aasdf6
+title:&nbsp;Downloading&nbsp;{{series_name}}
+message:&nbsp;Episode&nbsp;{{series_id}}
+</code></pre></div>
 
 
 
@@ -9069,7 +9105,7 @@ pushover.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -96,11 +96,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#konfiguration" class="md-skip">
-          Gå till innehållet
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -6588,24 +6583,6 @@
       
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Nexus FabricPath
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -6622,62 +6599,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Innehållsförteckning">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Innehållsförteckning
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#konfiguration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Konfiguration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Konfiguration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#anycast-hsrp" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Anycast HSRP
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -8693,6 +8614,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8895,53 +8844,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Innehållsförteckning
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#konfiguration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Konfiguration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Konfiguration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#anycast-hsrp" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Anycast HSRP
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Troubleshooting
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -8994,90 +8896,7 @@ med FabricPath skapas en logisk switch genom att samma FP switch-id
 annonseras ut från båda noderna i vPC-domänen, detta kallas vPC+. Se
 även <a href="/Nexus_vPC" title="wikilink">Nexus vPC</a>.</p>
 <p>Wireshark kan inte avkoda FabricPath-frames.
-<a href="/File:Cisco_FabricPath.PNG" title="wikilink"><file:cisco_fabricpath.png></file:cisco_fabricpath.png></a></p>
-<p><strong>MAC Learning</strong>
-* Traditional = Learn SRC MAC of all received traffic</p>
-<ul>
-<li>FabricPath = Only learn SRC MAC if you already know DST MAC</li>
-</ul>
-<p><code>show&nbsp;mac&nbsp;address-table&nbsp;learning&nbsp;mode</code></p>
-<h2 id="konfiguration">Konfiguration</h2>
-<p>Aktivera FabricPath</p>
-<p><code>install&nbsp;feature-set&nbsp;fabricpath</code>
-<code>feature-set&nbsp;fabricpath</code></p>
-<p>Skapa nyckel för autentisering</p>
-<p><code>key&nbsp;chain&nbsp;FABRICPATH</code>
-<code>key&nbsp;0</code>
-<code>key-string&nbsp;topsecret123</code></p>
-<p>Global konfiguration med autentisering och fast convergence</p>
-<p><code>fabricpath&nbsp;switch-id&nbsp;1</code>
-<code>fabricpath&nbsp;timers&nbsp;linkup-delay&nbsp;60</code></p>
-<p><code>fabricpath&nbsp;domain&nbsp;default</code>
-<code>spf-interval&nbsp;50&nbsp;50&nbsp;50</code>
-<code>lsp-gen-interval&nbsp;50&nbsp;50&nbsp;50</code>
-<code>authentication-type&nbsp;md5&nbsp;&nbsp;&nbsp;#LSP&nbsp;authentication</code>
-<code>authentication&nbsp;key-chain&nbsp;FABRICPATH</code>
-<code>authentication-check</code>
-<code>log-adjacency-changes</code></p>
-<p>Konfigurera interface för FabricPath</p>
-<p><code>interface&nbsp;Ethernet1/25</code>
-<code>switchport</code>
-<code>switchport&nbsp;mode&nbsp;fabricpath</code>
-<code>no&nbsp;fabricpath&nbsp;isis&nbsp;hello-padding</code>
-<code>fabricpath&nbsp;isis&nbsp;authentication-type&nbsp;md5&nbsp;&nbsp;&nbsp;#hello&nbsp;authentication</code>
-<code>fabricpath&nbsp;isis&nbsp;authentication&nbsp;key-chain&nbsp;FABRICPATH</code></p>
-<p><code>show&nbsp;fabricpath&nbsp;isis&nbsp;interface&nbsp;br</code></p>
-<p>VLAN</p>
-<p><code>vlan&nbsp;10</code>
-<code>mode&nbsp;fabricpath</code>
-<code>name&nbsp;Server</code>
-<code>vlan&nbsp;20</code>
-<code>mode&nbsp;fabricpath</code>
-<code>name&nbsp;DB</code>
-<code>exit</code></p>
-<p>Show</p>
-<p><code>show&nbsp;fabricpath&nbsp;switch-id</code>
-<code>show&nbsp;fabricpath&nbsp;topology</code>
-<code>show&nbsp;fabricpath&nbsp;conflict&nbsp;all</code>
-<code>show&nbsp;fabricpath&nbsp;route</code>
-<code>show&nbsp;fabricpath&nbsp;isis</code></p>
-<p>Effektivisera LSP-hanteringen genom att byta IS-IS network type från
-broadcast till p2p.</p>
-<p><code>interface&nbsp;e1/1</code>
-<code>medium&nbsp;p2p</code></p>
-<p><strong>Traffic Engineering</strong>
-FabricPath gör ECMP default men man kan styra vilka länkar som används
-genom att manipulera IGP-metricen. Detta görs per interface.</p>
-<p><code>interface&nbsp;e1/1</code>
-<code>fabricpath&nbsp;isis&nbsp;metric&nbsp;400</code></p>
-<p><strong>BFD</strong>
-Man kan slå på <a href="/Cisco_BFD#NX-OS" title="wikilink">BFD</a> på alla FP-interface
-men notera att VLAN 1 måste vara i fabricpath mode. BFD-klienten blir
-fabricpath-isis. Echo mode inte är supporterat.</p>
-<p><code>fabricpath&nbsp;domain&nbsp;default</code>
-<code>bfd</code></p>
-<p><code>show&nbsp;bfd&nbsp;neighbors&nbsp;fabricpath</code></p>
-<h3 id="anycast-hsrp">Anycast HSRP</h3>
-<p>De aktiva HSRP-routrarna annonserar anycast switch ID som source switch
-ID för HSRP MAC i FabricPath IS-IS. Alla andra kan då lastdela genom att
-skicka till vilken HSRP-router som helst i gruppen. Max antal aktiva
-HSRP-routrar är 4 st. Se även <a href="/Cisco_HSRP" title="wikilink">Cisco HSRP</a>.</p>
-<p><code>hsrp&nbsp;anycast&nbsp;1&nbsp;ipv4</code>
-<code>switch-id&nbsp;111</code>
-<code>vlan&nbsp;10,11,12</code>
-<code>priority&nbsp;120</code>
-<code>no&nbsp;shutdown</code></p>
-<p>Man måste köra HSRP version 2 på alla SVI:er som ska dra nytta av
-Anycast HSRP.</p>
-<p><code>show&nbsp;hsrp&nbsp;anycast</code></p>
-<h3 id="troubleshooting">Troubleshooting</h3>
-<p><code>ping&nbsp;fabricpath&nbsp;switch-id&nbsp;101</code></p>
-<p>Send OAM Path Trace Request message to the egress switch ID</p>
-<p><code>traceroute&nbsp;fabricpath&nbsp;switch-id&nbsp;101</code></p>
-<p>Operation, Administration, and Maintenance</p>
-<p><code>fabricpath-oam</code>
-<code>show&nbsp;fabricpath&nbsp;oam&nbsp;loopback&nbsp;database</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_FabricPath.PNG" data-desc-position="bottom"><img alt="Cisco_FabricPath.PNG" src="../../images/Cisco_FabricPath.PNG"></a></p>
 
 
 
@@ -9100,7 +8919,7 @@ Anycast HSRP.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

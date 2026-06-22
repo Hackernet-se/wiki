@@ -8743,6 +8743,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9069,43 +9097,51 @@ VXLAN</a>.</p>
 <p><strong>Extended:</strong> 1006-4094</p>
 <h2 id="vlan">VLAN</h2>
 <p>Stäng ett VLAN lokalt i switchen och suspenda det i VTP.</p>
-<p><code>vlan&nbsp;20</code>
-<code>shutdown</code>
-<code>state&nbsp;suspend</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;20
+&nbsp;shutdown
+&nbsp;state&nbsp;suspend
+</code></pre></div>
 <p>Show</p>
-<p><code>show&nbsp;vlan&nbsp;brief</code>
-<code>show&nbsp;vlan&nbsp;internal&nbsp;usage</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;vlan&nbsp;brief
+show&nbsp;vlan&nbsp;internal&nbsp;usage
+</code></pre></div>
 <p><strong>Layer 2 Traceroute</strong>
 Man kan tracea mac-adresser i ett vlan. OBS
 <a href="/Cisco_IOS#CDP" title="wikilink">CDP</a> är ett prereq för detta annars blir det
 <em>Unable to send a l2trace request</em>. Max hops är 10.</p>
-<p><code>traceroute&nbsp;mac&nbsp;0050.5600.0001&nbsp;0000.aabb.ccdd&nbsp;vlan&nbsp;20</code></p>
+<div class="highlight"><pre><span></span><code>traceroute&nbsp;mac&nbsp;0050.5600.0001&nbsp;0000.aabb.ccdd&nbsp;vlan&nbsp;20
+</code></pre></div>
 <p>Det går även att ta reda på vilken väg en frame tar utifrån IP-adresser.
 ARP används för IP-to-MAC resolution och båda adresserna måste finnas i
 samma subnät.</p>
 <p><strong>Voice</strong></p>
-<p><code>interface&nbsp;GigabitEthernet0/1</code>
-<code>switchport&nbsp;mode&nbsp;access</code>
-<code>switchport&nbsp;access&nbsp;vlan&nbsp;20</code>
-<code>switchport&nbsp;voice&nbsp;vlan&nbsp;30</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet0/1
+&nbsp;switchport&nbsp;mode&nbsp;access
+&nbsp;switchport&nbsp;access&nbsp;vlan&nbsp;20
+&nbsp;switchport&nbsp;voice&nbsp;vlan&nbsp;30
+</code></pre></div>
 <p>Alternativt konfigurera en trunk som tillåter voice-vlanet. Så fort man
 använder kommandot <em>switchport voice vlan</em> enableas portfast.</p>
 <p><strong>Database mode</strong>
 Är gammalt och stöds inte längre på alla switchar.</p>
-<p><code>vlan&nbsp;database</code>
-<code>vlan&nbsp;20&nbsp;name&nbsp;Old-school</code>
-<code>apply</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;database
+&nbsp;vlan&nbsp;20&nbsp;name&nbsp;Old-school
+apply
+</code></pre></div>
 <h1 id="trunking">Trunking</h1>
 <p>IEEE 802.1q är standarden för att supportera VLAN över ethernet.</p>
 <p>Vitlista VLAN</p>
-<p><code>switchport&nbsp;trunk&nbsp;allowed&nbsp;vlan&nbsp;1-5,8</code>
-<code>show&nbsp;interface&nbsp;trunk</code></p>
+<div class="highlight"><pre><span></span><code>switchport&nbsp;trunk&nbsp;allowed&nbsp;vlan&nbsp;1-5,8
+show&nbsp;interface&nbsp;trunk
+</code></pre></div>
 <p>Se till att native VLAN matchar på trunkar, både CDP och DTP kan
 upptäcka mismatch.</p>
-<p><code>switchport&nbsp;trunk&nbsp;native&nbsp;vlan&nbsp;20</code></p>
+<div class="highlight"><pre><span></span><code>switchport&nbsp;trunk&nbsp;native&nbsp;vlan&nbsp;20
+</code></pre></div>
 <p>Man kan tagga alla frames på en trunk.</p>
-<p><code>vlan&nbsp;dot1q&nbsp;tag&nbsp;native</code>
-<code>show&nbsp;vlan&nbsp;dot1q&nbsp;tag&nbsp;native</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;dot1q&nbsp;tag&nbsp;native
+show&nbsp;vlan&nbsp;dot1q&nbsp;tag&nbsp;native
+</code></pre></div>
 <h2 id="dtp">DTP</h2>
 <p>Dynamic Trunking Protocol är ett Cisco-properitärt protokoll som används
 av switchar för att förhandla med andra sidan om ett interface ska vara
@@ -9115,18 +9151,10 @@ domain name så det måste matcha för att DTP ska kunna förhandla upp
 trunk (ena sidan kan ha vtp domain NULL så funkar det också). DTP är
 påslaget default och skickas både som vanlig ethernet men också
 ISL-enkapsulerat. DTP är inte supporterat på någon Nexus-plattform.</p>
-<div class="mw-collapsible mw-collapsed" style="width:250px">
-
-DTP frame:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_dtp.png>](/File:Cisco_DTP.png "wikilink")
-
-</file:cisco_dtp.png></div>
-</div>
-
-<p><code>show&nbsp;dtp</code></p>
+<p>DTP frame:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_DTP.png" data-desc-position="bottom"><img alt="Cisco_DTP.png" src="../../images/Cisco_DTP.png"></a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;dtp
+</code></pre></div>
 <p>Port Modes, vissa switchmodeller har desirable som default (3560) och
 vissa har auto (2960)</p>
 <ul>
@@ -9138,11 +9166,13 @@ vissa har auto (2960)</p>
 <p>Stänga av DTP. OBS porten måste vara konfad som något för att kunna
 använda nonegotiate, annars blir det <em>Conflict between 'nonegotiate' and
 'dynamic' status.</em></p>
-<p><code>switchport&nbsp;mode&nbsp;trunk&nbsp;/&nbsp;access</code>
-<code>switchport&nbsp;nonegotiate</code></p>
+<div class="highlight"><pre><span></span><code>switchport&nbsp;mode&nbsp;trunk&nbsp;/&nbsp;access
+switchport&nbsp;nonegotiate
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;dtp&nbsp;interface</code>
-<code>show&nbsp;interfaces&nbsp;switchport&nbsp;|&nbsp;i&nbsp;Name|Negotiation</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;dtp&nbsp;interface
+show&nbsp;interfaces&nbsp;switchport&nbsp;|&nbsp;i&nbsp;Name|Negotiation
+</code></pre></div>
 <h1 id="private-vlan">Private VLAN</h1>
 <p>Vanligtvis kan allt i ett VLAN nå övrigt i samma VLAN obehindrat men det
 kan finnas situationer när man vill begränsa konnektivitet inom en
@@ -9198,141 +9228,171 @@ local-proxy-arp</strong> är konfigurerat på gateway. Det fungerar som proxy AR
 fast inom subnätet. Funktionerna DHCP Snooping, ARP Inspection och
 Source Guard på primary VLANet enablear det även på secondary VLANs.</p>
 <h3 id="konfiguration">Konfiguration</h3>
-<p><code>vtp&nbsp;mode&nbsp;transparent</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;mode&nbsp;transparent
+</code></pre></div>
 <p>Alternativt kan <a href="/Cisco_VTP" title="wikilink">VTP</a> version 3 användas.</p>
 <p>VLAN</p>
-<p><code>vlan&nbsp;101</code>
-<code>private-vlan&nbsp;isolated</code>
-<code>vlan&nbsp;102</code>
-<code>private-vlan&nbsp;community</code>
-<code>vlan&nbsp;100</code>
-<code>private-vlan&nbsp;primary</code>
-<code>private-vlan&nbsp;assoc&nbsp;101,102</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;101
+&nbsp;private-vlan&nbsp;isolated
+vlan&nbsp;102
+&nbsp;private-vlan&nbsp;community
+vlan&nbsp;100
+&nbsp;private-vlan&nbsp;primary
+&nbsp;private-vlan&nbsp;assoc&nbsp;101,102
+</code></pre></div>
 <p>Access Ports</p>
-<p><code>interface&nbsp;g0/1</code>
-<code>description&nbsp;Gateway</code>
-<code>switchport&nbsp;mode&nbsp;private-vlan&nbsp;promiscuous</code>
-<code>switchport&nbsp;private-vlan&nbsp;mapping&nbsp;100&nbsp;101-102</code></p>
-<p><code>interface&nbsp;g0/2</code>
-<code>description&nbsp;Isolated</code>
-<code>switchport&nbsp;mode&nbsp;private-vlan&nbsp;host</code>
-<code>switchport&nbsp;private-vlan&nbsp;host-association&nbsp;100&nbsp;101</code></p>
-<p><code>interface&nbsp;g0/3</code>
-<code>description&nbsp;Community</code>
-<code>switchport&nbsp;mode&nbsp;private-vlan&nbsp;host</code>
-<code>switchport&nbsp;private-vlan&nbsp;host-association&nbsp;100&nbsp;102</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;g0/1
+&nbsp;description&nbsp;Gateway
+&nbsp;switchport&nbsp;mode&nbsp;private-vlan&nbsp;promiscuous
+&nbsp;switchport&nbsp;private-vlan&nbsp;mapping&nbsp;100&nbsp;101-102
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;g0/2
+&nbsp;description&nbsp;Isolated
+&nbsp;switchport&nbsp;mode&nbsp;private-vlan&nbsp;host
+&nbsp;switchport&nbsp;private-vlan&nbsp;host-association&nbsp;100&nbsp;101
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;g0/3
+&nbsp;description&nbsp;Community
+&nbsp;switchport&nbsp;mode&nbsp;private-vlan&nbsp;host
+&nbsp;switchport&nbsp;private-vlan&nbsp;host-association&nbsp;100&nbsp;102
+</code></pre></div>
 <p>Other switch</p>
-<p><code>interface&nbsp;g0/4</code>
-<code>switchport&nbsp;mode&nbsp;trunk</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;g0/4
+&nbsp;switchport&nbsp;mode&nbsp;trunk
+</code></pre></div>
 <p>Promiscuous PVLAN Trunk Port</p>
-<p><code>interface&nbsp;g0/5</code>
-<code>switchport&nbsp;private-vlan&nbsp;trunk&nbsp;allowed&nbsp;vlan&nbsp;100-103</code>
-<code>switchport&nbsp;private-vlan&nbsp;mapping&nbsp;trunk&nbsp;103&nbsp;130-135</code>
-<code>switchport&nbsp;mode&nbsp;private-vlan&nbsp;trunk&nbsp;promiscuous</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;g0/5
+&nbsp;switchport&nbsp;private-vlan&nbsp;trunk&nbsp;allowed&nbsp;vlan&nbsp;100-103
+&nbsp;switchport&nbsp;private-vlan&nbsp;mapping&nbsp;trunk&nbsp;103&nbsp;130-135
+&nbsp;switchport&nbsp;mode&nbsp;private-vlan&nbsp;trunk&nbsp;promiscuous
+</code></pre></div>
 <p>Notera att primary vlan ska vara med i allowed vlan list. Om man har
 t.ex. en <a href="/Cisco_ASA" title="wikilink">ASA</a> kan man köra med en vanlig
 switchport mode trunk om man vill för ASA har native stöd för PVLAN.</p>
 <p>SVI</p>
-<p><code>interface&nbsp;Vlan100</code>
-<code>ip&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.0</code>
-<code>private-vlan&nbsp;mapping&nbsp;101,102</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Vlan100
+&nbsp;ip&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.0
+&nbsp;private-vlan&nbsp;mapping&nbsp;101,102
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;vlan&nbsp;private-vlan</code>
-<code>show&nbsp;interfaces&nbsp;vlan100&nbsp;private-vlan&nbsp;mapping</code>
-<code>ping&nbsp;255.255.255.255</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;vlan&nbsp;private-vlan
+show&nbsp;interfaces&nbsp;vlan100&nbsp;private-vlan&nbsp;mapping
+ping&nbsp;255.255.255.255
+</code></pre></div>
 <h1 id="q-in-q">Q-in-Q</h1>
 <p>Med IEEE 802.1Q tunneling kan man bygga en simpel L2 VPN genom att
 dubbeltagga Ethernet-frames.</p>
 <p>prereq</p>
-<p><code>system&nbsp;mtu&nbsp;1504</code>
-<code>reload</code>
-<code>show&nbsp;system&nbsp;mtu</code></p>
+<div class="highlight"><pre><span></span><code>system&nbsp;mtu&nbsp;1504
+reload
+show&nbsp;system&nbsp;mtu
+</code></pre></div>
 <p>Port</p>
-<p><code>switchport&nbsp;mode&nbsp;dot1q-tunnel</code>
-<code>l2protocol-tunnel&nbsp;cdp</code></p>
+<div class="highlight"><pre><span></span><code>switchport&nbsp;mode&nbsp;dot1q-tunnel
+l2protocol-tunnel&nbsp;cdp
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;dot1q-tunnel</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;dot1q-tunnel
+</code></pre></div>
 <p>Dubbeltaggning på router</p>
-<p><code>int&nbsp;gi2</code>
-<code>mtu&nbsp;1504</code>
-<code>int&nbsp;gi2.10</code>
-<code>encapsulation&nbsp;dot1q&nbsp;10&nbsp;second-dot1q&nbsp;100,101</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;gi2
+&nbsp;mtu&nbsp;1504
+int&nbsp;gi2.10
+&nbsp;encapsulation&nbsp;dot1q&nbsp;10&nbsp;second-dot1q&nbsp;100,101
+</code></pre></div>
 <h1 id="bridging">Bridging</h1>
 <p>Med bridging kan man ändra en routers beteende att bli mer likt hur en
 switch fungerar. För IOS-XE se längre ner.</p>
 <p><strong>Transparent</strong>
 Routern blir precis som en L2-switch, dvs ingen IP routing och
 <a href="/Cisco_STP" title="wikilink">STP</a> används för loop prevention.</p>
-<p><code>no&nbsp;ip&nbsp;routing</code>
-<code>bridge&nbsp;1&nbsp;protocol&nbsp;vlan-bridge</code></p>
-<p><code>interface&nbsp;gi0</code>
-<code>bridge-group&nbsp;1</code>
-<code>interface&nbsp;gi1</code>
-<code>bridge-group&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;ip&nbsp;routing
+bridge&nbsp;1&nbsp;protocol&nbsp;vlan-bridge
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0
+&nbsp;bridge-group&nbsp;1
+interface&nbsp;gi1
+&nbsp;bridge-group&nbsp;1
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bridge</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bridge
+</code></pre></div>
 <p><strong>CRB</strong>
 Transparent bridging har en stor nackdel, en router kan inte både routa
 paket och brygga interface, därför finns Concurrent Routing and Bridging
 som tillåter både routing och bridging samtidigt. Dock inte på samma
 interface-grupper.</p>
-<p><code>bridge&nbsp;crb</code>
-<code>ip&nbsp;routing</code></p>
-<p><code>bridge&nbsp;1&nbsp;protocol&nbsp;vlan-bridge</code></p>
-<p><code>interface&nbsp;gi0</code>
-<code>bridge-group&nbsp;1</code>
-<code>interface&nbsp;gi1</code>
-<code>bridge-group&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>bridge&nbsp;crb
+ip&nbsp;routing
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>bridge&nbsp;1&nbsp;protocol&nbsp;vlan-bridge
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0
+&nbsp;bridge-group&nbsp;1
+interface&nbsp;gi1
+&nbsp;bridge-group&nbsp;1
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bridge</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bridge
+</code></pre></div>
 <p><strong>IRB</strong>
 En nackdel med CRB är att det inte går att koppla ihop en routed domain
 med en bridged domain inom samma enhet, därför finns Integrated Routing
 and Bridging. Då skapas Bridge Group Virtual Interface (BVI) som
 fungerar som SVI på L3-switchar.</p>
 <p>Prereqs &amp; Configuration</p>
-<p><code>bridge&nbsp;irb</code>
-<code>ip&nbsp;routing</code></p>
-<p><code>bridge&nbsp;1&nbsp;route&nbsp;ip</code>
-<code>bridge&nbsp;1&nbsp;protocol&nbsp;vlan-bridge</code></p>
-<p><code>interface&nbsp;gi0</code>
-<code>bridge-group&nbsp;1</code>
-<code>interface&nbsp;gi1</code>
-<code>bridge-group&nbsp;1</code>
-<code>interface&nbsp;bvi1</code>
-<code>ip&nbsp;address&nbsp;10.0.0.10&nbsp;255.255.255.0</code></p>
+<div class="highlight"><pre><span></span><code>bridge&nbsp;irb
+ip&nbsp;routing
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>bridge&nbsp;1&nbsp;route&nbsp;ip&nbsp;
+bridge&nbsp;1&nbsp;protocol&nbsp;vlan-bridge
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0
+&nbsp;bridge-group&nbsp;1
+interface&nbsp;gi1
+&nbsp;bridge-group&nbsp;1
+interface&nbsp;bvi1
+&nbsp;ip&nbsp;address&nbsp;10.0.0.10&nbsp;255.255.255.0
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bridge</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bridge
+</code></pre></div>
 <p><strong>Fallback Bridging</strong>
 Fallback Bridging används för att brygga icke-routebara protokoll mellan
 SVIer och routade interface. Ett protokoll kan routas medans det andra
 bryggas, t.ex. IPv4 kan routas medans IPv6 bryggas.</p>
-<p><code>bridge&nbsp;1&nbsp;protocol&nbsp;vlan-bridge</code></p>
-<p><code>interface&nbsp;Gi0/2</code>
-<code>no&nbsp;switchport</code>
-<code>ip&nbsp;address&nbsp;10.0.2.10&nbsp;255.255.255.0</code>
-<code>bridge-group&nbsp;1</code></p>
-<p><code>interface&nbsp;Vlan10</code>
-<code>ip&nbsp;address&nbsp;10.0.10.10&nbsp;255.255.255.0</code>
-<code>bridge-group&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>bridge&nbsp;1&nbsp;protocol&nbsp;vlan-bridge
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/2
+&nbsp;no&nbsp;switchport
+&nbsp;ip&nbsp;address&nbsp;10.0.2.10&nbsp;255.255.255.0
+&nbsp;bridge-group&nbsp;1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Vlan10
+&nbsp;ip&nbsp;address&nbsp;10.0.10.10&nbsp;255.255.255.0
+&nbsp;bridge-group&nbsp;1
+</code></pre></div>
 <p><strong>IOS-XE</strong>
 På IOS-XE görs bridging med bridge domains och Ethernet flow points
 (EFP).</p>
-<p><code>interface&nbsp;gi0/0/1</code>
-<code>service&nbsp;instance&nbsp;1&nbsp;ethernet</code>
-<code>encapsulation&nbsp;untagged</code>
-<code>bridge-domain&nbsp;1</code></p>
-<p><code>interface&nbsp;gi0/0/2</code>
-<code>service&nbsp;instance&nbsp;1&nbsp;ethernet</code>
-<code>encapsulation&nbsp;untagged</code>
-<code>bridge-domain&nbsp;1</code>
-<code>l2protocol&nbsp;peer&nbsp;stp</code>
-<code>mac&nbsp;limit&nbsp;maximum&nbsp;addresses&nbsp;50</code></p>
-<p><code>interface&nbsp;bdi1</code>
-<code>ip&nbsp;address&nbsp;10.0.0.10&nbsp;255.255.255.0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/0/1
+&nbsp;service&nbsp;instance&nbsp;1&nbsp;ethernet
+&nbsp;&nbsp;encapsulation&nbsp;untagged
+&nbsp;&nbsp;bridge-domain&nbsp;1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/0/2
+&nbsp;service&nbsp;instance&nbsp;1&nbsp;ethernet
+&nbsp;&nbsp;encapsulation&nbsp;untagged
+&nbsp;&nbsp;bridge-domain&nbsp;1
+&nbsp;&nbsp;l2protocol&nbsp;peer&nbsp;stp
+&nbsp;&nbsp;mac&nbsp;limit&nbsp;maximum&nbsp;addresses&nbsp;50
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;bdi1
+&nbsp;ip&nbsp;address&nbsp;10.0.0.10&nbsp;255.255.255.0
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bridge-domain</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bridge-domain
+</code></pre></div>
 
 
 
@@ -9355,7 +9415,7 @@ På IOS-XE görs bridging med bridge domains och Ethernet flow points
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

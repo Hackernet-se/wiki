@@ -8769,6 +8769,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9131,90 +9159,113 @@ tunnel interface och sedan justera TCP MSS till 40 bytes lägre än det.</p>
 <p><a href="https://cway.cisco.com/tools/ipsec-overhead-calc/"><code>https://cway.cisco.com/tools/ipsec-overhead-calc/</code></a></p>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>Dead Peer Detection (DPD) &amp; NAT Keepalives</p>
-<p><code>crypto&nbsp;isakmp&nbsp;keepalive&nbsp;30</code>
-<code>crypto&nbsp;isakmp&nbsp;nat&nbsp;keepalive&nbsp;30</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;keepalive&nbsp;30&nbsp;
+crypto&nbsp;isakmp&nbsp;nat&nbsp;keepalive&nbsp;30
+</code></pre></div>
 <p>Capabilities, Encryption Layer Interface</p>
-<p><code>show&nbsp;crypto&nbsp;eli</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;eli
+</code></pre></div>
 <p>Errors and Invalid SPI Recovery Feature</p>
-<p><code>crypto&nbsp;isakmp&nbsp;invalid-spi-recovery</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;invalid-spi-recovery&nbsp;
+</code></pre></div>
 <h3 id="legacy">Legacy</h3>
 <p>IPsec VPN med crypto maps och IKEv1 är den äldsta och minst skalbara
 varianten av IPsec VPN.</p>
-<p><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10</code>
-<code>encryption&nbsp;aes&nbsp;256</code>
-<code>authentication&nbsp;pre-share</code>
-<code>group&nbsp;20</code>
-<code>lifetime&nbsp;86400</code></p>
-<p><code>show&nbsp;crypto&nbsp;isakmp&nbsp;policy</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10
+&nbsp;encryption&nbsp;aes&nbsp;256
+&nbsp;authentication&nbsp;pre-share
+&nbsp;group&nbsp;20
+&nbsp;lifetime&nbsp;86400
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;isakmp&nbsp;policy
+</code></pre></div>
 <p>PSK Authentication</p>
-<p><code>crypto&nbsp;isakmp&nbsp;key&nbsp;S3cr3ts&nbsp;address&nbsp;3.3.3.3</code></p>
-<p><code>show&nbsp;crypto&nbsp;isakmp&nbsp;key</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;key&nbsp;S3cr3ts&nbsp;address&nbsp;3.3.3.3
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;isakmp&nbsp;key
+</code></pre></div>
 <p><strong>Fas 2</strong></p>
-<p><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;PHASE2&nbsp;esp-aes&nbsp;esp-sha-hmac</code>
-<code>mode&nbsp;tunnel</code>
-<code>ip&nbsp;access-list&nbsp;extended&nbsp;CRYPTO</code>
-<code>permit&nbsp;ip&nbsp;192.168.1.0&nbsp;0.0.0.255&nbsp;192.168.2.0&nbsp;0.0.0.255</code></p>
-<p><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;ipsec-isakmp</code>
-<code>set&nbsp;peer&nbsp;3.3.3.3</code>
-<code>set&nbsp;transform-set&nbsp;PHASE2</code>
-<code>match&nbsp;address&nbsp;CRYPTO</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;PHASE2&nbsp;esp-aes&nbsp;esp-sha-hmac
+&nbsp;mode&nbsp;tunnel
+ip&nbsp;access-list&nbsp;extended&nbsp;CRYPTO
+&nbsp;permit&nbsp;ip&nbsp;192.168.1.0&nbsp;0.0.0.255&nbsp;192.168.2.0&nbsp;0.0.0.255
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;ipsec-isakmp
+&nbsp;set&nbsp;peer&nbsp;3.3.3.3
+&nbsp;set&nbsp;transform-set&nbsp;PHASE2
+&nbsp;match&nbsp;address&nbsp;CRYPTO
+</code></pre></div>
 <p>Interfaces</p>
-<p><code>interface&nbsp;GigabitEthernet0/1</code>
-<code>description&nbsp;Internet</code>
-<code>ip&nbsp;address&nbsp;2.2.2.2&nbsp;255.255.255.0</code>
-<code>crypto&nbsp;map&nbsp;VPNMAP</code></p>
-<p><code>interface&nbsp;GigabitEthernet0/2</code>
-<code>description&nbsp;Inside</code>
-<code>ip&nbsp;address&nbsp;192.168.1.1&nbsp;255.255.255.0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet0/1
+&nbsp;description&nbsp;Internet
+&nbsp;ip&nbsp;address&nbsp;2.2.2.2&nbsp;255.255.255.0
+&nbsp;crypto&nbsp;map&nbsp;VPNMAP
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet0/2
+&nbsp;description&nbsp;Inside
+&nbsp;ip&nbsp;address&nbsp;192.168.1.1&nbsp;255.255.255.0
+</code></pre></div>
 <p>Verify Fas 1 och 2. Inget förhandlas förens det skickas trafik som
 triggar tunneln.</p>
-<p><code>show&nbsp;crypto&nbsp;isakmp&nbsp;sa</code>
-<code>show&nbsp;crypto&nbsp;ipsec&nbsp;sa</code>
-<code>show&nbsp;crypto&nbsp;session</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;isakmp&nbsp;sa
+show&nbsp;crypto&nbsp;ipsec&nbsp;sa
+show&nbsp;crypto&nbsp;session
+</code></pre></div>
 <p>Loopback</p>
-<p><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;local-address&nbsp;Loopback0</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;local-address&nbsp;Loopback0
+</code></pre></div>
 <p>Reverse Route Injection</p>
-<p><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;ipsec-isakmp</code>
-<code>set&nbsp;reverse-route&nbsp;distance&nbsp;10</code></p>
-<p><code>show&nbsp;crypto&nbsp;route</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;ipsec-isakmp
+&nbsp;set&nbsp;reverse-route&nbsp;distance&nbsp;10
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;route
+</code></pre></div>
 <h2 id="gre-over-ipsec-with-profile">GRE over IPsec with Profile</h2>
 <p>En fördel med att tunnla trafiken med <a href="/Cisco_GRE" title="wikilink">GRE</a> är
 att routingprotokoll kan användas över tunneln. Trafiken krypteras efter
 att det har enkapsulerats med GRE. Man bör manuellt ange <strong>ip mtu</strong> på
 tunnel-interfacet för det tar ej hänsyn till ESP-enkapsuleringen som
 lägger till overhead.</p>
-<p><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10</code>
-<code>encryption&nbsp;aes&nbsp;256</code>
-<code>authentication&nbsp;pre-share</code>
-<code>group&nbsp;20</code>
-<code>lifetime&nbsp;86400</code></p>
-<p><code>crypto&nbsp;isakmp&nbsp;key&nbsp;S3cr3ts&nbsp;address&nbsp;3.3.3.3</code></p>
-<p><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;PHASE2&nbsp;esp-aes&nbsp;esp-sha-hmac</code>
-<code>mode&nbsp;transport&nbsp;&nbsp;#</code><em><code>Spara`` ``overhead`` ``genom`` ``att`` ``köra`` ``i`` ``transport`` ``mode</code></em></p>
-<p><code>crypto&nbsp;ipsec&nbsp;profile&nbsp;GRE_OVER_IPSEC</code>
-<code>set&nbsp;transform-set&nbsp;PHASE2</code></p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;address&nbsp;1.1.1.1&nbsp;255.255.255.0</code>
-<code>ip&nbsp;mtu&nbsp;1400</code>
-<code>ip&nbsp;tcp&nbsp;adjust-mss&nbsp;1360</code>
-<code>tunnel&nbsp;source&nbsp;Loopback0</code>
-<code>tunnel&nbsp;destination&nbsp;3.3.3.3</code>
-<code>tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;GRE_OVER_IPSEC</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10
+&nbsp;encryption&nbsp;aes&nbsp;256
+&nbsp;authentication&nbsp;pre-share
+&nbsp;group&nbsp;20
+&nbsp;lifetime&nbsp;86400
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;key&nbsp;S3cr3ts&nbsp;address&nbsp;3.3.3.3&nbsp;&nbsp;&nbsp;&nbsp;
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;PHASE2&nbsp;esp-aes&nbsp;esp-sha-hmac&nbsp;
+</code></pre></div>
+<code>mode&nbsp;transport&nbsp;&nbsp;#</code><em><code>Spara`` ``overhead`` ``genom`` ``att`` ``köra`` ``i`` ``transport`` ``mode</code></em><p></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;profile&nbsp;GRE_OVER_IPSEC
+&nbsp;set&nbsp;transform-set&nbsp;PHASE2&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;address&nbsp;1.1.1.1&nbsp;255.255.255.0
+&nbsp;ip&nbsp;mtu&nbsp;1400
+&nbsp;ip&nbsp;tcp&nbsp;adjust-mss&nbsp;1360
+&nbsp;tunnel&nbsp;source&nbsp;Loopback0
+&nbsp;tunnel&nbsp;destination&nbsp;3.3.3.3
+&nbsp;tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;GRE_OVER_IPSEC
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;crypto&nbsp;ipsec&nbsp;profile</code>
-<code>show&nbsp;crypto&nbsp;session</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;ipsec&nbsp;profile
+show&nbsp;crypto&nbsp;session
+</code></pre></div>
 <p>Local och remote i IPsec SA kommer att förhandlas som
 <em>tunnel-endpoint</em>/32 \&lt;-&gt; <em>tunnel-endpoint</em>/32 protokoll GRE vilket gör
 att det aldrig behövs mer än en entry per tunnel.</p>
 <h4 id="fvrf">FVRF</h4>
 <p>Om interfacet som terminerar tunneln ligger i en vrf måste man använda
 en keyring som man lägger i en isakmp-profil.</p>
-<p><code>crypto&nbsp;keyring&nbsp;VPN_PEERS&nbsp;vrf&nbsp;Outside</code>
-<code>pre-shared-key&nbsp;address&nbsp;3.3.3.3&nbsp;key&nbsp;SecretKey</code></p>
-<p><code>crypto&nbsp;isakmp&nbsp;profile&nbsp;VPN_PROFILE</code>
-<code>keyring&nbsp;VPN_PEERS</code>
-<code>match&nbsp;identity&nbsp;address&nbsp;3.3.3.3&nbsp;255.255.255.255</code>
-<code>keepalive&nbsp;10&nbsp;retry&nbsp;5</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;keyring&nbsp;VPN_PEERS&nbsp;vrf&nbsp;Outside
+&nbsp;pre-shared-key&nbsp;address&nbsp;3.3.3.3&nbsp;key&nbsp;SecretKey
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;profile&nbsp;VPN_PROFILE
+&nbsp;&nbsp;keyring&nbsp;VPN_PEERS
+&nbsp;&nbsp;match&nbsp;identity&nbsp;address&nbsp;3.3.3.3&nbsp;255.255.255.255
+&nbsp;&nbsp;keepalive&nbsp;10&nbsp;retry&nbsp;5
+</code></pre></div>
 <h2 id="vti">VTI</h2>
 <p>Med VPN som byggs med Virtual Tunnel Interface kan man både använda
 dynamic routing och multicast. Det fungerar likadant som GRE över IPsec
@@ -9224,101 +9275,122 @@ IS-IS fungerar ej). Detta gör att tunnel-interfacet vet sin korrekta
 mtu. VTI konfigureras likadant som GRE över IPsec med profil men med en
 skillnad, här följer därför endast skillnaden samt att transform set
 alltid måste köras i tunnel mode.</p>
-<p><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;PHASE2&nbsp;esp-aes&nbsp;esp-sha-hmac</code>
-<code>mode&nbsp;tunnel</code></p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code></code><strong><code>tunnel`` ``mode`` ``ipsec`` ``ipv4</code></strong></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;PHASE2&nbsp;esp-aes&nbsp;esp-sha-hmac&nbsp;
+&nbsp;mode&nbsp;tunnel
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+</code></pre></div>
+<code></code><strong><code>tunnel`` ``mode`` ``ipsec`` ``ipv4</code></strong><p></p>
 <p>Verify</p>
-<p><code>show&nbsp;crypto&nbsp;ipsec&nbsp;sa</code>
-<code>show&nbsp;crypto&nbsp;route</code>
-<code>show&nbsp;crypto&nbsp;session</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;ipsec&nbsp;sa
+show&nbsp;crypto&nbsp;route
+show&nbsp;crypto&nbsp;session
+</code></pre></div>
 <p>Local och remote kommer alltid att förhandlas som <strong>0.0.0.0/0 \&lt;-&gt;
 0.0.0.0/0</strong> vilket gör att det aldrig behövs mer än en entry per tunnel.</p>
 <h3 id="dynamic-vti">Dynamic VTI</h3>
 <p>Man kan även låta VTI:s skapas dynamiskt.</p>
-<p><code>interface&nbsp;Virtual-Template1&nbsp;type&nbsp;tunnel</code>
-<code>ip&nbsp;unnumbered&nbsp;Loopback0</code>
-<code>tunnel&nbsp;mode&nbsp;ipsec&nbsp;ipv4</code>
-<code>tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;VTI_PROFILE</code></p>
-<p><code>crypto&nbsp;isakmp&nbsp;profile&nbsp;VTI_ISAKMP_PROFILE</code>
-<code>keyring&nbsp;default</code>
-<code>match&nbsp;identity&nbsp;address&nbsp;0.0.0.0</code>
-<code>virtual-template&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Virtual-Template1&nbsp;type&nbsp;tunnel&nbsp;&nbsp;
+&nbsp;ip&nbsp;unnumbered&nbsp;Loopback0&nbsp;
+&nbsp;tunnel&nbsp;mode&nbsp;ipsec&nbsp;ipv4&nbsp;
+&nbsp;tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;VTI_PROFILE
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;profile&nbsp;VTI_ISAKMP_PROFILE
+&nbsp;keyring&nbsp;default&nbsp;&nbsp;
+&nbsp;match&nbsp;identity&nbsp;address&nbsp;0.0.0.0&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;virtual-template&nbsp;1
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;interfaces&nbsp;virtual-template&nbsp;1</code>
-<code>...</code>
-<code>Tunnel&nbsp;linestate&nbsp;evaluation&nbsp;down&nbsp;-&nbsp;no&nbsp;IPv4&nbsp;tunnel&nbsp;destination&nbsp;address</code>
-<code>Tunnel&nbsp;source&nbsp;UNKNOWN</code>
-<code>...</code></p>
-<p><code>show&nbsp;interfaces&nbsp;virtual-access&nbsp;1</code>
-<code>...</code>
-<code>Tunnel&nbsp;vaccess,&nbsp;cloned&nbsp;from&nbsp;Virtual-Template1</code>
-<code>Tunnel&nbsp;linestate&nbsp;evaluation&nbsp;up</code>
-<code>Tunnel&nbsp;source&nbsp;10.0.0.1,&nbsp;destination&nbsp;10.0.0.2</code>
-<code>...</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;interfaces&nbsp;virtual-template&nbsp;1
+&nbsp;...
+&nbsp;Tunnel&nbsp;linestate&nbsp;evaluation&nbsp;down&nbsp;-&nbsp;no&nbsp;IPv4&nbsp;tunnel&nbsp;destination&nbsp;address
+&nbsp;Tunnel&nbsp;source&nbsp;UNKNOWN
+&nbsp;...
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;interfaces&nbsp;virtual-access&nbsp;1
+&nbsp;...
+&nbsp;Tunnel&nbsp;vaccess,&nbsp;cloned&nbsp;from&nbsp;Virtual-Template1
+&nbsp;Tunnel&nbsp;linestate&nbsp;evaluation&nbsp;up
+&nbsp;Tunnel&nbsp;source&nbsp;10.0.0.1,&nbsp;destination&nbsp;10.0.0.2
+&nbsp;...
+</code></pre></div>
 <p>Andra sidan konfigureras som en vanlig point-to-point IPsec tunnel.</p>
-<p><code>interface&nbsp;Tunnel10</code>
-<code>ip&nbsp;address&nbsp;10.0.0.2&nbsp;255.255.255.0</code>
-<code>tunnel&nbsp;source&nbsp;Loopback0</code>
-<code>tunnel&nbsp;mode&nbsp;ipsec&nbsp;ipv4</code>
-<code>tunnel&nbsp;destination&nbsp;1.1.1.1</code>
-<code>tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;IPSEC</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel10
+&nbsp;ip&nbsp;address&nbsp;10.0.0.2&nbsp;255.255.255.0
+&nbsp;tunnel&nbsp;source&nbsp;Loopback0&nbsp;&nbsp;
+&nbsp;tunnel&nbsp;mode&nbsp;ipsec&nbsp;ipv4&nbsp;&nbsp;
+&nbsp;tunnel&nbsp;destination&nbsp;1.1.1.1
+&nbsp;tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;IPSEC
+</code></pre></div>
 <h2 id="nat-t">NAT-T</h2>
 <p>IOS märker med hjälp av NAT-Discovery (RFC 3947) om paketen till och
 från remote peer natas och byter då till UDP 4500. Detta är på default
 men kan stängas av. Båda sidor måste ha stöd NAT-T för att det ska
 funka.</p>
-<p><code>no&nbsp;crypto&nbsp;ipsec&nbsp;nat-transparency&nbsp;udp-encapsulation</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;crypto&nbsp;ipsec&nbsp;nat-transparency&nbsp;udp-encapsulation
+</code></pre></div>
 <h2 id="ikev2">IKEv2</h2>
 <p>IKEv2 har inbyggt stöd för NAT traversal och ID är alltid skyddat till
 skillnad från IKEv1 aggressive mode.</p>
 <p>Key ring</p>
-<p><code>crypto&nbsp;ikev2&nbsp;keyring&nbsp;IKEv2_KEYRING</code>
-<code>peer&nbsp;SITE2</code>
-<code>address&nbsp;3.3.3.3</code>
-<code>pre-shared-key&nbsp;local&nbsp;PSK01</code>
-<code>pre-shared-key&nbsp;remote&nbsp;PSK02</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ikev2&nbsp;keyring&nbsp;IKEv2_KEYRING
+&nbsp;peer&nbsp;SITE2
+&nbsp;&nbsp;address&nbsp;3.3.3.3
+&nbsp;&nbsp;pre-shared-key&nbsp;local&nbsp;PSK01
+&nbsp;&nbsp;pre-shared-key&nbsp;remote&nbsp;PSK02
+</code></pre></div>
 <p>Proposal</p>
-<p><code>crypto&nbsp;ikev2&nbsp;proposal&nbsp;IKEv2_PROPOSAL</code>
-<code>encryption&nbsp;aes-cbc-256</code>
-<code>integrity&nbsp;sha512</code>
-<code>group&nbsp;20</code></p>
-<p><code>show&nbsp;crypto&nbsp;ikev2&nbsp;proposal</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ikev2&nbsp;proposal&nbsp;IKEv2_PROPOSAL
+&nbsp;encryption&nbsp;aes-cbc-256
+&nbsp;integrity&nbsp;sha512
+&nbsp;group&nbsp;20
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;ikev2&nbsp;proposal
+</code></pre></div>
 <p><em>Används aes-gcm måste prf köras på båda sidor.</em></p>
 <p>Profile</p>
-<p><code>crypto&nbsp;ikev2&nbsp;profile&nbsp;IKEv2_PROFILE</code>
-<code>match&nbsp;identity&nbsp;remote&nbsp;address&nbsp;3.3.3.3&nbsp;255.255.255.255</code>
-<code>identity&nbsp;local&nbsp;address&nbsp;2.2.2.2</code>
-<code>authentication&nbsp;remote&nbsp;pre-share</code>
-<code>authentication&nbsp;local&nbsp;pre-share</code>
-<code>keyring&nbsp;local&nbsp;IKEv2_KEYRING</code></p>
-<p><code>show&nbsp;crypto&nbsp;ikev2&nbsp;profile</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ikev2&nbsp;profile&nbsp;IKEv2_PROFILE
+&nbsp;match&nbsp;identity&nbsp;remote&nbsp;address&nbsp;3.3.3.3&nbsp;255.255.255.255
+&nbsp;identity&nbsp;local&nbsp;address&nbsp;2.2.2.2
+&nbsp;authentication&nbsp;remote&nbsp;pre-share
+&nbsp;authentication&nbsp;local&nbsp;pre-share
+&nbsp;keyring&nbsp;local&nbsp;IKEv2_KEYRING
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;ikev2&nbsp;profile
+</code></pre></div>
 <p>Policy</p>
-<p><code>crypto&nbsp;ikev2&nbsp;policy&nbsp;IKEv2_POLICY</code>
-<code>proposal&nbsp;IKEv2_PROPOSAL</code></p>
-<p><code>show&nbsp;crypto&nbsp;ikev2&nbsp;policy</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ikev2&nbsp;policy&nbsp;IKEv2_POLICY
+&nbsp;proposal&nbsp;IKEv2_PROPOSAL
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;ikev2&nbsp;policy
+</code></pre></div>
 <p>Transform set</p>
-<p><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;SITE2&nbsp;esp-aes&nbsp;256&nbsp;esp-sha-hmac</code>
-<code>mode&nbsp;tunnel</code></p>
-<p><code>show&nbsp;crypto&nbsp;ipsec&nbsp;transform-set</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;SITE2&nbsp;esp-aes&nbsp;256&nbsp;esp-sha-hmac
+&nbsp;mode&nbsp;tunnel
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;ipsec&nbsp;transform-set
+</code></pre></div>
 <p>Crypto map</p>
-<p><code>crypto&nbsp;map&nbsp;IKEv2_MAP&nbsp;1000&nbsp;ipsec-isakmp</code>
-<code>set&nbsp;peer&nbsp;3.3.3.3</code>
-<code>set&nbsp;transform-set&nbsp;SITE2</code>
-<code>match&nbsp;address&nbsp;CRYPTO</code>
-<code>interface&nbsp;gi2</code>
-<code>crypto&nbsp;map&nbsp;IKEv2_MAP</code>
-<code>show&nbsp;crypto&nbsp;map</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;IKEv2_MAP&nbsp;1000&nbsp;ipsec-isakmp
+&nbsp;set&nbsp;peer&nbsp;3.3.3.3
+&nbsp;set&nbsp;transform-set&nbsp;SITE2
+&nbsp;match&nbsp;address&nbsp;CRYPTO
+interface&nbsp;gi2
+&nbsp;crypto&nbsp;map&nbsp;IKEv2_MAP
+show&nbsp;crypto&nbsp;map
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;crypto&nbsp;ikev2&nbsp;sa</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;ikev2&nbsp;sa
+</code></pre></div>
 <h2 id="high-availability">High Availability</h2>
 <p>För att få till HA kan man sätta upp det på olika sätt. Man kan t.ex. ha
 loopbacks som tunnel endpoints och sedan sköta konvergering med
 routingprotokoll. Man kan även bygga redundans genom att ha flera
 peer-adresser i sin crypto-map.</p>
-<p><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;ipsec-isakmp</code>
-<code>set&nbsp;peer&nbsp;2.2.2.2&nbsp;default</code>
-<code>set&nbsp;peer&nbsp;3.3.3.3</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;ipsec-isakmp
+&nbsp;set&nbsp;peer&nbsp;2.2.2.2&nbsp;default
+&nbsp;set&nbsp;peer&nbsp;3.3.3.3
+</code></pre></div>
 <p><strong>Stateless IPsec redundancy</strong>
 Det finns inget samspel mellan IPSec och <a href="/Cisco_HSRP" title="wikilink">HSRP</a>,
 dvs HSRP kan inte hålla koll på IPSec's SA state och IPSec vet inte när
@@ -9329,14 +9401,17 @@ innan IPsec-tunnlar är uppsatta på nytt efter en failover pga
 renegotiation. Därför är denna metod inte optimal utan det man t.ex. kan
 göra istället är att ha uppe två tunnlar parallellt och sedan styra
 routingen med <a href="/Cisco_Routing#IP_SLA" title="wikilink">IP SLA</a>.</p>
-<p><code>crypto&nbsp;dynamic-map&nbsp;VPNMAP&nbsp;10</code>
-<code>set&nbsp;transform-set&nbsp;PHASE2</code>
-<code>match&nbsp;address&nbsp;ACL</code>
-<code>reverse-route</code></p>
-<p><code>crypto&nbsp;map&nbsp;CRYPTO&nbsp;10&nbsp;ipsec-isakmp&nbsp;dynamic&nbsp;VPNMAP</code></p>
-<p><code>interface&nbsp;GigabitEthernet0/1</code>
-<code>standby&nbsp;1&nbsp;name&nbsp;IPSEC</code>
-<code>crypto&nbsp;map&nbsp;CRYPTO&nbsp;redundancy&nbsp;IPSEC</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;dynamic-map&nbsp;VPNMAP&nbsp;10
+&nbsp;set&nbsp;transform-set&nbsp;PHASE2
+&nbsp;match&nbsp;address&nbsp;ACL
+&nbsp;reverse-route
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;CRYPTO&nbsp;10&nbsp;ipsec-isakmp&nbsp;dynamic&nbsp;VPNMAP
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet0/1
+&nbsp;standby&nbsp;1&nbsp;name&nbsp;IPSEC
+&nbsp;crypto&nbsp;map&nbsp;CRYPTO&nbsp;redundancy&nbsp;IPSEC
+</code></pre></div>
 <p><strong>Stateful IPsec redundancy</strong>
 Det går även att synka SA-states mellan IOS-routrar vilket möjliggör
 snabbare överslag. Phase1/Phase2 session states synkroniseras mellan
@@ -9344,24 +9419,28 @@ ACTIVE och STANDBY så inget behöver förhandlas om vid failover. Detta
 sköts automatiskt med hjälp av SCTP, men ingen konfiguration synkas utan
 det måste sättas upp symmetriskt. Utöver ovanstående
 HSRP/IPsec-konfiguration behövs synkronisering sättas upp.</p>
-<p><code>ipc&nbsp;zone&nbsp;default</code>
-<code>association&nbsp;1</code>
-<code>protocol&nbsp;sctp</code>
-<code>local-port&nbsp;5000</code>
-<code>local-ip&nbsp;10.0.0.1</code>
-<code>remote-port&nbsp;5000</code>
-<code>remote-ip&nbsp;10.0.0.2</code></p>
-<p><code>redundancy&nbsp;inter-device</code>
-<code>scheme&nbsp;standby&nbsp;IPSEC</code></p>
+<div class="highlight"><pre><span></span><code>ipc&nbsp;zone&nbsp;default
+&nbsp;association&nbsp;1
+&nbsp;&nbsp;protocol&nbsp;sctp
+&nbsp;&nbsp;&nbsp;local-port&nbsp;5000
+&nbsp;&nbsp;&nbsp;local-ip&nbsp;10.0.0.1
+&nbsp;&nbsp;&nbsp;remote-port&nbsp;5000
+&nbsp;&nbsp;&nbsp;remote-ip&nbsp;10.0.0.2
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>redundancy&nbsp;inter-device
+&nbsp;scheme&nbsp;standby&nbsp;IPSEC
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;redundancy&nbsp;inter-device</code>
-<code>show&nbsp;crypto&nbsp;ha</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;redundancy&nbsp;inter-device
+show&nbsp;crypto&nbsp;ha
+</code></pre></div>
 <h2 id="qos">QoS</h2>
 <p>Eftersom trafiken är enkapsulerad och krypterad måste
 QoS-markeringar/beslut fattas innan, man kan använda QoS pre-classify på
 crypto map. Se även <a href="/Cisco_QoS" title="wikilink">Cisco QoS</a>.</p>
-<p><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;ipsec-isakmp</code>
-<code>qos&nbsp;pre-classify</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;ipsec-isakmp&nbsp;
+&nbsp;qos&nbsp;pre-classify
+</code></pre></div>
 <h1 id="get-vpn">GET VPN</h1>
 <p>Group Encrypted Transport VPN är en Cisco proprietary VPN-teknik som
 inte använder point-to-point-tunnlar utan istället tillhandahåller
@@ -9401,58 +9480,72 @@ internet kan man kombinera det med <a href="/Cisco_DMVPN" title="wikilink">DMVPN
 <h3 id="konfiguration_1">Konfiguration</h3>
 <p><strong>Key Server</strong>
 Generera RSA-nycklar</p>
-<p><code>crypto&nbsp;key&nbsp;generate&nbsp;rsa&nbsp;general-keys&nbsp;label&nbsp;GDOI_KEYS&nbsp;modulus&nbsp;2048&nbsp;exportable</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;key&nbsp;generate&nbsp;rsa&nbsp;general-keys&nbsp;label&nbsp;GDOI_KEYS&nbsp;modulus&nbsp;2048&nbsp;exportable
+</code></pre></div>
 <p>KS har all IPsec-konfiguration som sedan laddas ner av gruppmedlemmarna</p>
-<p><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10</code>
-<code>authentication&nbsp;pre-share</code></p>
-<p><code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;2.2.2.2&nbsp;&nbsp;&nbsp;#GM-1</code>
-<code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;3.3.3.3&nbsp;&nbsp;&nbsp;#GM-2</code>
-<code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;4.4.4.4&nbsp;&nbsp;&nbsp;#GM-3</code></p>
-<p><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;PHASE2&nbsp;esp-aes&nbsp;esp-sha-hmac</code></p>
-<p><code>crypto&nbsp;ipsec&nbsp;profile&nbsp;GDOI_PROFILE</code>
-<code>set&nbsp;transform-set&nbsp;PHASE2</code></p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;SYMMETRIC_ACL</code>
-<code>permit&nbsp;ip&nbsp;172.16.0.0&nbsp;0.0.255.255&nbsp;172.16.0.0&nbsp;0.0.255.255</code></p>
-<p><code>crypto&nbsp;gdoi&nbsp;group&nbsp;GDOI_GROUP</code>
-<code>identity&nbsp;number&nbsp;123</code>
-<code>server&nbsp;local</code>
-<code>rekey&nbsp;transport&nbsp;unicast</code>
-<code>rekey&nbsp;authentication&nbsp;mypubkey&nbsp;rsa&nbsp;GDOI_KEYS</code>
-<code>rekey&nbsp;retransmit&nbsp;60&nbsp;number&nbsp;2</code>
-<code>sa&nbsp;ipsec&nbsp;1</code>
-<code>profile&nbsp;GDOI_PROFILE</code>
-<code>match&nbsp;address&nbsp;ipv4&nbsp;SYMMETRIC_ACL</code>
-<code>replay&nbsp;time&nbsp;window-size&nbsp;5</code>
-<code>address&nbsp;ipv4&nbsp;1.1.1.1</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10
+&nbsp;authentication&nbsp;pre-share
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;2.2.2.2&nbsp;&nbsp;&nbsp;#GM-1
+crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;3.3.3.3&nbsp;&nbsp;&nbsp;#GM-2&nbsp;
+crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;4.4.4.4&nbsp;&nbsp;&nbsp;#GM-3&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;PHASE2&nbsp;esp-aes&nbsp;esp-sha-hmac
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;profile&nbsp;GDOI_PROFILE
+&nbsp;set&nbsp;transform-set&nbsp;PHASE2
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;SYMMETRIC_ACL
+&nbsp;permit&nbsp;ip&nbsp;172.16.0.0&nbsp;0.0.255.255&nbsp;172.16.0.0&nbsp;0.0.255.255&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;gdoi&nbsp;group&nbsp;GDOI_GROUP
+&nbsp;identity&nbsp;number&nbsp;123
+&nbsp;server&nbsp;local
+&nbsp;&nbsp;rekey&nbsp;transport&nbsp;unicast
+&nbsp;&nbsp;rekey&nbsp;authentication&nbsp;mypubkey&nbsp;rsa&nbsp;GDOI_KEYS
+&nbsp;&nbsp;rekey&nbsp;retransmit&nbsp;60&nbsp;number&nbsp;2
+&nbsp;&nbsp;sa&nbsp;ipsec&nbsp;1
+&nbsp;&nbsp;&nbsp;profile&nbsp;GDOI_PROFILE
+&nbsp;&nbsp;&nbsp;match&nbsp;address&nbsp;ipv4&nbsp;SYMMETRIC_ACL
+&nbsp;&nbsp;&nbsp;replay&nbsp;time&nbsp;window-size&nbsp;5
+&nbsp;&nbsp;address&nbsp;ipv4&nbsp;1.1.1.1&nbsp;
+</code></pre></div>
 <p><strong>Group Member</strong></p>
-<p><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10</code>
-<code>authentication&nbsp;pre-share</code></p>
-<p><code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;1.1.1.1&nbsp;&nbsp;&nbsp;#KS</code></p>
-<p><code>crypto&nbsp;gdoi&nbsp;group&nbsp;GDOI_GROUP</code>
-<code>identity&nbsp;number&nbsp;123</code>
-<code>server&nbsp;address&nbsp;ipv4&nbsp;1.1.1.1</code></p>
-<p><code>crypto&nbsp;map&nbsp;GETVPN&nbsp;local-address&nbsp;Loopback&nbsp;0</code>
-<code>crypto&nbsp;map&nbsp;GETVPN&nbsp;10&nbsp;gdoi</code>
-<code>set&nbsp;group&nbsp;GDOI_GROUP</code></p>
-<p><code>interface&nbsp;Gi2</code>
-<code>description&nbsp;To&nbsp;KS</code>
-<code>crypto&nbsp;map&nbsp;GETVPN</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10
+&nbsp;authentication&nbsp;pre-share
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;1.1.1.1&nbsp;&nbsp;&nbsp;#KS
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;gdoi&nbsp;group&nbsp;GDOI_GROUP
+&nbsp;identity&nbsp;number&nbsp;123
+&nbsp;server&nbsp;address&nbsp;ipv4&nbsp;1.1.1.1&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;GETVPN&nbsp;local-address&nbsp;Loopback&nbsp;0
+crypto&nbsp;map&nbsp;GETVPN&nbsp;10&nbsp;gdoi
+&nbsp;set&nbsp;group&nbsp;GDOI_GROUP
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi2
+&nbsp;description&nbsp;To&nbsp;KS
+&nbsp;crypto&nbsp;map&nbsp;GETVPN
+</code></pre></div>
 <p><strong>Verify</strong></p>
-<p><code>show&nbsp;crypto&nbsp;gdoi</code>
-<code>show&nbsp;crypto&nbsp;gdoi&nbsp;ks</code>
-<code>show&nbsp;crypto&nbsp;gdoi&nbsp;gm</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;gdoi
+show&nbsp;crypto&nbsp;gdoi&nbsp;ks
+show&nbsp;crypto&nbsp;gdoi&nbsp;gm
+</code></pre></div>
 <p><strong>COOP KS</strong>
 För redundans och lastdelning kan man ha flera KS som då konfigureras
 likadant. Generera RSA-nycklar på primary KS och exportera både public
 och private till alla COOP KS. Notera att på vissa IOS-versioner går det
 att köra KS och GM på samma enhet men det är inte officially supported.</p>
-<p><code>crypto&nbsp;key&nbsp;export&nbsp;rsa&nbsp;GDOI_KEYS&nbsp;pem&nbsp;terminal&nbsp;3des&nbsp;CISCO123</code>
-<code>crypto&nbsp;key&nbsp;import&nbsp;rsa&nbsp;GDOI_KEYS&nbsp;pem&nbsp;exportable&nbsp;terminal&nbsp;CISCO123</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;key&nbsp;export&nbsp;rsa&nbsp;GDOI_KEYS&nbsp;pem&nbsp;terminal&nbsp;3des&nbsp;CISCO123&nbsp;
+crypto&nbsp;key&nbsp;import&nbsp;rsa&nbsp;GDOI_KEYS&nbsp;pem&nbsp;exportable&nbsp;terminal&nbsp;CISCO123
+</code></pre></div>
 <p><strong>Suite B</strong>
 GET VPN har stöd för Suite B men måste sättas upp för det genom att på
 KS konfigurera de säkra algoritmer som ska användas.</p>
-<p><code>show&nbsp;crypto&nbsp;gdoi&nbsp;feature&nbsp;suite-b</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;gdoi&nbsp;feature&nbsp;suite-b&nbsp;
+</code></pre></div>
 
 
 
@@ -9475,7 +9568,7 @@ KS konfigurera de säkra algoritmer som ska användas.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

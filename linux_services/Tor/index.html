@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8841,43 +8869,52 @@
   
 
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a> Tor är en
+<p>Tor är en
 anonymiseringsprogram och används bla för att komma åt deep web.</p>
 <h1 id="installation">Installation</h1>
 <p>Källa: <a href="https://www.torproject.org/docs/debian.html.en">https://www.torproject.org/docs/debian.html.en</a></p>
 <p>Ubuntu 18.04 LTS</p>
-<p><code>sudo&nbsp;su&nbsp;-</code>
+<p></p><div class="highlight"><pre><span></span><code>sudo&nbsp;su&nbsp;-
+</code></pre></div>
 <code>echo&nbsp;"deb</code><a href="https://deb.torproject.org/torproject.org"><code>https://deb.torproject.org/torproject.org</code></a><code>bionic&nbsp;main"&nbsp;&gt;&gt;&nbsp;/etc/apt/sources.list</code>
 <code>curl</code><a href="https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc"><code>https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc</code></a><code>|&nbsp;gpg&nbsp;--import</code>
-<code>gpg&nbsp;--export&nbsp;A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89&nbsp;|&nbsp;apt-key&nbsp;add&nbsp;-</code>
-<code>apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;deb.torproject.org-keyring&nbsp;ntp&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;tor</code></p>
+<div class="highlight"><pre><span></span><code>gpg&nbsp;--export&nbsp;A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89&nbsp;|&nbsp;apt-key&nbsp;add&nbsp;-
+apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;deb.torproject.org-keyring&nbsp;ntp&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;tor
+</code></pre></div><p></p>
 <p>Verifiera</p>
-<p><code>tor&nbsp;--version</code></p>
+<div class="highlight"><pre><span></span><code>tor&nbsp;--version
+</code></pre></div>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>TCP 9001 och 9030 behöver port forwardas till maskinen.</p>
-<p><code>nano&nbsp;/etc/tor/torrc</code></p>
+<div class="highlight"><pre><span></span><code>nano&nbsp;/etc/tor/torrc
+</code></pre></div>
 <h3 id="exempel">Exempel</h3>
 <p>SwedishNSA är en non-exit tor-nod. Statistik finns på
 <a href="https://metrics.torproject.org/rs.html">https://metrics.torproject.org/rs.html</a>.</p>
-<p><code>mv&nbsp;/etc/tor/torrc&nbsp;/etc/tor/torrc.orig</code>
-<code>wget</code><a href="https://raw.githubusercontent.com/torproject/tor/master/contrib/operator-tools/tor-exit-notice.html"><code>https://raw.githubusercontent.com/torproject/tor/master/contrib/operator-tools/tor-exit-notice.html</code></a><code>-O&nbsp;/etc/tor/tor-exit-notice.html</code></p>
-<p><code>cat&lt;&lt;'__EOF__'&gt;/etc/tor/torrc</code>
-<code>SocksPort&nbsp;0</code>
-<code>Log&nbsp;notice&nbsp;file&nbsp;/var/log/tor/notices.log</code>
-<code>RunAsDaemon&nbsp;1</code>
-<code>DataDirectory&nbsp;/var/lib/tor</code>
-<code>ORPort&nbsp;9001</code>
-<code>ORPort&nbsp;[2001:2002:beef:ffff::11]:9001</code>
-<code>Address&nbsp;swedishnsa.hackernet.se</code>
-<code>Nickname&nbsp;SwedishNSA</code>
+<p></p><div class="highlight"><pre><span></span><code>mv&nbsp;/etc/tor/torrc&nbsp;/etc/tor/torrc.orig
+</code></pre></div>
+<code>wget</code><a href="https://raw.githubusercontent.com/torproject/tor/master/contrib/operator-tools/tor-exit-notice.html"><code>https://raw.githubusercontent.com/torproject/tor/master/contrib/operator-tools/tor-exit-notice.html</code></a><code>-O&nbsp;/etc/tor/tor-exit-notice.html</code><p></p>
+<p></p><div class="highlight"><pre><span></span><code>cat&lt;&lt;'__EOF__'&gt;/etc/tor/torrc
+SocksPort&nbsp;0&nbsp;
+Log&nbsp;notice&nbsp;file&nbsp;/var/log/tor/notices.log
+RunAsDaemon&nbsp;1
+DataDirectory&nbsp;/var/lib/tor
+ORPort&nbsp;9001
+ORPort&nbsp;[2001:2002:beef:ffff::11]:9001
+Address&nbsp;swedishnsa.hackernet.se
+Nickname&nbsp;SwedishNSA
+</code></pre></div>
 <code>ContactInfo&nbsp;Helikopter</code><tor at="" hackernet="" dot="" se="">
-<code>DirPort&nbsp;9030&nbsp;#&nbsp;what&nbsp;port&nbsp;to&nbsp;advertise&nbsp;for&nbsp;directory&nbsp;connections</code>
-<code>DirPortFrontPage&nbsp;/etc/tor/tor-exit-notice.html</code>
-<code>ExitPolicy&nbsp;reject&nbsp;*:*&nbsp;#&nbsp;no&nbsp;exits&nbsp;allowed</code>
-<code>__EOF__</code></tor></p>
-<p><code>systemctl&nbsp;restart&nbsp;tor</code></p>
+<div class="highlight"><pre><span></span><code>DirPort&nbsp;9030&nbsp;#&nbsp;what&nbsp;port&nbsp;to&nbsp;advertise&nbsp;for&nbsp;directory&nbsp;connections
+DirPortFrontPage&nbsp;/etc/tor/tor-exit-notice.html
+ExitPolicy&nbsp;reject&nbsp;*:*&nbsp;#&nbsp;no&nbsp;exits&nbsp;allowed
+__EOF__
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>systemctl&nbsp;restart&nbsp;tor
+</code></pre></div>
 <p>Kolla att det kommer igång som det ska</p>
-<p><code>tail&nbsp;-f&nbsp;/var/log/tor/notices.log</code></p>
+<div class="highlight"><pre><span></span><code>tail&nbsp;-f&nbsp;/var/log/tor/notices.log
+</code></pre></div>
 <h1 id="torport">Torport</h1>
 <p>En torport kan vara en fysisk port eller ett nätverk som sätter allt som
 är inkopplat bakom tornätverket, helt transparant, vare sig man vill
@@ -8886,34 +8923,39 @@ Man behöver en maskin med två interface. Det ena behöver internetaccess
 och kan vara DHCP-klient. Det andra är DHCP-server för det som ska
 torifieras, <a href="/ISC_DHCP" title="wikilink">ISC_DHCP</a>. Stäng även av
 IP-forwardering för att undvika eventuella IP-läckor.</p>
-<p><code>sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;tor</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;tor
+</code></pre></div>
 <p>Tor kan göra det mesta själv</p>
-<p><code>sudo&nbsp;dd&nbsp;of=/etc/tor/torrc&nbsp;&lt;&lt;&nbsp;EOF</code>
-<code>Log&nbsp;notice&nbsp;file&nbsp;/var/log/tor/notices.log</code>
-<code>VirtualAddrNetwork&nbsp;10.192.0.0/10</code>
-<code>AutomapHostsSuffixes&nbsp;.onion,.exit</code>
-<code>AutomapHostsOnResolve&nbsp;1</code>
-<code>TransPort&nbsp;9040</code>
-<code>TransListenAddress&nbsp;10.0.0.1&nbsp;#Interface-IPn&nbsp;på&nbsp;torporten</code>
-<code>DNSPort&nbsp;53</code>
-<code>DNSListenAddress&nbsp;10.0.0.1</code>
-<code>EOF</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;dd&nbsp;of=/etc/tor/torrc&nbsp;&lt;&lt;&nbsp;EOF
+Log&nbsp;notice&nbsp;file&nbsp;/var/log/tor/notices.log
+VirtualAddrNetwork&nbsp;10.192.0.0/10
+AutomapHostsSuffixes&nbsp;.onion,.exit
+AutomapHostsOnResolve&nbsp;1
+TransPort&nbsp;9040
+TransListenAddress&nbsp;10.0.0.1&nbsp;#Interface-IPn&nbsp;på&nbsp;torporten
+DNSPort&nbsp;53
+DNSListenAddress&nbsp;10.0.0.1
+EOF
+</code></pre></div>
 <p>Men behöver lite hjälp från iptables</p>
-<p><code>sudo&nbsp;iptables&nbsp;-F</code>
-<code>sudo&nbsp;iptables&nbsp;-t&nbsp;nat&nbsp;-F</code>
-<code>sudo&nbsp;iptables&nbsp;-t&nbsp;nat&nbsp;-A&nbsp;PREROUTING&nbsp;-i&nbsp;p2p1&nbsp;-p&nbsp;tcp&nbsp;--dport&nbsp;22&nbsp;-j&nbsp;REDIRECT&nbsp;--to-ports&nbsp;22</code>
-<code>sudo&nbsp;iptables&nbsp;-t&nbsp;nat&nbsp;-A&nbsp;PREROUTING&nbsp;-i&nbsp;p2p1&nbsp;-p&nbsp;udp&nbsp;--dport&nbsp;53&nbsp;-j&nbsp;REDIRECT&nbsp;--to-ports&nbsp;53</code>
-<code>sudo&nbsp;iptables&nbsp;-t&nbsp;nat&nbsp;-A&nbsp;PREROUTING&nbsp;-i&nbsp;p2p1&nbsp;-p&nbsp;tcp&nbsp;--syn&nbsp;-j&nbsp;REDIRECT&nbsp;--to-ports&nbsp;9040</code>
-<code>sudo&nbsp;sh&nbsp;-c&nbsp;"iptables-save&nbsp;&gt;&nbsp;/etc/iptables.rules"</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;iptables&nbsp;-F
+sudo&nbsp;iptables&nbsp;-t&nbsp;nat&nbsp;-F
+sudo&nbsp;iptables&nbsp;-t&nbsp;nat&nbsp;-A&nbsp;PREROUTING&nbsp;-i&nbsp;p2p1&nbsp;-p&nbsp;tcp&nbsp;--dport&nbsp;22&nbsp;-j&nbsp;REDIRECT&nbsp;--to-ports&nbsp;22
+sudo&nbsp;iptables&nbsp;-t&nbsp;nat&nbsp;-A&nbsp;PREROUTING&nbsp;-i&nbsp;p2p1&nbsp;-p&nbsp;udp&nbsp;--dport&nbsp;53&nbsp;-j&nbsp;REDIRECT&nbsp;--to-ports&nbsp;53
+sudo&nbsp;iptables&nbsp;-t&nbsp;nat&nbsp;-A&nbsp;PREROUTING&nbsp;-i&nbsp;p2p1&nbsp;-p&nbsp;tcp&nbsp;--syn&nbsp;-j&nbsp;REDIRECT&nbsp;--to-ports&nbsp;9040&nbsp;&nbsp;&nbsp;&nbsp;
+sudo&nbsp;sh&nbsp;-c&nbsp;"iptables-save&nbsp;&gt;&nbsp;/etc/iptables.rules"
+</code></pre></div>
 <p>Välj det interface som är din torport. Med p22-regeln kan man ssha till
 hosten från "tornätet".</p>
-<p><code>sudo&nbsp;nano&nbsp;/etc/network/if-pre-up.d/iptables</code>
-<code>#!/bin/bash</code>
-<code>/sbin/iptables-restore&nbsp;&lt;&nbsp;/etc/iptables.rules</code>
-<code>sudo&nbsp;chmod&nbsp;+x&nbsp;/etc/network/if-pre-up.d/iptables</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;nano&nbsp;/etc/network/if-pre-up.d/iptables
+#!/bin/bash
+/sbin/iptables-restore&nbsp;&lt;&nbsp;/etc/iptables.rules
+sudo&nbsp;chmod&nbsp;+x&nbsp;/etc/network/if-pre-up.d/iptables&nbsp;&nbsp;&nbsp;&nbsp;
+</code></pre></div>
 <h3 id="valj-land">Välj land</h3>
 <p>Vill man gå i specifika länder kan man specca det i torrc</p>
-<p><code>ExitNodes&nbsp;{us},{uk}</code></p>
+<div class="highlight"><pre><span></span><code>ExitNodes&nbsp;{us},{uk}
+</code></pre></div></tor>
 
 
 
@@ -8936,7 +8978,7 @@ hosten från "tornätet".</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

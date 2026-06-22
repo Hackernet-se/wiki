@@ -8621,6 +8621,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8845,66 +8873,78 @@
 
 <p>Bird Internet Routing Daemon. Senaste version: 1.5.0 (22.4.2015)</p>
 <h1 id="installation">Installation</h1>
-<p><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;bird</code>
-<code>sudo&nbsp;dnf&nbsp;install&nbsp;bird</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;bird&nbsp;
+sudo&nbsp;dnf&nbsp;install&nbsp;bird
+</code></pre></div>
 <h1 id="konfiguration">Konfiguration</h1>
 <p><strong>Ubuntu</strong></p>
 <p>Enable IPv4 and IPv6 Forwarding:</p>
-<p><code>echo&nbsp;"net.ipv4.conf.all.forwarding=1"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/sysctl.conf</code>
-<code>echo&nbsp;"net.ipv4.conf.default.forwarding=1"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/sysctl.conf</code>
-<code>sed&nbsp;'s/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/g'&nbsp;/etc/sysctl.conf&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;/etc/sysctl.conf</code>
-<code>echo&nbsp;"net.ipv6.conf.default.forwarding=1"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/sysctl.conf</code>
-<code>sudo&nbsp;sysctl&nbsp;-p</code></p>
+<div class="highlight"><pre><span></span><code>echo&nbsp;"net.ipv4.conf.all.forwarding=1"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/sysctl.conf&nbsp;
+echo&nbsp;"net.ipv4.conf.default.forwarding=1"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/sysctl.conf&nbsp;
+sed&nbsp;'s/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/g'&nbsp;/etc/sysctl.conf&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;/etc/sysctl.conf&nbsp;
+echo&nbsp;"net.ipv6.conf.default.forwarding=1"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/sysctl.conf&nbsp;
+sudo&nbsp;sysctl&nbsp;-p&nbsp;
+</code></pre></div>
 <p>Backup the configuration files:</p>
-<p><code>sudo&nbsp;cp&nbsp;/etc/bird/bird.conf&nbsp;/etc/bird/bird.conf.original</code>
-<code>sudo&nbsp;cp&nbsp;/etc/bird/bird6.conf&nbsp;/etc/bird/bird6.conf.original</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;cp&nbsp;/etc/bird/bird.conf&nbsp;/etc/bird/bird.conf.original&nbsp;
+sudo&nbsp;cp&nbsp;/etc/bird/bird6.conf&nbsp;/etc/bird/bird6.conf.original&nbsp;
+</code></pre></div>
 <p>Create the configuration files:</p>
-<p><code>sudo&nbsp;nano&nbsp;/etc/bird/bird.conf</code>
-<code>sudo&nbsp;nano&nbsp;/etc/bird/bird6.conf</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;nano&nbsp;/etc/bird/bird.conf&nbsp;
+sudo&nbsp;nano&nbsp;/etc/bird/bird6.conf&nbsp;
+</code></pre></div>
 <p>Restart the daemons:</p>
-<p><code>sudo&nbsp;service&nbsp;bird&nbsp;restart</code>
-<code>sudo&nbsp;service&nbsp;bird6&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;service&nbsp;bird&nbsp;restart&nbsp;
+sudo&nbsp;service&nbsp;bird6&nbsp;restart&nbsp;
+</code></pre></div>
 <p><strong>Fedora</strong></p>
 <p>Backup</p>
-<p><code>sudo&nbsp;cp&nbsp;/etc/bird.conf&nbsp;/etc/bird.conf.original</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;cp&nbsp;/etc/bird.conf&nbsp;/etc/bird.conf.original
+</code></pre></div>
 <p>Edit</p>
-<p><code>sudo&nbsp;nano&nbsp;/etc/bird.conf</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;nano&nbsp;/etc/bird.conf
+</code></pre></div>
 <p>Restart</p>
-<p><code>sudo&nbsp;systemctl&nbsp;restart&nbsp;bird</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;systemctl&nbsp;restart&nbsp;bird
+</code></pre></div>
 <h2 id="cli">CLI</h2>
 <p>Gå till cli</p>
-<p><code>sudo&nbsp;birdc</code>
-<code>bird&gt;&nbsp;show&nbsp;route</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;birdc
+bird&gt;&nbsp;show&nbsp;route
+</code></pre></div>
 <p>Quit</p>
-<p><code>bird&gt;&nbsp;exit</code></p>
+<div class="highlight"><pre><span></span><code>bird&gt;&nbsp;exit
+</code></pre></div>
 <h2 id="ospf">OSPF</h2>
-<p><code>show&nbsp;ospf&nbsp;interface</code>
-<code>show&nbsp;ospf&nbsp;neighbors</code>
-<code>show&nbsp;ospf&nbsp;state</code>
-<code>show&nbsp;ospf&nbsp;topology</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ospf&nbsp;interface&nbsp;
+show&nbsp;ospf&nbsp;neighbors&nbsp;
+show&nbsp;ospf&nbsp;state&nbsp;
+show&nbsp;ospf&nbsp;topology
+</code></pre></div>
 <h2 id="bgp">BGP</h2>
-<p><code>protocol&nbsp;bgp&nbsp;{</code>
-<code>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disabled;</code>
-<code>description&nbsp;"My&nbsp;BGP&nbsp;uplink";</code>
-<code>local&nbsp;as&nbsp;65002;</code>
-<code>neighbor&nbsp;172.22.0.90&nbsp;as&nbsp;65000;</code>
-<code>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multihop;</code>
-<code>hold&nbsp;time&nbsp;240;</code>
-<code>startup&nbsp;hold&nbsp;time&nbsp;240;</code>
-<code>connect&nbsp;retry&nbsp;time&nbsp;120;</code>
-<code>keepalive&nbsp;time&nbsp;80;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;defaults&nbsp;to&nbsp;hold&nbsp;time&nbsp;/&nbsp;3</code>
-<code>start&nbsp;delay&nbsp;time&nbsp;5;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;How&nbsp;long&nbsp;do&nbsp;we&nbsp;wait&nbsp;before&nbsp;initial&nbsp;connect</code>
-<code>error&nbsp;wait&nbsp;time&nbsp;60,&nbsp;300;#&nbsp;Minimum&nbsp;and&nbsp;maximum&nbsp;time&nbsp;we&nbsp;wait&nbsp;after&nbsp;an&nbsp;error&nbsp;(when&nbsp;consecutive</code>
-<code>error&nbsp;forget&nbsp;time&nbsp;300;&nbsp;&nbsp;#&nbsp;...&nbsp;until&nbsp;this&nbsp;timeout&nbsp;expires)</code>
-<code>path&nbsp;metric&nbsp;1;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Prefer&nbsp;routes&nbsp;with&nbsp;shorter&nbsp;paths&nbsp;(like&nbsp;Cisco&nbsp;does)</code>
-<code>default&nbsp;bgp_med&nbsp;0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;MED&nbsp;value&nbsp;we&nbsp;use&nbsp;for&nbsp;comparison&nbsp;when&nbsp;none&nbsp;is&nbsp;defined</code>
-<code>default&nbsp;bgp_local_pref&nbsp;0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;same&nbsp;for&nbsp;local&nbsp;preference</code>
-<code>source&nbsp;address&nbsp;172.22.0.19;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;What&nbsp;local&nbsp;address&nbsp;we&nbsp;use&nbsp;for&nbsp;the&nbsp;TCP&nbsp;connection</code>
-<code>#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password&nbsp;"secret";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Password&nbsp;used&nbsp;for&nbsp;MD5&nbsp;authentication</code>
-<code>}</code></p>
+<div class="highlight"><pre><span></span><code>protocol&nbsp;bgp&nbsp;{
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disabled;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description&nbsp;"My&nbsp;BGP&nbsp;uplink";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;local&nbsp;as&nbsp;65002;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;neighbor&nbsp;172.22.0.90&nbsp;as&nbsp;65000;
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multihop;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hold&nbsp;time&nbsp;240;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startup&nbsp;hold&nbsp;time&nbsp;240;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connect&nbsp;retry&nbsp;time&nbsp;120;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keepalive&nbsp;time&nbsp;80;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;defaults&nbsp;to&nbsp;hold&nbsp;time&nbsp;/&nbsp;3
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;delay&nbsp;time&nbsp;5;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;How&nbsp;long&nbsp;do&nbsp;we&nbsp;wait&nbsp;before&nbsp;initial&nbsp;connect
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error&nbsp;wait&nbsp;time&nbsp;60,&nbsp;300;#&nbsp;Minimum&nbsp;and&nbsp;maximum&nbsp;time&nbsp;we&nbsp;wait&nbsp;after&nbsp;an&nbsp;error&nbsp;(when&nbsp;consecutive
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error&nbsp;forget&nbsp;time&nbsp;300;&nbsp;&nbsp;#&nbsp;...&nbsp;until&nbsp;this&nbsp;timeout&nbsp;expires)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path&nbsp;metric&nbsp;1;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Prefer&nbsp;routes&nbsp;with&nbsp;shorter&nbsp;paths&nbsp;(like&nbsp;Cisco&nbsp;does)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;bgp_med&nbsp;0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;MED&nbsp;value&nbsp;we&nbsp;use&nbsp;for&nbsp;comparison&nbsp;when&nbsp;none&nbsp;is&nbsp;defined
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;bgp_local_pref&nbsp;0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;same&nbsp;for&nbsp;local&nbsp;preference
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source&nbsp;address&nbsp;172.22.0.19;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;What&nbsp;local&nbsp;address&nbsp;we&nbsp;use&nbsp;for&nbsp;the&nbsp;TCP&nbsp;connection
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password&nbsp;"secret";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Password&nbsp;used&nbsp;for&nbsp;MD5&nbsp;authentication
+}
+</code></pre></div>
 <p>Birdc</p>
-<p><code>show&nbsp;protocols&nbsp;all&nbsp;bgp1</code></p>
-<p><a href="/Category:Network" title="wikilink">Category:Network</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;protocols&nbsp;all&nbsp;bgp1
+</code></pre></div>
 
 
 
@@ -8927,7 +8967,7 @@
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

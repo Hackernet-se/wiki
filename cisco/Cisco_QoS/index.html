@@ -6124,23 +6124,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Packet Marking">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#nbar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        NBAR
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -8910,6 +8893,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9137,23 +9148,6 @@
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Packet Marking">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#nbar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        NBAR
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -9427,52 +9421,45 @@ ACLer/MAC-adresser/QoS-markeringar/protokoll. Det går att välja mellan
 AND-logik (<em>match-all</em>) eller OR-logik (<em>match-any</em>) om man behöver
 flera match-statements. Det går även att använda nested class-maps för
 mer avancerad logik.</p>
-<p><code>class-map&nbsp;CLASS-MAP</code>
+<p></p><div class="highlight"><pre><span></span><code>class-map&nbsp;CLASS-MAP
+</code></pre></div>
 <code>match&nbsp;access-group&nbsp;name</code><acl>
 <code>match&nbsp;cos</code><cos>
-<code>match&nbsp;mpls&nbsp;experimental</code>
-<code>match&nbsp;not&nbsp;destination-address&nbsp;mac</code></cos></acl></p>
-<p><code>show&nbsp;class-map</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;match&nbsp;mpls&nbsp;experimental
+&nbsp;match&nbsp;not&nbsp;destination-address&nbsp;mac
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;class-map
+</code></pre></div>
 <p>Policy</p>
-<p><code>policy-map&nbsp;POLICY-MAP</code>
-<code>class&nbsp;CLASS-MAP</code>
-<code>set&nbsp;ip&nbsp;dscp&nbsp;&lt;0-63&gt;</code></p>
-<p><code>show&nbsp;policy-map&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;POLICY-MAP
+&nbsp;class&nbsp;CLASS-MAP
+&nbsp;&nbsp;set&nbsp;ip&nbsp;dscp&nbsp;&lt;0-63&gt;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;policy-map&nbsp;interface
+</code></pre></div>
 <p>Interface</p>
-<p><code>interface&nbsp;Gi0/0</code>
-<code>service-policy&nbsp;input&nbsp;POLICY-MAP</code></p>
-<p><code>show&nbsp;policy-map&nbsp;interface&nbsp;brief</code>
-<code>show&nbsp;run&nbsp;|&nbsp;i&nbsp;interface|service-policy</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/0
+&nbsp;service-policy&nbsp;input&nbsp;POLICY-MAP
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;policy-map&nbsp;interface&nbsp;brief
+show&nbsp;run&nbsp;|&nbsp;i&nbsp;interface|service-policy
+</code></pre></div>
 <p>Om service-policy rejectas kan det bero på avsaknad av
 <a href="/Cisco_CEF" title="wikilink">CEF</a> på enheten.</p>
 <h2 id="packet-marking">Packet Marking</h2>
-<p><a href="/File:Cisco_QoS_Markings.png" title="wikilink"><file:cisco_qos_markings.png></file:cisco_qos_markings.png></a></p>
-<p>På vissa plattformar när man kör med L2 etherchannel måste man slå på
-att qos ska titta på vlan-taggade paket.</p>
-<p><code>interface&nbsp;Port-channel4</code>
-<code>platform&nbsp;qos&nbsp;vlan-based</code></p>
-<p><strong>Non-IP Marking</strong>
-Alla enheter kanske inte har möjligheten att kolla på L3-headern, t.ex.
-en LSR (<a href="/Cisco_MPLS" title="wikilink">MPLS</a>) ser endast labels. Det man kan
-göra är att låta ingress LSR föra över QoS-klassificeringen till
-MPLS-headern som har ett 3-bitars fält för detta (EXP).</p>
-<h3 id="nbar">NBAR</h3>
-<p>Vill man matcha på ett visst protokoll i sin class-map kan man använda
-Network Based Application Recognition som finns inbyggt i IOS. Det finns
-väldigt många fördefinierade protokoll. NBAR är i passive och active
-mode beroende på hur det används.</p>
-<p><code>class-map&nbsp;NBAR</code>
-<code>match&nbsp;protocol&nbsp;?</code></p>
-<p>NBAR på <a href="/Cisco_CSR" title="wikilink">CSR 1000V</a> matchar inte ICMP echo
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_QoS_Markings.png" data-desc-position="bottom"><img alt="Cisco_QoS_Markings.png" src="../../images/Cisco_QoS_Markings.png"></a> matchar inte ICMP echo
 packets under icmp utan har eget kommando.</p>
-<p><code>class-map&nbsp;match-any&nbsp;ICMP</code>
-<code>match&nbsp;protocol&nbsp;icmp</code>
-<code>match&nbsp;protocol&nbsp;ping</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;match-any&nbsp;ICMP
+&nbsp;match&nbsp;protocol&nbsp;icmp
+&nbsp;match&nbsp;protocol&nbsp;ping
+</code></pre></div>
 <p>Man kan också använda NBAR för att samla trafikdata om paketen som går
 över ett interface.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;nbar&nbsp;protocol-discovery</code></p>
-<p><code>show&nbsp;ip&nbsp;nbar&nbsp;protocol-discovery</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;nbar&nbsp;protocol-discovery
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;nbar&nbsp;protocol-discovery
+</code></pre></div>
 <p>Behöver man lägga in ett nytt protokoll får man ladda ner en PDLM-fil
 från Cisco och ladda upp till IOS-enheten och aktivera.</p>
 <p><code>ip&nbsp;nbar&nbsp;pdlm</code><em><code>name</code></em></p>
@@ -9488,26 +9475,30 @@ IOS queuing tools. Det är när tx ring går full som ett interface är
 överbelastat. Det som händer när man använder queuing tools är att
 hardware queue minskas lite för att ge mjukvaran mer utrymme att spela
 med eftersom mer trafik då hamnar i software queue.</p>
-<p><code>show&nbsp;controllers</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;controllers
+</code></pre></div>
 <p>tx_ring är hardware queue, hold queue är software queue</p>
-<p><code>interface&nbsp;gi2</code>
-<code>tx-ring-limit</code>
-<code>hold-queue&nbsp;375&nbsp;in</code>
-<code>hold-queue&nbsp;40&nbsp;out</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;&nbsp;tx-ring-limit
+&nbsp;&nbsp;hold-queue&nbsp;375&nbsp;in
+&nbsp;&nbsp;hold-queue&nbsp;40&nbsp;out
+</code></pre></div>
 <p><strong>Catalyst 3850</strong>
 Soft Buffers är assignade till en kö men kan delas med andra köer och
 interface om de inte används. Det totala antalet tillgängliga buffrar
 default är mindre än vad hårdvaran klarar av men detta kan ökas globalt
 i switchen.</p>
-<p><code>qos&nbsp;queue-softmax-multiplier&nbsp;1200</code>
-<code>qos&nbsp;queue-stats-frame-count</code></p>
+<div class="highlight"><pre><span></span><code>qos&nbsp;queue-softmax-multiplier&nbsp;1200
+qos&nbsp;queue-stats-frame-count
+</code></pre></div>
 <p>Även "hold-queue out" är lite snålt ställt default på 3850.</p>
 <h3 id="selective-packet-discard">Selective Packet Discard</h3>
 <p>SPD används när input queue är full och det innebär att mer minne
 tillåts ifall det är control plane packets som ska till CPU. Input queue
 kommer börja tömmas för ge utrymme ifall det kommer in ytterliggare
 control plane packets. SPD är på default både för IPv4 och IPv6.</p>
-<p><code>show&nbsp;ip&nbsp;spd</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;spd
+</code></pre></div>
 <h3 id="cbwfq">CBWFQ</h3>
 <p>Tanken med Class-Based Weighted Fair Queueing är att använda samma
 scheduling logic som WFQ fast med konfigurerbara klasser som har extra
@@ -9522,17 +9513,21 @@ Summan av alla bandbreddsreservationer kan inte överstiga 75% av
 interfacets bandbredd pga max-reserved-bandwidth defaults. Det går ej
 att kombinera bandwidth och bandwidth percent kommandona i samma
 policy-map.</p>
-<p><code>class-map&nbsp;match-all&nbsp;R2</code>
-<code>match&nbsp;access-group&nbsp;name&nbsp;R2</code></p>
-<p><code>policy-map&nbsp;CBWFQ</code>
-<code>class&nbsp;R2</code>
-<code>bandwidth&nbsp;percent&nbsp;5</code>
-<code>class&nbsp;class-default</code></p>
-<p><code>interface&nbsp;Gi&nbsp;0/1</code>
-<code>bandwidth&nbsp;1000</code>
-<code>service-policy&nbsp;output&nbsp;CBWFQ</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;match-all&nbsp;R2
+&nbsp;match&nbsp;access-group&nbsp;name&nbsp;R2
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;CBWFQ
+&nbsp;class&nbsp;R2
+&nbsp;&nbsp;bandwidth&nbsp;percent&nbsp;5
+&nbsp;class&nbsp;class-default
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi&nbsp;0/1
+&nbsp;bandwidth&nbsp;1000
+&nbsp;service-policy&nbsp;output&nbsp;CBWFQ
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;policy-map&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;policy-map&nbsp;interface
+</code></pre></div>
 <h3 id="llq">LLQ</h3>
 <p>Low Latency Queueing fungerar som CBWFQ men utökar det med priority
 queues även kallat low-latency queues. Det som behandlas först är paket
@@ -9546,36 +9541,42 @@ inom den konfigurerade bandbredden/procenten kommer att prioriteras men
 i övrigt får flödena använda all bandbredd, dvs LLQ används endast när
 hardware queues går fulla. Notera att LLQ policern tar hänsyn till L2
 framesens längd.</p>
-<p><code>class-map&nbsp;http</code>
-<code>match&nbsp;protocol&nbsp;http</code>
-<code>class-map&nbsp;voice</code>
-<code>match&nbsp;protocol&nbsp;rtp</code></p>
-<p><code>policy-map&nbsp;VOICE_PRIO</code>
-<code>class&nbsp;http</code>
-<code>bandwidth&nbsp;percent&nbsp;20</code>
-<code>class&nbsp;voice</code>
-<code>priority&nbsp;percent&nbsp;50</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;http
+&nbsp;match&nbsp;protocol&nbsp;http
+class-map&nbsp;voice
+&nbsp;match&nbsp;protocol&nbsp;rtp
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;VOICE_PRIO
+&nbsp;class&nbsp;http
+&nbsp;&nbsp;bandwidth&nbsp;percent&nbsp;20
+&nbsp;class&nbsp;voice
+&nbsp;&nbsp;priority&nbsp;percent&nbsp;50
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;policy-map&nbsp;interface</code></p>
-<p><a href="/File:Cisco_QoS_Queues.png" title="wikilink"><file:cisco_qos_queues.png></file:cisco_qos_queues.png></a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;policy-map&nbsp;interface
+</code></pre></div>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_QoS_Queues.png" data-desc-position="bottom"><img alt="Cisco_QoS_Queues.png" src="../../images/Cisco_QoS_Queues.png"></a></p>
 <h3 id="ethernet-subinterface">Ethernet Subinterface</h3>
 <p>Subinterfaces har inget eget sätt att veta om det är fulla köer på
 huvudinterfacet därför tillåter inte Cisco IOS att policy-maps med
 queuing policies appliceras direkt på subinterfacen. Det man kan göra är
 att ha en policy på huvudinterfacet och matcha på vlan-taggningen för
 att kunna använda queuing policies på subinterfacen.</p>
-<p><code>class-map&nbsp;match-any&nbsp;Server</code>
-<code>match&nbsp;vlan&nbsp;10</code>
-<code>class-map&nbsp;match-any&nbsp;DMZ</code>
-<code>match&nbsp;vlan&nbsp;20</code></p>
-<p><code>policy-map&nbsp;Vlans</code>
-<code>class&nbsp;Server</code>
-<code>bandwidth&nbsp;percent&nbsp;20</code>
-<code>class&nbsp;DMZ</code>
-<code>police&nbsp;cir&nbsp;10000000&nbsp;bc&nbsp;1875000</code></p>
-<p><code>interface&nbsp;GigabitEthernet1</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>service-policy&nbsp;output&nbsp;Vlans</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;match-any&nbsp;Server
+&nbsp;match&nbsp;vlan&nbsp;10
+class-map&nbsp;match-any&nbsp;DMZ
+&nbsp;match&nbsp;vlan&nbsp;20
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;Vlans
+&nbsp;class&nbsp;Server
+&nbsp;&nbsp;bandwidth&nbsp;percent&nbsp;20
+&nbsp;class&nbsp;DMZ
+&nbsp;&nbsp;police&nbsp;cir&nbsp;10000000&nbsp;bc&nbsp;1875000
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet1
+&nbsp;no&nbsp;ip&nbsp;address
+&nbsp;service-policy&nbsp;output&nbsp;Vlans
+</code></pre></div>
 <h2 id="congestion-avoidance">Congestion Avoidance</h2>
 <p>När en kö är full har inte routern plats för paket utan de droppas
 vilket påverkar nätverksprestandan. TCP skickar så mycket som möjligt
@@ -9598,9 +9599,11 @@ det över maximum droppas alla nya paket. Eftersom WRED tittar på köer
 måste det konfigureras ihop med en kö och alla kömekanismer har inte
 stöd för WRED.</p>
 <p>Fysiskt interface (allt blir en FIFO på interfacet)</p>
-<p><code>interface&nbsp;gi0/0</code>
-<code>random-detect</code></p>
-<p><code>show&nbsp;queueing&nbsp;random-detect</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/0
+&nbsp;random-detect
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;queueing&nbsp;random-detect
+</code></pre></div>
 <p>För att slå på WRED i class-default kan man antingen konfigurera en
 bandbreddsreservation för att göra om klassens kö till FIFO och sedan
 slå RED eller slå på RED med WFQ. Då aktiveras RED dropping istället för
@@ -9616,9 +9619,11 @@ TCP slow start och att paket måste skickas om. TCP ECN fungerar
 tillsammans med RED genom att byta exceed action från random drops till
 ECN marking. Denna marking använder de två least-significant bitarna av
 TOS-byten i IP-headern, se bilden ovan.</p>
-<p><code>random-detect&nbsp;ecn</code></p>
+<div class="highlight"><pre><span></span><code>random-detect&nbsp;ecn&nbsp;
+</code></pre></div>
 <p>IOS använder inte ECN default, global inställning.</p>
-<p><code>ip&nbsp;tcp&nbsp;ecn</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;tcp&nbsp;ecn
+</code></pre></div>
 <h1 id="traffic-shaping">Traffic Shaping</h1>
 <p>Det finns två sätt att begränsa mängden trafik som lämnar ett interface,
 policing och shaping. Traffic shaping förhindrar bit raten på de paket
@@ -9639,16 +9644,20 @@ det är grundläggande och man kan styra vad som ska shapeas med ACL. Det
 rekommenderade sättet är dock att använda class-based shaping som finns
 i IOS 15. Då skapar man class-maps och policy-maps med MQC vilket ger
 mer granulär kontroll över shaping.</p>
-<p><code>policy-map&nbsp;SHAPE</code>
-<code>class&nbsp;CLASS</code>
-<code>shape&nbsp;average&nbsp;500000&nbsp;&nbsp;#BW</code></p>
-<p><code>interface&nbsp;Gi2</code>
-<code>service-policy&nbsp;output&nbsp;SHAPE</code></p>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;SHAPE
+&nbsp;class&nbsp;CLASS
+&nbsp;&nbsp;shape&nbsp;average&nbsp;500000&nbsp;&nbsp;#BW
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi2
+&nbsp;service-policy&nbsp;output&nbsp;SHAPE
+</code></pre></div>
 <p>Man kan välja att shapea <strong>average</strong>, <strong>adaptive</strong> eller <strong>peak</strong>.</p>
 <p>Verify</p>
-<p><code>show&nbsp;policy-map&nbsp;interface</code>
+<p></p><div class="highlight"><pre><span></span><code>show&nbsp;policy-map&nbsp;interface
+</code></pre></div>
 <code>show&nbsp;traffic-shape</code><em><code>#Legacy</code></em>
-<code>show&nbsp;traffic-shape&nbsp;queue</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;traffic-shape&nbsp;queue
+</code></pre></div><p></p>
 <h2 id="policing">Policing</h2>
 <p>Class-Based Policing är en funktion som håller koll på bit raten på
 interface och om konfigurerat värde överskrids kan policing agera, t.ex.
@@ -9664,43 +9673,51 @@ man tillåta lite längre perioder med burst kan man använda Two-Rate
 Three-Color Policing, då konfigurerar man även en Peak Information Rate
 (PIR). Man kan även ta flera aktioner med paketen, t.ex. sätta flera
 olika markeringar, detta kallas multi-action policing.</p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;ACL-HTTP</code>
-<code>permit&nbsp;tcp&nbsp;any&nbsp;any&nbsp;eq&nbsp;http</code></p>
-<p><code>class-map&nbsp;HTTP</code>
-<code>match&nbsp;ip&nbsp;access-list&nbsp;ACL-HTTP</code></p>
-<p><code>policy-map&nbsp;POLICE</code>
-<code>class&nbsp;HTTP</code>
-<code>police&nbsp;64000&nbsp;12000&nbsp;24000&nbsp;conform-action&nbsp;transmit&nbsp;exceed-action&nbsp;drop</code>
-<code>class&nbsp;class-default</code>
-<code>police&nbsp;cir&nbsp;percent&nbsp;25&nbsp;bc&nbsp;500&nbsp;ms&nbsp;be&nbsp;500&nbsp;ms&nbsp;conform-action&nbsp;transmit&nbsp;exceed-action&nbsp;drop</code></p>
-<p><code>int&nbsp;Gi1</code>
-<code>service-policy&nbsp;input&nbsp;POLICE</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;ACL-HTTP
+&nbsp;permit&nbsp;tcp&nbsp;any&nbsp;any&nbsp;eq&nbsp;http
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;HTTP
+&nbsp;match&nbsp;ip&nbsp;access-list&nbsp;ACL-HTTP
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;POLICE
+&nbsp;class&nbsp;HTTP
+&nbsp;&nbsp;police&nbsp;64000&nbsp;12000&nbsp;24000&nbsp;conform-action&nbsp;transmit&nbsp;exceed-action&nbsp;drop&nbsp;
+&nbsp;class&nbsp;class-default
+&nbsp;&nbsp;police&nbsp;cir&nbsp;percent&nbsp;25&nbsp;bc&nbsp;500&nbsp;ms&nbsp;be&nbsp;500&nbsp;ms&nbsp;conform-action&nbsp;transmit&nbsp;exceed-action&nbsp;drop
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>int&nbsp;Gi1
+&nbsp;service-policy&nbsp;input&nbsp;POLICE
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;policy-map&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;policy-map&nbsp;interface
+</code></pre></div>
 <p><strong>Single-Rate Three-Color</strong></p>
-<p><code>policy-map&nbsp;POLICE</code>
-<code>class&nbsp;HTTP</code>
-<code>police&nbsp;cir&nbsp;64000</code>
-<code>conform-action&nbsp;set-prec-transmit&nbsp;1</code>
-<code>exceed-action&nbsp;set-prec-transmit&nbsp;0</code>
-<code>violate-action&nbsp;drop</code></p>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;POLICE
+&nbsp;class&nbsp;HTTP
+&nbsp;&nbsp;&nbsp;police&nbsp;cir&nbsp;64000
+&nbsp;&nbsp;&nbsp;&nbsp;conform-action&nbsp;set-prec-transmit&nbsp;1
+&nbsp;&nbsp;&nbsp;&nbsp;exceed-action&nbsp;set-prec-transmit&nbsp;0
+&nbsp;&nbsp;&nbsp;&nbsp;violate-action&nbsp;drop
+</code></pre></div>
 <p><strong>Two-Rate Three-Color</strong>
 Detta är hierarkisk policing med three color.</p>
-<p><code>policy-map&nbsp;POLICE</code>
-<code>class&nbsp;HTTP</code>
-<code>police&nbsp;cir&nbsp;64000</code>
-<code>service-policy&nbsp;SUBRATE_POLICER</code></p>
-<p><code>policy-map&nbsp;SUBRATE_POLICER</code>
-<code>class&nbsp;SITE1</code>
-<code>police&nbsp;cir&nbsp;32000</code>
-<code>conform-action&nbsp;set-prec-transmit&nbsp;1</code>
-<code>exceed-action&nbsp;set-prec-transmit&nbsp;0</code>
-<code>violate-action&nbsp;drop</code>
-<code>class&nbsp;SITE2</code>
-<code>police&nbsp;cir&nbsp;32000</code>
-<code>conform-action&nbsp;set-prec-transmit&nbsp;1</code>
-<code>exceed-action&nbsp;set-prec-transmit&nbsp;0</code>
-<code>violate-action&nbsp;drop</code></p>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;POLICE
+&nbsp;class&nbsp;HTTP
+&nbsp;&nbsp;police&nbsp;cir&nbsp;64000
+&nbsp;&nbsp;&nbsp;service-policy&nbsp;SUBRATE_POLICER
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;SUBRATE_POLICER
+&nbsp;class&nbsp;SITE1
+&nbsp;&nbsp;police&nbsp;cir&nbsp;32000&nbsp;
+&nbsp;&nbsp;&nbsp;conform-action&nbsp;set-prec-transmit&nbsp;1
+&nbsp;&nbsp;&nbsp;exceed-action&nbsp;set-prec-transmit&nbsp;0
+&nbsp;&nbsp;&nbsp;violate-action&nbsp;drop
+&nbsp;class&nbsp;SITE2
+&nbsp;&nbsp;police&nbsp;cir&nbsp;32000&nbsp;
+&nbsp;&nbsp;&nbsp;conform-action&nbsp;set-prec-transmit&nbsp;1
+&nbsp;&nbsp;&nbsp;exceed-action&nbsp;set-prec-transmit&nbsp;0
+&nbsp;&nbsp;&nbsp;violate-action&nbsp;drop
+</code></pre></div>
 <p><strong>CAR</strong>
 Committed Access Rate är ett äldre alternativ till CB-Policing som inte
 använder MQC-syntax. Det tillåter burst men endast Single-Rate
@@ -9717,16 +9734,19 @@ kollas L2-headern i ISL eller det 802.1Q-taggade paketet. Litar man på
 DSCP eller IP precedence tas QoS-nivån ifrån L3 headern. Att lita på CoS
 är endast giltigt på trunk-länkar och DSCP/precedence fungerar endast på
 IP-paket.</p>
-<p><a href="/File:Cisco_QoS_L2.png" title="wikilink"><file:cisco_qos_l2.png></file:cisco_qos_l2.png></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_QoS_L2.png" data-desc-position="bottom"><img alt="Cisco_QoS_L2.png" src="../../images/Cisco_QoS_L2.png"></a></p>
 <p>Global</p>
-<p><code>mls&nbsp;qos</code>
-<code>mls&nbsp;qos&nbsp;monitor&nbsp;packets</code>
-<code>ip&nbsp;precedence&nbsp;to&nbsp;dscp&nbsp;mapping</code>
-<code>no&nbsp;mls&nbsp;qos&nbsp;rewrite&nbsp;ip&nbsp;dscp</code></p>
+<div class="highlight"><pre><span></span><code>mls&nbsp;qos
+mls&nbsp;qos&nbsp;monitor&nbsp;packets
+ip&nbsp;precedence&nbsp;to&nbsp;dscp&nbsp;mapping
+no&nbsp;mls&nbsp;qos&nbsp;rewrite&nbsp;ip&nbsp;dscp
+</code></pre></div>
 <p><strong>Verify</strong></p>
-<p><code>show&nbsp;mls&nbsp;qos&nbsp;interface&nbsp;g0/3&nbsp;statistics</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mls&nbsp;qos&nbsp;interface&nbsp;g0/3&nbsp;statistics
+</code></pre></div>
 <p>Switch Database Management, används för att dela upp TCAM.</p>
-<p><code>show&nbsp;sdm&nbsp;prefer</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;sdm&nbsp;prefer
+</code></pre></div>
 <h3 id="catalyst-3560">Catalyst 3560</h3>
 <p>En Catalyst 3560 switch har köer både för input och output. Det finns
 två köer för input och scheduler använder Shared Round-Robin (SRR) för
@@ -9737,16 +9757,21 @@ ratio. Default när man slår på QoS hamnar paket med COS 5 i kö 2 och
 övrig trafik i kö 1. Kö 2 har även 10% bandbredd reserverat. När man ska
 prioritera trafik konfigurerar man den ena kön för det. Ingress QoS
 konfigureras globalt så det gäller alla interface.</p>
-<p><code>mls&nbsp;qos&nbsp;srr-queue&nbsp;input&nbsp;priority-queue&nbsp;2&nbsp;bandwidth&nbsp;30</code></p>
+<div class="highlight"><pre><span></span><code>mls&nbsp;qos&nbsp;srr-queue&nbsp;input&nbsp;priority-queue&nbsp;2&nbsp;bandwidth&nbsp;30
+</code></pre></div>
 <p>Kö 2 kommer att få 30% av bandbredden och resterande delas mellan
 köerna.</p>
-<p><code>show&nbsp;mls&nbsp;qos&nbsp;input-queue</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mls&nbsp;qos&nbsp;input-queue
+</code></pre></div>
 <p>Man kan dela på resterande bandbredd med en ratio, default är 4:4.</p>
-<p><code>srr-queue&nbsp;input&nbsp;bandwidth&nbsp;4&nbsp;4</code></p>
+<div class="highlight"><pre><span></span><code>srr-queue&nbsp;input&nbsp;bandwidth&nbsp;4&nbsp;4
+</code></pre></div>
 <p>Man kan mappa annan trafik till kö 2, t.ex. COS 6.</p>
-<p><code>mls&nbsp;qos&nbsp;srr-queue&nbsp;input&nbsp;cos-map&nbsp;queue&nbsp;2&nbsp;6</code></p>
+<div class="highlight"><pre><span></span><code>mls&nbsp;qos&nbsp;srr-queue&nbsp;input&nbsp;cos-map&nbsp;queue&nbsp;2&nbsp;6
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;mls&nbsp;qos&nbsp;maps&nbsp;cos-input-q</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mls&nbsp;qos&nbsp;maps&nbsp;cos-input-q
+</code></pre></div>
 <p><strong>Egress</strong>
 Cisco 3560 har fyra köer för egress per interface och man kan mappa
 COS/DCSP, använda weight och sätta drop thresholds per kö. SRR används
@@ -9757,16 +9782,19 @@ finns paket i alla köer och servar eventuell prio-kö direkt när Tx är
 ledigt. Men Shaping sätter rate-limit på köerna så att de inte
 överstiger tilldelad bandbredd.</p>
 <p>Per interface, ratio mellan fyra köer</p>
-<p><code>interface&nbsp;Gi2</code>
-<code>queue-set&nbsp;1</code>
-<code>srr-queue&nbsp;bandwidth&nbsp;share&nbsp;&lt;1&gt;&nbsp;&lt;2&gt;&nbsp;&lt;3&gt;&nbsp;&lt;4&gt;</code>
-<code>srr-queue&nbsp;bandwidth&nbsp;shape&nbsp;&lt;1&gt;&nbsp;&lt;2&gt;&nbsp;&lt;3&gt;&nbsp;&lt;4&gt;</code>
-<code>priority-queue&nbsp;out</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi2
+&nbsp;queue-set&nbsp;1
+&nbsp;srr-queue&nbsp;bandwidth&nbsp;share&nbsp;&lt;1&gt;&nbsp;&lt;2&gt;&nbsp;&lt;3&gt;&nbsp;&lt;4&gt;
+&nbsp;srr-queue&nbsp;bandwidth&nbsp;shape&nbsp;&lt;1&gt;&nbsp;&lt;2&gt;&nbsp;&lt;3&gt;&nbsp;&lt;4&gt;
+&nbsp;priority-queue&nbsp;out
+</code></pre></div>
 <p>Buffer och WTD</p>
-<p><code>mls&nbsp;qos&nbsp;queue-set&nbsp;output&nbsp;1&nbsp;buffers&nbsp;&lt;1&gt;&nbsp;&lt;2&gt;&nbsp;&lt;3&gt;&nbsp;&lt;4&gt;</code>
-<code>mls&nbsp;qos&nbsp;queue-set&nbsp;output&nbsp;1&nbsp;threshold&nbsp;2&nbsp;&lt;1&gt;&nbsp;&lt;2&gt;&nbsp;&lt;3&gt;&nbsp;&lt;4&gt;</code></p>
+<div class="highlight"><pre><span></span><code>mls&nbsp;qos&nbsp;queue-set&nbsp;output&nbsp;1&nbsp;buffers&nbsp;&lt;1&gt;&nbsp;&lt;2&gt;&nbsp;&lt;3&gt;&nbsp;&lt;4&gt;
+mls&nbsp;qos&nbsp;queue-set&nbsp;output&nbsp;1&nbsp;threshold&nbsp;2&nbsp;&lt;1&gt;&nbsp;&lt;2&gt;&nbsp;&lt;3&gt;&nbsp;&lt;4&gt;
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;mls&nbsp;qos&nbsp;interface&nbsp;Gi2&nbsp;queueing</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mls&nbsp;qos&nbsp;interface&nbsp;Gi2&nbsp;queueing
+</code></pre></div>
 <h1 id="mpls">MPLS</h1>
 <p>När man gör label imposition är default beteende att kopiera IP
 Precedence till MPLS EXP på alla labels som impose:as. Se även <a href="/Cisco_MPLS" title="wikilink">Cisco
@@ -9778,62 +9806,66 @@ som sätter EXP. Även policy på edge mot kund baseras på EXP-bitar men
 kunds märkningar är intakta. Kunden får veta hur paket ska märkas för
 att hamna i de olika klasser/köer som SP erbjuder.</p>
 <p>Ingress PE</p>
-<p><code>class-map&nbsp;match-all&nbsp;PREC6</code>
-<code>match&nbsp;ip&nbsp;precedence&nbsp;6</code>
-<code>!</code>
-<code>policy-map&nbsp;from-ce</code>
-<code>class&nbsp;PREC6</code>
-<code>set&nbsp;mpls&nbsp;experimental&nbsp;imposition&nbsp;3</code>
-<code>!</code>
-<code>int&nbsp;gi2</code>
-<code>service-policy&nbsp;input&nbsp;from-ce</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;match-all&nbsp;PREC6
+&nbsp;match&nbsp;ip&nbsp;precedence&nbsp;6
+!
+policy-map&nbsp;from-ce
+&nbsp;class&nbsp;PREC6
+&nbsp;&nbsp;set&nbsp;mpls&nbsp;experimental&nbsp;imposition&nbsp;3
+!
+int&nbsp;gi2
+&nbsp;service-policy&nbsp;input&nbsp;from-ce
+</code></pre></div>
 <p>Egress PE</p>
-<p><code>mpls&nbsp;ldp&nbsp;explicit-null</code>
-<code>!</code>
-<code>class-map&nbsp;match-all&nbsp;EXP3</code>
-<code>match&nbsp;mpls&nbsp;experimental&nbsp;topmost&nbsp;3</code>
-<code>!</code>
-<code>policy-map&nbsp;from-core</code>
-<code>class&nbsp;EXP3</code>
-<code>set&nbsp;qos-group&nbsp;3</code>
-<code>!</code>
-<code>int&nbsp;gi1</code>
-<code>service-policy&nbsp;input&nbsp;from-core</code>
-<code>!</code>
-<code>class-map&nbsp;match-all&nbsp;GROUP3</code>
-<code>match&nbsp;qos-group&nbsp;3</code>
-<code>!</code>
-<code>policy-map&nbsp;to-ce</code>
-<code>class&nbsp;GROUP3</code>
-<code>bandwidth&nbsp;percent&nbsp;15</code>
-<code>!</code>
-<code>int&nbsp;gi2</code>
-<code>service-policy&nbsp;output&nbsp;to-ce</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;ldp&nbsp;explicit-null
+!
+class-map&nbsp;match-all&nbsp;EXP3
+&nbsp;match&nbsp;mpls&nbsp;experimental&nbsp;topmost&nbsp;3&nbsp;
+!
+policy-map&nbsp;from-core
+&nbsp;class&nbsp;EXP3
+&nbsp;&nbsp;set&nbsp;qos-group&nbsp;3
+!
+int&nbsp;gi1
+&nbsp;service-policy&nbsp;input&nbsp;from-core
+!
+class-map&nbsp;match-all&nbsp;GROUP3
+&nbsp;match&nbsp;qos-group&nbsp;3
+!
+policy-map&nbsp;to-ce
+&nbsp;class&nbsp;GROUP3
+&nbsp;&nbsp;bandwidth&nbsp;percent&nbsp;15
+!
+int&nbsp;gi2
+&nbsp;service-policy&nbsp;output&nbsp;to-ce
+</code></pre></div>
 <h3 id="short-pipe-mode">Short Pipe mode</h3>
 <p>Short pipe mode funkar på samma sätt som pipe mode men SP kommer att
 konfigurera egress policy utifrån kundens paketmärkningar, dvs DSCP i
 IP-headern. Eftersom top label EXP marking till egress PE inte behövs
 kan man köra med default implicit null, PHP.</p>
 <p>Ingress PE</p>
-<p><code>class-map&nbsp;match-all&nbsp;PREC6</code>
-<code>match&nbsp;ip&nbsp;precedence&nbsp;6</code>
-<code>!</code>
-<code>policy-map&nbsp;from-ce</code>
-<code>class&nbsp;PREC6</code>
-<code>set&nbsp;mpls&nbsp;experimental&nbsp;imposition&nbsp;3</code>
-<code>!</code>
-<code>int&nbsp;gi2</code>
-<code>service-policy&nbsp;input&nbsp;from-ce</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;match-all&nbsp;PREC6
+&nbsp;match&nbsp;ip&nbsp;precedence&nbsp;6
+!
+policy-map&nbsp;from-ce
+&nbsp;class&nbsp;PREC6
+&nbsp;&nbsp;set&nbsp;mpls&nbsp;experimental&nbsp;imposition&nbsp;3
+!
+int&nbsp;gi2
+&nbsp;service-policy&nbsp;input&nbsp;from-ce
+</code></pre></div>
 <p>Egress PE</p>
-<p><code>class-map&nbsp;match-all&nbsp;PREC6</code>
-<code>match&nbsp;ip&nbsp;precedence&nbsp;6</code>
-<code>!</code>
-<code>policy-map&nbsp;to-ce</code>
-<code>class&nbsp;PREC6</code>
-<code>bandwidth&nbsp;percent&nbsp;5</code>
-<code>!</code>
-<code>int&nbsp;gi2</code>
-<code>service-policy&nbsp;output&nbsp;to-ce</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;match-all&nbsp;PREC6
+&nbsp;match&nbsp;ip&nbsp;precedence&nbsp;6&nbsp;
+!
+policy-map&nbsp;to-ce
+&nbsp;class&nbsp;PREC6
+&nbsp;&nbsp;bandwidth&nbsp;percent&nbsp;5&nbsp;
+!
+int&nbsp;gi2
+&nbsp;service-policy&nbsp;output&nbsp;to-ce
+</code></pre></div>
 <h3 id="uniform-mode">Uniform mode</h3>
 <p>I detta mode kommer egress PE att kopiera ner EXP till IP-headern innan
 paketen skickas till CE, dvs corets MPLS-märkning reflekters till
@@ -9842,27 +9874,28 @@ Det vanliga är att kund märker paket ingress och om det ändras nånstans
 längs MPLS-vägen så kommer även IP-paketen på andra sidan ha dessa nya
 märkningar. Detta mode används oftast när man själv äger MPLS-nätet.</p>
 <p>Egress PE</p>
-<p><code>mpls&nbsp;ldp&nbsp;explicit-null</code>
-<code>!</code>
-<code>class-map&nbsp;match-all&nbsp;EXP3</code>
-<code>match&nbsp;mpls&nbsp;experimental&nbsp;topmost&nbsp;3</code>
-<code>!</code>
-<code>policy-map&nbsp;from-core</code>
-<code>class&nbsp;EXP3</code>
-<code>set&nbsp;qos-group&nbsp;3</code>
-<code>!</code>
-<code>int&nbsp;gi1</code>
-<code>service-policy&nbsp;input&nbsp;from-core</code>
-<code>!</code>
-<code>class-map&nbsp;match-all&nbsp;GROUP3</code>
-<code>match&nbsp;qos-group&nbsp;3</code>
-<code>!</code>
-<code>policy-map&nbsp;to-ce</code>
-<code>class&nbsp;GROUP3</code>
-<code>set&nbsp;ip&nbsp;precedence&nbsp;3</code>
-<code>!</code>
-<code>int&nbsp;gi2</code>
-<code>service-policy&nbsp;output&nbsp;to-ce</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;ldp&nbsp;explicit-null
+!
+class-map&nbsp;match-all&nbsp;EXP3
+&nbsp;match&nbsp;mpls&nbsp;experimental&nbsp;topmost&nbsp;3&nbsp;
+!
+policy-map&nbsp;from-core
+&nbsp;class&nbsp;EXP3
+&nbsp;&nbsp;set&nbsp;qos-group&nbsp;3
+!
+int&nbsp;gi1
+&nbsp;service-policy&nbsp;input&nbsp;from-core
+!
+class-map&nbsp;match-all&nbsp;GROUP3
+&nbsp;match&nbsp;qos-group&nbsp;3
+!
+policy-map&nbsp;to-ce
+&nbsp;class&nbsp;GROUP3
+&nbsp;&nbsp;set&nbsp;ip&nbsp;precedence&nbsp;3
+!
+int&nbsp;gi2
+&nbsp;service-policy&nbsp;output&nbsp;to-ce
+</code></pre></div>
 <p>Ingress PE gör inget speciellt.</p>
 <h1 id="autoqos">AutoQoS</h1>
 <p>AutoQoS är ett macro man kan använda för att smidigt slå på
@@ -9877,25 +9910,31 @@ Ingress och egress köer konfigureras på interfacen samt class-maps och
 policy-maps enableas. Känd trafik som voice, video, real-time,
 routingprotokoll och BPDUer prioriteras av AutoQoS voip.</p>
 <p><strong>VoIP</strong></p>
-<p><code>interface&nbsp;Gi0/0</code>
-<code>auto&nbsp;qos&nbsp;voip</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/0
+&nbsp;auto&nbsp;qos&nbsp;voip
+</code></pre></div>
 <p>Uplink</p>
-<p><code>auto&nbsp;qos&nbsp;voip&nbsp;trust</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;auto&nbsp;qos&nbsp;voip&nbsp;trust
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;auto&nbsp;qos&nbsp;interface</code>
-<code>show&nbsp;mls&nbsp;qos</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;auto&nbsp;qos&nbsp;interface
+show&nbsp;mls&nbsp;qos
+</code></pre></div>
 <p><strong>Enterprise</strong>
 Gäller VoIP plus andra applikationer och kräver att interface bandwidth
 är konfigurerat samt att CEF är på. NBAR används för trafikigenkänning.</p>
-<p><code>interface&nbsp;Gi0/0</code>
-<code>auto&nbsp;discovery&nbsp;qos</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/0
+&nbsp;auto&nbsp;discovery&nbsp;qos
+</code></pre></div>
 <p>Discovery bör stå på ett tag så att NBAR hinner samla in information om
 paketen som går över interfacet. Sedan slår man på QoS och då skapas
 lämpliga class-maps och policy-maps.</p>
-<p><code>auto&nbsp;qos</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;auto&nbsp;qos
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;auto&nbsp;discovery&nbsp;qos</code>
-<code>show&nbsp;auto&nbsp;qos</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;auto&nbsp;discovery&nbsp;qos
+show&nbsp;auto&nbsp;qos
+</code></pre></div>
 <h1 id="nx-os">NX-OS</h1>
 <p>NX-OS använder MQC men har ett lite annorlunda QoS-upplägg jämfört med
 IOS. NX-OS slår alltid på en system-defined default queuing policy på
@@ -9910,19 +9949,23 @@ varje port och port-channel. QoS-statistik är också på default.</p>
     scheduling.</li>
 </ul>
 <p>Verify</p>
-<p><code>show&nbsp;policy-map</code>
-<code>show&nbsp;policy-map&nbsp;vlan</code>
-<code>show&nbsp;policy-map&nbsp;interface&nbsp;e1/15&nbsp;type&nbsp;queuing</code>
-<code>show&nbsp;policy-map&nbsp;interface&nbsp;e1/15&nbsp;type&nbsp;qos</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;policy-map
+show&nbsp;policy-map&nbsp;vlan
+show&nbsp;policy-map&nbsp;interface&nbsp;e1/15&nbsp;type&nbsp;queuing&nbsp;
+show&nbsp;policy-map&nbsp;interface&nbsp;e1/15&nbsp;type&nbsp;qos&nbsp;
+</code></pre></div>
 <p>Notera att "type queuing" visar L2 MTU och "type qos" visar L3 MTU.</p>
 <p><strong>Shared Policer</strong>
 Med en shared policer kan man ha en policy som gäller för flera
 interface samtidigt.</p>
-<p><code>qos&nbsp;shared-policer&nbsp;type&nbsp;qos&nbsp;POLICE&nbsp;cir&nbsp;4&nbsp;gbps&nbsp;conform&nbsp;transmit&nbsp;exceed&nbsp;drop</code></p>
-<p><code>policy-map&nbsp;type&nbsp;qos&nbsp;PMAP</code>
-<code>class&nbsp;type&nbsp;qos&nbsp;class-default</code>
-<code>police&nbsp;aggregate&nbsp;POLICE</code></p>
-<p><code>show&nbsp;qos&nbsp;shared-policer&nbsp;POLICE</code></p>
+<div class="highlight"><pre><span></span><code>qos&nbsp;shared-policer&nbsp;type&nbsp;qos&nbsp;POLICE&nbsp;cir&nbsp;4&nbsp;gbps&nbsp;conform&nbsp;transmit&nbsp;exceed&nbsp;drop
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;type&nbsp;qos&nbsp;PMAP
+&nbsp;class&nbsp;type&nbsp;qos&nbsp;class-default
+&nbsp;&nbsp;police&nbsp;aggregate&nbsp;POLICE
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;qos&nbsp;shared-policer&nbsp;POLICE
+</code></pre></div>
 <p><strong>Network QoS</strong>
 Med en network qos policy kan man konfa pause behavior, congestion
 control mechanisms, MTU. Man kan även välja vilket protokoll som gäller
@@ -9933,42 +9976,49 @@ beteende utan det funkar bara för de CoS-värdena på portar där PFC är
 påslaget och successfully negotiated. Att byta network qos policy är
 disruptive. Kör man med VDC:er så går det endast använda den i
 default-VDC:n.</p>
-<p><code>system&nbsp;qos</code>
-<code>service-policy&nbsp;type&nbsp;network-qos&nbsp;my_template</code></p>
-<p><code>show&nbsp;policy-map&nbsp;type&nbsp;network-qos</code>
-<code>show&nbsp;policy-map&nbsp;system&nbsp;type&nbsp;network-qos</code></p>
+<div class="highlight"><pre><span></span><code>system&nbsp;qos
+&nbsp;service-policy&nbsp;type&nbsp;network-qos&nbsp;my_template
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;policy-map&nbsp;type&nbsp;network-qos
+show&nbsp;policy-map&nbsp;system&nbsp;type&nbsp;network-qos
+</code></pre></div>
 <p><strong>Default CoS</strong>
 Man kan ange att frames med CoS 0 ska få en viss CoS-märkning när de
 kommer in på ett interface.</p>
-<p><code>interface&nbsp;e1/1</code>
-<code>untagged&nbsp;cos&nbsp;4</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;e1/1
+&nbsp;untagged&nbsp;cos&nbsp;4
+</code></pre></div>
 <p><strong>Mutation mapping</strong>
 Mutation mapping är ett sätt att ändra ett QoS-fält i alla paket på ett
 interface. Notera att på ingress så händer det före traffic
 classification och alla andra actions. Medans på egress så händer det
 efter traffic classification men före andra actions. Man kan applicera
 det på CoS, DSCP och IP precedence fält.</p>
-<p><code>table-map&nbsp;mutate_dscp</code>
-<code>default&nbsp;copy</code>
-<code>from&nbsp;0&nbsp;to&nbsp;0</code>
-<code>from&nbsp;1&nbsp;to&nbsp;1</code>
-<code>from&nbsp;2&nbsp;to&nbsp;1</code>
-<code>from&nbsp;63&nbsp;to&nbsp;46</code></p>
-<p><code>policy-map&nbsp;type&nbsp;qos&nbsp;parent_policy</code>
-<code>class&nbsp;class-default</code>
-<code>set&nbsp;dscp&nbsp;dscp&nbsp;table&nbsp;mutate_dscp</code>
-<code>service-policy&nbsp;type&nbsp;qos&nbsp;child_qos_policy</code></p>
+<div class="highlight"><pre><span></span><code>table-map&nbsp;mutate_dscp
+&nbsp;default&nbsp;copy
+&nbsp;from&nbsp;0&nbsp;to&nbsp;0
+&nbsp;from&nbsp;1&nbsp;to&nbsp;1
+&nbsp;from&nbsp;2&nbsp;to&nbsp;1
+&nbsp;from&nbsp;63&nbsp;to&nbsp;46
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;type&nbsp;qos&nbsp;parent_policy
+&nbsp;class&nbsp;class-default
+&nbsp;&nbsp;set&nbsp;dscp&nbsp;dscp&nbsp;table&nbsp;mutate_dscp
+&nbsp;&nbsp;service-policy&nbsp;type&nbsp;qos&nbsp;child_qos_policy
+</code></pre></div>
 <p><strong>Session Manager</strong>
 Vill man dubbelkolla att QoS-konfen är giltig och att det finns
 tillräckligt med resurser innan man lägger det i running kan man dra
 nytta av session manager.</p>
-<p><code>configure&nbsp;session&nbsp;myQoS</code>
-<code>...</code>
+<p></p><div class="highlight"><pre><span></span><code>configure&nbsp;session&nbsp;myQoS
+&nbsp;...
+</code></pre></div>
 <code></code><qos konfig="">
-<code>...</code></qos></p>
-<p><code>verify</code>
-<code>commit&nbsp;/&nbsp;abort</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>&nbsp;...
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>verify
+commit&nbsp;/&nbsp;abort
+</code></pre></div></qos></cos></acl>
 
 
 
@@ -9991,7 +10041,7 @@ nytta av session manager.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

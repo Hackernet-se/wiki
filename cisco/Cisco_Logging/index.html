@@ -8720,6 +8720,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9021,44 +9049,58 @@
 även ändra på debugmeddelanden. Vill man att tidsstämplarna ska utgå
 ifrån den tidszon enheten är konfad med kan man lägga till <strong>localtime</strong>
 efter datetime-kommandona.</p>
-<p><code>(Utan&nbsp;tidsstämpel)</code>
-<code>%LINK-3-UPDOWN:&nbsp;Interface&nbsp;Port-channel1,&nbsp;changed&nbsp;state&nbsp;to&nbsp;up</code></p>
+<div class="highlight"><pre><span></span><code>(Utan&nbsp;tidsstämpel)
+%LINK-3-UPDOWN:&nbsp;Interface&nbsp;Port-channel1,&nbsp;changed&nbsp;state&nbsp;to&nbsp;up
+</code></pre></div>
 <p><strong><code>service`` ``timestamps`` ``log`` ``uptime</code></strong>
-<code>00:00:46:&nbsp;%LINK-3-UPDOWN:&nbsp;Interface&nbsp;Port-channel1,&nbsp;changed&nbsp;state&nbsp;to&nbsp;up</code></p>
+</p><div class="highlight"><pre><span></span><code>00:00:46:&nbsp;%LINK-3-UPDOWN:&nbsp;Interface&nbsp;Port-channel1,&nbsp;changed&nbsp;state&nbsp;to&nbsp;up
+</code></pre></div><p></p>
 <p><strong><code>service`` ``timestamps`` ``log`` ``datetime</code></strong>
-<code>*Feb&nbsp;&nbsp;8&nbsp;18:24:02:&nbsp;%LINK-3-UPDOWN:&nbsp;Interface&nbsp;Port-channel1,&nbsp;changed&nbsp;state&nbsp;to&nbsp;up</code></p>
+</p><div class="highlight"><pre><span></span><code>*Feb&nbsp;&nbsp;8&nbsp;18:24:02:&nbsp;%LINK-3-UPDOWN:&nbsp;Interface&nbsp;Port-channel1,&nbsp;changed&nbsp;state&nbsp;to&nbsp;up
+</code></pre></div><p></p>
 <p><strong><code>service`` ``timestamps`` ``log`` ``datetime`` ``msec</code></strong>
-<code>*Feb&nbsp;&nbsp;8&nbsp;18:24:02:355&nbsp;%LINK-3-UPDOWN:&nbsp;Interface&nbsp;Port-channel1,&nbsp;changed&nbsp;state&nbsp;to&nbsp;up</code></p>
+</p><div class="highlight"><pre><span></span><code>*Feb&nbsp;&nbsp;8&nbsp;18:24:02:355&nbsp;%LINK-3-UPDOWN:&nbsp;Interface&nbsp;Port-channel1,&nbsp;changed&nbsp;state&nbsp;to&nbsp;up
+</code></pre></div><p></p>
 <p><a href="/Cisco_Nexus" title="wikilink">NX-OS</a> har lite annan struktur på syslog</p>
-<p><code>2016&nbsp;Feb&nbsp;&nbsp;8&nbsp;18:41:55.911853&nbsp;&nbsp;DC01-SW02&nbsp;&nbsp;%BGP-3-UNEXPECT:&nbsp;&nbsp;the-message...</code></p>
+<div class="highlight"><pre><span></span><code>2016&nbsp;Feb&nbsp;&nbsp;8&nbsp;18:41:55.911853&nbsp;&nbsp;DC01-SW02&nbsp;&nbsp;%BGP-3-UNEXPECT:&nbsp;&nbsp;the-message...
+</code></pre></div>
 <h3 id="diverse">Diverse</h3>
 <p>Default har de flesta IOS-enheter en rätt liten logg-buffer men det går
 att ställa upp.</p>
-<p><code>logging&nbsp;buffered&nbsp;131072</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;buffered&nbsp;131072
+</code></pre></div>
 <p>Count every log message and timestamp last occurance</p>
-<p><code>logging&nbsp;count</code>
-<code>show&nbsp;logging&nbsp;count</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;count
+show&nbsp;logging&nbsp;count
+</code></pre></div>
 <p>Persistent, no buffering</p>
-<p><code>logging&nbsp;persistent&nbsp;immediate</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;persistent&nbsp;immediate
+</code></pre></div>
 <p>Rate limit</p>
-<p><code>logging&nbsp;rate-limit&nbsp;console&nbsp;all&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;rate-limit&nbsp;console&nbsp;all&nbsp;1
+</code></pre></div>
 <p>Numrera loggrader, gör det svårare att manipulera lagrade loggar i
 efterhand.</p>
-<p><code>service&nbsp;sequence-numbers</code></p>
+<div class="highlight"><pre><span></span><code>service&nbsp;sequence-numbers
+</code></pre></div>
 <p><strong>Message Discriminator</strong>
 Innan ett loggmeddelande levereras kan man ha det checkat mot en
 manuellt definierad kriterielista. På så sätt kan man t.ex. specificera
 om några speciella loggmeddelanden ska droppas.</p>
-<p><code>logging&nbsp;discriminator&nbsp;BLOCK&nbsp;msg-body&nbsp;drops&nbsp;Interface&nbsp;Port-channel1</code></p>
-<p><code>logging&nbsp;monitor&nbsp;discriminator&nbsp;BLOCK</code>
-<code>logging&nbsp;host&nbsp;1.1.1.1&nbsp;discriminator&nbsp;BLOCK</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;discriminator&nbsp;BLOCK&nbsp;msg-body&nbsp;drops&nbsp;Interface&nbsp;Port-channel1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>logging&nbsp;monitor&nbsp;discriminator&nbsp;BLOCK
+logging&nbsp;host&nbsp;1.1.1.1&nbsp;discriminator&nbsp;BLOCK
+</code></pre></div>
 <h1 id="local-storage">Local Storage</h1>
 <p>Man kan lagra loggar lokalt på flash.</p>
-<p><code>mkdir&nbsp;flash:/logs</code>
-<code>logging&nbsp;persistent&nbsp;url&nbsp;flash:/logs</code>
-<code>logging&nbsp;on</code></p>
+<div class="highlight"><pre><span></span><code>mkdir&nbsp;flash:/logs
+logging&nbsp;persistent&nbsp;url&nbsp;flash:/logs
+logging&nbsp;on
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;logging</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;logging
+</code></pre></div>
 <h1 id="syslog">Syslog</h1>
 <p>Syslog är en standard för message logging, även om inte strukturen på
 meddelandena är standardiserad. Syslog använder default UDP port 514.
@@ -9066,38 +9108,47 @@ Syslog-meddelanden går även att skicka med
 <a href="/Cisco_SNMP" title="wikilink">SNMP</a>-traps, först skickas det lokalt till en
 speciell history buffer och sedan replikerar SNMP agenten det till
 traps.</p>
-<p><code>logging&nbsp;on</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;on
+</code></pre></div>
 <p>Set syslog server logging level, 0-7.</p>
-<p><code>logging&nbsp;trap&nbsp;?</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;trap&nbsp;?
+</code></pre></div>
 <p>Source</p>
-<p><code>logging&nbsp;origin-id&nbsp;HOSTNAME</code>
-<code>logging&nbsp;source-interface&nbsp;Loopback&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;origin-id&nbsp;HOSTNAME
+logging&nbsp;source-interface&nbsp;Loopback&nbsp;0
+</code></pre></div>
 <p>Bytt protokoll och port</p>
-<p><code>logging&nbsp;host&nbsp;1.1.1.1&nbsp;transport&nbsp;tcp&nbsp;port&nbsp;5514</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;host&nbsp;1.1.1.1&nbsp;transport&nbsp;tcp&nbsp;port&nbsp;5514
+</code></pre></div>
 <h1 id="kommandologgning">Kommandologgning</h1>
-<p><code>archive</code>
-<code>log&nbsp;config</code>
-<code>logging&nbsp;enable</code>
-<code>notify&nbsp;syslog</code>
-<code>hidekeys</code></p>
+<div class="highlight"><pre><span></span><code>archive
+&nbsp;log&nbsp;config
+&nbsp;&nbsp;logging&nbsp;enable
+&nbsp;&nbsp;notify&nbsp;syslog
+&nbsp;&nbsp;hidekeys
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;archive&nbsp;log&nbsp;config&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;archive&nbsp;log&nbsp;config&nbsp;all
+</code></pre></div>
 <h1 id="acl">ACL</h1>
 <p>Förutom att öka hit count generera ett loggmeddelande när en ACL-regel
 träffas.</p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;Block_HTTP</code>
+<p></p><div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;Block_HTTP
+</code></pre></div>
 <code>10&nbsp;deny&nbsp;tcp&nbsp;any&nbsp;any&nbsp;eq&nbsp;80</code><strong><code>log</code></strong>
-<code>20&nbsp;permit&nbsp;ip&nbsp;any&nbsp;any</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;20&nbsp;permit&nbsp;ip&nbsp;any&nbsp;any
+</code></pre></div><p></p>
 <p>För L2-info också använd <em>log-input</em> istället för log.</p>
 <p>Access list logging interval (milliseconds) &amp; log-update threshold
 (number of hits)</p>
-<p><code>ip&nbsp;access-list&nbsp;logging&nbsp;interval&nbsp;1000</code>
-<code>ip&nbsp;access-list&nbsp;log-update&nbsp;threshold&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;logging&nbsp;interval&nbsp;1000
+ip&nbsp;access-list&nbsp;log-update&nbsp;threshold&nbsp;10
+</code></pre></div>
 <p>IOS kan generera och lägga på en MD5 hash på varje access-list entry.
 Denna hash kan användas för att enklare söka och filtrera på
 loggmeddelanden utifrån en viss regel. Hashen ligger kvar efter reboot.</p>
-<p><code>ip&nbsp;access-list&nbsp;logging&nbsp;hash-generation</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;logging&nbsp;hash-generation&nbsp;
+</code></pre></div>
 
 
 
@@ -9120,7 +9171,7 @@ loggmeddelanden utifrån en viss regel. Hashen ligger kvar efter reboot.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

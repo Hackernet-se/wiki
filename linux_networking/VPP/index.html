@@ -8676,6 +8676,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8937,25 +8965,32 @@ Processing (VPP) teknologi.</p>
 <h2 id="installation">Installation</h2>
 <p>Ubuntu 16.04</p>
 <p><code>echo&nbsp;"deb</code><a href="https://nexus.fd.io/content/repositories/fd.io.ubuntu.xenial.main/"><code>https://nexus.fd.io/content/repositories/fd.io.ubuntu.xenial.main/</code></a><code>./"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/apt/sources.list.d/99fd.io.list</code>
-<code>sudo&nbsp;apt&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt&nbsp;install&nbsp;vpp&nbsp;vpp-lib&nbsp;vpp-dpdk-dkms</code></p>
+</p><div class="highlight"><pre><span></span><code>sudo&nbsp;apt&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt&nbsp;install&nbsp;vpp&nbsp;vpp-lib&nbsp;vpp-dpdk-dkms
+</code></pre></div><p></p>
 <p>Fedora</p>
 <p><code>sudo&nbsp;curl&nbsp;-o&nbsp;/etc/yum.repos.d/fdio.repo</code><a href="https://paste.fedoraproject.org/355177/60579220/raw/"><code>https://paste.fedoraproject.org/355177/60579220/raw/</code></a>
-<code>sudo&nbsp;dnf&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;dnf&nbsp;install&nbsp;vpp</code></p>
+</p><div class="highlight"><pre><span></span><code>sudo&nbsp;dnf&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;dnf&nbsp;install&nbsp;vpp
+</code></pre></div><p></p>
 <h2 id="konfiguration">Konfiguration</h2>
-<p><code>cat&nbsp;/etc/vpp/startup.conf</code></p>
+<div class="highlight"><pre><span></span><code>cat&nbsp;/etc/vpp/startup.conf
+</code></pre></div>
 <p>Service</p>
-<p><code>sudo&nbsp;systemctl&nbsp;start&nbsp;vpp</code>
-<code>sudo&nbsp;systemctl&nbsp;status&nbsp;vpp</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;systemctl&nbsp;start&nbsp;vpp
+sudo&nbsp;systemctl&nbsp;status&nbsp;vpp
+</code></pre></div>
 <p>VPP lyssnar default på tcp port 5000</p>
-<p><code>telnet&nbsp;0&nbsp;5000</code></p>
+<div class="highlight"><pre><span></span><code>telnet&nbsp;0&nbsp;5000
+</code></pre></div>
 <p>VPP shell</p>
-<p><code>show&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;interface
+</code></pre></div>
 <p>Bash</p>
-<p><code>sudo&nbsp;vppctl&nbsp;show&nbsp;ip&nbsp;arp</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;vppctl&nbsp;show&nbsp;ip&nbsp;arp
+</code></pre></div>
 <p><strong>Honeycomb</strong> är en agent man kan köra på samma host som tillhandahåller
 yang models via netconf/restconf för remote management.</p>
-<p><code>sudo&nbsp;yum&nbsp;install&nbsp;honeycomb</code></p>
-<p><a href="/Category:Network" title="wikilink">Category:Network</a></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;yum&nbsp;install&nbsp;honeycomb
+</code></pre></div>
 
 
 
@@ -8978,7 +9013,7 @@ yang models via netconf/restconf för remote management.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

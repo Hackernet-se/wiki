@@ -8782,6 +8782,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9175,17 +9203,20 @@ får hitta en annan väg eller misslyckas med LSP-uppsättningen.</p>
 interface flödena ska traversera. Det behöver inte köras på alla enheter
 för att det ska funka men då kan man inte reservera bandbredd på dem
 heller.</p>
-<p><code>interface&nbsp;Gi2</code>
-<code>ip&nbsp;rsvp&nbsp;bandwidth&nbsp;1000&nbsp;100&nbsp;&nbsp;#kbps</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi2
+&nbsp;ip&nbsp;rsvp&nbsp;bandwidth&nbsp;1000&nbsp;100&nbsp;&nbsp;#kbps
+</code></pre></div>
 <p>Om man inte specificerar total bandbredd och per-flow bandbredd kommer
 75% av interfacets bandbredd kunna reserveras av ett enskilt flöde.</p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;rsvp</code>
-<code>show&nbsp;ip&nbsp;rsvp&nbsp;interface</code>
-<code>show&nbsp;ip&nbsp;rsvp&nbsp;reservation</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;rsvp
+show&nbsp;ip&nbsp;rsvp&nbsp;interface
+show&nbsp;ip&nbsp;rsvp&nbsp;reservation
+</code></pre></div>
 <p>Om man kör LLQ/CBWFQ bör man stänga av RSVPs WFQ och klassificering.</p>
-<p><code>ip&nbsp;rsvp&nbsp;resource-provider&nbsp;none</code>
-<code>ip&nbsp;rsvp&nbsp;data-packet&nbsp;classification&nbsp;none</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;rsvp&nbsp;resource-provider&nbsp;none
+ip&nbsp;rsvp&nbsp;data-packet&nbsp;classification&nbsp;none
+</code></pre></div>
 <h2 id="traffic-engineering">Traffic Engineering</h2>
 <p>MPLS TE är unidirectional tunnels från source (head-end) till
 destination (tail-end) i form av LSP:er som används för att forwardera
@@ -9208,42 +9239,51 @@ periodiskt varje timme som standard. Det går även att signalera om en
 LSP manuellt. Om det finns en bättre väg kommer trafiken att skiftas
 över till den med MBB (make before break).</p>
 <p><strong>Konfiguration</strong></p>
-<p><code>mpls&nbsp;traffic-eng&nbsp;tunnels</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;traffic-eng&nbsp;tunnels
+</code></pre></div>
 <p>Per interface, detta måste konfas på alla core-interface.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>mpls&nbsp;traffic-eng&nbsp;tunnels</code>
-<code>ip&nbsp;rsvp&nbsp;bandwidth</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;mpls&nbsp;traffic-eng&nbsp;tunnels
+&nbsp;ip&nbsp;rsvp&nbsp;bandwidth
+</code></pre></div>
 <p>IGP, OSPF använder opaque LSA:er och IS-IS använder nya TLV:er för att
 skicka TE attribut.</p>
-<p><code>router&nbsp;ospf&nbsp;1</code>
-<code>mpls&nbsp;traffic-eng&nbsp;router-id&nbsp;Loopback0</code>
-<code>mpls&nbsp;traffic-eng&nbsp;area&nbsp;0</code></p>
-<p><code>router&nbsp;isis&nbsp;1</code>
-<code>mpls&nbsp;traffic-eng&nbsp;router-id&nbsp;Loopback0</code>
-<code>mpls&nbsp;traffic-eng&nbsp;level-2</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;ospf&nbsp;1
+&nbsp;mpls&nbsp;traffic-eng&nbsp;router-id&nbsp;Loopback0
+&nbsp;mpls&nbsp;traffic-eng&nbsp;area&nbsp;0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;isis&nbsp;1
+&nbsp;mpls&nbsp;traffic-eng&nbsp;router-id&nbsp;Loopback0
+&nbsp;mpls&nbsp;traffic-eng&nbsp;level-2
+</code></pre></div>
 <p>Tunnel. För att tunneln ska användas måste man routa över den, detta kan
 t.ex. göras med statisk routing eller autoroute. Eftersom det inte är en
 vanlig GRE-tunnel uppstår ingen recursive routing. Record route används
 för loop detection.</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;unnumbered&nbsp;Loopback0</code>
-<code>tunnel&nbsp;mode&nbsp;mpls&nbsp;traffic-eng</code>
-<code>tunnel&nbsp;destination&nbsp;x.x.x.x</code>
-<code>tunnel&nbsp;mpls&nbsp;traffic-eng&nbsp;path-option&nbsp;1&nbsp;dynamic</code>
-<code>tunnel&nbsp;mpls&nbsp;traffic-eng&nbsp;autoroute&nbsp;destination</code>
-<code>tunnel&nbsp;mpls&nbsp;traffic-eng&nbsp;record-route</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;unnumbered&nbsp;Loopback0
+&nbsp;tunnel&nbsp;mode&nbsp;mpls&nbsp;traffic-eng
+&nbsp;tunnel&nbsp;destination&nbsp;x.x.x.x
+&nbsp;tunnel&nbsp;mpls&nbsp;traffic-eng&nbsp;path-option&nbsp;1&nbsp;dynamic
+&nbsp;tunnel&nbsp;mpls&nbsp;traffic-eng&nbsp;autoroute&nbsp;destination
+&nbsp;tunnel&nbsp;mpls&nbsp;traffic-eng&nbsp;record-route
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;mpls&nbsp;traffic-eng&nbsp;tunnel</code>
-<code>show&nbsp;ip&nbsp;rsvp&nbsp;interface</code>
-<code>show&nbsp;ip&nbsp;route</code>
-<code>show&nbsp;ip&nbsp;rsvp&nbsp;reservation&nbsp;detail</code></p>
-<p><code>traceroute&nbsp;mpls&nbsp;traffic-eng&nbsp;tunnel&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mpls&nbsp;traffic-eng&nbsp;tunnel
+show&nbsp;ip&nbsp;rsvp&nbsp;interface
+show&nbsp;ip&nbsp;route
+show&nbsp;ip&nbsp;rsvp&nbsp;reservation&nbsp;detail
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>traceroute&nbsp;mpls&nbsp;traffic-eng&nbsp;tunnel&nbsp;0
+</code></pre></div>
 <p>Dry run</p>
-<p><code>show&nbsp;mpls&nbsp;traffic-eng&nbsp;topology&nbsp;path&nbsp;destination&nbsp;10.10.10.10&nbsp;bandwidth&nbsp;50000</code>
-<code>show&nbsp;mpls&nbsp;traffic-eng&nbsp;link-management&nbsp;admission-control</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mpls&nbsp;traffic-eng&nbsp;topology&nbsp;path&nbsp;destination&nbsp;10.10.10.10&nbsp;bandwidth&nbsp;50000&nbsp;
+show&nbsp;mpls&nbsp;traffic-eng&nbsp;link-management&nbsp;admission-control&nbsp;
+</code></pre></div>
 <p>Logging, detta är för att skicka traps.</p>
-<p><code>mpls&nbsp;traffic-eng&nbsp;logging&nbsp;lsp</code>
-<code>mpls&nbsp;traffic-eng&nbsp;logging&nbsp;tunnel</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;traffic-eng&nbsp;logging&nbsp;lsp
+mpls&nbsp;traffic-eng&nbsp;logging&nbsp;tunnel
+</code></pre></div>
 <p><strong>Auto-Bandwidth</strong>
 Med auto-bw mäter routern själv trafikmängden på tunneln periodiskt.
 Sedan kan olika bw-reservationer signaleras allt eftersom utifrån
@@ -9254,8 +9294,9 @@ snabbt i förändring. Underflow och Overflow är tröskelvärden för
 event-baserad statistikinsamling. Detta är inte heller alltid
 supersnabbt vid förändring. Det är rekommenderat att köra: tunnel
 load-interval \&lt; global sampling frequency \&lt; tunnel adjust frequency.</p>
-<p><code>int&nbsp;tun0</code>
-<code>tunnel&nbsp;mpls&nbsp;traffic-eng&nbsp;auto-bw</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;tun0
+&nbsp;tunnel&nbsp;mpls&nbsp;traffic-eng&nbsp;auto-bw
+</code></pre></div>
 <p>Notera att senaste requested/signaled bandwidth sparas i running config.</p>
 <p><strong>TE - inter-area/multi-level</strong>
 IOS implementerar Inter-Area MPLS TE genom att definiera ett Explicit
@@ -9267,9 +9308,10 @@ till nästa ABR och så vidare tills man har nått tail end. Detta uppnås
 genom en loose hop expanderas i den fullt definierade explicita path:en,
 dvs Head End och ABRs definierar de hop som finns i den egna lokala
 flooding domain.</p>
-<p><code>ip&nbsp;explicit-path&nbsp;name&nbsp;INTER_AREA_TE&nbsp;enable</code>
+<p></p><div class="highlight"><pre><span></span><code>ip&nbsp;explicit-path&nbsp;name&nbsp;INTER_AREA_TE&nbsp;enable
+</code></pre></div>
 <code>next-address&nbsp;loose</code><abr1>
-<code>next-address&nbsp;loose</code><abr2></abr2></abr1></p>
+<code>next-address&nbsp;loose</code><abr2><p></p>
 <h3 id="autotunnel-fast-reroute">Autotunnel - Fast Reroute</h3>
 <p>RSVP-TE kan använda sig av backup LSPer för snabbare konvergens. Med
 hjälp av autotunnel backup kan dessa autoskapas efter behov och man
@@ -9280,79 +9322,90 @@ och det finns alternativa vägar. FRR föredrar NNHOP över NHOP backup
 tunnels om båda finns tillgängliga. För NNHOP FRR måste man ha record
 route.</p>
 <p>PLR</p>
-<p><code>mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;backup</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;backup
+</code></pre></div>
 <p>Head-end</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>tunnel&nbsp;mpls&nbsp;traffic-eng&nbsp;fast-reroute</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;tunnel&nbsp;mpls&nbsp;traffic-eng&nbsp;fast-reroute
+</code></pre></div>
 <p><strong>SRLG</strong>
 SRLG-information distribueras med IGP och funkar endast för backup
 tunnels som är skapade av Autotunnel backup.</p>
-<p><code>interface&nbsp;Gi0/1</code>
-<code>mpls&nbsp;traffic-eng&nbsp;srlg&nbsp;1</code>
-<code>mpls&nbsp;traffic-eng&nbsp;srlg&nbsp;2</code>
-<code>!</code>
-<code>interface&nbsp;Gi0/2</code>
-<code>mpls&nbsp;traffic-eng&nbsp;srlg&nbsp;2</code>
-<code>mpls&nbsp;traffic-eng&nbsp;srlg&nbsp;3</code>
-<code>!</code>
-<code>mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;backup</code>
-<code>mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;backup&nbsp;srlg&nbsp;exclude&nbsp;force</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/1
+&nbsp;mpls&nbsp;traffic-eng&nbsp;srlg&nbsp;1
+&nbsp;mpls&nbsp;traffic-eng&nbsp;srlg&nbsp;2
+!
+interface&nbsp;Gi0/2
+&nbsp;mpls&nbsp;traffic-eng&nbsp;srlg&nbsp;2
+&nbsp;mpls&nbsp;traffic-eng&nbsp;srlg&nbsp;3
+!
+mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;backup
+mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;backup&nbsp;srlg&nbsp;exclude&nbsp;force&nbsp;
+</code></pre></div>
 <h3 id="autotunnel-mesh">Autotunnel - Mesh</h3>
 <p>Autoskapa tunnlar till alla PE:s som finns med i en acl.</p>
-<p><code>mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;mesh</code></p>
-<p><code>interface&nbsp;Auto-Template1</code>
-<code>ip&nbsp;unnumbered&nbsp;Loopback0</code>
-<code>tunnel&nbsp;mode&nbsp;mpls&nbsp;traffic-eng</code>
-<code>tunnel&nbsp;destination&nbsp;access-list&nbsp;1</code></p>
-<p><code>access-list&nbsp;1&nbsp;permit&nbsp;1.1.1.1</code>
-<code>access-list&nbsp;1&nbsp;permit&nbsp;1.1.1.2</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;mesh
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Auto-Template1
+&nbsp;ip&nbsp;unnumbered&nbsp;Loopback0
+&nbsp;tunnel&nbsp;mode&nbsp;mpls&nbsp;traffic-eng
+&nbsp;tunnel&nbsp;destination&nbsp;access-list&nbsp;1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;1&nbsp;permit&nbsp;1.1.1.1
+access-list&nbsp;1&nbsp;permit&nbsp;1.1.1.2
+</code></pre></div>
 <p>Primary, configure tunnels to directly connected neighbors.</p>
-<p><code>mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;primary&nbsp;onehop</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;primary&nbsp;onehop
+</code></pre></div>
 <h3 id="inter-as-te">Inter-AS TE</h3>
 <p>Med ASBR Forced Link Flooding kan man låta länkar som inte är med i IGP
 att installeras i TE database som point-to-point. Man konfigurerar
 länken som passiv för MPLS TE och anger neighbor TE-ID och ip-adress.</p>
-<p><code>mpls&nbsp;traffic-eng&nbsp;passive-interface&nbsp;nbr-te-id&nbsp;1.1.1.2&nbsp;nbr-if-addr&nbsp;10.0.0.2&nbsp;nbr-igp-id&nbsp;isis&nbsp;49.0000.0000.0002.00</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;traffic-eng&nbsp;passive-interface&nbsp;nbr-te-id&nbsp;1.1.1.2&nbsp;nbr-if-addr&nbsp;10.0.0.2&nbsp;nbr-igp-id&nbsp;isis&nbsp;49.0000.0000.0002.00
+</code></pre></div>
 <h3 id="multicast">Multicast</h3>
 <p>Om man routar multicast i sitt core samtidigt som man kör MPLE-TE med
 autoroute announce kommer RPF att titta på fel best path. Workaround är
 att slå på att IGP håller två set med best paths under SPF calculation,
 en för unicast (TE tunnels och physical interfaces) och en för multicast
 (endast physical interfaces).</p>
-<p><code>router&nbsp;ospf&nbsp;1</code>
-<code>mpls&nbsp;traffic-eng&nbsp;multicast-intact</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;ospf&nbsp;1
+&nbsp;mpls&nbsp;traffic-eng&nbsp;multicast-intact
+</code></pre></div>
 <h1 id="ios-xr">IOS-XR</h1>
 <h3 id="auto-tunnel-backup">Auto-Tunnel Backup</h3>
-<p><code>ipv4&nbsp;unnumbered&nbsp;mpls&nbsp;traffic-eng&nbsp;lo0</code>
-<code>mpls&nbsp;traffic-eng</code>
-<code>auto-tunnel&nbsp;backup</code>
-<code>tunnel-id&nbsp;min&nbsp;6000&nbsp;max&nbsp;6500</code>
-<code>!</code>
-<code>interface&nbsp;GigabitEthernet0/0/0/0</code>
-<code>auto-tunnel&nbsp;backup</code></p>
+<div class="highlight"><pre><span></span><code>ipv4&nbsp;unnumbered&nbsp;mpls&nbsp;traffic-eng&nbsp;lo0
+mpls&nbsp;traffic-eng
+&nbsp;auto-tunnel&nbsp;backup
+&nbsp;&nbsp;tunnel-id&nbsp;min&nbsp;6000&nbsp;max&nbsp;6500
+&nbsp;!
+&nbsp;interface&nbsp;GigabitEthernet0/0/0/0
+&nbsp;&nbsp;auto-tunnel&nbsp;backup
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;backup&nbsp;summary</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mpls&nbsp;traffic-eng&nbsp;auto-tunnel&nbsp;backup&nbsp;summary
+</code></pre></div>
 <h3 id="mesh">Mesh</h3>
-<p><code>ipv4&nbsp;unnumbered&nbsp;mpls&nbsp;traffic-eng&nbsp;Loopback0</code>
-<code>ipv4&nbsp;prefix-list&nbsp;PE</code>
-<code>10&nbsp;permit&nbsp;10.0.0.1/32</code>
-<code>20&nbsp;permit&nbsp;10.0.0.2/32</code>
-<code>!</code>
-<code>mpls&nbsp;traffic-eng</code>
-<code>auto-tunnel&nbsp;mesh</code>
-<code>group&nbsp;1</code>
-<code>attribute-set&nbsp;PE</code>
-<code>destination-list&nbsp;PE</code>
-<code>!</code>
-<code>tunnel-id&nbsp;min&nbsp;1000&nbsp;max&nbsp;1499</code>
-<code>!</code>
-<code>attribute-set&nbsp;auto-mesh&nbsp;PE</code>
-<code>logging&nbsp;events&nbsp;lsp-status&nbsp;state</code>
-<code>signalled-bandwidth&nbsp;100&nbsp;class-type&nbsp;0</code>
-<code>autoroute&nbsp;announce</code>
-<code>fast-reroute</code>
-<code>record-route</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>ipv4&nbsp;unnumbered&nbsp;mpls&nbsp;traffic-eng&nbsp;Loopback0
+ipv4&nbsp;prefix-list&nbsp;PE
+&nbsp;10&nbsp;permit&nbsp;10.0.0.1/32
+&nbsp;20&nbsp;permit&nbsp;10.0.0.2/32
+!
+mpls&nbsp;traffic-eng
+&nbsp;auto-tunnel&nbsp;mesh
+&nbsp;&nbsp;group&nbsp;1
+&nbsp;&nbsp;&nbsp;attribute-set&nbsp;PE
+&nbsp;&nbsp;&nbsp;destination-list&nbsp;PE
+&nbsp;&nbsp;!
+&nbsp;&nbsp;tunnel-id&nbsp;min&nbsp;1000&nbsp;max&nbsp;1499
+&nbsp;!
+&nbsp;attribute-set&nbsp;auto-mesh&nbsp;PE
+&nbsp;&nbsp;logging&nbsp;events&nbsp;lsp-status&nbsp;state
+&nbsp;&nbsp;signalled-bandwidth&nbsp;100&nbsp;class-type&nbsp;0
+&nbsp;&nbsp;autoroute&nbsp;announce
+&nbsp;&nbsp;fast-reroute
+&nbsp;&nbsp;record-route
+</code></pre></div></abr2></abr1>
 
 
 
@@ -9375,7 +9428,7 @@ en för unicast (TE tunnels och physical interfaces) och en för multicast
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

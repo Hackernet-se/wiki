@@ -8702,6 +8702,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9009,126 +9037,147 @@ samt följande paket.</p>
 </ul>
 <h2 id="installation">Installation</h2>
 <p>Det är rekomenderat att installera under <code>/opt/apps</code>.</p>
-<p><code>mkdir&nbsp;/opt/apps&nbsp;&amp;&amp;&nbsp;cd&nbsp;/opt/apps</code>
+<p></p><div class="highlight"><pre><span></span><code>mkdir&nbsp;/opt/apps&nbsp;&amp;&amp;&nbsp;cd&nbsp;/opt/apps
+</code></pre></div>
 <code>git&nbsp;clone</code><a href="https://github.com/tildaslash/RatticWeb"><code>https://github.com/tildaslash/RatticWeb</code></a>
-<code>cd&nbsp;RatticWeb</code>
-<code>pip&nbsp;install&nbsp;-r&nbsp;requirements-mysql.txt</code>
-<code>mkdir&nbsp;static</code>
-<code>cd&nbsp;conf&nbsp;&amp;&amp;&nbsp;cp&nbsp;defaults.cfg&nbsp;local.cfg</code></p>
+<div class="highlight"><pre><span></span><code>cd&nbsp;RatticWeb
+pip&nbsp;install&nbsp;-r&nbsp;requirements-mysql.txt
+mkdir&nbsp;static
+cd&nbsp;conf&nbsp;&amp;&amp;&nbsp;cp&nbsp;defaults.cfg&nbsp;local.cfg
+</code></pre></div><p></p>
 <p>Ändra följande rader,</p>
-<p><code>[ratticweb]</code>
-<code>debug&nbsp;=&nbsp;False</code>
-<code>secretkey&nbsp;=&nbsp;[enter&nbsp;a&nbsp;string&nbsp;of&nbsp;random&nbsp;secret&nbsp;data]</code>
-<code>hostname&nbsp;=&nbsp;rattic</code></p>
-<p><code>[filepaths]</code>
-<code>static&nbsp;=&nbsp;/opt/apps/RatticWeb/static</code></p>
-<p><code>[database]</code>
-<code>engine&nbsp;=&nbsp;django.db.backends.mysql</code>
-<code>name&nbsp;=&nbsp;rattic</code>
-<code>user&nbsp;=&nbsp;root</code>
-<code>password&nbsp;=</code>
-<code>host&nbsp;=</code>
-<code>port&nbsp;=</code></p>
+<div class="highlight"><pre><span></span><code>[ratticweb]
+debug&nbsp;=&nbsp;False
+secretkey&nbsp;=&nbsp;[enter&nbsp;a&nbsp;string&nbsp;of&nbsp;random&nbsp;secret&nbsp;data]
+hostname&nbsp;=&nbsp;rattic&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[filepaths]
+static&nbsp;=&nbsp;/opt/apps/RatticWeb/static
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[database]
+engine&nbsp;=&nbsp;django.db.backends.mysql
+name&nbsp;=&nbsp;rattic
+user&nbsp;=&nbsp;root
+password&nbsp;=
+host&nbsp;=
+port&nbsp;=
+</code></pre></div>
 <p>Skapa sedan tabeller i databasen och fyll static mappen.</p>
-<p><code>cd&nbsp;/opt/apps/RatticWeb/</code>
-<code>./manage.py&nbsp;syncdb&nbsp;--noinput</code>
-<code>./manage.py&nbsp;migrate&nbsp;--all</code>
-<code>./manage.py&nbsp;collectstatic&nbsp;-c&nbsp;--noinput</code>
-<code>./manage.py&nbsp;demosetup</code></p>
+<div class="highlight"><pre><span></span><code>cd&nbsp;/opt/apps/RatticWeb/
+./manage.py&nbsp;syncdb&nbsp;--noinput
+./manage.py&nbsp;migrate&nbsp;--all
+./manage.py&nbsp;collectstatic&nbsp;-c&nbsp;--noinput
+./manage.py&nbsp;demosetup
+</code></pre></div>
 <p>Logga in med användaren <code>admin</code> med password <code>rattic</code>.</p>
 <h3 id="nginx-konfiguration">Nginx konfiguration</h3>
 <p>Börja med att installera supervisord och gunicorn.</p>
-<p><code>pip&nbsp;install&nbsp;gunicorn</code>
-<code>easy_install&nbsp;supervisor</code>
+<p></p><div class="highlight"><pre><span></span><code>pip&nbsp;install&nbsp;gunicorn
+easy_install&nbsp;supervisor
+</code></pre></div>
 <code>wget</code><a href="https://gist.githubusercontent.com/howthebodyworks/176149/raw/88d0d68c4af22a7474ad1d011659ea2d27e35b8d/supervisord.sh"><code>https://gist.githubusercontent.com/howthebodyworks/176149/raw/88d0d68c4af22a7474ad1d011659ea2d27e35b8d/supervisord.sh</code></a><code>-O&nbsp;/etc/init.d/supervisord</code>
-<code>update-rc.d&nbsp;supervisord&nbsp;defaults</code>
-<code>mkdir&nbsp;/opt/apps/log</code></p>
+<div class="highlight"><pre><span></span><code>update-rc.d&nbsp;supervisord&nbsp;defaults
+mkdir&nbsp;/opt/apps/log
+</code></pre></div><p></p>
 <p>Lägg till följande rader längst ner i <code>/etc/superviseord.conf</code>.</p>
-<p><code>[program:RatticDB]</code>
-<code>command&nbsp;=&nbsp;/opt/apps/gunicorn_start.sh</code>
-<code>user&nbsp;=&nbsp;rattic</code>
-<code>stdout_logfile&nbsp;=&nbsp;/opt/apps/log/gunicorn_supervisor.log</code>
-<code>redirect_stderr&nbsp;=&nbsp;true</code></p>
+<div class="highlight"><pre><span></span><code>[program:RatticDB]
+command&nbsp;=&nbsp;/opt/apps/gunicorn_start.sh
+user&nbsp;=&nbsp;rattic
+stdout_logfile&nbsp;=&nbsp;/opt/apps/log/gunicorn_supervisor.log
+redirect_stderr&nbsp;=&nbsp;true
+</code></pre></div>
 <p>Skapa en fil som heter <code>gunicorn_start.sh</code> under /opt/apps och lägg in
 följande.</p>
-<p><code>#!/bin/bash</code>
-<code></code>
-<code>NAME="RatticDB"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Name&nbsp;of&nbsp;the&nbsp;application</code>
-<code>DJANGODIR=/opt/apps/RatticWeb/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;ratticdb&nbsp;project&nbsp;directory</code>
-<code>USER=rattic&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;the&nbsp;user&nbsp;to&nbsp;run&nbsp;as</code>
-<code>GROUP=rattic&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;the&nbsp;group&nbsp;to&nbsp;run&nbsp;as</code>
-<code>NUM_WORKERS=3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;how&nbsp;many&nbsp;worker&nbsp;processes&nbsp;should&nbsp;Gunicorn&nbsp;spawn&nbsp;(2xcores+1)</code>
-<code>DJANGO_SETTINGS_MODULE=ratticweb.settings&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;which&nbsp;settings&nbsp;file&nbsp;should&nbsp;Django&nbsp;use</code>
-<code>DJANGO_WSGI_MODULE=ratticweb.wsgi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;WSGI&nbsp;module&nbsp;name</code>
-<code></code>
+<p></p><div class="highlight"><pre><span></span><code>&nbsp;#!/bin/bash
+&nbsp;
+NAME="RatticDB"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Name&nbsp;of&nbsp;the&nbsp;application
+DJANGODIR=/opt/apps/RatticWeb/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;ratticdb&nbsp;project&nbsp;directory
+USER=rattic&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;the&nbsp;user&nbsp;to&nbsp;run&nbsp;as
+GROUP=rattic&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;the&nbsp;group&nbsp;to&nbsp;run&nbsp;as
+NUM_WORKERS=3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;how&nbsp;many&nbsp;worker&nbsp;processes&nbsp;should&nbsp;Gunicorn&nbsp;spawn&nbsp;(2xcores+1)
+DJANGO_SETTINGS_MODULE=ratticweb.settings&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;which&nbsp;settings&nbsp;file&nbsp;should&nbsp;Django&nbsp;use
+DJANGO_WSGI_MODULE=ratticweb.wsgi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;WSGI&nbsp;module&nbsp;name
+&nbsp;
+</code></pre></div>
 <code>echo&nbsp;"Starting&nbsp;$NAME&nbsp;as&nbsp;`whoami`"</code>
-<code></code>
-<code>#&nbsp;Activate&nbsp;the&nbsp;virtual&nbsp;environment</code>
-<code>cd&nbsp;$DJANGODIR</code>
-<code>export&nbsp;DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE</code>
-<code>export&nbsp;PYTHONPATH=$DJANGODIR:$PYTHONPATH</code>
-<code></code>
-<code>#&nbsp;Start&nbsp;your&nbsp;Django&nbsp;Unicorn</code>
-<code>#&nbsp;Programs&nbsp;meant&nbsp;to&nbsp;be&nbsp;run&nbsp;under&nbsp;supervisor&nbsp;should&nbsp;not&nbsp;daemonize&nbsp;themselves&nbsp;(do&nbsp;not&nbsp;use&nbsp;--daemon)</code>
-<code>exec&nbsp;/usr/bin/gunicorn&nbsp;${DJANGO_WSGI_MODULE}:application&nbsp;\</code>
-<code>--name&nbsp;$NAME&nbsp;\</code>
-<code>--workers&nbsp;$NUM_WORKERS&nbsp;\</code>
-<code>--user=$USER&nbsp;--group=$GROUP&nbsp;\</code>
-<code>--log-level=debug&nbsp;\</code>
-<code>--bind=127.0.0.1:8000</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;
+#&nbsp;Activate&nbsp;the&nbsp;virtual&nbsp;environment
+cd&nbsp;$DJANGODIR
+export&nbsp;DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export&nbsp;PYTHONPATH=$DJANGODIR:$PYTHONPATH
+&nbsp;
+#&nbsp;Start&nbsp;your&nbsp;Django&nbsp;Unicorn
+#&nbsp;Programs&nbsp;meant&nbsp;to&nbsp;be&nbsp;run&nbsp;under&nbsp;supervisor&nbsp;should&nbsp;not&nbsp;daemonize&nbsp;themselves&nbsp;(do&nbsp;not&nbsp;use&nbsp;--daemon)
+exec&nbsp;/usr/bin/gunicorn&nbsp;${DJANGO_WSGI_MODULE}:application&nbsp;\
+&nbsp;&nbsp;--name&nbsp;$NAME&nbsp;\
+&nbsp;&nbsp;--workers&nbsp;$NUM_WORKERS&nbsp;\
+&nbsp;&nbsp;--user=$USER&nbsp;--group=$GROUP&nbsp;\
+&nbsp;&nbsp;--log-level=debug&nbsp;\
+&nbsp;&nbsp;--bind=127.0.0.1:8000
+</code></pre></div><p></p>
 <p>Nginx conf fil.</p>
-<p><code>server&nbsp;{</code>
-<code>listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;443&nbsp;ssl;</code>
-<code>server_name&nbsp;&nbsp;rattic.hackernet.se;</code>
-<code></code>
-<code>client_max_body_size&nbsp;4G;</code></p>
-<p><code>location&nbsp;/static/&nbsp;{</code>
-<code>alias&nbsp;/opt/apps/RatticWeb/static/;</code>
-<code>}</code></p>
-<p><code>location&nbsp;/media/&nbsp;{</code>
-<code>alias&nbsp;&nbsp;&nbsp;/opt/apps/RatticWeb/media/;</code>
-<code>}</code></p>
-<p><code>add_header&nbsp;Strict-Transport-Security&nbsp;max-age=15768000;</code>
-<code>add_header&nbsp;X-Frame-Options&nbsp;DENY;</code>
-<code>add_header&nbsp;X-Content-Type-Options&nbsp;nosniff;</code>
-<code>ssl_certificate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/etc/nginx/cert.crt;</code>
-<code>ssl_certificate_key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/etc/nginx/cert/cert.pem;</code>
-<code>ssl_protocols&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TLSv1&nbsp;TLSv1.1&nbsp;TLSv1.2;</code>
-<code>ssl_ciphers&nbsp;'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!DSS:!RC4';</code>
-<code>ssl_prefer_server_ciphers&nbsp;on;</code>
-<code>ssl_dhparam&nbsp;/etc/nginx/cert/dhparam.pem;</code>
-<code>ssl_session_cache&nbsp;shared:SSL:1m;</code>
-<code>ssl_session_timeout&nbsp;&nbsp;5m;</code></p>
-<p><code>location&nbsp;/&nbsp;{</code>
+<div class="highlight"><pre><span></span><code>server&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;443&nbsp;ssl;
+&nbsp;&nbsp;&nbsp;&nbsp;server_name&nbsp;&nbsp;rattic.hackernet.se;
+&nbsp;&nbsp;&nbsp;&nbsp;
+client_max_body_size&nbsp;4G;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;location&nbsp;/static/&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alias&nbsp;/opt/apps/RatticWeb/static/;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;location&nbsp;/media/&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alias&nbsp;&nbsp;&nbsp;/opt/apps/RatticWeb/media/;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;add_header&nbsp;Strict-Transport-Security&nbsp;max-age=15768000;
+&nbsp;&nbsp;&nbsp;&nbsp;add_header&nbsp;X-Frame-Options&nbsp;DENY;
+&nbsp;&nbsp;&nbsp;&nbsp;add_header&nbsp;X-Content-Type-Options&nbsp;nosniff;
+&nbsp;&nbsp;&nbsp;&nbsp;ssl_certificate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/etc/nginx/cert.crt;
+&nbsp;&nbsp;&nbsp;&nbsp;ssl_certificate_key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/etc/nginx/cert/cert.pem;
+&nbsp;&nbsp;&nbsp;&nbsp;ssl_protocols&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TLSv1&nbsp;TLSv1.1&nbsp;TLSv1.2;
+&nbsp;&nbsp;&nbsp;&nbsp;ssl_ciphers&nbsp;'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!DSS:!RC4';
+&nbsp;&nbsp;&nbsp;&nbsp;ssl_prefer_server_ciphers&nbsp;on;
+&nbsp;&nbsp;&nbsp;&nbsp;ssl_dhparam&nbsp;/etc/nginx/cert/dhparam.pem;
+&nbsp;&nbsp;&nbsp;&nbsp;ssl_session_cache&nbsp;shared:SSL:1m;
+&nbsp;&nbsp;&nbsp;&nbsp;ssl_session_timeout&nbsp;&nbsp;5m;
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;location&nbsp;/&nbsp;{
+</code></pre></div>
 <code>proxy_pass</code><a href="http://127.0.0.1:8000"><code>http://127.0.0.1:8000</code></a><code>;</code>
-<code>}</code>
-<code>}</code>
-<code>server&nbsp;{</code>
-<code>listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;80;</code>
-<code>server_name&nbsp;rattic.hackernet.se;</code>
-<code></code>
-<code>#&nbsp;301&nbsp;=&nbsp;permanent&nbsp;redirect,&nbsp;302&nbsp;=&nbsp;temporary&nbsp;redirect</code>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+&nbsp;&nbsp;server&nbsp;{
+&nbsp;listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;80;
+&nbsp;server_name&nbsp;rattic.hackernet.se;
+&nbsp;
+&nbsp;#&nbsp;301&nbsp;=&nbsp;permanent&nbsp;redirect,&nbsp;302&nbsp;=&nbsp;temporary&nbsp;redirect
+</code></pre></div>
 <code>return&nbsp;301</code><a href="https://rattic.hackernet.se$request_uri"><code>https://rattic.hackernet.se$request_uri</code></a><code>;</code>
-<code>}</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;}
+</code></pre></div><p></p>
 <p>Starta sedan Rattic med hjälp av supervisord.</p>
-<p><code>service&nbsp;supervisord&nbsp;start</code></p>
+<div class="highlight"><pre><span></span><code>service&nbsp;supervisord&nbsp;start
+</code></pre></div>
 <h3 id="ldap">LDAP</h3>
 <p>Lägg in följande i conf filen. Mer dokumentation finns på <a href="https://github.com/tildaslash/RatticWeb/wiki/LDAP">Rattic
 Wiki</a>.</p>
-<p><code>[ldap]</code>
-<code>#&nbsp;LDAP&nbsp;server&nbsp;details</code>
-<code>uri&nbsp;=</code><a href="ldap://localhost"><code>ldap://localhost</code></a></p>
-<p><code>#&nbsp;User&nbsp;parameters</code>
-<code>userbase&nbsp;=&nbsp;ou=users,dc=example,dc=com</code>
-<code>userfilter&nbsp;=&nbsp;(uid=%(user)s)</code></p>
-<p><code>#&nbsp;Set&nbsp;up&nbsp;the&nbsp;basic&nbsp;group&nbsp;parameters.</code>
-<code>groupbase&nbsp;=&nbsp;ou=django,ou=groups,dc=example,dc=com</code>
-<code>groupfilter&nbsp;=&nbsp;(objectClass=groupOfNames)</code>
-<code>grouptype&nbsp;=&nbsp;GroupOfNamesType</code></p>
-<p><code>#&nbsp;How&nbsp;do&nbsp;I&nbsp;find&nbsp;staff</code>
-<code>staff&nbsp;=&nbsp;cn=staff,ou=groups,dc=example,dc=com</code></p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a>
-<a href="/Category:Sparco" title="wikilink">Category:Sparco</a></p>
+<p></p><div class="highlight"><pre><span></span><code>[ldap]
+#&nbsp;LDAP&nbsp;server&nbsp;details
+</code></pre></div>
+<code>uri&nbsp;=</code><a href="ldap://localhost"><code>ldap://localhost</code></a><p></p>
+<div class="highlight"><pre><span></span><code>#&nbsp;User&nbsp;parameters
+userbase&nbsp;=&nbsp;ou=users,dc=example,dc=com
+userfilter&nbsp;=&nbsp;(uid=%(user)s)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Set&nbsp;up&nbsp;the&nbsp;basic&nbsp;group&nbsp;parameters.
+groupbase&nbsp;=&nbsp;ou=django,ou=groups,dc=example,dc=com
+groupfilter&nbsp;=&nbsp;(objectClass=groupOfNames)
+grouptype&nbsp;=&nbsp;GroupOfNamesType
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;How&nbsp;do&nbsp;I&nbsp;find&nbsp;staff
+staff&nbsp;=&nbsp;cn=staff,ou=groups,dc=example,dc=com
+</code></pre></div>
 
 
 
@@ -9151,7 +9200,7 @@ Wiki</a>.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

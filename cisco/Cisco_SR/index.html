@@ -8725,6 +8725,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9065,90 +9093,106 @@ nåbara i flera domäner.</p>
 (SRLB) är de label ranges som är reserverad för segment routing. Default
 value för SRGB är 16000 till 23999, det är rekommenderat att använda
 default SRGB range (utom vid multi vendor).</p>
-<p><code>show&nbsp;mpls&nbsp;label&nbsp;range</code>
-<code>show&nbsp;ip&nbsp;ospf&nbsp;segment-routing&nbsp;global-block</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mpls&nbsp;label&nbsp;range
+show&nbsp;ip&nbsp;ospf&nbsp;segment-routing&nbsp;global-block
+</code></pre></div>
 <p>Associera SID values med lokala prefix, detta prefix måste även
 annonseras i IGP.</p>
-<p><code>interface&nbsp;Loopback0</code>
-<code>ip&nbsp;address&nbsp;2.2.2.2&nbsp;255.255.255.255</code></p>
-<p><code>segment-routing&nbsp;mpls</code>
-<code>connected-prefix-sid-map</code>
-<code>address-family&nbsp;ipv4</code>
-<code>2.2.2.2/32&nbsp;index&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Loopback0
+&nbsp;ip&nbsp;address&nbsp;2.2.2.2&nbsp;255.255.255.255
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>segment-routing&nbsp;mpls
+&nbsp;connected-prefix-sid-map
+&nbsp;&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;&nbsp;2.2.2.2/32&nbsp;index&nbsp;2
+</code></pre></div>
 <p>Sedan går man in under IGP och slår på segment-routing, detta enablear
 MPLS på alla IGP-interface och lägger in MPLS labels för forwarding. För
 övrig konfiguration se <a href="/Cisco_IS-IS#Konfiguration" title="wikilink">IS-IS</a>
 och <a href="/Cisco_OSPF#Konfiguration" title="wikilink">OSPF</a>.</p>
-<p><code>router&nbsp;ospf&nbsp;1</code>
-<code>segment-routing&nbsp;mpls</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;ospf&nbsp;1
+&nbsp;segment-routing&nbsp;mpls
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;segment-routing&nbsp;mpls&nbsp;state</code>
-<code>show&nbsp;mpls&nbsp;forwarding-table</code>
-<code>show&nbsp;ip&nbsp;ospf&nbsp;segment-routing&nbsp;local-prefix</code>
-<code>show&nbsp;ip&nbsp;ospf&nbsp;segment-routing&nbsp;sid-database</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;segment-routing&nbsp;mpls&nbsp;state
+show&nbsp;mpls&nbsp;forwarding-table
+show&nbsp;ip&nbsp;ospf&nbsp;segment-routing&nbsp;local-prefix
+show&nbsp;ip&nbsp;ospf&nbsp;segment-routing&nbsp;sid-database
+</code></pre></div>
 <p>Kolla Adjacency SID</p>
-<p><code>show&nbsp;ip&nbsp;ospf&nbsp;neighbor&nbsp;detail&nbsp;|&nbsp;i&nbsp;Neighbor|SR</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;ospf&nbsp;neighbor&nbsp;detail&nbsp;|&nbsp;i&nbsp;Neighbor|SR
+</code></pre></div>
 <p><strong>Node SID Redistribution</strong>
 router ospf 1</p>
-<p><code>segment-routing&nbsp;mpls</code>
-<code>distribute&nbsp;link-state</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;segment-routing&nbsp;mpls
+&nbsp;distribute&nbsp;link-state
+</code></pre></div>
 <h3 id="bgp-sr">BGP-SR</h3>
 <p>Man kan även göra segment routing med hjälp av BGP-SR, då används
 BGP-LU. Se även <a href="/Cisco_BGP" title="wikilink">Cisco BGP</a>.</p>
-<p><code>router&nbsp;bgp&nbsp;1</code>
-<code>neighbor&nbsp;10.1.1.2&nbsp;remote-as&nbsp;2</code>
-<code>!</code>
-<code>address-family&nbsp;ipv4</code>
-<code>redistribute&nbsp;connected</code>
-<code>segment-routing&nbsp;mpls</code>
-<code>neighbor&nbsp;10.1.1.2&nbsp;activate</code>
-<code>neighbor&nbsp;10.1.1.2&nbsp;send-label</code>
-<code>exit-address-family</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;1
+&nbsp;neighbor&nbsp;10.1.1.2&nbsp;remote-as&nbsp;2
+&nbsp;!
+&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;redistribute&nbsp;connected
+&nbsp;&nbsp;segment-routing&nbsp;mpls
+&nbsp;&nbsp;neighbor&nbsp;10.1.1.2&nbsp;activate
+&nbsp;&nbsp;neighbor&nbsp;10.1.1.2&nbsp;send-label
+&nbsp;exit-address-family
+</code></pre></div>
 <h2 id="ios-xr">IOS-XR</h2>
 <p>Segment Routing med MPLS Data Plane. SR funkar även med Multi-topology.</p>
-<p><code>router&nbsp;isis&nbsp;1</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>segment-routing&nbsp;mpls</code>
-<code>!</code>
-<code>interface&nbsp;Loopback0</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>prefix-sid&nbsp;absolute&nbsp;16001</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;isis&nbsp;1
+&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;segment-routing&nbsp;mpls
+&nbsp;!
+&nbsp;interface&nbsp;Loopback0
+&nbsp;&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;&nbsp;prefix-sid&nbsp;absolute&nbsp;16001
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;isis&nbsp;segment-routing&nbsp;label&nbsp;table</code>
-<code>show&nbsp;isis&nbsp;route&nbsp;sr-only</code>
-<code>show&nbsp;mpls&nbsp;label&nbsp;table&nbsp;summary</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;isis&nbsp;segment-routing&nbsp;label&nbsp;table
+show&nbsp;isis&nbsp;route&nbsp;sr-only
+show&nbsp;mpls&nbsp;label&nbsp;table&nbsp;summary
+</code></pre></div>
 <p>Detta gäller vid imposition</p>
-<p><code>segment-routing&nbsp;mpls</code>
-<code>set-attributes</code>
-<code>address-family&nbsp;ipv4</code>
-<code>sr-label-preferred</code></p>
+<div class="highlight"><pre><span></span><code>segment-routing&nbsp;mpls
+&nbsp;set-attributes
+&nbsp;&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;&nbsp;sr-label-preferred
+</code></pre></div>
 <p><strong>PHP</strong>
 PHP går att stänga av per prefix SID.</p>
-<p><code>router&nbsp;isis&nbsp;1</code>
-<code>interface&nbsp;Loopback0</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>prefix-sid&nbsp;index&nbsp;1&nbsp;explicit-null</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;isis&nbsp;1
+&nbsp;interface&nbsp;Loopback0
+&nbsp;&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;&nbsp;prefix-sid&nbsp;index&nbsp;1&nbsp;explicit-null
+</code></pre></div>
 <p><strong>Microloop Protection</strong></p>
-<p><code>microloop&nbsp;avoidance&nbsp;segment-routing</code></p>
+<div class="highlight"><pre><span></span><code>microloop&nbsp;avoidance&nbsp;segment-routing
+</code></pre></div>
 <p><strong>Anycast SID</strong>
 Vill man använda en prefix SID för anycast måste man stänga av att den
 annonseras som en nod i LSDB.</p>
-<p><code>router&nbsp;isis&nbsp;1</code>
-<code>interface&nbsp;Loopback0</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>prefix-sid&nbsp;index&nbsp;1&nbsp;n-flag-clear</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;isis&nbsp;1
+&nbsp;interface&nbsp;Loopback0
+&nbsp;&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;&nbsp;prefix-sid&nbsp;index&nbsp;1&nbsp;n-flag-clear
+</code></pre></div>
 <p><strong>OAM</strong>
 ping sr-mpls 4.4.4.4/32</p>
-<p><code>traceroute&nbsp;sr-mpls&nbsp;3.3.3.3/32&nbsp;verbose</code></p>
+<div class="highlight"><pre><span></span><code>traceroute&nbsp;sr-mpls&nbsp;3.3.3.3/32&nbsp;verbose
+</code></pre></div>
 <p><strong>BGP Peer Adjacency SID</strong>
 Man kan även skapa Adj-SID för eBGP-grannar, t.ex. på inter-AS-länkar.
 Man forwarderar där det finns en BGP-granne, detta kan användas för
 Egress Peering Engineering applications.</p>
-<p><code>router&nbsp;bgp&nbsp;1</code>
-<code>neighbor&nbsp;10.1.1.2</code>
-<code>remote-as&nbsp;2</code>
-<code>egress-engineering</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;1
+&nbsp;neighbor&nbsp;10.1.1.2
+&nbsp;&nbsp;remote-as&nbsp;2
+&nbsp;&nbsp;egress-engineering
+&nbsp;&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+</code></pre></div>
 <h3 id="ldp">LDP</h3>
 <p>SR kan samköras med LDP men ska man koppla ihop ett LDP-nät med SR-nät
 måste man sätta upp mapping servers. Alla destinationer måste ha ett
@@ -9157,40 +9201,47 @@ nod) så gör mapping servern det på dennes vägnar. Alla Segment Routing
 routers behöver också vara mapping clients. Mapping server behöver ej
 finnas i data path.</p>
 <p>Mapping server</p>
-<p><code>router&nbsp;isis&nbsp;1</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>segment-routing&nbsp;prefix-sid-map&nbsp;advertise-local</code>
-<code>!</code>
-<code>segment-routing</code>
-<code>mapping-server</code>
-<code>prefix-sid-map</code>
-<code>address-family&nbsp;ipv4</code>
-<code>1.1.1.1/32&nbsp;1001&nbsp;range&nbsp;8</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;isis&nbsp;1
+&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;segment-routing&nbsp;prefix-sid-map&nbsp;advertise-local
+!&nbsp;
+segment-routing
+&nbsp;mapping-server&nbsp;
+&nbsp;&nbsp;prefix-sid-map
+&nbsp;&nbsp;&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;&nbsp;&nbsp;1.1.1.1/32&nbsp;1001&nbsp;range&nbsp;8
+</code></pre></div>
 <p>Range 8 betyder prefix 1.1.1.1/32 - 1.1.1.8/32 med start label 17001
 vilket gör det lätt att se vilka labels som kommer ifrån mapping server.</p>
 <p>Mapping client</p>
-<p><code>router&nbsp;isis&nbsp;1</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>segment-routing&nbsp;prefix-sid-map&nbsp;receive</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;isis&nbsp;1
+&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;segment-routing&nbsp;prefix-sid-map&nbsp;receive
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;isis&nbsp;segment-routing&nbsp;prefix-sid-map&nbsp;active-policy&nbsp;detail</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;isis&nbsp;segment-routing&nbsp;prefix-sid-map&nbsp;active-policy&nbsp;detail
+</code></pre></div>
 <p>SR vs LDP preference</p>
-<p><code>router&nbsp;isis&nbsp;1</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>segment-routing&nbsp;mpls&nbsp;sr-prefer</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;isis&nbsp;1
+&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;segment-routing&nbsp;mpls&nbsp;sr-prefer
+</code></pre></div>
 <h2 id="nx-os">NX-OS</h2>
 <p>Se även <a href="/Cisco_MPLS#NX-OS" title="wikilink">NX-OS MPLS</a>.</p>
-<p><code>install&nbsp;feature-set&nbsp;mpls</code>
-<code>feature-set&nbsp;mpls</code>
-<code>feature&nbsp;mpls&nbsp;segment-routing</code></p>
-<p><code>segment-routing&nbsp;mpls</code></p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>network&nbsp;2.2.2.2/32&nbsp;route-map&nbsp;assign_label</code>
-<code>allocate-label&nbsp;all</code>
-<code>neighbor&nbsp;10.1.1.2&nbsp;remote-as&nbsp;65000</code>
-<code>address-family&nbsp;ipv4&nbsp;labeled-unicast</code>
-<code>send-community&nbsp;extended</code></p>
+<div class="highlight"><pre><span></span><code>install&nbsp;feature-set&nbsp;mpls
+feature-set&nbsp;mpls
+feature&nbsp;mpls&nbsp;segment-routing
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>segment-routing&nbsp;mpls
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;&nbsp;network&nbsp;2.2.2.2/32&nbsp;route-map&nbsp;assign_label
+&nbsp;&nbsp;&nbsp;allocate-label&nbsp;all
+&nbsp;neighbor&nbsp;10.1.1.2&nbsp;remote-as&nbsp;65000
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address-family&nbsp;ipv4&nbsp;labeled-unicast
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;send-community&nbsp;extended
+</code></pre></div>
 <h1 id="sr-te">SR-TE</h1>
 <p>SR-TE kallas SR Policy. Med SR-TE behöver inte längre nätet hålla något
 state per-flow eller per-applikation utan man följer bara det
@@ -9201,23 +9252,24 @@ lasten för övriga routrar.</p>
 <p>För att styra en path så används lokal TE policy alternativt BGP-LU, man
 annonserar en unicast route med en associerad MPLS labelstack. Se
 exempel med <a href="/ExaBGP#Segment_Routing" title="wikilink">ExaBGP</a>.</p>
-<p><code>segment-routing</code>
-<code>traffic-eng</code>
-<code>segment-list&nbsp;SIDLIST1</code>
-<code>index&nbsp;10&nbsp;address&nbsp;ipv4&nbsp;1.1.1.3</code>
-<code>index&nbsp;20&nbsp;mpls&nbsp;label&nbsp;24006</code>
-<code>index&nbsp;30&nbsp;mpls&nbsp;label&nbsp;16008</code>
-<code>!</code>
-<code>policy&nbsp;POLICY1</code>
-<code>binding-sid&nbsp;mpls&nbsp;15000</code>
-<code>color&nbsp;10&nbsp;end-point&nbsp;ipv4&nbsp;1.1.1.10</code>
-<code>candidate-paths</code>
-<code>preference&nbsp;100</code>
-<code>explicit&nbsp;segment-list&nbsp;SIDLIST1</code></p>
+<div class="highlight"><pre><span></span><code>segment-routing
+&nbsp;traffic-eng
+&nbsp;&nbsp;segment-list&nbsp;SIDLIST1
+&nbsp;&nbsp;&nbsp;index&nbsp;10&nbsp;address&nbsp;ipv4&nbsp;1.1.1.3
+&nbsp;&nbsp;&nbsp;index&nbsp;20&nbsp;mpls&nbsp;label&nbsp;24006
+&nbsp;&nbsp;&nbsp;index&nbsp;30&nbsp;mpls&nbsp;label&nbsp;16008
+&nbsp;&nbsp;!
+&nbsp;&nbsp;&nbsp;policy&nbsp;POLICY1
+&nbsp;&nbsp;&nbsp;&nbsp;binding-sid&nbsp;mpls&nbsp;15000
+&nbsp;&nbsp;&nbsp;&nbsp;color&nbsp;10&nbsp;end-point&nbsp;ipv4&nbsp;1.1.1.10
+&nbsp;&nbsp;&nbsp;&nbsp;candidate-paths
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;preference&nbsp;100
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;explicit&nbsp;segment-list&nbsp;SIDLIST1
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;segment-routing&nbsp;traffic-eng&nbsp;policy</code>
-<code>show&nbsp;segment-routing&nbsp;traffic-eng&nbsp;forwarding&nbsp;policy</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;segment-routing&nbsp;traffic-eng&nbsp;policy
+show&nbsp;segment-routing&nbsp;traffic-eng&nbsp;forwarding&nbsp;policy&nbsp;
+</code></pre></div>
 
 
 
@@ -9240,7 +9292,7 @@ exempel med <a href="/ExaBGP#Segment_Routing" title="wikilink">ExaBGP</a>.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

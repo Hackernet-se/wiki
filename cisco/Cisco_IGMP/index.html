@@ -8776,6 +8776,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9159,7 +9187,8 @@ satt.</p>
     från, Source-Specifik Multicast. Det är bakåtkompatilbelt med IGMPv1
     och v2.</li>
 </ul>
-<p><code>show&nbsp;ip&nbsp;igmp&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;igmp&nbsp;interface
+</code></pre></div>
 <h1 id="packets">Packets</h1>
 <p>IGMP-paket skickas med IP och har TTL satt till 1.</p>
 <ul>
@@ -9203,30 +9232,37 @@ själv men lyssnar efter Queries och när det slutar komma in kan den ta
 över. Tiden det tar innan en vald Querier anses död är 2 gånger Query
 Interval plus en halv Query Response Interval, default är detta 255
 sekunder.</p>
-<p><code>show&nbsp;ip&nbsp;igmp&nbsp;interface&nbsp;|&nbsp;i&nbsp;querying</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;igmp&nbsp;interface&nbsp;|&nbsp;i&nbsp;querying
+</code></pre></div>
 <p>Med IGMPv1 finns det inget inbyggt sätt för hostarna att avgöra vem som
 ska stå för Queries. Därför väljer routrarna en som blir DR och den
 kommer att skicka IGMP Queries, routern med högst IP vinner.</p>
-<p><code>show&nbsp;ip&nbsp;igmp&nbsp;interface&nbsp;|&nbsp;i&nbsp;DR</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;igmp&nbsp;interface&nbsp;|&nbsp;i&nbsp;DR&nbsp;
+</code></pre></div>
 <h2 id="timers">Timers</h2>
 <p>Man kan konfigurera hur ofta queries ska skickas ut. Varje membership
 query message innehåller ett timer-värde (8 bit field) som anger hur
 lång tid hostarna har på sig att besvara meddelandet, det räcker att en
 host svarar på det så kommer inte multicast-strömmen att upphöra.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;igmp&nbsp;query-max-response-time&nbsp;10</code>
-<code>ip&nbsp;igmp&nbsp;query-interval&nbsp;60</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;igmp&nbsp;query-max-response-time&nbsp;10
+&nbsp;ip&nbsp;igmp&nbsp;query-interval&nbsp;60
+</code></pre></div>
 <p>Querier</p>
-<p><code>ip&nbsp;igmp&nbsp;querier-timeout&nbsp;120</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;ip&nbsp;igmp&nbsp;querier-timeout&nbsp;120
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;igmp&nbsp;interface&nbsp;|&nbsp;i&nbsp;IGMP</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;igmp&nbsp;interface&nbsp;|&nbsp;i&nbsp;IGMP
+</code></pre></div>
 <p><strong>Last Member</strong></p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;igmp&nbsp;last-member-query-count&nbsp;2</code>
-<code>ip&nbsp;igmp&nbsp;last-member-query-interval&nbsp;1000</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;igmp&nbsp;last-member-query-count&nbsp;2
+&nbsp;ip&nbsp;igmp&nbsp;last-member-query-interval&nbsp;1000
+</code></pre></div>
 <p>Man kan även ange att strömmen ska upphöra direkt om det kommer in ett
 Leave group message.</p>
-<p><code>ip&nbsp;igmp&nbsp;immediate-leave&nbsp;group-list&nbsp;IMMEDIATE_LEAVE</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;ip&nbsp;igmp&nbsp;immediate-leave&nbsp;group-list&nbsp;IMMEDIATE_LEAVE
+</code></pre></div>
 <h2 id="filtering">Filtering</h2>
 <p>IGMP filtering tillåter att man konfigurerar filter för IGMP-trafik på
 SVI, per-port eller per-VLAN per-port. Det är ett komplement till IGMP
@@ -9235,21 +9271,25 @@ paketen ifall filtret träffas medans i IGMPv3 kan man filtrera och
 skriva om fält i paketen. Man kan styra minimum IGMP-version och på en
 trunk kan man filtrera per VLAN.</p>
 <p>ACL Group and channel access control &amp; limit (per interface)</p>
-<p><code>access-list&nbsp;12&nbsp;permit&nbsp;224.10.10.0&nbsp;0.0.0.255</code>
-<code>interface&nbsp;Gi0/0</code>
-<code>ip&nbsp;igmp&nbsp;access-group&nbsp;12</code>
-<code>ip&nbsp;igmp&nbsp;limit&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;12&nbsp;permit&nbsp;224.10.10.0&nbsp;0.0.0.255
+interface&nbsp;Gi0/0
+&nbsp;ip&nbsp;igmp&nbsp;access-group&nbsp;12
+&nbsp;ip&nbsp;igmp&nbsp;limit&nbsp;10
+</code></pre></div>
 <p>Profile, only allow the specific multicast range</p>
-<p><code>ip&nbsp;igmp&nbsp;profile&nbsp;1</code>
-<code>permit</code>
-<code>range&nbsp;224.0.O.O&nbsp;224.255.255.255</code>
-<code>int&nbsp;Gi0/0</code>
-<code>ip&nbsp;igmp&nbsp;filter&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;igmp&nbsp;profile&nbsp;1
+&nbsp;permit
+&nbsp;range&nbsp;224.0.O.O&nbsp;224.255.255.255
+int&nbsp;Gi0/0
+&nbsp;ip&nbsp;igmp&nbsp;filter&nbsp;1
+</code></pre></div>
 <p>IGMP minimum version (global)</p>
-<p><code>ip&nbsp;igmp&nbsp;snooping&nbsp;minimum-version&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;igmp&nbsp;snooping&nbsp;minimum-version&nbsp;2
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;filter</code>
-<code>show&nbsp;ip&nbsp;igmp&nbsp;profile</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;filter
+show&nbsp;ip&nbsp;igmp&nbsp;profile
+</code></pre></div>
 <h1 id="igmp-snooping">IGMP Snooping</h1>
 <p>Switchar kan använda IGMP snooping för att avlyssna IGMP-meddelanden och
 ta reda på vilka switchportar som ska ha vilka mac-adresser, dvs är med
@@ -9276,15 +9316,18 @@ vidare. Eftersom switchar interceptar IGMP Reports får inte hostar
 varandras Reports utan alla måste skicka det, detta påverkar Report
 Suppression.</p>
 <p>Global</p>
-<p><code>ip&nbsp;igmp&nbsp;snooping</code>
-<code>no&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;vlan&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;igmp&nbsp;snooping
+no&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;vlan&nbsp;10
+</code></pre></div>
 <p>Immediately remove a VLAN from multicast forwarding when an IGMP leave
 is received.</p>
-<p><code>ip&nbsp;igmp&nbsp;snooping&nbsp;vlan&nbsp;11&nbsp;immediate-leave</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;igmp&nbsp;snooping&nbsp;vlan&nbsp;11&nbsp;immediate-leave
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;igmp&nbsp;snooping</code>
-<code>show&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;groups</code>
-<code>show&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;mrouter</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;igmp&nbsp;snooping
+show&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;groups
+show&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;mrouter
+</code></pre></div>
 <p><strong>L2 only environment</strong>
 Om en switch inte har någon mrouter port, t.ex. om det är en L2 only
 environment, kommer inte multicast-trafik att forwarderas vilket kan
@@ -9293,8 +9336,9 @@ eller dynamically learned. När det finns en mrouter port kommer IGMP
 reports att skickas på den. Man kan även ändra detta beteende så att en
 switch agerar proxy och själv skickar ut membership queries för att
 komma runt detta problem så att det forwarderas multicast-trafik.</p>
-<p><code>ip&nbsp;igmp&nbsp;snooping&nbsp;querier</code>
-<code>show&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;mrouter</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;igmp&nbsp;snooping&nbsp;querier
+show&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;mrouter&nbsp;
+</code></pre></div>
 <h3 id="cgmp">CGMP</h3>
 <p>Cisco Group Management Protocol är ett protokoll som används av
 L3-enheter för att berätta för Cisco-switchar vilka hostar som ska ha
@@ -9321,11 +9365,13 @@ skickas ut ett CGMP Leave och switcharna kan ta bort GDA från porten där
 hosten sitter. Alla enheter som ska använda CGMP måste konfigureras för
 det, detta funkar ej om RGMP används.</p>
 <p>L3-enhet</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;cgmp</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;cgmp
+</code></pre></div>
 <p>Clear, skicka ut ett CGMP Leave med USA = 0 och GDA = 0 då kommer alla
 switchar att rensa alla CAM-entries som de satt tack vare CGMP.</p>
-<p><code>clear&nbsp;ip&nbsp;cgmp</code></p>
+<div class="highlight"><pre><span></span><code>clear&nbsp;ip&nbsp;cgmp
+</code></pre></div>
 <p><strong>RGMP</strong>
 Router-Port Group Management Protocol (RFC 3488) är ett annat
 Cisco-protokoll som routrar kan använda för att kommunicera till
@@ -9343,21 +9389,24 @@ disableas CGMP och vice versa.</p>
 <li><strong>Bye:</strong> när man slår av RGMP skickas ett RGMP Bye och switchen
     återgår till att forwardera all multicast-trafik.</li>
 </ul>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;rgmp</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;rgmp
+</code></pre></div>
 <h1 id="igmp-proxy">IGMP Proxy</h1>
 <p>IGMP proxy låter hostar i unidirectional link routing (UDLR) miljöer som
 inte har någon direktkoppling till någon downstream router att joina
 multicast-grupper.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;igmp&nbsp;unidirectional-link</code>
-<code>interface&nbsp;gi3</code>
-<code>ip&nbsp;igmp&nbsp;mroute-proxy&nbsp;lo2</code>
-<code>interface&nbsp;lo2</code>
-<code>ip&nbsp;igmp&nbsp;helper-address&nbsp;udl&nbsp;gi2</code>
-<code>ip&nbsp;igmp&nbsp;proxy-service</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;igmp&nbsp;unidirectional-link&nbsp;
+interface&nbsp;gi3
+&nbsp;ip&nbsp;igmp&nbsp;mroute-proxy&nbsp;lo2
+interface&nbsp;lo2
+&nbsp;ip&nbsp;igmp&nbsp;helper-address&nbsp;udl&nbsp;gi2&nbsp;
+&nbsp;ip&nbsp;igmp&nbsp;proxy-service&nbsp;
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;igmp&nbsp;udlr</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;igmp&nbsp;udlr
+</code></pre></div>
 <h1 id="mvr">MVR</h1>
 <p>Multicast VLAN Registration finns till för att effektivisera trafiken på
 switchens upplänkar om det finns många multicast-mottagare för samma
@@ -9366,20 +9415,24 @@ switchar som används för att leverera multicast feeden till alla
 receivers. Man måste ange detta, dvs i vilket VLAN källan för trafiken
 befinner sig. MVR går ej att köra samtidigt som multicast routing är
 påslaget.</p>
-<p><code>no&nbsp;ip&nbsp;multicast-routing</code>
-<code>mvr</code>
-<code>mvr&nbsp;vlan&nbsp;200</code>
-<code>mvr&nbsp;group&nbsp;239.1.1.10</code>
-<code>mvr&nbsp;mode&nbsp;dynamic&nbsp;&nbsp;#skapa&nbsp;mroute&nbsp;states&nbsp;dynamiskt</code></p>
-<p><code>interface&nbsp;gi1</code>
-<code>description&nbsp;Uplink</code>
-<code>mvr&nbsp;type&nbsp;source</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>mvr&nbsp;type&nbsp;receiver</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;ip&nbsp;multicast-routing
+mvr
+mvr&nbsp;vlan&nbsp;200
+mvr&nbsp;group&nbsp;239.1.1.10
+mvr&nbsp;mode&nbsp;dynamic&nbsp;&nbsp;#skapa&nbsp;mroute&nbsp;states&nbsp;dynamiskt
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi1
+&nbsp;description&nbsp;Uplink
+&nbsp;mvr&nbsp;type&nbsp;source
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;mvr&nbsp;type&nbsp;receiver
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;mvr</code>
-<code>show&nbsp;mvr&nbsp;interface</code>
-<code>show&nbsp;mvr&nbsp;members</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mvr
+show&nbsp;mvr&nbsp;interface
+show&nbsp;mvr&nbsp;members
+</code></pre></div>
 <h1 id="mld">MLD</h1>
 <p>Med IPv6 är multicast en central del eftersom broadcast inte finns och
 nu heter det Multicast Listener Discovery istället för IGMP. Det är inte
@@ -9396,35 +9449,42 @@ Multicast, RFC 4604.</p>
     gruppadress. Skickas till FF02::2.</li>
 </ul>
 <p>Gå med i grupp manuellt</p>
-<p><code>ipv6&nbsp;mld&nbsp;join-group&nbsp;FF08::10</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;mld&nbsp;join-group&nbsp;FF08::10
+</code></pre></div>
 <p>Gå med i SSM-grupp</p>
-<p><code>ipv6&nbsp;mld&nbsp;join-group&nbsp;FF36::8&nbsp;2001::25</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;mld&nbsp;join-group&nbsp;FF36::8&nbsp;2001::25
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ipv6&nbsp;mld&nbsp;interface</code>
-<code>show&nbsp;ipv6&nbsp;mld&nbsp;snooping&nbsp;querier</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;mld&nbsp;interface
+show&nbsp;ipv6&nbsp;mld&nbsp;snooping&nbsp;querier
+</code></pre></div>
 <p>Defaults per interface</p>
-<p><code>ipv6&nbsp;mld&nbsp;query-max-response-time&nbsp;10</code>
-<code>ipv6&nbsp;mld&nbsp;query-timeout&nbsp;255</code>
-<code>ipv6&nbsp;mld&nbsp;query-interval&nbsp;125</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;mld&nbsp;query-max-response-time&nbsp;10
+ipv6&nbsp;mld&nbsp;query-timeout&nbsp;255
+ipv6&nbsp;mld&nbsp;query-interval&nbsp;125
+</code></pre></div>
 <p>Membership limit on interface</p>
-<p><code>ipv6&nbsp;mld&nbsp;limit&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;mld&nbsp;limit&nbsp;100
+</code></pre></div>
 <h1 id="nx-os">NX-OS</h1>
 <p>Här följer <a href="/Cisco_Nexus" title="wikilink">Nexus</a>-specifik information. En
 skillnad mot IOS är att det saknas stöd för IGMP version 1 och Version 3
 Lite. IGMP Snooping är på default och gör IP lookups default. En annan
 skillnad är att IGMP snooping querier inte konfas på L3 interface utan
 under VLAN:et. Se även <a href="/Cisco_PIM#NX-OS" title="wikilink">PIM</a> för NX-OS.</p>
-<p><code>interface&nbsp;Ethernet1/1</code>
-<code>ip&nbsp;address&nbsp;192.168.10.1/24</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code>
-<code>ip&nbsp;igmp&nbsp;version&nbsp;3</code></p>
-<p><code>vlan&nbsp;configuration&nbsp;10</code>
-<code>ip&nbsp;igmp&nbsp;snooping&nbsp;querier&nbsp;192.168.1.1</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Ethernet1/1
+&nbsp;ip&nbsp;address&nbsp;192.168.10.1/24
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+&nbsp;ip&nbsp;igmp&nbsp;version&nbsp;3
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;configuration&nbsp;10
+&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;querier&nbsp;192.168.1.1
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;igmp&nbsp;snooping</code>
-<code>show&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;querier</code>
-<code>show&nbsp;ip&nbsp;igmp&nbsp;route</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;igmp&nbsp;snooping
+show&nbsp;ip&nbsp;igmp&nbsp;snooping&nbsp;querier
+show&nbsp;ip&nbsp;igmp&nbsp;route
+</code></pre></div>
 
 
 
@@ -9447,7 +9507,7 @@ under VLAN:et. Se även <a href="/Cisco_PIM#NX-OS" title="wikilink">PIM</a> för
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

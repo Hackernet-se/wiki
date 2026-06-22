@@ -8676,6 +8676,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8944,17 +8972,8 @@ kan användas i kombination med
 <a href="/Cisco_STP" title="wikilink">STP</a>/<a href="/Cisco_MST" title="wikilink">MST</a>. Om man inte
 kör Bridge Assurance eller <a href="/Cisco_BFD" title="wikilink">BFD</a> bör man köra
 UDLD.</p>
-<div class="mw-collapsible mw-collapsed" style="width:200px">
-
-UDLD-paket:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_udld.png>](/File:Cisco_UDLD.png "wikilink")
-
-</file:cisco_udld.png></div>
-</div>
-
+<p>UDLD-paket:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_UDLD.png" data-desc-position="bottom"><img alt="Cisco_UDLD.png" src="../../images/Cisco_UDLD.png"></a></p>
 <h3 id="normal-vs-aggressive-mode">Normal vs Aggressive mode</h3>
 <p>Vad som ska hände när det slutar komma in UDLD-meddelanden beror på
 vilket mode UDLD är konfigurerat i. I Normal mode försöker switchen
@@ -8968,24 +8987,30 @@ dvs den måste först ha varit uppe och haft fungerande grannskap.</p>
 endast handlar om lokalt beteende vid avsaknad av UDLD-meddelanden.</p>
 <h3 id="konfiguration">Konfiguration</h3>
 <p>Global, gäller fiberportar.</p>
-<p><code>udld&nbsp;enable|aggressive</code></p>
+<div class="highlight"><pre><span></span><code>udld&nbsp;enable|aggressive
+</code></pre></div>
 <p>Per interface, gäller oavsett media.</p>
-<p><code>interface&nbsp;gi0/20</code>
-<code>udld&nbsp;port&nbsp;[aggressive]</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/20
+&nbsp;udld&nbsp;port&nbsp;[aggressive]
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;udld</code>
-<code>show&nbsp;udld&nbsp;neighbors</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;udld
+show&nbsp;udld&nbsp;neighbors
+</code></pre></div>
 <p>Restore alla interface som är error-disabled pga link failure.</p>
-<p><code>udld&nbsp;reset</code></p>
+<div class="highlight"><pre><span></span><code>udld&nbsp;reset
+</code></pre></div>
 <p>Auto Recovery</p>
-<p><code>errdisable&nbsp;recovery&nbsp;cause&nbsp;udld</code>
-<code>show&nbsp;errdisable&nbsp;recovery</code></p>
+<div class="highlight"><pre><span></span><code>errdisable&nbsp;recovery&nbsp;cause&nbsp;udld
+show&nbsp;errdisable&nbsp;recovery
+</code></pre></div>
 <p>På vissa plattformar kan man välja att UDLD endast ska rapportera errors
 istället för att err-disablea porten.</p>
-<p><code>udld&nbsp;fast-hello&nbsp;error-reporting</code></p>
+<div class="highlight"><pre><span></span><code>udld&nbsp;fast-hello&nbsp;error-reporting
+</code></pre></div>
 <p>Time in seconds between sending of messages in steady state.</p>
-<p><code>udld&nbsp;message&nbsp;time&nbsp;&lt;7-90&gt;</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>udld&nbsp;message&nbsp;time&nbsp;&lt;7-90&gt;
+</code></pre></div>
 
 
 
@@ -9008,7 +9033,7 @@ istället för att err-disablea porten.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

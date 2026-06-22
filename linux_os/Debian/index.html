@@ -8689,6 +8689,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8952,33 +8980,39 @@
   
 
 
-<p><a href="/Category:Distar" title="wikilink">Category:Distar</a> Debian är en dist som är
+<p>Debian är en dist som är
 inriktad på stabilitet.</p>
 <h1 id="first-5-minutes">First 5 minutes</h1>
 <p>Debian server installeras med rootkontot som enda kontot. Gör följande
 för att öka säkerheten. Logga in som root:</p>
 <h3 id="user">User</h3>
-<p><code>adduser&nbsp;trevor</code>
-<code>apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;install&nbsp;sudo</code>
-<code>usermod&nbsp;-a&nbsp;-G&nbsp;sudo&nbsp;trevor</code>
-<code>sed&nbsp;-i&nbsp;-r&nbsp;'s/PermitRootLogin&nbsp;yes/PermitRootLogin&nbsp;no/g'&nbsp;/etc/ssh/sshd_config</code>
-<code>systemctl&nbsp;restart&nbsp;ssh</code></p>
+<div class="highlight"><pre><span></span><code>adduser&nbsp;trevor
+apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;install&nbsp;sudo
+usermod&nbsp;-a&nbsp;-G&nbsp;sudo&nbsp;trevor
+sed&nbsp;-i&nbsp;-r&nbsp;'s/PermitRootLogin&nbsp;yes/PermitRootLogin&nbsp;no/g'&nbsp;/etc/ssh/sshd_config
+systemctl&nbsp;restart&nbsp;ssh
+</code></pre></div>
 <h3 id="hostname">Hostname</h3>
-<p><code>echo&nbsp;"hostname"&nbsp;&gt;&nbsp;/etc/hostname</code>
-<code>hostname&nbsp;-F&nbsp;/etc/hostname</code></p>
+<div class="highlight"><pre><span></span><code>echo&nbsp;"hostname"&nbsp;&gt;&nbsp;/etc/hostname
+hostname&nbsp;-F&nbsp;/etc/hostname
+</code></pre></div>
 <h3 id="tidszon">Tidszon</h3>
-<p><code>dpkg-reconfigure&nbsp;tzdata</code></p>
+<div class="highlight"><pre><span></span><code>dpkg-reconfigure&nbsp;tzdata
+</code></pre></div>
 <h1 id="pakethanterare">Pakethanterare</h1>
 <p><a href="/Apt" title="wikilink">Apt</a></p>
 <h1 id="goodies">Goodies</h1>
 <p>Debian Goodies är en uppsättning verktyg som är bra att känna till.</p>
-<p><code>apt-get&nbsp;install&nbsp;debian-goodies</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;debian-goodies
+</code></pre></div>
 <p>När man installerar ett nytt paket kan det hända att program som redan
 körs använder filer som blivit uppgraderade. För att ta reda på detta:</p>
-<p><code>checkrestart</code>
-<code>checkrestart&nbsp;-v</code></p>
+<div class="highlight"><pre><span></span><code>checkrestart
+checkrestart&nbsp;-v
+</code></pre></div>
 <p>Vilket installerat paket tar mest plats:</p>
-<p><code>dpigs</code></p>
+<div class="highlight"><pre><span></span><code>dpigs
+</code></pre></div>
 <p>Felsök varför något slutat fungera vid uppdatering</p>
 <p><code>which-pkg-broke</code><em><code>packagename</code></em></p>
 
@@ -9003,7 +9037,7 @@ körs använder filer som blivit uppgraderade. För att ta reda på detta:</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

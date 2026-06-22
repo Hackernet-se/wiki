@@ -8680,6 +8680,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8940,40 +8968,50 @@ Security</a>,
 IPsec</a>.</p>
 <h1 id="device-security">Device Security</h1>
 <p>Login enhancements</p>
-<p><code>login&nbsp;block-for&nbsp;[seconds]&nbsp;attempts&nbsp;[attempts]&nbsp;within&nbsp;[seconds]</code>
-<code>login&nbsp;on-failure&nbsp;log&nbsp;every&nbsp;3</code></p>
-<p><code>show&nbsp;login</code>
-<code>show&nbsp;login&nbsp;failures</code></p>
+<div class="highlight"><pre><span></span><code>login&nbsp;block-for&nbsp;[seconds]&nbsp;attempts&nbsp;[attempts]&nbsp;within&nbsp;[seconds]
+login&nbsp;on-failure&nbsp;log&nbsp;every&nbsp;3
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;login
+show&nbsp;login&nbsp;failures
+</code></pre></div>
 <p>Lägg till undantag</p>
-<p><code>ip&nbsp;access-list&nbsp;standard&nbsp;TRUSTED_HOSTS</code>
-<code>permit&nbsp;host&nbsp;10.0.0.10</code>
-<code>login&nbsp;quiet-mode&nbsp;access-class&nbsp;TRUSTED_HOSTS</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;standard&nbsp;TRUSTED_HOSTS
+&nbsp;permit&nbsp;host&nbsp;10.0.0.10
+login&nbsp;quiet-mode&nbsp;access-class&nbsp;TRUSTED_HOSTS
+</code></pre></div>
 <p>Default genereras det ett syslog-meddelande om det görs 8 misslyckade
 inloggningsförsök inom en minut. Detta tröskelvärde går att konfigurera.</p>
-<p><code>security&nbsp;authentication&nbsp;failure&nbsp;rate&nbsp;8&nbsp;log</code></p>
+<div class="highlight"><pre><span></span><code>security&nbsp;authentication&nbsp;failure&nbsp;rate&nbsp;8&nbsp;log&nbsp;
+</code></pre></div>
 <p>Password recovery är på default men går att stänga av.</p>
-<p><code>no&nbsp;service&nbsp;password-recovery</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;service&nbsp;password-recovery
+</code></pre></div>
 <h3 id="ssh">SSH</h3>
-<p><code>ip&nbsp;ssh&nbsp;version&nbsp;2</code>
-<code>crypto&nbsp;key&nbsp;generate&nbsp;rsa&nbsp;modulus&nbsp;2048</code></p>
-<p><code>line&nbsp;vty&nbsp;0&nbsp;15</code>
-<code>transport&nbsp;input&nbsp;ssh</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;ssh&nbsp;version&nbsp;2
+crypto&nbsp;key&nbsp;generate&nbsp;rsa&nbsp;modulus&nbsp;2048
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>line&nbsp;vty&nbsp;0&nbsp;15
+&nbsp;transport&nbsp;input&nbsp;ssh
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ssh</code>
-<code>show&nbsp;ip&nbsp;ssh</code>
-<code>show&nbsp;users</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ssh
+show&nbsp;ip&nbsp;ssh
+show&nbsp;users
+</code></pre></div>
 <p><strong>Public key SSH authentication</strong>
 Ens SSH-nyckel får inte plats på en rad utan man får lägga in det på
 flera rader och avsluta med exit.</p>
-<p><code>ip&nbsp;ssh&nbsp;pubkey-chain</code>
-<code>username&nbsp;cisco</code>
-<code>key-string</code>
-<code>AAAAB3NzaC1yc2EAAAADAQABAAABAQDLf...</code>
-<code>VPrV/fn35p1xq5Pc7b2oTxhe2sPEssVM7...</code>
-<code>exit</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;ssh&nbsp;pubkey-chain
+&nbsp;username&nbsp;cisco
+&nbsp;&nbsp;key-string
+&nbsp;&nbsp;&nbsp;AAAAB3NzaC1yc2EAAAADAQABAAABAQDLf...
+&nbsp;&nbsp;&nbsp;VPrV/fn35p1xq5Pc7b2oTxhe2sPEssVM7...
+&nbsp;&nbsp;&nbsp;exit
+</code></pre></div>
 <p>Enable key based authentication only. Ordning på authentication methods
 är default: publickey, keyboard-interactive, password.</p>
-<p><code>ip&nbsp;ssh&nbsp;server&nbsp;algorithm&nbsp;authentication&nbsp;publickey</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;ssh&nbsp;server&nbsp;algorithm&nbsp;authentication&nbsp;publickey
+</code></pre></div>
 <h3 id="control-plane">Control Plane</h3>
 <p>Det är viktigt att skydda CPU i sina enheter, man kan styra accessen
 (Control-Plane Policing) och man kan överbelastningsskydda
@@ -8981,86 +9019,107 @@ flera rader och avsluta med exit.</p>
 behandla det som en separat enhet med eget ingress interface. Man kan
 styra trafik till control plane med hjälp av ACL:er och
 <a href="/Cisco_QoS" title="wikilink">QoS</a>-filter.</p>
-<p><code>class-map&nbsp;match-all&nbsp;COPP-IN-IP</code>
-<code>match&nbsp;protocol&nbsp;ip</code></p>
-<p><code>policy-map&nbsp;COPP-INBOUND</code>
-<code>class&nbsp;COPP-IN-IP</code>
-<code>police&nbsp;rate&nbsp;10&nbsp;pps&nbsp;conform-action&nbsp;transmit&nbsp;&nbsp;exceed-action&nbsp;drop</code></p>
-<p><code>control-plane</code>
-<code>service-policy&nbsp;input&nbsp;COPP-INBOUND</code></p>
-<p><code>show&nbsp;policy-map&nbsp;control-plane</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;match-all&nbsp;COPP-IN-IP
+&nbsp;match&nbsp;protocol&nbsp;ip
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;COPP-INBOUND
+&nbsp;class&nbsp;COPP-IN-IP
+&nbsp;&nbsp;police&nbsp;rate&nbsp;10&nbsp;pps&nbsp;conform-action&nbsp;transmit&nbsp;&nbsp;exceed-action&nbsp;drop&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>control-plane
+&nbsp;service-policy&nbsp;input&nbsp;COPP-INBOUND
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;policy-map&nbsp;control-plane
+</code></pre></div>
 <p>Default CoPP</p>
-<p><code>cpp&nbsp;system-default</code></p>
+<div class="highlight"><pre><span></span><code>cpp&nbsp;system-default&nbsp;
+</code></pre></div>
 <p>Management Plane Protection</p>
-<p><code>control-plane&nbsp;host</code>
-<code>management-interface&nbsp;GigabitEthernet&nbsp;0/1&nbsp;allow&nbsp;ssh&nbsp;https</code></p>
-<p><code>show&nbsp;management-interface</code></p>
+<div class="highlight"><pre><span></span><code>control-plane&nbsp;host
+&nbsp;management-interface&nbsp;GigabitEthernet&nbsp;0/1&nbsp;allow&nbsp;ssh&nbsp;https
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;management-interface
+</code></pre></div>
 <p><strong>AutoSecure</strong>
 AutoSecure finns i två modes, Interactive och Noninteractive där det
 senare "Automatically executes the recommended Cisco default settings"
 vilket bland annat stänger av ICMP redirects, unreachables och Proxy-ARP
 på alla interface.</p>
-<p><code>auto-secure&nbsp;no-interact</code>
-<code>show&nbsp;auto&nbsp;secure&nbsp;config</code></p>
+<div class="highlight"><pre><span></span><code>auto-secure&nbsp;no-interact
+show&nbsp;auto&nbsp;secure&nbsp;config
+</code></pre></div>
 <h1 id="aaa">AAA</h1>
 <p>AAA authentication på IOS kan konfigureras att använda upp till fyra
 olika metoder för autentisering. Enheten kommer att använda metoderna i
 ordning och det är endast vid error som nästa metod används, detta gör
 att man kan ha fallbacks. <em>aaa new-model</em> gör att lokala usernames och
 passwords på enheten används vid avsaknad av andra AAA statements.</p>
-<p><code>aaa&nbsp;new-model</code>
-<code>aaa&nbsp;authentication&nbsp;username-prompt&nbsp;"Enter&nbsp;Username:"</code>
-<code>aaa&nbsp;authentication&nbsp;password-prompt&nbsp;"Enter&nbsp;Password:"</code></p>
-<p><code>aaa&nbsp;authentication&nbsp;enable&nbsp;default&nbsp;group&nbsp;tacacs+&nbsp;enable</code>
-<code>aaa&nbsp;authentication&nbsp;login&nbsp;default&nbsp;group&nbsp;tacacs+&nbsp;local</code></p>
+<div class="highlight"><pre><span></span><code>aaa&nbsp;new-model
+aaa&nbsp;authentication&nbsp;username-prompt&nbsp;"Enter&nbsp;Username:"
+aaa&nbsp;authentication&nbsp;password-prompt&nbsp;"Enter&nbsp;Password:"
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>aaa&nbsp;authentication&nbsp;enable&nbsp;default&nbsp;group&nbsp;tacacs+&nbsp;enable
+aaa&nbsp;authentication&nbsp;login&nbsp;default&nbsp;group&nbsp;tacacs+&nbsp;local
+</code></pre></div>
 <p>Debug</p>
-<p><code>debug&nbsp;aaa&nbsp;authentication</code></p>
+<div class="highlight"><pre><span></span><code>debug&nbsp;aaa&nbsp;authentication
+</code></pre></div>
 <p>Fallback user account ifall AAA-server är unreachable</p>
-<p><code>username&nbsp;fallback&nbsp;privilege&nbsp;15&nbsp;secret&nbsp;SECRETS</code></p>
+<div class="highlight"><pre><span></span><code>username&nbsp;fallback&nbsp;privilege&nbsp;15&nbsp;secret&nbsp;SECRETS
+</code></pre></div>
 <p>Max failed attempts to lock the user</p>
-<p><code>aaa&nbsp;local&nbsp;authentication&nbsp;attempts&nbsp;max-fail&nbsp;10</code>
-<code>show&nbsp;aaa&nbsp;local&nbsp;user&nbsp;lockout</code>
-<code>clear&nbsp;aaa&nbsp;local&nbsp;user&nbsp;locked</code></p>
+<div class="highlight"><pre><span></span><code>aaa&nbsp;local&nbsp;authentication&nbsp;attempts&nbsp;max-fail&nbsp;10
+show&nbsp;aaa&nbsp;local&nbsp;user&nbsp;lockout
+clear&nbsp;aaa&nbsp;local&nbsp;user&nbsp;locked
+</code></pre></div>
 <h3 id="tacacs">TACACS</h3>
 <p>TACACS+ är Ciscoproperitärt och all trafik är krypterad. Tacacs
 kommunicerar på TCP port 49.</p>
-<p><code>aaa&nbsp;group&nbsp;server&nbsp;tacacs+</code>
-<code>server-private&nbsp;10.0.0.20&nbsp;key&nbsp;7&nbsp;078905478...</code>
-<code>server-private&nbsp;10.0.0.21&nbsp;key&nbsp;7&nbsp;134272319...</code>
-<code>ip&nbsp;vrf&nbsp;forwarding&nbsp;Mgmt</code>
-<code>ip&nbsp;tacacs&nbsp;source-interface&nbsp;gi0</code></p>
-<p><code>aaa&nbsp;authentication&nbsp;login&nbsp;default&nbsp;group&nbsp;tacacs+&nbsp;local</code>
-<code>aaa&nbsp;authorization&nbsp;exec&nbsp;default&nbsp;group&nbsp;tacacs+&nbsp;if-authenticated</code></p>
+<div class="highlight"><pre><span></span><code>aaa&nbsp;group&nbsp;server&nbsp;tacacs+&nbsp;
+&nbsp;server-private&nbsp;10.0.0.20&nbsp;key&nbsp;7&nbsp;078905478...
+&nbsp;server-private&nbsp;10.0.0.21&nbsp;key&nbsp;7&nbsp;134272319...
+&nbsp;ip&nbsp;vrf&nbsp;forwarding&nbsp;Mgmt
+&nbsp;ip&nbsp;tacacs&nbsp;source-interface&nbsp;gi0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>aaa&nbsp;authentication&nbsp;login&nbsp;default&nbsp;group&nbsp;tacacs+&nbsp;local
+aaa&nbsp;authorization&nbsp;exec&nbsp;default&nbsp;group&nbsp;tacacs+&nbsp;if-authenticated
+</code></pre></div>
 <p>Verify</p>
-<p><code>test&nbsp;aaa&nbsp;group&nbsp;tacacs+&nbsp;USER&nbsp;SECRET123&nbsp;new-code</code>
-<code>show&nbsp;tacacs</code></p>
+<div class="highlight"><pre><span></span><code>test&nbsp;aaa&nbsp;group&nbsp;tacacs+&nbsp;USER&nbsp;SECRET123&nbsp;new-code
+show&nbsp;tacacs
+</code></pre></div>
 <h3 id="radius">Radius</h3>
 <p>Cisco IOS RADIUS använder AV pairs, UDP port 1645-1646 eller 1812-1813,
 accounting är separat från authentication och authorization. Endast
 lösenord är krypterat.</p>
-<p><code>radius&nbsp;server&nbsp;ISE1</code>
-<code>address&nbsp;ipv4&nbsp;10.0.0.30&nbsp;auth-port&nbsp;1812&nbsp;acct-port&nbsp;1813</code>
-<code>key&nbsp;7&nbsp;01300F175804575D72</code></p>
-<p><code>aaa&nbsp;group&nbsp;server&nbsp;radius&nbsp;ISE-GROUP</code>
-<code>server&nbsp;name&nbsp;ISE1</code>
-<code>server&nbsp;name&nbsp;ISE2</code>
-<code>ip&nbsp;vrf&nbsp;forwarding&nbsp;mgmt</code>
-<code>ip&nbsp;radius&nbsp;source-interface&nbsp;Vlan100</code>
-<code>retransmit&nbsp;2</code>
-<code>timeout&nbsp;4</code>
-<code>deadtime&nbsp;1</code></p>
-<p><code>aaa&nbsp;authentication&nbsp;login&nbsp;VTY-LINES&nbsp;group&nbsp;ISE-GROUP&nbsp;local</code>
-<code>aaa&nbsp;authorization&nbsp;exec&nbsp;default&nbsp;group&nbsp;radius&nbsp;local</code></p>
+<div class="highlight"><pre><span></span><code>radius&nbsp;server&nbsp;ISE1
+&nbsp;address&nbsp;ipv4&nbsp;10.0.0.30&nbsp;auth-port&nbsp;1812&nbsp;acct-port&nbsp;1813
+&nbsp;key&nbsp;7&nbsp;01300F175804575D72
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>aaa&nbsp;group&nbsp;server&nbsp;radius&nbsp;ISE-GROUP
+&nbsp;server&nbsp;name&nbsp;ISE1
+&nbsp;server&nbsp;name&nbsp;ISE2
+&nbsp;ip&nbsp;vrf&nbsp;forwarding&nbsp;mgmt
+&nbsp;ip&nbsp;radius&nbsp;source-interface&nbsp;Vlan100
+&nbsp;retransmit&nbsp;2
+&nbsp;timeout&nbsp;4
+&nbsp;deadtime&nbsp;1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>aaa&nbsp;authentication&nbsp;login&nbsp;VTY-LINES&nbsp;group&nbsp;ISE-GROUP&nbsp;local
+aaa&nbsp;authorization&nbsp;exec&nbsp;default&nbsp;group&nbsp;radius&nbsp;local
+</code></pre></div>
 <p>Verify</p>
-<p><code>test&nbsp;aaa&nbsp;group&nbsp;radius&nbsp;USER&nbsp;SECRET123&nbsp;new-code</code>
-<code>show&nbsp;radius</code></p>
+<div class="highlight"><pre><span></span><code>test&nbsp;aaa&nbsp;group&nbsp;radius&nbsp;USER&nbsp;SECRET123&nbsp;new-code
+show&nbsp;radius
+</code></pre></div>
 <h1 id="ips">IPS</h1>
 <p>IOS kan sättas upp som ett Intrusion Prevention System.</p>
-<p><code>mkdir&nbsp;ips</code>
-<code>ip&nbsp;ips&nbsp;config&nbsp;location&nbsp;flash:/ips</code>
-<code>ip&nbsp;ips&nbsp;name&nbsp;IPS</code></p>
-<p><code>show&nbsp;ip&nbsp;ips&nbsp;config</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>mkdir&nbsp;ips
+ip&nbsp;ips&nbsp;config&nbsp;location&nbsp;flash:/ips
+ip&nbsp;ips&nbsp;name&nbsp;IPS
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;ips&nbsp;config
+</code></pre></div>
 
 
 
@@ -9083,7 +9142,7 @@ lösenord är krypterat.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

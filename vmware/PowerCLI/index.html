@@ -8687,6 +8687,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8950,7 +8978,7 @@
 
   <h1>PowerCLI</h1>
 
-<p><a href="/Category:VMware" title="wikilink">Category:VMware</a> PowerCLI är ett Windows
+<p>PowerCLI är ett Windows
 Powershell-gränssnitt för hantering av VMware vSphere. PowerCLI
 distribueras som en Powershell snapin, och innehåller över 370
 Powershell-cmdlets för att hantera och automatisera vSphere och vCloud.</p>
@@ -8964,21 +8992,28 @@ det från online repo.</p>
 <span class="nb">Get-PowerCLIVersion</span>
 </code></pre></div>
 <p>Anslut till din ESXi/vCenter med:</p>
-<p><code>Connect-VIServer</code></p>
+<div class="highlight"><pre><span></span><code>Connect-VIServer
+</code></pre></div>
 <p>Untrusted certificate</p>
-<p><code>Set-PowerCLIConfiguration&nbsp;-InvalidCertificateAction&nbsp;ignore&nbsp;-confirm:$false</code></p>
+<div class="highlight"><pre><span></span><code>Set-PowerCLIConfiguration&nbsp;-InvalidCertificateAction&nbsp;ignore&nbsp;-confirm:$false
+</code></pre></div>
 <h2 id="exempel">Exempel</h2>
 <p>Flytta alla vms från en datastore till en annan.</p>
-<p><code>Get-Datastore</code>
-<code>Get-VM&nbsp;-Datastore&nbsp;Datastore1&nbsp;|&nbsp;Move-VM&nbsp;-Datastore&nbsp;Datastore2&nbsp;-DiskStorageFormat&nbsp;thin</code></p>
+<div class="highlight"><pre><span></span><code>Get-Datastore
+Get-VM&nbsp;-Datastore&nbsp;Datastore1&nbsp;|&nbsp;Move-VM&nbsp;-Datastore&nbsp;Datastore2&nbsp;-DiskStorageFormat&nbsp;thin
+</code></pre></div>
 <p>Flytta alla vms från en host till en annan.</p>
-<p><code>Get-VMHost&nbsp;172.20.0.2&nbsp;|&nbsp;Get-VM&nbsp;|&nbsp;Move-VM&nbsp;-destination&nbsp;172.20.0.8</code></p>
+<div class="highlight"><pre><span></span><code>Get-VMHost&nbsp;172.20.0.2&nbsp;|&nbsp;Get-VM&nbsp;|&nbsp;Move-VM&nbsp;-destination&nbsp;172.20.0.8
+</code></pre></div>
 <p>Visa alla <strong>notes</strong></p>
-<p><code>Get-VM&nbsp;|&nbsp;Select-Object&nbsp;-ExpandProperty&nbsp;Notes</code></p>
+<div class="highlight"><pre><span></span><code>Get-VM&nbsp;|&nbsp;Select-Object&nbsp;-ExpandProperty&nbsp;Notes
+</code></pre></div>
 <p>Lista <strong>hardware version</strong> för alla vms</p>
-<p><code>Get-VM&nbsp;|&nbsp;Select&nbsp;Name,&nbsp;Version</code></p>
+<div class="highlight"><pre><span></span><code>Get-VM&nbsp;|&nbsp;Select&nbsp;Name,&nbsp;Version
+</code></pre></div>
 <p>Ladda upp fil till datastore</p>
-<p><code>Copy-DatastoreItem&nbsp;-Item&nbsp;linux.iso&nbsp;-Destination&nbsp;vmstore:\DC\DATASTORE\linux.iso</code></p>
+<div class="highlight"><pre><span></span><code>Copy-DatastoreItem&nbsp;-Item&nbsp;linux.iso&nbsp;-Destination&nbsp;vmstore:\DC\DATASTORE\linux.iso
+</code></pre></div>
 <p>Hitta vilken vm som har en viss <strong>MAC-adress</strong></p>
 <div class="highlight"><pre><span></span><code><span class="nb">Get-vm</span> <span class="p">|</span> <span class="nb">Select </span><span class="n">Name</span><span class="p">,</span> <span class="p">@{</span><span class="n">N</span><span class="p">=</span><span class="err">“</span><span class="n">Network</span><span class="err">“</span><span class="p">;</span><span class="n">E</span><span class="p">={</span><span class="nv">$_</span> <span class="p">|</span> <span class="nb">Get-networkAdapter</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">macaddress</span> <span class="o">-eq</span> <span class="err">“</span><span class="n">00</span><span class="p">:</span><span class="n">50</span><span class="p">:</span><span class="n">56</span><span class="p">:</span><span class="n">00</span><span class="p">:</span><span class="n">50</span><span class="p">:</span><span class="n">43</span><span class="err">“</span><span class="p">}}}</span> <span class="p">|</span><span class="nb">Where </span><span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Network</span><span class="o">-ne</span> <span class="err">“”</span><span class="p">}</span>
 </code></pre></div>
@@ -9005,8 +9040,9 @@ det från online repo.</p>
 <span class="nb">Get-Cluster</span> <span class="n">cluster</span> <span class="p">|</span> <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Get-AdvancedSetting</span> <span class="n">-Name</span> <span class="n">Syslog</span><span class="p">.</span><span class="n">global</span><span class="p">.</span><span class="n">logHost</span> <span class="p">|</span> <span class="nb">Set-AdvancedSetting</span> <span class="n">-value</span> <span class="s2">"syslog.hackernet.se"</span> <span class="n">-Confirm</span><span class="p">:</span><span class="nv">$False</span>
 </code></pre></div>
 <p>Lagra logg på persistant storage</p>
-<p><code>Get-Cluster&nbsp;cluster&nbsp;|&nbsp;Get-VMhost&nbsp;|&nbsp;Get-AdvancedSetting&nbsp;-Name&nbsp;Syslog.global.logDirUnique&nbsp;|&nbsp;Set-AdvancedSetting&nbsp;-Value&nbsp;$True&nbsp;-Confirm:$False</code>
-<code>Get-Cluster&nbsp;cluster&nbsp;|&nbsp;Get-VMHost&nbsp;|&nbsp;Get-AdvancedSetting&nbsp;-Name&nbsp;Syslog.global.logDir&nbsp;|&nbsp;Set-AdvancedSetting&nbsp;-value&nbsp;"[datastore]&nbsp;esxi_logs"&nbsp;-Confirm:$False</code></p>
+<div class="highlight"><pre><span></span><code>Get-Cluster&nbsp;cluster&nbsp;|&nbsp;Get-VMhost&nbsp;|&nbsp;Get-AdvancedSetting&nbsp;-Name&nbsp;Syslog.global.logDirUnique&nbsp;|&nbsp;Set-AdvancedSetting&nbsp;-Value&nbsp;$True&nbsp;-Confirm:$False
+Get-Cluster&nbsp;cluster&nbsp;|&nbsp;Get-VMHost&nbsp;|&nbsp;Get-AdvancedSetting&nbsp;-Name&nbsp;Syslog.global.logDir&nbsp;|&nbsp;Set-AdvancedSetting&nbsp;-value&nbsp;"[datastore]&nbsp;esxi_logs"&nbsp;-Confirm:$False
+</code></pre></div>
 <p><strong>DNS</strong></p>
 <div class="highlight"><pre><span></span><code><span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Select </span><span class="n">Name</span><span class="p">,</span> <span class="p">@{</span><span class="n">N</span><span class="p">=</span><span class="s1">'DNS Server(s)'</span><span class="p">;</span><span class="n">E</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">Extensiondata</span><span class="p">.</span><span class="n">Config</span><span class="p">.</span><span class="n">Network</span><span class="p">.</span><span class="n">DnsConfig</span><span class="p">.</span><span class="n">Address</span> <span class="n">-join</span> <span class="s1">', '</span><span class="p">}}</span> <span class="p">|</span> <span class="nb">FT </span><span class="n">-autosize</span>
 <span class="nb">Get-VMHost</span> <span class="p">|</span> <span class="nb">Get-VMHostNetwork</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span> <span class="p">|</span> <span class="nb">Set-VMHostNetwork</span> <span class="n">-DnsAddress</span> <span class="p">@(</span><span class="s2">"10.240.100.81"</span><span class="p">,</span> <span class="s2">"10.60.0.81"</span><span class="p">)</span>
@@ -9111,7 +9147,7 @@ det från online repo.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

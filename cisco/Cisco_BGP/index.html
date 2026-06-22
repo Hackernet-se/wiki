@@ -9125,6 +9125,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9842,70 +9870,25 @@ best. Se även <a href="/Cisco_Multicast#BGP" title="wikilink">BGP Multicast</a>
 <p><strong>OPEN</strong>: Första paketet som skickas av varje sida används för att
 upprätta grannskap, innehåller grundläggande parametrar och
 capabilities.</p>
-<div class="mw-collapsible mw-collapsed" style="width:250px">
-
-Exempel:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_bgp_open.png>](/File:Cisco_BGP_Open.PNG "wikilink")
-
-</file:cisco_bgp_open.png></div>
-</div>
-
+<p>Exempel:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_BGP_Open.PNG" data-desc-position="bottom"><img alt="Cisco_BGP_Open.PNG" src="../../images/Cisco_BGP_Open.PNG"></a></p>
 <p><strong>UPDATE</strong>: En update innehåller routinginformation. Varje NLRI skickas
 endast en gång.</p>
-<div class="mw-collapsible mw-collapsed" style="width:250px">
-
-Exempel:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_bgp_update.png>](/File:Cisco_BGP_Update.PNG "wikilink")
-
-</file:cisco_bgp_update.png></div>
-</div>
-
+<p>Exempel:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_BGP_Update.PNG" data-desc-position="bottom"><img alt="Cisco_BGP_Update.PNG" src="../../images/Cisco_BGP_Update.PNG"></a></p>
 <p><strong>NOTIFICATION</strong>: Errormeddelanden, kan skickas för att starta om ett
 grannskap. För alla error codes se <a href="http://www.iana.org/assignments/bgp-parameters/bgp-parameters.xhtml">IANAs
 lista</a></p>
-<div class="mw-collapsible mw-collapsed" style="width:250px">
-
-Exempel:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_bgp_notification.png>](/File:Cisco_BGP_Notification.PNG "wikilink")
-
-</file:cisco_bgp_notification.png></div>
-</div>
-
+<p>Exempel:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_BGP_Notification.PNG" data-desc-position="bottom"><img alt="Cisco_BGP_Notification.PNG" src="../../images/Cisco_BGP_Notification.PNG"></a></p>
 <p><strong>KEEPALIVE</strong>: Skickas regelbundet för att säkerställa att grannen
 lever. Peers måste komma överens om holdtime för keepalives, default är
 holdtime 180 sek och då skickas keepalives var 60 sek.</p>
-<div class="mw-collapsible mw-collapsed" style="width:250px">
-
-Exempel:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_bgp_keepalive.png>](/File:Cisco_BGP_Keepalive.PNG "wikilink")
-
-</file:cisco_bgp_keepalive.png></div>
-</div>
-
+<p>Exempel:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_BGP_Keepalive.PNG" data-desc-position="bottom"><img alt="Cisco_BGP_Keepalive.PNG" src="../../images/Cisco_BGP_Keepalive.PNG"></a></p>
 <p><strong>ROUTE REFRESH</strong>: (RFC 2918) Båda sidor måste stödja denna capability.</p>
-<div class="mw-collapsible mw-collapsed" style="width:250px">
-
-Exempel:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_bgp_routerefresh.png>](/File:Cisco_BGP_RouteRefresh.PNG "wikilink")
-
-</file:cisco_bgp_routerefresh.png></div>
-</div>
-
+<p>Exempel:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_BGP_RouteRefresh.PNG" data-desc-position="bottom"><img alt="Cisco_BGP_RouteRefresh.PNG" src="../../images/Cisco_BGP_RouteRefresh.PNG"></a></p>
 <h2 id="bgp-table">BGP table</h2>
 <p>Källor till BGP table:</p>
 <ul>
@@ -9914,8 +9897,9 @@ Exempel:
 <li>Redistribution</li>
 </ul>
 <p>Show BGP table</p>
-<p><code>show&nbsp;ip&nbsp;bgp</code>
-<code>show&nbsp;bgp</code><afi><code>unicast&nbsp;update-sources</code></afi></p>
+<p></p><div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp
+</code></pre></div>
+<code>show&nbsp;bgp</code><afi><code>unicast&nbsp;update-sources</code><p></p>
 <h2 id="path-selection">Path Selection</h2>
 <p>Till skillnad från IGPer används inte enbart metric för att avgöra
 vilken som är bästa routen, istället används ett gäng Path Attributes
@@ -10042,21 +10026,29 @@ Det finns många sätt att ändra BGPs beteende med avseende på path
 selection.</p>
 <p>Stänga av att oldest path kan ge best route. Compare router-id for
 identical EBGP paths</p>
-<p><code>bgp&nbsp;bestpath&nbsp;compare-routerid</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;bestpath&nbsp;compare-routerid
+</code></pre></div>
 <p>Stänga av att AS path length kollas. OBS detta är ett dolt kommando.</p>
-<p><code>bgp&nbsp;bestpath&nbsp;as-path&nbsp;ignore</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;bestpath&nbsp;as-path&nbsp;ignore
+</code></pre></div>
 <p>Ignore cost IGP metric in bestpath selection</p>
-<p><code>bgp&nbsp;bestpath&nbsp;igp-metric&nbsp;ignore</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;bestpath&nbsp;igp-metric&nbsp;ignore
+</code></pre></div>
 <p>Ignore cost communities in bestpath selection</p>
-<p><code>bgp&nbsp;bestpath&nbsp;cost-community&nbsp;ignore</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;bestpath&nbsp;cost-community&nbsp;ignore
+</code></pre></div>
 <p>Allow comparing MED from different neighbors</p>
-<p><code>bgp&nbsp;always-compare-med</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;always-compare-med
+</code></pre></div>
 <p>Treat missing MED as the least preferred one</p>
-<p><code>bgp&nbsp;bestpath&nbsp;med&nbsp;missing-as-worst</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;bestpath&nbsp;med&nbsp;missing-as-worst
+</code></pre></div>
 <p>Compare MED among confederation paths</p>
-<p><code>bgp&nbsp;bestpath&nbsp;med&nbsp;confed</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;bestpath&nbsp;med&nbsp;confed
+</code></pre></div>
 <p>Pick the best-MED path among paths advertised from the neighboring AS</p>
-<p><code>bgp&nbsp;deterministic-med</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;deterministic-med
+</code></pre></div>
 <h3 id="multipath">Multipath</h3>
 <p><strong>Maximum Paths</strong>
 Flera paths kan hamna i routingtabellen men endast best path kan
@@ -10066,10 +10058,11 @@ Cost vara lika för att maximum paths ska spela någon roll. Inte alla
 topologier stödjer multipath. <strong>bgp bestpath as-path multipath-relax</strong>
 används för att möjliggöra ECMP genom olika AS, detta är ett dolt
 kommando.</p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>maximum-paths&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#eBGP</code>
-<code>maximum-paths&nbsp;ibgp&nbsp;4&nbsp;&nbsp;&nbsp;#iBGP</code>
-<code>maximum-paths&nbsp;eibgp&nbsp;4&nbsp;&nbsp;#MPLS</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;maximum-paths&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#eBGP
+&nbsp;maximum-paths&nbsp;ibgp&nbsp;4&nbsp;&nbsp;&nbsp;#iBGP
+&nbsp;maximum-paths&nbsp;eibgp&nbsp;4&nbsp;&nbsp;#MPLS
+</code></pre></div>
 <p><strong>Additional Paths</strong>
 Med iBGP kan man använda add-paths. Syftet är att tillhandahålla en
 backup route för snabbare konvergering. Det är en capability som skickas
@@ -10078,39 +10071,47 @@ ID på varje prefix för att det ska kunna gå att skilja på dem. För att
 det ska funka måste next-hop på backup path skilja sig från det på
 primary path.</p>
 <p>Det går att konfigurera per adressfamilj eller per neighbor.</p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>bgp&nbsp;additional-paths&nbsp;select&nbsp;all</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;additional-paths&nbsp;send&nbsp;receive</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;advertise&nbsp;additional-paths&nbsp;all</code></p>
-<p><code>show&nbsp;ip&nbsp;route&nbsp;repair-paths</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;bgp&nbsp;additional-paths&nbsp;select&nbsp;all
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;additional-paths&nbsp;send&nbsp;receive
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;advertise&nbsp;additional-paths&nbsp;all
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;route&nbsp;repair-paths
+</code></pre></div>
 <p>Man kan välja additional paths och skicka vidare dem utan att installera
 det i RIB/FIB lokalt.</p>
-<p><code>bgp&nbsp;additional-paths&nbsp;install</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;additional-paths&nbsp;install
+</code></pre></div>
 <p><strong>Diverse Path</strong>
 Diverse-Path säger åt en BGP-router att medvetet beräkna en 2nd-best
 path som har en annan next hop som den första pathen. Diverse-Path var
 en workaround innan Add-Path var supporterat. Det görs endast på route
 reflector. Diverse-Path är ej supporterat i IOS-XR.</p>
-<p><code>router&nbsp;bgp&nbsp;1</code>
-<code>address-family&nbsp;vpnv4&nbsp;unicast</code>
-<code>maximum-paths&nbsp;2</code>
-<code>bgp&nbsp;bestpath&nbsp;igp-metric&nbsp;ignore</code>
-<code>bgp&nbsp;additional-paths&nbsp;select&nbsp;backup</code>
-<code>bgp&nbsp;additional-paths&nbsp;install</code>
-<code>neighbor&nbsp;IBGP&nbsp;advertise&nbsp;diverse-path&nbsp;backup</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;1
+&nbsp;address-family&nbsp;vpnv4&nbsp;unicast
+&nbsp;&nbsp;maximum-paths&nbsp;2
+&nbsp;&nbsp;bgp&nbsp;bestpath&nbsp;igp-metric&nbsp;ignore
+&nbsp;&nbsp;bgp&nbsp;additional-paths&nbsp;select&nbsp;backup
+&nbsp;&nbsp;bgp&nbsp;additional-paths&nbsp;install
+&nbsp;&nbsp;neighbor&nbsp;IBGP&nbsp;advertise&nbsp;diverse-path&nbsp;backup
+</code></pre></div>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>För att byta från NLRI-format till AFI-format i konfigurationen</p>
-<p><code>bgp&nbsp;upgrade-cli</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;upgrade-cli&nbsp;
+</code></pre></div>
 <p>Administrative Distance: eBGP, iBGP, local. Det går ändra distance per
 granne också med distance-kommandot och en acl.</p>
-<p><code>distance&nbsp;bgp&nbsp;20&nbsp;200&nbsp;200</code></p>
+<div class="highlight"><pre><span></span><code>distance&nbsp;bgp&nbsp;20&nbsp;200&nbsp;200
+</code></pre></div>
 <p>Synchronization is disabled by default in Cisco IOS post 12.2(8)T.
 Synchronization bör vara avstängt annars medföljer vissa begränsningar.
 T.ex. måste routes finnas i IGP innan det kan propagera vidare med BGP
 och OSPF RID måste vara samma som BGP RID om sync är på.</p>
-<p><code>no&nbsp;synchronization</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;synchronization
+</code></pre></div>
 <p>IPv4 aktiveras default i BGP på IOS men det går att stänga av.</p>
-<p><code>no&nbsp;bgp&nbsp;default&nbsp;ipv4-unicast</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;bgp&nbsp;default&nbsp;ipv4-unicast
+</code></pre></div>
 <h2 id="neighbor">Neighbor</h2>
 <p>För att kunna utbyta routinginformation måste grannskap upprättas, detta
 görs med en TCP-anslutning som det skickas BGP-meddelanden över. eBGP
@@ -10134,26 +10135,31 @@ Established State: Skicka uppdateringar. Neighbor up
 Om ett grannskap är iBGP eller eBGP avgörs med remote-as som antingen är
 samma AS som en själv eller ett annat. Default accepteras all NLRI från
 eBGP-grannar, så fungerar ej IOS XR.</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;remote-as&nbsp;65001</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;description&nbsp;Other&nbsp;side</code>
-<code>neighbor&nbsp;fe80::a00:27ff:fe80:7008%GigabitEthernet1&nbsp;remote-as&nbsp;65001</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;remote-as&nbsp;65001
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;description&nbsp;Other&nbsp;side
+&nbsp;neighbor&nbsp;fe80::a00:27ff:fe80:7008%GigabitEthernet1&nbsp;remote-as&nbsp;65001
+</code></pre></div>
 <p>When configuring iBGP always use loopbacks (advertised by your IGP) for
 peering.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;update-source&nbsp;Loopback0</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;update-source&nbsp;Loopback0
+</code></pre></div>
 <p>md5 authentication görs med tcp option 19</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;password&nbsp;SECRET</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;|&nbsp;i&nbsp;state|Flags</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;password&nbsp;SECRET
+show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;|&nbsp;i&nbsp;state|Flags
+</code></pre></div>
 <p>Man kan konfigurera intervallet mellan uppdateringar till grannar där 0
 är annonsera direkt. Default är 0 sek för iBGP, 0 sek för eBGP i en VRF
 och 30 sek för eBGP-sessioner i default-vrfen.</p>
 <p><code>neighbor&nbsp;1.1.1.1&nbsp;advertise-interval</code><interval></interval></p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;neighbor</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;summary</code>
-<code>show&nbsp;tcp&nbsp;brief</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;neighbor
+show&nbsp;ip&nbsp;bgp&nbsp;summary
+show&nbsp;tcp&nbsp;brief
+</code></pre></div>
 <p>Debug</p>
-<p><code>debug&nbsp;ip&nbsp;bgp&nbsp;events</code></p>
+<div class="highlight"><pre><span></span><code>debug&nbsp;ip&nbsp;bgp&nbsp;events
+</code></pre></div>
 <h3 id="peer-group">Peer Group</h3>
 <p>För att förenkla konfen kan man gruppera flera grannar som ska ha
 likadan konfiguration i så kallade peer groups. Det blir även lite
@@ -10161,55 +10167,65 @@ effektivare processing eftersom identiska Updates skickas till alla
 peers i gruppen. Man kan ju ha olika out policy per grannskap och då
 funkar inte identiska Updates till alla men IOS löser detta automatiskt
 genom att skapa fler update groups dynamiskt.</p>
-<p><code>neighbor&nbsp;GROUP01&nbsp;peer-group</code>
-<code>neighbor&nbsp;GROUP01&nbsp;remote-as&nbsp;100&nbsp;[alternate-as&nbsp;50000]</code>
-<code>neighbor&nbsp;GROUP01&nbsp;update-source&nbsp;Loopback0</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;peer-group&nbsp;GROUP01</code>
-<code>neighbor&nbsp;2.2.2.2&nbsp;peer-group&nbsp;GROUP01</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;GROUP01&nbsp;peer-group
+neighbor&nbsp;GROUP01&nbsp;remote-as&nbsp;100&nbsp;[alternate-as&nbsp;50000]
+neighbor&nbsp;GROUP01&nbsp;update-source&nbsp;Loopback0
+neighbor&nbsp;1.1.1.1&nbsp;peer-group&nbsp;GROUP01
+neighbor&nbsp;2.2.2.2&nbsp;peer-group&nbsp;GROUP01
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;peer-group</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;update-group</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;replication</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;peer-group
+show&nbsp;ip&nbsp;bgp&nbsp;update-group
+show&nbsp;ip&nbsp;bgp&nbsp;replication
+</code></pre></div>
 <p>Eftersom peers kan svara segt (av någon anledning) finns det en dynamisk
 funktion för att splita peer-grupper och lägga dessa i slow-update
 groups. When “permanent” is not configured, the “slow peer” will be
 moved to its regular original update group, after it becomes regular
 peer (converges).</p>
-<p><code>bgp&nbsp;slow-peer&nbsp;split-update-group&nbsp;dynamic</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;slow</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;bgp&nbsp;slow-peer&nbsp;split-update-group&nbsp;dynamic
+show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;slow
+</code></pre></div>
 <p><strong>Templates</strong>
 Det går även att skapa policy och session templates. Detta går tyvärr ej
 att kombinera med bgp listen range eftersom den kopplas till en peer
 group.</p>
-<p><code>template&nbsp;peer-session&nbsp;RR</code>
-<code>remote-as&nbsp;101</code>
-<code>password&nbsp;SECRET</code>
-<code>update-source&nbsp;Loopback0</code>
-<code>exit-peer-session</code></p>
-<p><code>template&nbsp;peer-policy&nbsp;RR</code>
-<code>route-reflector-client</code>
-<code>send-community&nbsp;both</code>
-<code>additional-paths&nbsp;send&nbsp;receive</code>
-<code>exit-peer-policy</code></p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;inherit&nbsp;peer-session&nbsp;RR</code>
-<code>neighbor&nbsp;1.1.1.2&nbsp;inherit&nbsp;peer-session&nbsp;RR</code></p>
-<p><code>address-family&nbsp;vpnv4</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;activate</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;inherit&nbsp;peer-policy&nbsp;RR</code></p>
+<div class="highlight"><pre><span></span><code>template&nbsp;peer-session&nbsp;RR
+&nbsp;remote-as&nbsp;101
+&nbsp;password&nbsp;SECRET
+&nbsp;update-source&nbsp;Loopback0
+exit-peer-session
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>template&nbsp;peer-policy&nbsp;RR
+&nbsp;route-reflector-client
+&nbsp;send-community&nbsp;both
+&nbsp;additional-paths&nbsp;send&nbsp;receive
+exit-peer-policy
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;inherit&nbsp;peer-session&nbsp;RR
+neighbor&nbsp;1.1.1.2&nbsp;inherit&nbsp;peer-session&nbsp;RR
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>address-family&nbsp;vpnv4
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;activate
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;inherit&nbsp;peer-policy&nbsp;RR
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;template&nbsp;peer-session</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;template&nbsp;peer-policy</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;template&nbsp;peer-session
+show&nbsp;ip&nbsp;bgp&nbsp;template&nbsp;peer-policy
+</code></pre></div>
 <h3 id="dynamic-peering">Dynamic Peering</h3>
 <p>Det får ej finnas några statiska neighbor statements när man använder
 listen range.</p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>bgp&nbsp;listen&nbsp;range&nbsp;10.1.123.0/24&nbsp;peer-group&nbsp;AS_200</code>
-<code>bgp&nbsp;listen&nbsp;limit&nbsp;15</code>
-<code>neighbor&nbsp;AS_200&nbsp;peer-group</code>
-<code>neighbor&nbsp;AS_200&nbsp;remote-as&nbsp;200</code></p>
-<p><code>address-family&nbsp;ipv4</code>
-<code>neighbor&nbsp;AS_200&nbsp;activate</code>
-<code>neighbor&nbsp;AS_200&nbsp;send-community&nbsp;both</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;bgp&nbsp;listen&nbsp;range&nbsp;10.1.123.0/24&nbsp;peer-group&nbsp;AS_200
+&nbsp;bgp&nbsp;listen&nbsp;limit&nbsp;15
+&nbsp;neighbor&nbsp;AS_200&nbsp;peer-group
+&nbsp;neighbor&nbsp;AS_200&nbsp;remote-as&nbsp;200
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;neighbor&nbsp;AS_200&nbsp;activate
+&nbsp;&nbsp;neighbor&nbsp;AS_200&nbsp;send-community&nbsp;both
+</code></pre></div>
 <h3 id="route-refresh-vs-soft-reconfiguration">Route Refresh vs Soft Reconfiguration</h3>
 <p>Både Route Refresh och Soft Reconfiguration tillåter en router att ändra
 sin routing policy utan att starta om grannskapet (Hard reset). Soft
@@ -10222,83 +10238,34 @@ Route Refresh använder lite mer bandbredd. Route Refresh är
 rekommenderat nuförtiden tack vare att bandbredd sällan är ett problem
 samt att de flesta enheter har stöd för det. Vill man spara minne men
 ändå ha tillgång till Adj-RIB-In får man använda BMP (se BMP-stycket).</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;|&nbsp;s&nbsp;Neighbor&nbsp;capabilities</code>
-<code>Neighbor&nbsp;capabilities:</code>
-<code>Route&nbsp;refresh:&nbsp;advertised&nbsp;and&nbsp;received(new)</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;|&nbsp;s&nbsp;Neighbor&nbsp;capabilities
+Neighbor&nbsp;capabilities:
+&nbsp;&nbsp;&nbsp;Route&nbsp;refresh:&nbsp;advertised&nbsp;and&nbsp;received(new)
+</code></pre></div>
 <p>Route Refresh är en capability som finns i olika varianter och skickas i
 open message. Det IOS-XE kallar "new" decodar wireshark som "Cisco". En
 BGP-peer kan annonsera flera varianter.</p>
-<p><a href="/File:Cisco_BGP_Route_Refresh_Capability.PNG" title="wikilink"><file:cisco_bgp_route_refresh_capability.png></file:cisco_bgp_route_refresh_capability.png></a></p>
-<p>Om en router inte har stöd för Route Refresh får Soft Reconfiguration
-användas. Då måste man slå på det på grannskapet.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;soft-reconfiguration&nbsp;inbound</code>
-<code>show&nbsp;bgp&nbsp;ipv4&nbsp;unicast&nbsp;neighbors&nbsp;1.1.1.1&nbsp;policy</code></p>
-<p>Alternativt använd soft reconfiguration som fallback om andra sidan inte
-stödjer route refresh.</p>
-<p><code>bgp&nbsp;soft-reconfig-backup</code></p>
-<p>Kolla adj-ribs-in (alla prefix raw):</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;received-routes</code></p>
-<p>Oavsett om reset eller reconfiguration används så kör man
-clear-kommandot för att göra det.</p>
-<p><code>clear&nbsp;ip&nbsp;bgp&nbsp;1.1.1.1&nbsp;soft&nbsp;[in]</code>
-<code>clear&nbsp;ip&nbsp;bgp&nbsp;*&nbsp;soft</code></p>
-<p><strong>eBGP Multihop</strong>
-Ska man upprätta eBGP-grannskap om neighbor-IP ej är directly connected,
-t.ex. mellan loopbacks, behöver man öka TTLn på paketen som skickas ut.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;ebgp-multihop&nbsp;3</code></p>
-<p>Alternativt godta TTL 1 genom att stänga av checken som kollar om
-grannen sitter på ett directly connected network genom att kolla
-routingtabellen. Grannen kan dock max vara ett hop bort för TTL är 1 med
-detta alternativ.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;disable-connected-check</code></p>
-<p><strong>TTL Security</strong>
-GTSM (RFC 3682) används för att skydda mot spoof attacks. Med GTSM (utan
-angiven "hops") lyssnar man bara på TCP/BGP-paket med ett TTL-fält på
-minst 254, det betyder att paketet inte kan ha routats och därmed inte
-kan komma ifrån någon på internet utan endast från närliggande granne,
-dvs den man peerar med. Notera att TTL security och eBGP multihop är
-mutually exclusive. Detta gäller endast för eBGP peers.</p>
-<p><code>neighbor&nbsp;2.2.2.2&nbsp;ttl-security&nbsp;hops&nbsp;10</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;2.2.2.2&nbsp;|&nbsp;i&nbsp;TTL|hop</code></p>
-<p>T.ex. "hops 10" betyder att endast BGP-paket med TTL 245 eller högre kan
-accepteras.</p>
-<p><strong>PMTUD</strong>
-Förr i världen sattes max data segment på BGPs TCP-session till 536
-bytes men nu finns PMTUD default.</p>
-<p><code>bgp&nbsp;transport&nbsp;path-mtu-discovery</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;neighbor&nbsp;|&nbsp;i&nbsp;Data|MTU|transport|MSS</code></p>
-<p>Turn off per neighbor</p>
-<p><code>neighbor&nbsp;$PEER&nbsp;transport&nbsp;path-mtu-discovery&nbsp;disable</code></p>
-<p><strong>Multi Session TCP</strong>
-Multi Session TCP Transport per AF togs fram för att stödja Multi
-Topology Routing. Multisession capability utbyts i OPEN message och
-indikerar att multisession BGP stöds.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;transport&nbsp;multi-session</code>
-<code>show&nbsp;tcp&nbsp;brief</code></p>
-<p><strong>Passive Peer</strong>
-Kan t.ex. behövas om grannskap går igenom en brandvägg. Default är
-såklart active.</p>
-<p><code>bgp&nbsp;neighbor&nbsp;transport&nbsp;connection-mode&nbsp;active/passive</code></p>
-<p><strong>GRE</strong>
-Det går även att upprätta BGP-grannskap över
-<a href="/Cisco_GRE" title="wikilink">GRE</a>-tunnlar. Det är dock viktigt att se till
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_BGP_Route_Refresh_Capability.PNG" data-desc-position="bottom"><img alt="Cisco_BGP_Route_Refresh_Capability.PNG" src="../../images/Cisco_BGP_Route_Refresh_Capability.PNG"></a>-tunnlar. Det är dock viktigt att se till
 att next hop blir rätt.</p>
 <h3 id="next-hop">Next Hop</h3>
 <p>Ändra så att annonserade uppdateringar har den egna IP-adressen (peer
 address) istället för det som står i uppdateringen från den granne man
 har lärt sig prefixet av.</p>
-<p><code>neighbor&nbsp;10.0.0.10&nbsp;next-hop-self</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;10.0.0.10&nbsp;next-hop-self
+</code></pre></div>
 <p>Alternativt</p>
-<p><code>neighbor&nbsp;10.0.0.10&nbsp;route-map&nbsp;OUT</code>
-<code>route-map&nbsp;OUT&nbsp;permit&nbsp;10</code>
-<code>set&nbsp;ip&nbsp;next-hop&nbsp;self&nbsp;|&nbsp;peer-address</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;10.0.0.10&nbsp;route-map&nbsp;OUT
+route-map&nbsp;OUT&nbsp;permit&nbsp;10&nbsp;
+&nbsp;set&nbsp;ip&nbsp;next-hop&nbsp;self&nbsp;|&nbsp;peer-address
+</code></pre></div>
 <p>Route Reflector Server ändrar inte next-hop när prefix skickas vidare
 till RR-klienter oavsett om man har konfigurerat next-hop-self eller en
 route-map. Sätt next-hop-self oavsett om det är reflected routes.</p>
 <p><code>neighbor&nbsp;10.0.0.10&nbsp;next-hop-self</code><strong><code>all</code></strong></p>
 <p>Det finns situationer då man kör eBGP men vill att next-hop ej ska
 ändras, t.ex. vid Inter-AS MPLS Option C.</p>
-<p><code>neighbor&nbsp;10.0.0.10&nbsp;next-hop-unchanged</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;10.0.0.10&nbsp;next-hop-unchanged
+</code></pre></div>
 <h3 id="4-byte-asn">4 byte ASN</h3>
 <p>Från början användes 2 bytes för ASN vilket ger 65535 stycken men det
 räcker inte. Nyare routrar skickar AS_PATH som innehåller 4 bytes ASN
@@ -10315,7 +10282,8 @@ stämmer. Om detta kommer till en ny router vid ett senare tillfälle kan
 den sätta ihop den korrekta as-pathen.</p>
 <p>Man kan konfigurera hur man vill att ASN ska presenteras i outputen från
 show-kommandon.</p>
-<p><code>bgp&nbsp;asnotation&nbsp;dot</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;asnotation&nbsp;dot
+</code></pre></div>
 <h3 id="diverse">Diverse</h3>
 <p>När BGP startar väntas en specificerad tidsperiod för att grannarna ska
 etablera sig själva innan de första uppdateringarna skickas. När
@@ -10331,8 +10299,9 @@ OPEN message när grannskap sätts upp. En router som är NSF-capable kan
 göra stateful switchover. BGP graceful restart är på default när IOS
 stödjer det. Defaultvärden som används om inget annat anges är
 restart-time: 120 sekunder och stalepath-time: 360 sekunder.</p>
-<p><code>bgp&nbsp;graceful-restart</code>
-<code>bgp&nbsp;graceful-restart&nbsp;extended</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;graceful-restart
+bgp&nbsp;graceful-restart&nbsp;extended
+</code></pre></div>
 <p><strong>Backdoor</strong>
 Eftersom eBGP har AD 20 är det preferred över IGPs. Om man kör IGP
 mellan AS och vill att det i första hand ska styra trafiken kan man
@@ -10341,33 +10310,39 @@ de andra AS har. iBGP har AD 200 och blir således inte preferred. Dock
 blir då next-hop fel och det är där BGP Backdoor feature kommer in. Med
 backdoor annonseras inte några prefix till eBGP-grannar om man själv
 inte har det i sitt AS men AD lokalt blir fortfarande 200.</p>
-<p><code>network&nbsp;10.0.0.0&nbsp;mask&nbsp;255.0.0.0&nbsp;backdoor</code></p>
+<div class="highlight"><pre><span></span><code>network&nbsp;10.0.0.0&nbsp;mask&nbsp;255.0.0.0&nbsp;backdoor
+</code></pre></div>
 <p>Går även manuellt att sätta högre distance på prefix från grannar.</p>
 <p><strong>DMZ Link över eBGP</strong>
 Use DMZ Link Bandwidth as weight for BGP multipaths on single-hop EBGP
 peers. Bandwidth skickas med i uppdateringar som extended community och
 kan användas för lastdelning av trafiken.</p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>maximum-path&nbsp;4</code>
-<code>bgp&nbsp;dmzlink-bw</code>
-<code>neighbor&nbsp;2.2.2.2&nbsp;dmzlink-bw</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;maximum-path&nbsp;4
+&nbsp;bgp&nbsp;dmzlink-bw
+&nbsp;neighbor&nbsp;2.2.2.2&nbsp;dmzlink-bw
+</code></pre></div>
 <p><code>show&nbsp;ip&nbsp;bgp</code><prefix><code>|&nbsp;i&nbsp;DMZ</code></prefix></p>
 <p>För att verifiera får man också kolla traffic share.</p>
 <p>IOS-XR
 neighbor 1.1.1.1</p>
-<p><code>dmz-link-bandwidth</code>
-<code>ebgp-send-extcommunity-dmz</code>
-<code>ebgp-recv-extcommunity-dmz</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;dmz-link-bandwidth
+&nbsp;ebgp-send-extcommunity-dmz
+&nbsp;ebgp-recv-extcommunity-dmz
+</code></pre></div>
 <p>För att köra multipath över olika AS.</p>
-<p><code>bgp&nbsp;bestpath&nbsp;as-path&nbsp;multipath-relax</code>
-<code>bgp&nbsp;bestpath&nbsp;as-path&nbsp;ignore</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;bestpath&nbsp;as-path&nbsp;multipath-relax
+bgp&nbsp;bestpath&nbsp;as-path&nbsp;ignore
+</code></pre></div>
 <p>Have route-map set commands take priority over BGP commands such as
 next-hop unchanged.</p>
-<p><code>bgp&nbsp;route-map&nbsp;priority</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;route-map&nbsp;priority
+</code></pre></div>
 <p>Default annonseras routes som ej hamnar i RIB (RIB-failure) vidare till
 andra, ändra detta:</p>
-<p><code>bgp&nbsp;suppress-inactive</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;rib-failure</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;suppress-inactive
+show&nbsp;ip&nbsp;bgp&nbsp;rib-failure
+</code></pre></div>
 <h2 id="path-manipulation">Path Manipulation</h2>
 <p><strong>Outbound from AS:</strong></p>
 <ul>
@@ -10386,37 +10361,44 @@ för att välja var trafik komma in till sitt AS. Eftersom det är ett
 nontransitive attribute skickas det inom AS men lämnar ej. Det jämförs
 bara om flera olika paths kommer från samma AS, detta kan ändras med bgp
 <em>always-compare-med</em>.</p>
-<p><code>route-map&nbsp;MED_50&nbsp;permit&nbsp;10</code>
-<code>set&nbsp;metric&nbsp;50</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;route-map&nbsp;MED_50&nbsp;out</code></p>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;MED_50&nbsp;permit&nbsp;10
+&nbsp;set&nbsp;metric&nbsp;50
+neighbor&nbsp;1.1.1.1&nbsp;route-map&nbsp;MED_50&nbsp;out
+</code></pre></div>
 <p>4,294,967,295 är max metric och räknas som infinity.</p>
 <h3 id="local-preference">Local Preference</h3>
 <p>Local Preference är ett konfigurerbart värde som används för att välja
 var trafik ska lämna det egna AS. Det skickas med NLRI till iBGP-grannar
 men ej eBGP. När en uppdateringar kommer från en eBGP-peer sätts default
 preference (100) på prefixet innan det annonseras vidare till iBGP.</p>
-<p><code>bgp&nbsp;default&nbsp;local-preference&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;default&nbsp;local-preference&nbsp;100
+</code></pre></div>
 <p>Eller stäng av det</p>
-<p><code>no&nbsp;bgp&nbsp;default&nbsp;local-preference</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;bgp&nbsp;default&nbsp;local-preference
+</code></pre></div>
 <p>Högst preference vinner</p>
-<p><code>route-map&nbsp;LOCALPREF&nbsp;permit&nbsp;10</code>
-<code>set&nbsp;local-preference&nbsp;500</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;route-map&nbsp;LOCALPREF&nbsp;in</code></p>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;LOCALPREF&nbsp;permit&nbsp;10
+&nbsp;set&nbsp;local-preference&nbsp;500
+neighbor&nbsp;1.1.1.1&nbsp;route-map&nbsp;LOCALPREF&nbsp;in
+</code></pre></div>
 <h3 id="as-prepend">AS-prepend</h3>
 <p>För att ändra var man vill att trafik ska komma in till det egna AS kan
 man manipulera AS_PATH genom att lägga på sitt AS flera gånger för att
 göra pathen längre.</p>
-<p><code>route-map&nbsp;PREPEND&nbsp;permit&nbsp;10</code>
-<code>set&nbsp;as-path&nbsp;prepend&nbsp;100&nbsp;100&nbsp;100</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;route-map&nbsp;PREPEND&nbsp;out</code></p>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;PREPEND&nbsp;permit&nbsp;10
+&nbsp;set&nbsp;as-path&nbsp;prepend&nbsp;100&nbsp;100&nbsp;100
+neighbor&nbsp;1.1.1.1&nbsp;route-map&nbsp;PREPEND&nbsp;out
+</code></pre></div>
 <h3 id="weight">Weight</h3>
 <p>Cisco proprietary och finns endast inom routern själv.</p>
-<p><code>route-map&nbsp;WEIGHT&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;HEAVY</code>
-<code>set&nbsp;weight&nbsp;2000</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;route-map&nbsp;WEIGHT&nbsp;in</code></p>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;WEIGHT&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;HEAVY
+&nbsp;set&nbsp;weight&nbsp;2000
+neighbor&nbsp;1.1.1.1&nbsp;route-map&nbsp;WEIGHT&nbsp;in
+</code></pre></div>
 <p>Default weight per neighbor</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;weight&nbsp;&lt;0-65535&gt;</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;weight&nbsp;&lt;0-65535&gt;
+</code></pre></div>
 <h3 id="community">Community</h3>
 <p>Community Path Attribute är 32-bitars nummer som används för att tagga
 prefix. Då kan man använda taggen för att matcha på och sedan manipulera
@@ -10428,38 +10410,47 @@ Till exempel kan man konfigurera att prefix med en viss community ska få
 en viss LOCAL_PREF och man kan på så sätt styra trafiken.</p>
 <p>Både heltal och AA:NN accepteras i konfiguration och show-kommandon men
 outputen från show route-map går att ändra. Detta är best practice.</p>
-<p><code>ip&nbsp;bgp-community&nbsp;new-format</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;bgp-community&nbsp;new-format
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;community&nbsp;?</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;community&nbsp;?
+</code></pre></div>
 <p>Så står det antingen aa:nn eller 1-4294967295 beroende på format</p>
 <p>För att Community ska funka måste det skickas i uppdateringarna,
 standard och extended</p>
-<p><code>neighbor&nbsp;[ip-address]&nbsp;send-community&nbsp;both</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;[ip-address]&nbsp;send-community&nbsp;both
+</code></pre></div>
 <p>Skicka community</p>
-<p><code>route-map&nbsp;SETCOMMUNITY&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;COMMUNITY</code>
-<code>set&nbsp;community&nbsp;5</code></p>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;SETCOMMUNITY&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;COMMUNITY
+&nbsp;set&nbsp;community&nbsp;5
+</code></pre></div>
 <p>Alternativt flera med eller utan additive beroende på om att lägga till
 community istället för att ersätta är önskvärt.</p>
-<p><code>set&nbsp;community&nbsp;5&nbsp;10&nbsp;15</code>
-<code>set&nbsp;community&nbsp;5&nbsp;10&nbsp;15&nbsp;additive</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;set&nbsp;community&nbsp;5&nbsp;10&nbsp;15
+&nbsp;set&nbsp;community&nbsp;5&nbsp;10&nbsp;15&nbsp;additive
+</code></pre></div>
 <p>Man kan även ta bort community.</p>
-<p><code>set&nbsp;community&nbsp;none</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;set&nbsp;community&nbsp;none
+</code></pre></div>
 <p>Delete anything starting with 300</p>
-<p><code>ip&nbsp;community-list&nbsp;expanded&nbsp;REGEXP&nbsp;permit&nbsp;300:[0-9]+_</code>
-<code>route-map&nbsp;DELETE&nbsp;permit&nbsp;10</code>
-<code>set&nbsp;comm-list&nbsp;REGEXP&nbsp;delete</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;community-list&nbsp;expanded&nbsp;REGEXP&nbsp;permit&nbsp;300:[0-9]+_
+route-map&nbsp;DELETE&nbsp;permit&nbsp;10
+&nbsp;set&nbsp;comm-list&nbsp;REGEXP&nbsp;delete
+</code></pre></div>
 <p>Ta emot community</p>
-<p><code>ip&nbsp;community-list&nbsp;6&nbsp;permit&nbsp;5</code>
-<code>route-map&nbsp;CHANGEPREF&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;community&nbsp;6</code>
-<code>set&nbsp;local-preference&nbsp;250</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;community-list&nbsp;6&nbsp;permit&nbsp;5
+route-map&nbsp;CHANGEPREF&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;community&nbsp;6
+&nbsp;set&nbsp;local-preference&nbsp;250
+</code></pre></div>
 <p>Vill man matcha med regex måste man använda en extended community list.
 Community Internet (0:0) kan användas i community lists och betyder
 match any.</p>
 <p><code>ip&nbsp;community-list&nbsp;101&nbsp;permit</code><regex></regex></p>
 <p>Show</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;community</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;community
+</code></pre></div>
 <p>Några kända communities, <em>set community ?</em></p>
 <ul>
 <li>Internet: 0:0</li>
@@ -10469,7 +10460,8 @@ match any.</p>
 <li>local-as (NO_EXPORT_SUBCONFED): Annonsera inte utanför eget
     confederation sub-AS</li>
 </ul>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;community&nbsp;no-advertise&nbsp;no-export&nbsp;local-AS</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;community&nbsp;no-advertise&nbsp;no-export&nbsp;local-AS
+</code></pre></div>
 <p><strong>Graceful BGP session shutdown</strong>
 GRACEFUL_SHUTDOWN är en well-known community som används i samband med
 BGP Graceful Shutdown feature. Man skickar ut communityn till de grannar
@@ -10479,18 +10471,21 @@ man ha en ingress policy som säger "match community gshut -&gt; make path
 least prefered". IOS XE har en inbyggd macro för detta community-utskick
 och man anger hur många sekunder det tar innan man bryter grannskapet.</p>
 <p>Exempel:</p>
-<p><code>neighbor&nbsp;10.0.1.1&nbsp;shutdown&nbsp;graceful&nbsp;30</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;10.0.1.1&nbsp;shutdown&nbsp;graceful&nbsp;30
+</code></pre></div>
 <p>Då skickas det ut UPDATE + ROUTE REFRESH som har community value
 0xFFFF0000. 30 sekunder senare skickas det NOTIFICATION med admin
 shutdown. Då hamnar även "neighbor 10.0.1.1 shutdown" i running conf.</p>
 <p>Man kan även skicka med en egen community eller local pref (funkar
 såklart inte på ebgp).</p>
-<p><code>neighbor&nbsp;10.0.1.1&nbsp;shutdown&nbsp;graceful&nbsp;30&nbsp;community&nbsp;100&nbsp;local-preference&nbsp;150</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;10.0.1.1&nbsp;shutdown&nbsp;graceful&nbsp;30&nbsp;community&nbsp;100&nbsp;local-preference&nbsp;150
+</code></pre></div>
 <p>Det går även att aktivera community-utskicket + admin shutdown för alla
 grannskap samtidigt. Oavsett om man använder peer-groups eller inte så
 hamnar shutdown på alla enskilda neighbors. Det finns ingen macro för
 unactivate utan "neighbor shutdown" får man ta bort själv efteråt.</p>
-<p><code>bgp&nbsp;graceful-shutdown&nbsp;all&nbsp;neighbors&nbsp;activate</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;graceful-shutdown&nbsp;all&nbsp;neighbors&nbsp;activate
+</code></pre></div>
 <h3 id="as-manipulation">AS Manipulation</h3>
 <p>Man kan konfigurera sig själv att skicka ett helt annat ASN i OPEN
 message än vad man egentligen har så att man ser ut som ett annat AS för
@@ -10500,30 +10495,37 @@ AS är uppdelat, dvs anledningen till att man ens kör local-as. Man kan
 också ställa in att det enda som andra sidan ser är fake AS,
 <em>replace-as</em>. Under en övergångsperiod kan man acceptera två AS och
 grannen kan då peera med valfritt, <em>dual-as</em>.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;local-as&nbsp;601&nbsp;no-prepend&nbsp;[replace-as]&nbsp;[dual-as]</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;local-as&nbsp;601&nbsp;no-prepend&nbsp;[replace-as]&nbsp;[dual-as]
+</code></pre></div>
 <p>Kan användas för att dölja ASN, Override matching AS-number while
 sending update, dvs det är en egress feature.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;as-override</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;as-override
+</code></pre></div>
 <p>Acceptera as-path som innehåller det egna ASN, kan behövas i vissa fall
 där ens AS är uppdelat. Default får ens AS förekomma 3 gånger i
 AS_PATH.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;allowas-in</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;allowas-in&nbsp;
+</code></pre></div>
 <p>Ta bort private AS number från utgående uppdateringar, detta AS måste
 finnas i början av AS path för att detta ska funka.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;remove-private-as&nbsp;[all]</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;remove-private-as&nbsp;[all]
+</code></pre></div>
 <p><strong>Attribute-map</strong>
 Attribute map kan användas för att manipulera AS och/eller attributes
 från AS-sets.</p>
-<p><code>set&nbsp;origin&nbsp;egp&nbsp;22</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;origin&nbsp;egp&nbsp;22
+</code></pre></div>
 <h2 id="filtering">Filtering</h2>
 <p>BGP kan filtrera AS, NLRI och PA i alla inkommande och utgående
 uppdateringar antingen per granne eller per peer group. För att en
 filterändring ska gå igenom krävs clear-kommandot.</p>
 <p><strong>Maximum prefixes</strong></p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;maximum-prefix&nbsp;1000</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;maximum-prefix&nbsp;1000&nbsp;
+</code></pre></div>
 <p>Only give warning message when limit is exceeded</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;maximum-prefix&nbsp;1000&nbsp;warning-only</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;|&nbsp;i&nbsp;Maximum|Threshold</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;maximum-prefix&nbsp;1000&nbsp;warning-only
+show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;|&nbsp;i&nbsp;Maximum|Threshold
+</code></pre></div>
 <h3 id="as">AS</h3>
 <p>Regular Expressions</p>
 <ul>
@@ -10535,43 +10537,54 @@ filterändring ska gå igenom krävs clear-kommandot.</p>
 <li>[0-9]+ = Any AS</li>
 </ul>
 <p>AS-path ACL</p>
-<p><code>ip&nbsp;as-path&nbsp;access-list&nbsp;100&nbsp;deny&nbsp;_120$</code>
-<code>ip&nbsp;as-path&nbsp;access-list&nbsp;100&nbsp;permit&nbsp;.*</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;filter-list&nbsp;100&nbsp;in</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;as-path&nbsp;access-list&nbsp;100&nbsp;deny&nbsp;_120$
+ip&nbsp;as-path&nbsp;access-list&nbsp;100&nbsp;permit&nbsp;.*
+neighbor&nbsp;1.1.1.1&nbsp;filter-list&nbsp;100&nbsp;in
+</code></pre></div>
 <p>Maximum number of ASes in the AS-PATH attribute</p>
-<p><code>bgp&nbsp;maxas-limit&nbsp;&lt;1-254&gt;</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;maxas-limit&nbsp;&lt;1-254&gt;
+</code></pre></div>
 <h3 id="network">Network</h3>
 <p>Distribute-list, standard ACL</p>
-<p><code>access-list&nbsp;1&nbsp;permit&nbsp;10.10.10.0&nbsp;0.0.0.255</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;distribute-list&nbsp;1&nbsp;in</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;1&nbsp;permit&nbsp;10.10.10.0&nbsp;0.0.0.255&nbsp;
+neighbor&nbsp;1.1.1.1&nbsp;distribute-list&nbsp;1&nbsp;in
+</code></pre></div>
 <p>Extended ACL tolkas av BGP som:</p>
 <p><code>access-list&nbsp;100&nbsp;permit&nbsp;ip</code><subnet><code></code><wildcard for="" subnet=""><code></code><mask><code></code><wildcard for="" mask="">
-<code>neighbor&nbsp;1.1.1.1&nbsp;distribute-list&nbsp;100&nbsp;in</code></wildcard></mask></wildcard></subnet></p>
+</wildcard></mask></wildcard></subnet></p><div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;distribute-list&nbsp;100&nbsp;in
+</code></pre></div><p></p>
 <p>Prefix-list, det rekommenderade sättet.</p>
-<p><code>ip&nbsp;prefix-list&nbsp;ACCEPT&nbsp;seq&nbsp;10&nbsp;permit&nbsp;10.10.10.0/24&nbsp;le&nbsp;24</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;prefix-list&nbsp;ACCEPT&nbsp;in</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;prefix-list&nbsp;ACCEPT&nbsp;seq&nbsp;10&nbsp;permit&nbsp;10.10.10.0/24&nbsp;le&nbsp;24
+neighbor&nbsp;1.1.1.1&nbsp;prefix-list&nbsp;ACCEPT&nbsp;in
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;prefix-list&nbsp;ACCEPT</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;prefix-list&nbsp;ACCEPT
+</code></pre></div>
 <p><strong>ORF</strong>
 Outbound route filtering kan användas för att berätta för sina neighbors
 vilka prefix man tillåter in så de dynamiskt kan sätta samma
 prefix-lista som outbound prefix filter och inte ens behöver skicka
 något annat. Båda sidor måste stödja ORF för att det ska kunna användas.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;prefix-list&nbsp;ALLOW&nbsp;in</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;capability&nbsp;orf&nbsp;prefix-list&nbsp;both</code></p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;|&nbsp;s&nbsp;Outbound</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;received&nbsp;prefix-filter</code>
-<code>clear&nbsp;ip&nbsp;bgp&nbsp;1.1.1.1&nbsp;soft&nbsp;in&nbsp;prefix-filter</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;prefix-list&nbsp;ALLOW&nbsp;in&nbsp;
+neighbor&nbsp;1.1.1.1&nbsp;capability&nbsp;orf&nbsp;prefix-list&nbsp;both
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;|&nbsp;s&nbsp;Outbound
+show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;received&nbsp;prefix-filter
+clear&nbsp;ip&nbsp;bgp&nbsp;1.1.1.1&nbsp;soft&nbsp;in&nbsp;prefix-filter
+</code></pre></div>
 <h3 id="rt">RT</h3>
 <p>Filtrera inkommande routes genom att vitlista specifikt route-target</p>
-<p><code>ip&nbsp;extcommunity-list&nbsp;standard&nbsp;FILTER-AS400-VPNV4-IN&nbsp;permit&nbsp;rt&nbsp;1337:10</code>
-<code>route-map&nbsp;FILTER-AS400-VPNV4-IN&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;extcommunity&nbsp;FILTER-AS400-VPNV4-IN</code></p>
-<p><code>address-family&nbsp;vpnv4</code>
-<code>neighbor&nbsp;172.16.99.2&nbsp;route-map&nbsp;FILTER-AS400-IN&nbsp;in</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;extcommunity-list&nbsp;standard&nbsp;FILTER-AS400-VPNV4-IN&nbsp;permit&nbsp;rt&nbsp;1337:10
+route-map&nbsp;FILTER-AS400-VPNV4-IN&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;extcommunity&nbsp;FILTER-AS400-VPNV4-IN
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>address-family&nbsp;vpnv4
+&nbsp;neighbor&nbsp;172.16.99.2&nbsp;route-map&nbsp;FILTER-AS400-IN&nbsp;in
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;extcommunity-list</code>
-<code>show&nbsp;bgp&nbsp;vpnv4&nbsp;unicast&nbsp;all&nbsp;extcommunity-list&nbsp;FILTER-AS400-VPNV4-IN</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;extcommunity-list
+show&nbsp;bgp&nbsp;vpnv4&nbsp;unicast&nbsp;all&nbsp;extcommunity-list&nbsp;FILTER-AS400-VPNV4-IN
+</code></pre></div>
 <h2 id="convergence">Convergence</h2>
 <p>BGP är inte designat för att vara det snabbaste protokollet, detta för
 att kunna fungera i stor skala men det finns flera tekniker för att
@@ -10586,7 +10599,8 @@ var 60:e sekund. Allt detta leder till att BGP kan ta väldigt lång tid
 på sig att konvergera.</p>
 <p>Timers</p>
 <p><code>timers&nbsp;bgp</code><keepalive><code></code><holdtime><code></code><minimum hold="" time="" from="" neighbor="">
-<code>timers&nbsp;bgp&nbsp;10&nbsp;30&nbsp;20</code></minimum></holdtime></keepalive></p>
+</minimum></holdtime></keepalive></p><div class="highlight"><pre><span></span><code>timers&nbsp;bgp&nbsp;10&nbsp;30&nbsp;20
+</code></pre></div><p></p>
 <p>I IOS-XE verkar <em>keepalive</em> vara verkningslöst, det är holdtime delat
 med tre som blir aktivt.</p>
 <p><strong>Next Hop Tracking</strong>
@@ -10597,30 +10611,35 @@ by default. The bgp nexthop trigger delay defines how long for the NHT
 process to delay updating BGP. This timer is here to prevent BGP from
 being beaten up by a flapping IGP route. At default value 5 seconds, the
 BGP process can't get bogged down from unnecessary updates.</p>
-<p><code>bgp&nbsp;nexthop&nbsp;trigger&nbsp;enable</code>
-<code>bgp&nbsp;nexthop&nbsp;trigger&nbsp;delay&nbsp;5</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;nexthop&nbsp;trigger&nbsp;enable
+bgp&nbsp;nexthop&nbsp;trigger&nbsp;delay&nbsp;5
+</code></pre></div>
 <p><strong>Scan interval</strong>
 Hur ofta IGP ska scannas efter uppdateringar, default är 60 sekunder.
 OBS <em>bgp scan-time configuration less than 15 seconds can cause high cpu
 usage by BGP Scanner.</em></p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>bgp&nbsp;scan-time&nbsp;&lt;5-60&gt;</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;summary&nbsp;|&nbsp;i&nbsp;scan</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;bgp&nbsp;scan-time&nbsp;&lt;5-60&gt;
+show&nbsp;ip&nbsp;bgp&nbsp;summary&nbsp;|&nbsp;i&nbsp;scan
+</code></pre></div>
 <p>Kolla VRF:er om det finns nya routes att annonsera med MP-BGP.</p>
-<p><code>address-family&nbsp;vpnv4&nbsp;unicast</code>
-<code>bgp&nbsp;scan-time&nbsp;&lt;5-60&gt;</code>
-<code>show&nbsp;bgp&nbsp;vpnv4&nbsp;unicast&nbsp;all&nbsp;summary&nbsp;|&nbsp;i&nbsp;scan</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;address-family&nbsp;vpnv4&nbsp;unicast
+&nbsp;&nbsp;bgp&nbsp;scan-time&nbsp;&lt;5-60&gt;
+show&nbsp;bgp&nbsp;vpnv4&nbsp;unicast&nbsp;all&nbsp;summary&nbsp;|&nbsp;i&nbsp;scan
+</code></pre></div>
 <p>Man kan reducera konvergenstiden när BGP paths förändras genom att
 konfigurera policyn för vad som ska dra nytta av BGP Event-Based VPN
 Import feature.</p>
-<p><code>address-family&nbsp;ipv4&nbsp;vrf&nbsp;Cust_A</code>
-<code>import&nbsp;path&nbsp;selection&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>address-family&nbsp;ipv4&nbsp;vrf&nbsp;Cust_A
+&nbsp;import&nbsp;path&nbsp;selection&nbsp;all
+</code></pre></div>
 <p><strong>eBGP neighbor loss detection</strong>
 BGP-grannskap rivs direkt när länken mellan går ner vilket leder till
 att BGP-routsen flushas direkt och det sökes efter alternativ. Detta är
 default i IOS sedan länge.</p>
-<p><code>bgp&nbsp;fast-external-fallover&nbsp;&nbsp;#Global</code>
-<code>ip&nbsp;bgp&nbsp;fast-external-fallover&nbsp;&nbsp;#Per&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;fast-external-fallover&nbsp;&nbsp;#Global
+ip&nbsp;bgp&nbsp;fast-external-fallover&nbsp;&nbsp;#Per&nbsp;interface
+</code></pre></div>
 <p><strong>iBGP neighbor loss detection</strong>
 Så fort en grannens IP-address försvinner från routingtabellen (på grund
 av IGP) så tas grannskapet ner och konvergering kan börja direkt. Ingen
@@ -10628,15 +10647,18 @@ hold-down eller delay i deaktivering av BGP-session används. Är IGPn det
 minsta långsam på att hitta en alternativ route till grannen så hinner
 grannskapet tas ner. Det går även att använda detta för eBGP t.ex. om
 man peerar med loopbacks och det fungerar på samma sätt.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;fall-over</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;fall-over
+</code></pre></div>
 <h4 id="bfd">BFD</h4>
 <p>Se även <a href="/Cisco_BFD" title="wikilink">Cisco BFD</a>.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;fall-over&nbsp;bfd</code>
-<code>show&nbsp;bfd&nbsp;neighbor</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;fall-over&nbsp;bfd
+show&nbsp;bfd&nbsp;neighbor
+</code></pre></div>
 <p>The C-Bit is set by the BFD process itself, and isn't something you can
 toggle. However, you can tell your BFD process whether to ignore the
 setting or not. The default is to ignore.</p>
-<p><code>neighbor&nbsp;2.2.2.2&nbsp;fall-over&nbsp;bfd&nbsp;check-control-plane-failure</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;2.2.2.2&nbsp;fall-over&nbsp;bfd&nbsp;check-control-plane-failure
+</code></pre></div>
 <h3 id="pic">PIC</h3>
 <p>Prefix Independent Convergence är en CEF/FIB-feature framtagen för att
 snabba upp data-plane recovery när man har FIB med väldigt många routes
@@ -10654,35 +10676,43 @@ reflector endast i control plane behöver man inte slå på PIC eftersom
 det handlar om data plane recovery.</p>
 <p><strong>PIC Core</strong>
 Hierarchical FIB, local only mechanism.</p>
-<p><code>bgp&nbsp;additional-paths&nbsp;install</code></p>
-<p><code>cef&nbsp;table&nbsp;output-chain&nbsp;build&nbsp;favor&nbsp;convergence-speed</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;additional-paths&nbsp;install
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>cef&nbsp;table&nbsp;output-chain&nbsp;build&nbsp;favor&nbsp;convergence-speed
+</code></pre></div>
 <p>Stänga av PIC</p>
-<p><code>cef&nbsp;table&nbsp;output-chain&nbsp;build&nbsp;favor&nbsp;memory-utilization</code></p>
+<div class="highlight"><pre><span></span><code>cef&nbsp;table&nbsp;output-chain&nbsp;build&nbsp;favor&nbsp;memory-utilization&nbsp;&nbsp;
+</code></pre></div>
 <p><strong>PIC Edge</strong>
 Eftersom PIC Edge precomputes en alternate path försvinner poängen med
 CEF recursion så därför kommer det att disableas för prefix med /32-mask
 eller som är directly connected när man slår på BGP PIC. <em>bgp recursion
 host</em> enableas för VPNv4 och VPNv6 address families och disableas för
 IPv4 och IPv6 address families.</p>
-<p><code>bgp&nbsp;additional-path&nbsp;install</code>
-<code>bgp&nbsp;recursion&nbsp;host</code>
-<code>bgp&nbsp;advertise-best-external</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;additional-path&nbsp;install
+bgp&nbsp;recursion&nbsp;host
+bgp&nbsp;advertise-best-external
+</code></pre></div>
 <p><strong>IOS-XR</strong>
 route-policy PIC-EDGE</p>
-<p><code>set&nbsp;path-selection&nbsp;backup&nbsp;1&nbsp;advertise</code>
-<code>end-policy</code></p>
-<p><code>router&nbsp;bgp&nbsp;1</code>
-<code>address-family&nbsp;vpnv4&nbsp;unicast</code>
-<code>additional-paths&nbsp;selection&nbsp;route-policy&nbsp;PIC-EDGE</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;set&nbsp;path-selection&nbsp;backup&nbsp;1&nbsp;advertise
+end-policy
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;1
+&nbsp;address-family&nbsp;vpnv4&nbsp;unicast
+&nbsp;&nbsp;additional-paths&nbsp;selection&nbsp;route-policy&nbsp;PIC-EDGE
+</code></pre></div>
 <h2 id="default-route">Default route</h2>
 <p>Send default route, görs per adressfamilj och måste finnas i
 routingtabellen.</p>
-<p><code>network&nbsp;0.0.0.0</code></p>
+<div class="highlight"><pre><span></span><code>network&nbsp;0.0.0.0
+</code></pre></div>
 <p>eller använd <strong>default-information originate</strong> (det kräver också
 redistribution)</p>
 <p>Skicka default route villkorslöst, görs per neighbor. Detta går förbi
 output filtering och kräver inte gateway of last resort i RIB.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;default-originate</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;default-originate
+</code></pre></div>
 <h2 id="summarization">Summarization</h2>
 <p>Auto-Summary är avstängt default och bör vara det. Om det är påslaget
 påverkar det network och redistribution.</p>
@@ -10696,7 +10726,8 @@ någon component route i BGP-tabellen. Om component routes har olika
 AS_SEQ så kan inte de slås samman utan då kommer aggregeringen att
 skickas med AS_SEQ null. aggregate-address skickas med PA: Atomic
 Aggregate.</p>
-<p><code>aggregate-address&nbsp;10.0.0.0&nbsp;255.0.0.0&nbsp;[summary-only]&nbsp;[as-set]</code></p>
+<div class="highlight"><pre><span></span><code>aggregate-address&nbsp;10.0.0.0&nbsp;255.0.0.0&nbsp;[summary-only]&nbsp;[as-set]
+</code></pre></div>
 <p>summary-only = suppress detailed routes. AS-set innebär att alla ASN
 från de mer specifika prefixen ska sättas ihop och inkluderas i
 summeringen, ett set räknas som ett AS hopp och används för loop
@@ -10706,27 +10737,32 @@ detta själv genom att välja ut enskilda prefix som ska utgöra källan för
 de attribut som aggregeringen ska ha. Detta görs med route-map som
 konfigureras efter as-set, <strong>advertise-map ADVERTISE_MAP</strong>.</p>
 <p>Alternativt</p>
-<p><code>ip&nbsp;route&nbsp;10.0.0.0&nbsp;255.0.0.0&nbsp;null&nbsp;0</code>
-<code>router&nbsp;bgp&nbsp;100</code>
-<code>network&nbsp;10.0.0.0&nbsp;255.0.0.0</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;route&nbsp;10.0.0.0&nbsp;255.0.0.0&nbsp;null&nbsp;0
+router&nbsp;bgp&nbsp;100
+&nbsp;network&nbsp;10.0.0.0&nbsp;255.0.0.0
+</code></pre></div>
 <p><strong>Suppress-map</strong>
 Med aggregate-address skickas en summary och de mer specifika prefixen.
 Detta går att styra med en suppress-map som fungerar som en svartlista.</p>
-<p><code>ip&nbsp;prefix-list&nbsp;DONT-SUPPRESS-THIS&nbsp;permit&nbsp;10.0.2.0/24</code>
-<code>route-map&nbsp;SUPPRESS&nbsp;deny&nbsp;10</code>
-<code>match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;DONT-SUPPRESS-THIS</code>
-<code>route-map&nbsp;SUPPRESS&nbsp;permit&nbsp;20</code></p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>aggregate-address&nbsp;10.0.0.0&nbsp;255.255.0.0&nbsp;suppress-map&nbsp;SUPPRESS</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;prefix-list&nbsp;DONT-SUPPRESS-THIS&nbsp;permit&nbsp;10.0.2.0/24
+route-map&nbsp;SUPPRESS&nbsp;deny&nbsp;10
+&nbsp;match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;DONT-SUPPRESS-THIS
+route-map&nbsp;SUPPRESS&nbsp;permit&nbsp;20
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;aggregate-address&nbsp;10.0.0.0&nbsp;255.255.0.0&nbsp;suppress-map&nbsp;SUPPRESS
+</code></pre></div>
 <p><strong>Unsuppress-map</strong>
 Används om man vill skicka mer specifika prefix till en granne trots att
 man använder summary-only, fungerar som en vitlista.</p>
-<p><code>ip&nbsp;prefix-list&nbsp;UNSUPPRESS-THIS&nbsp;permit&nbsp;10.0.2.0/24</code>
-<code>route-map&nbsp;UNSUPPRESS&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;UNSUPPRESS-THIS</code></p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>aggregate-address&nbsp;10.0.0.0&nbsp;255.255.0.0&nbsp;summary-only</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;unsuppress-map&nbsp;UNSUPPRESS</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;prefix-list&nbsp;UNSUPPRESS-THIS&nbsp;permit&nbsp;10.0.2.0/24
+route-map&nbsp;UNSUPPRESS&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;UNSUPPRESS-THIS
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;aggregate-address&nbsp;10.0.0.0&nbsp;255.255.0.0&nbsp;summary-only&nbsp;
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;unsuppress-map&nbsp;UNSUPPRESS
+</code></pre></div>
 <h2 id="multiprotocol-bgp">Multiprotocol BGP</h2>
 <p>För att kunna skicka NLRI om annat än IPv4, t.ex. VPN routes för olika
 VRF:er, behövs fler path attributes. MP-BGP (RFC 4760) är ett extension
@@ -10737,29 +10773,22 @@ MP-routes. Dessa innehåller AFI, Next-hop och NLRI. NLRI står för lägga
 till eller ta bort routes och next-hop. MP-BGP listas som capability i
 Open-paketen och körs för det mesta inom samma AS. Se även <a href="/Cisco_MPLS" title="wikilink">Cisco
 MPLS</a>.</p>
-<div class="mw-collapsible mw-collapsed" style="width:270px">
-
-Exempel:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_bgp_mp.png>](/File:Cisco_BGP_MP.png "wikilink")
-
-</file:cisco_bgp_mp.png></div>
-</div>
-
+<p>Exempel:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_BGP_MP.png" data-desc-position="bottom"><img alt="Cisco_BGP_MP.png" src="../../images/Cisco_BGP_MP.png"></a></p>
 <p>IPv4 unicast aktiveras så fort man konfigurerar MP-BGP.</p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>no&nbsp;bgp&nbsp;default&nbsp;ipv4-unicast</code>
-<code>address-family&nbsp;vpnv4</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;activate</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;send-community&nbsp;extended</code>
-<code>exit-address-family</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;no&nbsp;bgp&nbsp;default&nbsp;ipv4-unicast
+&nbsp;address-family&nbsp;vpnv4
+&nbsp;&nbsp;neighbor&nbsp;1.1.1.1&nbsp;activate
+&nbsp;&nbsp;neighbor&nbsp;1.1.1.1&nbsp;send-community&nbsp;extended
+&nbsp;exit-address-family
+</code></pre></div>
 <p>BGP send-community slås på automatiskt när man aktiverar en granne för
 det är ett måste för att MP-BGP ska fungera.</p>
 <p>Se routes som skickas från en VRF (adj-ribs-out)</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;vrf&nbsp;Name&nbsp;neighbors&nbsp;10.10.10.10&nbsp;advertised-routes</code>
-<code>clear&nbsp;ip&nbsp;bgp&nbsp;10.10.10.10&nbsp;vrf&nbsp;Name</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;vrf&nbsp;Name&nbsp;neighbors&nbsp;10.10.10.10&nbsp;advertised-routes&nbsp;
+clear&nbsp;ip&nbsp;bgp&nbsp;10.10.10.10&nbsp;vrf&nbsp;Name
+</code></pre></div>
 <h2 id="route-reflector">Route Reflector</h2>
 <p>Routes lärda av iBGP skickas ej vidare till iBGP-grannar per default. En
 route reflector (RFC 1966) bryter denna regel så full mesh
@@ -10795,27 +10824,32 @@ client kommer man att få in uppdateringar med det man själv annonserar
 ut dvs feedback loop. Detta är inga problem med små BGP-tabeller men kan
 ställa till det med stora.</p>
 <p>RR-server</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;remote-as&nbsp;65000</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;update-source&nbsp;lo0</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;route-reflector-client</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;remote-as&nbsp;65000
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;update-source&nbsp;lo0
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;route-reflector-client
+</code></pre></div>
 <p>Kluster konfigureras på RR-server, sätt samma cluster-id på de RR som
 ska ingå i klustret. Man kan ha flera kluster.</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>bgp&nbsp;cluster-id&nbsp;5</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;bgp&nbsp;cluster-id&nbsp;5
+</code></pre></div>
 <p>RR-klienter känner inte till RR-konceptet så de konfigureras som vanlig
 iBGP.</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>neighbor&nbsp;2.2.2.2&nbsp;remote-as&nbsp;65000</code>
-<code>neighbor&nbsp;2.2.2.2&nbsp;update-source&nbsp;lo0</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;neighbor&nbsp;2.2.2.2&nbsp;remote-as&nbsp;65000
+&nbsp;neighbor&nbsp;2.2.2.2&nbsp;update-source&nbsp;lo0
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;update-group</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;update-group
+</code></pre></div>
 <p>Det är inte alltid RR finns i forwarding path, då kan man använda
 "Selective RIB Download" för att spara lokala resurser. All NLRI finns i
 BGP-tabellen som vanligt för best-path och annonsering men det behöver
 ju aldrig läggas in entries i RIB/FIB. En table-map är en route-map för
 BGP-tabellen istället för per grannskap.</p>
-<p><code>table-map&nbsp;BORD&nbsp;filter</code></p>
+<div class="highlight"><pre><span></span><code>table-map&nbsp;BORD&nbsp;filter
+</code></pre></div>
 <h2 id="confederations">Confederations</h2>
 <p>BGP confederations (RFC 5065) delar upp ett AS i flera sub-AS. Routrar
 inom samma sub-AS är confederation iBGP-grannar medans mellan sub-AS är
@@ -10830,69 +10864,85 @@ att annonseras till den. När det gäller confederation eBGP används TTL 1
 precis som med vanlig eBGP däremot ändras inte NEXT_HOP default mellan
 sub-AS. Om ett prefix ska annonseras ut från en confederation tas
 confederation ASN bort från AS_PATH så utsidan ser endast ett AS.</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>bgp&nbsp;confederation&nbsp;identifier&nbsp;123</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;bgp&nbsp;confederation&nbsp;identifier&nbsp;123
+</code></pre></div>
 <p>För att routern ska veta att det är ett confederation eBGP-grannskap och
 inte ett vanligt ange <em>bgp confederation peers</em>. Detta behövs inte på
 routrar som ej har confederation eBGP-grannskap.</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>bgp&nbsp;confederation&nbsp;peers&nbsp;65001</code>
-<code>neighbor&nbsp;10.0.0.20&nbsp;remote-as&nbsp;65001</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;bgp&nbsp;confederation&nbsp;peers&nbsp;65001
+&nbsp;neighbor&nbsp;10.0.0.20&nbsp;remote-as&nbsp;65001
+</code></pre></div>
 <h2 id="redistribution">Redistribution</h2>
 <p>Man måste vara försiktig när man redistribuerar mellan IGP och BGP
 eftersom BGP klarar så mycket fler routes än någon IGP. Default så
 redistribueras endast eBGP till andra protokoll pga att iBGP inte har
 någon egen loop prevention mekanism. Man kan ändra detta men det bör man
 inte göra.</p>
-<p><code>bgp&nbsp;redistribute&nbsp;internal</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;redistribute&nbsp;internal
+</code></pre></div>
 <p><strong>OSPF</strong>
 Only internal OSPF routes will be redistributed into BGP by default.</p>
-<p><code>redistribute&nbsp;ospf&nbsp;1</code>
-<code>redistribute&nbsp;ospf&nbsp;1&nbsp;route-map&nbsp;SET-ORIGIN&nbsp;&nbsp;#&nbsp;betyder&nbsp;allt&nbsp;i&nbsp;rib&nbsp;dvs&nbsp;externals&nbsp;följer&nbsp;med</code></p>
+<div class="highlight"><pre><span></span><code>redistribute&nbsp;ospf&nbsp;1&nbsp;
+redistribute&nbsp;ospf&nbsp;1&nbsp;route-map&nbsp;SET-ORIGIN&nbsp;&nbsp;#&nbsp;betyder&nbsp;allt&nbsp;i&nbsp;rib&nbsp;dvs&nbsp;externals&nbsp;följer&nbsp;med
+</code></pre></div>
 <h2 id="dampening">Dampening</h2>
 <p>Förutom att använda route aggregation för att minska risken att CPU går
 i taket på alla enheter när något flappar kan dampening användas.</p>
-<p><code>route-map&nbsp;DAMPENING&nbsp;permit&nbsp;10</code>
-<code>set&nbsp;dampening&nbsp;5&nbsp;1900&nbsp;2000&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;DAMPENING&nbsp;permit&nbsp;10
+&nbsp;set&nbsp;dampening&nbsp;5&nbsp;1900&nbsp;2000&nbsp;10
+</code></pre></div>
 <p>5=half-life, 1900=reuse-limit, 2000=suppress-limit, 10
 max-suppress-limit</p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>bgp&nbsp;dampening&nbsp;route-map&nbsp;DAMPENING</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;bgp&nbsp;dampening&nbsp;route-map&nbsp;DAMPENING
+</code></pre></div>
 <p>Route flap</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;flap-statistics</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;dampening&nbsp;parameters</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;flap-statistics
+show&nbsp;ip&nbsp;bgp&nbsp;dampening&nbsp;parameters
+</code></pre></div>
 <h2 id="conditional-route-injection">Conditional Route Injection</h2>
 <p>The ability to insert more specific prefixes into BGP without having
 them in the IP routing table. Routemap which specifies prefixes to
 inject and routemap which specifies exist condition (Det går även köra
 med non-exist om man vill vända på det)</p>
-<p><code>ip&nbsp;prefix-list&nbsp;INJECT-THIS&nbsp;permit&nbsp;110.0.1.0/24</code>
-<code>ip&nbsp;prefix-list&nbsp;INJECT-THIS&nbsp;permit&nbsp;110.0.2.0/24</code>
-<code>ip&nbsp;prefix-list&nbsp;AGGREGATE&nbsp;permit&nbsp;110.0.0.0/8</code>
-<code>ip&nbsp;prefix-list&nbsp;SOURCE&nbsp;permit&nbsp;1.1.1.1/32</code></p>
-<p><code>route-map&nbsp;INJECT</code>
-<code>set&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;INJECT-THIS</code></p>
-<p><code>route-map&nbsp;EXIST</code>
-<code>match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;AGGREGATE</code>
-<code>match&nbsp;ip&nbsp;route-source&nbsp;prefix-list&nbsp;SOURCE</code></p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>bgp&nbsp;inject-map&nbsp;INJECT&nbsp;exist-map&nbsp;EXIST</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;prefix-list&nbsp;INJECT-THIS&nbsp;permit&nbsp;110.0.1.0/24
+ip&nbsp;prefix-list&nbsp;INJECT-THIS&nbsp;permit&nbsp;110.0.2.0/24
+ip&nbsp;prefix-list&nbsp;AGGREGATE&nbsp;permit&nbsp;110.0.0.0/8
+ip&nbsp;prefix-list&nbsp;SOURCE&nbsp;permit&nbsp;1.1.1.1/32
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;INJECT
+&nbsp;set&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;INJECT-THIS
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;EXIST
+&nbsp;match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;AGGREGATE
+&nbsp;match&nbsp;ip&nbsp;route-source&nbsp;prefix-list&nbsp;SOURCE
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;bgp&nbsp;inject-map&nbsp;INJECT&nbsp;exist-map&nbsp;EXIST
+</code></pre></div>
 <p>The less-specific prefix MUST come from a BGP neighbor. No insertion of
 more-specific prefixes of a locally-originated prefix.</p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;injected-paths</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;|&nbsp;i&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;injected-paths
+show&nbsp;ip&nbsp;bgp&nbsp;neighbors&nbsp;1.1.1.1&nbsp;|&nbsp;i&nbsp;status
+</code></pre></div>
 <h3 id="conditional-advertisement">Conditional Advertisement</h3>
 <p>Conditional advertisement tillåter att man per neighbor endast
 annonserar utvalda prefix om vissa prefix existerar/inte existerar i den
 lokala BGP-tabellen, som kollas av BGP scanner/NHT.</p>
-<p><code>route-map&nbsp;ADVERTISE_MAP&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;as-path&nbsp;1</code></p>
-<p><code>ip&nbsp;prefix-list&nbsp;PREFIX&nbsp;permit&nbsp;10.0.10.0/24</code></p>
-<p><code>route-map&nbsp;NON_EXIST_MAP&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;PREFIX</code></p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;advertise-map&nbsp;ADVERTISE_MAP&nbsp;non-exist-map&nbsp;NON_EXIST_MAP</code></p>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;ADVERTISE_MAP&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;as-path&nbsp;1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;prefix-list&nbsp;PREFIX&nbsp;permit&nbsp;10.0.10.0/24
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;NON_EXIST_MAP&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;ip&nbsp;address&nbsp;prefix-list&nbsp;PREFIX
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;advertise-map&nbsp;ADVERTISE_MAP&nbsp;non-exist-map&nbsp;NON_EXIST_MAP
+</code></pre></div>
 <h2 id="flowspec">Flowspec</h2>
 <p>BGP flow specification är en feature som man kan använda för att
 propagera filter- och policy-funktionalitet till sina BGP-noder. Det kan
@@ -10909,15 +10959,18 @@ fler och ju mer avancerade regler man skjuter ut ju mer TCAM går åt.</p>
 <a href="/Cisco_IOS-XR" title="wikilink">IOS-XR</a>, GoBGP eller
 <a href="/ExaBGP" title="wikilink">ExaBGP</a>.</p>
 <p>IOS XE</p>
-<p><code>flowspec</code>
-<code>address-family&nbsp;ipv4</code>
-<code>local-install&nbsp;interface-all</code></p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>address-family&nbsp;ipv4&nbsp;flowspec</code>
-<code>neighbor&nbsp;10.1.1.1&nbsp;activate</code></p>
+<div class="highlight"><pre><span></span><code>flowspec
+&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;local-install&nbsp;interface-all
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;address-family&nbsp;ipv4&nbsp;flowspec
+&nbsp;&nbsp;neighbor&nbsp;10.1.1.1&nbsp;activate
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;flowspec&nbsp;summary</code>
-<code>show&nbsp;bgp&nbsp;ipv4&nbsp;flowspec</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;flowspec&nbsp;summary&nbsp;
+show&nbsp;bgp&nbsp;ipv4&nbsp;flowspec&nbsp;
+</code></pre></div>
 <h2 id="bmp">BMP</h2>
 <p>The BGP Monitoring Protocol (BMP) feature supports functionality to
 monitor Border Gateway Protocol (BGP) neighbors. Det kan t.ex. användas
@@ -10925,14 +10978,16 @@ för BGP Looking glass och/eller advanced route analytics. Det kan även
 underlätta vid route-policy troubleshooting. BMP devices (routers)
 skickar BMP messages till en BMP collector/daemon, t.ex.
 <a href="https://github.com/OpenBMP/openbmp">OpenBMP</a>.</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>neighbor&nbsp;30.1.1.1&nbsp;bmp-activate&nbsp;server&nbsp;1</code>
-<code>bmp&nbsp;server&nbsp;1</code>
-<code>address&nbsp;10.0.0.10&nbsp;port-number&nbsp;8000</code>
-<code>activate</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;neighbor&nbsp;30.1.1.1&nbsp;bmp-activate&nbsp;server&nbsp;1
+&nbsp;bmp&nbsp;server&nbsp;1
+&nbsp;&nbsp;address&nbsp;10.0.0.10&nbsp;port-number&nbsp;8000
+&nbsp;&nbsp;activate
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;bmp&nbsp;server&nbsp;1</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;bmp&nbsp;server&nbsp;summary</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;bmp&nbsp;server&nbsp;1
+show&nbsp;ip&nbsp;bgp&nbsp;bmp&nbsp;server&nbsp;summary
+</code></pre></div>
 <h2 id="rpki">RPKI</h2>
 <p>"Resource Public Key Infrastructure allows IP address holders to specify
 which Autonomous Systems (AS’s) are authorized to originate their IP
@@ -10940,31 +10995,38 @@ address prefixes." RPKI ökar dock komplexitet. Konfigurera RPKI
 Cache-server, RPKI Prefix Validation, BGP Prefix Validation och RPKI
 Bestpath Computation.</p>
 <p><strong>IOS</strong></p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>bgp&nbsp;rpki&nbsp;server&nbsp;tcp&nbsp;10.0.10.10&nbsp;port&nbsp;1333&nbsp;refresh&nbsp;600</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;bgp&nbsp;rpki&nbsp;server&nbsp;tcp&nbsp;10.0.10.10&nbsp;port&nbsp;1333&nbsp;refresh&nbsp;600
+</code></pre></div>
 <p>Slå av Validation of BGP Prefixes men ladda ner RPKI Information.</p>
-<p><code>bgp&nbsp;bestpath&nbsp;prefix-validate&nbsp;disable</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;bestpath&nbsp;prefix-validate&nbsp;disable
+</code></pre></div>
 <p>Tillåt Invalid Prefixes som Best Path.</p>
-<p><code>bgp&nbsp;bestpath&nbsp;prefix-validate&nbsp;allow-invalid</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;bestpath&nbsp;prefix-validate&nbsp;allow-invalid
+</code></pre></div>
 <p>Announce RPKI information mha Extended Community</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;announce&nbsp;rpki&nbsp;state</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;announce&nbsp;rpki&nbsp;state
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;rpki&nbsp;servers</code>
-<code>show&nbsp;ip&nbsp;bgp&nbsp;rpki&nbsp;table</code>
-<code>clear&nbsp;ip&nbsp;bgp&nbsp;rpki&nbsp;server</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;rpki&nbsp;servers
+show&nbsp;ip&nbsp;bgp&nbsp;rpki&nbsp;table
+clear&nbsp;ip&nbsp;bgp&nbsp;rpki&nbsp;server
+</code></pre></div>
 <p><strong>IOS-XR</strong>
 Fr.o.m. XR 6.5.1 är origin-as validation disabled by default.</p>
-<p><code>router&nbsp;bgp&nbsp;1</code>
-<code>rpki&nbsp;server&nbsp;10.0.0.10</code>
-<code>transport&nbsp;tcp&nbsp;port&nbsp;3323</code>
-<code>refresh-time&nbsp;600</code>
-<code>!</code>
-<code>bgp&nbsp;bestpath&nbsp;origin-as&nbsp;use&nbsp;validity</code>
-<code>bgp&nbsp;bestpath&nbsp;origin-as&nbsp;allow&nbsp;invalid</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>bgp&nbsp;origin-as&nbsp;validation&nbsp;signal&nbsp;ibgp</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;1
+&nbsp;rpki&nbsp;server&nbsp;10.0.0.10
+&nbsp;&nbsp;transport&nbsp;tcp&nbsp;port&nbsp;3323
+&nbsp;&nbsp;refresh-time&nbsp;600
+!
+bgp&nbsp;bestpath&nbsp;origin-as&nbsp;use&nbsp;validity
+bgp&nbsp;bestpath&nbsp;origin-as&nbsp;allow&nbsp;invalid
+address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;bgp&nbsp;origin-as&nbsp;validation&nbsp;signal&nbsp;ibgp
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bgp&nbsp;rpki&nbsp;summary</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bgp&nbsp;rpki&nbsp;summary
+</code></pre></div>
 <h2 id="route-server">Route Server</h2>
 <p>BGP route server är feature designad för internet exchange (IX)
 operators som ger ett alternativ till full eBGP mesh peering inne på
@@ -10974,23 +11036,26 @@ next-hop så SPs som peerar med varandra fortfarande kan göra det som
 directly connected men IX route server medlar denna peering. Detta är
 osynligt utanför IX. Route server leder till mindre konfiguration samt
 CPU/minnesanvändning på varje border router.</p>
-<p><code>router&nbsp;bgp&nbsp;1337</code>
-<code>neighbor&nbsp;10.0.0.1&nbsp;remote-as&nbsp;100</code>
-<code>neighbor&nbsp;10.0.0.2&nbsp;remote-as&nbsp;200</code></p>
-<p><code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>neighbor&nbsp;10.0.0.1&nbsp;activate</code>
-<code>neighbor&nbsp;10.0.0.1&nbsp;route-server-client</code>
-<code>neighbor&nbsp;10.0.0.2&nbsp;activate</code>
-<code>neighbor&nbsp;10.0.0.2&nbsp;route-server-client</code></p>
-<p><code>show&nbsp;ip&nbsp;bgp&nbsp;ipv4&nbsp;unicast&nbsp;route-server&nbsp;all&nbsp;summary</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;1337
+&nbsp;neighbor&nbsp;10.0.0.1&nbsp;remote-as&nbsp;100
+&nbsp;neighbor&nbsp;10.0.0.2&nbsp;remote-as&nbsp;200
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.1&nbsp;activate
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.1&nbsp;route-server-client
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.2&nbsp;activate
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.2&nbsp;route-server-client
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;bgp&nbsp;ipv4&nbsp;unicast&nbsp;route-server&nbsp;all&nbsp;summary
+</code></pre></div>
 <p>Default så nekar en router uppdateringar från en eBGP-peer som inte har
 det egna ASN i början av as-path. Detta gör att en route servers
 beteende inte är okej så denna check måste stängas av på alla border
 router.</p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>no&nbsp;bgp&nbsp;enforce-first-as</code>
-<code>neighbor&nbsp;10.0.0.137&nbsp;remote-as&nbsp;1337</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;no&nbsp;bgp&nbsp;enforce-first-as
+&nbsp;neighbor&nbsp;10.0.0.137&nbsp;remote-as&nbsp;1337
+</code></pre></div></afi>
 
 
 
@@ -11013,7 +11078,7 @@ router.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

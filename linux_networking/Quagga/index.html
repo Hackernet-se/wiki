@@ -8621,6 +8621,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8854,51 +8882,62 @@ kernel, interface och redistribution mellan olika routingprotokoll.</p>
 <h1 id="installation">Installation</h1>
 <p>Vill man ha senaste versionen kan man behöva ta ner paketet och
 installera manuellt annars funkar pakethanterare.</p>
-<p><code>dnf&nbsp;install&nbsp;quagga</code>
-<code>apt-get&nbsp;install&nbsp;quagga</code></p>
+<div class="highlight"><pre><span></span><code>dnf&nbsp;install&nbsp;quagga
+apt-get&nbsp;install&nbsp;quagga
+</code></pre></div>
 <p>Allow routing in os</p>
-<p><code>echo&nbsp;"net.ipv4.conf.all.forwarding=1"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/sysctl.conf</code>
-<code>echo&nbsp;"net.ipv4.conf.default.forwarding=1"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/sysctl.conf</code>
-<code>sudo&nbsp;sysctl&nbsp;-p</code></p>
+<div class="highlight"><pre><span></span><code>echo&nbsp;"net.ipv4.conf.all.forwarding=1"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/sysctl.conf&nbsp;
+echo&nbsp;"net.ipv4.conf.default.forwarding=1"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/sysctl.conf
+sudo&nbsp;sysctl&nbsp;-p
+</code></pre></div>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>Slå på det som är önskvärt genom att editera daemons-filen.</p>
-<p><code>sudo&nbsp;nano&nbsp;/etc/quagga/daemons</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;nano&nbsp;/etc/quagga/daemons
+</code></pre></div>
 <p>Lägg sedan in grundkonf för zebra.</p>
-<p><code>sudo&nbsp;cp&nbsp;/usr/share/doc/quagga/examples/zebra.conf.sample&nbsp;/etc/quagga/zebra.conf</code>
-<code>sudo&nbsp;service&nbsp;quagga&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;cp&nbsp;/usr/share/doc/quagga/examples/zebra.conf.sample&nbsp;/etc/quagga/zebra.conf
+sudo&nbsp;service&nbsp;quagga&nbsp;restart
+</code></pre></div>
 <p>File Permissions</p>
-<p><code>sudo&nbsp;chown&nbsp;quagga.quaggavty&nbsp;/etc/quagga/*.conf</code>
-<code>sudo&nbsp;chmod&nbsp;640&nbsp;/etc/quagga/*.conf</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;chown&nbsp;quagga.quaggavty&nbsp;/etc/quagga/*.conf
+sudo&nbsp;chmod&nbsp;640&nbsp;/etc/quagga/*.conf
+</code></pre></div>
 <p>Zebra-only CLI</p>
-<p><code>telnet&nbsp;localhost&nbsp;zebra</code></p>
+<div class="highlight"><pre><span></span><code>telnet&nbsp;localhost&nbsp;zebra
+</code></pre></div>
 <p><strong>VTYSH</strong>, CLI som används för att sköta all quagga-konfiguration.</p>
-<p><code>sudo&nbsp;cp&nbsp;/usr/share/doc/quagga/examples/vtysh.conf.sample&nbsp;/etc/quagga/vtysh.conf</code>
-<code>sudo&nbsp;chown&nbsp;quagga:quaggavty&nbsp;/etc/quagga/vtysh.conf&nbsp;&amp;&amp;&nbsp;sudo&nbsp;chmod&nbsp;660&nbsp;/etc/quagga/vtysh.conf</code>
-<code>sudo&nbsp;su&nbsp;-</code>
-<code>export&nbsp;VTYSH_PAGER=more</code>
-<code>vtysh</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;cp&nbsp;/usr/share/doc/quagga/examples/vtysh.conf.sample&nbsp;/etc/quagga/vtysh.conf
+sudo&nbsp;chown&nbsp;quagga:quaggavty&nbsp;/etc/quagga/vtysh.conf&nbsp;&amp;&amp;&nbsp;sudo&nbsp;chmod&nbsp;660&nbsp;/etc/quagga/vtysh.conf
+sudo&nbsp;su&nbsp;-
+export&nbsp;VTYSH_PAGER=more&nbsp;
+vtysh
+</code></pre></div>
 <p>wr för att spara</p>
 <h2 id="ospf">OSPF</h2>
 <p>Se <a href="/Cisco_OSPF" title="wikilink">Cisco OSPF</a> för mer info om OSPF.</p>
-<p><code>sudo&nbsp;cp&nbsp;/usr/share/doc/quagga/examples/ospfd.conf.sample&nbsp;/etc/quagga/ospfd.conf</code>
-<code>sudo&nbsp;nano&nbsp;/etc/quagga/ospfd.conf&nbsp;&amp;&amp;&nbsp;sudo&nbsp;service&nbsp;quagga&nbsp;restart</code>
-<code>hostname&nbsp;ospfd</code>
-<code>router&nbsp;ospf</code>
-<code>network&nbsp;10.0.0.0/24&nbsp;area&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;cp&nbsp;/usr/share/doc/quagga/examples/ospfd.conf.sample&nbsp;/etc/quagga/ospfd.conf
+sudo&nbsp;nano&nbsp;/etc/quagga/ospfd.conf&nbsp;&amp;&amp;&nbsp;sudo&nbsp;service&nbsp;quagga&nbsp;restart
+hostname&nbsp;ospfd
+router&nbsp;ospf
+&nbsp;network&nbsp;10.0.0.0/24&nbsp;area&nbsp;0
+</code></pre></div>
 <p>OSPF-only CLI</p>
-<p><code>telnet&nbsp;localhost&nbsp;ospfd</code></p>
+<div class="highlight"><pre><span></span><code>telnet&nbsp;localhost&nbsp;ospfd
+</code></pre></div>
 <p>wr för att spara</p>
 <h2 id="bgp">BGP</h2>
 <p>Se <a href="/Cisco_BGP" title="wikilink">Cisco BGP</a> för mer info om BGP.</p>
-<p><code>sudo&nbsp;cp&nbsp;/usr/share/doc/quagga/examples/bgpd.conf.sample&nbsp;/etc/quagga/bgpd.conf</code>
-<code>sudo&nbsp;nano&nbsp;/etc/quagga/bgpd.conf&nbsp;&amp;&amp;&nbsp;sudo&nbsp;service&nbsp;quagga&nbsp;restart</code>
-<code>hostname&nbsp;bgpd</code>
-<code>router&nbsp;bgp&nbsp;100</code>
-<code>bgp&nbsp;router-id&nbsp;10.0.0.1</code>
-<code>network&nbsp;10.0.0.0/24</code>
-<code>neighbor&nbsp;10.0.0.2&nbsp;remote-as&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;cp&nbsp;/usr/share/doc/quagga/examples/bgpd.conf.sample&nbsp;/etc/quagga/bgpd.conf
+sudo&nbsp;nano&nbsp;/etc/quagga/bgpd.conf&nbsp;&amp;&amp;&nbsp;sudo&nbsp;service&nbsp;quagga&nbsp;restart
+hostname&nbsp;bgpd
+router&nbsp;bgp&nbsp;100
+&nbsp;bgp&nbsp;router-id&nbsp;10.0.0.1
+&nbsp;network&nbsp;10.0.0.0/24
+&nbsp;neighbor&nbsp;10.0.0.2&nbsp;remote-as&nbsp;100
+</code></pre></div>
 <p>BGP-only CLI</p>
-<p><code>telnet&nbsp;localhost&nbsp;bgpd</code></p>
+<div class="highlight"><pre><span></span><code>telnet&nbsp;localhost&nbsp;bgpd
+</code></pre></div>
 <p>wr för att spara</p>
 <h3 id="evpn">EVPN</h3>
 <p>Ethernet VPN (RFC 7432) är en modernare variant än VPLS för att
@@ -8908,21 +8947,23 @@ tillhandahålla Ethernet multipoint services över MPLS eller IP. Det är
 <p>OBS detta finns än sålänge endast i en community fork av Quagga som
 heter FRR.</p>
 <p>VTEP</p>
-<p><code>router&nbsp;bgp&nbsp;100</code>
-<code>address-family&nbsp;evpn</code>
-<code>neighbor&nbsp;10.0.0.10&nbsp;activate</code>
-<code>advertise-all-vni</code>
-<code>exit-address-family</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;100
+&nbsp;address-family&nbsp;evpn
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.10&nbsp;activate
+&nbsp;&nbsp;advertise-all-vni
+&nbsp;exit-address-family
+</code></pre></div>
 <p>Route reflector</p>
-<p><code>address-family&nbsp;evpn</code>
-<code>neighbor&nbsp;10.0.0.11&nbsp;activate</code>
-<code>neighbor&nbsp;10.0.0.11&nbsp;route-reflector-client</code>
-<code>exit-address-family</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;address-family&nbsp;evpn
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.11&nbsp;activate
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.11&nbsp;route-reflector-client
+&nbsp;exit-address-family
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bgp&nbsp;evpn&nbsp;route</code>
-<code>show&nbsp;evpn&nbsp;vni</code>
-<code>show&nbsp;evpn&nbsp;mac&nbsp;vni&nbsp;100</code></p>
-<p><a href="/Category:Network" title="wikilink">Category:Network</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bgp&nbsp;evpn&nbsp;route
+show&nbsp;evpn&nbsp;vni
+show&nbsp;evpn&nbsp;mac&nbsp;vni&nbsp;100
+</code></pre></div>
 
 
 
@@ -8945,7 +8986,7 @@ heter FRR.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

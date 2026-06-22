@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8841,7 +8869,7 @@
   
 
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a> RSYSLOG står för
+<p>RSYSLOG står för
 <strong>ro</strong>cket-fast <strong>sys</strong>tem for <strong>log</strong> processing. Rsyslog är väldigt
 flexibelt har en mängd olika input plugins och output plugins som gör
 att du kan forwarda dina loggar till andra system som Elasticsearch,
@@ -8855,22 +8883,30 @@ Kafka eller bara spara ner dina loggar till en fil som roterar dagligen.</p>
 <div class="tab-content">
 <div id="tab1" class="tab-pane fade in active">
 
-`yum&nbsp;-y&nbsp;install&nbsp;rsyslog`
+<div class="highlight"><pre><span></span><code>yum&nbsp;-y&nbsp;install&nbsp;rsyslog
+</code></pre></div>
 
-</div>
+
 <div id="tab2" class="tab-pane fade">
 
-`apt-get&nbsp;install&nbsp;rsyslog`
-`&nbsp;&nbsp;`
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;rsyslog
+&nbsp;&nbsp;
+</code></pre></div>
 
-</div>
-</div>
 
-<h1 id="konfiguration">Konfiguration</h1>
-<p>Default så letar rsyslog efter <strong>.conf</strong> filer under <strong>/etc/rsyslog.d/</strong></p>
-<h2 id="syslog-server">Syslog server</h2>
-<p>Starta en syslog server som lysnar på port 514 TCP/UDP och som sparar
-ner varje enhet i sin egen fil.</p>
+
+
+Konfiguration
+=============
+
+Default så letar rsyslog efter **.conf** filer under **/etc/rsyslog.d/**
+
+Syslog server
+-------------
+
+Starta en syslog server som lysnar på port 514 TCP/UDP och som sparar
+ner varje enhet i sin egen fil.
+
 <div class="highlight"><pre><span></span><code><span class="c1"># Load modules for UDP &amp; TCP</span>
 module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">"imudp"</span><span class="o">)</span>
 module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">"imtcp"</span><span class="o">)</span>
@@ -8885,31 +8921,37 @@ template<span class="o">(</span><span class="nv">name</span><span class="o">=</s
 <span class="c1"># Actions</span>
 action<span class="o">(</span><span class="nv">type</span><span class="o">=</span><span class="s2">"omfile"</span><span class="w"> </span><span class="nv">DynaFile</span><span class="o">=</span><span class="s2">"RemoteHost"</span><span class="o">)</span>
 </code></pre></div>
-<h2 id="kafka-output">Kafka Output</h2>
-<p>Man kan använda rsyslog som en aggregator som sedan skickar datan vidare
+
+Kafka Output
+------------
+
+Man kan använda rsyslog som en aggregator som sedan skickar datan vidare
 till en Kafka instance. Då kan man man använda sig av
-<a href="https://www.rsyslog.com/doc/master/configuration/modules/omkafka.html">omkafka</a>
-pluginet.</p>
-<ul>
-<li><btn data-toggle="tab" class="">#tab3|CentOS 7/8</btn></li>
-<li><btn data-toggle="tab" class="">#tab4|Ubuntu 18.04/20.04</btn></li>
-</ul>
+[omkafka](https://www.rsyslog.com/doc/master/configuration/modules/omkafka.html)
+pluginet.
+
+-   <btn data-toggle="tab" class="">\#tab3\|CentOS 7/8</btn>
+-   <btn data-toggle="tab" class="">\#tab4\|Ubuntu 18.04/20.04</btn>
+
 <div class="tab-content">
 <div id="tab3" class="tab-pane fade in active">
 
-`yum&nbsp;-y&nbsp;install&nbsp;rsyslog-kafka`
+<div class="highlight"><pre><span></span><code>yum&nbsp;-y&nbsp;install&nbsp;rsyslog-kafka
+</code></pre></div>
 
-</div>
+
 <div id="tab4" class="tab-pane fade">
 
-`apt-get&nbsp;install&nbsp;rsyslog-kafka`
-`&nbsp;&nbsp;`
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;rsyslog-kafka
+&nbsp;&nbsp;
+</code></pre></div>
 
-</div>
-</div>
 
-<p>Simpel syslog server som tar emot på port 514 TCP/UDP och som exportar
-till en Kafka instans direkt.</p>
+
+
+Simpel syslog server som tar emot på port 514 TCP/UDP och som exportar
+till en Kafka instans direkt.
+
 <div class="highlight"><pre><span></span><code><span class="c1"># Load modules for UDP &amp; TCP</span>
 module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">"imudp"</span><span class="o">)</span>
 module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">"imtcp"</span><span class="o">)</span>
@@ -8922,17 +8964,25 @@ input<span class="o">(</span><span class="nv">type</span><span class="o">=</span
 <span class="c1"># Actions</span>
 action<span class="o">(</span><span class="nv">type</span><span class="o">=</span><span class="s2">"omkafka"</span><span class="w"> </span><span class="nv">Broker</span><span class="o">=</span><span class="s2">"&lt;BROKER IP&gt;"</span><span class="w"> </span><span class="nv">Topic</span><span class="o">=</span><span class="s2">"&lt;KAFKA-TOPIC&gt;"</span><span class="o">)</span>
 </code></pre></div>
-<h3 id="dynamic-topic">Dynamic Topic</h3>
-<p>Man kan skicka syslog till olika topics baserat på innehållet i syslog
+
+### Dynamic Topic
+
+Man kan skicka syslog till olika topics baserat på innehållet i syslog
 meddelandet, tex facility, hostname, datum osv. Egentligen allt som
 rsyslog själv kan urskilja, vad det finns för färdig definierade
 variabler kan man hitta
-<a href="https://www.rsyslog.com/doc/master/configuration/properties.html">här.</a></p>
-<p>För att slå på denna funktion använder man sig av:</p>
-<p><code>DynaTopic="on"</code></p>
-<p>Det gör att <strong>topic</strong> parametern pekar på en template istället.</p>
-<p>I detta exempel så skickar jag syslog till en topic baserat på vilken
-input syslogen kommer in på.</p>
+[här.](https://www.rsyslog.com/doc/master/configuration/properties.html)
+
+För att slå på denna funktion använder man sig av:
+
+<div class="highlight"><pre><span></span><code>DynaTopic="on"
+</code></pre></div>
+
+Det gör att **topic** parametern pekar på en template istället.
+
+I detta exempel så skickar jag syslog till en topic baserat på vilken
+input syslogen kommer in på.
+
 <div class="highlight"><pre><span></span><code><span class="c1"># Module loaders</span>
 module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">"imudp"</span><span class="o">)</span>
 module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">"imtcp"</span><span class="o">)</span>
@@ -8952,18 +9002,26 @@ template<span class="o">(</span><span class="nv">name</span><span class="o">=</s
 <span class="c1"># Output to Kafka</span>
 action<span class="o">(</span><span class="nv">type</span><span class="o">=</span><span class="s2">"omkafka"</span><span class="w"> </span><span class="nv">Broker</span><span class="o">=</span><span class="s2">"&lt;BROKER IP&gt;"</span><span class="w"> </span><span class="nv">DynaTopic</span><span class="o">=</span><span class="s2">"on"</span><span class="w"> </span><span class="nv">Topic</span><span class="o">=</span><span class="s2">"Kafka_Topic"</span><span class="o">)</span>
 </code></pre></div>
-<h3 id="dynamic-key">Dynamic Key</h3>
-<p>By default så skriver man i random order till olika partitioner för att
+
+### Dynamic Key
+
+By default så skriver man i random order till olika partitioner för att
 lastbalansera. Detta kommer göra att när man läser tillbaka syslogen
 ifrån Kafka så kommer meddelande ifrån samma enhet att inte komma i
 ordning. För att fixa detta måste man skicka med en key. Det gör att
 alla meddelande ifrån enhet1 tex alltid kommer att hamna i partition 1.
 På så sätt kommer man alltid läsa meddelanden från varje enhet i den
-ordningen dom skapades.</p>
-<p>För att fixa detta använder man sig av:</p>
-<p><code>DynaKey="on"</code></p>
-<p>Det gör att <strong>key</strong> parametern pekar på en template istället.</p>
-<p>I exemplet nedan så sätter vi keyn till IP'n det kommer ifrån.</p>
+ordningen dom skapades.
+
+För att fixa detta använder man sig av:
+
+<div class="highlight"><pre><span></span><code>DynaKey="on"
+</code></pre></div>
+
+Det gör att **key** parametern pekar på en template istället.
+
+I exemplet nedan så sätter vi keyn till IP'n det kommer ifrån.
+
 <div class="highlight"><pre><span></span><code><span class="c1"># Module loaders</span>
 module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">"imudp"</span><span class="o">)</span>
 module<span class="o">(</span><span class="nv">load</span><span class="o">=</span><span class="s2">"imtcp"</span><span class="o">)</span>
@@ -8979,22 +9037,33 @@ template<span class="o">(</span><span class="nv">name</span><span class="o">=</s
 <span class="c1"># Output to Kafka</span>
 action<span class="o">(</span><span class="nv">type</span><span class="o">=</span><span class="s2">"omkafka"</span><span class="w"> </span><span class="nv">Broker</span><span class="o">=</span><span class="s2">"&lt;BROKER IP&gt;"</span><span class="w"> </span><span class="nv">DynaKey</span><span class="o">=</span><span class="s2">"on"</span><span class="w"> </span><span class="nv">Topic</span><span class="o">=</span><span class="s2">"Kafka_Key"</span><span class="o">)</span>
 </code></pre></div>
-<h3 id="multiple-brokers">Multiple brokers</h3>
-<p>Om man har ett Kafka cluster så behöver man sätta flera brokers det gör
-man såhär:</p>
+
+### Multiple brokers
+
+Om man har ett Kafka cluster så behöver man sätta flera brokers det gör
+man såhär:
+
 <div class="highlight"><pre><span></span><code>action<span class="o">(</span><span class="nv">type</span><span class="o">=</span><span class="s2">"omkafka"</span><span class="w"> </span><span class="nv">Broker</span><span class="o">=[</span><span class="s2">"&lt;BROKER IP&gt;"</span>,<span class="s2">"&lt;BROKER IP&gt;"</span>,<span class="s2">"&lt;BROKER IP&gt;"</span><span class="o">]</span><span class="w"> </span>Partitions.Auto<span class="o">=</span><span class="s2">"on"</span><span class="w"> </span><span class="nv">Topic</span><span class="o">=</span><span class="s2">"Kafka_Topic"</span><span class="o">)</span>
 </code></pre></div>
-<p>Det är också bra om man sätter på:</p>
-<p><code>Partitions.Auto="on"</code></p>
-<p>Det gör att man automatiskt kommer att last balansera alla meddelande
-man skapar till alla partioner för den topicen.</p>
-<h2 id="structured-data-rfc5424">Structured data - RFC5424</h2>
-<p>Ifall du har en syslog som följer RFC 5424 kan du använda dig av den
-fördefinierade templaten <strong>RSYSLOG_SyslogProtocol23Format</strong> för att
-behålla strukturen när du sparar till fil eller forwardar loggen till
-ett annat system.</p>
-<div class="highlight"><pre><span></span><code>action<span class="o">(</span><span class="nv">type</span><span class="o">=</span><span class="s2">"omkafka"</span><span class="w"> </span><span class="nv">Broker</span><span class="o">=</span><span class="s2">"&lt;BROKER IP&gt;"</span><span class="w"> </span><span class="nv">Topic</span><span class="o">=</span><span class="s2">"&lt;KAFKA-TOPIC&gt;"</span><span class="w"> </span><span class="nv">template</span><span class="o">=</span><span class="s2">"RSYSLOG_SyslogProtocol23Format"</span><span class="o">)</span>
+
+Det är också bra om man sätter på:
+
+<div class="highlight"><pre><span></span><code>Partitions.Auto="on"
 </code></pre></div>
+
+Det gör att man automatiskt kommer att last balansera alla meddelande
+man skapar till alla partioner för den topicen.
+
+Structured data - RFC5424
+-------------------------
+
+Ifall du har en syslog som följer RFC 5424 kan du använda dig av den
+fördefinierade templaten **RSYSLOG_SyslogProtocol23Format** för att
+behålla strukturen när du sparar till fil eller forwardar loggen till
+ett annat system.
+
+<div class="highlight"><pre><span></span><code>action<span class="o">(</span><span class="nv">type</span><span class="o">=</span><span class="s2">"omkafka"</span><span class="w"> </span><span class="nv">Broker</span><span class="o">=</span><span class="s2">"&lt;BROKER IP&gt;"</span><span class="w"> </span><span class="nv">Topic</span><span class="o">=</span><span class="s2">"&lt;KAFKA-TOPIC&gt;"</span><span class="w"> </span><span class="nv">template</span><span class="o">=</span><span class="s2">"RSYSLOG_SyslogProtocol23Format"</span><span class="o">)</span>
+</code></pre></div></div></div></div></div></div></div>
 
 
 
@@ -9017,7 +9086,7 @@ ett annat system.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

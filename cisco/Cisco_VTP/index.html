@@ -8776,6 +8776,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9179,77 +9207,45 @@ innehåller allt utom själva VLAN-databasen. Innehåller VTP domain name,
 revision number, identity of last updater, time stamp of last update,
 MD5 sum of VLAN database, VTP password och antalet efterkommande Subset
 advertisements.</p>
-<div class="mw-collapsible mw-collapsed" style="width:250px">
-
-Exempel:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_vtp_summary.png>](/File:Cisco_VTP_Summary.png "wikilink")
-
-</file:cisco_vtp_summary.png></div>
-</div>
-
+<p>Exempel:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_VTP_Summary.png" data-desc-position="bottom"><img alt="Cisco_VTP_Summary.png" src="../../images/Cisco_VTP_Summary.png"></a></p>
 <p><strong>Subset advertisement</strong>
 Skickas ut efter en VLAN-förändring och innehåller hela databasen. Kan
 dock behövas flera paket ifall det är en stor databas.</p>
-<div class="mw-collapsible mw-collapsed" style="width:250px">
-
-Exempel:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_vtp_subset.png>](/File:Cisco_VTP_Subset.png "wikilink")
-
-</file:cisco_vtp_subset.png></div>
-</div>
-
+<p>Exempel:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_VTP_Subset.png" data-desc-position="bottom"><img alt="Cisco_VTP_Subset.png" src="../../images/Cisco_VTP_Subset.png"></a></p>
 <p><strong>Advertisement requests</strong>
 Skickas av server och client när de vill ha hela VLAN-databasen, t.ex.
 när de får in en Summary Advertisement med högre revisionsnummer.
 Skickas även av klienter när de startas om eller blir client.</p>
-<div class="mw-collapsible mw-collapsed" style="width:250px">
-
-Exempel:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_vtp_request.png>](/File:Cisco_VTP_Request.png "wikilink")
-
-</file:cisco_vtp_request.png></div>
-</div>
-
+<p>Exempel:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_VTP_Request.png" data-desc-position="bottom"><img alt="Cisco_VTP_Request.png" src="../../images/Cisco_VTP_Request.png"></a></p>
 <p><strong>VTP join messages</strong>
 Skickas av server och client var 6 sekund om pruning är påslaget.
 Berättar om vilka VLAN som är aktiva.</p>
-<div class="mw-collapsible mw-collapsed" style="width:250px">
-
-Exempel:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_vtp_join.png>](/File:Cisco_VTP_Join.png "wikilink")
-
-</file:cisco_vtp_join.png></div>
-</div>
-
+<p>Exempel:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_VTP_Join.png" data-desc-position="bottom"><img alt="Cisco_VTP_Join.png" src="../../images/Cisco_VTP_Join.png"></a></p>
 <h1 id="konfiguration">Konfiguration</h1>
-<p><code>vtp&nbsp;version&nbsp;[version]</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;version&nbsp;[version]
+</code></pre></div>
 <p>Vill man byta vlan.dat kan man göra det, det har bara lokal signifikans.</p>
 <p><code>vtp&nbsp;file</code><em><code>filename</code></em></p>
 <p>VTP kan stängas av per interface</p>
-<p><code>no&nbsp;vtp</code>
-<code>show&nbsp;vtp&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;vtp
+show&nbsp;vtp&nbsp;interface
+</code></pre></div>
 <p>Debug</p>
-<p><code>debug&nbsp;sw-vlan&nbsp;vtp&nbsp;events</code>
-<code>debug&nbsp;sw-vlan&nbsp;vtp&nbsp;packets</code></p>
+<div class="highlight"><pre><span></span><code>debug&nbsp;sw-vlan&nbsp;vtp&nbsp;events
+debug&nbsp;sw-vlan&nbsp;vtp&nbsp;packets
+</code></pre></div>
 <h3 id="domain">Domain</h3>
 <p>Domän måste vara samma på alla enheter annars ignoreras updates, har man
 inget domännamn konfigurerat lånar man det som andra sidan skickar med i
 sina paket (v3 gör ej så). Byt namn på domän för att resetta revision
 number.</p>
-<p><code>vtp&nbsp;domain&nbsp;[domain]</code>
-<code>show&nbsp;vtp&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;domain&nbsp;[domain]
+show&nbsp;vtp&nbsp;status
+</code></pre></div>
 <p>Använd lösenord för att skydda din miljö annars kan t.ex. domäner
 propagera till switchar automatiskt. Detta skyddar ej mot eavesdropping
 utan endast mot unauthorized switches. En MD5-summa räknas fram av
@@ -9257,8 +9253,9 @@ VLAN-databasen och lösenordet för att sedan skickas med Summary
 advertisement. Hidden password är VTPv3 only och då hashas lösenordet i
 vlan.dat också, v1/2 funkar inte ifall det finns ett hidden password
 konfigurerat.</p>
-<p><code>vtp&nbsp;password&nbsp;SECRETZ&nbsp;{hidden|secret}</code>
-<code>show&nbsp;vtp&nbsp;password</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;password&nbsp;SECRETZ&nbsp;{hidden|secret}
+show&nbsp;vtp&nbsp;password
+</code></pre></div>
 <h3 id="modes">Modes</h3>
 <p><strong>Server</strong>
 På VTP-servrar skapar, modifierar och tar man bort VLAN, detta
@@ -9266,24 +9263,28 @@ propageras sedan ut till klienter och övriga servrar. Detta är default
 för Cisco IOS men uppdateringar skickas inte förrens VTP domain är
 konfigurerat. Uppdateringar accepteras från server och client och VLAN
 sparas i vlan.dat.</p>
-<p><code>vtp&nbsp;mode&nbsp;server</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;mode&nbsp;server
+</code></pre></div>
 <p><strong>Client</strong>
 Behöver ej ha VTP domain konfigurerat utan tar det från den första
 VTP-uppdateringen som tas emot. Dock måste vtp mode client konfigureras.
 Uppdateringar accepteras från server och client och VLAN sparas i
 vlan.dat. Eftersom klienter originerar uppdateringar kan en klient med
 högre revisionsnummer uppdatera databasen på en server.</p>
-<p><code>vtp&nbsp;mode&nbsp;client</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;mode&nbsp;client
+</code></pre></div>
 <p><strong>Transparent</strong>
 Enheter i VTP mode transparent släpper igenom VTP frames om VTP domain
 matchar men behandlar dem aldrig själv, <em>VTP LOG RUNTIME: Relaying
 packet received on trunk Gi0/2 - in TRANSPARENT MODE</em>. VLAN på dessa
 enheter sparas lokalt i running config och vlan.dat. OBS transparent
 mode forwarderar VTP om domain är NULL.</p>
-<p><code>vtp&nbsp;mode&nbsp;transparent</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;mode&nbsp;transparent
+</code></pre></div>
 <p><strong>Off</strong>
 Finns endast med VTPv3 och stänger av VTP-forwarding helt.</p>
-<p><code>vtp&nbsp;mode&nbsp;off</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;mode&nbsp;off
+</code></pre></div>
 <h3 id="pruning">Pruning</h3>
 <p>VTP pruning erbjuder en dynamisk mekanism som automatisk konfigurerar
 vilka VLAN som ska tillåtas på trunkar inom VTP-domänen. Slå på pruning
@@ -9292,13 +9293,16 @@ alla VLAN. För utbyte av information om aktiva VLAN används VTP join
 messages. VTP pruning kan läras av VTP-klienter, så om man slår på det
 på en VTP-server och den börjar skicka ut join messages så kommer också
 klienterna att slå på pruning automatiskt.</p>
-<p><code>vtp&nbsp;pruning</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;pruning
+</code></pre></div>
 <p>By default är alla VLAN utom 1 prune eligible. Vill man att endast vissa
 VLAN ska vara med i VTP pruning kan man lägga dem per trunk i Prune
 Eligible List.</p>
-<p><code>switchport&nbsp;trunk&nbsp;pruning&nbsp;vlan&nbsp;VLAN-RANGE</code></p>
+<div class="highlight"><pre><span></span><code>switchport&nbsp;trunk&nbsp;pruning&nbsp;vlan&nbsp;VLAN-RANGE
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;interface&nbsp;trunk</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;interface&nbsp;trunk
+</code></pre></div>
 <h1 id="vtpv3">VTPv3</h1>
 <p>Med VTPv3 introduceras <em>primary server</em> och det är bara dennes
 VLAN-databas som får modifieras och skickas ut i domänen. Alla andra
@@ -9324,22 +9328,27 @@ andra då kommer v3 känna av det och återgå till v2 vilket tvingar den
 första switchen att använda v2-only. v2-sidan kan aldrig uppdatera
 v3-domänen så allt i v2 bör vara client.</p>
 <p>Konfiguration</p>
-<p><code>vtp&nbsp;domain&nbsp;hackernet.se</code>
-<code>vtp&nbsp;version&nbsp;3</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;domain&nbsp;hackernet.se
+vtp&nbsp;version&nbsp;3
+</code></pre></div>
 <p>Skapa VLAN</p>
-<p><code>vtp&nbsp;mode&nbsp;server</code>
-<code>vlan&nbsp;100</code>
-<em><code>VTP`` ``VLAN`` ``configuration`` ``not`` ``allowed`` ``when`` ``device`` ``is`` ``not`` ``the`` ``primary`` ``server`` ``for`` ``vlan`` ``database.</code></em></p>
+<p></p><div class="highlight"><pre><span></span><code>vtp&nbsp;mode&nbsp;server
+vlan&nbsp;100
+</code></pre></div>
+<em><code>VTP`` ``VLAN`` ``configuration`` ``not`` ``allowed`` ``when`` ``device`` ``is`` ``not`` ``the`` ``primary`` ``server`` ``for`` ``vlan`` ``database.</code></em><p></p>
 <p>För att bli primary krävs lösenordet. Primary är endast operational
 state, det är inget som sparas i running eller startup.</p>
-<p><code>vtp&nbsp;primary</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;primary
+</code></pre></div>
 <p>Ta primary utan att först kontrollera efter conflicting devices (som
 annars kan ta lite tid).</p>
-<p><code>vtp&nbsp;primary&nbsp;vlan&nbsp;force</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;primary&nbsp;vlan&nbsp;force
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;vtp&nbsp;status</code>
-<code>show&nbsp;vtp&nbsp;devices&nbsp;&nbsp;#Endast&nbsp;v3-enheter&nbsp;syns</code>
-<code>show&nbsp;vtp&nbsp;counters</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;vtp&nbsp;status
+show&nbsp;vtp&nbsp;devices&nbsp;&nbsp;#Endast&nbsp;v3-enheter&nbsp;syns
+show&nbsp;vtp&nbsp;counters
+</code></pre></div>
 <h3 id="extended-vlans">Extended VLANs</h3>
 <p>Varje gång man skapar en routed port eller SVI i en L3-switch binds ett
 VLAN till det interfacet för intern kommunikation till control plane.
@@ -9349,26 +9358,31 @@ switch utan SVI:er så funkar det bra men det kanske inte skapas på alla
 switchar även om VTP fungerar som det ska, <em>"VLAN_CREATE_FAIL"</em> pga
 "VLAN 1007 currently in use by GigabitEthernet0/3". Vilka VLAN en switch
 använder till detta beror på global policy i switchen.</p>
-<p><code>show&nbsp;vlan&nbsp;internal&nbsp;usage</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;vlan&nbsp;internal&nbsp;usage
+</code></pre></div>
 <p>Default är att starta allokering på VLAN 1006 och gå uppåt.</p>
-<p><code>vlan&nbsp;internal&nbsp;allocation&nbsp;policy&nbsp;ascending</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;internal&nbsp;allocation&nbsp;policy&nbsp;ascending
+</code></pre></div>
 <p>På nyare switchar kan man ändra detta till att starta på vlan 4094 och
 gå neråt istället.</p>
-<p><code>vlan&nbsp;internal&nbsp;allocation&nbsp;policy&nbsp;descending</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;internal&nbsp;allocation&nbsp;policy&nbsp;descending
+</code></pre></div>
 <h3 id="mst">MST</h3>
 <p><a href="/Cisco_MST" title="wikilink">MST</a>-konfiguration kan också distribueras med
 hjälp av VTPv3. Precis som för VLAN får endast ändringar göras på
 primary server (som ej behöver vara samma som för feature VLAN).</p>
-<p><code>vtp&nbsp;mode&nbsp;server&nbsp;mst</code>
-<code>vtp&nbsp;mode&nbsp;client&nbsp;mst</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;mode&nbsp;server&nbsp;mst
+vtp&nbsp;mode&nbsp;client&nbsp;mst
+</code></pre></div>
 <p><em>OBS att ändra VTP mode för MST påverkar spanning tree så det bör göras
 under kontrollerade former.</em></p>
 <p>Ta primary-rollen</p>
-<p><code>vtp&nbsp;primary&nbsp;mst</code>
-<code>vtp&nbsp;primary&nbsp;mst&nbsp;force</code></p>
+<div class="highlight"><pre><span></span><code>vtp&nbsp;primary&nbsp;mst&nbsp;
+vtp&nbsp;primary&nbsp;mst&nbsp;force
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;vtp&nbsp;status</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;vtp&nbsp;status
+</code></pre></div>
 
 
 
@@ -9391,7 +9405,7 @@ under kontrollerade former.</em></p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

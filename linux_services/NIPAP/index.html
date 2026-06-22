@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8849,65 +8877,77 @@ Demo: <a href="http://nipap-demo.spritelink.net/">http://nipap-demo.spritelink.n
 <p><em>Debian eller Ubuntu</em></p>
 <p><code>echo&nbsp;"deb</code><a href="http://spritelink.github.io/NIPAP/repos/apt"><code>http://spritelink.github.io/NIPAP/repos/apt</code></a><code>stable&nbsp;main&nbsp;extra"&nbsp;&gt;&nbsp;/etc/apt/sources.list.d/nipap.list</code>
 <code>wget&nbsp;-O&nbsp;-</code><a href="https://spritelink.github.io/NIPAP/nipap.gpg.key"><code>https://spritelink.github.io/NIPAP/nipap.gpg.key</code></a><code>|&nbsp;apt-key&nbsp;add&nbsp;-</code>
-<code>apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;nipapd</code></p>
+</p><div class="highlight"><pre><span></span><code>apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;nipapd
+</code></pre></div><p></p>
 <p>Svara Yes på frågorna för att autoskapa databas</p>
-<p><code>apt-get&nbsp;-y&nbsp;install&nbsp;nipap-www</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;-y&nbsp;install&nbsp;nipap-www
+</code></pre></div>
 <p>Återigen yes för att skapa ett användarkonto för frontend till backend</p>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>I denna guide görs allt på samma maskin men frontend accessas från andra
 maskiner. Det behövs ett konto för att logga in på webguit.</p>
-<p><code>nipap-passwd&nbsp;add&nbsp;--user&nbsp;user1&nbsp;--password&nbsp;mypasswort&nbsp;--name&nbsp;"the&nbsp;man"</code></p>
+<div class="highlight"><pre><span></span><code>nipap-passwd&nbsp;add&nbsp;--user&nbsp;user1&nbsp;--password&nbsp;mypasswort&nbsp;--name&nbsp;"the&nbsp;man"
+</code></pre></div>
 <h3 id="apache"><a href="/Apache" title="wikilink">Apache</a></h3>
-<p><code>apt-get&nbsp;-y&nbsp;install&nbsp;apache2&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;libapache2-mod-wsgi</code>
-<code>nano&nbsp;/etc/apache2/sites-available/000-default.conf</code>
-<code>&lt;VirtualHost&nbsp;*:80&gt;</code>
-<code>DocumentRoot&nbsp;/var/www/html</code>
-<code>ErrorLog&nbsp;${APACHE_LOG_DIR}/error.log</code>
-<code>CustomLog&nbsp;${APACHE_LOG_DIR}/access.log&nbsp;combined</code></p>
-<p><code>WSGIScriptAlias&nbsp;/&nbsp;/etc/nipap/nipap-www.wsgi</code>
-<code>&lt;Directory&nbsp;"/etc/nipap"&gt;</code>
-<code>Order&nbsp;allow,deny</code>
-<code>Allow&nbsp;from&nbsp;all</code>
-<code>&lt;Files&nbsp;nipap-www.wsgi&gt;</code>
-<code>Require&nbsp;all&nbsp;granted</code>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;-y&nbsp;install&nbsp;apache2&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;libapache2-mod-wsgi
+nano&nbsp;/etc/apache2/sites-available/000-default.conf
+&lt;VirtualHost&nbsp;*:80&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DocumentRoot&nbsp;/var/www/html
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ErrorLog&nbsp;${APACHE_LOG_DIR}/error.log
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CustomLog&nbsp;${APACHE_LOG_DIR}/access.log&nbsp;combined
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WSGIScriptAlias&nbsp;/&nbsp;/etc/nipap/nipap-www.wsgi
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Directory&nbsp;"/etc/nipap"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order&nbsp;allow,deny
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allow&nbsp;from&nbsp;all
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Files&nbsp;nipap-www.wsgi&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Require&nbsp;all&nbsp;granted
+</code></pre></div>
 <code></code>
 <code></code>
-</p>
-<p><code>chown&nbsp;-R&nbsp;www-data:www-data&nbsp;/var/cache/nipap-www&nbsp;&amp;&amp;&nbsp;chmod&nbsp;-R&nbsp;u=rwX&nbsp;/var/cache/nipap-www</code>
-<code>sudo&nbsp;service&nbsp;apache2&nbsp;restart</code></p>
+<p></p>
+<div class="highlight"><pre><span></span><code>chown&nbsp;-R&nbsp;www-data:www-data&nbsp;/var/cache/nipap-www&nbsp;&amp;&amp;&nbsp;chmod&nbsp;-R&nbsp;u=rwX&nbsp;/var/cache/nipap-www
+sudo&nbsp;service&nbsp;apache2&nbsp;restart
+</code></pre></div>
 <h3 id="ldap">LDAP</h3>
 <p>Börja med att installera python-ldap modul.</p>
-<p><code>apt-get&nbsp;install&nbsp;python-ldap</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;python-ldap
+</code></pre></div>
 <p>Ändra sedan i <code>/etc/nipap/nipap.conf</code> filen till följande.</p>
-<p><code>default_backend&nbsp;=&nbsp;ldap</code></p>
-<p><code>basedn&nbsp;=&nbsp;dc=hackernet,dc=se</code>
+<div class="highlight"><pre><span></span><code>default_backend&nbsp;=&nbsp;ldap
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>basedn&nbsp;=&nbsp;dc=hackernet,dc=se
+</code></pre></div>
 <code>uri&nbsp;=</code><a href="ldap://IP"><code>ldap://IP</code></a>
-<code>binddn_fmt&nbsp;=&nbsp;uid={},ou=users,dc=hackernet,dc=se</code>
-<code>search&nbsp;=&nbsp;uid={}</code>
-<code>search_binddn&nbsp;=&nbsp;cn=admin,dc=hackernet,dc=se</code>
-<code>search_password&nbsp;=&nbsp;secretpw</code>
-<code>rw_group&nbsp;=&nbsp;cn=nipap,dc=hackernet,dc=se</code></p>
+<div class="highlight"><pre><span></span><code>binddn_fmt&nbsp;=&nbsp;uid={},ou=users,dc=hackernet,dc=se
+search&nbsp;=&nbsp;uid={}
+search_binddn&nbsp;=&nbsp;cn=admin,dc=hackernet,dc=se
+search_password&nbsp;=&nbsp;secretpw
+rw_group&nbsp;=&nbsp;cn=nipap,dc=hackernet,dc=se
+</code></pre></div><p></p>
 <p>Skapa sedan en grupp som heter nipap och som har stöd för
 <a href="/OpenLDAP#memberOf" title="wikilink">memberOf</a>. Användare i denna gruppen får
 read/write rättigheter.</p>
 <h1 id="cli">CLI</h1>
 <p>Med ett cli går det snabbare att fylla databasen om det handlar om stora
 datamängder.</p>
-<p><code>apt-get&nbsp;-y&nbsp;install&nbsp;nipap-cli</code>
-<code>nipap-passwd&nbsp;add&nbsp;--user&nbsp;cli-master-flash&nbsp;--password&nbsp;olasamigossenior&nbsp;--name&nbsp;"the&nbsp;CLI&nbsp;man"</code>
-<code>touch&nbsp;~/.nipaprc&nbsp;&amp;&amp;&nbsp;chmod&nbsp;0600&nbsp;.nipaprc&nbsp;&amp;&amp;&nbsp;nano&nbsp;.nipaprc</code>
-<code>[global]</code>
-<code>hostname&nbsp;=&nbsp;localhost</code>
-<code>port&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;1337</code>
-<code>username&nbsp;=&nbsp;cli-master-flash</code>
-<code>password&nbsp;=&nbsp;olasamigossenior</code>
-<code>default_vrf_rt&nbsp;=&nbsp;none</code>
-<code>default_list_vrf_rt&nbsp;=&nbsp;all</code></p>
-<p><code>nipap&nbsp;address&nbsp;add&nbsp;prefix&nbsp;192.0.2.0/24&nbsp;type&nbsp;assignment&nbsp;description&nbsp;"MGM-network"</code>
-<code>nipap&nbsp;address&nbsp;add&nbsp;prefix&nbsp;172.20.0.10&nbsp;type&nbsp;host&nbsp;node&nbsp;"SW01"&nbsp;description&nbsp;"L3-switch"</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;-y&nbsp;install&nbsp;nipap-cli
+nipap-passwd&nbsp;add&nbsp;--user&nbsp;cli-master-flash&nbsp;--password&nbsp;olasamigossenior&nbsp;--name&nbsp;"the&nbsp;CLI&nbsp;man"
+touch&nbsp;~/.nipaprc&nbsp;&amp;&amp;&nbsp;chmod&nbsp;0600&nbsp;.nipaprc&nbsp;&amp;&amp;&nbsp;nano&nbsp;.nipaprc
+[global]
+hostname&nbsp;=&nbsp;localhost
+port&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;1337
+username&nbsp;=&nbsp;cli-master-flash
+password&nbsp;=&nbsp;olasamigossenior
+default_vrf_rt&nbsp;=&nbsp;none
+default_list_vrf_rt&nbsp;=&nbsp;all
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>nipap&nbsp;address&nbsp;add&nbsp;prefix&nbsp;192.0.2.0/24&nbsp;type&nbsp;assignment&nbsp;description&nbsp;"MGM-network"
+nipap&nbsp;address&nbsp;add&nbsp;prefix&nbsp;172.20.0.10&nbsp;type&nbsp;host&nbsp;node&nbsp;"SW01"&nbsp;description&nbsp;"L3-switch"
+</code></pre></div>
 <h1 id="debug">Debug</h1>
-<p><code>sudo&nbsp;nipapd&nbsp;-d&nbsp;-f&nbsp;--no-pid-file</code></p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;nipapd&nbsp;-d&nbsp;-f&nbsp;--no-pid-file
+</code></pre></div>
 
 
 
@@ -8930,7 +8970,7 @@ datamängder.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

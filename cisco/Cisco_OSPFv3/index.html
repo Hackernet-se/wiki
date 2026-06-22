@@ -8798,6 +8798,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9189,105 +9217,129 @@ IPv4.</p>
 <p>NBMA</p>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Prereq</p>
-<p><code>ipv6&nbsp;unicast-routing</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;unicast-routing
+</code></pre></div>
 <p>Process, det måste finnas en RID som är 32-bitar och skrivs som en
 IPv4-adress. Den väljs på samma sätt som i OSPFv2. Finns det ingen
 IPv4-adress konfigurerad så måste man konfigurera detta manuellt innan
 processen kan starta.</p>
-<p><code>ipv6&nbsp;router&nbsp;ospf&nbsp;1</code>
-<code>router-id&nbsp;1.1.1.1</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;router&nbsp;ospf&nbsp;1
+&nbsp;router-id&nbsp;1.1.1.1
+</code></pre></div>
 <p>Interface, det finns inget network-kommando utan man slår på det per
 interface. Finns det flera adresser på ett interface kommer alla att
 annonseras av OSPFv3. IPv6-granne konfigureras under interface och inte
 processen.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ipv6&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0</code>
-<code>ipv6&nbsp;ospf&nbsp;neighbor&nbsp;2000:1::2</code>
-<code>ipv6&nbsp;ospf&nbsp;priority&nbsp;1</code>
-<code>ipv6&nbsp;ospf&nbsp;hello-interval&nbsp;10</code>
-<code>ipv6&nbsp;ospf&nbsp;dead-interval&nbsp;40</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ipv6&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0
+&nbsp;ipv6&nbsp;ospf&nbsp;neighbor&nbsp;2000:1::2
+&nbsp;ipv6&nbsp;ospf&nbsp;priority&nbsp;1
+&nbsp;ipv6&nbsp;ospf&nbsp;hello-interval&nbsp;10
+&nbsp;ipv6&nbsp;ospf&nbsp;dead-interval&nbsp;40
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ipv6&nbsp;ospf&nbsp;neighbor</code>
-<code>show&nbsp;ipv6&nbsp;ospf&nbsp;database</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;ospf&nbsp;neighbor
+show&nbsp;ipv6&nbsp;ospf&nbsp;database
+</code></pre></div>
 <p><strong>Instance</strong>, OSPFv3 har stöd för multipla instanser per länk. Endast
 routrar med samma instance-nummer bildar grannskap.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ipv6&nbsp;ospf&nbsp;1&nbsp;area&nbsp;2&nbsp;instance&nbsp;3</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ipv6&nbsp;ospf&nbsp;1&nbsp;area&nbsp;2&nbsp;instance&nbsp;3
+</code></pre></div>
 <h3 id="authentication">Authentication</h3>
 <p>Den första varianten av OSPFv3 (IPv6 only) använder IPv6’s inbyggda
 IPsec-autentisering så det finns ingen egen. Eftersom OSPFv3 inte
 använder ISAKMP för nyckelutbyte i fas 1 måste fas 2 autentisering och
 kryptering konfigureras manuellt.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ipv6&nbsp;ospf&nbsp;encryption&nbsp;ipsec&nbsp;spi&nbsp;2001&nbsp;esp&nbsp;aes-cbc&nbsp;256&nbsp;4F814B37EA44ED42549955036FC0A68830A45FAC16424B093511EB4ACF20962D&nbsp;sha1&nbsp;8A4481AF1A1444A92BB405F3A7FA392DF7222E5F</code></p>
-<p><code>ipv6&nbsp;ospf&nbsp;authentication&nbsp;?</code>
-<code>ipsec</code>
-<code>null</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ipv6&nbsp;ospf&nbsp;encryption&nbsp;ipsec&nbsp;spi&nbsp;2001&nbsp;esp&nbsp;aes-cbc&nbsp;256&nbsp;4F814B37EA44ED42549955036FC0A68830A45FAC16424B093511EB4ACF20962D&nbsp;sha1&nbsp;8A4481AF1A1444A92BB405F3A7FA392DF7222E5F
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;ipv6&nbsp;ospf&nbsp;authentication&nbsp;?
+&nbsp;&nbsp;&nbsp;ipsec&nbsp;
+&nbsp;&nbsp;&nbsp;null
+</code></pre></div>
 <h3 id="prefix-suppression">Prefix Suppression</h3>
 <p>Fungerar som med OSPFv2.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ipv6&nbsp;ospf&nbsp;prefix-suppression</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ipv6&nbsp;ospf&nbsp;prefix-suppression
+</code></pre></div>
 <h3 id="summarization">Summarization</h3>
 <p>Fungerar som med OSPFv2.</p>
-<p><code>ipv6&nbsp;router&nbsp;ospf&nbsp;1</code>
-<code>area&nbsp;0&nbsp;range&nbsp;2000:1::/60</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;router&nbsp;ospf&nbsp;1
+&nbsp;area&nbsp;0&nbsp;range&nbsp;2000:1::/60
+</code></pre></div>
 <h3 id="redistribution">Redistribution</h3>
 <p>Default metric: 1 för BGP, 20 för övrigt</p>
-<p><code>ipv6&nbsp;router&nbsp;ospf&nbsp;1</code>
-<code>redistribute&nbsp;connected&nbsp;metric&nbsp;10</code>
-<code>redistribute&nbsp;rip&nbsp;RIPNG&nbsp;tag&nbsp;123</code>
-<code>redistribute&nbsp;eigrp&nbsp;100&nbsp;route-map&nbsp;FILTER</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;router&nbsp;ospf&nbsp;1
+&nbsp;redistribute&nbsp;connected&nbsp;metric&nbsp;10
+&nbsp;redistribute&nbsp;rip&nbsp;RIPNG&nbsp;tag&nbsp;123
+&nbsp;redistribute&nbsp;eigrp&nbsp;100&nbsp;route-map&nbsp;FILTER
+</code></pre></div>
 <h3 id="virtual-links">Virtual Links</h3>
 <p>Virtual link kan byggas över IPv4 precis som med OSPFv2.</p>
-<p><code>ipv6&nbsp;router&nbsp;ospf&nbsp;1</code>
-<code>area&nbsp;1&nbsp;virtual-link&nbsp;10.0.0.20</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;router&nbsp;ospf&nbsp;1
+&nbsp;area&nbsp;1&nbsp;virtual-link&nbsp;10.0.0.20
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ipv6&nbsp;ospf&nbsp;virtual-links</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;ospf&nbsp;virtual-links&nbsp;
+</code></pre></div>
 <h2 id="multi-af-mode">Multi AF Mode</h2>
 <p>Denna konfigurationen är mer homogen med <a href="/Cisco_BGP#Konfiguration" title="wikilink">BGP
 AFI-format</a> och <a href="/Cisco_EIGRP#Named_mode" title="wikilink">EIGRP Named
 mode</a>.</p>
-<p><code>router&nbsp;ospfv3&nbsp;1</code>
-<code>router-id&nbsp;1.1.1.1</code></p>
-<p><code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>maximum-paths&nbsp;4</code>
-<code>redistribute&nbsp;connected</code>
-<code>exit-address-family</code></p>
-<p><code>address-family&nbsp;ipv6&nbsp;unicast</code>
-<code>maximum-paths&nbsp;16</code>
-<code>area&nbsp;0&nbsp;range&nbsp;2001:100:1::/48</code>
-<code>exit-address-family</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>ospfv3&nbsp;1&nbsp;ipv4&nbsp;area&nbsp;0</code>
-<code>ospfv3&nbsp;1&nbsp;ipv6&nbsp;area&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;ospfv3&nbsp;1
+&nbsp;router-id&nbsp;1.1.1.1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;maximum-paths&nbsp;4
+&nbsp;&nbsp;redistribute&nbsp;connected
+&nbsp;exit-address-family
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;address-family&nbsp;ipv6&nbsp;unicast
+&nbsp;&nbsp;maximum-paths&nbsp;16
+&nbsp;&nbsp;area&nbsp;0&nbsp;range&nbsp;2001:100:1::/48
+&nbsp;exit-address-family
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ospfv3&nbsp;1&nbsp;ipv4&nbsp;area&nbsp;0
+&nbsp;ospfv3&nbsp;1&nbsp;ipv6&nbsp;area&nbsp;0
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ospfv3</code>
-<code>show&nbsp;ospfv3&nbsp;neighbor</code>
-<code>show&nbsp;ospfv3&nbsp;interface&nbsp;brief</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ospfv3
+show&nbsp;ospfv3&nbsp;neighbor
+show&nbsp;ospfv3&nbsp;interface&nbsp;brief
+</code></pre></div>
 <p>Man måste köra IPv6 också eftersom det används för control plane.</p>
-<p><code>ospfv3&nbsp;1&nbsp;ipv4&nbsp;area&nbsp;0</code>
-<code>%&nbsp;OSPFv3:&nbsp;IPV6&nbsp;is&nbsp;not&nbsp;enabled&nbsp;on&nbsp;this&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>ospfv3&nbsp;1&nbsp;ipv4&nbsp;area&nbsp;0
+%&nbsp;OSPFv3:&nbsp;IPV6&nbsp;is&nbsp;not&nbsp;enabled&nbsp;on&nbsp;this&nbsp;interface
+</code></pre></div>
 <h3 id="authentication_1">Authentication</h3>
 <p>Med OSPFv3 kan man använda ESP header eller Authentication Header och
 det konfigureras antingen per-link eller globalt under arean.</p>
-<p><code>router&nbsp;ospfv3&nbsp;1</code>
-<code>area&nbsp;10&nbsp;authentication&nbsp;ipsec&nbsp;spi&nbsp;500&nbsp;sha1&nbsp;8a4481af1a1444a92bb405f3a7fa392df7222e5f</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>ospfv3&nbsp;encryption&nbsp;ipsec&nbsp;spi&nbsp;700&nbsp;esp&nbsp;aes-cbc&nbsp;256&nbsp;4F814B37EA44ED42549955036FC0A68830A45FAC16424B093511EB4ACF20962D&nbsp;sha1&nbsp;8A4481AF1A1444A92BB405F3A7FA392DF7222E5F</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;ospfv3&nbsp;1
+&nbsp;area&nbsp;10&nbsp;authentication&nbsp;ipsec&nbsp;spi&nbsp;500&nbsp;sha1&nbsp;8a4481af1a1444a92bb405f3a7fa392df7222e5f
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ospfv3&nbsp;encryption&nbsp;ipsec&nbsp;spi&nbsp;700&nbsp;esp&nbsp;aes-cbc&nbsp;256&nbsp;4F814B37EA44ED42549955036FC0A68830A45FAC16424B093511EB4ACF20962D&nbsp;sha1&nbsp;8A4481AF1A1444A92BB405F3A7FA392DF7222E5F
+</code></pre></div>
 <p>Innan OSPFv3 Authentication Trailer var IPsec det enda sättet att
 autentisera OSPF-paketen.</p>
-<p><code>key&nbsp;chain&nbsp;OSPFv3</code>
-<code>key&nbsp;1</code>
-<code>key-string&nbsp;SECRET</code>
-<code>cryptographic-algorithm&nbsp;hmac-sha-512</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>ospfv3&nbsp;authentication&nbsp;?</code>
-<code>ipsec</code>
+<div class="highlight"><pre><span></span><code>key&nbsp;chain&nbsp;OSPFv3
+&nbsp;key&nbsp;1
+&nbsp;&nbsp;key-string&nbsp;SECRET
+&nbsp;&nbsp;cryptographic-algorithm&nbsp;hmac-sha-512
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ospfv3&nbsp;authentication&nbsp;?
+&nbsp;&nbsp;&nbsp;ipsec
+</code></pre></div>
 <code></code><strong><code>key-chain</code></strong>
-<code>null</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;null
+</code></pre></div><p></p>
 <p>Verify</p>
-<p><code>show&nbsp;ospfv3&nbsp;interface&nbsp;|&nbsp;i&nbsp;Ethernet|authentication|encryption</code>
-<code>show&nbsp;crypto&nbsp;ipsec&nbsp;policy</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ospfv3&nbsp;interface&nbsp;|&nbsp;i&nbsp;Ethernet|authentication|encryption
+show&nbsp;crypto&nbsp;ipsec&nbsp;policy
+</code></pre></div>
 <h3 id="ttl-security">TTL Security</h3>
 <p>OSPFv3 TTL security kan endast konfigureras för virtual links och sham
 links i Multi AF Mode. TTL Security gör ingen nytta i övrigt eftersom
@@ -9295,11 +9347,12 @@ OSPFv3 control plane görs med link-local-adresser.</p>
 <h3 id="bfd">BFD</h3>
 <p>BFD-support för OSPFv3 kan konfigureras på två sätt, under processen
 eller interface. Se även <a href="/Cisco_BFD" title="wikilink">Cisco BFD</a>.</p>
-<p><code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>bfd&nbsp;all-interfaces</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>ospfv3&nbsp;bfd</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;bfd&nbsp;all-interfaces
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ospfv3&nbsp;bfd&nbsp;
+</code></pre></div>
 
 
 
@@ -9322,7 +9375,7 @@ eller interface. Se även <a href="/Cisco_BFD" title="wikilink">Cisco BFD</a>.</
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8864,6 +8864,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9330,52 +9358,66 @@ resultatet. Används också för att skicka kommandon mot Core.</p>
 <p><code>wget&nbsp;-O&nbsp;-</code><a href="http://packages.icinga.org/icinga.key"><code>http://packages.icinga.org/icinga.key</code></a><code>|&nbsp;apt-key&nbsp;add&nbsp;-</code>
 <code>echo&nbsp;deb</code><a href="http://packages.icinga.org/debian"><code>http://packages.icinga.org/debian</code></a><code>icinga-jessie&nbsp;main&nbsp;&gt;&gt;&nbsp;/etc/apt/sources.list</code>
 <code>echo&nbsp;deb-src</code><a href="http://packages.icinga.org/debian"><code>http://packages.icinga.org/debian</code></a><code>icinga-jessie&nbsp;main&nbsp;&gt;&gt;&nbsp;/etc/apt/sources.list</code>
-<code>apt-get&nbsp;update</code></p>
+</p><div class="highlight"><pre><span></span><code>apt-get&nbsp;update
+</code></pre></div><p></p>
 <p><strong>Debian backports repo</strong></p>
 <p><code>echo&nbsp;deb</code><a href="http://ftp.se.debian.org/debian/"><code>http://ftp.se.debian.org/debian/</code></a><code>jessie-backports&nbsp;main&nbsp;&gt;&gt;&nbsp;/etc/apt/sources.list</code>
-<code>apt-get&nbsp;update</code></p>
+</p><div class="highlight"><pre><span></span><code>apt-get&nbsp;update
+</code></pre></div><p></p>
 <p><strong>Debmon repo</strong></p>
 <p><code>wget&nbsp;-O&nbsp;-</code><a href="http://debmon.org/debmon/repo.key"><code>http://debmon.org/debmon/repo.key</code></a><code>2&gt;/dev/null&nbsp;|&nbsp;apt-key&nbsp;add&nbsp;-</code>
 <code>echo&nbsp;'deb</code><a href="http://debmon.org/debmon"><code>http://debmon.org/debmon</code></a><code>debmon-jessie&nbsp;main'&nbsp;&gt;/etc/apt/sources.list.d/debmon.list</code>
-<code>apt-get&nbsp;update</code></p>
+</p><div class="highlight"><pre><span></span><code>apt-get&nbsp;update
+</code></pre></div><p></p>
 <h4 id="ubuntu">Ubuntu</h4>
 <p><strong>Icinga Ubuntu repo</strong>'</p>
 <p><code>wget&nbsp;-O&nbsp;-</code><a href="http://packages.icinga.org/icinga.key"><code>http://packages.icinga.org/icinga.key</code></a><code>|&nbsp;apt-key&nbsp;add&nbsp;-</code>
 <code>echo&nbsp;deb</code><a href="http://packages.icinga.org/ubuntu"><code>http://packages.icinga.org/ubuntu</code></a><code>icinga-trusty&nbsp;main&nbsp;&gt;&gt;&nbsp;/etc/apt/sources.list</code>
 <code>echo&nbsp;deb-src</code><a href="http://packages.icinga.org/ubuntu"><code>http://packages.icinga.org/ubuntu</code></a><code>icinga-trusty&nbsp;main&nbsp;&gt;&gt;&nbsp;/etc/apt/sources.list</code>
-<code>apt-get&nbsp;update</code></p>
+</p><div class="highlight"><pre><span></span><code>apt-get&nbsp;update
+</code></pre></div><p></p>
 <p><strong>Icinga PPA repo</strong></p>
-<p><code>add-apt-repository&nbsp;ppa:formorer/icinga</code>
-<code>apt-get&nbsp;update</code></p>
+<div class="highlight"><pre><span></span><code>add-apt-repository&nbsp;ppa:formorer/icinga
+apt-get&nbsp;update
+</code></pre></div>
 <h2 id="installation">Installation</h2>
 <h3 id="core">Core</h3>
 <p>För att installera Icinga2 core skriv,</p>
-<p><code>apt-get&nbsp;install&nbsp;icinga2</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;icinga2
+</code></pre></div>
 <p>Utan plugins vet inte Icinga hur den ska kolla en tjänst. Enklast är att
 tanka hem en färdig bundle med plugins.</p>
-<p><code>apt-get&nbsp;install&nbsp;nagios-plugins</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;nagios-plugins
+</code></pre></div>
 <h3 id="icinga-data-out-database">Icinga Data Out Database</h3>
 <p>Guiden utgår ifrån att du kommer köra en lokal MySQL databas.</p>
 <p>Installera MySQL</p>
-<p><code>apt-get&nbsp;install&nbsp;mysql-server&nbsp;mysql-client</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;mysql-server&nbsp;mysql-client
+</code></pre></div>
 <p>Logga in och skapa en databas samt en användare med rättigheter.</p>
-<p><code>mysql&nbsp;-u&nbsp;root&nbsp;-p</code>
-<code>CREATE&nbsp;DATABASE&nbsp;icinga;</code>
-<code>GRANT&nbsp;SELECT,&nbsp;INSERT,&nbsp;UPDATE,&nbsp;DELETE,&nbsp;DROP,&nbsp;CREATE&nbsp;VIEW,&nbsp;INDEX,&nbsp;EXECUTE&nbsp;ON&nbsp;icinga.*&nbsp;TO&nbsp;'icinga'@'localhost'&nbsp;IDENTIFIED&nbsp;BY&nbsp;'icinga';</code></p>
+<div class="highlight"><pre><span></span><code>mysql&nbsp;-u&nbsp;root&nbsp;-p
+CREATE&nbsp;DATABASE&nbsp;icinga;
+GRANT&nbsp;SELECT,&nbsp;INSERT,&nbsp;UPDATE,&nbsp;DELETE,&nbsp;DROP,&nbsp;CREATE&nbsp;VIEW,&nbsp;INDEX,&nbsp;EXECUTE&nbsp;ON&nbsp;icinga.*&nbsp;TO&nbsp;'icinga'@'localhost'&nbsp;IDENTIFIED&nbsp;BY&nbsp;'icinga';
+</code></pre></div>
 <p>Lägg sedan till MySQL ido paketet. Paketet har en wizard som du kan
 använda eller skippa och göra det manuellt om du vill.</p>
-<p><code>apt-get&nbsp;install&nbsp;icinga2-ido-mysql</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;icinga2-ido-mysql
+</code></pre></div>
 <p>Om du vill få upp wizarden igen skriv
-<code>dpkg-reconfigure icinga2-ido-mysql</code></p>
+</p><div class="highlight"><pre><span></span><code>dpkg-reconfigure icinga2-ido-mysql
+</code></pre></div><p></p>
 <p>För att ansluta manuellt använd conf filen
 <code>/etc/icinga2/features-available/ido-mysql.conf</code> <a href="http://docs.icinga.org/icinga2/latest/doc/module/icinga2/chapter/object-types#objecttype-idomysqlconnection">Exempel conf
 MySQL</a></p>
 <p>Importera MySQL schemat.</p>
-<p><code>mysql&nbsp;-u&nbsp;root&nbsp;-p&nbsp;icinga&nbsp;&lt;&nbsp;/usr/share/icinga2-ido-mysql/schema/mysql.sql</code></p>
+<div class="highlight"><pre><span></span><code>mysql&nbsp;-u&nbsp;root&nbsp;-p&nbsp;icinga&nbsp;&lt;&nbsp;/usr/share/icinga2-ido-mysql/schema/mysql.sql
+</code></pre></div>
 <p>Enabla featuren ido-mysql</p>
-<p><code>icinga2&nbsp;feature&nbsp;enable&nbsp;ido-mysql</code></p>
+<div class="highlight"><pre><span></span><code>icinga2&nbsp;feature&nbsp;enable&nbsp;ido-mysql
+</code></pre></div>
 <p>Starta om icinga2 för att det ska gälla.</p>
-<p><code>service&nbsp;icinga2&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>service&nbsp;icinga2&nbsp;restart
+</code></pre></div>
 <h3 id="icingas-user-interface">Icinga's user interface</h3>
 <p>Icinga erbjuder tre st web interface, Icinga Web 2, Icinga Web och
 Classic UI.</p>
@@ -9387,43 +9429,55 @@ andra med git. Över repot sker många steg automatiskt men du får kanske
 inte senaste versionen. Med GIT får du senaste versionen men får göra
 fler steg själv.</p>
 <h5 id="repo">Repo</h5>
-<p><code>apt-get&nbsp;install&nbsp;icingaweb2&nbsp;icingacli</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;icingaweb2&nbsp;icingacli
+</code></pre></div>
 <p>Skapa sedan en setup token med,</p>
-<p><code>icingacli&nbsp;setup&nbsp;token&nbsp;create</code></p>
+<div class="highlight"><pre><span></span><code>icingacli&nbsp;setup&nbsp;token&nbsp;create
+</code></pre></div>
 <p>För att visa den ifall du skulle glömma av den skriv,</p>
-<p><code>icingacli&nbsp;setup&nbsp;token&nbsp;show</code></p>
+<div class="highlight"><pre><span></span><code>icingacli&nbsp;setup&nbsp;token&nbsp;show
+</code></pre></div>
 <p>Surfa sedan till <a href="http://ip/icingaweb2/setup">http://ip/icingaweb2/setup</a> för att följa wizarden.</p>
 <h5 id="git">Git</h5>
 <p>Börja med att klona repot.</p>
 <p><code>git&nbsp;clone</code><a href="git://git.icinga.org/icingaweb2.git"><code>git://git.icinga.org/icingaweb2.git</code></a></p>
 <p>Flytta sedan repot och gå till dess plats.</p>
-<p><code>mv&nbsp;icingaweb2&nbsp;/usr/share/icingaweb2&nbsp;&amp;&amp;&nbsp;cd&nbsp;/usr/share/icingaweb2</code></p>
+<div class="highlight"><pre><span></span><code>mv&nbsp;icingaweb2&nbsp;/usr/share/icingaweb2&nbsp;&amp;&amp;&nbsp;cd&nbsp;/usr/share/icingaweb2
+</code></pre></div>
 <p>Skapa en konfigurationsfil till Apache eller Nginx.</p>
 <p><strong>Apache</strong></p>
-<p><code>./bin/icingacli&nbsp;setup&nbsp;config&nbsp;webserver&nbsp;apache&nbsp;--document-root&nbsp;/usr/share/icingaweb2/public&nbsp;&gt;&nbsp;/etc/apache2/sites-available/icingaweb2</code>
-<code>a2ensite&nbsp;icingaweb2</code>
-<code>service&nbsp;apache2&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>./bin/icingacli&nbsp;setup&nbsp;config&nbsp;webserver&nbsp;apache&nbsp;--document-root&nbsp;/usr/share/icingaweb2/public&nbsp;&gt;&nbsp;/etc/apache2/sites-available/icingaweb2
+a2ensite&nbsp;icingaweb2
+service&nbsp;apache2&nbsp;restart
+</code></pre></div>
 <p><strong>Nginx</strong></p>
-<p><code>./bin/icingacli&nbsp;setup&nbsp;config&nbsp;webserver&nbsp;nginx&nbsp;--document-root&nbsp;/usr/share/icingaweb2/public</code></p>
+<div class="highlight"><pre><span></span><code>./bin/icingacli&nbsp;setup&nbsp;config&nbsp;webserver&nbsp;nginx&nbsp;--document-root&nbsp;/usr/share/icingaweb2/public
+</code></pre></div>
 <p>Både webusern och cli usern måste ha tillgång till conf och loggar.
 Permissions sköter man med en special grupp.</p>
-<p><code>addgroup&nbsp;--system&nbsp;icingaweb2&nbsp;&amp;&amp;&nbsp;usermod&nbsp;-a&nbsp;-G&nbsp;icingaweb2&nbsp;www-data</code></p>
+<div class="highlight"><pre><span></span><code>addgroup&nbsp;--system&nbsp;icingaweb2&nbsp;&amp;&amp;&nbsp;usermod&nbsp;-a&nbsp;-G&nbsp;icingaweb2&nbsp;www-data
+</code></pre></div>
 <p>Skapa ett configuration directory. Default är <code>/etc/icingaweb2</code></p>
-<p><code>./bin/icingacli&nbsp;setup&nbsp;config&nbsp;directory</code></p>
+<div class="highlight"><pre><span></span><code>./bin/icingacli&nbsp;setup&nbsp;config&nbsp;directory
+</code></pre></div>
 <p>Skapa en setup token med kommandot.</p>
-<p><code>./bin/icingacli&nbsp;setup&nbsp;config&nbsp;directory</code></p>
+<div class="highlight"><pre><span></span><code>./bin/icingacli&nbsp;setup&nbsp;config&nbsp;directory
+</code></pre></div>
 <p>Visa setup token ifall du glömmer bort den.</p>
-<p><code>./bin/icingacli&nbsp;setup&nbsp;token&nbsp;show</code></p>
+<div class="highlight"><pre><span></span><code>./bin/icingacli&nbsp;setup&nbsp;token&nbsp;show
+</code></pre></div>
 <p>Surfa sedan till <a href="http://">http://</a><ip>/icingaweb2/setup för att följa wizarden.</ip></p>
 <h2 id="kommandon">Kommandon</h2>
 <p>Icinga har en hög olika <a href="http://docs.icinga.org/icinga2/latest/doc/module/icinga2/chapter/cli-commands#cli-command-feature">CLI
 kommandon</a>.</p>
 <h3 id="features">Features</h3>
 <p>Kolla vilka features som är enablat.</p>
-<p><code>icinga2&nbsp;feature&nbsp;list</code></p>
+<div class="highlight"><pre><span></span><code>icinga2&nbsp;feature&nbsp;list
+</code></pre></div>
 <h3 id="systemctlinit">systemctl/init</h3>
-<p><code>systemctl&nbsp;status&nbsp;icinga2</code>
-<code>/etc/init.d/icinga2&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>systemctl&nbsp;status&nbsp;icinga2
+/etc/init.d/icinga2&nbsp;status
+</code></pre></div>
 <table>
 <thead>
 <tr>
@@ -9535,7 +9589,7 @@ kommandon</a>.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

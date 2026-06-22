@@ -8771,6 +8771,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9132,28 +9160,34 @@ access-vlan vara samma.</p>
 <p>Se även <a href="/Nexus_vPC" title="wikilink">vPC</a></p>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Static</p>
-<p><code>interface&nbsp;range&nbsp;gi0/1&nbsp;-&nbsp;2</code>
-<code>channel-group&nbsp;1&nbsp;mode&nbsp;on</code>
-<code>interface&nbsp;port-channel&nbsp;1</code>
-<code>switchport&nbsp;mode&nbsp;trunk</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;range&nbsp;gi0/1&nbsp;-&nbsp;2
+&nbsp;channel-group&nbsp;1&nbsp;mode&nbsp;on
+interface&nbsp;port-channel&nbsp;1
+&nbsp;switchport&nbsp;mode&nbsp;trunk
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;etherchannel&nbsp;summary</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;etherchannel&nbsp;summary
+</code></pre></div>
 <h3 id="l3">L3</h3>
 <p>Det är viktigt att man konfigurerar L3 etherchannel i rätt ordning. När
 <em>channel-group</em>-kommandot exekveras tas attributen från member
 interfacen till port-channel-interfacet. Det betyder att <em>no switchport</em>
 måste slås först annars blir port-channel-interfacet en switchport och
 detta går inte ändra i efterhand.</p>
-<p><code>interface&nbsp;range&nbsp;gi0/1&nbsp;-&nbsp;2</code>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;range&nbsp;gi0/1&nbsp;-&nbsp;2
+</code></pre></div>
 <code></code><strong><code>no`` ``switchport</code></strong>
-<code>channel-group&nbsp;1&nbsp;mode&nbsp;[mode]</code>
-<code>interface&nbsp;port-channel&nbsp;1</code>
+<div class="highlight"><pre><span></span><code>&nbsp;channel-group&nbsp;1&nbsp;mode&nbsp;[mode]
+interface&nbsp;port-channel&nbsp;1
+</code></pre></div>
 <code></code><strong><code>no`` ``switchport</code></strong>
-<code>ip&nbsp;address&nbsp;[ip&nbsp;address]&nbsp;[subnet&nbsp;mask]</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;ip&nbsp;address&nbsp;[ip&nbsp;address]&nbsp;[subnet&nbsp;mask]
+</code></pre></div><p></p>
 <h3 id="load-balancing">Load-balancing</h3>
 <p>Global inställning. EtherChannel tillhandahåller lastdelning per frame.</p>
-<p><code>port-channel&nbsp;load-balance&nbsp;[method]</code>
-<code>show&nbsp;etherchannel&nbsp;load-balance</code></p>
+<div class="highlight"><pre><span></span><code>port-channel&nbsp;load-balance&nbsp;[method]
+show&nbsp;etherchannel&nbsp;load-balance
+</code></pre></div>
 <p>Kolla vilket interface en viss frame skickas på.</p>
 <p><code>test&nbsp;etherchannel&nbsp;load-balance&nbsp;interface&nbsp;port-channel&nbsp;1&nbsp;ip</code><source-ip><code></code><destination-ip>
 <em><code>Would`` ``select`` ``Gi1/0/4`` ``of`` ``Po1</code></em></destination-ip></source-ip></p>
@@ -9163,8 +9197,9 @@ per switch. Duplex och speed måste överensstämma på alla portar samt att
 alla BPDUer som kommer in har samma source MAC-adress. Detta är en
 global inställning som automatically error-disables alla portar som är
 felkopplade.</p>
-<p><code>spanning-tree&nbsp;etherchannel&nbsp;guard&nbsp;misconfig</code>
-<code>show&nbsp;spanning-tree&nbsp;summary&nbsp;|&nbsp;i&nbsp;EtherChannel</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;etherchannel&nbsp;guard&nbsp;misconfig
+show&nbsp;spanning-tree&nbsp;summary&nbsp;|&nbsp;i&nbsp;EtherChannel
+</code></pre></div>
 <h2 id="lacp">LACP</h2>
 <p>Link Aggregation Control Protocol (802.3ad) är ett IEEE
 kontrollprotokoll för etherchannels. En EtherChannel bildas endast om
@@ -9176,36 +9211,32 @@ beteende i nätverket. Destination mac adress för LACP-frames är
 LACPDU varje sekund. Sedan ändras det beroende på keepalive mode, slow
 (30 sek interval) är default. Att ändra görs per interface, <strong>lacp rate
 fast</strong>, men alla switchmodeller stödjer inte fast rate (1 sek interval).</p>
-<div class="mw-collapsible mw-collapsed" style="width:310px">
-
-LACPDU
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_lacp.png>](/File:Cisco_LACP.png "wikilink")
-
-</file:cisco_lacp.png></div>
-</div>
-
+<p>LACPDU</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_LACP.png" data-desc-position="bottom"><img alt="Cisco_LACP.png" src="../../images/Cisco_LACP.png"></a></p>
 <h3 id="konfiguration_1">Konfiguration</h3>
 <p>För att initiera LACP används nyckelordet active. Det finns också
 passive mode = speak when spoken to.</p>
-<p><code>interface&nbsp;range&nbsp;gi0/1&nbsp;-&nbsp;2</code>
-<code>channel-group&nbsp;1&nbsp;mode&nbsp;active</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;range&nbsp;gi0/1&nbsp;-&nbsp;2
+&nbsp;channel-group&nbsp;1&nbsp;mode&nbsp;active
+</code></pre></div>
 <p>Enable LACP auto on interface.</p>
-<p><code>channel-group&nbsp;auto</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;channel-group&nbsp;auto
+</code></pre></div>
 <p>Maximalt kan 16 interface konfigureras i en EtherChannel men endast 8
 kan vara aktiva samtidigt. Vilka länkar som ska vara aktiva bestäms av
 den switch med lägst LACP ID som utgörs av MAC-adress och prioritet. Den
 använder de portar med lägst prio i första hand, detta är lokala värden.</p>
-<p><code>lacp&nbsp;system-mac&nbsp;0011.2233.4455</code>
-<code>lacp&nbsp;system-priority&nbsp;32768</code></p>
-<p><code>interface&nbsp;gi0/2</code>
-<code>lacp&nbsp;port-priority&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>lacp&nbsp;system-mac&nbsp;0011.2233.4455
+lacp&nbsp;system-priority&nbsp;32768
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/2
+&nbsp;lacp&nbsp;port-priority&nbsp;0
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;etherchannel&nbsp;protocol</code>
-<code>show&nbsp;lacp&nbsp;?</code>
-<code>show&nbsp;lacp&nbsp;neighbor</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;etherchannel&nbsp;protocol
+show&nbsp;lacp&nbsp;?
+show&nbsp;lacp&nbsp;neighbor
+</code></pre></div>
 <h4 id="pagp">PAgP</h4>
 <p>Port Aggregation Protocol är ett Ciscoproperitärt protokoll för samma
 funktionalitet som LACP. Det använder destination mac 01:00:0C:CC:CC:CC.
@@ -9215,39 +9246,45 @@ auto/desirable</strong></p>
 <p>Man kan konfigurera portar mot servrar att disablas om uplink går ner.
 Detta är användbart om man har multihomed servers för då märker de att
 de ska sluta använda sitt primära NIC.</p>
-<p><code>link&nbsp;state&nbsp;track&nbsp;1</code></p>
-<p><code>int&nbsp;range&nbsp;gi0/1&nbsp;-&nbsp;2</code>
-<code>switchport&nbsp;trunk&nbsp;encapsulation&nbsp;dot1q</code>
-<code>switchport&nbsp;mode&nbsp;trunk</code>
-<code>channel-group&nbsp;1&nbsp;mode&nbsp;active</code>
-<code>link&nbsp;state&nbsp;group&nbsp;1&nbsp;upstream</code></p>
-<p><code>int&nbsp;po1</code>
-<code>description&nbsp;Uplink</code>
-<code>switchport&nbsp;trunk&nbsp;encapsulation&nbsp;dot1q</code>
-<code>switchport&nbsp;mode&nbsp;trunk</code>
-<code>link&nbsp;state&nbsp;group&nbsp;1&nbsp;upstream</code></p>
-<p><code>int&nbsp;gi0/10</code>
-<code>description&nbsp;Server</code>
-<code>switchport&nbsp;mode&nbsp;access</code>
-<code>switchport&nbsp;access&nbsp;vlan&nbsp;10</code>
-<code>link&nbsp;state&nbsp;group&nbsp;1&nbsp;downstream</code></p>
+<div class="highlight"><pre><span></span><code>link&nbsp;state&nbsp;track&nbsp;1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>int&nbsp;range&nbsp;gi0/1&nbsp;-&nbsp;2
+&nbsp;switchport&nbsp;trunk&nbsp;encapsulation&nbsp;dot1q
+&nbsp;switchport&nbsp;mode&nbsp;trunk
+&nbsp;channel-group&nbsp;1&nbsp;mode&nbsp;active
+&nbsp;link&nbsp;state&nbsp;group&nbsp;1&nbsp;upstream
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>int&nbsp;po1
+&nbsp;description&nbsp;Uplink
+&nbsp;switchport&nbsp;trunk&nbsp;encapsulation&nbsp;dot1q
+&nbsp;switchport&nbsp;mode&nbsp;trunk
+&nbsp;link&nbsp;state&nbsp;group&nbsp;1&nbsp;upstream
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>int&nbsp;gi0/10
+&nbsp;description&nbsp;Server
+&nbsp;switchport&nbsp;mode&nbsp;access
+&nbsp;switchport&nbsp;access&nbsp;vlan&nbsp;10
+&nbsp;link&nbsp;state&nbsp;group&nbsp;1&nbsp;downstream
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;link&nbsp;state&nbsp;group&nbsp;detail</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;link&nbsp;state&nbsp;group&nbsp;detail
+</code></pre></div>
 <h2 id="flex-links">Flex Links</h2>
 <p>Tekniskt sett inte etherchannel men kan användas istället för det i
 vissa situationer. Det som händer när primären går ner är att alla
 dynamiska MAC entries flyttas till backupinterfacet och det hamnar i
 forwarding state. Inga BPDUer inblandade. Bör användas tillsammans med
 <a href="/Cisco_UDLD" title="wikilink">UDLD</a>.</p>
-<p><code>interface&nbsp;po2</code>
-<code>switchport&nbsp;backup&nbsp;int&nbsp;gi0/5</code>
-<code>switchport&nbsp;backup&nbsp;int&nbsp;gi0/5&nbsp;preemption&nbsp;mode&nbsp;forced</code>
-<code>switchport&nbsp;backup&nbsp;int&nbsp;gi0/5&nbsp;preemption&nbsp;delay&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;po2
+&nbsp;switchport&nbsp;backup&nbsp;int&nbsp;gi0/5
+&nbsp;switchport&nbsp;backup&nbsp;int&nbsp;gi0/5&nbsp;preemption&nbsp;mode&nbsp;forced
+&nbsp;switchport&nbsp;backup&nbsp;int&nbsp;gi0/5&nbsp;preemption&nbsp;delay&nbsp;10
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;interface&nbsp;po2&nbsp;switchport&nbsp;backup</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;interface&nbsp;po2&nbsp;switchport&nbsp;backup
+</code></pre></div>
 <p>Antingen står det Backup Standby eller Backup Up beroende på status på
 port-channeln.</p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
 
 
 
@@ -9270,7 +9307,7 @@ port-channeln.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

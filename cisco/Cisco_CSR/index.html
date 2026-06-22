@@ -8743,6 +8743,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9081,46 +9109,58 @@ begränsad till 100 kbps (<strong>show platform hardware throughput level</stron
 <p><strong>Licens</strong>
 Ladda ner licens från cisco (http:/www.cisco.com/go/license) och lägg in
 på bootflash på enheten. Det finns 60 dagars eval-licens.</p>
-<p><code>license&nbsp;install&nbsp;bootflash:lic25ax.lic</code>
-<code>show&nbsp;license&nbsp;detail</code></p>
+<div class="highlight"><pre><span></span><code>license&nbsp;install&nbsp;bootflash:lic25ax.lic
+show&nbsp;license&nbsp;detail
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Här listas CSR-specifik info, för övrig konfiguration se <a href="/Cisco_IOS" title="wikilink">Cisco
 IOS</a>.</p>
 <p>Nyare CSR har ett modernt webbgränssnitt som man kan använda för att
 managera och monitorera enheten.</p>
-<p><code>ip&nbsp;http&nbsp;server</code>
-<a href="http://10.0.10.1/webui/"><code>http://10.0.10.1/webui/</code></a></p>
+<p></p><div class="highlight"><pre><span></span><code>ip&nbsp;http&nbsp;server
+</code></pre></div>
+<a href="http://10.0.10.1/webui/"><code>http://10.0.10.1/webui/</code></a><p></p>
 <h3 id="resurser">Resurser</h3>
 <p><strong>CPU</strong>
 Show processes inside the IOS daemon.</p>
-<p><code>show&nbsp;processes&nbsp;cpu&nbsp;sorted</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;processes&nbsp;cpu&nbsp;sorted
+</code></pre></div>
 <p>Show processes for the underlying operating system.</p>
-<p><code>show&nbsp;processes&nbsp;cpu&nbsp;platform&nbsp;sorted</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;processes&nbsp;cpu&nbsp;platform&nbsp;sorted
+</code></pre></div>
 <p>Increase the control-plane CPU</p>
-<p><code>platform&nbsp;resource&nbsp;control-plane-heavy</code></p>
+<div class="highlight"><pre><span></span><code>platform&nbsp;resource&nbsp;control-plane-heavy
+</code></pre></div>
 <p><strong>Memory</strong></p>
-<p><code>show&nbsp;memory&nbsp;platform</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;memory&nbsp;platform
+</code></pre></div>
 <p>Increase the Cisco IOS XE memory</p>
-<p><code>platform&nbsp;memory&nbsp;add&nbsp;3286</code></p>
+<div class="highlight"><pre><span></span><code>platform&nbsp;memory&nbsp;add&nbsp;3286
+</code></pre></div>
 <p><strong>NIC</strong></p>
-<p><code>show&nbsp;platform&nbsp;software&nbsp;vnic-if&nbsp;interface-mapping</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;platform&nbsp;software&nbsp;vnic-if&nbsp;interface-mapping
+</code></pre></div>
 <h3 id="uppgradering">Uppgradering</h3>
 <p>För att uppgradera en CSR laddar man ner nyare bin-fil och lägger på
 local storage.</p>
 <p><code>copy</code><a href="http://"><code>http://</code></a><em><code>fileserver</code></em><code>/csr1000v-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.bin&nbsp;bootflash:</code>
-<code>verify&nbsp;bootflash:csr1000v-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.bin</code></p>
-<p><code>boot&nbsp;system&nbsp;flash&nbsp;bootflash:csr1000v-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.bin</code>
-<code>show&nbsp;bootvar</code>
-<code>reload</code></p>
+</p><div class="highlight"><pre><span></span><code>verify&nbsp;bootflash:csr1000v-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.bin
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>boot&nbsp;system&nbsp;flash&nbsp;bootflash:csr1000v-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.bin
+show&nbsp;bootvar
+reload
+</code></pre></div>
 <h2 id="rest-api">REST API</h2>
 <p>Standard port for IOS XE REST API: 55443</p>
-<p><code>virtual-service&nbsp;csr_mgmt</code>
-<code>ip&nbsp;shared&nbsp;host-interface&nbsp;GigabitEthernet1</code>
-<code>activate</code></p>
+<div class="highlight"><pre><span></span><code>virtual-service&nbsp;csr_mgmt
+&nbsp;ip&nbsp;shared&nbsp;host-interface&nbsp;GigabitEthernet1
+&nbsp;activate
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;virtual-service</code>
-<code>show&nbsp;virtual-service&nbsp;detail&nbsp;|&nbsp;i&nbsp;API</code>
-<code>show&nbsp;remote-management&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;virtual-service
+show&nbsp;virtual-service&nbsp;detail&nbsp;|&nbsp;i&nbsp;API
+show&nbsp;remote-management&nbsp;status
+</code></pre></div>
 <p><strong>URL-exempel</strong>
 {| class="wikitable" ! URL || Method |- |
 /api/v1/global/running-config || GET |- | /api/v1/global/save-config
@@ -9133,35 +9173,43 @@ curl -X POST <a href="https://10.0.10.1:55443/api/v1/auth/token-services">https:
 <p>Tokens automatically expire after 15 minutes.</p>
 <h3 id="netconf">NETCONF</h3>
 <p>Legacy NETCONF, port 22.</p>
-<p><code>netconf&nbsp;ssh</code></p>
+<div class="highlight"><pre><span></span><code>netconf&nbsp;ssh
+</code></pre></div>
 <p>Enable NETCONF/YANG support, port 830.</p>
-<p><code>netconf-yang</code></p>
+<div class="highlight"><pre><span></span><code>netconf-yang
+</code></pre></div>
 <p>Discover capabilities</p>
-<p><code>from&nbsp;ncclient&nbsp;import&nbsp;manager</code>
-<code>m&nbsp;=&nbsp;manager.connect(host='192.168.1.21',&nbsp;port=830,&nbsp;username='cisco',</code>
-<code>password='cisco',&nbsp;device_params={'name':&nbsp;'CSR'})</code>
-<code>print&nbsp;m.server_capabilities</code></p>
+<div class="highlight"><pre><span></span><code>from&nbsp;ncclient&nbsp;import&nbsp;manager
+m&nbsp;=&nbsp;manager.connect(host='192.168.1.21',&nbsp;port=830,&nbsp;username='cisco',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password='cisco',&nbsp;device_params={'name':&nbsp;'CSR'})
+print&nbsp;m.server_capabilities
+</code></pre></div>
 <h2 id="hypervisor">Hypervisor</h2>
 <p>IOS-XE har numera stöd för att själv köra virtuella maskiner, dvs agera
 hypervisor. Om man kör på en CSR glöm ej Hardware Assisted
 Virtualization.</p>
 <p>Förberedelser, lägga in OVA på routerns lokala storage samt:</p>
-<p><code>virtual-service</code>
-<code>signing&nbsp;level&nbsp;unsigned</code></p>
+<div class="highlight"><pre><span></span><code>virtual-service
+&nbsp;signing&nbsp;level&nbsp;unsigned
+</code></pre></div>
 <p>Installera paket</p>
-<p><code>virtual-service&nbsp;install&nbsp;name&nbsp;Fedora&nbsp;package&nbsp;bootflash:Fedora.ova</code>
-<code>show&nbsp;virtual-service&nbsp;list</code></p>
+<div class="highlight"><pre><span></span><code>virtual-service&nbsp;install&nbsp;name&nbsp;Fedora&nbsp;package&nbsp;bootflash:Fedora.ova
+show&nbsp;virtual-service&nbsp;list
+</code></pre></div>
 <p>För att ge VM:en konnektivitet med outside world skapar man en Virtual
 Port Group.</p>
-<p><code>int&nbsp;virtualportGroup&nbsp;1</code>
-<code>ip&nbsp;add&nbsp;10.0.10.1&nbsp;255.255.255.0</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;virtualportGroup&nbsp;1
+&nbsp;ip&nbsp;add&nbsp;10.0.10.1&nbsp;255.255.255.0
+</code></pre></div>
 <p>Starta VM</p>
-<p><code>activate</code></p>
+<div class="highlight"><pre><span></span><code>activate
+</code></pre></div>
 <p>Anslut till console på VM</p>
-<p><code>virtual-service&nbsp;connect&nbsp;name&nbsp;Fedora&nbsp;console</code></p>
+<div class="highlight"><pre><span></span><code>virtual-service&nbsp;connect&nbsp;name&nbsp;Fedora&nbsp;console
+</code></pre></div>
 <p>Aktivera shell</p>
-<p><code>guestshell&nbsp;enable</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>guestshell&nbsp;enable
+</code></pre></div>
 
 
 
@@ -9184,7 +9232,7 @@ Port Group.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

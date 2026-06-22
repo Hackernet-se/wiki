@@ -8798,6 +8798,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9189,30 +9217,33 @@ lägger till en 4-bytes identifier i GRE-headern (tänk VLAN-taggning). Om
 mottagande router ser att det är en mismatch i key value kommer paketet
 att droppas.</p>
 <p>Utan key, 4 bytes header.
-<a href="/File:Cisco_GRE.png" title="wikilink"><file:cisco_gre.png></file:cisco_gre.png></a></p>
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_GRE.png" data-desc-position="bottom"><img alt="Cisco_GRE.png" src="../../images/Cisco_GRE.png"></a></p>
 <p>Med key, 8 bytes header.
-<a href="/File:Cisco_GRE_key.png" title="wikilink"><file:cisco_gre_key.png></file:cisco_gre_key.png></a></p>
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_GRE_key.png" data-desc-position="bottom"><img alt="Cisco_GRE_key.png" src="../../images/Cisco_GRE_key.png"></a></p>
 <h1 id="konfiguration">Konfiguration</h1>
 <p><strong>R1</strong></p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.252</code>
-<code>ip&nbsp;mtu&nbsp;1400</code>
-<code>ip&nbsp;tcp&nbsp;adjust-mss&nbsp;1360</code>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.252
+&nbsp;ip&nbsp;mtu&nbsp;1400
+&nbsp;ip&nbsp;tcp&nbsp;adjust-mss&nbsp;1360
+</code></pre></div>
 <code>tunnel&nbsp;source</code><local-ip>
-<code>tunnel&nbsp;destination</code><r2-ip></r2-ip></local-ip></p>
+<code>tunnel&nbsp;destination</code><r2-ip><p></p>
 <p>Väljer man ett interface som source används primary IP på det
 interfacet.</p>
 <p><strong>R2</strong></p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;address&nbsp;10.0.0.2&nbsp;255.255.255.252</code>
-<code>ip&nbsp;mtu&nbsp;1400</code>
-<code>ip&nbsp;tcp&nbsp;adjust-mss&nbsp;1360</code>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;address&nbsp;10.0.0.2&nbsp;255.255.255.252
+&nbsp;ip&nbsp;mtu&nbsp;1400
+&nbsp;ip&nbsp;tcp&nbsp;adjust-mss&nbsp;1360
+</code></pre></div>
 <code>tunnel&nbsp;source</code><local-ip>
-<code>tunnel&nbsp;destination</code><r1-ip></r1-ip></local-ip></p>
+<code>tunnel&nbsp;destination</code><r1-ip><p></p>
 <p>Verify. Utan keepalives är ett tunnel-interface UP/UP sålänge det inte
 är administratively shutdown.</p>
-<p><code>show&nbsp;ip&nbsp;int&nbsp;br</code>
-<code>show&nbsp;interface&nbsp;|&nbsp;i&nbsp;Tunnel&nbsp;protocol</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;int&nbsp;br
+show&nbsp;interface&nbsp;|&nbsp;i&nbsp;Tunnel&nbsp;protocol
+</code></pre></div>
 <h3 id="keepalive">Keepalive</h3>
 <p>Eftersom en GRE-tunnel går över andra enheter och länkar måste en
 keepalive skickas hela vägen mellan tunnel-interfacen för att routern
@@ -9225,20 +9256,23 @@ interfacen är alltid UP/UP.</p>
 skickas till andra sidan. När paketet packas upp kommer
 destinationsadressen att kollas upp för att avgöra vart det ska skickas
 vilket resulterar i att det skickas tillbaka.
-<a href="/File:Cisco_GRE_Keepalive.png" title="wikilink"><file:cisco_gre_keepalive.png></file:cisco_gre_keepalive.png></a></p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>keepalive</code><interval><code></code><retries></retries></interval></p>
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_GRE_Keepalive.png" data-desc-position="bottom"><img alt="Cisco_GRE_Keepalive.png" src="../../images/Cisco_GRE_Keepalive.png"></a></p>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+</code></pre></div>
+<code>keepalive</code><interval><code></code><retries><p></p>
 <p>Verify</p>
-<p><code>show&nbsp;interface&nbsp;tunnel&nbsp;0&nbsp;|&nbsp;i&nbsp;Keepalive</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;interface&nbsp;tunnel&nbsp;0&nbsp;|&nbsp;i&nbsp;Keepalive
+</code></pre></div>
 <h3 id="vrf">VRF</h3>
 <p>Man kan ha tunnel-interfacet i en VRF medans tunneln själv terminerar i
 en annan VRF.</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>vrf&nbsp;forwarding&nbsp;VRF-1</code>
-<code>ip&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.252</code>
-<code>tunnel&nbsp;vrf&nbsp;VRF-2</code>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;vrf&nbsp;forwarding&nbsp;VRF-1
+&nbsp;ip&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.252
+&nbsp;tunnel&nbsp;vrf&nbsp;VRF-2
+</code></pre></div>
 <code>tunnel&nbsp;source</code><vrf2-ip>
-<code>tunnel&nbsp;destination</code><vrf2-ip></vrf2-ip></vrf2-ip></p>
+<code>tunnel&nbsp;destination</code><vrf2-ip><p></p>
 <h3 id="recursive-routing">Recursive Routing</h3>
 <p>Tunnel Source och Destination bör alltid läras utanför tunneln. Om det
 är problem med Recursive Routing kan man antingen disallow tunnel source
@@ -9253,51 +9287,38 @@ operations appliceras innan QoS policy. Med QoS pre-classify för VPN:er
 Man kan även klassa på annat än IP-prec eller DSCP. Se även <a href="/Cisco_QoS" title="wikilink">Cisco
 QoS</a>.</p>
 <p>Enable QoS for VPNs feature:</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>qos&nbsp;pre-classify</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;qos&nbsp;pre-classify
+</code></pre></div>
 <h3 id="others">Others</h3>
 <p>Man kan koppla ihop loopback-interface med hjälp av GRE genom att sätta
 tunnelinterfacen som unnumbered.</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;unnumbered&nbsp;Loopback0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;unnumbered&nbsp;Loopback0
+</code></pre></div>
 <p>Drop corrupted and out-of-order VPN packets</p>
-<p><code>tunnel&nbsp;checksum</code>
-<code>tunnel&nbsp;sequence-datagrams</code></p>
+<div class="highlight"><pre><span></span><code>tunnel&nbsp;checksum&nbsp;&nbsp;
+tunnel&nbsp;sequence-datagrams
+</code></pre></div>
 <h1 id="ipv6">IPv6</h1>
 <p>IPv6 går att tunnla och enkapsulering av IPv6 är IP protokoll 41.
 IPv6-paket går även att tunnla över ett IPv4-nätverk med hjälp av flera
 olika tekniker, IPv4 end-to-end reachability är det som krävs.</p>
 <p><strong>Protokoll 41:</strong></p>
-<div class="mw-collapsible mw-collapsed" style="width:310px">
-
-Över IPv6, "tunnel mode ipv6"
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_gre_ipv6.png>](/File:Cisco_GRE_IPv6.PNG "wikilink")
-
-</file:cisco_gre_ipv6.png></div>
-</div>
-<div class="mw-collapsible mw-collapsed" style="width:310px">
-
-Över IPv4, "tunnel mode ipv6ip"
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_gre_ipv6ip.png>](/File:Cisco_GRE_IPv6IP.PNG "wikilink")
-
-</file:cisco_gre_ipv6ip.png></div>
-</div>
-
+<p>Över IPv6, "tunnel mode ipv6"</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_GRE_IPv6.PNG" data-desc-position="bottom"><img alt="Cisco_GRE_IPv6.PNG" src="../../images/Cisco_GRE_IPv6.PNG"></a></p>
+<p>Över IPv4, "tunnel mode ipv6ip"</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_GRE_IPv6IP.PNG" data-desc-position="bottom"><img alt="Cisco_GRE_IPv6IP.PNG" src="../../images/Cisco_GRE_IPv6IP.PNG"></a></p>
 <h4 id="manual-tunnel">Manual tunnel</h4>
 <p>IPv6-IP-tunnlar använder IP-protokoll 41 och vill man filtrera det i en
 acl får man använda protokollnumret. Detta har något lägre overhead än
 GRE.</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ipv6&nbsp;address&nbsp;10::1/64</code>
-<code>tunnel&nbsp;source&nbsp;loopback0</code>
-<code>tunnel&nbsp;destination&nbsp;10.0.0.20</code>
-<code>tunnel&nbsp;mode&nbsp;ipv6ip</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ipv6&nbsp;address&nbsp;10::1/64
+&nbsp;tunnel&nbsp;source&nbsp;loopback0
+&nbsp;tunnel&nbsp;destination&nbsp;10.0.0.20
+&nbsp;tunnel&nbsp;mode&nbsp;ipv6ip
+</code></pre></div>
 <h4 id="automatic-6to4">Automatic 6to4</h4>
 <p>Tanken med automatiska 6to4-tunnlar är att lösa IPv6-routing över ett
 IPv4-nätverk baserat på next-hop adresser inbakade i IPv6-adressen.
@@ -9309,14 +9330,17 @@ och ska till en annan IPv6-site. Det betyder att alla site prefix
 inklusive adressen på tunnel-interfacet måste tas ut från den range som
 är en kombination av det reserverade IPv6-prefixet och 6to4 border
 routerns för övriga nåbara IPv4-adress, dvs 2002:\&lt;32-bitar ipv4&gt;::/48.</p>
-<p><code>interface&nbsp;Loopback0</code>
-<code>description&nbsp;Border&nbsp;Router&nbsp;IPv4&nbsp;Address</code>
-<code>ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.255</code></p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>tunnel&nbsp;source&nbsp;Loopback0</code>
-<code>tunnel&nbsp;mode&nbsp;ipv6ip&nbsp;6to4</code>
-<code>ipv6&nbsp;address&nbsp;2002:C0A8:0001::10/64</code></p>
-<p><code>ipv6&nbsp;route&nbsp;2002::/16&nbsp;tunnel&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Loopback0
+&nbsp;description&nbsp;Border&nbsp;Router&nbsp;IPv4&nbsp;Address
+&nbsp;ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.255
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;tunnel&nbsp;source&nbsp;Loopback0
+&nbsp;tunnel&nbsp;mode&nbsp;ipv6ip&nbsp;6to4
+&nbsp;ipv6&nbsp;address&nbsp;2002:C0A8:0001::10/64
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;route&nbsp;2002::/16&nbsp;tunnel&nbsp;0
+</code></pre></div>
 <h4 id="isatap">ISATAP</h4>
 <p>Intra-Site Automatic Tunnel Addressing Protocol (RFC 5214) är framtaget
 för möjliggöra IPv6-kommunikation mellan IPv4-only hosts och
@@ -9331,10 +9355,11 @@ utifrån ISATAP identifier (0000:5efe) och sin egen IPv4-adress. Adress
 måste tas med hjälp av EUI-64 och då genereras interface ID automatiskt.
 ISATAP är också point-to-multipoint natively</p>
 <p>Man behöver ej ange destination address manuellt.</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;address&nbsp;2001:0:0:500::/64&nbsp;eui-64</code>
-<code>no&nbsp;ipv6&nbsp;nd&nbsp;suppress-ra</code>
-<code>tunnel&nbsp;mode&nbsp;ipv6ip&nbsp;isatap</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;address&nbsp;2001:0:0:500::/64&nbsp;eui-64
+&nbsp;no&nbsp;ipv6&nbsp;nd&nbsp;suppress-ra
+&nbsp;tunnel&nbsp;mode&nbsp;ipv6ip&nbsp;isatap
+</code></pre></div>
 <p>Ett äldre alternativ till ISATAP är "IPv6 Automatic IPv4-compatible"
 (<em>tunnel mode ipv6ip automatic</em>) men det är inte rekommenderat att köra.</p>
 <h4 id="6rd">6RD</h4>
@@ -9366,36 +9391,38 @@ forwarderingen.</p>
 <p><strong>Konfiguration</strong>
 Tunnel 6rd ipv4 prefix-len 0 är default.</p>
 <p>BR</p>
-<p><code>ipv6&nbsp;general-prefix&nbsp;RD&nbsp;6rd&nbsp;Tunnel0</code>
-<code>!</code>
-<code>interface&nbsp;Tunnel0</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>ipv6&nbsp;address&nbsp;RD&nbsp;::/128&nbsp;anycast</code>
-<code>tunnel&nbsp;source&nbsp;Loopback0</code>
-<code>tunnel&nbsp;mode&nbsp;ipv6ip&nbsp;6rd</code>
-<code>tunnel&nbsp;6rd&nbsp;prefix&nbsp;2002::/32</code>
-<code>!</code>
-<code>ipv6&nbsp;route&nbsp;2002::/32&nbsp;Tunnel0</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;general-prefix&nbsp;RD&nbsp;6rd&nbsp;Tunnel0
+!
+interface&nbsp;Tunnel0
+&nbsp;no&nbsp;ip&nbsp;address
+&nbsp;ipv6&nbsp;address&nbsp;RD&nbsp;::/128&nbsp;anycast
+&nbsp;tunnel&nbsp;source&nbsp;Loopback0
+&nbsp;tunnel&nbsp;mode&nbsp;ipv6ip&nbsp;6rd
+&nbsp;tunnel&nbsp;6rd&nbsp;prefix&nbsp;2002::/32
+!&nbsp;
+ipv6&nbsp;route&nbsp;2002::/32&nbsp;Tunnel0
+</code></pre></div>
 <p>CE</p>
-<p><code>ipv6&nbsp;general-prefix&nbsp;RD&nbsp;6rd&nbsp;Tunnel0</code>
-<code>!</code>
-<code>interface&nbsp;Tunnel0</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>ipv6&nbsp;enable</code>
-<code>tunnel&nbsp;source&nbsp;Loopback0</code>
-<code>tunnel&nbsp;mode&nbsp;ipv6ip&nbsp;6rd</code>
-<code>tunnel&nbsp;6rd&nbsp;prefix&nbsp;2002::/32</code>
-<code>tunnel&nbsp;6rd&nbsp;br&nbsp;4.4.4.4</code>
-<code>!</code>
-<code>ipv6&nbsp;route&nbsp;2002::/32&nbsp;Tunnel0</code>
-<code>ipv6&nbsp;route&nbsp;::/0&nbsp;Tunnel0&nbsp;2002:0:404:404::</code>
-<code>!</code>
-<code>interface&nbsp;GigabitEthernet1</code>
-<code>description&nbsp;LAN</code>
-<code>ipv6&nbsp;address&nbsp;RD&nbsp;::/64&nbsp;eui-64</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;general-prefix&nbsp;RD&nbsp;6rd&nbsp;Tunnel0
+!
+interface&nbsp;Tunnel0
+&nbsp;no&nbsp;ip&nbsp;address
+&nbsp;ipv6&nbsp;enable
+&nbsp;tunnel&nbsp;source&nbsp;Loopback0
+&nbsp;tunnel&nbsp;mode&nbsp;ipv6ip&nbsp;6rd
+&nbsp;tunnel&nbsp;6rd&nbsp;prefix&nbsp;2002::/32
+&nbsp;tunnel&nbsp;6rd&nbsp;br&nbsp;4.4.4.4
+!
+ipv6&nbsp;route&nbsp;2002::/32&nbsp;Tunnel0
+ipv6&nbsp;route&nbsp;::/0&nbsp;Tunnel0&nbsp;2002:0:404:404::
+!
+interface&nbsp;GigabitEthernet1
+&nbsp;description&nbsp;LAN
+&nbsp;ipv6&nbsp;address&nbsp;RD&nbsp;::/64&nbsp;eui-64
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;tunnel&nbsp;6rd</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;tunnel&nbsp;6rd
+</code></pre></div></vrf2-ip></vrf2-ip></retries></interval></r1-ip></local-ip></r2-ip></local-ip>
 
 
 
@@ -9418,7 +9445,7 @@ Tunnel 6rd ipv4 prefix-len 0 är default.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

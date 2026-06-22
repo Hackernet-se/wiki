@@ -8614,6 +8614,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8837,53 +8865,63 @@
   <h1>Kickstart ESXi</h1>
 
 <p>ESXi 6.0</p>
-<p><code>accepteula</code>
-<code>install&nbsp;--firstdisk&nbsp;--overwritevmfs</code>
-<code>#For&nbsp;USB&nbsp;install&nbsp;use&nbsp;below&nbsp;instead</code>
-<code>#install&nbsp;--firstdisk&nbsp;--novmfsondisk</code>
-<code>rootpw&nbsp;bueno</code>
-<code>keyboard&nbsp;Swedish</code>
-<code>reboot</code></p>
-<p><code>network&nbsp;--bootproto=static&nbsp;--device=vmnic0&nbsp;--hostname=esxi2.hackernet.se&nbsp;--ip=172.20.0.2&nbsp;--netmask=255.255.255.0&nbsp;--gateway=172.20.0.1&nbsp;--nameserver=172.20.0.10&nbsp;--addvmportgroup=false</code></p>
-<p><code>%firstboot&nbsp;--interpreter=busybox</code></p>
-<p><code>#SSH</code>
-<code>vim-cmd&nbsp;hostsvc/enable_ssh</code>
-<code>vim-cmd&nbsp;hostsvc/start_ssh</code>
-<code>esxcli&nbsp;system&nbsp;settings&nbsp;advanced&nbsp;set&nbsp;-o&nbsp;/UserVars/SuppressShellWarning&nbsp;-i&nbsp;1</code></p>
-<p><code>vim-cmd&nbsp;hostsvc/datastore/rename&nbsp;datastore1&nbsp;"LocalHDD"</code>
-<code>vim-cmd&nbsp;vimsvc/license&nbsp;--set&nbsp;11111-BBBBB-CCCCC-BH951-CAW3U</code>
-<code>esxcli&nbsp;system&nbsp;module&nbsp;parameters&nbsp;set&nbsp;-m&nbsp;tcpip3&nbsp;-p&nbsp;ipv6=0</code></p>
-<p><code>cat&nbsp;&gt;&nbsp;/etc/ntp.conf&nbsp;&lt;&lt;&nbsp;__NTP_CONFIG__</code>
-<code>restrict&nbsp;default&nbsp;kod&nbsp;nomodify&nbsp;notrap&nbsp;noquerynopeer</code>
-<code>restrict&nbsp;127.0.0.1</code>
-<code>server&nbsp;0.vmware.pool.ntp.org</code>
-<code>server&nbsp;1.vmware.pool.ntp.org</code>
-<code>__NTP_CONFIG__</code>
-<code>/sbin/chkconfig&nbsp;ntpd&nbsp;on</code></p>
-<p><code>#&nbsp;EHC</code>
-<code>esxcli&nbsp;software&nbsp;vib&nbsp;install&nbsp;-v</code><a href="http://download3.vmware.com/software/vmw-tools/esxui/esxui_signed.vib"><code>http://download3.vmware.com/software/vmw-tools/esxui/esxui_signed.vib</code></a></p>
-<p><code>#If&nbsp;planning&nbsp;on&nbsp;running&nbsp;nested&nbsp;ESXi,&nbsp;uncomment</code>
-<code>#grep&nbsp;-i&nbsp;"vhv.enable"&nbsp;/etc/vmware/config&nbsp;||&nbsp;echo&nbsp;"vhv.enable&nbsp;=&nbsp;\"TRUE\""&nbsp;&gt;&gt;&nbsp;/etc/vmware/config</code></p>
-<p><code>#&nbsp;Mgmt</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;set&nbsp;--portgroup-name&nbsp;"Management&nbsp;Network"&nbsp;--vlan-id&nbsp;2</code></p>
-<p><code>#&nbsp;vSwitch0</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;set&nbsp;--mtu&nbsp;9000&nbsp;--cdp-status&nbsp;both&nbsp;--vswitch-name&nbsp;vSwitch0</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;add&nbsp;--portgroup-name&nbsp;LAN&nbsp;--vswitch-name&nbsp;vSwitch0</code></p>
-<p><code>#&nbsp;vSwitch1</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;add&nbsp;--ports&nbsp;256&nbsp;--vswitch-name&nbsp;vSwitch1</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;uplink&nbsp;add&nbsp;--uplink-name&nbsp;vmnic1&nbsp;--vswitch-name&nbsp;vSwitch1</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;set&nbsp;--cdp-status&nbsp;listen&nbsp;--vswitch-name&nbsp;vSwitch1</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;add&nbsp;--portgroup-name&nbsp;WAN&nbsp;--vswitch-name&nbsp;vSwitch1</code></p>
-<p><code>#&nbsp;vSwitch2</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;add&nbsp;--ports&nbsp;256&nbsp;--vswitch-name&nbsp;vSwitch2</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;uplink&nbsp;add&nbsp;--uplink-name&nbsp;vmnic2&nbsp;--vswitch-name&nbsp;vSwitch2</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;set&nbsp;--mtu&nbsp;9000&nbsp;--cdp-status&nbsp;both&nbsp;--vswitch-name&nbsp;vSwitch2</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;add&nbsp;--portgroup-name&nbsp;DMZ1&nbsp;--vswitch-name&nbsp;vSwitch2</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;set&nbsp;--portgroup-name&nbsp;DMZ1&nbsp;--vlan-id&nbsp;1</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;add&nbsp;--portgroup-name&nbsp;DMZ2&nbsp;--vswitch-name&nbsp;vSwitch2</code>
-<code>esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;set&nbsp;--portgroup-name&nbsp;DMZ2&nbsp;--vlan-id&nbsp;2</code></p>
-<p><a href="/Category:Kickstart" title="wikilink">Category:Kickstart</a>
-<a href="/Category:VMware" title="wikilink">Category:VMware</a></p>
+<div class="highlight"><pre><span></span><code>accepteula
+install&nbsp;--firstdisk&nbsp;--overwritevmfs
+#For&nbsp;USB&nbsp;install&nbsp;use&nbsp;below&nbsp;instead
+#install&nbsp;--firstdisk&nbsp;--novmfsondisk
+rootpw&nbsp;bueno
+keyboard&nbsp;Swedish
+reboot
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>network&nbsp;--bootproto=static&nbsp;--device=vmnic0&nbsp;--hostname=esxi2.hackernet.se&nbsp;--ip=172.20.0.2&nbsp;--netmask=255.255.255.0&nbsp;--gateway=172.20.0.1&nbsp;--nameserver=172.20.0.10&nbsp;--addvmportgroup=false
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>%firstboot&nbsp;--interpreter=busybox
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#SSH
+vim-cmd&nbsp;hostsvc/enable_ssh
+vim-cmd&nbsp;hostsvc/start_ssh
+esxcli&nbsp;system&nbsp;settings&nbsp;advanced&nbsp;set&nbsp;-o&nbsp;/UserVars/SuppressShellWarning&nbsp;-i&nbsp;1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>vim-cmd&nbsp;hostsvc/datastore/rename&nbsp;datastore1&nbsp;"LocalHDD"
+vim-cmd&nbsp;vimsvc/license&nbsp;--set&nbsp;11111-BBBBB-CCCCC-BH951-CAW3U
+esxcli&nbsp;system&nbsp;module&nbsp;parameters&nbsp;set&nbsp;-m&nbsp;tcpip3&nbsp;-p&nbsp;ipv6=0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>cat&nbsp;&gt;&nbsp;/etc/ntp.conf&nbsp;&lt;&lt;&nbsp;__NTP_CONFIG__
+restrict&nbsp;default&nbsp;kod&nbsp;nomodify&nbsp;notrap&nbsp;noquerynopeer
+restrict&nbsp;127.0.0.1
+server&nbsp;0.vmware.pool.ntp.org
+server&nbsp;1.vmware.pool.ntp.org
+__NTP_CONFIG__
+/sbin/chkconfig&nbsp;ntpd&nbsp;on
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>#&nbsp;EHC
+</code></pre></div>
+<code>esxcli&nbsp;software&nbsp;vib&nbsp;install&nbsp;-v</code><a href="http://download3.vmware.com/software/vmw-tools/esxui/esxui_signed.vib"><code>http://download3.vmware.com/software/vmw-tools/esxui/esxui_signed.vib</code></a><p></p>
+<div class="highlight"><pre><span></span><code>#If&nbsp;planning&nbsp;on&nbsp;running&nbsp;nested&nbsp;ESXi,&nbsp;uncomment
+#grep&nbsp;-i&nbsp;"vhv.enable"&nbsp;/etc/vmware/config&nbsp;||&nbsp;echo&nbsp;"vhv.enable&nbsp;=&nbsp;\"TRUE\""&nbsp;&gt;&gt;&nbsp;/etc/vmware/config
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Mgmt
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;set&nbsp;--portgroup-name&nbsp;"Management&nbsp;Network"&nbsp;--vlan-id&nbsp;2
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;vSwitch0
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;set&nbsp;--mtu&nbsp;9000&nbsp;--cdp-status&nbsp;both&nbsp;--vswitch-name&nbsp;vSwitch0
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;add&nbsp;--portgroup-name&nbsp;LAN&nbsp;--vswitch-name&nbsp;vSwitch0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;vSwitch1
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;add&nbsp;--ports&nbsp;256&nbsp;--vswitch-name&nbsp;vSwitch1
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;uplink&nbsp;add&nbsp;--uplink-name&nbsp;vmnic1&nbsp;--vswitch-name&nbsp;vSwitch1
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;set&nbsp;--cdp-status&nbsp;listen&nbsp;--vswitch-name&nbsp;vSwitch1
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;add&nbsp;--portgroup-name&nbsp;WAN&nbsp;--vswitch-name&nbsp;vSwitch1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;vSwitch2&nbsp;
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;add&nbsp;--ports&nbsp;256&nbsp;--vswitch-name&nbsp;vSwitch2
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;uplink&nbsp;add&nbsp;--uplink-name&nbsp;vmnic2&nbsp;--vswitch-name&nbsp;vSwitch2
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;set&nbsp;--mtu&nbsp;9000&nbsp;--cdp-status&nbsp;both&nbsp;--vswitch-name&nbsp;vSwitch2
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;add&nbsp;--portgroup-name&nbsp;DMZ1&nbsp;--vswitch-name&nbsp;vSwitch2
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;set&nbsp;--portgroup-name&nbsp;DMZ1&nbsp;--vlan-id&nbsp;1
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;add&nbsp;--portgroup-name&nbsp;DMZ2&nbsp;--vswitch-name&nbsp;vSwitch2
+esxcli&nbsp;network&nbsp;vswitch&nbsp;standard&nbsp;portgroup&nbsp;set&nbsp;--portgroup-name&nbsp;DMZ2&nbsp;--vlan-id&nbsp;2
+</code></pre></div>
 
 
 
@@ -8906,7 +8944,7 @@
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

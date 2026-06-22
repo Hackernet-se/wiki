@@ -8669,6 +8669,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8924,85 +8952,106 @@ stöd för, t.ex. storm-control och IPsec.</p>
 <p><strong>ESXi</strong></p>
 <p><a href="https://eos.arista.com/running-veos-on-esxi-5-5/"><code>https://eos.arista.com/running-veos-on-esxi-5-5/</code></a></p>
 <p><strong>Virtualbox</strong></p>
-<p><code>vboxmanage&nbsp;createvm&nbsp;--name&nbsp;vEOS02&nbsp;--ostype&nbsp;Fedora_64&nbsp;--register</code>
-<code>VBoxManage&nbsp;modifyvm&nbsp;vEOS02&nbsp;--memory&nbsp;2048</code>
-<code>VBoxManage&nbsp;modifyvm&nbsp;vEOS02&nbsp;--nic1&nbsp;intnet</code>
-<code>VBoxManage&nbsp;modifyvm&nbsp;vEOS02&nbsp;--intnet1&nbsp;Mgmt1</code>
-<code>VBoxManage&nbsp;modifyvm&nbsp;vEOS02&nbsp;--nicpromisc1&nbsp;allow-vms</code>
-<code>VBoxManage&nbsp;modifyvm&nbsp;vEOS02&nbsp;--cableconnected1&nbsp;on</code>
-<code>VBoxManage&nbsp;storagectl&nbsp;vEOS02&nbsp;--name&nbsp;"IDE&nbsp;Controller"&nbsp;--add&nbsp;ide</code>
-<code>VBoxManage&nbsp;storageattach&nbsp;vEOS02&nbsp;--storagectl&nbsp;"IDE&nbsp;Controller"&nbsp;--port&nbsp;0&nbsp;--device&nbsp;0&nbsp;--type&nbsp;hdd&nbsp;--medium&nbsp;/path/vEOS-lab-4.15.2.1F.vmdk</code>
-<code>VBoxManage&nbsp;storageattach&nbsp;vEOS02&nbsp;--storagectl&nbsp;"IDE&nbsp;Controller"&nbsp;--port&nbsp;1&nbsp;--device&nbsp;0&nbsp;--type&nbsp;dvddrive&nbsp;--medium&nbsp;/path/Aboot-veos-2.1.0.iso</code></p>
+<div class="highlight"><pre><span></span><code>vboxmanage&nbsp;createvm&nbsp;--name&nbsp;vEOS02&nbsp;--ostype&nbsp;Fedora_64&nbsp;--register
+VBoxManage&nbsp;modifyvm&nbsp;vEOS02&nbsp;--memory&nbsp;2048
+VBoxManage&nbsp;modifyvm&nbsp;vEOS02&nbsp;--nic1&nbsp;intnet
+VBoxManage&nbsp;modifyvm&nbsp;vEOS02&nbsp;--intnet1&nbsp;Mgmt1
+VBoxManage&nbsp;modifyvm&nbsp;vEOS02&nbsp;--nicpromisc1&nbsp;allow-vms
+VBoxManage&nbsp;modifyvm&nbsp;vEOS02&nbsp;--cableconnected1&nbsp;on
+VBoxManage&nbsp;storagectl&nbsp;vEOS02&nbsp;--name&nbsp;"IDE&nbsp;Controller"&nbsp;--add&nbsp;ide
+VBoxManage&nbsp;storageattach&nbsp;vEOS02&nbsp;--storagectl&nbsp;"IDE&nbsp;Controller"&nbsp;--port&nbsp;0&nbsp;--device&nbsp;0&nbsp;--type&nbsp;hdd&nbsp;--medium&nbsp;/path/vEOS-lab-4.15.2.1F.vmdk
+VBoxManage&nbsp;storageattach&nbsp;vEOS02&nbsp;--storagectl&nbsp;"IDE&nbsp;Controller"&nbsp;--port&nbsp;1&nbsp;--device&nbsp;0&nbsp;--type&nbsp;dvddrive&nbsp;--medium&nbsp;/path/Aboot-veos-2.1.0.iso
+</code></pre></div>
 <p><strong>Credentials</strong>
 admin: <no password=""></no></p>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>Grundkonfiguration</p>
-<p><code>hostname&nbsp;vEOS-01</code>
-<code>logging&nbsp;console&nbsp;notifications</code>
-<code>logging&nbsp;monitor&nbsp;informational</code>
-<code>logging&nbsp;synchronous</code>
-<code>logging&nbsp;buffered&nbsp;2000</code>
-<code>username&nbsp;wizkid&nbsp;privilege&nbsp;15&nbsp;secret</code><password></password></p>
-<p><code>show&nbsp;user-account</code></p>
+<p></p><div class="highlight"><pre><span></span><code>hostname&nbsp;vEOS-01
+logging&nbsp;console&nbsp;notifications
+logging&nbsp;monitor&nbsp;informational
+logging&nbsp;synchronous
+logging&nbsp;buffered&nbsp;2000
+</code></pre></div>
+<code>username&nbsp;wizkid&nbsp;privilege&nbsp;15&nbsp;secret</code><password><p></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;user-account
+</code></pre></div>
 <p>Management interface</p>
-<p><code>interface&nbsp;Management1</code>
-<code>ip&nbsp;address&nbsp;10.0.0.10/24</code>
-<code>no&nbsp;shut</code></p>
-<p><code>lldp&nbsp;management-address&nbsp;Management1</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Management1
+&nbsp;ip&nbsp;address&nbsp;10.0.0.10/24
+&nbsp;no&nbsp;shut
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>lldp&nbsp;management-address&nbsp;Management1
+</code></pre></div>
 <h3 id="ssh">SSH</h3>
 <p>SSH är påslaget default, det som behöver konfas är användare och
 IP-adress. Ska man använda EOS som scp-server måste det user-konto man
 loggar in med ha "full access", dvs privilege 15.</p>
-<p><code>management&nbsp;ssh</code>
-<code>idle-timeout&nbsp;1800</code></p>
+<div class="highlight"><pre><span></span><code>management&nbsp;ssh
+&nbsp;idle-timeout&nbsp;1800
+</code></pre></div>
 <p>Autentisering med SSH-nyckel</p>
-<p><code>copy&nbsp;scp:user@jumphost/home/user/.ssh/id_rsa.pub&nbsp;flash:</code>
-<code>username</code><em><code>user</code></em><code>sshkey&nbsp;file&nbsp;flash:id_rsa.pub</code></p>
+<p></p><div class="highlight"><pre><span></span><code>copy&nbsp;scp:user@jumphost/home/user/.ssh/id_rsa.pub&nbsp;flash:
+</code></pre></div>
+<code>username</code><em><code>user</code></em><code>sshkey&nbsp;file&nbsp;flash:id_rsa.pub</code><p></p>
 <h3 id="management-vrf">Management VRF</h3>
-<p><code>vrf&nbsp;definition&nbsp;MGMT</code>
-<code>rd&nbsp;100:100</code></p>
+<div class="highlight"><pre><span></span><code>vrf&nbsp;definition&nbsp;MGMT&nbsp;
+&nbsp;rd&nbsp;100:100
+</code></pre></div>
 <p>Första porten är Ma1</p>
-<p><code>interface&nbsp;ma1</code>
-<code>vrf&nbsp;forwarding&nbsp;MGMT</code>
-<code>ip&nbsp;address&nbsp;10.0.0.10&nbsp;255.255.255.0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;ma1&nbsp;
+&nbsp;vrf&nbsp;forwarding&nbsp;MGMT&nbsp;
+&nbsp;ip&nbsp;address&nbsp;10.0.0.10&nbsp;255.255.255.0
+</code></pre></div>
 <h3 id="eapi">eAPI</h3>
 <p>En user behövs för att kunna använda eAPI. URL till API sandbox:
 <a href="https://">https://</a><mgmt-ip>:443</mgmt-ip></p>
-<p><code>management&nbsp;api&nbsp;http-commands</code>
-<code>no&nbsp;shutdown</code>
-<code>!</code>
-<code>vrf&nbsp;MGMT</code>
-<code>no&nbsp;shutdown</code></p>
-<p><code>show&nbsp;management&nbsp;api&nbsp;http-commands</code></p>
+<div class="highlight"><pre><span></span><code>management&nbsp;api&nbsp;http-commands
+&nbsp;no&nbsp;shutdown
+&nbsp;!
+&nbsp;vrf&nbsp;MGMT
+&nbsp;&nbsp;no&nbsp;shutdown
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;management&nbsp;api&nbsp;http-commands&nbsp;
+</code></pre></div>
 <p>Det finns även stöd för netconf och restconf</p>
-<p><code>management&nbsp;api&nbsp;netconf</code>
-<code>transport&nbsp;ssh&nbsp;MGMT</code>
-<code>!</code>
-<code>management&nbsp;api&nbsp;restconf</code>
-<code>transport&nbsp;https&nbsp;MGMT</code></p>
+<div class="highlight"><pre><span></span><code>management&nbsp;api&nbsp;netconf
+&nbsp;&nbsp;transport&nbsp;ssh&nbsp;MGMT
+!
+management&nbsp;api&nbsp;restconf
+&nbsp;&nbsp;transport&nbsp;https&nbsp;MGMT
+</code></pre></div>
 <h1 id="diverse">Diverse</h1>
 <p>Show the current running-config for this sub mode</p>
-<p><code>show&nbsp;active</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;active
+</code></pre></div>
 <p>Show diff between running and startup</p>
-<p><code>show&nbsp;running&nbsp;diff</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;running&nbsp;diff
+</code></pre></div>
 <p>Backa till startup-konfig</p>
-<p><code>configure&nbsp;replace&nbsp;startup-config</code></p>
+<div class="highlight"><pre><span></span><code>configure&nbsp;replace&nbsp;startup-config
+</code></pre></div>
 <p>CLI history</p>
-<p><code>show&nbsp;history</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;history
+</code></pre></div>
 <p>Slå på loggmeddelanden i SSH terminal.</p>
-<p><code>terminal&nbsp;monitor</code></p>
+<div class="highlight"><pre><span></span><code>terminal&nbsp;monitor
+</code></pre></div>
 <p><strong>Syslog</strong></p>
-<p><code>logging&nbsp;buffered&nbsp;10000&nbsp;notifications</code>
-<code>logging&nbsp;host&nbsp;10.0.0.12</code>
-<code>show&nbsp;logging</code>
-<code>show&nbsp;logg&nbsp;last&nbsp;10&nbsp;min</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;buffered&nbsp;10000&nbsp;notifications
+logging&nbsp;host&nbsp;10.0.0.12
+show&nbsp;logging
+show&nbsp;logg&nbsp;last&nbsp;10&nbsp;min
+</code></pre></div>
 <p><strong>NTP</strong></p>
-<p><code>ntp&nbsp;server&nbsp;10.0.0.12</code></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;server&nbsp;10.0.0.12
+</code></pre></div>
 <p><strong>DNS</strong></p>
-<p><code>ip&nbsp;name-server&nbsp;8.8.8.8</code>
-<code>show&nbsp;hosts</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;name-server&nbsp;8.8.8.8
+show&nbsp;hosts
+</code></pre></div>
 <p><strong>SCP Server</strong></p>
-<p><code>aaa&nbsp;authorization&nbsp;exec&nbsp;default&nbsp;local</code></p>
+<div class="highlight"><pre><span></span><code>aaa&nbsp;authorization&nbsp;exec&nbsp;default&nbsp;local
+</code></pre></div>
 <h3 id="port-mirroring">Port mirroring</h3>
 <p><code>monitor&nbsp;session&nbsp;1&nbsp;source&nbsp;interface</code><interface><code>[&nbsp;rx&nbsp;|&nbsp;tx&nbsp;|&nbsp;both&nbsp;]</code>
 <code>monitor&nbsp;session&nbsp;1&nbsp;destination</code><interface></interface></interface></p>
@@ -9011,31 +9060,36 @@ loggar in med ha "full access", dvs privilege 15.</p>
 <h3 id="iperf">Iperf</h3>
 <p><a href="/Iperf" title="wikilink">Iperf</a> finns inbyggt i EOS. Dock tillåts inte tcp
 5001 default.</p>
-<p><code>bash</code>
-<code>sudo&nbsp;iptables&nbsp;-I&nbsp;INPUT&nbsp;-p&nbsp;tcp&nbsp;-m&nbsp;tcp&nbsp;--dport&nbsp;5001&nbsp;-j&nbsp;ACCEPT</code>
-<code>iperf&nbsp;-s</code></p>
+<div class="highlight"><pre><span></span><code>bash
+sudo&nbsp;iptables&nbsp;-I&nbsp;INPUT&nbsp;-p&nbsp;tcp&nbsp;-m&nbsp;tcp&nbsp;--dport&nbsp;5001&nbsp;-j&nbsp;ACCEPT
+iperf&nbsp;-s
+</code></pre></div>
 <p>Klient</p>
-<p><code>iperf&nbsp;-c&nbsp;10.0.0.10</code></p>
+<div class="highlight"><pre><span></span><code>iperf&nbsp;-c&nbsp;10.0.0.10
+</code></pre></div>
 <h3 id="yum">Yum</h3>
 <p>Yum finns inbyggt i EOS men det finns inga repos default.</p>
-<p><code>bash</code>
-<code>sudo&nbsp;nano&nbsp;/etc/yum.repos.d/fedora.repo</code>
-<code>[fedora]</code>
-<code>name=Fedora&nbsp;14&nbsp;–&nbsp;i386</code>
-<code>failovermethod=priority</code>
+<p></p><div class="highlight"><pre><span></span><code>bash
+sudo&nbsp;nano&nbsp;/etc/yum.repos.d/fedora.repo
+[fedora]
+name=Fedora&nbsp;14&nbsp;–&nbsp;i386
+failovermethod=priority
+</code></pre></div>
 <code>baseurl=</code><a href="http://dl.fedoraproject.org/pub/archive/fedora/linux/releases/14/Everything/i386/os/"><code>http://dl.fedoraproject.org/pub/archive/fedora/linux/releases/14/Everything/i386/os/</code></a>
-<code>exclude=kernel,fedora-logos</code>
-<code>enabled=1</code>
-<code>gpgcheck=0</code></p>
-<p><code>sudo&nbsp;yum&nbsp;install&nbsp;iftop</code></p>
+<div class="highlight"><pre><span></span><code>exclude=kernel,fedora-logos
+enabled=1
+gpgcheck=0
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;yum&nbsp;install&nbsp;iftop
+</code></pre></div>
 <h3 id="maintenance-mode">Maintenance Mode</h3>
 <p>Sätt hela switchen i maintenance mode, då graceful stängs allt utom
 management.</p>
-<p><code>maintenance</code>
-<code>unit&nbsp;System</code>
-<code>quiesce</code>
-<code>show&nbsp;maintenance</code></p>
-<p><a href="/Category:Arista" title="wikilink">Category:Arista</a></p>
+<div class="highlight"><pre><span></span><code>maintenance
+&nbsp;unit&nbsp;System
+&nbsp;&nbsp;quiesce
+show&nbsp;maintenance
+</code></pre></div></password>
 
 
 
@@ -9058,7 +9112,7 @@ management.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

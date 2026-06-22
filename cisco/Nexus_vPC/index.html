@@ -8709,6 +8709,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9012,40 +9040,34 @@ inte rekommenderat samt att det endast går på vissa releaser. Det
 konfigureras under vPC-domänen med <em>layer3 peer-router</em>.</p>
 <h2 id="initial-setup">Initial setup</h2>
 <p>Aktivera vPC</p>
-<p><code>feature&nbsp;vpc</code>
-<code>feature&nbsp;lacp</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;vpc
+feature&nbsp;lacp
+</code></pre></div>
 <p>vPC peers skickar varje sekund keepalives mellan varandra. Man kan t.ex.
 använda mgmt-portarna för keepalives, det är endast små UDP-paket som
 ska skickas och tas emot.</p>
-<div class="mw-collapsible mw-collapsed" style="width:300px">
-
-Keepalive message:
-
-<div class="mw-collapsible-content">
-
-[<file:nexus-vpc-keepalive.png>](/File:Nexus-vPC-Keepalive.PNG "wikilink")
-
-</file:nexus-vpc-keepalive.png></div>
-</div>
-
+<p>Keepalive message:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Nexus-vPC-Keepalive.PNG" data-desc-position="bottom"><img alt="Nexus-vPC-Keepalive.PNG" src="../../images/Nexus-vPC-Keepalive.PNG"></a></p>
 <p>Exempel: skapa en dedikerad vrf för keepalives och assigna interface.</p>
-<p><code>vrf&nbsp;context&nbsp;VPC-KEEPALIVE</code>
-<code>interface&nbsp;po1</code>
-<code>no&nbsp;switchport</code>
-<code>vrf&nbsp;member&nbsp;VPC-KEEPALIVE</code>
-<code>ip&nbsp;address&nbsp;10.255.255.1/30</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>vrf&nbsp;context&nbsp;VPC-KEEPALIVE
+interface&nbsp;po1
+&nbsp;no&nbsp;switchport
+&nbsp;vrf&nbsp;member&nbsp;VPC-KEEPALIVE
+&nbsp;ip&nbsp;address&nbsp;10.255.255.1/30
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <p><strong>Domänkonfiguration</strong>
 En VPC-domän har default en restore-delay på 30 sekunder.</p>
 <p><code>vpc&nbsp;domain</code><number>
-<code>role&nbsp;priority&nbsp;1</code>
-<code>system-priority&nbsp;1000</code>
-<code>system-mac&nbsp;00:00:11:11:22:22</code>
-<code>peer-keepalive&nbsp;destination&nbsp;10.255.255.2&nbsp;source&nbsp;10.255.255.1&nbsp;vrf&nbsp;VPC-KEEPALIVE</code>
-<code>peer-gateway</code>
-<code>auto-recovery</code>
-<code>ip&nbsp;arp&nbsp;synchronize</code>
-<code>ipv6&nbsp;nd&nbsp;synchronize</code></number></p>
+</number></p><div class="highlight"><pre><span></span><code>&nbsp;role&nbsp;priority&nbsp;1
+&nbsp;system-priority&nbsp;1000
+&nbsp;system-mac&nbsp;00:00:11:11:22:22
+&nbsp;peer-keepalive&nbsp;destination&nbsp;10.255.255.2&nbsp;source&nbsp;10.255.255.1&nbsp;vrf&nbsp;VPC-KEEPALIVE
+&nbsp;peer-gateway
+&nbsp;auto-recovery
+&nbsp;ip&nbsp;arp&nbsp;synchronize
+&nbsp;ipv6&nbsp;nd&nbsp;synchronize
+</code></pre></div><p></p>
 <p>Default-värden för keepalive: udp-port 3200, vrf management, interval
 1000, timeout 5, precedence 6, hold-timeout 3</p>
 <p>"system-priority" och "system-mac" bestämmer vilken LACP system priority
@@ -9056,26 +9078,30 @@ Auto-recovery är på default och det bör det vara, det ser till att man
 kan bli forwarding trots att peer aldrig kommer upp, t.ex. om man endast
 har en switch eller den andra inte startar efter ett strömavbrott.</p>
 <p>Konfigurera vPC peer-link</p>
-<p><code>interface&nbsp;port-channel2</code>
-<code>switchport</code>
-<code>switchport&nbsp;mode&nbsp;trunk</code>
-<code>spanning-tree&nbsp;port&nbsp;type&nbsp;network&nbsp;&nbsp;#för&nbsp;Bridge&nbsp;Assurance</code>
-<code>vpc&nbsp;peer-link</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;port-channel2
+&nbsp;switchport
+&nbsp;switchport&nbsp;mode&nbsp;trunk
+&nbsp;spanning-tree&nbsp;port&nbsp;type&nbsp;network&nbsp;&nbsp;#för&nbsp;Bridge&nbsp;Assurance
+&nbsp;vpc&nbsp;peer-link
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;vpc</code>
-<code>show&nbsp;vpc&nbsp;peer-keepalive</code>
-<code>show&nbsp;vpc&nbsp;role</code>
-<code>logging&nbsp;level&nbsp;vpc&nbsp;5</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;vpc&nbsp;
+show&nbsp;vpc&nbsp;peer-keepalive&nbsp;
+show&nbsp;vpc&nbsp;role
+logging&nbsp;level&nbsp;vpc&nbsp;5
+</code></pre></div>
 <p>För att byta role: <em>vpc role preempt</em></p>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Skapa vPC:er genom att assigna interface. Status på dessa vPC member
 ports signaleras med CFS mellan peers.</p>
-<p><code>interface&nbsp;Ethernet1/20</code>
-<code>switchport&nbsp;mode&nbsp;trunk</code>
-<code>channel-group&nbsp;20&nbsp;mode&nbsp;active</code></p>
-<p><code>interface&nbsp;port-channel20</code>
-<code>switchport&nbsp;mode&nbsp;trunk</code>
-<code>vpc&nbsp;20</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Ethernet1/20
+&nbsp;switchport&nbsp;mode&nbsp;trunk
+&nbsp;channel-group&nbsp;20&nbsp;mode&nbsp;active
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;port-channel20
+&nbsp;switchport&nbsp;mode&nbsp;trunk
+&nbsp;vpc&nbsp;20
+</code></pre></div>
 <p><strong>LACP</strong>
 NX-OS har ”graceful convergence” aktiverat som standard. Denna funktion
 förbättrar hanteringen av handskakningen för LACP. När en PortChannel
@@ -9083,8 +9109,9 @@ går mot en enhet som inte kör NX-OS så ska denna funktion stängas av för
 att minska risken att en individuell port går ner i ”suspended state”.
 Notera att man emot vmware esxi bör slå på graceful convergence,
 CSCuy84084.</p>
-<p><code>interface&nbsp;port-channel10</code>
-<code>no&nbsp;lacp&nbsp;graceful-convergence</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;port-channel10
+&nbsp;no&nbsp;lacp&nbsp;graceful-convergence
+</code></pre></div>
 <p><strong>Individual port</strong>
 Portar som inte får in LACPDU:er räknas som "individual". Man kan välja
 om portar som inte lyckas med LACP-förhandling ska fallbacka till
@@ -9098,33 +9125,39 @@ man uppgraderar till nyare NX-OS så läggs "no lacp suspend-individual"
 till i running config på interface med default-konfiguration, innan
 syntes inte detta. När Nexus 5000 ansluts till andra nätverksenheter,
 använd suspend-individual för PortChannel:n.</p>
-<p><code>interface&nbsp;port-channel10</code>
-<code>lacp&nbsp;suspend-individual</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;port-channel10&nbsp;
+&nbsp;lacp&nbsp;suspend-individual
+</code></pre></div>
 <p><strong>Verify</strong>
 show vpc brief</p>
-<p><code>show&nbsp;port-channel&nbsp;database</code>
-<code>show&nbsp;vpc&nbsp;consistency-parameters&nbsp;vpc&nbsp;5</code>
-<code>show&nbsp;vpc&nbsp;orphan&nbsp;ports</code>
-<code>show&nbsp;lacp&nbsp;neighbor</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;port-channel&nbsp;database
+show&nbsp;vpc&nbsp;consistency-parameters&nbsp;vpc&nbsp;5
+show&nbsp;vpc&nbsp;orphan&nbsp;ports
+show&nbsp;lacp&nbsp;neighbor
+</code></pre></div>
 <p>Vid en Type 1 mismatch för ett visst vlan så kommer vlanet endast att
 suspendas på vPC:er på secondary vPC peer, detta kallas graceful
 consistency check och är på default.</p>
 <p>Advanced troubleshooting</p>
-<p><code>show&nbsp;cfs&nbsp;status</code>
-<code>show&nbsp;cfs&nbsp;peers</code>
-<code>show&nbsp;cfs&nbsp;internal&nbsp;notification&nbsp;log&nbsp;name&nbsp;vpc</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;cfs&nbsp;status
+show&nbsp;cfs&nbsp;peers
+show&nbsp;cfs&nbsp;internal&nbsp;notification&nbsp;log&nbsp;name&nbsp;vpc
+</code></pre></div>
 <p><strong>Load balancing method</strong></p>
-<p><code>show&nbsp;port-channel&nbsp;load-balance</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;port-channel&nbsp;load-balance&nbsp;
+</code></pre></div>
 <p>Notera att på Nexus 7000 går det endast ändra load balancing method i
 default VDC:n och detta slår chassis-wide, däremot går det att ställa in
 per linjekort.</p>
 <p><strong>Multicast</strong>
 Peers utbyter metrics över CFS för nya sources.</p>
-<p><code>show&nbsp;ip&nbsp;pim&nbsp;internal&nbsp;vpc&nbsp;rpf</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;pim&nbsp;internal&nbsp;vpc&nbsp;rpf
+</code></pre></div>
 <p><strong>BDPU</strong>
 Ändra så att VPCer använder Cisco OUI i BPDUer istället för
 0026.fxxx.0000.</p>
-<p><code>Nexus7000(config-vpc-domain)#&nbsp;mac-address&nbsp;bpdu&nbsp;source&nbsp;version&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>Nexus7000(config-vpc-domain)#&nbsp;mac-address&nbsp;bpdu&nbsp;source&nbsp;version&nbsp;2&nbsp;
+</code></pre></div>
 <h2 id="vpc-enhancements">vPC Enhancements</h2>
 <p><strong>Peer-switch</strong>
 vPC Peer-switch möjliggör för ett vPC-par att presentera sig som en
@@ -9141,8 +9174,9 @@ rekommenderas att använda sig av peer-switch i en vPC-domän.</p>
 samma spanning tree-konfiguration för samtliga vPC VLAN. Peer-switch
 måste även det vara konfigurerat på båda sidor. För att slå på
 peer-switch:</p>
-<p><code>vpc&nbsp;domain&nbsp;1</code>
-<code>peer-switch</code></p>
+<div class="highlight"><pre><span></span><code>vpc&nbsp;domain&nbsp;1
+&nbsp;peer-switch
+</code></pre></div>
 <p><strong>Peer-gateway</strong>
 vPC Peer-gateway tillåter en vPC peer-enhet att agera gateway för paket
 som adresserats till den andra peer-enhetens MAC-adress. På så vis
@@ -9154,8 +9188,9 @@ med denna teknologi och rekommenderas att aktivera i alla
 vPC-installationer, även denna funktion ska aktiveras på båda
 peer-enheterna. Båda vpc-peers blir också aktiva forwarders för HSRPs
 vMAC. För att slå på peer-gateway:</p>
-<p><code>vpc&nbsp;domain&nbsp;1</code>
-<code>peer-gateway</code></p>
+<div class="highlight"><pre><span></span><code>vpc&nbsp;domain&nbsp;1
+&nbsp;peer-gateway
+</code></pre></div>
 <p><strong>ARP Sync</strong>
 För att snabba upp återskapandet av ARP-tabellen efter exempelvis
 peer-flap eller att ett SVI gått up kan man använda sig av
@@ -9164,30 +9199,35 @@ nämnda händelser inträffat kommer båda enheterna då att synkronisera
 sina ARP-tabeller med varandra över peer-länken. Det rekommenderas
 starkt att alltid aktivera IP ARP synchronization på båda
 peer-enheterna. För att aktivera ARP sync:</p>
-<p><code>vpc&nbsp;domain&nbsp;1</code>
-<code>ip&nbsp;arp&nbsp;synchronize</code></p>
-<p><code>show&nbsp;ip&nbsp;arp&nbsp;vpc-statistics</code></p>
+<div class="highlight"><pre><span></span><code>vpc&nbsp;domain&nbsp;1
+&nbsp;ip&nbsp;arp&nbsp;synchronize
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;arp&nbsp;vpc-statistics&nbsp;
+</code></pre></div>
 <p><strong>Nexus 9000</strong>
 Om man slår på vPC Fast Convergence så enablear man en feature som heter
 MCT Down Handler. Då skapas en lista med member ports, layer-3
 interfaces (SVI:er) och alla vlan de använder. Om peer-linken failar så
 skickas ett suspend-meddelande till alla dem samtidigt. Det betyder att
 SVI:erna inte stängs ner först vilket förhindrar traffic loss.</p>
-<p><code>vpc&nbsp;domain&nbsp;1</code>
-<code>fast-convergence</code></p>
+<div class="highlight"><pre><span></span><code>vpc&nbsp;domain&nbsp;1
+&nbsp;fast-convergence
+</code></pre></div>
 <p>Detta används för att förbättra konvergens av Layer 2
 <a href="/Cisco_EVPN" title="wikilink">EVPN</a> VXLAN.</p>
-<p><code>interface&nbsp;port-channel&nbsp;10</code>
-<code>lacp&nbsp;vpc-convergence</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;port-channel&nbsp;10
+&nbsp;lacp&nbsp;vpc-convergence
+</code></pre></div>
 <p><strong>Hybrid Setup - Spanning Tree</strong>
 Om man har en mix av enheter på vPC och icke-vPC-portar kopplade till
 sin vPC-domän kan man ändå välja att switcharna skickar ut olika BPDU:er
 och därmed lastdela trafiken VLAN-baserat. Denna konfig overidar annan
 stp rootprio-konf.</p>
-<p><code>spanning-tree&nbsp;pseudo-information</code>
-<code>vlan&nbsp;10,20&nbsp;root&nbsp;priority&nbsp;16384</code>
-<code>vlan&nbsp;10&nbsp;designated&nbsp;priority&nbsp;4096</code>
-<code>vlan&nbsp;20&nbsp;designated&nbsp;priority&nbsp;61440</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;pseudo-information
+&nbsp;vlan&nbsp;10,20&nbsp;root&nbsp;priority&nbsp;16384
+&nbsp;vlan&nbsp;10&nbsp;designated&nbsp;priority&nbsp;4096
+&nbsp;vlan&nbsp;20&nbsp;designated&nbsp;priority&nbsp;61440
+</code></pre></div>
 <h2 id="failover-behavior">Failover Behavior</h2>
 <p>Olika fel kan uppstå i ett datacenter och vPC har vissa mekanismer för
 att hantera det. Om peer-länken går ner så används peer-keepalive för
@@ -9203,7 +9243,8 @@ såklart bli traffic drops. Finns det något konfigurationsfel mellan
 noderna så går inte Consistency Check igenom och då kommer endast den
 primära noden att vara aktiv för forwardering. Beroende på typ av
 mismatch så genereras syslog-meddelanden.</p>
-<p><code>show&nbsp;vpc&nbsp;consistency-parameters&nbsp;global</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;vpc&nbsp;consistency-parameters&nbsp;global
+</code></pre></div>
 <h2 id="back-to-back">Back to Back</h2>
 <p>Man kan koppla ett vpc-par till ett annat vpc-par och köra en vpc på
 varje sida, detta kallas back-to-back vPC. Detta kan t.ex. användas
@@ -9214,8 +9255,7 @@ skickas (portfast) och ha varje DC i egen STP-domän.</p>
 <p>Det finns inga speciella kommandon eller hårdvarukrav för detta utan det
 är en implementationsvariant, man konfar vpc på båda sidor. Dock måste
 vPC domain ID skilja sig mellan paren.</p>
-<p><a href="/File:Cisco_vPC_B2B.PNG" title="wikilink"><file:cisco_vpc_b2b.png></file:cisco_vpc_b2b.png></a></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_vPC_B2B.PNG" data-desc-position="bottom"><img alt="Cisco_vPC_B2B.PNG" src="../../images/Cisco_vPC_B2B.PNG"></a></p>
 
 
 
@@ -9238,7 +9278,7 @@ vPC domain ID skilja sig mellan paren.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

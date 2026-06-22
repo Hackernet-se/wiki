@@ -8621,6 +8621,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8864,17 +8892,8 @@ någon BPDU innan MaxAge (minus MessageAge) har gått ut måste STP räkna
 om. Rotbryggan avgör dessa timers. Root Path Cost skickas med i varje
 Hello och genom att addera det med costen på interfacet där Hellon kom
 in vet switchen hur långt det är till rotbryggan.</p>
-<div class="mw-collapsible mw-collapsed" style="width:210px">
-
-**BPDU**
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_stp_bpdu.png>](/File:Cisco_STP_BPDU.png "wikilink")
-
-</file:cisco_stp_bpdu.png></div>
-</div>
-
+<p><strong>BPDU</strong></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_STP_BPDU.png" data-desc-position="bottom"><img alt="Cisco_STP_BPDU.png" src="../../images/Cisco_STP_BPDU.png"></a></p>
 <p><strong>Process</strong>
 STP-processen börjar med att alla switchar ser sig själva som root och
 skickar ut Hellos. Sedan görs följande val:</p>
@@ -8913,9 +8932,10 @@ innan de skickar det vidare. MaxAge, HelloTime och ForwardDelay är
 värden satta på rotbryggan, har andra switchar andra värden
 konfigurerade spelar det ingen roll för det är rotbryggan som bestämmer.
 Hellos skickas default var 2 sekund.</p>
-<p><code>spanning-tree&nbsp;vlan&nbsp;1-4094&nbsp;hello-time&nbsp;2</code>
-<code>spanning-tree&nbsp;vlan&nbsp;1-4094&nbsp;forward-time&nbsp;15</code>
-<code>spanning-tree&nbsp;vlan&nbsp;1-4094&nbsp;max-age&nbsp;20</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;vlan&nbsp;1-4094&nbsp;hello-time&nbsp;2
+spanning-tree&nbsp;vlan&nbsp;1-4094&nbsp;forward-time&nbsp;15
+spanning-tree&nbsp;vlan&nbsp;1-4094&nbsp;max-age&nbsp;20
+</code></pre></div>
 <p><strong>Interface states</strong>
 När nätverket konvergerar kan portar byta mellan Blocking och Forwarding
 men detta kan inte göras direkt utan att riskera tillfälliga loopar.
@@ -9069,38 +9089,47 @@ Discarding är stable state medans Learning är transitory.</p>
 <p>Bridge ID med VLAN, detta är default och går ej att ta bort på nyare
 switchar för det konsumerar fler MAC-adresser. Kolla den lokala
 MAC-adressen som används till Bridge ID: <strong>show version | i bia|Base</strong></p>
-<p><code>spanning-tree&nbsp;extend&nbsp;system-id</code>
-<code>spanning-tree&nbsp;mode&nbsp;rapid-pvst</code>
-<code>show&nbsp;spanning-tree</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;extend&nbsp;system-id
+spanning-tree&nbsp;mode&nbsp;rapid-pvst
+show&nbsp;spanning-tree
+</code></pre></div>
 <p><strong>Cost</strong>
 802.1D-1998, 1G = 4</p>
-<p><code>spanning-tree&nbsp;pathcost&nbsp;method&nbsp;short</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;pathcost&nbsp;method&nbsp;short
+</code></pre></div>
 <p>802.1D-2004, 1G = 20000</p>
-<p><code>spanning-tree&nbsp;pathcost&nbsp;method&nbsp;long</code>
-<code>show&nbsp;spanning-tree&nbsp;pathcost&nbsp;method</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;pathcost&nbsp;method&nbsp;long
+show&nbsp;spanning-tree&nbsp;pathcost&nbsp;method
+</code></pre></div>
 <p><strong>Root Bridge</strong>
 Konfigurera root brygga. Priority 0 är det absolut lägsta medans root
 primary sätter prio till 24k förutsatt att det ger root-rollen, detta
 ändras inte dynamiskt.</p>
-<p><code>spanning-tree&nbsp;priority&nbsp;0</code>
-<code>spanning-tree&nbsp;root&nbsp;primary</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;priority&nbsp;0
+spanning-tree&nbsp;root&nbsp;primary
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;spanning-tree&nbsp;root</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;spanning-tree&nbsp;root
+</code></pre></div>
 <p>Default-värden</p>
-<p><code>default&nbsp;spanning-tree&nbsp;vlan&nbsp;1-4094&nbsp;priority</code></p>
+<div class="highlight"><pre><span></span><code>default&nbsp;spanning-tree&nbsp;vlan&nbsp;1-4094&nbsp;priority
+</code></pre></div>
 <p><strong>Portar</strong>
 Root Port och Designated Port</p>
-<p><code>interface&nbsp;range&nbsp;gi0/7</code>
-<code>spanning-tree&nbsp;cost&nbsp;1000</code>
-<code>spanning-tree&nbsp;port-priority&nbsp;128</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;range&nbsp;gi0/7
+&nbsp;spanning-tree&nbsp;cost&nbsp;1000
+&nbsp;spanning-tree&nbsp;port-priority&nbsp;128
+</code></pre></div>
 <p>Restart the protocol migration process</p>
-<p><code>clear&nbsp;spanning-tree&nbsp;detected-protocols</code></p>
+<div class="highlight"><pre><span></span><code>clear&nbsp;spanning-tree&nbsp;detected-protocols
+</code></pre></div>
 <p><strong>Troubleshoot</strong></p>
-<p><code>test&nbsp;spanning-tree&nbsp;diameter&nbsp;3</code>
-<code>test&nbsp;spanning-tree&nbsp;get&nbsp;configuration&nbsp;vlan</code>
-<code>debug&nbsp;spanning-tree&nbsp;events</code>
-<code>debug&nbsp;spanning-tree&nbsp;backbone&nbsp;fast</code>
-<code>debug&nbsp;spanning-tree&nbsp;pvst+</code></p>
+<div class="highlight"><pre><span></span><code>test&nbsp;spanning-tree&nbsp;diameter&nbsp;3
+test&nbsp;spanning-tree&nbsp;get&nbsp;configuration&nbsp;vlan
+debug&nbsp;spanning-tree&nbsp;events
+debug&nbsp;spanning-tree&nbsp;backbone&nbsp;fast
+debug&nbsp;spanning-tree&nbsp;pvst+
+</code></pre></div>
 <h2 id="legacy-extensions">Legacy Extensions</h2>
 <p>Det finns många tillägg till Spanning-tree som bör användas, de hjälper
 till att öka stabilitet, säkerhet och kompabilitet. Se även <a href="/Cisco_MST#Extensions" title="wikilink">MST
@@ -9114,8 +9143,9 @@ en switch som har sin STP prio modifierad. När överslag görs så skickas
 dummy frames till mac 01:00:0c:cc:cc:cc från alla adresser i cam
 tabellen för att snabba upp konvergens i övriga nätet. Uplinkfast på
 default och konfigureras globalt.</p>
-<p><code>spanning-tree&nbsp;uplinkfast</code>
-<code>show&nbsp;spanning-tree&nbsp;uplinkfast</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;uplinkfast
+show&nbsp;spanning-tree&nbsp;uplinkfast
+</code></pre></div>
 <p><strong>BackboneFast</strong>
 Cisco-proprietary teknik som används för att snabba upp konvergens vid
 indirect link failure genom att låta MaxAge timer gå ut direkt. Om någon
@@ -9125,9 +9155,9 @@ enheten för att snabba upp konvergens. RLQ skickas också till root för
 att dubbelkollla att man sjäv inte tappat root. RSTP och MST har detta
 inbyggt men bör i övrigt användas på alla enheter, så förhoppningsvis
 inga...</p>
-<p><code>spanning-tree&nbsp;backbonefast</code>
-<code>show&nbsp;spanning-tree&nbsp;backbonefast</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;backbonefast
+show&nbsp;spanning-tree&nbsp;backbonefast
+</code></pre></div>
 
 
 
@@ -9150,7 +9180,7 @@ inga...</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

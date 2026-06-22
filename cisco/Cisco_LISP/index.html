@@ -5639,56 +5639,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#konfiguration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Konfiguration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Konfiguration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#data-center" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Data Center
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pxtr" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PxTR
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#vrf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        VRF
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -8715,6 +8665,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8934,56 +8912,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#konfiguration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Konfiguration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Konfiguration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#data-center" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Data Center
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pxtr" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PxTR
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#vrf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        VRF
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -9026,74 +8954,7 @@ udp 4342 och data plane trafik skickas till udp 4341.</p>
 <li>Egress/Ingress Tunnel Router (xTR)</li>
 <li>Proxy Ingress Tunnel Router (P-ITR)</li>
 </ul>
-<p><a href="/File:Cisco_LISP.png" title="wikilink"><file:cisco_lisp.png></file:cisco_lisp.png></a></p>
-<h2 id="konfiguration">Konfiguration</h2>
-<p><strong>Map Server/Resolver</strong>
-På MS/MR konfar man vilka sites som får registrera sig, med sites menas
-de prefix/adresser som ska LISP:as. Dvs det är inte en vitlista på RLOCs
-som får registrera sig däremot måste MS/MR kunna nå alla RLOC-adresser.
-Det går att ha dessa roller på olika enheter men det finns ingen större
-vinning med det eftersom MS/MR inte behöver finnas i data plane. För att
-göra MS/MR-funktionen redundant kan man bygga IP anycast.</p>
-<p><code>router&nbsp;lisp</code>
-<code>ipv4&nbsp;map-server</code>
-<code>ipv4&nbsp;map-resolver</code></p>
-<p><code>site&nbsp;SITE_A</code>
-<code>authentication-key&nbsp;SITE_A_KEY</code>
-<code>eid-prefix&nbsp;192.168.1.0/24</code></p>
-<p><em>alla lokala ip-adresser på MS/MR används default av LISP</em></p>
-<p><strong>Branch Site</strong>
-MS/MR ska vara nåbar med unicast i default-vrfen. Man kan ha flera RLOCs
-på samma site för redundans och lastdelning, då ska alla konfas likadant
-vad gäller RLOC-adresser. Med priority kan man styra vilken RLOC som ska
-användas. Har två stycken samma prio kan man styra lastdelning med
-weight. RLOC:ar inom samma site kommer automatiskt proba varandra för
-att kolla att de lever.</p>
-<p><code>router&nbsp;lisp</code>
-<code>ipv4&nbsp;itr&nbsp;map-resolver&nbsp;10.0.0.10</code>
-<code>ipv4&nbsp;itr</code>
-<code>ipv4&nbsp;etr&nbsp;map-server&nbsp;10.0.0.10&nbsp;key&nbsp;SITE_A_KEY</code>
-<code>ipv4&nbsp;etr</code></p>
-<p><code>database-mapping&nbsp;192.168.1.0/24&nbsp;IPv4-interface&nbsp;GigabitEthernet2&nbsp;priority&nbsp;1&nbsp;weight&nbsp;1</code></p>
-<p>Verify</p>
-<p><code>show&nbsp;lisp</code>
-<code>show&nbsp;lisp&nbsp;site</code>
-<code>show&nbsp;ip&nbsp;lisp&nbsp;map-cache</code>
-<code>show&nbsp;ip&nbsp;lisp&nbsp;database</code></p>
-<p><code>clear&nbsp;ip&nbsp;lisp&nbsp;map-cache&nbsp;*</code></p>
-<p><em>map cache default TTL: 24h</em></p>
-<h3 id="data-center">Data Center</h3>
-<p>Genom att tillåta registrering av mer specifika routes (/32-routes) kan
-man lösa VM mobility mellan datacenter. IP-adressen på roaming device
-måste vara inom EID-prefixet. En LISP xTR konfigurerad för LISP VM
-mobility och dynamiska EIDs är en LISP-VM router. Den avgör dynamiskt om
-en VM finns i det direktanslutna subnätet eller någon annanstans.
-LISP-VM routers är RLOCs som används för enkapsulering till EID.</p>
-<p><code>router&nbsp;lisp</code>
-<code>site&nbsp;DATA_CENTER</code>
-<code>authentication-key&nbsp;DC_KEY</code>
-<code>eid-prefix&nbsp;10.8.0.0/16&nbsp;accept-more-specifics</code></p>
-<h3 id="pxtr">PxTR</h3>
-<p>Proxy xTR kan användas för att lisp-siter ska kunna nå non-lisp-aware
-sites. Då skickas paketen native ip ut ur nätverket och sedan
-lisp-enkapsulerat på vägen tillbaka till siten.</p>
-<p><code>router&nbsp;lisp</code>
-<code>ipv4&nbsp;proxy-etr</code>
-<code>ipv4&nbsp;proxy-itr&nbsp;2.2.2.2&nbsp;&nbsp;#local&nbsp;ip</code>
-<code>ipv4&nbsp;itr&nbsp;map-resolver&nbsp;8.8.8.8</code>
-<code>map-cache</code><em><code>EID-prefix</code></em><code>map-request</code></p>
-<p><strong>MTU</strong>
-PMTUD är på default.</p>
-<p><code>router&nbsp;lisp</code>
-<code>ipv4&nbsp;path-mtu-discovery&nbsp;min&nbsp;576&nbsp;max&nbsp;65535</code>
-<code>ipv6&nbsp;path-mtu-discovery&nbsp;min&nbsp;1280&nbsp;max&nbsp;65535</code></p>
-<h3 id="vrf">VRF</h3>
-<p>EIDs och RLOCs kan separeras i olika VRF:er.</p>
-<p><code>router&nbsp;lisp</code>
-<code>locator-table&nbsp;vrf&nbsp;UNDERLAY</code></p>
-<p><code>eid-table&nbsp;vrf&nbsp;Cust_A&nbsp;instance-id&nbsp;101</code>
-<code>database-mapping&nbsp;192.168.1.0/24&nbsp;10.0.0.10&nbsp;priority&nbsp;1&nbsp;weight&nbsp;1</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_LISP.png" data-desc-position="bottom"><img alt="Cisco_LISP.png" src="../../images/Cisco_LISP.png"></a></p>
 
 
 
@@ -9116,7 +8977,7 @@ PMTUD är på default.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

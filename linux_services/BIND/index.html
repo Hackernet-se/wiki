@@ -8981,6 +8981,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9548,7 +9576,8 @@
 <li>Tools</li>
 </ul>
 <h2 id="installation">Installation</h2>
-<p><code>apt-get&nbsp;install&nbsp;bind9&nbsp;bind9utils&nbsp;bind9-doc&nbsp;dnsutils</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;bind9&nbsp;bind9utils&nbsp;bind9-doc&nbsp;dnsutils
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
 <h3 id="domain-name-resolver">Domain Name Resolver</h3>
 <h3 id="domain-name-authority-server">Domain Name Authority server</h3>
@@ -9556,71 +9585,87 @@
 <p>Har man flera servrar kan det vara smidigt att vid ändring i en zone att
 den syncas över till de andra bind servarna.</p>
 <p>Skapa en ACL på master servern i <code>named.conf.local</code>.</p>
-<p><code>acl&nbsp;slave&nbsp;{</code>
-<code>172.22.0.0/24;</code>
-<code>172.22.0.10;</code>
-<code>};</code></p>
+<div class="highlight"><pre><span></span><code>acl&nbsp;slave&nbsp;{
+&nbsp;&nbsp;&nbsp;172.22.0.0/24;
+&nbsp;&nbsp;&nbsp;172.22.0.10;
+};
+</code></pre></div>
 <p>I zonen lägg till följande:</p>
-<p><code>zone&nbsp;"hackernet.se"&nbsp;{</code>
-<code>....</code>
-<code>type&nbsp;master;</code>
-<code>allow-transfer&nbsp;{&nbsp;slave;&nbsp;};</code>
-<code>};</code></p>
+<div class="highlight"><pre><span></span><code>zone&nbsp;"hackernet.se"&nbsp;{
+&nbsp;&nbsp;&nbsp;....
+&nbsp;&nbsp;&nbsp;type&nbsp;master;
+&nbsp;&nbsp;&nbsp;allow-transfer&nbsp;{&nbsp;slave;&nbsp;};
+};
+</code></pre></div>
 <p>På din slav server lägg till följande i zonen:</p>
-<p><code>zone&nbsp;"hackernet.se&nbsp;{</code>
-<code>....</code>
-<code>type&nbsp;slave;</code>
-<code>masters&nbsp;{&nbsp;192.168.1.10;&nbsp;};</code>
-<code>}</code></p>
+<div class="highlight"><pre><span></span><code>zone&nbsp;"hackernet.se&nbsp;{
+&nbsp;&nbsp;&nbsp;....
+&nbsp;&nbsp;&nbsp;type&nbsp;slave;
+&nbsp;&nbsp;&nbsp;masters&nbsp;{&nbsp;192.168.1.10;&nbsp;};
+}
+</code></pre></div>
 <p>Starta sedan om tjänsten på båda servarna.</p>
 <h5 id="tsig">TSIG</h5>
 <p>Transaction Signature (TSIG) kan användas för att säkra upp zone
 transfern.</p>
 <p>Starta med att generera nykeln som ska användas på master DNS'n.</p>
-<p><code>dnssec-keygen&nbsp;-a&nbsp;HMAC-SHA512&nbsp;-b&nbsp;512&nbsp;-n&nbsp;HOST&nbsp;-r&nbsp;/dev/urandom&nbsp;tsigkey</code></p>
+<div class="highlight"><pre><span></span><code>dnssec-keygen&nbsp;-a&nbsp;HMAC-SHA512&nbsp;-b&nbsp;512&nbsp;-n&nbsp;HOST&nbsp;-r&nbsp;/dev/urandom&nbsp;tsigkey
+</code></pre></div>
 <p>Två filer kommer att skapas. I private filen finns nykeln efter
 <strong>Key:</strong>. Kopiera nykeln och skapa filen:</p>
-<p><code>vim&nbsp;/etc/bind/named.conf.tsigkeys</code></p>
+<div class="highlight"><pre><span></span><code>vim&nbsp;/etc/bind/named.conf.tsigkeys
+</code></pre></div>
 <p>Med följande info:</p>
-<p><code>key&nbsp;"my-tsig"&nbsp;{</code>
-<code>algorithm&nbsp;HMAC-SHA512;</code>
+<p></p><div class="highlight"><pre><span></span><code>key&nbsp;"my-tsig"&nbsp;{
+&nbsp;algorithm&nbsp;HMAC-SHA512;
+</code></pre></div>
 <code>secret&nbsp;"</code><key><code>";</code>
-<code>};</code></key></p>
+<div class="highlight"><pre><span></span><code>};
+</code></pre></div><p></p>
 <p>Säg till bind att läsa in filen. Lägg till följande i slutet på
 <strong>named.conf</strong>:</p>
-<p><code>include&nbsp;"/etc/bind/named.conf.tsigkeys";</code></p>
+<div class="highlight"><pre><span></span><code>include&nbsp;"/etc/bind/named.conf.tsigkeys";
+</code></pre></div>
 <p>För att säkra upp en zone skriv följande.</p>
-<p><code>zone&nbsp;"hackernet.se"&nbsp;{</code>
-<code>....</code>
-<code>allow-transfer&nbsp;{&nbsp;key&nbsp;"my-tsig";&nbsp;};</code>
-<code>};</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;zone&nbsp;"hackernet.se"&nbsp;{
+&nbsp;&nbsp;&nbsp;....
+&nbsp;&nbsp;&nbsp;allow-transfer&nbsp;{&nbsp;key&nbsp;"my-tsig";&nbsp;};
+};
+</code></pre></div>
 <p>Starta sedan om tjänsten.</p>
 <p>På DNS slaven skapa samma tsigkeys fil:</p>
-<p><code>vim&nbsp;/etc/bind/named.conf.tsigkeys</code></p>
+<div class="highlight"><pre><span></span><code>vim&nbsp;/etc/bind/named.conf.tsigkeys
+</code></pre></div>
 <p>Och kopiera in samma innehåll från master servern, men lägg till
 följande i slutet. För att säga till vilken nykel den ska använda:</p>
-<p><code>.....</code>
-<code>server&nbsp;192.168.2.254&nbsp;{</code>
-<code>keys&nbsp;{&nbsp;my-tsig;&nbsp;};</code>
-<code>};</code></p>
+<div class="highlight"><pre><span></span><code>.....
+server&nbsp;192.168.2.254&nbsp;{
+&nbsp;keys&nbsp;{&nbsp;my-tsig;&nbsp;};
+};
+</code></pre></div>
 <p>Lägg till följande rad i <strong>/etc/bind/named.conf</strong></p>
-<p><code>include&nbsp;"/etc/bind/named.conf.tsigkeys";</code></p>
+<div class="highlight"><pre><span></span><code>include&nbsp;"/etc/bind/named.conf.tsigkeys";
+</code></pre></div>
 <p>Och starta om tjänsten. Zone transfer ska nu funka, för att prova köra
 följande på slaven.</p>
-<p><code>dig&nbsp;@{master-dns-ip}&nbsp;hackernet.se&nbsp;axfr</code></p>
+<div class="highlight"><pre><span></span><code>dig&nbsp;@{master-dns-ip}&nbsp;hackernet.se&nbsp;axfr
+</code></pre></div>
 <p>Om du fick följande error:</p>
-<p><code>;&nbsp;&lt;&lt;&gt;&gt;&nbsp;DiG&nbsp;9.8.4-rpz2+rl005.12-P1&nbsp;&lt;&lt;&gt;&gt;&nbsp;@ns1&nbsp;hackernet.se&nbsp;axfr</code>
-<code>;&nbsp;(1&nbsp;server&nbsp;found)</code>
-<code>;;&nbsp;global&nbsp;options:&nbsp;+cmd</code>
-<code>;&nbsp;Transfer&nbsp;failed.</code></p>
+<div class="highlight"><pre><span></span><code>;&nbsp;&lt;&lt;&gt;&gt;&nbsp;DiG&nbsp;9.8.4-rpz2+rl005.12-P1&nbsp;&lt;&lt;&gt;&gt;&nbsp;@ns1&nbsp;hackernet.se&nbsp;axfr
+;&nbsp;(1&nbsp;server&nbsp;found)
+;;&nbsp;global&nbsp;options:&nbsp;+cmd
+;&nbsp;Transfer&nbsp;failed.
+</code></pre></div>
 <p>Så visar det att en zone transfer gick inte att köra utan en tsig nykel.</p>
 <p>För att använda tsig nykeln kör följande kommando:</p>
-<p><code>dig&nbsp;@{master-dns-ip}&nbsp;hackernet.se&nbsp;axfr&nbsp;-k&nbsp;/etc/bind/named.conf.tsigkeys</code></p>
+<div class="highlight"><pre><span></span><code>dig&nbsp;@{master-dns-ip}&nbsp;hackernet.se&nbsp;axfr&nbsp;-k&nbsp;/etc/bind/named.conf.tsigkeys
+</code></pre></div>
 <h2 id="srv-record">SRV record</h2>
 <p>Med hjälp av service record(<strong>SRV</strong>) så kan man peka ut på vilken port
 och bakom vilket hostnamn en tjänst körs tex LDAP, SIP, Lync.</p>
 <p>Ett SRV record ser ut på följande sätt.</p>
-<p><code>_service._proto.name.&nbsp;TTL&nbsp;class&nbsp;SRV&nbsp;priority&nbsp;weight&nbsp;port&nbsp;target.</code></p>
+<div class="highlight"><pre><span></span><code>_service._proto.name.&nbsp;TTL&nbsp;class&nbsp;SRV&nbsp;priority&nbsp;weight&nbsp;port&nbsp;target.
+</code></pre></div>
 <ul>
 <li>service: namnet på tjänsten.</li>
 <li>proto: vilket transport protokoll som ska användas, vanligast är TCP
@@ -9636,49 +9681,58 @@ och bakom vilket hostnamn en tjänst körs tex LDAP, SIP, Lync.</p>
 </ul>
 <h3 id="ldap-autodiscovery">LDAP autodiscovery</h3>
 <p>Skriv följande i din zonefil.</p>
-<p><code>_ldap._tcp.hackernet.se.&nbsp;&nbsp;&nbsp;IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SRV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10&nbsp;0&nbsp;389&nbsp;ldap1.hackernet.se.</code>
-<code>_ldap._tcp.hackernet.se.&nbsp;&nbsp;&nbsp;IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SRV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20&nbsp;0&nbsp;389&nbsp;ldap2.hackernet.se.</code></p>
+<div class="highlight"><pre><span></span><code>_ldap._tcp.hackernet.se.&nbsp;&nbsp;&nbsp;IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SRV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10&nbsp;0&nbsp;389&nbsp;ldap1.hackernet.se.
+_ldap._tcp.hackernet.se.&nbsp;&nbsp;&nbsp;IN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SRV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20&nbsp;0&nbsp;389&nbsp;ldap2.hackernet.se.
+</code></pre></div>
 <h2 id="dynamic-dns">Dynamic DNS</h2>
 <h3 id="isc-dhcp">ISC DHCP</h3>
 <p>Sätt upp DDNS så att lokala klienter som får IP från en dhcp server
 uppdaterar din lokala forward och reverse zone.</p>
 <h5 id="generera-en-nykel">Generera en nykel</h5>
-<p><code>dnssec-keygen&nbsp;-a&nbsp;HMAC-MD5&nbsp;-b&nbsp;128&nbsp;-r&nbsp;/dev/urandom&nbsp;-n&nbsp;USER&nbsp;DDNS_UPDATE</code></p>
+<div class="highlight"><pre><span></span><code>dnssec-keygen&nbsp;-a&nbsp;HMAC-MD5&nbsp;-b&nbsp;128&nbsp;-r&nbsp;/dev/urandom&nbsp;-n&nbsp;USER&nbsp;DDNS_UPDATE
+</code></pre></div>
 <p>Öppna filen <strong>*.private</strong> och kopiera allt efter <strong>Key:</strong></p>
 <p>Skapa en ny fil som heter <strong>ddns.key</strong> som ser ut som följande och
 kopiera in texten från <strong>*.private</strong> filen:</p>
-<p><code>key&nbsp;DDNS_UPDATE&nbsp;{</code>
-<code>algorithm&nbsp;HMAC-MD5.SIG-ALG.REG.INT;</code>
+<p></p><div class="highlight"><pre><span></span><code>key&nbsp;DDNS_UPDATE&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;algorithm&nbsp;HMAC-MD5.SIG-ALG.REG.INT;
+</code></pre></div>
 <code>secret&nbsp;"</code><key><code>";</code>
-<code>};</code></key></p>
+<div class="highlight"><pre><span></span><code>};
+</code></pre></div><p></p>
 <p>Kopiera sedan <strong>ddns.key</strong> filen till bind mappen och dhcp serverns
 mapp.</p>
-<p><code>install&nbsp;-o&nbsp;root&nbsp;-g&nbsp;bind&nbsp;-m&nbsp;0640&nbsp;ddns.key&nbsp;/etc/bind/ddns.key</code>
-<code>install&nbsp;-o&nbsp;root&nbsp;-g&nbsp;root&nbsp;-m&nbsp;0640&nbsp;ddns.key&nbsp;/etc/dhcp/ddns.key</code></p>
+<div class="highlight"><pre><span></span><code>install&nbsp;-o&nbsp;root&nbsp;-g&nbsp;bind&nbsp;-m&nbsp;0640&nbsp;ddns.key&nbsp;/etc/bind/ddns.key
+install&nbsp;-o&nbsp;root&nbsp;-g&nbsp;root&nbsp;-m&nbsp;0640&nbsp;ddns.key&nbsp;/etc/dhcp/ddns.key
+</code></pre></div>
 <h5 id="bind-konfiguration">Bind konfiguration</h5>
 <p>Lägg in följande rad i din <strong>named.conf.local</strong> fil:</p>
-<p><code>include&nbsp;"/etc/bind/ddns.key";</code></p>
+<div class="highlight"><pre><span></span><code>include&nbsp;"/etc/bind/ddns.key";
+</code></pre></div>
 <p>Lägg till denna raden <strong>allow-update { key DDNS_UPDATE; };</strong> i varje
 zone som ska uppdateras.</p>
-<p><code>zone&nbsp;"example.org"&nbsp;{</code>
-<code>type&nbsp;master;</code>
-<code>notify&nbsp;no;</code>
-<code>file&nbsp;"/var/cache/bind/db.example.org";</code>
-<code>allow-update&nbsp;{&nbsp;key&nbsp;DDNS_UPDATE;&nbsp;};</code>
-<code>};</code>
-<code>zone&nbsp;"1.168.192.in-addr.arpa"&nbsp;{</code>
-<code>type&nbsp;master;</code>
-<code>notify&nbsp;no;</code>
-<code>file&nbsp;"/var/cache/bind/db.192.168.2";</code>
-<code>allow-update&nbsp;{&nbsp;key&nbsp;DDNS_UPDATE;&nbsp;};</code>
-<code>};</code></p>
+<div class="highlight"><pre><span></span><code>zone&nbsp;"example.org"&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;master;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;notify&nbsp;no;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;"/var/cache/bind/db.example.org";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-update&nbsp;{&nbsp;key&nbsp;DDNS_UPDATE;&nbsp;};
+};
+zone&nbsp;"1.168.192.in-addr.arpa"&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;master;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;notify&nbsp;no;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;"/var/cache/bind/db.192.168.2";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow-update&nbsp;{&nbsp;key&nbsp;DDNS_UPDATE;&nbsp;};
+};
+</code></pre></div>
 <h5 id="dhcp-konfiguration">DHCP konfiguration</h5>
 <p>Följande globala inställningar behövs i din <strong>dhcpd.conf</strong>' fil:</p>
-<p><code>option&nbsp;domain-name&nbsp;"example.org";</code></p>
-<p><code>ddns-updates&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on;</code>
-<code>ddns-update-style&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interim;</code>
-<code>ignore&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client-updates;</code>
-<code>update-static-leases&nbsp;&nbsp;&nbsp;on;</code></p>
+<div class="highlight"><pre><span></span><code>option&nbsp;domain-name&nbsp;"example.org";
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ddns-updates&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on;
+ddns-update-style&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interim;
+ignore&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client-updates;
+update-static-leases&nbsp;&nbsp;&nbsp;on;
+</code></pre></div>
 <p><strong>option domain-name:</strong> Specificerar vilket domän namn som delas ut,
 används också av DDNS.
 <strong>ddns-update-style:</strong> Bör alltid vara interim. Adhoc finns som val
@@ -9689,93 +9743,113 @@ klienter registrera sitt domän namn på DNS servern själv. Default är
 <strong>update-static-leases:</strong> Default så uppdaterar inte DHCP-servern DNS
 rader som är statiska leases.</p>
 <p>Lägg också till följande rader i din <strong>dhcpd.conf</strong> fil:</p>
-<p><code>include&nbsp;"/etc/dhcp/ddns.key";</code></p>
-<p><code>zone&nbsp;example.org.&nbsp;{</code>
-<code>primary&nbsp;127.0.0.1;</code>
-<code>key&nbsp;DDNS_UPDATE;</code>
-<code>}</code></p>
-<p><code>zone&nbsp;1.168.192.in-addr.arpa.&nbsp;{</code>
-<code>primary&nbsp;127.0.0.1;</code>
-<code>key&nbsp;DDNS_UPDATE;</code>
-<code>}</code></p>
+<div class="highlight"><pre><span></span><code>include&nbsp;"/etc/dhcp/ddns.key";
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>zone&nbsp;example.org.&nbsp;{
+&nbsp;&nbsp;primary&nbsp;127.0.0.1;
+&nbsp;&nbsp;key&nbsp;DDNS_UPDATE;
+}&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>zone&nbsp;1.168.192.in-addr.arpa.&nbsp;{
+&nbsp;&nbsp;primary&nbsp;127.0.0.1;
+&nbsp;&nbsp;key&nbsp;DDNS_UPDATE;
+}
+</code></pre></div>
 <p>Se till att bind har skrivrättigheter i mappen där zone filen finns
 sparad annars kan den inte uppdatera.</p>
 <p>Starta sedan om tjänsterna.</p>
-<p><code>/etc/init.d/isc-dhcp-server&nbsp;restart</code>
-<code>/etc/init.d/bind9&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>/etc/init.d/isc-dhcp-server&nbsp;restart
+/etc/init.d/bind9&nbsp;restart
+</code></pre></div>
 <h2 id="tips-n-trix">Tips n Trix</h2>
 <h3 id="chroot">Chroot</h3>
 <p>För att öka säkerheten bör man lägga tjänsten i en chroot-miljö.</p>
-<p><code>yum&nbsp;install&nbsp;bind-chroot&nbsp;-y</code>
-<code>service&nbsp;named&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>yum&nbsp;install&nbsp;bind-chroot&nbsp;-y
+service&nbsp;named&nbsp;restart
+</code></pre></div>
 <h3 id="serial-number-reset">Serial number reset</h3>
 <p>Har man råkat sätta för högt serienummer i en zon kan man resetta det
 med följande metod. Sätt serienumret till:</p>
-<p><code>4294967295</code></p>
+<div class="highlight"><pre><span></span><code>4294967295
+</code></pre></div>
 <p>Låt det propagera till slavarna och sedan kan man sätta vad man vill.</p>
 <h3 id="statistics">Statistics</h3>
 <p>Vill du se lite statistik på din DNS-server kan konfa följande och sedan
 surfa in på <a href="http://">http://</a><ip>:8080</ip></p>
-<p><code>acl&nbsp;"trusted"&nbsp;{</code>
-<code>192.168.1.0/24;</code>
-<code>};</code>
-<code>statistics-channels&nbsp;{</code>
-<code>inet&nbsp;*&nbsp;&nbsp;port&nbsp;8080&nbsp;allow&nbsp;{&nbsp;trusted;&nbsp;};</code>
-<code>};</code></p>
+<div class="highlight"><pre><span></span><code>acl&nbsp;"trusted"&nbsp;{
+&nbsp;&nbsp;192.168.1.0/24;
+};
+statistics-channels&nbsp;{&nbsp;
+&nbsp;&nbsp;inet&nbsp;*&nbsp;&nbsp;port&nbsp;8080&nbsp;allow&nbsp;{&nbsp;trusted;&nbsp;};&nbsp;
+};
+</code></pre></div>
 <h3 id="response-rate-limiting">Response Rate Limiting</h3>
 <h2 id="tools">Tools</h2>
 <p>Kör igenom toolsen för att få en känsla för dem.
 Short output</p>
-<p><code>dnsget&nbsp;hackernet.se</code>
-<code>dig&nbsp;hackernet.se&nbsp;+short</code></p>
+<div class="highlight"><pre><span></span><code>dnsget&nbsp;hackernet.se
+dig&nbsp;hackernet.se&nbsp;+short
+</code></pre></div>
 <p>Kolla SOA på alla namnservrar</p>
-<p><code>dig&nbsp;hackernet.se&nbsp;+nssearch</code></p>
+<div class="highlight"><pre><span></span><code>dig&nbsp;hackernet.se&nbsp;+nssearch
+</code></pre></div>
 <p>Kolla om records finns mot wordlist</p>
-<p><code>dnsmap&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>dnsmap&nbsp;hackernet.se
+</code></pre></div>
 <p>Kolla version på DNS-server</p>
-<p><code>ldns-chaos&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>ldns-chaos&nbsp;hackernet.se
+</code></pre></div>
 <p>Monitor queries</p>
-<p><code>sudo&nbsp;dnstop&nbsp;eth0</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;dnstop&nbsp;eth0
+</code></pre></div>
 <p>Capture queries</p>
-<p><code>sudo&nbsp;dnscap&nbsp;-g</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;dnscap&nbsp;-g
+</code></pre></div>
 <p>Visualisera</p>
-<p><code>sudo&nbsp;tcpdump&nbsp;-i&nbsp;eth0&nbsp;-w&nbsp;dnsdump.pcap&nbsp;port&nbsp;53</code>
-<code>dnspktflow&nbsp;dnsdump.pcap</code>
-<code>eog&nbsp;out.png</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;tcpdump&nbsp;-i&nbsp;eth0&nbsp;-w&nbsp;dnsdump.pcap&nbsp;port&nbsp;53
+dnspktflow&nbsp;dnsdump.pcap
+eog&nbsp;out.png
+</code></pre></div>
 <h3 id="rndc">rndc</h3>
 <p>Är ett program för att uppdatera dnservern med nya zoner eller uppdatera
 befintliga zoner. Fördelen med att använda rndc är att man behöver inte
 ladda om alla zoner om man bara gör ändringar i en zone. Har man många
 stora zoner kan DNS sluta svara under några sekunder.</p>
-<p><code>rndc&nbsp;reconfig&nbsp;-&nbsp;Används&nbsp;om&nbsp;du&nbsp;gjort&nbsp;någon&nbsp;ändring&nbsp;i&nbsp;.conf&nbsp;filerna&nbsp;eller&nbsp;för&nbsp;att&nbsp;läsa&nbsp;in&nbsp;nya&nbsp;zoner.&nbsp;Den&nbsp;kommer&nbsp;inte&nbsp;bry&nbsp;sig&nbsp;om&nbsp;du&nbsp;gjort&nbsp;någon&nbsp;ändring&nbsp;i&nbsp;nån&nbsp;zone&nbsp;fil.</code>
-<code>rndc&nbsp;reload&nbsp;-&nbsp;För&nbsp;att&nbsp;ladda&nbsp;om&nbsp;alla&nbsp;zone&nbsp;filer.</code>
-<code>rndc&nbsp;reload</code><zone name=""><code>-&nbsp;För&nbsp;att&nbsp;enbart&nbsp;ladda&nbsp;om&nbsp;den&nbsp;zonen&nbsp;du&nbsp;gjort&nbsp;en&nbsp;ändring&nbsp;på.</code></zone></p>
+<p></p><div class="highlight"><pre><span></span><code>rndc&nbsp;reconfig&nbsp;-&nbsp;Används&nbsp;om&nbsp;du&nbsp;gjort&nbsp;någon&nbsp;ändring&nbsp;i&nbsp;.conf&nbsp;filerna&nbsp;eller&nbsp;för&nbsp;att&nbsp;läsa&nbsp;in&nbsp;nya&nbsp;zoner.&nbsp;Den&nbsp;kommer&nbsp;inte&nbsp;bry&nbsp;sig&nbsp;om&nbsp;du&nbsp;gjort&nbsp;någon&nbsp;ändring&nbsp;i&nbsp;nån&nbsp;zone&nbsp;fil.
+rndc&nbsp;reload&nbsp;-&nbsp;För&nbsp;att&nbsp;ladda&nbsp;om&nbsp;alla&nbsp;zone&nbsp;filer.
+</code></pre></div>
+<code>rndc&nbsp;reload</code><zone name=""><code>-&nbsp;För&nbsp;att&nbsp;enbart&nbsp;ladda&nbsp;om&nbsp;den&nbsp;zonen&nbsp;du&nbsp;gjort&nbsp;en&nbsp;ändring&nbsp;på.</code><p></p>
 <h3 id="dnstracer">dnstracer</h3>
 <p><a href="/Dnstracer" title="wikilink">Dnstracer</a> följer alla dns servrar tills man
 hittar den servern man letar efter.</p>
-<p><code>dnstracer&nbsp;-o4s&nbsp;.&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>dnstracer&nbsp;-o4s&nbsp;.&nbsp;hackernet.se
+</code></pre></div>
 <h3 id="felsok">Felsök</h3>
 <p>Se hur långt i resolve-processen det funkar</p>
-<p><code>dig&nbsp;hackernet.se&nbsp;+trace</code></p>
+<div class="highlight"><pre><span></span><code>dig&nbsp;hackernet.se&nbsp;+trace
+</code></pre></div>
 <p>Kolla efter syntax-errors alla inladdade zoner</p>
-<p><code>named-checkconf&nbsp;-z</code></p>
+<div class="highlight"><pre><span></span><code>named-checkconf&nbsp;-z
+</code></pre></div>
 <h2 id="dnssec">DNSSEC</h2>
 <h2 id="known-errors">Known errors</h2>
 <h3 id="journal-out-of-sync-error">Journal out of sync error</h3>
 <p>Om man har en dynamisk zone som uppdateras från tex en DHCP och denna
 zonen skulle uppdateras manuellt så kommer den inte längre laddas
 korrekt och ger följande meddelande.</p>
-<p><code>zone&nbsp;hackernet.se/IN:&nbsp;journal&nbsp;rollforward&nbsp;failed:&nbsp;journal&nbsp;out&nbsp;of&nbsp;sync&nbsp;with&nbsp;zone</code>
-<code>zone&nbsp;hackernet.se/IN:&nbsp;not&nbsp;loaded&nbsp;due&nbsp;to&nbsp;errors.</code></p>
+<div class="highlight"><pre><span></span><code>zone&nbsp;hackernet.se/IN:&nbsp;journal&nbsp;rollforward&nbsp;failed:&nbsp;journal&nbsp;out&nbsp;of&nbsp;sync&nbsp;with&nbsp;zone
+zone&nbsp;hackernet.se/IN:&nbsp;not&nbsp;loaded&nbsp;due&nbsp;to&nbsp;errors.
+</code></pre></div>
 <p>Lösningen är att ta bort <strong>.jnl</strong> filen som tillhör zonen. Efter det är
 det bara att starta om BIND.</p>
 <p>Om du skulle behöva uppdatera en zone manuellt börja med att frysa
 zonen.</p>
-<p><code>rndc&nbsp;freeze&nbsp;hackernet.se</code>
+<p></p><div class="highlight"><pre><span></span><code>rndc&nbsp;freeze&nbsp;hackernet.se
+</code></pre></div>
 <strong><code>(ändra`` ``i`` ``zonefilen)</code></strong>
-<code>rndc&nbsp;reload&nbsp;hackernet.se</code>
-<code>rndc&nbsp;thaw&nbsp;hackernet.se</code></p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
+<div class="highlight"><pre><span></span><code>rndc&nbsp;reload&nbsp;hackernet.se
+rndc&nbsp;thaw&nbsp;hackernet.se
+</code></pre></div><p></p></zone></key></key>
 
 
 
@@ -9798,7 +9872,7 @@ zonen.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

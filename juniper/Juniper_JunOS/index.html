@@ -8776,6 +8776,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9140,73 +9168,100 @@ när man skrivit kommandot så måste man i JunOS skriva commit.</p>
 <h2 id="operational">Operational</h2>
 <p>Gå till operational mode. Här kan man köra kommandon för att
 troubleshoota och monitorera.</p>
-<p><code>cli</code></p>
+<div class="highlight"><pre><span></span><code>cli
+</code></pre></div>
 <p>Lista conf i set kommandon. Andvändbart om man behöver paste in conf.</p>
-<p><code>show&nbsp;configuration&nbsp;|&nbsp;display&nbsp;set</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;configuration&nbsp;|&nbsp;display&nbsp;set
+</code></pre></div>
 <p>Lista conf efter hierarchy level.(Funkar enbart om man gått in i edit
 läge på tex ett interface.)</p>
-<p><code>show&nbsp;configuration&nbsp;|&nbsp;display&nbsp;set&nbsp;relative</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;configuration&nbsp;|&nbsp;display&nbsp;set&nbsp;relative
+</code></pre></div>
 <p>Visa mac tabellen.</p>
-<p><code>show&nbsp;ethernet-switching&nbsp;table</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ethernet-switching&nbsp;table
+</code></pre></div>
 <h2 id="configuration">Configuration</h2>
 <p>Gå till configuration mode.</p>
-<p><code>configure</code></p>
+<div class="highlight"><pre><span></span><code>configure&nbsp;
+</code></pre></div>
 <p>Går till configuration mode och låser den globala configurationen, så
 att andra användare inte kan commita förens du lämnat</p>
 <p>configuration mode.</p>
-<p><code>configure&nbsp;exclusive</code></p>
+<div class="highlight"><pre><span></span><code>configure&nbsp;exclusive
+</code></pre></div>
 <p>Lämna configuration mode utan att commita.</p>
-<p><code>exit</code></p>
+<div class="highlight"><pre><span></span><code>exit&nbsp;
+</code></pre></div>
 <p>Kör operational mode kommandon i configuration mode.</p>
 <p><code>run</code><operational mode="" kommando=""></operational></p>
 <h2 id="commit">Commit</h2>
 <p>Lämna configuration mode och commita ändringar.</p>
-<p><code>commit&nbsp;and-quit</code></p>
+<div class="highlight"><pre><span></span><code>commit&nbsp;and-quit
+</code></pre></div>
 <p>Visa vad som kan commitas.</p>
-<p><code>show&nbsp;|&nbsp;compware</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;|&nbsp;compware
+</code></pre></div>
 <p>Ta bort all conf som ligger redo att commitas.</p>
-<p><code>rollback</code></p>
+<div class="highlight"><pre><span></span><code>rollback
+</code></pre></div>
 <p>Rollbacka till en conf vid en viss tid.</p>
-<p><code>rollback&nbsp;?</code></p>
+<div class="highlight"><pre><span></span><code>rollback&nbsp;?
+</code></pre></div>
 <p>Commita och kör en autorollback efter 2 miniut. För att stoppa
 autorollback skriv <code>commit</code> bara.</p>
-<p><code>commit&nbsp;confirmed&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>commit&nbsp;confirmed&nbsp;2
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
 <p><strong>Hostnamn</strong></p>
-<p><code>set&nbsp;system&nbsp;host-name&nbsp;[hostname]</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;system&nbsp;host-name&nbsp;[hostname]
+</code></pre></div>
 <p><strong>Lösenord på root(autoencryption)</strong></p>
-<p><code>set&nbsp;root-authentication&nbsp;plain-text-password</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;root-authentication&nbsp;plain-text-password
+</code></pre></div>
 <p>Om du redan har en krypterad sträng av lösenordet använd följande.</p>
-<p><code>set&nbsp;root-authentication&nbsp;encrypted-password</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;root-authentication&nbsp;encrypted-password
+</code></pre></div>
 <p>Tillåt enbart root logins över console.</p>
-<p><code>set&nbsp;services&nbsp;ssh&nbsp;root-login&nbsp;deny</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;services&nbsp;ssh&nbsp;root-login&nbsp;deny
+</code></pre></div>
 <p><strong>Skapa användare</strong></p>
-<p><code>set&nbsp;system&nbsp;login&nbsp;user&nbsp;admin&nbsp;uid&nbsp;2000</code>
-<code>set&nbsp;system&nbsp;login&nbsp;user&nbsp;admin&nbsp;class&nbsp;super-user</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;system&nbsp;login&nbsp;user&nbsp;admin&nbsp;uid&nbsp;2000
+set&nbsp;system&nbsp;login&nbsp;user&nbsp;admin&nbsp;class&nbsp;super-user
+</code></pre></div>
 <p><strong>Mgmt port</strong></p>
-<p><code>set&nbsp;interfaces&nbsp;vme&nbsp;unit&nbsp;0&nbsp;family&nbsp;inet&nbsp;address&nbsp;192.168.0.0/24</code>
-<code>set&nbsp;routing-options&nbsp;static&nbsp;route&nbsp;0.0.0.0/0&nbsp;next-hop&nbsp;192.168.0.1</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;interfaces&nbsp;vme&nbsp;unit&nbsp;0&nbsp;family&nbsp;inet&nbsp;address&nbsp;192.168.0.0/24
+set&nbsp;routing-options&nbsp;static&nbsp;route&nbsp;0.0.0.0/0&nbsp;next-hop&nbsp;192.168.0.1
+</code></pre></div>
 <p><strong>LLDP</strong></p>
-<p><code>set&nbsp;protocols&nbsp;lldp&nbsp;interface&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;protocols&nbsp;lldp&nbsp;interface&nbsp;all
+</code></pre></div>
 <p><strong>Tid</strong></p>
-<p><code>set&nbsp;system&nbsp;time-zone&nbsp;Europe/Stockholm</code></p>
-<p><code>set&nbsp;system&nbsp;ntp&nbsp;server&nbsp;[ip]&nbsp;prefer</code>
-<code>set&nbsp;system&nbsp;ntp&nbsp;server&nbsp;[ip]</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;system&nbsp;time-zone&nbsp;Europe/Stockholm
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>set&nbsp;system&nbsp;ntp&nbsp;server&nbsp;[ip]&nbsp;prefer
+set&nbsp;system&nbsp;ntp&nbsp;server&nbsp;[ip]
+</code></pre></div>
 <h2 id="firmware">Firmware</h2>
 <h3 id="scp">Scp</h3>
 <p>Börja med att skicka över imagen till JunOS.</p>
-<p><code>scp&nbsp;[image]&nbsp;root@[juniper]:/var/tmp/[image]</code></p>
+<div class="highlight"><pre><span></span><code>scp&nbsp;[image]&nbsp;root@[juniper]:/var/tmp/[image]
+</code></pre></div>
 <p>Från operational mode kör sedan följande.</p>
-<p><code>request&nbsp;system&nbsp;software&nbsp;add&nbsp;/var/tmp/[image]&nbsp;no-copy&nbsp;no-validate&nbsp;unlink&nbsp;reboot</code></p>
+<div class="highlight"><pre><span></span><code>request&nbsp;system&nbsp;software&nbsp;add&nbsp;/var/tmp/[image]&nbsp;no-copy&nbsp;no-validate&nbsp;unlink&nbsp;reboot
+</code></pre></div>
 <h3 id="usb">USB</h3>
 <p>Börja med att mounta usb stickan med.</p>
-<p><code>mount_msdosfs&nbsp;/dev/da0s1&nbsp;/mnt</code></p>
+<div class="highlight"><pre><span></span><code>mount_msdosfs&nbsp;/dev/da0s1&nbsp;/mnt
+</code></pre></div>
 <p>Kopiera imagen till JunOS.</p>
-<p><code>cp&nbsp;/mnt/[image]&nbsp;/var/tmp/</code></p>
+<div class="highlight"><pre><span></span><code>cp&nbsp;/mnt/[image]&nbsp;/var/tmp/
+</code></pre></div>
 <p>Unmounta usb stickan.</p>
-<p><code>unmount&nbsp;/mnt</code></p>
+<div class="highlight"><pre><span></span><code>unmount&nbsp;/mnt
+</code></pre></div>
 <p>Gå in i operational mode.</p>
-<p><code>request&nbsp;system&nbsp;software&nbsp;add&nbsp;/var/tmp/[image]&nbsp;no-copy&nbsp;no-validate&nbsp;unlink&nbsp;reboot</code></p>
+<div class="highlight"><pre><span></span><code>request&nbsp;system&nbsp;software&nbsp;add&nbsp;/var/tmp/[image]&nbsp;no-copy&nbsp;no-validate&nbsp;unlink&nbsp;reboot
+</code></pre></div>
 <h2 id="backup">Backup</h2>
 <h3 id="configuration_1">Configuration</h3>
 <p>Man kan använda system som <a href="/Rancid" title="wikilink">Rancid</a> eller
@@ -9218,11 +9273,13 @@ man inte har något sånt system uppsatt så kan man sätta
 <p><strong>transfer-interval</strong> gör samma sak fast den skickar iväg configen en
 gång i timmen bara.</p>
 <p>Börja med att sätta dina <strong>archive-sites</strong></p>
-<p><code>set&nbsp;system&nbsp;archival&nbsp;configuration&nbsp;archive-sites&nbsp;scp://backupusr@10.10.10.200:/opt/backup/R1&nbsp;password&nbsp;hackernet</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;system&nbsp;archival&nbsp;configuration&nbsp;archive-sites&nbsp;scp://backupusr@10.10.10.200:/opt/backup/R1&nbsp;password&nbsp;hackernet
+</code></pre></div>
 <p>Byt ut <strong>SCP</strong> mot <strong>FTP</strong> om du hellre vill använda det.</p>
 <p>Efter det så väljer du när du vill skicka configen.</p>
-<p><code>set&nbsp;system&nbsp;archival&nbsp;configuration&nbsp;transfer-on-commit</code>
-<code>set&nbsp;system&nbsp;archival&nbsp;configuration&nbsp;transfer-interval</code><strong><code>interval-in-minutes</code></strong></p>
+<p></p><div class="highlight"><pre><span></span><code>set&nbsp;system&nbsp;archival&nbsp;configuration&nbsp;transfer-on-commit
+</code></pre></div>
+<code>set&nbsp;system&nbsp;archival&nbsp;configuration&nbsp;transfer-interval</code><strong><code>interval-in-minutes</code></strong><p></p>
 <p>Filen kommer att sparas som
 <strong><router-name>_YYYYMMDD_HHMMSS_juniper.conf.n.gz</router-name></strong>.</p>
 <h3 id="image">Image</h3>
@@ -9230,10 +9287,11 @@ gång i timmen bara.</p>
 tillfället till en annan partition så ifall en firmware upgrade skulle
 gå snett kan man boota ifrån den.</p>
 <p><strong>Skapa en recovery snapshot</strong></p>
-<p><code>request&nbsp;system&nbsp;snapshot&nbsp;recovery</code></p>
+<div class="highlight"><pre><span></span><code>request&nbsp;system&nbsp;snapshot&nbsp;recovery
+</code></pre></div>
 <p>På äldre platformar kör man</p>
-<p><code>request&nbsp;system&nbsp;snapshot&nbsp;slice&nbsp;alternate</code></p>
-<p><a href="/Category:Juniper" title="wikilink">Category:Juniper</a></p>
+<div class="highlight"><pre><span></span><code>request&nbsp;system&nbsp;snapshot&nbsp;slice&nbsp;alternate
+</code></pre></div>
 
 
 
@@ -9256,7 +9314,7 @@ gå snett kan man boota ifrån den.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

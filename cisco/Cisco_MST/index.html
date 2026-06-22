@@ -8809,6 +8809,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9201,17 +9229,8 @@ Se <a href="/Cisco_STP" title="wikilink">Cisco STP</a>. MST-konfiguration går �
 distribuera med hjälp av <a href="/Cisco_VTP#VTPv3" title="wikilink">VTPv3</a>.</p>
 <h3 id="mst-bpdu">MST BPDU</h3>
 <p>MST använder en BPDU för att skicka information om alla instanser.</p>
-<div class="mw-collapsible mw-collapsed" style="width:190px">
-
-Exempel
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_mst_bpdu.png>](/File:Cisco_MST_BPDU.png "wikilink")
-
-</file:cisco_mst_bpdu.png></div>
-</div>
-
+<p>Exempel</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_MST_BPDU.png" data-desc-position="bottom"><img alt="Cisco_MST_BPDU.png" src="../../images/Cisco_MST_BPDU.png"></a></p>
 <p><strong>Topology change</strong>
 Den enda gång en topologiändring anses hända är när en non-edge port går
 från non-forwarding till forwarding. Den nya portan kan ha en bättre väg
@@ -9248,61 +9267,72 @@ region:</p>
 <li>revision number</li>
 <li>instances</li>
 </ul>
-<p><code>spanning-tree&nbsp;extend&nbsp;system-id</code>
-<code>spanning-tree&nbsp;mode&nbsp;mst</code>
-<code>spanning-tree&nbsp;mst&nbsp;configuration</code>
-<code>name&nbsp;Site1</code>
-<code>revision&nbsp;1</code>
-<code>instance&nbsp;1&nbsp;vlan&nbsp;1-2000</code>
-<code>instance&nbsp;2&nbsp;vlan&nbsp;2001-4094</code>
-<code>show&nbsp;current</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;extend&nbsp;system-id
+spanning-tree&nbsp;mode&nbsp;mst
+spanning-tree&nbsp;mst&nbsp;configuration
+&nbsp;name&nbsp;Site1
+&nbsp;revision&nbsp;1
+&nbsp;instance&nbsp;1&nbsp;vlan&nbsp;1-2000
+&nbsp;instance&nbsp;2&nbsp;vlan&nbsp;2001-4094
+&nbsp;show&nbsp;current
+</code></pre></div>
 <p>Root, priority 0 är det absolut lägsta medans root primary sätter prio
 till 24k förutsatt att det ger root-rollen, detta ändras inte dynamiskt.</p>
-<p><code>spanning-tree&nbsp;mst&nbsp;1&nbsp;root&nbsp;primary</code>
-<code>spanning-tree&nbsp;mst&nbsp;2&nbsp;priority&nbsp;0</code>
-<code>spanning-tree&nbsp;mst&nbsp;0&nbsp;root&nbsp;primary&nbsp;diameter&nbsp;7&nbsp;hello-time&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;mst&nbsp;1&nbsp;root&nbsp;primary
+spanning-tree&nbsp;mst&nbsp;2&nbsp;priority&nbsp;0
+spanning-tree&nbsp;mst&nbsp;0&nbsp;root&nbsp;primary&nbsp;diameter&nbsp;7&nbsp;hello-time&nbsp;2
+</code></pre></div>
 <p>Port Cost &amp; Priority</p>
-<p><code>interface&nbsp;Gi0/1</code>
-<code>spanning-tree&nbsp;mst&nbsp;1&nbsp;cost&nbsp;50</code>
-<code>spanning-tree&nbsp;mst&nbsp;1&nbsp;port-priority&nbsp;128</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/1
+&nbsp;spanning-tree&nbsp;mst&nbsp;1&nbsp;cost&nbsp;50
+&nbsp;spanning-tree&nbsp;mst&nbsp;1&nbsp;port-priority&nbsp;128
+</code></pre></div>
 <p><strong>Verify</strong></p>
-<p><code>show&nbsp;spanning-tree&nbsp;mst</code>
-<code>show&nbsp;spanning-tree&nbsp;mst&nbsp;interface</code></p>
-<p><code>spanning-tree&nbsp;logging</code>
-<code>test&nbsp;spanning-tree&nbsp;diameter&nbsp;3</code>
-<code>test&nbsp;spanning-tree&nbsp;get&nbsp;configuration&nbsp;mst</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;spanning-tree&nbsp;mst
+show&nbsp;spanning-tree&nbsp;mst&nbsp;interface
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;logging&nbsp;
+test&nbsp;spanning-tree&nbsp;diameter&nbsp;3
+test&nbsp;spanning-tree&nbsp;get&nbsp;configuration&nbsp;mst
+</code></pre></div>
 <p>Mappa alla secondary vlan till samma MST-instans som deras primary VLAN
 befinner sig i, se även <a href="/Cisco_VLAN#Private_VLAN" title="wikilink">Private
 VLAN</a>.</p>
-<p><code>spanning-tree&nbsp;mst&nbsp;configuration</code>
-<code>private-vlan&nbsp;synchronize</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;mst&nbsp;configuration
+&nbsp;private-vlan&nbsp;synchronize
+</code></pre></div>
 <p>MST började implementeras av tillverkarna innan standarden var helt
 spikad vilket man bör tänka på om man kör gamla enheter. Dock säger
 standarden att pre-standard MST-grannar måste kunna upptäckas
 automatiskt av kompabilitetsskäl. I normalfallet märker man ingenting
 men om grannen är tyst, t.ex. en root port, kan man slå på det per
 interface.</p>
-<p><code>interface&nbsp;gi0/7</code>
-<code>spanning-tree&nbsp;mst&nbsp;pre-standard</code></p>
-<p><code>show&nbsp;spanning-tree&nbsp;mst&nbsp;configuration&nbsp;digest</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/7
+&nbsp;spanning-tree&nbsp;mst&nbsp;pre-standard
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;spanning-tree&nbsp;mst&nbsp;configuration&nbsp;digest
+</code></pre></div>
 <h2 id="nexus">Nexus</h2>
 <p>Grundkonf för <a href="/Cisco_Nexus" title="wikilink">NX-OS</a>.</p>
-<p><code>spanning-tree&nbsp;mode&nbsp;mst</code>
-<code>spanning-tree&nbsp;mst&nbsp;configuration</code>
-<code>name&nbsp;DC1</code>
-<code>revision&nbsp;1</code>
-<code>exit</code></p>
-<p><code>spanning-tree&nbsp;mst&nbsp;0&nbsp;priority&nbsp;32768</code>
-<code>spanning-tree&nbsp;pathcost&nbsp;method&nbsp;long</code>
-<code>spanning-tree&nbsp;port&nbsp;type&nbsp;edge&nbsp;default</code>
-<code>spanning-tree&nbsp;port&nbsp;type&nbsp;edge&nbsp;bpduguard&nbsp;default</code>
-<code>spanning-tree&nbsp;port&nbsp;type&nbsp;edge&nbsp;bpdufilter&nbsp;default</code>
-<code>spanning-tree&nbsp;loopguard&nbsp;default</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;mode&nbsp;mst
+spanning-tree&nbsp;mst&nbsp;configuration
+&nbsp;name&nbsp;DC1
+&nbsp;revision&nbsp;1
+&nbsp;exit
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;mst&nbsp;0&nbsp;priority&nbsp;32768
+spanning-tree&nbsp;pathcost&nbsp;method&nbsp;long
+spanning-tree&nbsp;port&nbsp;type&nbsp;edge&nbsp;default
+spanning-tree&nbsp;port&nbsp;type&nbsp;edge&nbsp;bpduguard&nbsp;default
+spanning-tree&nbsp;port&nbsp;type&nbsp;edge&nbsp;bpdufilter&nbsp;default
+spanning-tree&nbsp;loopguard&nbsp;default
+</code></pre></div>
 <h1 id="extensions">Extensions</h1>
 <p>Det finns många tillägg till spanning-tree som kan öka stabilitet och
 säkerhet. Dessa agerar fristående från varandra förutom att de går att
 konfigurera ihop. Detta är tillägg för protokoll som kör Rapid ST.</p>
-<p><code>show&nbsp;spanning-tree&nbsp;summary</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;spanning-tree&nbsp;summary
+</code></pre></div>
 <h3 id="portfast">PortFast</h3>
 <p>När en vanlig port aktiveras så initierar RSTP sin synk-process för
 snabb konvergens. Om andra sidan t.ex. är en server så kommer den inte
@@ -9318,14 +9348,18 @@ andra end hosts. Ibland är PortFast ett måste pga att
 <a href="/Cisco_DHCP" title="wikilink">DHCP</a> hinner timea ut innan porten blivit
 forwarding.</p>
 <p>Globalt, aktiveras på alla portar i operational state: access</p>
-<p><code>spanning-tree&nbsp;portfast&nbsp;default</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;portfast&nbsp;default
+</code></pre></div>
 <p>Per interface, on/off</p>
-<p><code>spanning-tree&nbsp;portfast</code>
-<code>spanning-tree&nbsp;portfast&nbsp;disable</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;portfast
+spanning-tree&nbsp;portfast&nbsp;disable
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;spanning-tree&nbsp;interface&nbsp;gi0/10&nbsp;portfast</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;spanning-tree&nbsp;interface&nbsp;gi0/10&nbsp;portfast
+</code></pre></div>
 <p>Vill man ha portfast på en trunk måste man ställa det per interface</p>
-<p><code>spanning-tree&nbsp;portfast&nbsp;trunk</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;portfast&nbsp;trunk
+</code></pre></div>
 <p>Kör aldrig portfast mot andra switchar! MST och RSTP har tekniker för
 att vara snabba ändå.</p>
 <h3 id="bpdu-guard">BPDU Guard</h3>
@@ -9333,12 +9367,15 @@ att vara snabba ändå.</p>
 om det kommer en BPDU. <em>%PM-4-ERR_DISABLE: bpduguard error detected on
 Po2, putting Gi0/8 in err-disable state</em></p>
 <p>Globalt, skyddar alla PortFast-portar</p>
-<p><code>spanning-tree&nbsp;bpduguard&nbsp;default</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;bpduguard&nbsp;default
+</code></pre></div>
 <p>Per interface, on/off</p>
-<p><code>spanning-tree&nbsp;bpduguard&nbsp;enable</code>
-<code>spanning-tree&nbsp;bpduguard&nbsp;disable</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;bpduguard&nbsp;enable
+spanning-tree&nbsp;bpduguard&nbsp;disable
+</code></pre></div>
 <p>Auto recovery</p>
-<p><code>errdisable&nbsp;recovery&nbsp;cause&nbsp;bpduguard</code></p>
+<div class="highlight"><pre><span></span><code>errdisable&nbsp;recovery&nbsp;cause&nbsp;bpduguard&nbsp;
+</code></pre></div>
 <h3 id="root-guard">Root Guard</h3>
 <p>Skydda så att ingen annan än den enhet man själv har konfigurerat kan
 bli root genom att ignorera superior BPDUer som kommer in på portar med
@@ -9348,7 +9385,8 @@ emot. Porten går automatiskt tillbaka när dessa BPDUer slutar att komma
 in. <em>%SPANTREE-2-ROOTGUARD_BLOCK: Root guard blocking port
 GigabitEthernet0/8 on VLAN0002.</em></p>
 <p>Per interface</p>
-<p><code>spanning-tree&nbsp;guard&nbsp;root</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;guard&nbsp;root
+</code></pre></div>
 <h3 id="bpdu-filter">BPDU Filter</h3>
 <p>En edge port skickar BPDUer som vanligt enligt Hello-interval men om det
 inte finns något som talar STP på andra sidan är detta onödigt. Med BPDU
@@ -9358,13 +9396,15 @@ dock beredd på att behandla BPDUer och BDPU-filter inaktiveras ifall det
 kommer in en BPDU vilket gör att detta är ett någorlunda mindre osäkert
 sätt att terminera sin STP-domän på.</p>
 <p>Globalt, gäller alla PortFast-portar</p>
-<p><code>spanning-tree&nbsp;portfast&nbsp;bpdufilter&nbsp;default</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;portfast&nbsp;bpdufilter&nbsp;default
+</code></pre></div>
 <p>Man kan också hårdställa BPDU-filter per interface om man t.ex. ska
 splita ett nätverk i olika STP-domäner. Inga BPDUer kommer att skickas
 eller behandlas.</p>
 <p>Per interface, hard on/off</p>
-<p><code>spanning-tree&nbsp;bpdufilter&nbsp;enable</code>
-<code>spanning-tree&nbsp;bpdufilter&nbsp;disable</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;bpdufilter&nbsp;enable
+spanning-tree&nbsp;bpdufilter&nbsp;disable
+</code></pre></div>
 <h3 id="loop-guard">Loop Guard</h3>
 <p>Unidirectional links kan ställa till det för en L2-domän. Med Loop Guard
 stoppar man den vanliga STP-konvergeringen för root och alternate
@@ -9376,9 +9416,11 @@ BPDUer igen återgår portarna till normalt tillstånd. Loop Guard fungerar
 endast på point-to-point länkar. <em>%SPANTREE-2-LOOPGUARD_BLOCK: Loop
 guard blocking port GigabitEthernet0/8 on VLAN0002.</em></p>
 <p>Globalt, skyddar alla root- och alternate-portar</p>
-<p><code>spanning-tree&nbsp;loopguard&nbsp;default</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;loopguard&nbsp;default
+</code></pre></div>
 <p>Per interface</p>
-<p><code>spanning-tree&nbsp;guard&nbsp;loop</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;guard&nbsp;loop
+</code></pre></div>
 <h3 id="bridge-assurance">Bridge Assurance</h3>
 <p>Bridge Assurance är en utökning till Loop Guard och det fungerar med
 RSTP och MST. Slår man på det så skickar båda sidor alltid BPDUer
@@ -9393,9 +9435,11 @@ men ändå forwarderar frames. BA prunear också onödiga VLAN på
 trunklänkar. Detta är en <a href="/Cisco_Nexus" title="wikilink">Nexus</a>-feature men
 finns även i nyare versioner av IOS.</p>
 <p>Global</p>
-<p><code>spanning-tree&nbsp;bridge&nbsp;assurance</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;bridge&nbsp;assurance
+</code></pre></div>
 <p>Per interface</p>
-<p><code>spanning-tree&nbsp;portfast&nbsp;network</code></p>
+<div class="highlight"><pre><span></span><code>spanning-tree&nbsp;portfast&nbsp;network&nbsp;
+</code></pre></div>
 <h3 id="pvst-simulation">PVST Simulation</h3>
 <p>MST kan samköras med Rapid PVST+ utan någon speciell konfiguration.
 Detta är en feature på <a href="/Cisco_Nexus" title="wikilink">Nexus</a>-switchar och
@@ -9405,8 +9449,9 @@ som får in en Rapid PVST+ BPDU hamnar i blocking state tills det slutar
 komma BPDUer. Rotbryggan för alla VLAN måste finnas på samma sida,
 antingen i MST eller i PVST+. Om man inte uppfyller detta kommer porten
 att hamna i PVST simulation-inconsistent state dvs forwarding stängs av.</p>
-<p><code>interface&nbsp;Gi0/2</code>
-<code>spanning-tree&nbsp;mst&nbsp;simulate&nbsp;pvst</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/2
+&nbsp;spanning-tree&nbsp;mst&nbsp;simulate&nbsp;pvst
+</code></pre></div>
 <h3 id="others">Others</h3>
 <p>Dispute mechanism innebär att role och state hos porten som skickar en
 BPDU skickas med i BPDUn så andra sidan vet att den inte pratat med en
@@ -9415,7 +9460,6 @@ state. Detta är påslaget default och behöver inte konfigureras. Fungerar
 dock inte med de äldsta varianterna av STP.</p>
 <p><strong>UDLD</strong>
 Se <a href="/Cisco_UDLD" title="wikilink">Cisco UDLD</a></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
 
 
 
@@ -9438,7 +9482,7 @@ Se <a href="/Cisco_UDLD" title="wikilink">Cisco UDLD</a></p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

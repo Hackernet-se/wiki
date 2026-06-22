@@ -8621,6 +8621,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8875,47 +8903,56 @@ en oanvänd port för att switchen ska kunna spegla trafik.</p>
 <li>Endast en SPAN-session kan skicka trafik till en destination port.</li>
 </ul>
 <h1 id="span">SPAN</h1>
-<p><code>monitor&nbsp;session&nbsp;1&nbsp;source&nbsp;interface&nbsp;fa0/2&nbsp;rx</code>
-<code>monitor&nbsp;session&nbsp;1&nbsp;source&nbsp;interface&nbsp;fa0/3&nbsp;both</code>
-<code>monitor&nbsp;session&nbsp;1&nbsp;destination&nbsp;interface&nbsp;fa0/10&nbsp;encapsulation&nbsp;replicate</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;session&nbsp;1&nbsp;source&nbsp;interface&nbsp;fa0/2&nbsp;rx
+monitor&nbsp;session&nbsp;1&nbsp;source&nbsp;interface&nbsp;fa0/3&nbsp;both
+monitor&nbsp;session&nbsp;1&nbsp;destination&nbsp;interface&nbsp;fa0/10&nbsp;encapsulation&nbsp;replicate
+</code></pre></div>
 <p>Encapsulation replicate gör att exakt alla frames speglas.</p>
-<p><code>monitor&nbsp;session&nbsp;1&nbsp;filter&nbsp;vlan&nbsp;2&nbsp;-&nbsp;5</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;session&nbsp;1&nbsp;filter&nbsp;vlan&nbsp;2&nbsp;-&nbsp;5
+</code></pre></div>
 <p>Speglar man en trunkport kan man filtrera så att endast vissa VLAN
 speglas.</p>
 <p><strong>Verify</strong></p>
-<p><code>show&nbsp;monitor&nbsp;session&nbsp;1</code>
-<code>show&nbsp;platform&nbsp;software&nbsp;monitor&nbsp;session&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;monitor&nbsp;session&nbsp;1
+show&nbsp;platform&nbsp;software&nbsp;monitor&nbsp;session&nbsp;1
+</code></pre></div>
 <p><strong>NX-OS</strong>
 Destination</p>
-<p><code>interface&nbsp;Ethernet1/1</code>
-<code>description&nbsp;MONITOR-SESSION-1</code>
-<code>switchport</code>
-<code>switchport&nbsp;monitor</code>
-<code>no&nbsp;shutdown</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Ethernet1/1
+&nbsp;description&nbsp;MONITOR-SESSION-1
+&nbsp;switchport
+&nbsp;switchport&nbsp;monitor
+&nbsp;no&nbsp;shutdown
+</code></pre></div>
 <p>Monitor session</p>
-<p><code>monitor&nbsp;session&nbsp;1</code>
-<code>description&nbsp;SPAN-to-SERVER</code>
-<code>source&nbsp;vlan&nbsp;10-20&nbsp;both</code>
-<code>rate-limit&nbsp;auto</code>
-<code>destination&nbsp;interface&nbsp;Ethernet1/1</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;session&nbsp;1
+&nbsp;description&nbsp;SPAN-to-SERVER
+&nbsp;source&nbsp;vlan&nbsp;10-20&nbsp;both
+&nbsp;rate-limit&nbsp;auto
+&nbsp;destination&nbsp;interface&nbsp;Ethernet1/1
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <h1 id="rspan">RSPAN</h1>
 <p>Skapa RSPAN VLAN på alla switchar. RSPAN vlan stänger av mac learning
 och allt som kommer in floodas till alla portar som är konfigurerade som
 destination.</p>
-<p><code>vlan&nbsp;999</code>
-<code>name&nbsp;RSPAN</code>
-<code>remote&nbsp;span</code>
-<code>exit</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;999
+&nbsp;name&nbsp;RSPAN
+&nbsp;remote&nbsp;span
+&nbsp;exit
+</code></pre></div>
 <p>Source</p>
-<p><code>monitor&nbsp;session&nbsp;1&nbsp;source&nbsp;interface&nbsp;fa0/3&nbsp;both</code>
-<code>monitor&nbsp;session&nbsp;1&nbsp;destination&nbsp;remote&nbsp;vlan&nbsp;999</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;session&nbsp;1&nbsp;source&nbsp;interface&nbsp;fa0/3&nbsp;both
+monitor&nbsp;session&nbsp;1&nbsp;destination&nbsp;remote&nbsp;vlan&nbsp;999
+</code></pre></div>
 <p>Switch 2</p>
-<p><code>monitor&nbsp;session&nbsp;1&nbsp;source&nbsp;remote&nbsp;vlan&nbsp;999</code>
-<code>monitor&nbsp;session&nbsp;1&nbsp;destination&nbsp;interface&nbsp;gi0/8</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;session&nbsp;1&nbsp;source&nbsp;remote&nbsp;vlan&nbsp;999
+monitor&nbsp;session&nbsp;1&nbsp;destination&nbsp;interface&nbsp;gi0/8
+</code></pre></div>
 <p><strong>Verify</strong></p>
-<p><code>show&nbsp;monitor&nbsp;session&nbsp;1</code>
-<code>show&nbsp;vlan&nbsp;remote-span</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;monitor&nbsp;session&nbsp;1
+show&nbsp;vlan&nbsp;remote-span
+</code></pre></div>
 <h1 id="erspan">ERSPAN</h1>
 <p>ERSPAN finns i två versioner. I version 1 (type II) används en ERSPAN
 header innan GRE-enkapsuleringen. Den innehåller metadata om sessions id
@@ -8925,52 +8962,61 @@ latency analysis. PTP timestamp information används för att räkna ut
 packet latency över edge, aggregate och core switches. De skiljs åt med
 hjälp av GRE Protocol Type value, 0x88BE och 0x22EB.</p>
 <p>Source</p>
-<p><code>monitor&nbsp;session&nbsp;1&nbsp;type&nbsp;erspan-source</code>
-<code>source&nbsp;interface&nbsp;gi0/1&nbsp;both</code>
-<code>no&nbsp;shut</code>
-<code>destination</code>
-<code>erspan-id&nbsp;101</code>
-<code>ip&nbsp;address&nbsp;10.0.0.20</code>
-<code>origin&nbsp;ip&nbsp;address&nbsp;172.20.0.10</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;session&nbsp;1&nbsp;type&nbsp;erspan-source
+source&nbsp;interface&nbsp;gi0/1&nbsp;both
+no&nbsp;shut
+destination
+&nbsp;erspan-id&nbsp;101
+&nbsp;ip&nbsp;address&nbsp;10.0.0.20
+&nbsp;origin&nbsp;ip&nbsp;address&nbsp;172.20.0.10
+</code></pre></div>
 <p>Destination</p>
-<p><code>monitor&nbsp;session&nbsp;1&nbsp;type&nbsp;erspan-destination</code>
-<code>destination&nbsp;interface&nbsp;gi0/2</code>
-<code>no&nbsp;shut</code>
-<code>source</code>
-<code>erspan-id&nbsp;101</code>
-<code>ip&nbsp;address&nbsp;10.0.0.20</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;session&nbsp;1&nbsp;type&nbsp;erspan-destination
+destination&nbsp;interface&nbsp;gi0/2&nbsp;
+no&nbsp;shut
+source
+&nbsp;erspan-id&nbsp;101
+&nbsp;ip&nbsp;address&nbsp;10.0.0.20
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;monitor&nbsp;session&nbsp;1</code>
-<code>show&nbsp;capability&nbsp;feature&nbsp;monitor&nbsp;erspan-source</code>
-<code>show&nbsp;capability&nbsp;feature&nbsp;monitor&nbsp;erspan-destination</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;monitor&nbsp;session&nbsp;1
+show&nbsp;capability&nbsp;feature&nbsp;monitor&nbsp;erspan-source
+show&nbsp;capability&nbsp;feature&nbsp;monitor&nbsp;erspan-destination
+</code></pre></div>
 <p><strong>NX-OS</strong></p>
-<p><code>monitor&nbsp;erspan&nbsp;origin&nbsp;ip-address&nbsp;10.1.2.1</code>
-<code>monitor&nbsp;session&nbsp;1&nbsp;type&nbsp;erspan-source</code>
-<code>description&nbsp;ERSPAN&nbsp;direct&nbsp;to&nbsp;Sniffer&nbsp;PC</code>
-<code>erspan-id&nbsp;32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;required,&nbsp;#&nbsp;between&nbsp;1-1023</code>
-<code>vrf&nbsp;default&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;required</code>
-<code>destination&nbsp;ip&nbsp;10.1.2.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;IP&nbsp;address&nbsp;of&nbsp;Sniffer&nbsp;PC</code>
-<code>source&nbsp;interface&nbsp;port-channel1&nbsp;both&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Port(s)&nbsp;to&nbsp;be&nbsp;sniffed</code>
-<code>filter&nbsp;vlan&nbsp;3900&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;limit&nbsp;VLAN(s)&nbsp;(optional)</code>
-<code>no&nbsp;shut&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;enable</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;erspan&nbsp;origin&nbsp;ip-address&nbsp;10.1.2.1
+monitor&nbsp;session&nbsp;1&nbsp;type&nbsp;erspan-source
+&nbsp;description&nbsp;ERSPAN&nbsp;direct&nbsp;to&nbsp;Sniffer&nbsp;PC
+&nbsp;erspan-id&nbsp;32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;required,&nbsp;#&nbsp;between&nbsp;1-1023
+&nbsp;vrf&nbsp;default&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;required
+&nbsp;destination&nbsp;ip&nbsp;10.1.2.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;IP&nbsp;address&nbsp;of&nbsp;Sniffer&nbsp;PC
+&nbsp;source&nbsp;interface&nbsp;port-channel1&nbsp;both&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Port(s)&nbsp;to&nbsp;be&nbsp;sniffed
+&nbsp;filter&nbsp;vlan&nbsp;3900&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;limit&nbsp;VLAN(s)&nbsp;(optional)
+&nbsp;no&nbsp;shut&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;enable
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;monitor&nbsp;session&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;monitor&nbsp;session&nbsp;all
+</code></pre></div>
 <h1 id="embedded-packet-capture">Embedded Packet Capture</h1>
 <p>På vissa enheter går det att göra en lokal packet capture. Man kan fånga
 paket i båda riktningen på ett interface samt begränsa så att inte allt
 fångas. Man kan såklart ha en permit ip any any acl men något slags
 filter måste konfigureras. Detta är IOS-XE syntax.</p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;CAPTURE</code>
-<code>permit&nbsp;udp&nbsp;host&nbsp;172.17.0.13&nbsp;host&nbsp;172.16.0.14&nbsp;eq&nbsp;53</code>
-<code>permit&nbsp;udp&nbsp;host&nbsp;172.16.0.14&nbsp;host&nbsp;172.17.0.13&nbsp;eq&nbsp;53</code></p>
-<p><code>monitor&nbsp;capture&nbsp;1&nbsp;access-list&nbsp;CAPTURE&nbsp;interface&nbsp;g0/0&nbsp;both</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;CAPTURE
+&nbsp;permit&nbsp;udp&nbsp;host&nbsp;172.17.0.13&nbsp;host&nbsp;172.16.0.14&nbsp;eq&nbsp;53
+&nbsp;permit&nbsp;udp&nbsp;host&nbsp;172.16.0.14&nbsp;host&nbsp;172.17.0.13&nbsp;eq&nbsp;53
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;capture&nbsp;1&nbsp;access-list&nbsp;CAPTURE&nbsp;interface&nbsp;g0/0&nbsp;both
+</code></pre></div>
 <p>Start / Stop / Clean up</p>
-<p><code>monitor&nbsp;capture&nbsp;1&nbsp;start</code>
-<code>monitor&nbsp;capture&nbsp;1&nbsp;stop</code>
-<code>no&nbsp;monitor&nbsp;capture&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;capture&nbsp;1&nbsp;start
+monitor&nbsp;capture&nbsp;1&nbsp;stop
+no&nbsp;monitor&nbsp;capture&nbsp;1
+</code></pre></div>
 <p>Show</p>
-<p><code>show&nbsp;mon&nbsp;cap&nbsp;1&nbsp;buffer&nbsp;brief</code>
-<code>show&nbsp;mon&nbsp;cap&nbsp;1&nbsp;parameter</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mon&nbsp;cap&nbsp;1&nbsp;buffer&nbsp;brief
+show&nbsp;mon&nbsp;cap&nbsp;1&nbsp;parameter
+</code></pre></div>
 <h1 id="ethanalyzer">Ethanalyzer</h1>
 <p>Ethanalyzer är ett protocol analyzer-verktyg för
 <a href="/Cisco_Nexus" title="wikilink">NX-OS</a>. Det är en CLI-variant av Wireshark med
@@ -8980,37 +9026,43 @@ stöd för filter.</p>
 <li>display-filter: wireshark display filter syntax</li>
 </ul>
 <p>Exempel: titta på trafik till och från supervisor på mgmt-interface.</p>
-<p><code>ethanalyzer&nbsp;local&nbsp;interface&nbsp;mgmt</code>
-<code>ethanalyzer&nbsp;local&nbsp;interface&nbsp;mgmt&nbsp;capture-filter&nbsp;"host&nbsp;10.0.0.10"&nbsp;limit-captured-frames&nbsp;50&nbsp;write&nbsp;bootflash:CAP_MGMT.pcap</code></p>
+<div class="highlight"><pre><span></span><code>ethanalyzer&nbsp;local&nbsp;interface&nbsp;mgmt
+ethanalyzer&nbsp;local&nbsp;interface&nbsp;mgmt&nbsp;capture-filter&nbsp;"host&nbsp;10.0.0.10"&nbsp;limit-captured-frames&nbsp;50&nbsp;write&nbsp;bootflash:CAP_MGMT.pcap
+</code></pre></div>
 <p>Man kan inte se trafik som går i hårdvaran (ASIC) men man kan använda en
 ACL med log option som workaround.</p>
-<p><code>ip&nbsp;access-list&nbsp;ACL-CAP</code>
-<code>permit&nbsp;tcp&nbsp;10.0.0.3/32&nbsp;10.0.0.10/32&nbsp;eq&nbsp;5000&nbsp;log</code>
-<code>permit&nbsp;ip&nbsp;any&nbsp;any</code>
-<code>interface&nbsp;e1/1</code>
-<code>ip&nbsp;access-group&nbsp;ACL-CAP&nbsp;in</code></p>
-<p><code>ethanalyzer&nbsp;local&nbsp;interface&nbsp;inband&nbsp;capture-filter&nbsp;“tcp&nbsp;port&nbsp;5000”</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;ACL-CAP
+&nbsp;permit&nbsp;tcp&nbsp;10.0.0.3/32&nbsp;10.0.0.10/32&nbsp;eq&nbsp;5000&nbsp;log
+&nbsp;permit&nbsp;ip&nbsp;any&nbsp;any
+interface&nbsp;e1/1
+&nbsp;ip&nbsp;access-group&nbsp;ACL-CAP&nbsp;in
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ethanalyzer&nbsp;local&nbsp;interface&nbsp;inband&nbsp;capture-filter&nbsp;“tcp&nbsp;port&nbsp;5000”
+</code></pre></div>
 <p>En annan mer kraftfull workaround man kan göra är att spegla trafik från
 ASIC (cloud scale) till CPU och sedan använda ethanalyzer.</p>
-<p><code>monitor&nbsp;session&nbsp;1</code>
-<code>source&nbsp;interface&nbsp;e1/15</code>
-<code>destination&nbsp;interface&nbsp;sup-eth&nbsp;0</code>
-<code>no&nbsp;shut</code></p>
-<p><code>ethanalyzer&nbsp;local&nbsp;interface&nbsp;inband&nbsp;mirror&nbsp;limit-captured-frames&nbsp;50</code></p>
+<div class="highlight"><pre><span></span><code>monitor&nbsp;session&nbsp;1
+&nbsp;source&nbsp;interface&nbsp;e1/15
+&nbsp;destination&nbsp;interface&nbsp;sup-eth&nbsp;0
+&nbsp;no&nbsp;shut
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ethanalyzer&nbsp;local&nbsp;interface&nbsp;inband&nbsp;mirror&nbsp;limit-captured-frames&nbsp;50
+</code></pre></div>
 <h1 id="rite">RITE</h1>
 <p>På routrar heter SPANs motsvarighet Router IP Traffic Export och man
 anger en mac-adress man vill skicka paketen till, det skulle t.ex. kunna
 vara en IDS. Man kan matcha det man vill ska skickas mot en acl och man
 kan sampla.</p>
-<p><code>ip&nbsp;traffic-export&nbsp;profile&nbsp;IDS</code>
-<code>interface&nbsp;Gi0/0</code>
-<code>mac-address&nbsp;0123.0005.abcd</code>
-<code>incoming&nbsp;sample&nbsp;one-in-every&nbsp;5</code>
-<code>interface&nbsp;Gi0/2</code>
-<code>ip&nbsp;traffic-export&nbsp;apply&nbsp;IDS</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;traffic-export&nbsp;profile&nbsp;IDS
+&nbsp;interface&nbsp;Gi0/0
+&nbsp;mac-address&nbsp;0123.0005.abcd
+&nbsp;incoming&nbsp;sample&nbsp;one-in-every&nbsp;5
+interface&nbsp;Gi0/2
+&nbsp;ip&nbsp;traffic-export&nbsp;apply&nbsp;IDS
+</code></pre></div>
 <p>Show</p>
-<p><code>show&nbsp;ip&nbsp;traffic-export</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;traffic-export
+</code></pre></div>
 
 
 
@@ -9033,7 +9085,7 @@ kan sampla.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8804,6 +8804,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9200,12 +9228,14 @@ webui.</p>
 <ul>
 <li>Default användarnamn och lösenord på vmwares appliance är,</li>
 </ul>
-<p><code>root/vmware</code></p>
+<div class="highlight"><pre><span></span><code>root/vmware
+</code></pre></div>
 <ul>
 <li>Börja med att öppna en console och logga in. Kör scriptet under för
     att sätta ip, hostnamn, gw, dns.</li>
 </ul>
-<p><code>/opt/vmware/share/vami/vami_config_net</code></p>
+<div class="highlight"><pre><span></span><code>/opt/vmware/share/vami/vami_config_net
+</code></pre></div>
 <ul>
 <li>Surfa sedan in på <a href="https://">https://</a><ip>:5480, här görs den initiala
     setupen.</ip></li>
@@ -9220,7 +9250,8 @@ webui.</p>
     <code>Administration &gt; Single Sign-On &gt; Configuration &gt; Identity Sources</code>.
     Tryck på det gröna plustecknet.</li>
 </ul>
-<p><code>Om&nbsp;inte&nbsp;Single&nbsp;Sign-On&nbsp;finns&nbsp;under&nbsp;Administration&nbsp;så&nbsp;är&nbsp;du&nbsp;antagligen&nbsp;inloggad&nbsp;som&nbsp;användaren&nbsp;root.</code></p>
+<div class="highlight"><pre><span></span><code>Om&nbsp;inte&nbsp;Single&nbsp;Sign-On&nbsp;finns&nbsp;under&nbsp;Administration&nbsp;så&nbsp;är&nbsp;du&nbsp;antagligen&nbsp;inloggad&nbsp;som&nbsp;användaren&nbsp;root.
+</code></pre></div>
 <ul>
 <li>Fyll sedan i dina uppgifter och tryck på "Test connection".</li>
 </ul>
@@ -9240,11 +9271,13 @@ och sedan klicka på vCenterns hostnamn.</p>
 </ul>
 <h3 id="enable-scp">Enable SCP</h3>
 <p>För att kunna SCP'a filer till vCenter skriv följande:</p>
-<p><code>chsh&nbsp;–s&nbsp;/bin/bash</code></p>
+<div class="highlight"><pre><span></span><code>chsh&nbsp;–s&nbsp;/bin/bash
+</code></pre></div>
 <p>Då ändrar man login skalet från <strong>appliancesh</strong> till <strong>bash</strong> och kan då
 SCP filer.</p>
 <p>För att ändra tillbaka till vanliga skriv:</p>
-<p><code>chsh&nbsp;-s&nbsp;/bin/appliancesh</code></p>
+<div class="highlight"><pre><span></span><code>chsh&nbsp;-s&nbsp;/bin/appliancesh
+</code></pre></div>
 <h2 id="vmware-client-integration-plugin">VMware Client Integration Plugin</h2>
 <p>Behövs för att kunna öppna console eller logga in med sitt windows
 login. Länk till pluginet finns längst ner på
@@ -9278,27 +9311,29 @@ dom i koden.</p>
 <p><a href="https://github.com/Hackernet-se/vmware-custom-login">Hackernet's egna Login
 UI</a></p>
 <p><strong>VCSA 6.0</strong></p>
-<p><code>/usr/lib/vmware-sso/vmware-sts/webapps/websso/WEB-INF/views/unpentry.jsp</code>
-<code>/usr/lib/vmware-sso/vmware-sts/webapps/websso/resources/css/login.css</code>
-<code>/usr/lib/vmware-sso/vmware-sts/webapps/websso/resources/img</code></p>
+<div class="highlight"><pre><span></span><code>/usr/lib/vmware-sso/vmware-sts/webapps/websso/WEB-INF/views/unpentry.jsp
+/usr/lib/vmware-sso/vmware-sts/webapps/websso/resources/css/login.css
+/usr/lib/vmware-sso/vmware-sts/webapps/websso/resources/img
+</code></pre></div>
 <p><strong>Windows vCenter Server 6.0</strong></p>
-<p><code>C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\WEB-INF\views</code>
-<code>C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\resources\css</code>
-<code>C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\resources\img</code></p>
+<div class="highlight"><pre><span></span><code>C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\WEB-INF\views
+C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\resources\css
+C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\resources\img
+</code></pre></div>
 <h2 id="regenerate-certificates">Regenerate certificates</h2>
 <p>För att skapa nya cert eller lägga in ett eget cert från tex <a href="/Let's_Encrypt" title="wikilink">Let's
 Encrypt</a> så använder man certificate manager.</p>
-<p><code>/usr/lib/vmware-vmca/bin/certificate-manager</code></p>
+<div class="highlight"><pre><span></span><code>/usr/lib/vmware-vmca/bin/certificate-manager
+</code></pre></div>
 <h2 id="reset-the-vmware-vcenter-single-sign-on-administrator-password">Reset the VMware vCenter Single Sign-On administrator password</h2>
 <p>Om man glömt sitt lösenord till en användare tex
 Administrator@vSphere.local kan man skapa ett nytt.</p>
-<p><code>/usr/lib/vmware-vmdir/bin/vdcadmintool</code></p>
+<div class="highlight"><pre><span></span><code>/usr/lib/vmware-vmdir/bin/vdcadmintool
+</code></pre></div>
 <ul>
 <li>Välj nr 3: <strong>Reset account password</strong></li>
 <li>Ange följande som UPN: '''Administrator@vSphere.</li>
 </ul>
-<p><a href="/Category:VMware" title="wikilink">Category:VMware</a>
-<a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
 
 
 
@@ -9321,7 +9356,7 @@ Administrator@vSphere.local kan man skapa ett nytt.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8741,6 +8741,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9060,7 +9088,7 @@
 
   <h1>Netdisco</h1>
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a> Netdisco hämtar
+<p>Netdisco hämtar
 MAC-tabeller, ARP-tabeller, VLAN-databaser, LLDP/CDP-grannskap,
 firmwareversioner, m.m från routrar och switchar med hjälp av SNMP. Man
 schemalägger när data ska samlas in, dvs det är inte
@@ -9072,84 +9100,95 @@ referensguide alternativt google. Referens:</p>
 <p><em>Ubuntu 14.04.1 LTS Server x64</em>
 Denna guide är till stor del hämtad från:
 <a href="http://blog.asiantuntijakaveri.fi/2014/08/netdisco2-on-ubuntu-1404.html">http://blog.asiantuntijakaveri.fi/2014/08/netdisco2-on-ubuntu-1404.html</a></p>
-<p><code>sudo&nbsp;su&nbsp;-</code>
-<code>apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;dist-upgrade&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;open-vm-tools&nbsp;build-essential&nbsp;wget&nbsp;lftp&nbsp;mtr-tiny&nbsp;zip&nbsp;ntp&nbsp;fail2ban&nbsp;curl</code>
-<code>echo&nbsp;"net.ipv6.conf.all.disable_ipv6=1"&nbsp;&gt;&gt;/etc/sysctl.conf</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;su&nbsp;-
+apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;dist-upgrade&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;open-vm-tools&nbsp;build-essential&nbsp;wget&nbsp;lftp&nbsp;mtr-tiny&nbsp;zip&nbsp;ntp&nbsp;fail2ban&nbsp;curl
+echo&nbsp;"net.ipv6.conf.all.disable_ipv6=1"&nbsp;&gt;&gt;/etc/sysctl.conf
+</code></pre></div>
 <h3 id="databas">Databas</h3>
-<p><code>apt-get&nbsp;-y&nbsp;install&nbsp;libdbd-pg-perl&nbsp;libsnmp-perl&nbsp;postgresql&nbsp;pgtune</code>
-<code>mv&nbsp;/etc/postgresql/9.3/main/postgresql.conf&nbsp;/etc/postgresql/9.3/main/postgresql.conf.old</code>
-<code>pgtune&nbsp;-i&nbsp;/etc/postgresql/9.3/main/postgresql.conf.old&nbsp;-o&nbsp;/etc/postgresql/9.3/main/postgresql.conf</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;-y&nbsp;install&nbsp;libdbd-pg-perl&nbsp;libsnmp-perl&nbsp;postgresql&nbsp;pgtune&nbsp;
+mv&nbsp;/etc/postgresql/9.3/main/postgresql.conf&nbsp;/etc/postgresql/9.3/main/postgresql.conf.old
+pgtune&nbsp;-i&nbsp;/etc/postgresql/9.3/main/postgresql.conf.old&nbsp;-o&nbsp;/etc/postgresql/9.3/main/postgresql.conf
+</code></pre></div>
 <p>Switch to postgres user and create new SQL user</p>
-<p><code>su&nbsp;-&nbsp;postgres</code>
-<code>createuser&nbsp;-DRSP&nbsp;netdisco</code>
-<code>(Enter&nbsp;some&nbsp;DB&nbsp;password&nbsp;here)</code>
-<code>createdb&nbsp;--owner&nbsp;netdisco&nbsp;netdisco</code></p>
+<div class="highlight"><pre><span></span><code>su&nbsp;-&nbsp;postgres
+createuser&nbsp;-DRSP&nbsp;netdisco
+(Enter&nbsp;some&nbsp;DB&nbsp;password&nbsp;here)
+createdb&nbsp;--owner&nbsp;netdisco&nbsp;netdisco
+</code></pre></div>
 <p>Switch back to root</p>
-<p><code>exit</code></p>
+<div class="highlight"><pre><span></span><code>exit
+</code></pre></div>
 <h3 id="netdisco">Netdisco</h3>
-<p><code>adduser&nbsp;netdisco&nbsp;--shell&nbsp;/bin/bash&nbsp;--disabled-password&nbsp;--gecos&nbsp;netdisco&nbsp;&amp;&amp;&nbsp;su&nbsp;-&nbsp;netdisco</code>
-<code>curl&nbsp;-L</code><a href="http://cpanmin.us/"><code>http://cpanmin.us/</code></a><code>|&nbsp;perl&nbsp;-&nbsp;--notest&nbsp;--local-lib&nbsp;~/perl5&nbsp;App::Netdisco</code></p>
+<p></p><div class="highlight"><pre><span></span><code>adduser&nbsp;netdisco&nbsp;--shell&nbsp;/bin/bash&nbsp;--disabled-password&nbsp;--gecos&nbsp;netdisco&nbsp;&amp;&amp;&nbsp;su&nbsp;-&nbsp;netdisco
+</code></pre></div>
+<code>curl&nbsp;-L</code><a href="http://cpanmin.us/"><code>http://cpanmin.us/</code></a><code>|&nbsp;perl&nbsp;-&nbsp;--notest&nbsp;--local-lib&nbsp;~/perl5&nbsp;App::Netdisco</code><p></p>
 <h2 id="konfiguration">Konfiguration</h2>
-<p><code>mkdir&nbsp;~/bin&nbsp;&amp;&amp;&nbsp;mkdir&nbsp;~/environments&nbsp;&amp;&amp;&nbsp;ln&nbsp;-s&nbsp;~/perl5/bin/{localenv,netdisco-*}&nbsp;~/bin/</code>
-<code>~/bin/netdisco-daemon&nbsp;status</code></p>
+<div class="highlight"><pre><span></span><code>mkdir&nbsp;~/bin&nbsp;&amp;&amp;&nbsp;mkdir&nbsp;~/environments&nbsp;&amp;&amp;&nbsp;ln&nbsp;-s&nbsp;~/perl5/bin/{localenv,netdisco-*}&nbsp;~/bin/
+~/bin/netdisco-daemon&nbsp;status
+</code></pre></div>
 <p>Här är grunden för deploymenten, lägg till de SNMP-communitys som ska
 användas. Schemaläggningen är i cron-format. I exemplet görs discoverall
 10 över varje timme.
 OBS Om detta görs i en virtuell maskin tas förslagsvis en snapshot här.</p>
-<p><code>cat&nbsp;&lt;&lt;'__EOF__'&gt;~/environments/deployment.yml</code>
-<code>database:</code>
-<code>name:&nbsp;'netdisco'</code>
-<code>user:&nbsp;'netdisco'</code>
-<code>pass:&nbsp;'(PW&nbsp;som&nbsp;sattes&nbsp;tidigare)'</code>
-<code>safe_password_store:&nbsp;true</code>
-<code>snmp_auth:</code>
-<code>-&nbsp;tag:&nbsp;'default_1'</code>
-<code>community:&nbsp;'puplic'</code>
-<code>read:&nbsp;true</code>
-<code>write:&nbsp;false</code>
-<code>-&nbsp;tag:&nbsp;'default_2'</code>
-<code>community:&nbsp;'public'</code>
-<code>read:&nbsp;true</code>
-<code>write:&nbsp;false</code>
-<code>-&nbsp;tag:&nbsp;'v3example'</code>
-<code>user:&nbsp;netdisco</code>
-<code>auth:</code>
-<code>pass:&nbsp;netdiscokey</code>
-<code>proto:&nbsp;SHA</code>
-<code>priv:</code>
-<code>pass:&nbsp;netdiscokey2</code>
-<code>proto:&nbsp;AES</code>
-<code>schedule:</code>
-<code>discoverall:</code>
-<code>when:&nbsp;'10&nbsp;*&nbsp;*&nbsp;*&nbsp;*'</code>
-<code>macwalk:</code>
-<code>when:&nbsp;'35&nbsp;*&nbsp;*&nbsp;*&nbsp;*'</code>
-<code>arpwalk:</code>
-<code>when:&nbsp;'45&nbsp;*&nbsp;*&nbsp;*&nbsp;*'</code>
-<code>nbtwalk:</code>
-<code>when:&nbsp;'55&nbsp;*&nbsp;*&nbsp;*&nbsp;*'</code>
-<code>expire:</code>
-<code>when:&nbsp;'15&nbsp;23&nbsp;*&nbsp;*&nbsp;*'</code>
-<code>dns:</code>
-<code>max_outstanding:&nbsp;50</code>
-<code>workers:</code>
-<code>tasks:&nbsp;'AUTO&nbsp;*&nbsp;5'</code>
-<code>__EOF__</code></p>
-<p><code>~/bin/netdisco-deploy</code></p>
+<div class="highlight"><pre><span></span><code>cat&nbsp;&lt;&lt;'__EOF__'&gt;~/environments/deployment.yml
+database:
+&nbsp;name:&nbsp;'netdisco'
+&nbsp;user:&nbsp;'netdisco'
+&nbsp;pass:&nbsp;'(PW&nbsp;som&nbsp;sattes&nbsp;tidigare)'
+safe_password_store:&nbsp;true
+snmp_auth:
+&nbsp;-&nbsp;tag:&nbsp;'default_1'
+&nbsp;&nbsp;&nbsp;community:&nbsp;'puplic'
+&nbsp;&nbsp;&nbsp;read:&nbsp;true
+&nbsp;&nbsp;&nbsp;write:&nbsp;false
+&nbsp;-&nbsp;tag:&nbsp;'default_2'
+&nbsp;&nbsp;&nbsp;community:&nbsp;'public'
+&nbsp;&nbsp;&nbsp;read:&nbsp;true
+&nbsp;&nbsp;&nbsp;write:&nbsp;false
+&nbsp;-&nbsp;tag:&nbsp;'v3example'
+&nbsp;&nbsp;&nbsp;&nbsp;user:&nbsp;netdisco
+&nbsp;&nbsp;&nbsp;&nbsp;auth:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass:&nbsp;netdiscokey
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proto:&nbsp;SHA
+&nbsp;&nbsp;&nbsp;&nbsp;priv:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass:&nbsp;netdiscokey2
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proto:&nbsp;AES
+schedule:
+&nbsp;discoverall:
+&nbsp;&nbsp;&nbsp;&nbsp;when:&nbsp;'10&nbsp;*&nbsp;*&nbsp;*&nbsp;*'
+&nbsp;macwalk:
+&nbsp;&nbsp;&nbsp;&nbsp;when:&nbsp;'35&nbsp;*&nbsp;*&nbsp;*&nbsp;*'
+&nbsp;arpwalk:
+&nbsp;&nbsp;&nbsp;&nbsp;when:&nbsp;'45&nbsp;*&nbsp;*&nbsp;*&nbsp;*'
+&nbsp;nbtwalk:
+&nbsp;&nbsp;&nbsp;&nbsp;when:&nbsp;'55&nbsp;*&nbsp;*&nbsp;*&nbsp;*'
+&nbsp;expire:
+&nbsp;&nbsp;&nbsp;&nbsp;when:&nbsp;'15&nbsp;23&nbsp;*&nbsp;*&nbsp;*'
+dns:
+&nbsp;max_outstanding:&nbsp;50
+workers:
+&nbsp;tasks:&nbsp;'AUTO&nbsp;*&nbsp;5'
+__EOF__
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>~/bin/netdisco-deploy
+</code></pre></div>
 <p>Svara ja på allt och sätt credentials för web gui:t.</p>
 <p>Skapa script för att starta Netdisco med listener port 5000</p>
-<p><code>cat&nbsp;&lt;&lt;'__EOF__'&gt;~/run-netdisco.sh</code>
-<code>#!/bin/bash</code>
-<code>~/bin/netdisco-web&nbsp;start&nbsp;--port=5000</code>
-<code>sleep&nbsp;5</code>
-<code>~/bin/netdisco-daemon&nbsp;start</code>
-<code>__EOF__</code>
-<code>chmod&nbsp;a+x&nbsp;~/run-netdisco.sh</code></p>
-<p><code>~/run-netdisco.sh</code></p>
+<div class="highlight"><pre><span></span><code>cat&nbsp;&lt;&lt;'__EOF__'&gt;~/run-netdisco.sh
+#!/bin/bash
+~/bin/netdisco-web&nbsp;start&nbsp;--port=5000
+sleep&nbsp;5
+~/bin/netdisco-daemon&nbsp;start
+__EOF__
+chmod&nbsp;a+x&nbsp;~/run-netdisco.sh
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>~/run-netdisco.sh
+</code></pre></div>
 <p>Switch back to root</p>
-<p><code>exit</code>
-<code>echo&nbsp;"(&nbsp;sudo&nbsp;su&nbsp;-&nbsp;netdisco&nbsp;-c&nbsp;'/home/netdisco/run-netdisco.sh'&nbsp;)&nbsp;&amp;"&nbsp;&gt;/etc/rc.local</code>
-<code>reboot</code></p>
+<div class="highlight"><pre><span></span><code>exit
+echo&nbsp;"(&nbsp;sudo&nbsp;su&nbsp;-&nbsp;netdisco&nbsp;-c&nbsp;'/home/netdisco/run-netdisco.sh'&nbsp;)&nbsp;&amp;"&nbsp;&gt;/etc/rc.local
+reboot
+</code></pre></div>
 <h3 id="webgui">WEBGUI</h3>
 <p>Logga in på <a href="http://%5BIP%5D:5000">http://%5BIP%5D:5000</a></p>
 <p>Börja med att mata in IP-adress på en switch eller router som ska
@@ -9160,13 +9199,17 @@ rätt konfigurerat kommer väldigt mycket att upptäckas.</p>
 IP för Netdiscomaskinen.</p>
 <h3 id="underhall">Underhåll</h3>
 <p>upgrade Netdisco</p>
-<p><code>~/bin/localenv&nbsp;cpanm&nbsp;--notest&nbsp;App::Netdisco</code></p>
+<div class="highlight"><pre><span></span><code>~/bin/localenv&nbsp;cpanm&nbsp;--notest&nbsp;App::Netdisco
+</code></pre></div>
 <p>apply database schema updates</p>
-<p><code>~/bin/netdisco-deploy</code></p>
+<div class="highlight"><pre><span></span><code>~/bin/netdisco-deploy
+</code></pre></div>
 <p>restart web service</p>
-<p><code>~/bin/netdisco-web&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>~/bin/netdisco-web&nbsp;restart
+</code></pre></div>
 <p>restart job daemon</p>
-<p><code>~/bin/netdisco-daemon&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>~/bin/netdisco-daemon&nbsp;restart
+</code></pre></div>
 
 
 
@@ -9189,7 +9232,7 @@ IP för Netdiscomaskinen.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

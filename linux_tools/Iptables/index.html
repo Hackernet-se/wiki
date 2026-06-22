@@ -8700,6 +8700,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9008,7 +9036,8 @@ en matchning hittas med en av dess regler. De två vanligaste är DROP och
 ACCEPT.</p>
 <h1 id="regelverk">Regelverk</h1>
 <p>Kolla regelverk</p>
-<p><code>sudo&nbsp;iptables&nbsp;-S</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;iptables&nbsp;-S
+</code></pre></div>
 <p>Skapa regelverk</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dd<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/etc/iptables.firewall.rules<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
 <span class="s">*filter</span>
@@ -9033,8 +9062,9 @@ ACCEPT.</p>
 <span class="s">EOF</span>
 </code></pre></div>
 <p>Rules activate!</p>
-<p><code>sudo&nbsp;iptables-restore&nbsp;&lt;&nbsp;/etc/iptables.firewall.rules</code>
-<code>sudo&nbsp;iptables&nbsp;-L&nbsp;-n&nbsp;-v&nbsp;--line-numbers</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;iptables-restore&nbsp;&lt;&nbsp;/etc/iptables.firewall.rules
+sudo&nbsp;iptables&nbsp;-L&nbsp;-n&nbsp;-v&nbsp;--line-numbers
+</code></pre></div>
 <h3 id="persistent">Persistent</h3>
 <p>Behåll regler efter omstart, Debian/Ubuntu</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dd<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/etc/network/if-pre-up.d/firewall<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
@@ -9044,14 +9074,16 @@ ACCEPT.</p>
 sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/etc/network/if-pre-up.d/firewall
 </code></pre></div>
 <p>Alternativt använd iptables-persistent</p>
-<p><code>apt-get&nbsp;install&nbsp;iptables-persistent</code>
-<code>iptables-save&nbsp;&gt;&nbsp;/etc/iptables/rules.v4</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;iptables-persistent
+iptables-save&nbsp;&gt;&nbsp;/etc/iptables/rules.v4
+</code></pre></div>
 <h1 id="dynamisk-ip">Dynamisk IP</h1>
 <p>Att ha dynamisk IP suger men så är det ibland. Som tur är kan iptables
 uppdatera sina regler automatiskt även om en IP-adress ändras. Det som
 behövs är ett DNS-namn mot IPn.</p>
-<p><code>iptables&nbsp;-N&nbsp;DYNDNS</code>
-<code>iptables&nbsp;-A&nbsp;INPUT&nbsp;-p&nbsp;tcp&nbsp;-m&nbsp;tcp&nbsp;--dport&nbsp;22&nbsp;-j&nbsp;DYNDNS</code></p>
+<div class="highlight"><pre><span></span><code>iptables&nbsp;-N&nbsp;DYNDNS
+iptables&nbsp;-A&nbsp;INPUT&nbsp;-p&nbsp;tcp&nbsp;-m&nbsp;tcp&nbsp;--dport&nbsp;22&nbsp;-j&nbsp;DYNDNS
+</code></pre></div>
 <p>Sedan ett script som körs enligt schemaläggning</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dd<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/etc/dyndns.sh<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
 <span class="s">#!/bin/bash</span>
@@ -9068,15 +9100,18 @@ iptables som tillåter skapandet av regler som matchar mot grupper med
 t.ex. IP-adresser, nätverk och portar. Med grupper kan man få ner
 antalet regelrader vilket förenklar uppsättning och felsökning samt ökar
 skalbarhet och prestanda.</p>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;ipset</code>
-<code>sudo&nbsp;dnf&nbsp;install&nbsp;ipset</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;ipset
+sudo&nbsp;dnf&nbsp;install&nbsp;ipset
+</code></pre></div>
 <p>Exempelanvändning, skapa ett set.</p>
-<p><code>ipset&nbsp;-N&nbsp;myset&nbsp;nethash</code>
-<code>ipset&nbsp;-A&nbsp;myset&nbsp;1.1.1.1</code>
-<code>ipset&nbsp;-A&nbsp;myset&nbsp;2.2.2.2</code>
-<code>iptables&nbsp;-A&nbsp;INPUT&nbsp;-p&nbsp;tcp&nbsp;-m&nbsp;set&nbsp;--set&nbsp;myset&nbsp;src&nbsp;--dport&nbsp;22&nbsp;-j&nbsp;ACCEPT</code></p>
+<div class="highlight"><pre><span></span><code>ipset&nbsp;-N&nbsp;myset&nbsp;nethash
+ipset&nbsp;-A&nbsp;myset&nbsp;1.1.1.1
+ipset&nbsp;-A&nbsp;myset&nbsp;2.2.2.2
+iptables&nbsp;-A&nbsp;INPUT&nbsp;-p&nbsp;tcp&nbsp;-m&nbsp;set&nbsp;--set&nbsp;myset&nbsp;src&nbsp;--dport&nbsp;22&nbsp;-j&nbsp;ACCEPT
+</code></pre></div>
 <p>Kolla grupper</p>
-<p><code>sudo&nbsp;ipset&nbsp;list</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;ipset&nbsp;list
+</code></pre></div>
 <h3 id="exempelscript">Exempelscript</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">## Firewall script by Helikopter</span>
 
@@ -9128,7 +9163,6 @@ ipset<span class="w"> </span>-A<span class="w"> </span>HTTPS<span class="w"> </s
 ipset<span class="w"> </span>-A<span class="w"> </span>HTTPS<span class="w"> </span><span class="m">172</span>.24.190.110
 ipset<span class="w"> </span>-A<span class="w"> </span>HTTPS<span class="w"> </span><span class="m">192</span>.168.0.10
 </code></pre></div>
-<p><a href="/Category:Tools" title="wikilink">Category:Tools</a></p>
 
 
 
@@ -9151,7 +9185,7 @@ ipset<span class="w"> </span>-A<span class="w"> </span>HTTPS<span class="w"> </s
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

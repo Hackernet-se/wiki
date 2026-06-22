@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8842,50 +8870,56 @@
 
 
 <p>Fedora 23</p>
-<p><code>#&nbsp;Network&nbsp;information</code>
-<code>network&nbsp;&nbsp;--bootproto&nbsp;static&nbsp;--ip&nbsp;172.10.0.20&nbsp;--netmask&nbsp;255.255.255.0&nbsp;--gateway&nbsp;172.10.0.1&nbsp;--nameserver&nbsp;172.10.0.1&nbsp;--device=eno16780032&nbsp;--ipv6=auto&nbsp;--activate</code>
-<code>network&nbsp;&nbsp;--hostname=fedora.hackernet.se</code></p>
-<p><code>graphical</code>
-<code>auth&nbsp;--enableshadow&nbsp;--passalgo=sha512</code>
+<div class="highlight"><pre><span></span><code>#&nbsp;Network&nbsp;information
+network&nbsp;&nbsp;--bootproto&nbsp;static&nbsp;--ip&nbsp;172.10.0.20&nbsp;--netmask&nbsp;255.255.255.0&nbsp;--gateway&nbsp;172.10.0.1&nbsp;--nameserver&nbsp;172.10.0.1&nbsp;--device=eno16780032&nbsp;--ipv6=auto&nbsp;--activate
+network&nbsp;&nbsp;--hostname=fedora.hackernet.se
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>graphical
+auth&nbsp;--enableshadow&nbsp;--passalgo=sha512
+</code></pre></div>
 <code>url&nbsp;--url="</code><a href="http://download.fedoraproject.org/pub/fedora/linux/releases/23/Server/x86_64/os"><code>http://download.fedoraproject.org/pub/fedora/linux/releases/23/Server/x86_64/os</code></a><code>"</code>
-<code>firstboot&nbsp;--enable</code>
-<code>ignoredisk&nbsp;--only-use=sda</code>
-<code>keyboard&nbsp;--vckeymap=se&nbsp;--xlayouts='se'</code>
-<code>lang&nbsp;en_US.UTF-8</code>
-<code>rootpw&nbsp;--lock</code>
-<code>timezone&nbsp;Europe/Stockholm&nbsp;--isUtc</code>
-<code>user&nbsp;--groups=wheel&nbsp;--name=skeletor&nbsp;--password=$6$0mOr4b/kgDAOoxgg$vgPmtqFEZB0//fc3J9RW90eM6nDIISyE0IxT.06ufRvGnfx6ET2ollSHP46OefzAvYUs5hqbqHXzUzhptDefM1&nbsp;--iscrypted&nbsp;--gecos="skeletor"</code>
-<code>bootloader&nbsp;--location=mbr&nbsp;--boot-drive=sda</code>
-<code>autopart&nbsp;--type=lvm</code>
-<code>zerombr</code>
-<code>clearpart&nbsp;--all&nbsp;--initlabel</code>
-<code>reboot</code></p>
-<p><code>%packages</code>
-<code>@^server-product-environment</code>
-<code>%end</code></p>
-<p><code>%anaconda</code>
-<code>pwpolicy&nbsp;root&nbsp;--minlen=0&nbsp;--minquality=1&nbsp;--notstrict&nbsp;--nochanges&nbsp;--emptyok</code>
-<code>pwpolicy&nbsp;user&nbsp;--minlen=0&nbsp;--minquality=1&nbsp;--notstrict&nbsp;--nochanges&nbsp;--emptyok</code>
-<code>pwpolicy&nbsp;luks&nbsp;--minlen=0&nbsp;--minquality=1&nbsp;--notstrict&nbsp;--nochanges&nbsp;--emptyok</code>
-<code>%end</code></p>
+<div class="highlight"><pre><span></span><code>firstboot&nbsp;--enable
+ignoredisk&nbsp;--only-use=sda
+keyboard&nbsp;--vckeymap=se&nbsp;--xlayouts='se'
+lang&nbsp;en_US.UTF-8
+rootpw&nbsp;--lock
+timezone&nbsp;Europe/Stockholm&nbsp;--isUtc
+user&nbsp;--groups=wheel&nbsp;--name=skeletor&nbsp;--password=$6$0mOr4b/kgDAOoxgg$vgPmtqFEZB0//fc3J9RW90eM6nDIISyE0IxT.06ufRvGnfx6ET2ollSHP46OefzAvYUs5hqbqHXzUzhptDefM1&nbsp;--iscrypted&nbsp;--gecos="skeletor"
+bootloader&nbsp;--location=mbr&nbsp;--boot-drive=sda
+autopart&nbsp;--type=lvm
+zerombr
+clearpart&nbsp;--all&nbsp;--initlabel
+reboot
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>%packages
+@^server-product-environment
+%end
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>%anaconda
+pwpolicy&nbsp;root&nbsp;--minlen=0&nbsp;--minquality=1&nbsp;--notstrict&nbsp;--nochanges&nbsp;--emptyok
+pwpolicy&nbsp;user&nbsp;--minlen=0&nbsp;--minquality=1&nbsp;--notstrict&nbsp;--nochanges&nbsp;--emptyok
+pwpolicy&nbsp;luks&nbsp;--minlen=0&nbsp;--minquality=1&nbsp;--notstrict&nbsp;--nochanges&nbsp;--emptyok
+%end
+</code></pre></div>
 <h1 id="fraga-efter-hostnamn">Fråga efter hostnamn</h1>
 <p>Få fedora/centos/redhat att fråga efter hostnamn under installation.</p>
-<p><code>%pre</code>
-<code>#!/bin/sh</code>
-<code>exec&nbsp;&lt;&nbsp;/dev/tty3&nbsp;&gt;&nbsp;/dev/tty3&nbsp;2&gt;&amp;1</code>
-<code>chvt&nbsp;3</code>
-<code>hn=""</code></p>
-<p><code>while&nbsp;[&nbsp;"$hn"&nbsp;==&nbsp;""&nbsp;];&nbsp;do</code>
-<code>clear</code>
-<code>echo&nbsp;"&nbsp;***&nbsp;Please&nbsp;enter&nbsp;the&nbsp;following&nbsp;details:&nbsp;***&nbsp;"</code>
-<code>echo</code>
-<code>read&nbsp;-p&nbsp;"Hostname:&nbsp;"&nbsp;hn</code>
-<code>done</code>
-<code>clear</code>
-<code>chvt&nbsp;1</code>
-<code>echo&nbsp;"network&nbsp;--device=link&nbsp;--bootproto=dhcp&nbsp;--noipv6&nbsp;--hostname&nbsp;${hn}.hackernet.se&nbsp;--activate"&nbsp;&gt;&nbsp;/tmp/network.txt</code>
-<code>%end</code></p>
-<p><a href="/Category:Kickstart" title="wikilink">Category:Kickstart</a></p>
+<div class="highlight"><pre><span></span><code>%pre
+#!/bin/sh
+exec&nbsp;&lt;&nbsp;/dev/tty3&nbsp;&gt;&nbsp;/dev/tty3&nbsp;2&gt;&amp;1
+chvt&nbsp;3
+hn=""
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>while&nbsp;[&nbsp;"$hn"&nbsp;==&nbsp;""&nbsp;];&nbsp;do
+&nbsp;clear
+&nbsp;&nbsp;echo&nbsp;"&nbsp;***&nbsp;Please&nbsp;enter&nbsp;the&nbsp;following&nbsp;details:&nbsp;***&nbsp;"
+&nbsp;&nbsp;&nbsp;echo
+&nbsp;&nbsp;&nbsp;&nbsp;read&nbsp;-p&nbsp;"Hostname:&nbsp;"&nbsp;hn
+&nbsp;&nbsp;&nbsp;&nbsp;done
+&nbsp;&nbsp;&nbsp;&nbsp;clear
+&nbsp;&nbsp;&nbsp;&nbsp;chvt&nbsp;1
+&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"network&nbsp;--device=link&nbsp;--bootproto=dhcp&nbsp;--noipv6&nbsp;--hostname&nbsp;${hn}.hackernet.se&nbsp;--activate"&nbsp;&gt;&nbsp;/tmp/network.txt
+%end
+</code></pre></div>
 
 
 
@@ -8908,7 +8942,7 @@
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

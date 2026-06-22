@@ -8735,6 +8735,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9048,7 +9076,7 @@
 
   <h1>OpenVPN</h1>
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a> OpenVPN är öppen källkod.
+<p>OpenVPN är öppen källkod.
 Detta är exempelkonf för remote access med säkerhet i åtanke.
 Två-faktors-autentisering för inlogg samt TLS-autentisering av paketen.
 Tyvärr kan man inte hårdställa TLS-version. CA-certifikatet och
@@ -9057,8 +9085,9 @@ att hålla reda på. Remote access VPN är utmärkt om du vill känna dig som
 hemma var du än befinner dig.</p>
 <h2 id="installation">Installation</h2>
 <p>Med pakethanterare:</p>
-<p><code>apt-get&nbsp;install&nbsp;openvpn</code>
-<code>openvpn&nbsp;--version</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;openvpn
+openvpn&nbsp;--version
+</code></pre></div>
 <p>Road warrior installer.</p>
 <p><code>wget</code><a href="https://git.io/vpn"><code>https://git.io/vpn</code></a><code>|&nbsp;sudo&nbsp;bash</code></p>
 <p>OBS kontrollera det du wgetar innan du pipear till sudo bash.</p>
@@ -9066,92 +9095,110 @@ hemma var du än befinner dig.</p>
 <p>Openvpn är uppdelat i server och klient.</p>
 <h3 id="server">Server</h3>
 <p>En OpenVPN-server måste ha Diffie-Hellman-parametrar.</p>
-<p><code>time&nbsp;openssl&nbsp;dhparam&nbsp;-out&nbsp;dhparam.pem&nbsp;4096</code></p>
+<div class="highlight"><pre><span></span><code>time&nbsp;openssl&nbsp;dhparam&nbsp;-out&nbsp;dhparam.pem&nbsp;4096
+</code></pre></div>
 <p>Servern måste kunna forwarda trafik</p>
-<p><code>echo&nbsp;1&nbsp;&gt;&nbsp;/proc/sys/net/ipv4/ip_forward</code></p>
+<div class="highlight"><pre><span></span><code>echo&nbsp;1&nbsp;&gt;&nbsp;/proc/sys/net/ipv4/ip_forward
+</code></pre></div>
 <p>TLS-autentiseringsnyckeln ska vara samma på servern som klienterna</p>
-<p><code>openvpn&nbsp;--genkey&nbsp;--secret&nbsp;ta.key</code></p>
-<p><code>dev&nbsp;tun</code>
-<code>proto&nbsp;tcp</code>
-<code>server&nbsp;10.8.0.0&nbsp;255.255.255.0</code>
-<code>ifconfig-pool-persist&nbsp;ipp.txt</code></p>
-<p><code>ca&nbsp;[inline]</code>
-<code>cert&nbsp;Server.crt</code>
-<code>key&nbsp;Server.pem</code>
-<code>#auth-</code></p>
-<p><code>dh&nbsp;dhparam.pem</code>
-<code>tls-server</code>
-<code>tls-auth&nbsp;[inline]&nbsp;0</code></p>
-<p><code>keepalive&nbsp;10&nbsp;30</code>
-<code>cipher&nbsp;AES-256-CBC</code>
-<code>user&nbsp;nobody</code>
-<code>group&nbsp;nogroup</code>
-<code>persist-key</code>
-<code>persist-tun</code>
-<code>comp-lzo</code>
-<code>tun-mtu&nbsp;1500</code>
-<code>mssfix&nbsp;1200</code>
-<code>verb&nbsp;3</code></p>
-<p><code>client-to-client</code>
-<code>status&nbsp;openvpn-status.log</code></p>
-<p><code>push&nbsp;"redirect-gateway&nbsp;def1&nbsp;bypass-dhcp"</code>
-<code>push&nbsp;"dhcp-option&nbsp;DNS&nbsp;10.8.0.1"</code></p>
+<div class="highlight"><pre><span></span><code>openvpn&nbsp;--genkey&nbsp;--secret&nbsp;ta.key
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>dev&nbsp;tun
+proto&nbsp;tcp
+server&nbsp;10.8.0.0&nbsp;255.255.255.0
+ifconfig-pool-persist&nbsp;ipp.txt
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ca&nbsp;[inline]
+cert&nbsp;Server.crt
+key&nbsp;Server.pem
+#auth-
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>dh&nbsp;dhparam.pem
+tls-server
+tls-auth&nbsp;[inline]&nbsp;0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>keepalive&nbsp;10&nbsp;30
+cipher&nbsp;AES-256-CBC
+user&nbsp;nobody
+group&nbsp;nogroup
+persist-key
+persist-tun
+comp-lzo
+tun-mtu&nbsp;1500
+mssfix&nbsp;1200
+verb&nbsp;3
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>client-to-client
+status&nbsp;openvpn-status.log
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>push&nbsp;"redirect-gateway&nbsp;def1&nbsp;bypass-dhcp"
+push&nbsp;"dhcp-option&nbsp;DNS&nbsp;10.8.0.1"
+</code></pre></div>
 <p><ca>
-<code>-----BEGIN&nbsp;CERTIFICATE-----</code>
-<code>MIIFjjCCA3agAwIBAgICAQAwDQYJKoZIhvcNAQENBQAwaDELMAkGA1UEBhMCU0Ux</code>
-<code>...</code>
-<code>W45x0oueEpRKlORpP00dSaeAEj9yJCd/0pltmmR92cGVYg==</code>
-<code>-----END&nbsp;CERTIFICATE-----</code>
-</ca></p>
+</ca></p><div class="highlight"><pre><span></span><code>-----BEGIN&nbsp;CERTIFICATE-----
+MIIFjjCCA3agAwIBAgICAQAwDQYJKoZIhvcNAQENBQAwaDELMAkGA1UEBhMCU0Ux
+...
+W45x0oueEpRKlORpP00dSaeAEj9yJCd/0pltmmR92cGVYg==
+-----END&nbsp;CERTIFICATE-----
+</code></pre></div>
+<p></p>
 <p><tls-auth>
-<code>-----BEGIN&nbsp;OpenVPN&nbsp;Static&nbsp;key&nbsp;V1-----</code>
-<code>fae4feae672f9e291a40be76ee408106</code>
-<code>...</code>
-<code>16c46f97c66441da9bcddd2f717672d0</code>
-<code>-----END&nbsp;OpenVPN&nbsp;Static&nbsp;key&nbsp;V1-----</code>
-</tls-auth></p>
+</tls-auth></p><div class="highlight"><pre><span></span><code>-----BEGIN&nbsp;OpenVPN&nbsp;Static&nbsp;key&nbsp;V1-----
+fae4feae672f9e291a40be76ee408106
+...
+16c46f97c66441da9bcddd2f717672d0
+-----END&nbsp;OpenVPN&nbsp;Static&nbsp;key&nbsp;V1-----
+</code></pre></div>
+<p></p>
 <h3 id="klient">Klient</h3>
 <p>Klientkonf som funkar till serverkonfen ovan. Spara conf filen i
-<code>/etc/openvpn/client/</code></p>
-<p><code>client</code>
-<code>dev&nbsp;tun0</code>
-<code>proto&nbsp;udp</code>
-<code>remote&nbsp;vpn.hackernet.se&nbsp;1194</code>
-<code>resolv-retry&nbsp;infinite</code>
-<code>nobind</code></p>
-<p><code>ca&nbsp;[inline]</code>
-<code>cert&nbsp;Klient1.crt</code>
-<code>key&nbsp;Klient1.pem</code>
-<code>auth-user-pass&nbsp;auth.txt</code></p>
-<p><code>tls-client</code>
-<code>tls-auth&nbsp;[inline]&nbsp;1</code>
-<code>verify-x509-name&nbsp;vpn.hackernet.se&nbsp;name</code></p>
-<p><code>keepalive&nbsp;10&nbsp;30</code>
-<code>cipher&nbsp;AES-256-CBC</code>
-<code>auth&nbsp;SHA256</code>
-<code>persist-key</code>
-<code>persist-tun</code>
-<code>comp-lzo</code>
-<code>tun-mtu&nbsp;1500</code>
-<code>mssfix&nbsp;1200</code>
-<code>verb&nbsp;3</code></p>
+</p><div class="highlight"><pre><span></span><code>/etc/openvpn/client/
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>client
+dev&nbsp;tun0
+proto&nbsp;udp
+remote&nbsp;vpn.hackernet.se&nbsp;1194
+resolv-retry&nbsp;infinite
+nobind
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ca&nbsp;[inline]
+cert&nbsp;Klient1.crt
+key&nbsp;Klient1.pem
+auth-user-pass&nbsp;auth.txt
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tls-client
+tls-auth&nbsp;[inline]&nbsp;1
+verify-x509-name&nbsp;vpn.hackernet.se&nbsp;name
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>keepalive&nbsp;10&nbsp;30
+cipher&nbsp;AES-256-CBC
+auth&nbsp;SHA256
+persist-key
+persist-tun
+comp-lzo
+tun-mtu&nbsp;1500
+mssfix&nbsp;1200
+verb&nbsp;3
+</code></pre></div>
 <p><ca>
-<code>-----BEGIN&nbsp;CERTIFICATE-----</code>
-<code>MIIFjjCCA3agAwIBAgICAQAwDQYJKoZIhvcNAQENBQAwaDELMAkGA1UEBhMCU0Ux</code>
-<code>...</code>
-<code>W45x0oueEpRKlORpP00dSaeAEj9yJCd/0pltmmR92cGVYg==</code>
-<code>-----END&nbsp;CERTIFICATE-----</code>
-</ca></p>
+</ca></p><div class="highlight"><pre><span></span><code>-----BEGIN&nbsp;CERTIFICATE-----
+MIIFjjCCA3agAwIBAgICAQAwDQYJKoZIhvcNAQENBQAwaDELMAkGA1UEBhMCU0Ux
+...
+W45x0oueEpRKlORpP00dSaeAEj9yJCd/0pltmmR92cGVYg==
+-----END&nbsp;CERTIFICATE-----
+</code></pre></div>
+<p></p>
 <p><tls-auth>
-<code>-----BEGIN&nbsp;OpenVPN&nbsp;Static&nbsp;key&nbsp;V1-----</code>
-<code>fae4feae672f9e291a40be76ee408106</code>
-<code>...</code>
-<code>16c46f97c66441da9bcddd2f717672d0</code>
-<code>-----END&nbsp;OpenVPN&nbsp;Static&nbsp;key&nbsp;V1-----</code>
-</tls-auth></p>
+</tls-auth></p><div class="highlight"><pre><span></span><code>-----BEGIN&nbsp;OpenVPN&nbsp;Static&nbsp;key&nbsp;V1-----
+fae4feae672f9e291a40be76ee408106
+...
+16c46f97c66441da9bcddd2f717672d0
+-----END&nbsp;OpenVPN&nbsp;Static&nbsp;key&nbsp;V1-----
+</code></pre></div>
+<p></p>
 <h2 id="https">HTTPS</h2>
 <p>OpenVPN och HTTPS kan samsas på samma port.</p>
-<p><a href="/File:Openvpn1.png" title="wikilink"><file:openvpn1.png></file:openvpn1.png></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Openvpn1.png" data-desc-position="bottom"><img alt="Openvpn1.png" src="../../images/Openvpn1.png"></a></p>
 <h2 id="dolja-trafik">Dölja trafik</h2>
 <p>En bra början:
 <a href="https://www.bestvpn.com/blog/5919/how-to-hide-openvpn-traffic-an-introduction/">https://www.bestvpn.com/blog/5919/how-to-hide-openvpn-traffic-an-introduction/</a></p>
@@ -9180,7 +9227,7 @@ hemma var du än befinner dig.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

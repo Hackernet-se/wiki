@@ -8771,6 +8771,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9174,80 +9202,96 @@ non-AED vlan, detta för att snabba upp konvergens vid AED failover.</p>
 <p>Notera att "OTV cannot be configured when MPLS features are enabled on
 the router".</p>
 <p>site bridge-domain är samma sak som site-vlan.</p>
-<p><code>otv&nbsp;site&nbsp;bridge-domain&nbsp;100</code>
-<code>otv&nbsp;site-identifier&nbsp;0000.0000.0101</code></p>
-<p><code>otv&nbsp;isis&nbsp;Overlay1</code>
-<code>log-adjacency-changes</code></p>
+<div class="highlight"><pre><span></span><code>otv&nbsp;site&nbsp;bridge-domain&nbsp;100
+otv&nbsp;site-identifier&nbsp;0000.0000.0101
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>otv&nbsp;isis&nbsp;Overlay1
+&nbsp;log-adjacency-changes
+</code></pre></div>
 <p>Overlay-interface</p>
-<p><code>interface&nbsp;Overlay1</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>otv&nbsp;join-interface&nbsp;GigabitEthernet3</code>
-<code>otv&nbsp;use-adjacency-server&nbsp;10.0.0.10&nbsp;unicast-only</code></p>
-<p><code>service&nbsp;instance&nbsp;200&nbsp;ethernet</code>
-<code>description&nbsp;Test-vlan</code>
-<code>encapsulation&nbsp;dot1q&nbsp;200</code>
-<code>bridge-domain&nbsp;200</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Overlay1
+&nbsp;no&nbsp;ip&nbsp;address
+&nbsp;otv&nbsp;join-interface&nbsp;GigabitEthernet3
+&nbsp;otv&nbsp;use-adjacency-server&nbsp;10.0.0.10&nbsp;unicast-only
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;service&nbsp;instance&nbsp;200&nbsp;ethernet
+&nbsp;&nbsp;description&nbsp;Test-vlan
+&nbsp;&nbsp;encapsulation&nbsp;dot1q&nbsp;200
+&nbsp;&nbsp;bridge-domain&nbsp;200
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;otv&nbsp;site</code>
-<code>show&nbsp;otv&nbsp;adjacency</code>
-<code>show&nbsp;otv&nbsp;overlay&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;otv&nbsp;site
+show&nbsp;otv&nbsp;adjacency
+show&nbsp;otv&nbsp;overlay&nbsp;1
+</code></pre></div>
 <p>Internal interface</p>
-<p><code>interface&nbsp;GigabitEthernet4</code>
-<code>description&nbsp;Internal-interface</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>negotiation&nbsp;auto</code>
-<code>service&nbsp;instance&nbsp;100&nbsp;ethernet</code>
-<code>encapsulation&nbsp;dot1q&nbsp;100</code>
-<code>bridge-domain&nbsp;100</code></p>
-<p><code>service&nbsp;instance&nbsp;200&nbsp;ethernet</code>
-<code>description&nbsp;Test-vlan</code>
-<code>encapsulation&nbsp;dot1q&nbsp;2</code>
-<code>rewrite&nbsp;ingress&nbsp;tag&nbsp;translate&nbsp;1-to-1&nbsp;dot1q&nbsp;200&nbsp;symmetric&nbsp;&nbsp;#VLAN&nbsp;translation&nbsp;2&nbsp;&lt;-&gt;&nbsp;200</code>
-<code>bridge-domain&nbsp;200</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet4
+&nbsp;description&nbsp;Internal-interface
+&nbsp;no&nbsp;ip&nbsp;address
+&nbsp;negotiation&nbsp;auto
+&nbsp;service&nbsp;instance&nbsp;100&nbsp;ethernet
+&nbsp;&nbsp;encapsulation&nbsp;dot1q&nbsp;100
+&nbsp;&nbsp;bridge-domain&nbsp;100
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;service&nbsp;instance&nbsp;200&nbsp;ethernet
+&nbsp;&nbsp;description&nbsp;Test-vlan
+&nbsp;&nbsp;encapsulation&nbsp;dot1q&nbsp;2
+&nbsp;&nbsp;rewrite&nbsp;ingress&nbsp;tag&nbsp;translate&nbsp;1-to-1&nbsp;dot1q&nbsp;200&nbsp;symmetric&nbsp;&nbsp;#VLAN&nbsp;translation&nbsp;2&nbsp;&lt;-&gt;&nbsp;200
+&nbsp;&nbsp;bridge-domain&nbsp;200
+</code></pre></div>
 <p>Det går även att ta in det otaggat.</p>
-<p><code>interface&nbsp;GigabitEthernet2</code>
-<code>service&nbsp;instance&nbsp;201&nbsp;ethernet</code>
-<code>encapsulation&nbsp;untagged</code>
-<code>bridge-domain&nbsp;201</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet2
+&nbsp;service&nbsp;instance&nbsp;201&nbsp;ethernet
+&nbsp;&nbsp;encapsulation&nbsp;untagged
+&nbsp;&nbsp;bridge-domain&nbsp;201
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;otv&nbsp;route</code>
-<code>show&nbsp;otv&nbsp;vlan</code>
-<code>show&nbsp;otv&nbsp;arp-nd-cache</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;otv&nbsp;route
+show&nbsp;otv&nbsp;vlan
+show&nbsp;otv&nbsp;arp-nd-cache
+</code></pre></div>
 <p>AED håller även koll på multicast senders på den lokala siten. Show OTV
 multicast routing table for overlays.</p>
-<p><code>show&nbsp;otv&nbsp;mroute</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;otv&nbsp;mroute
+</code></pre></div>
 <p>Default skickas alla paketen över overlay med DF-biten satt. För att
 tillåta fragmentation of IP packets över overlays måste man slå på det.
 OBS alla edge devices i overlayen bör supportera reassembly in hardware.</p>
-<p><code>otv&nbsp;fragmentation&nbsp;join-interface&nbsp;port-channel&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>otv&nbsp;fragmentation&nbsp;join-interface&nbsp;port-channel&nbsp;1
+</code></pre></div>
 <h3 id="enkapsulering">Enkapsulering</h3>
 <p>I nya versioner av hårdvara/mjukvara kan man välja vilken enkapsulering
 man ska använda, default används
 <a href="/Cisco_GRE" title="wikilink">GRE</a>/<a href="/Cisco_MPLS" title="wikilink">MPLS</a> men nu kan
 man även använda <a href="/Cisco_VXLAN" title="wikilink">UDP/VXLAN</a>. Väljer man den
 VXLAN blir det overhead 50 Bytes per paket.</p>
-<p><code>otv&nbsp;encapsulation-format&nbsp;ip&nbsp;gre&nbsp;|&nbsp;udp</code></p>
+<div class="highlight"><pre><span></span><code>otv&nbsp;encapsulation-format&nbsp;ip&nbsp;gre&nbsp;|&nbsp;udp
+</code></pre></div>
 <h3 id="fhrp">FHRP</h3>
 <p>Om man har en design där båda sidor har FHRP active router måste
 FHRP-paket filtreras så de ej korsar OTVn.</p>
-<p><code>interface&nbsp;Overlay1</code>
-<code>otv&nbsp;filter-fhrp</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Overlay1
+&nbsp;otv&nbsp;filter-fhrp
+</code></pre></div>
 <p>Native-stöd även för NX-OS är planerat, lösning sålänge är att man
 använder VLAN-ACL i kombination med OTV MAC route filter och
 arp-inspection filter (feature dhcp).</p>
 <h1 id="nexus">Nexus</h1>
 <p>OTV är kompatibelt med ett IPv4 transport network.</p>
-<p><code>feature&nbsp;otv</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;otv
+</code></pre></div>
 <p>VLAN</p>
-<p><code>vlan&nbsp;1000</code>
-<code>name&nbsp;OTV-SITE-VLAN</code>
-<code>vlan&nbsp;2000</code>
-<code>name&nbsp;OTV-TEST1</code>
-<code>vlan&nbsp;2001</code>
-<code>name&nbsp;OTV-TEST2</code>
-<code>exit</code></p>
-<p><code>no&nbsp;ip&nbsp;dhcp&nbsp;relay</code>
-<code>no&nbsp;ipv6&nbsp;dhcp&nbsp;relay</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;1000
+&nbsp;name&nbsp;OTV-SITE-VLAN
+vlan&nbsp;2000
+&nbsp;name&nbsp;OTV-TEST1
+vlan&nbsp;2001
+&nbsp;name&nbsp;OTV-TEST2
+exit
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>no&nbsp;ip&nbsp;dhcp&nbsp;relay
+no&nbsp;ipv6&nbsp;dhcp&nbsp;relay
+</code></pre></div>
 <p><strong>Join interface</strong>
 Alla core och core facing L3 interface ska ha stöd för jumbo frames
 eftersom OTV sätter DF-biten i IP-headern på alla control och data plane
@@ -9256,87 +9300,106 @@ kan man konfa flera IP-adresser (secondary) på sina join-interface, då
 kommer OTV att hasha och kunna använda alla IP-adresser som source på
 OTV-enkapsulerade paket. Transportnätverket måste supportera ASM eller
 PIM-Bidir men slå ej på PIM på join interfacet. Exempel, för SSM.</p>
-<p><code>interface&nbsp;po1</code>
-<code>no&nbsp;ip&nbsp;redirects</code>
-<code>ip&nbsp;igmp&nbsp;version&nbsp;3</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;po1
+&nbsp;no&nbsp;ip&nbsp;redirects
+&nbsp;ip&nbsp;igmp&nbsp;version&nbsp;3
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <p><strong>Site VLAN</strong></p>
-<p><code>otv&nbsp;site-vlan&nbsp;1000</code>
-<code>otv&nbsp;site-identifier&nbsp;0x2</code></p>
-<p><code>otv-isis&nbsp;default</code>
-<code>vpn&nbsp;Overlay1</code></p>
-<p><code>interface&nbsp;vlan1000</code>
-<code>no&nbsp;ip&nbsp;redi</code>
-<code>no&nbsp;ipv6&nbsp;redi</code>
-<code>ip&nbsp;add&nbsp;10.1.1.1/30</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>otv&nbsp;site-vlan&nbsp;1000
+otv&nbsp;site-identifier&nbsp;0x2
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>otv-isis&nbsp;default&nbsp;
+&nbsp;vpn&nbsp;Overlay1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;vlan1000
+&nbsp;no&nbsp;ip&nbsp;redi
+&nbsp;no&nbsp;ipv6&nbsp;redi
+&nbsp;ip&nbsp;add&nbsp;10.1.1.1/30
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <p><strong>Overlay</strong>
 The site VLAN must not be extended into the OTV.</p>
-<p><code>int&nbsp;Overlay1</code>
-<code>otv&nbsp;join-interface&nbsp;po1</code>
-<code>otv&nbsp;control-group&nbsp;239.4.4.1</code>
-<code>otv&nbsp;data-group&nbsp;232.8.8.0/26</code>
-<code>otv&nbsp;extended-vlan&nbsp;2000</code>
-<code>otv&nbsp;extended-vlan&nbsp;add&nbsp;2001</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;Overlay1
+&nbsp;otv&nbsp;join-interface&nbsp;po1
+&nbsp;otv&nbsp;control-group&nbsp;239.4.4.1
+&nbsp;otv&nbsp;data-group&nbsp;232.8.8.0/26
+&nbsp;otv&nbsp;extended-vlan&nbsp;2000
+&nbsp;otv&nbsp;extended-vlan&nbsp;add&nbsp;2001
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <p><strong>BFD</strong>
 Man kan köra <a href="/Cisco_BFD" title="wikilink">BFD</a> över site-vlan:et för att
 snabbt upptäcka forwarderingsproblem inom siten.</p>
-<p><code>interface&nbsp;vlan1000</code>
-<code>no&nbsp;ip&nbsp;redirects</code>
-<code>ip&nbsp;address&nbsp;10.1.1.1/30</code></p>
-<p><code>otv&nbsp;site-vlan&nbsp;1000</code>
-<code>otv&nbsp;isis&nbsp;bfd</code></p>
-<p><code>otv-isis&nbsp;default</code>
-<code>track-adjacency-nexthop</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;vlan1000
+&nbsp;no&nbsp;ip&nbsp;redirects
+&nbsp;ip&nbsp;address&nbsp;10.1.1.1/30
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>otv&nbsp;site-vlan&nbsp;1000
+&nbsp;otv&nbsp;isis&nbsp;bfd
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>otv-isis&nbsp;default
+&nbsp;track-adjacency-nexthop
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;otv&nbsp;isis&nbsp;track-adjacency-nexthop</code>
-<code>show&nbsp;bfd&nbsp;neighbors</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;otv&nbsp;isis&nbsp;track-adjacency-nexthop
+show&nbsp;bfd&nbsp;neighbors
+</code></pre></div>
 <p><strong>Static flood</strong>
 Undantag för unknown unicast (t.ex. silent hosts). Broadcast går ej.</p>
-<p><code>otv&nbsp;flood&nbsp;mac&nbsp;0011.2233.4455&nbsp;vlan&nbsp;160</code></p>
-<p><code>otv&nbsp;flood&nbsp;mac&nbsp;FF:FF:FF:FF:FF:FF&nbsp;vlan&nbsp;160</code>
-<em><code>The`` ``flood`` ``mac`` ``can`` ``not`` ``be`` ``a`` ``broadcast`` ``mac.</code></em></p>
+<div class="highlight"><pre><span></span><code>otv&nbsp;flood&nbsp;mac&nbsp;0011.2233.4455&nbsp;vlan&nbsp;160
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>otv&nbsp;flood&nbsp;mac&nbsp;FF:FF:FF:FF:FF:FF&nbsp;vlan&nbsp;160
+</code></pre></div>
+<em><code>The`` ``flood`` ``mac`` ``can`` ``not`` ``be`` ``a`` ``broadcast`` ``mac.</code></em><p></p>
 <p><strong>VLAN Mapping</strong>
 Man kan skriva om VLAN ID:n på frames som gör över tunneln. Detta är
 inte supporterat på Cisco M3- och F3-moduler men man kan då använda
 per-port vlan-översättning (switchport vlan mapping).</p>
-<p><code>interface&nbsp;overlay&nbsp;5</code>
-<code>otv&nbsp;vlan&nbsp;mapping&nbsp;10,14-16&nbsp;to&nbsp;20-21,25,28</code>
-<code>otv&nbsp;extended-vlan&nbsp;10,14-16</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;overlay&nbsp;5
+&nbsp;otv&nbsp;vlan&nbsp;mapping&nbsp;10,14-16&nbsp;to&nbsp;20-21,25,28
+&nbsp;otv&nbsp;extended-vlan&nbsp;10,14-16
+</code></pre></div>
 <p>Show</p>
-<p><code>show&nbsp;otv&nbsp;vlan-mapping</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;otv&nbsp;vlan-mapping
+</code></pre></div>
 <h3 id="loopback-join-interface">Loopback Join Interface</h3>
 <p>Med NX-OS 8 kan man använda ett loopback som join interface, detta gör
 att man kan ha multipla routade upplänkar till sitt multicast core.
 Upplänkar och loopback ska köra PIM för att detta ska funka. Unicast
 (Adjacency Server) stöds inte med denna typ av join interface.</p>
-<p><code>feature&nbsp;pim</code></p>
-<p><code>interface&nbsp;loopback1</code>
-<code>ip&nbsp;address&nbsp;10.10.10.2/32</code>
-<code>ip&nbsp;router&nbsp;ospf&nbsp;100&nbsp;area&nbsp;0.0.0.0</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code></p>
-<p><code>interface&nbsp;Overlay1</code>
-<code>otv&nbsp;join-interface&nbsp;loopback1</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;pim
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;loopback1
+&nbsp;ip&nbsp;address&nbsp;10.10.10.2/32
+&nbsp;ip&nbsp;router&nbsp;ospf&nbsp;100&nbsp;area&nbsp;0.0.0.0
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Overlay1
+&nbsp;otv&nbsp;join-interface&nbsp;loopback1
+</code></pre></div>
 <h3 id="pvlan">PVLAN</h3>
 <p>I nyare releaser av NX-OS kan man sträcka <a href="/Cisco_VLAN#Private_VLAN" title="wikilink">Private
 VLAN</a> över OTV och därmed behålla
 segmenteringen.</p>
-<p><code>feature&nbsp;pvlan</code></p>
-<p><code>vlan&nbsp;100</code>
-<code>private-vlan&nbsp;primary</code>
-<code>private-vlan&nbsp;association&nbsp;101-103</code>
-<code>vlan&nbsp;101</code>
-<code>private-vlan&nbsp;community</code>
-<code>vlan&nbsp;102</code>
-<code>private-vlan&nbsp;community</code>
-<code>vlan&nbsp;103</code>
-<code>private-vlan&nbsp;isolated</code></p>
-<p><code>interface&nbsp;overlay&nbsp;1</code>
-<code>otv&nbsp;extend-vlan&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;pvlan
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;100
+&nbsp;&nbsp;&nbsp;private-vlan&nbsp;primary
+&nbsp;&nbsp;&nbsp;private-vlan&nbsp;association&nbsp;101-103
+vlan&nbsp;101
+&nbsp;&nbsp;&nbsp;private-vlan&nbsp;community
+vlan&nbsp;102
+&nbsp;&nbsp;&nbsp;private-vlan&nbsp;community
+vlan&nbsp;103
+&nbsp;&nbsp;&nbsp;private-vlan&nbsp;isolated
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;overlay&nbsp;1
+&nbsp;&nbsp;&nbsp;otv&nbsp;extend-vlan&nbsp;100
+</code></pre></div>
 <p>Show</p>
-<p><code>show&nbsp;otv&nbsp;vlan&nbsp;private-vlan</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;otv&nbsp;vlan&nbsp;private-vlan
+</code></pre></div>
 
 
 
@@ -9359,7 +9422,7 @@ segmenteringen.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

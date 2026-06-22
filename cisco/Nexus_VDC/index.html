@@ -8715,6 +8715,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9034,19 +9062,22 @@ om VDC creation, resource allocation, NX-OS upgrade,
 <a href="/Cisco_SPAN#Ethanalyzer" title="wikilink">Ethanalyzer</a>, System wide
 <a href="/Cisco_QoS" title="wikilink">QoS</a>, Port Channel load balancing hash,
 <a href="/Cisco_IOS#EEM" title="wikilink">EEM</a> applets. Inga line cards tillåtna.</p>
-<p><code>conf</code>
-<code>system&nbsp;admin-vdc</code></p>
+<div class="highlight"><pre><span></span><code>conf
+system&nbsp;admin-vdc
+</code></pre></div>
 <p>Skapa VDC</p>
 <p><code>vdc</code><name><code>id&nbsp;2</code>
-<code>cpu-share&nbsp;10</code>
-<code>allocate&nbsp;interface&nbsp;Ethernet1/1-8</code>
-<code>boot-order&nbsp;1</code>
-<code>limit-resource&nbsp;vlan&nbsp;minimum&nbsp;512&nbsp;maximum&nbsp;4094</code></name></p>
-<p><code>vdc&nbsp;VDC3&nbsp;id&nbsp;3</code>
-<code>cpu-share&nbsp;10</code>
-<code>allocate&nbsp;interface&nbsp;Ethernet2/1-8</code>
-<code>boot-order&nbsp;2</code>
-<code>limit-resource&nbsp;vlan&nbsp;minimum&nbsp;512&nbsp;maximum&nbsp;4094</code></p>
+</name></p><div class="highlight"><pre><span></span><code>&nbsp;cpu-share&nbsp;10
+&nbsp;allocate&nbsp;interface&nbsp;Ethernet1/1-8
+&nbsp;boot-order&nbsp;1
+&nbsp;limit-resource&nbsp;vlan&nbsp;minimum&nbsp;512&nbsp;maximum&nbsp;4094
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>vdc&nbsp;VDC3&nbsp;id&nbsp;3
+&nbsp;cpu-share&nbsp;10
+&nbsp;allocate&nbsp;interface&nbsp;Ethernet2/1-8
+&nbsp;boot-order&nbsp;2
+&nbsp;limit-resource&nbsp;vlan&nbsp;minimum&nbsp;512&nbsp;maximum&nbsp;4094
+</code></pre></div>
 <p>Notera att ändringar av en VDC är disruptive. Man kan inte heller
 allokera enskilda interface till en VDC utan man allokerar en (eller
 flera) interface-range. Vilka interface som kan ingå i en range avgörs
@@ -9056,52 +9087,64 @@ NX-OS korrigera det automatiskt. Man kan alltså råka sno interface ifrån
 en annan VDC om man inte tänker sig för.</p>
 <p>Hoppa mellan VDC:ers CLI.</p>
 <p><code>switchto&nbsp;vdc</code><namn>
-<code>switchback</code></namn></p>
+</namn></p><div class="highlight"><pre><span></span><code>switchback
+</code></pre></div><p></p>
 <p>Alias</p>
-<p><code>cli&nbsp;alias&nbsp;name&nbsp;changeto&nbsp;switchto&nbsp;vdc</code></p>
+<div class="highlight"><pre><span></span><code>cli&nbsp;alias&nbsp;name&nbsp;changeto&nbsp;switchto&nbsp;vdc
+</code></pre></div>
 <p>Default visas VDC hostname som <admin-vdc>-<vdc-name>, detta går att
 stänga av.</vdc-name></admin-vdc></p>
-<p><code>no&nbsp;vdc&nbsp;combined-hostname</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;vdc&nbsp;combined-hostname&nbsp;
+</code></pre></div>
 <h3 id="high-availability">High Availability</h3>
 <p>Man kan konfa vad som ska hända om en VDC kraschar. Man kan ha olika
 settings för single kontra dual supervisor. Det man kan välja på är
 RESTART vdc, BRINGDOWN vdc, RELOAD supervisor, SWITCHOVER to standby
 supervisor.</p>
-<p><code>ha-policy&nbsp;single-sup&nbsp;bringdown&nbsp;dual-sup&nbsp;switchover</code></p>
+<div class="highlight"><pre><span></span><code>ha-policy&nbsp;single-sup&nbsp;bringdown&nbsp;dual-sup&nbsp;switchover
+</code></pre></div>
 <h3 id="verify">Verify</h3>
-<p><code>show&nbsp;vdc</code>
-<code>show&nbsp;vdc&nbsp;resource</code>
-<code>show&nbsp;vdc&nbsp;membership</code>
-<code>copy&nbsp;running-config&nbsp;startup-config&nbsp;vdc-all</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;vdc
+show&nbsp;vdc&nbsp;resource
+show&nbsp;vdc&nbsp;membership
+copy&nbsp;running-config&nbsp;startup-config&nbsp;vdc-all
+</code></pre></div>
 <p>Notera att det finns en VDC med ID 0, den används endast som en
 container för interface som inte får vara med i någon annan VDC.</p>
 <p>Nexus är en switch men varje VLAN representeras internt av en bridge
 domain. Detta gör att flera VDC:er kan deploya VLAN med samma ID.</p>
-<p><code>show&nbsp;vlan&nbsp;internal&nbsp;bd-info&nbsp;vlan-to-bd&nbsp;all-vlan</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;vlan&nbsp;internal&nbsp;bd-info&nbsp;vlan-to-bd&nbsp;all-vlan
+</code></pre></div>
 <p>Har man för lite ström för att klara ett PSU-bortfall startas inte alla
 linjekort, <em>show module</em> säger "pwr-denied". Man kan ändra detta
 beteende för att stänga av redundans.</p>
-<p><code>power&nbsp;redundancy-mode&nbsp;combined</code></p>
+<div class="highlight"><pre><span></span><code>power&nbsp;redundancy-mode&nbsp;combined
+</code></pre></div>
 <h3 id="routing-tables">Routing tables</h3>
 <p>Man kan styra hur mycket minne en VDC minimum och maximum får till IPv4
 och IPv6 unicast och multicast routes.</p>
-<p><code>vdc&nbsp;VDC3</code>
-<code>limit-resource&nbsp;u4route-mem&nbsp;minimum&nbsp;2&nbsp;maximum&nbsp;100</code></p>
-<p><code>show&nbsp;vdc&nbsp;resource&nbsp;u4route-mem&nbsp;detail</code></p>
+<div class="highlight"><pre><span></span><code>vdc&nbsp;VDC3
+&nbsp;limit-resource&nbsp;u4route-mem&nbsp;minimum&nbsp;2&nbsp;maximum&nbsp;100
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;vdc&nbsp;resource&nbsp;u4route-mem&nbsp;detail
+</code></pre></div>
 <p>Man ska såklart monitorera hur mycket resurser sina VDC:er använder men
 man kan också kolla hur mycket minne som behövs för en viss mängd
 routes.</p>
-<p><code>show&nbsp;routing&nbsp;ip&nbsp;unicast&nbsp;memory&nbsp;estimate&nbsp;routes&nbsp;100000&nbsp;next-hops&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;routing&nbsp;ip&nbsp;unicast&nbsp;memory&nbsp;estimate&nbsp;routes&nbsp;100000&nbsp;next-hops&nbsp;2
+</code></pre></div>
 <h3 id="storage-vdc">Storage VDC</h3>
 <p>Man kan använda en Storage VDC för att köra Ethernet och FCoE i samma
 switch.</p>
-<p><code>license&nbsp;fcoe&nbsp;module&nbsp;2</code></p>
-<p><code>system&nbsp;qos</code>
-<code>service-policy&nbsp;type&nbsp;network-qos&nbsp;default-nq-7e-4q8q-policy</code></p>
-<p><code>vdc&nbsp;SAN&nbsp;type&nbsp;storage</code>
-<code>allocate&nbsp;interface&nbsp;e2/1-8</code>
-<code>allocate&nbsp;fcoe-vlan-range&nbsp;100-101</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>license&nbsp;fcoe&nbsp;module&nbsp;2
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>system&nbsp;qos
+&nbsp;service-policy&nbsp;type&nbsp;network-qos&nbsp;default-nq-7e-4q8q-policy
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>vdc&nbsp;SAN&nbsp;type&nbsp;storage
+&nbsp;allocate&nbsp;interface&nbsp;e2/1-8
+&nbsp;allocate&nbsp;fcoe-vlan-range&nbsp;100-101
+</code></pre></div>
 
 
 
@@ -9124,7 +9167,7 @@ switch.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

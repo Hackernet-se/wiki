@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8845,50 +8873,65 @@
 men finns även till <a href="http://zfsonlinux.org/">Linux</a>.</p>
 <h1 id="installation">Installation</h1>
 <p><em>Ubuntu 16.04 onwards</em></p>
-<p><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;zfs</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;zfs
+</code></pre></div>
 <p><em>Fedora</em></p>
 <p><code>sudo&nbsp;dnf&nbsp;install&nbsp;--nogpgcheck</code>[<code>http://archive.zfsonlinux.org/fedora/zfs-release$(rpm</code>](http://archive.zfsonlinux.org/fedora/zfs-release$(rpm)<code>-E&nbsp;%dist).noarch.rpm</code>
-<code>sudo&nbsp;dnf&nbsp;install&nbsp;kernel-devel&nbsp;zfs</code>
-<code>sudo&nbsp;/sbin/modprobe&nbsp;zfs</code></p>
+</p><div class="highlight"><pre><span></span><code>sudo&nbsp;dnf&nbsp;install&nbsp;kernel-devel&nbsp;zfs&nbsp;
+sudo&nbsp;/sbin/modprobe&nbsp;zfs
+</code></pre></div><p></p>
 <p><em>Debian</em></p>
-<p><code>su&nbsp;-</code>
-<code>apt-get&nbsp;install&nbsp;lsb-release</code>
+<p></p><div class="highlight"><pre><span></span><code>su&nbsp;-
+apt-get&nbsp;install&nbsp;lsb-release
+</code></pre></div>
 <code>wget</code><a href="http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_6_all.deb"><code>http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_6_all.deb</code></a>
-<code>dpkg&nbsp;-i&nbsp;zfsonlinux_6_all.deb</code>
-<code>apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;install&nbsp;debian-zfs</code></p>
+<div class="highlight"><pre><span></span><code>dpkg&nbsp;-i&nbsp;zfsonlinux_6_all.deb
+apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;apt-get&nbsp;install&nbsp;debian-zfs
+</code></pre></div><p></p>
 <h1 id="konfiguration">Konfiguration</h1>
 <h3 id="pool">Pool</h3>
-<p><code>zpool&nbsp;create&nbsp;POOL&nbsp;raidz1&nbsp;\</code>
-<code>/dev/disk/by-id/ata-WDC_WD..&nbsp;\</code>
-<code>/dev/disk/by-id/ata-WDC_WD..&nbsp;\</code>
-<code>/dev/disk/by-id/ata-WDC_WD..&nbsp;\</code>
-<code>-o&nbsp;ashift=12&nbsp;-o&nbsp;failmode=continue</code></p>
+<div class="highlight"><pre><span></span><code>zpool&nbsp;create&nbsp;POOL&nbsp;raidz1&nbsp;\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/dev/disk/by-id/ata-WDC_WD..&nbsp;\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/dev/disk/by-id/ata-WDC_WD..&nbsp;\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/dev/disk/by-id/ata-WDC_WD..&nbsp;\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-o&nbsp;ashift=12&nbsp;-o&nbsp;failmode=continue
+</code></pre></div>
 <p>Lägg till -f om det inte finns någon EFI label.</p>
-<p><code>zfs&nbsp;set&nbsp;atime=off&nbsp;POOL</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;zfs&nbsp;set&nbsp;atime=off&nbsp;POOL
+</code></pre></div>
 <p>Show-kommandon.</p>
-<p><code>zpool&nbsp;list</code>
-<code>zpool&nbsp;status</code>
-<code>zfs&nbsp;get&nbsp;all</code>
-<code>zpool&nbsp;iostat&nbsp;-v&nbsp;POOL</code></p>
+<div class="highlight"><pre><span></span><code>zpool&nbsp;list
+zpool&nbsp;status
+zfs&nbsp;get&nbsp;all
+zpool&nbsp;iostat&nbsp;-v&nbsp;POOL
+</code></pre></div>
 <p>Radera en pool.</p>
-<p><code>zpool&nbsp;destroy&nbsp;POOL</code></p>
+<div class="highlight"><pre><span></span><code>zpool&nbsp;destroy&nbsp;POOL
+</code></pre></div>
 <p>Återställ raderad pool.</p>
-<p><code>zpool&nbsp;import&nbsp;-D&nbsp;POOL</code></p>
+<div class="highlight"><pre><span></span><code>zpool&nbsp;import&nbsp;-D&nbsp;POOL
+</code></pre></div>
 <h3 id="mount-point">Mount point</h3>
-<p><code>zfs&nbsp;set&nbsp;mountpoint=/path/pool&nbsp;POOL</code>
-<code>chown&nbsp;-R&nbsp;user:user&nbsp;/path/pool</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;set&nbsp;mountpoint=/path/pool&nbsp;POOL
+chown&nbsp;-R&nbsp;user:user&nbsp;/path/pool
+</code></pre></div>
 <h3 id="dataset">Dataset</h3>
-<p><code>zfs&nbsp;create&nbsp;POOL/test</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;create&nbsp;POOL/test
+</code></pre></div>
 <p>Kompression.</p>
-<p><code>zfs&nbsp;set&nbsp;compression=on&nbsp;POOL/test</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;set&nbsp;compression=on&nbsp;POOL/test
+</code></pre></div>
 <p>Deduplicering.</p>
-<p><code>zfs&nbsp;set&nbsp;dedup=on&nbsp;POOL/test</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;set&nbsp;dedup=on&nbsp;POOL/test
+</code></pre></div>
 <p>Radera dataset.</p>
-<p><code>zfs&nbsp;destroy&nbsp;POOL/test</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;destroy&nbsp;POOL/test
+</code></pre></div>
 <h3 id="l2arc">L2ARC</h3>
 <p>Level 2 Adjustable Replacement Cache (L2ARC), är en utökning av den read
 cache (ARC) som finns i RAM.</p>
-<p><code>zpool&nbsp;add&nbsp;-f&nbsp;POOL&nbsp;cache&nbsp;sdf</code></p>
+<div class="highlight"><pre><span></span><code>zpool&nbsp;add&nbsp;-f&nbsp;POOL&nbsp;cache&nbsp;sdf
+</code></pre></div>
 <h3 id="zil-slog">ZIL &amp; SLOG</h3>
 <p>ZFS Intent Log (ZIL) går att likna vid journalen i ett journalförande
 filsystem. Synkrona skrivningar skrivs alltid till ZIL först och flushas
@@ -8898,11 +8941,13 @@ ZIL är ingen write cache utan används enbart som ett skydd mot
 dataförlust, den enda prestandaökningen rör synkrona skrivningar som
 utan en SLOG hade skrivits två gånger till samma disk då ZIL befunnit
 sig inuti den pool dit data skrivs.</p>
-<p><code>zpool&nbsp;add&nbsp;-f&nbsp;POOL&nbsp;log&nbsp;sdg</code></p>
+<div class="highlight"><pre><span></span><code>zpool&nbsp;add&nbsp;-f&nbsp;POOL&nbsp;log&nbsp;sdg
+</code></pre></div>
 <p>Om man är extra rädd om sin data kan man tvinga alla skrivningar att gå
 genom ZIL med kommandot nedan. Det går att ställa på enskilda dataset
 eller hela pooler om så önskas.</p>
-<p><code>zfs&nbsp;set&nbsp;sync=always&nbsp;POOL/test</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;set&nbsp;sync=always&nbsp;POOL/test
+</code></pre></div>
 <p>Det går även att stänga av ZIL helt om man inte bryr sig om
 dataintegritet (samma syntax som ovan fast disable istället för always,
 standard är default).</p>
@@ -8913,21 +8958,27 @@ eventuella fel på diskarna i din pool. Detta sker inte per automatik
 utan måste triggas, cronjob rekommenderas starkt. Rekommendationen som
 finns för frekvens av scrubbing på Solaris för enterprise- och
 konsumentdiskar är en gång i månaden resp. en gång i veckan.</p>
-<p><code>zpool&nbsp;scrub</code></p>
+<div class="highlight"><pre><span></span><code>zpool&nbsp;scrub
+</code></pre></div>
 <p><em>IO intensive</em></p>
 <h3 id="snapshots">Snapshots</h3>
 <p>Snapshot kan tas både på pools och datasets, varje snapshot kräver ett
 unikt namn.</p>
 <p>Dataset snapshot.</p>
-<p><code>zfs&nbsp;snapshot&nbsp;POOL/test@NAME</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;snapshot&nbsp;POOL/test@NAME
+</code></pre></div>
 <p>Pool snapshot.</p>
-<p><code>zfs&nbsp;snapshot&nbsp;POOL@NAME</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;snapshot&nbsp;POOL@NAME
+</code></pre></div>
 <p>Lista snapshots.</p>
-<p><code>zfs&nbsp;list&nbsp;-t&nbsp;snapshot</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;list&nbsp;-t&nbsp;snapshot
+</code></pre></div>
 <p>Rollback till snapshot.</p>
-<p><code>zfs&nbsp;rollback&nbsp;POOL/test@NAME</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;rollback&nbsp;POOL/test@NAME
+</code></pre></div>
 <p>Ta bort snapshot.</p>
-<p><code>zfs&nbsp;destroy&nbsp;POOL/test@NAME</code></p>
+<div class="highlight"><pre><span></span><code>zfs&nbsp;destroy&nbsp;POOL/test@NAME
+</code></pre></div>
 <p><strong>Automatiska snapshots</strong>
 Det finns ett antal olika paket/skript för att sköta automatisering av
 snapshots för ZFS. Här beskrivs användning av det cron-baserade
@@ -8963,7 +9014,8 @@ automatiskt. Om disk-ID används för att referera till diskarna i poolen
 måste dock den nya disken specificeras med sin path. Poolens namn på
 disken ändras då disken är frånvarande, för att ta reda på vad <em>disk1</em>
 heter istället används i vanlig ordning <code>zpool status</code>.</p>
-<p><code>zpool&nbsp;replace&nbsp;POOL&nbsp;disk1&nbsp;disk2</code></p>
+<div class="highlight"><pre><span></span><code>zpool&nbsp;replace&nbsp;POOL&nbsp;disk1&nbsp;disk2
+</code></pre></div>
 <p>Får du ett felmeddelande som säger "<em>disk2</em> does not contain an EFI
 label but it may contain partition information in the MBR" bör det räcka
 att skapa en GPT-tabell på disken med t ex. parted. Vänta på att
@@ -8975,12 +9027,13 @@ resilvering körs färdigt, kolla status med <code>zpool status</code>.</p>
 finns en enkel lösning, helt utan dataförlust. Gör såhär:</p>
 <p>Exportera din pool, poolen tas nu bort från systemet i förberedelse för
 "flytten".</p>
-<p><code>zpool&nbsp;export&nbsp;POOL</code></p>
+<div class="highlight"><pre><span></span><code>zpool&nbsp;export&nbsp;POOL
+</code></pre></div>
 <p>Importera poolen från /dev/disk/by-id.</p>
-<p><code>zpool&nbsp;import&nbsp;-d&nbsp;/dev/disk/by-id&nbsp;POOL</code></p>
+<div class="highlight"><pre><span></span><code>zpool&nbsp;import&nbsp;-d&nbsp;/dev/disk/by-id&nbsp;POOL
+</code></pre></div>
 <p>Verifiera att poolen är tillbaks och att diskarna i poolen refereras med
 sitt ID istället för "sdX" med <code>zpool status</code>.</p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
 
 
 
@@ -9003,7 +9056,7 @@ sitt ID istället för "sdX" med <code>zpool status</code>.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

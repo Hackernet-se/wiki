@@ -8693,6 +8693,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8968,48 +8996,56 @@ Linuxmaskin till switchportar. Se även <a href="/Open_vSwitch" title="wikilink"
 vSwitch</a> och <a href="/Iproute2#VXLAN" title="wikilink">Linux
 VXLAN</a>.</p>
 <h2 id="installation">Installation</h2>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;bridge-utils</code>
-<code>sudo&nbsp;yum&nbsp;install&nbsp;bridge-utils</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;bridge-utils
+sudo&nbsp;yum&nbsp;install&nbsp;bridge-utils
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
-<p><code>ifconfig&nbsp;eth0&nbsp;0.0.0.0</code>
-<code>ifconfig&nbsp;eth1&nbsp;0.0.0.0</code>
-<code>brctl&nbsp;addbr&nbsp;bridge1</code>
-<code>brctl&nbsp;addif&nbsp;bridge1&nbsp;eth0&nbsp;eth1</code>
-<code>brctl&nbsp;show</code></p>
-<p><code>brctl&nbsp;delif&nbsp;bridge1&nbsp;eth0</code></p>
+<div class="highlight"><pre><span></span><code>ifconfig&nbsp;eth0&nbsp;0.0.0.0
+ifconfig&nbsp;eth1&nbsp;0.0.0.0
+brctl&nbsp;addbr&nbsp;bridge1
+brctl&nbsp;addif&nbsp;bridge1&nbsp;eth0&nbsp;eth1
+brctl&nbsp;show
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>brctl&nbsp;delif&nbsp;bridge1&nbsp;eth0
+</code></pre></div>
 <p><strong>/etc/network/interfaces</strong></p>
-<p><code>auto&nbsp;bridge</code>
-<code>iface&nbsp;bridge</code>
-<code>bridge-vlan-aware&nbsp;yes</code>
-<code>bridge-ports&nbsp;eth0&nbsp;eth1&nbsp;eth7</code>
-<code>bridge-vids&nbsp;3&nbsp;4&nbsp;6-10&nbsp;&nbsp;&nbsp;#allowed&nbsp;vlan</code>
-<code>bridge-pvid&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#native&nbsp;vlan</code>
-<code>bridge_waitport&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#portfast</code>
-<code>bridge-stp&nbsp;on</code>
-<code>mstpctl-treeprio&nbsp;20480</code></p>
+<div class="highlight"><pre><span></span><code>auto&nbsp;bridge
+iface&nbsp;bridge
+&nbsp;bridge-vlan-aware&nbsp;yes
+&nbsp;bridge-ports&nbsp;eth0&nbsp;eth1&nbsp;eth7
+&nbsp;bridge-vids&nbsp;3&nbsp;4&nbsp;6-10&nbsp;&nbsp;&nbsp;#allowed&nbsp;vlan
+&nbsp;bridge-pvid&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#native&nbsp;vlan
+&nbsp;bridge_waitport&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#portfast
+&nbsp;bridge-stp&nbsp;on
+&nbsp;mstpctl-treeprio&nbsp;20480
+</code></pre></div>
 <p><strong>VLAN</strong></p>
-<p><code>aptitude&nbsp;install&nbsp;vlan&nbsp;ifenslave</code>
-<code>echo&nbsp;"8021q"&nbsp;&gt;&gt;&nbsp;/etc/modules</code></p>
+<div class="highlight"><pre><span></span><code>aptitude&nbsp;install&nbsp;vlan&nbsp;ifenslave
+echo&nbsp;"8021q"&nbsp;&gt;&gt;&nbsp;/etc/modules
+</code></pre></div>
 <p><strong>Spanning-Tree</strong></p>
-<p><code>sudo&nbsp;brctl&nbsp;stp&nbsp;bridge1&nbsp;on</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;brctl&nbsp;stp&nbsp;bridge1&nbsp;on&nbsp;
+</code></pre></div>
 <p><strong>/etc/network/interfaces</strong></p>
-<p><code>auto&nbsp;bond0</code>
-<code>iface&nbsp;bond0&nbsp;inet&nbsp;manual</code>
-<code>up&nbsp;ifconfig&nbsp;bond0&nbsp;0.0.0.0&nbsp;up</code>
-<code>slaves&nbsp;eth0&nbsp;eth1</code>
-<code>bond-mode&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#bond-mode&nbsp;4&nbsp;=&nbsp;802.3ad</code>
-<code>bond-miimon&nbsp;100</code>
-<code>bond-downdelay&nbsp;200</code>
-<code>bond-updelay&nbsp;200</code>
-<code>bond-lacp-rate&nbsp;1</code>
-<code>bond-xmit-hash-policy&nbsp;layer2+3</code></p>
+<div class="highlight"><pre><span></span><code>auto&nbsp;bond0
+iface&nbsp;bond0&nbsp;inet&nbsp;manual
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;up&nbsp;ifconfig&nbsp;bond0&nbsp;0.0.0.0&nbsp;up
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slaves&nbsp;eth0&nbsp;eth1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bond-mode&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#bond-mode&nbsp;4&nbsp;=&nbsp;802.3ad
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bond-miimon&nbsp;100
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bond-downdelay&nbsp;200
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bond-updelay&nbsp;200
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bond-lacp-rate&nbsp;1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bond-xmit-hash-policy&nbsp;layer2+3
+</code></pre></div>
 <p>Kolla packet</p>
-<p><code>cat&nbsp;/proc/net/bonding/bond0</code></p>
+<div class="highlight"><pre><span></span><code>cat&nbsp;/proc/net/bonding/bond0
+</code></pre></div>
 <h3 id="mac-table">MAC Table</h3>
 <p>Man kan kolla MAC-tabellen på en brygga med följande kommando:</p>
-<p><code>brctl&nbsp;show</code>
-<code>brctl&nbsp;showmacs</code><bridge_name></bridge_name></p>
-<p><a href="/Category:Network" title="wikilink">Category:Network</a></p>
+<p></p><div class="highlight"><pre><span></span><code>brctl&nbsp;show
+</code></pre></div>
+<code>brctl&nbsp;showmacs</code><bridge_name><p></p></bridge_name>
 
 
 
@@ -9032,7 +9068,7 @@ VXLAN</a>.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

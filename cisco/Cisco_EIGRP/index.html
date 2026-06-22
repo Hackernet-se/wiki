@@ -9021,6 +9021,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9699,11 +9727,14 @@ multicast-sekvensering och IOS-version.</p>
     minuter:</li>
 </ul>
 <p><code>timers&nbsp;active-time</code><minutes>
-<code>show&nbsp;eigrp&nbsp;protocols&nbsp;|&nbsp;i&nbsp;Active</code></minutes></p>
+</minutes></p><div class="highlight"><pre><span></span><code>show&nbsp;eigrp&nbsp;protocols&nbsp;|&nbsp;i&nbsp;Active
+</code></pre></div><p></p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;eigrp&nbsp;traffic</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;traffic
+</code></pre></div>
 <p>Default får 50% av interfacebandbredden användas för EIGRP-trafik.</p>
-<p><code>ip&nbsp;bandwidth-percent&nbsp;eigrp&nbsp;100&nbsp;50</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;bandwidth-percent&nbsp;eigrp&nbsp;100&nbsp;50
+</code></pre></div>
 <h1 id="path-selection">Path Selection</h1>
 <p><strong>Computed Distance:</strong> den totala metricen för att nå destination via en
 särskild granne, dvs reported distance från granne plus distance till
@@ -9731,9 +9762,11 @@ condition.</p>
 <p><strong>Feasible Successor:</strong> alternativa (inte de bästa) routes som uppfyller
 feasibility condition. EIGRP får använda dessa men gör inte det default.</p>
 <p>Kolla CD, FD och RD.</p>
-<p><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology
+</code></pre></div>
 <p>Kolla grannar som inte uppfyller feasibility condition.</p>
-<p><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology&nbsp;all-links</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology&nbsp;all-links
+</code></pre></div>
 <h3 id="dual">DUAL</h3>
 <p>När EIGRP tappar en successor kollas det genast i topologitabellen efter
 en Feasible Successor. Finns det en blir den successor och det meddelas
@@ -9747,12 +9780,15 @@ fråga svarar den direkt med metric satt till inifinty. En route är aktiv
 tills alla har svarat. Det bästa sättet att lösa Stuck-in-Active problem
 är en strukturerad IP-plan för att kunna summera manuellt så mycket som
 möjligt. Ju mer summering ju mindre måste EIGRP jobba vid konvergens.</p>
-<p><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology&nbsp;active</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology&nbsp;active
+</code></pre></div>
 <p>Stuck in active?</p>
-<p><code>debug&nbsp;eigrp&nbsp;packet&nbsp;terse</code></p>
+<div class="highlight"><pre><span></span><code>debug&nbsp;eigrp&nbsp;packet&nbsp;terse
+</code></pre></div>
 <p>Med named mode kan slå graceful restart för stuck-in-active neighbors.</p>
-<p><code>address-family&nbsp;ipv4&nbsp;as&nbsp;100</code>
-<code>soft-sia</code></p>
+<div class="highlight"><pre><span></span><code>address-family&nbsp;ipv4&nbsp;as&nbsp;100
+&nbsp;soft-sia
+</code></pre></div>
 <h2 id="metrics">Metrics</h2>
 <p>EIGRP använder flera typer av metrics, så kallade <em>component metrics</em>.
 De klassiska är bandwidth, load, delay, reliability, MTU och hop count.
@@ -9768,15 +9804,17 @@ samt vidareannonsering. På så sätt känner man till den lägsta
 bandbredden längs vägen. Det är inte rekommenderat att påverka path
 selection med hjälp av manuell bandwidth-konfiguration i
 produktionsmiljö!</p>
-<p><code>interface&nbsp;gi0/3</code>
-<code>bandwidth</code><kbps></kbps></p>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;gi0/3
+</code></pre></div>
+<code>bandwidth</code><kbps><p></p>
 <p><strong>Load:</strong> är ett dynamiskt värde som IOS sätter på interface. Eftersom
 ingress och egress kan vara olika lastade hålls två skilda värden för
 detta. För att räkna på detta till composite metric används högsta
 Txload, routern jämför värdet den får in med sin Txload på det
 interfacet och väljer det högre värdet. Det triggas ingen uppdatering
 ifall load plötsligt skulle ändras. Denna metric används ej default.</p>
-<p><code>show&nbsp;interface&nbsp;gi0/3&nbsp;|&nbsp;i&nbsp;load</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;interface&nbsp;gi0/3&nbsp;|&nbsp;i&nbsp;load
+</code></pre></div>
 <p><strong>Delay:</strong> är en statisk metric som sätts per interface med
 <em>delay</em>-kommandot. Detta är inget som dynamiskt ändras, t.ex. utifrån
 paketstorlek, utan är en uppskattning av genomsnittlig fördröjning.
@@ -9788,9 +9826,11 @@ all delay längs vägen adderas ihop. Med klassisk metric kan detta ha
 detta kan man annonsera ut unreachable network. Det är så man löser
 Split Horizon with Poisoned Revered och withdrawing a route, man skickar
 det med delay 167772215 tiotal mikrosekunder.</p>
-<p><code>interface&nbsp;gi0/3</code>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;gi0/3
+</code></pre></div>
 <code>delay</code><tens of="" microseconds="">
-<code>show&nbsp;interface&nbsp;gi0/3&nbsp;|&nbsp;i&nbsp;DLY</code></tens></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;interface&nbsp;gi0/3&nbsp;|&nbsp;i&nbsp;DLY
+</code></pre></div><p></p>
 <p>OBS Output är i microseconds.</p>
 <p><strong>Reliability:</strong> är ett dynamiskt värde som IOS sätter på interface. 255
 är högsta och betyder 100% reliability. Detta skickas med i
@@ -9798,7 +9838,8 @@ EIGRP-paketen och det lägsta värdet är det som gäller till composite
 metric, dvs man jämför värdet man får in med det man själv har på det
 interfacet. Dock triggas ingen uppdatering ifall reliability plötsligt
 skulle ändras. Denna metric används ej default.</p>
-<p><code>show&nbsp;interface&nbsp;gi0/3&nbsp;|&nbsp;i&nbsp;reliability</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;interface&nbsp;gi0/3&nbsp;|&nbsp;i&nbsp;reliability
+</code></pre></div>
 <p><strong>MTU</strong> skickas med i EIGRP-paketen men används ej på något sätt.</p>
 <p><strong>Hop Count:</strong> används som en säkerhetsmekanism. Går hop count över 100
 (default) så är det unreachable vilket gör att oändliga loopar ej
@@ -9806,15 +9847,16 @@ uppstår. Det används ej på något sätt för path selection eller composite
 metric.</p>
 <p><strong>Composite metric</strong>
 Kolla composite och alla component metrics för ett prefix.</p>
-<p><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology&nbsp;10.2.2.0/28&nbsp;|&nbsp;b&nbsp;Composite</code>
-<code>Composite&nbsp;metric&nbsp;is&nbsp;(130816/128256),&nbsp;route&nbsp;is&nbsp;Internal</code>
-<code>Vector&nbsp;metric:</code>
-<code>Minimum&nbsp;bandwidth&nbsp;is&nbsp;1000000&nbsp;Kbit</code>
-<code>Total&nbsp;delay&nbsp;is&nbsp;5010&nbsp;microseconds</code>
-<code>Reliability&nbsp;is&nbsp;255/255</code>
-<code>Load&nbsp;is&nbsp;1/255</code>
-<code>Minimum&nbsp;MTU&nbsp;is&nbsp;1500</code>
-<code>Hop&nbsp;count&nbsp;is&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology&nbsp;10.2.2.0/28&nbsp;|&nbsp;b&nbsp;Composite
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Composite&nbsp;metric&nbsp;is&nbsp;(130816/128256),&nbsp;route&nbsp;is&nbsp;Internal
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector&nbsp;metric:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Minimum&nbsp;bandwidth&nbsp;is&nbsp;1000000&nbsp;Kbit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;delay&nbsp;is&nbsp;5010&nbsp;microseconds
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reliability&nbsp;is&nbsp;255/255
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Load&nbsp;is&nbsp;1/255
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Minimum&nbsp;MTU&nbsp;is&nbsp;1500
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hop&nbsp;count&nbsp;is&nbsp;1
+</code></pre></div>
 <p><strong>Wide Metrics</strong>
 Det finns Classic metrics och Wide metrics. De gamla metricen fungerar
 för hastigheter upp till 1Gbps eftersom då är bandwidth satt till högsta
@@ -9822,13 +9864,15 @@ värdet och delay till det lägsta. Detta leder till att classic metrics
 inte kan skilja på t.ex. 1G och 10G. Wide Metrics löser detta och stöds
 i Named Mode och om det används är Metric Version = 64bit samt att det
 finns en K6.</p>
-<p><code>show&nbsp;ip&nbsp;protocols&nbsp;|&nbsp;i&nbsp;Metric</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;protocols&nbsp;|&nbsp;i&nbsp;Metric
+</code></pre></div>
 <p>Eftersom wide metrics kan producera metrics som är större än 32-bitar
 och RIBen stödjer metrics upp till 32-bitar dividerar man det med 128
 innan det hamnar i RIBen samt presenteras av IOS show-kommandon. Detta
 går att ändra per adressfamilj.</p>
-<p><code>address-family&nbsp;...</code>
-<code>metric&nbsp;rib-scale&nbsp;128</code></p>
+<div class="highlight"><pre><span></span><code>address-family&nbsp;...
+&nbsp;metric&nbsp;rib-scale&nbsp;128
+</code></pre></div>
 <p><strong>Throughput:</strong> (bandwidth) fungerar på exakt samma sätt men nu är
 referensbandbredden 655.36 Tbps.</p>
 <p><strong>Load:</strong> Samma som classic.</p>
@@ -9850,17 +9894,22 @@ Energy och Quiescent Energy men de används inte.</p>
 <p>Simplified default metric, legacy = 256 * (10^7/bandwidth + delay/10)
 Simplified default metric, wide = 65536 * (10^7/bandwidth +
 delay/1000000)</p>
-<p><code>show&nbsp;eigrp&nbsp;protocols&nbsp;|&nbsp;i&nbsp;Metric</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;eigrp&nbsp;protocols&nbsp;|&nbsp;i&nbsp;Metric
+</code></pre></div>
 <p>Ändra vilka metrics som ska användas för EIGRP-processen</p>
-<p><code>metric&nbsp;weights&nbsp;0&nbsp;1&nbsp;0&nbsp;1&nbsp;0&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>metric&nbsp;weights&nbsp;0&nbsp;1&nbsp;0&nbsp;1&nbsp;0&nbsp;0
+</code></pre></div>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>Ändrar man AD kommer alla grannskap att droppas och sättas upp på nytt.</p>
-<p><code>router&nbsp;eigrp&nbsp;100</code>
-<code>distance&nbsp;eigrp&nbsp;90&nbsp;170</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;100
+&nbsp;distance&nbsp;eigrp&nbsp;90&nbsp;170
+</code></pre></div>
 <p>Logging av neighbor changes är på default</p>
-<p><code>show&nbsp;ip&nbsp;eigrp&nbsp;events&nbsp;type</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;events&nbsp;type
+</code></pre></div>
 <p>Modernare konfigurationsformat</p>
-<p><code>eigrp&nbsp;upgrade-cli</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;eigrp&nbsp;upgrade-cli
+</code></pre></div>
 <p><strong>Router ID</strong>
 Alla EIGRP-instanser måste ha ett router id, dock kan flera processer ha
 samma 32 bitars nummer (till skillnad från OSPF). Från början användes
@@ -9880,12 +9929,15 @@ eller ha något med EIGRP att göra utan alla interface jämförs.</p>
 </ol>
 <p>ID ändras endast när processen startas om eller router-id-kommandot körs
 men alla grannskap resettas vid RID-byte.</p>
-<p><code>show&nbsp;eigrp&nbsp;protocols&nbsp;|&nbsp;i&nbsp;Router-ID</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;eigrp&nbsp;protocols&nbsp;|&nbsp;i&nbsp;Router-ID
+</code></pre></div>
 <p>Kolla om routes droppas pga duplicate RID</p>
-<p><code>show&nbsp;eigrp&nbsp;address-family&nbsp;ipv4&nbsp;events</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;eigrp&nbsp;address-family&nbsp;ipv4&nbsp;events
+</code></pre></div>
 <p>Debug</p>
-<p><code>debug&nbsp;eigrp&nbsp;packets&nbsp;hello</code>
-<code>debug&nbsp;eigrp&nbsp;fsm</code></p>
+<div class="highlight"><pre><span></span><code>debug&nbsp;eigrp&nbsp;packets&nbsp;hello
+debug&nbsp;eigrp&nbsp;fsm
+</code></pre></div>
 <h2 id="adjacency">Adjacency</h2>
 <p>EIGRP upptäcker grannar dynamiskt och AS, K-values och authentication
 måste matcha. Så fort man slår på EIGRP på ett interface börjar det
@@ -9902,12 +9954,14 @@ När den är klar kommer endast inkrementella uppdateringar att skickas i
 fortsättningen. log-neighbor-changes är påslaget default.</p>
 <p>Interface vars IP-adress träffas av network-kommandot blir
 EIGRP-enabled.</p>
-<p><code>network&nbsp;[ip-address]&nbsp;[wildcard-mask]</code></p>
+<div class="highlight"><pre><span></span><code>network&nbsp;[ip-address]&nbsp;[wildcard-mask]
+</code></pre></div>
 <p>Designate passive interfaces. Passive interfaces stoppar grannskap och
 därmed inlärning av routes.</p>
-<p><code>passive-interface&nbsp;default</code>
-<code>no&nbsp;passive-interface&nbsp;gi2</code>
-<code>show&nbsp;ip&nbsp;eigrp&nbsp;interfaces&nbsp;detail</code></p>
+<div class="highlight"><pre><span></span><code>passive-interface&nbsp;default
+no&nbsp;passive-interface&nbsp;gi2
+show&nbsp;ip&nbsp;eigrp&nbsp;interfaces&nbsp;detail
+</code></pre></div>
 <p>Det går även att ändra timers per interface. Hold time säger hur länge
 en router maximalt ska vänta mellan två EIGRP-paket från en granne.
 Kommer inget paket blir grannen unreachable och DUAL informeras. Default
@@ -9916,19 +9970,23 @@ beroende på interfacetyp. Hold time ändras dock inte automatiskt ifall
 man ändrar Hello time. Notera att detta inte är en inställning som
 används lokalt utan ett "advertised value", om man sätter hold time
 lägre än hello time kommer grannar att flappa.</p>
-<p><code>int&nbsp;gi0/0</code>
+<p></p><div class="highlight"><pre><span></span><code>int&nbsp;gi0/0
+</code></pre></div>
 <code>ip&nbsp;hello-interval&nbsp;eigrp&nbsp;100</code><sekunder><code></code>
 <code>ip&nbsp;hold-time&nbsp;eigrp&nbsp;100</code><sekunder>
-<code>show&nbsp;ip&nbsp;eigrp&nbsp;100&nbsp;interfaces&nbsp;detail&nbsp;|&nbsp;i&nbsp;time</code></sekunder></sekunder></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;100&nbsp;interfaces&nbsp;detail&nbsp;|&nbsp;i&nbsp;time
+</code></pre></div><p></p>
 <p>Vissa nätverk stödjer inte broadcast eller multicast då måste man
 manuellt konfigurera grannar och unicast används. När man konfigurerar
 en granne så disableas multicast på det interfacet som används för
 unicasten. Det går därför inte att kombinera unicast- och
 multicastgrannskap på ett delat segment.</p>
-<p><code>router&nbsp;eigrp&nbsp;10</code>
-<code>neighbor&nbsp;10.0.1.1&nbsp;gi0/0</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;10
+&nbsp;neighbor&nbsp;10.0.1.1&nbsp;gi0/0&nbsp;
+</code></pre></div>
 <p><strong>Verify</strong></p>
-<p><code>show&nbsp;ip&nbsp;eigrp&nbsp;neighbor</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;neighbor
+</code></pre></div>
 <p>Outputen innehåller flera tal.</p>
 <ul>
 <li>H (Handle): lokalt löpnummer för grannar.</li>
@@ -9948,26 +10006,30 @@ skickas återigen en sequence TLV som säger att den ska lyssna på
 multicast igen.</p>
 <p>Route hold-timer bestämmer hur länge NSF-routrar som kör EIGRP ska hålla
 routes för inaktiva grannar.</p>
-<p><code>timers&nbsp;graceful-restart&nbsp;purge-time&nbsp;60</code></p>
+<div class="highlight"><pre><span></span><code>timers&nbsp;graceful-restart&nbsp;purge-time&nbsp;60
+</code></pre></div>
 <h3 id="authentication">Authentication</h3>
 <p>MD5 authentication måste matcha för grannskap. Med Named mode finns även
 stöd för SHA-256.</p>
-<p><code>interface&nbsp;[interface]</code>
-<code>ip&nbsp;authentication&nbsp;mode&nbsp;eigrp&nbsp;md5</code>
-<code>ip&nbsp;authentication&nbsp;key-chain&nbsp;eigrp&nbsp;[ASN]&nbsp;[name-of-chain]</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;[interface]
+&nbsp;ip&nbsp;authentication&nbsp;mode&nbsp;eigrp&nbsp;md5
+&nbsp;ip&nbsp;authentication&nbsp;key-chain&nbsp;eigrp&nbsp;[ASN]&nbsp;[name-of-chain]
+</code></pre></div>
 <p><strong>Key rotation</strong>
 Key chain kan innehålla flera nycklar men endast lägsta aktiva nyckeln
 används i EIGRP Hellos, Key ID måste därmed matcha.</p>
-<p><code>key&nbsp;chain&nbsp;ROTATION</code>
-<code>key&nbsp;10</code>
-<code>key-string&nbsp;CISCO10</code>
-<code>accept-lifetime&nbsp;00:00:00&nbsp;Jan&nbsp;1&nbsp;1993&nbsp;00:15:00&nbsp;Jan&nbsp;1&nbsp;2030</code>
-<code>send-lifetime&nbsp;00:00:00&nbsp;Jan&nbsp;1&nbsp;1993&nbsp;00:05:00&nbsp;Jan&nbsp;1&nbsp;2030</code>
-<code>key&nbsp;20</code>
-<code>key-string&nbsp;CISCO20</code>
-<code>accept-lifetime&nbsp;00:00:00&nbsp;Jan&nbsp;1&nbsp;2030&nbsp;infinite</code>
-<code>send-lifetime&nbsp;00:00:00&nbsp;Jan&nbsp;1&nbsp;2030&nbsp;infinite</code></p>
-<p><code>show&nbsp;key&nbsp;chain</code></p>
+<div class="highlight"><pre><span></span><code>key&nbsp;chain&nbsp;ROTATION
+&nbsp;key&nbsp;10
+&nbsp;&nbsp;key-string&nbsp;CISCO10
+&nbsp;&nbsp;accept-lifetime&nbsp;00:00:00&nbsp;Jan&nbsp;1&nbsp;1993&nbsp;00:15:00&nbsp;Jan&nbsp;1&nbsp;2030
+&nbsp;&nbsp;send-lifetime&nbsp;00:00:00&nbsp;Jan&nbsp;1&nbsp;1993&nbsp;00:05:00&nbsp;Jan&nbsp;1&nbsp;2030
+&nbsp;key&nbsp;20
+&nbsp;&nbsp;key-string&nbsp;CISCO20
+&nbsp;&nbsp;accept-lifetime&nbsp;00:00:00&nbsp;Jan&nbsp;1&nbsp;2030&nbsp;infinite
+&nbsp;&nbsp;send-lifetime&nbsp;00:00:00&nbsp;Jan&nbsp;1&nbsp;2030&nbsp;infinite
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;key&nbsp;chain
+</code></pre></div>
 <h3 id="troubleshoot">Troubleshoot</h3>
 <ul>
 <li>Uncommon subnet: de sitter inte i samma subnät.</li>
@@ -9979,12 +10041,14 @@ används i EIGRP Hellos, Key ID måste därmed matcha.</p>
 <li>Authentication issues.</li>
 <li>Secondary addresses.</li>
 </ul>
-<p><code>ping&nbsp;224.0.0.10</code></p>
+<div class="highlight"><pre><span></span><code>ping&nbsp;224.0.0.10
+</code></pre></div>
 <p>Subnet mask behöver inte matcha för att grannskap ska bildas men däremot
 blir topologitabellen felaktig vilket kan ställa till det
 routingmässigt.</p>
 <p>Clearing routing process. Behöver göras vid t.ex. byten av K-values.</p>
-<p><code>clear&nbsp;ip&nbsp;eigrp&nbsp;neighbors</code></p>
+<div class="highlight"><pre><span></span><code>clear&nbsp;ip&nbsp;eigrp&nbsp;neighbors
+</code></pre></div>
 <h2 id="unequal-cost-load-balancing">Unequal-Cost Load Balancing</h2>
 <p>Att det är möjligt med unequal-cost LB i EIGRP är pga att det finns
 feasible successors. De har inte bästa vägen till destination men de är
@@ -9995,17 +10059,21 @@ path får vara för att användas. För att ta reda på andelen trafik som
 går över en viss länk måste man räkna högsta installerade metricen delat
 med metricen på alla paths som används för närvarande och skriva ihop
 dem för att få respektive andel.</p>
-<p><code>router&nbsp;eigrp&nbsp;100</code>
+<p></p><div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;100
+</code></pre></div>
 <code>variance</code><multiplier>
-<code>maximum-paths&nbsp;4&nbsp;&nbsp;#Max&nbsp;är&nbsp;32</code>
-<code>traffic-share&nbsp;balanced</code></multiplier></p>
+<div class="highlight"><pre><span></span><code>&nbsp;maximum-paths&nbsp;4&nbsp;&nbsp;#Max&nbsp;är&nbsp;32
+&nbsp;traffic-share&nbsp;balanced
+</code></pre></div><p></p>
 <p>Default är variance 1 och det betyder equal-cost load balancing. Det går
 även begränsa antalet parallella paths som används. Använd
 <em>traffic-share balanced</em> (som är default) annars blir det equal-cost LB
 ändå.</p>
-<p><code>show&nbsp;ip&nbsp;protocols&nbsp;|&nbsp;i&nbsp;Maximum</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;protocols&nbsp;|&nbsp;i&nbsp;Maximum
+</code></pre></div>
 <p>Verifiera per IP</p>
-<p><code>show&nbsp;ip&nbsp;route&nbsp;90.0.0.1&nbsp;|&nbsp;i&nbsp;share</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;route&nbsp;90.0.0.1&nbsp;|&nbsp;i&nbsp;share
+</code></pre></div>
 <h1 id="summarization">Summarization</h1>
 <p>Man kan manuellt aggregera routes var som helst eftersom EIGRP är ett
 distance vector routingprotokoll (<em>auto-summary</em> är avstängt default
@@ -10031,39 +10099,48 @@ till att load och konvergeringstid minskar. En Query modifieras inte
 heller någonstans.</p>
 <p>Eftersom det är ett distance vector routingprotokoll görs summary per
 interface. <em>Classic mode</em></p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;summary-address&nbsp;eigrp&nbsp;100&nbsp;192.168.0.0&nbsp;255.255.0.0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;summary-address&nbsp;eigrp&nbsp;100&nbsp;192.168.0.0&nbsp;255.255.0.0
+</code></pre></div>
 <p><strong>Leak-map</strong></p>
-<p><code>access-list&nbsp;1&nbsp;permit&nbsp;192.168.2.0&nbsp;0.0.0.0</code>
-<code>route-map&nbsp;LEAK&nbsp;permit&nbsp;10</code>
-<code>match&nbsp;ip&nbsp;address&nbsp;1</code>
-<code>int&nbsp;gi2</code>
-<code>ip&nbsp;summary-address&nbsp;eigrp&nbsp;100&nbsp;192.168.0.0&nbsp;255.255.0.0&nbsp;leak-map&nbsp;LEAK</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;1&nbsp;permit&nbsp;192.168.2.0&nbsp;0.0.0.0
+route-map&nbsp;LEAK&nbsp;permit&nbsp;10
+&nbsp;match&nbsp;ip&nbsp;address&nbsp;1
+int&nbsp;gi2
+&nbsp;ip&nbsp;summary-address&nbsp;eigrp&nbsp;100&nbsp;192.168.0.0&nbsp;255.255.0.0&nbsp;leak-map&nbsp;LEAK
+</code></pre></div>
 <p>Finns det ingen route-map än som heter LEAK kommer endast summeringen
 att annonseras.</p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;protocols&nbsp;|&nbsp;s&nbsp;Summ</code>
-<code>show&nbsp;ip&nbsp;route&nbsp;eigrp&nbsp;|&nbsp;i&nbsp;Null</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;protocols&nbsp;|&nbsp;s&nbsp;Summ
+show&nbsp;ip&nbsp;route&nbsp;eigrp&nbsp;|&nbsp;i&nbsp;Null
+</code></pre></div>
 <p><strong>Poisoned Floating Summarization</strong></p>
-<p><code>router&nbsp;eigrp&nbsp;100</code>
-<code>summary-metric&nbsp;10.1.0.0/23&nbsp;distance&nbsp;255</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;100
+&nbsp;summary-metric&nbsp;10.1.0.0/23&nbsp;distance&nbsp;255
+</code></pre></div>
 <h3 id="default-route">Default route</h3>
 <p>Annonsera en default route ut på ett interface, inget annat kommer att
 skickas på detta interface.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;summary-address&nbsp;eigrp&nbsp;100&nbsp;0.0.0.0&nbsp;0.0.0.0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;summary-address&nbsp;eigrp&nbsp;100&nbsp;0.0.0.0&nbsp;0.0.0.0
+</code></pre></div>
 <p>Acceptera default routing information, detta är på default.</p>
-<p><code>default-information&nbsp;allowed</code></p>
+<div class="highlight"><pre><span></span><code>default-information&nbsp;allowed
+</code></pre></div>
 <p>Acceptera endast default route från specifik källa</p>
-<p><code>access-list&nbsp;6&nbsp;permit&nbsp;10.0.0.0</code>
-<code>router&nbsp;eigrp&nbsp;100</code>
-<code>default-information&nbsp;in&nbsp;6</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;6&nbsp;permit&nbsp;10.0.0.0
+router&nbsp;eigrp&nbsp;100
+&nbsp;default-information&nbsp;in&nbsp;6
+</code></pre></div>
 <p>Skicka ej default route</p>
-<p><code>no&nbsp;default-information&nbsp;allowed&nbsp;out</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;default-information&nbsp;allowed&nbsp;out
+</code></pre></div>
 <p>Legacy</p>
-<p><code>router&nbsp;eigrp&nbsp;100</code>
-<code>network&nbsp;10.0.0.0</code>
-<code>ip&nbsp;default-network&nbsp;10.0.0.0</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;100
+&nbsp;network&nbsp;10.0.0.0
+&nbsp;ip&nbsp;default-network&nbsp;10.0.0.0
+</code></pre></div>
 <h1 id="convergence">Convergence</h1>
 <p>Optimization &amp; Scalability. Detecting, notifying, calculating and
 installing new routes.</p>
@@ -10092,22 +10169,25 @@ topologier, routrar med dålig bandbredd blir aldrig transit router och
 antalet Queries reduceras vilket leder till snabbare konvergens och
 mindre SIA. Defualt för stub är (CONNECTED SUMMARY ) och grannskap
 resettas vid omkonfiguration.</p>
-<p><code>router&nbsp;eigrp&nbsp;100</code>
-<code>eigrp&nbsp;stub&nbsp;?</code>
-<code>connected</code>
-<code>receive-only</code>
-<code>redistributed</code>
-<code>static</code>
-<code>summary</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;100
+&nbsp;eigrp&nbsp;stub&nbsp;?
+&nbsp;&nbsp;&nbsp;&nbsp;connected&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;receive-only&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;redistributed&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;summary&nbsp;
+</code></pre></div>
 <p>Undantag läggs med en leak-map. Man får hålla koll på
 route-aggregeringar när man kör stub för de mer specifika routsen
 annonseras default.</p>
-<p><code>router&nbsp;eigrp&nbsp;100</code>
-<code>eigrp&nbsp;stub&nbsp;leak-map</code><em><code>NAME</code></em></p>
+<p></p><div class="highlight"><pre><span></span><code>&nbsp;router&nbsp;eigrp&nbsp;100
+</code></pre></div>
+<code>eigrp&nbsp;stub&nbsp;leak-map</code><em><code>NAME</code></em><p></p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;protocols&nbsp;|&nbsp;i&nbsp;EIGRP|Stub</code>
-<code>show&nbsp;eigrp&nbsp;address-family&nbsp;ipv4&nbsp;100&nbsp;neighbors&nbsp;detail&nbsp;|&nbsp;i&nbsp;Stub</code>
-<code>show&nbsp;ip&nbsp;eigrp&nbsp;neighbors&nbsp;detail</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;protocols&nbsp;|&nbsp;i&nbsp;EIGRP|Stub
+show&nbsp;eigrp&nbsp;address-family&nbsp;ipv4&nbsp;100&nbsp;neighbors&nbsp;detail&nbsp;|&nbsp;i&nbsp;Stub
+show&nbsp;ip&nbsp;eigrp&nbsp;neighbors&nbsp;detail
+</code></pre></div>
 <h3 id="fast-reroute">Fast Reroute</h3>
 <p>EIGRP använder DUAL för att räkna fram successors och feasible
 successors där successor används som primary path och feasible
@@ -10118,21 +10198,25 @@ per prefix. Man kan t.ex. sätta regler för att inte använda LFAs där
 outgoing interface, linecard eller SRLG är samma. EIGRP använder alltid
 prefix-based LFAs.</p>
 <p><em>Named mode only</em></p>
-<p><code>address-family&nbsp;ipv4&nbsp;unicast&nbsp;autonomous-system&nbsp;100</code>
-<code>topology&nbsp;base</code>
-<code>fast-reroute&nbsp;per-prefix&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>address-family&nbsp;ipv4&nbsp;unicast&nbsp;autonomous-system&nbsp;100
+&nbsp;topology&nbsp;base
+&nbsp;&nbsp;fast-reroute&nbsp;per-prefix&nbsp;all
+</code></pre></div>
 <p>ECMP använder alla equal cost paths men för att kontrollera vilka LFAs
 som används kan man stänga av load-sharing och istället låta FRR använda
 tie-breaking rules.</p>
-<p><code>fast-reroute&nbsp;load-sharing&nbsp;disable</code>
-<code>fast-reroute&nbsp;tie-break&nbsp;linecard-disjoint&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;fast-reroute&nbsp;load-sharing&nbsp;disable
+&nbsp;fast-reroute&nbsp;tie-break&nbsp;linecard-disjoint&nbsp;2
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology&nbsp;frr</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology&nbsp;frr&nbsp;
+</code></pre></div>
 <h3 id="bfd">BFD</h3>
 <p>Se <a href="/Cisco_BFD" title="wikilink">BFD</a></p>
-<p><code>router&nbsp;eigrp&nbsp;100</code>
-<code>bfd&nbsp;interface&nbsp;gi2&nbsp;&nbsp;&nbsp;#Enable&nbsp;BFD&nbsp;on&nbsp;specific&nbsp;interface</code>
-<code>bfd&nbsp;all-interfaces&nbsp;&nbsp;#Enable&nbsp;BFD&nbsp;on&nbsp;all&nbsp;interfaces</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;100
+&nbsp;bfd&nbsp;interface&nbsp;gi2&nbsp;&nbsp;&nbsp;#Enable&nbsp;BFD&nbsp;on&nbsp;specific&nbsp;interface
+&nbsp;bfd&nbsp;all-interfaces&nbsp;&nbsp;#Enable&nbsp;BFD&nbsp;on&nbsp;all&nbsp;interfaces
+</code></pre></div>
 <h1 id="filtering">Filtering</h1>
 <p>Med EIGRP går det att filtrera routes på många olika sätt. T.ex. kan
 router-id användas för att filtrera bort routes från en viss granne. När
@@ -10140,47 +10224,56 @@ man applyar en distribute-list under EIGRP-processen skickas en ROUTE
 FILTER CHANGED och grannskapet resettas för att topologitabellen ska
 synkas om.</p>
 <h3 id="prefix-lists">Prefix-Lists</h3>
-<p><code>ip&nbsp;prefix-list&nbsp;FILTER&nbsp;seq&nbsp;5&nbsp;deny&nbsp;172.16.10.0/24</code>
-<code>ip&nbsp;prefix-list&nbsp;FILTER&nbsp;seq&nbsp;10&nbsp;permit&nbsp;0.0.0.0/0&nbsp;le&nbsp;32</code>
-<code>router&nbsp;eigrp&nbsp;100</code>
-<code>distribute-list&nbsp;prefix&nbsp;FILTER&nbsp;in</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;prefix-list&nbsp;FILTER&nbsp;seq&nbsp;5&nbsp;deny&nbsp;172.16.10.0/24
+ip&nbsp;prefix-list&nbsp;FILTER&nbsp;seq&nbsp;10&nbsp;permit&nbsp;0.0.0.0/0&nbsp;le&nbsp;32
+router&nbsp;eigrp&nbsp;100
+&nbsp;distribute-list&nbsp;prefix&nbsp;FILTER&nbsp;in
+</code></pre></div>
 <p>Det går även använda prefix-listor för att filtrera på neighbor
 (gateway).</p>
 <h3 id="acl">ACL</h3>
 <p>Standard</p>
-<p><code>access-list&nbsp;3&nbsp;deny&nbsp;30.0.0.0</code>
-<code>access-list&nbsp;3&nbsp;permit&nbsp;any</code>
-<code>router&nbsp;eigrp&nbsp;100</code>
-<code>distribute-list&nbsp;3&nbsp;in&nbsp;gi0/0</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;3&nbsp;deny&nbsp;30.0.0.0
+access-list&nbsp;3&nbsp;permit&nbsp;any
+router&nbsp;eigrp&nbsp;100
+&nbsp;distribute-list&nbsp;3&nbsp;in&nbsp;gi0/0
+</code></pre></div>
 <p>Extended</p>
-<p><code>access-list&nbsp;103&nbsp;deny&nbsp;ip&nbsp;host&nbsp;10.0.0.10&nbsp;host&nbsp;172.20.1.0</code>
+<p></p><div class="highlight"><pre><span></span><code>access-list&nbsp;103&nbsp;deny&nbsp;ip&nbsp;host&nbsp;10.0.0.10&nbsp;host&nbsp;172.20.1.0
+</code></pre></div>
 <code>access-list&nbsp;103&nbsp;deny&nbsp;ip&nbsp;host</code><next-hop><code>host</code><prefix>
-<code>access-list&nbsp;103&nbsp;permit&nbsp;ip&nbsp;any&nbsp;any</code>
-<code>router&nbsp;eigrp&nbsp;100</code>
-<code>distribute-list&nbsp;103&nbsp;in&nbsp;gi0/0</code></prefix></next-hop></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;103&nbsp;permit&nbsp;ip&nbsp;any&nbsp;any
+router&nbsp;eigrp&nbsp;100
+&nbsp;distribute-list&nbsp;103&nbsp;in&nbsp;gi0/0
+</code></pre></div><p></p>
 <h3 id="administrative-distance">Administrative Distance</h3>
 <p>Per prefix filtering med AD (255 = UNKNOWN)</p>
-<p><code>access-list&nbsp;7&nbsp;permit&nbsp;20.0.0.0</code>
-<code>router&nbsp;eigrp&nbsp;100</code>
-<code>distance&nbsp;255&nbsp;0.0.0.0&nbsp;255.255.255.255&nbsp;7</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;7&nbsp;permit&nbsp;20.0.0.0
+router&nbsp;eigrp&nbsp;100
+&nbsp;distance&nbsp;255&nbsp;0.0.0.0&nbsp;255.255.255.255&nbsp;7
+</code></pre></div>
 <p><em>Träffar alla grannar</em></p>
 <p>AD för internal routes går att ändra per prefix men ej external.</p>
 <h3 id="route-map">Route Map</h3>
 <p>Med route-maps kan man matcha på metrics, tags och acler.</p>
-<p><code>route-map&nbsp;RM&nbsp;deny&nbsp;10</code>
-<code>match&nbsp;tag&nbsp;4</code>
-<code>route-map&nbsp;RM&nbsp;permit&nbsp;20</code>
-<code>router&nbsp;eigrp&nbsp;100</code>
-<code>distribute-list&nbsp;route-map&nbsp;RM&nbsp;in</code></p>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;RM&nbsp;deny&nbsp;10
+&nbsp;match&nbsp;tag&nbsp;4
+route-map&nbsp;RM&nbsp;permit&nbsp;20
+router&nbsp;eigrp&nbsp;100
+&nbsp;distribute-list&nbsp;route-map&nbsp;RM&nbsp;in
+</code></pre></div>
 <h3 id="prefix-limit">Prefix Limit</h3>
 <p>Per process</p>
-<p><code>maximum-prefix&nbsp;1000</code></p>
+<div class="highlight"><pre><span></span><code>maximum-prefix&nbsp;1000
+</code></pre></div>
 <p>Max antal prefix från granne.</p>
-<p><code>neighbor&nbsp;10.0.1.1&nbsp;maximum-prefix&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;10.0.1.1&nbsp;maximum-prefix&nbsp;100
+</code></pre></div>
 <p><strong>Övrigt</strong>
 Ändra hop-count limit. Prefix med högre hop-count kommer att filtreras
 ut.</p>
-<p><code>metric&nbsp;maximum-hops&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>metric&nbsp;maximum-hops&nbsp;2
+</code></pre></div>
 <p>Med Offset Lists kan man addera metric (Delay) när routes kommer in
 eller skickas ut. Det fungerar med EIGRP men är inte rekommenderat pga
 komplexiteten hos EIGRPs metric, det finns andra enklare sätt att
@@ -10189,28 +10282,35 @@ manipulera routes.</p>
 <p>För redistribution måste man sätta en seed metric eftersom default är
 infinity. Man kan sätta samma router-id på två EIGRP-routrar för att
 blockera ut externa routes vid redistribution för att undvika loopar.</p>
-<p><code>router&nbsp;eigrp&nbsp;100</code>
-<code>default-metric&nbsp;1000000&nbsp;10&nbsp;255&nbsp;1&nbsp;1500</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;100
+&nbsp;default-metric&nbsp;1000000&nbsp;10&nbsp;255&nbsp;1&nbsp;1500
+</code></pre></div>
 <p><strong>Static</strong>
 Med static och connected behövs ingen seed metric.</p>
-<p><code>redistribute&nbsp;static</code></p>
+<div class="highlight"><pre><span></span><code>redistribute&nbsp;static
+</code></pre></div>
 <p><strong><a href="/Cisco_RIP" title="wikilink">RIP</a></strong></p>
-<p><code>redistribute&nbsp;rip&nbsp;metric&nbsp;1500&nbsp;100&nbsp;255&nbsp;1&nbsp;1500</code></p>
+<div class="highlight"><pre><span></span><code>redistribute&nbsp;rip&nbsp;metric&nbsp;1500&nbsp;100&nbsp;255&nbsp;1&nbsp;1500
+</code></pre></div>
 <p><strong><a href="/Cisco_OSPF" title="wikilink">OSPF</a></strong></p>
-<p><code>redistribute&nbsp;ospf&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>redistribute&nbsp;ospf&nbsp;1
+</code></pre></div>
 <p>Route flapping kan upptäckas genom att kolla events, 500 lines hålls i
 minnet.</p>
-<p><code>show&nbsp;ip&nbsp;eigrp&nbsp;events</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;events
+</code></pre></div>
 <p>Route-tag notation dotted decimal</p>
-<p><code>eigrp&nbsp;default-route-tag&nbsp;&nbsp;#internal&nbsp;only</code>
-<code>show&nbsp;route-tag&nbsp;list</code></p>
+<div class="highlight"><pre><span></span><code>eigrp&nbsp;default-route-tag&nbsp;&nbsp;#internal&nbsp;only
+show&nbsp;route-tag&nbsp;list
+</code></pre></div>
 <p><strong>Wide metrics</strong>
 När man kör named mode måste man tänka på vilken metric man sätter när
 man redistribuerar. Följande exempel kommer inte att fungera eftersom
 named mode använder wide metrics och då kommer denna redistribution
 resultera i infinity metric och inget kommer att annonseras i EIGRP,
 utan man måste sätta något mer realistiskt.</p>
-<p><code>redistribute&nbsp;ospf&nbsp;1&nbsp;metric&nbsp;1&nbsp;1&nbsp;1&nbsp;1&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>redistribute&nbsp;ospf&nbsp;1&nbsp;metric&nbsp;1&nbsp;1&nbsp;1&nbsp;1&nbsp;1
+</code></pre></div>
 <h1 id="eigrpv6">EIGRPv6</h1>
 <p>Det finns några skillnader mot klassiska IPv4-EIGRP värda att notera.
 Man måste no shuta EIGRP-processen för att den ska starta. Default route
@@ -10220,26 +10320,31 @@ Unequal-cost load balancing stöds för närvarande inte med IPv6 EIGRP pga
 alltid sig själv som next-hop, även när routes annonseras ut på samma
 interface som de kom in på, detta går att stänga av med <em>no ipv6
 next-hop-self eigrp</em>.</p>
-<p><code>ipv6&nbsp;unicast-routing</code>
-<code>ipv6&nbsp;router&nbsp;eigrp&nbsp;1</code>
-<code>eigrp&nbsp;router-id&nbsp;2.2.2.2</code>
-<code>maximum-paths&nbsp;16&nbsp;&nbsp;#Max&nbsp;är&nbsp;32</code>
-<code>no&nbsp;shutdown</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;unicast-routing
+ipv6&nbsp;router&nbsp;eigrp&nbsp;1
+&nbsp;eigrp&nbsp;router-id&nbsp;2.2.2.2
+&nbsp;maximum-paths&nbsp;16&nbsp;&nbsp;#Max&nbsp;är&nbsp;32
+&nbsp;no&nbsp;shutdown
+</code></pre></div>
 <p>Per interface</p>
-<p><code>interface&nbsp;gi2</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>ipv6&nbsp;address&nbsp;2001::2/64</code>
-<code>ipv6&nbsp;eigrp&nbsp;1</code></p>
-<p><code>ipv6&nbsp;authentication&nbsp;mode&nbsp;eigrp&nbsp;1&nbsp;md5</code>
-<code>ipv6&nbsp;authentication&nbsp;key-chain&nbsp;eigrp&nbsp;1&nbsp;EIGRPV6</code>
-<code>ipv6&nbsp;summary-address&nbsp;eigrp&nbsp;1&nbsp;2001::/64&nbsp;leak-map&nbsp;LEAKS</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2&nbsp;
+&nbsp;no&nbsp;ip&nbsp;address&nbsp;&nbsp;
+&nbsp;ipv6&nbsp;address&nbsp;2001::2/64&nbsp;&nbsp;
+&nbsp;ipv6&nbsp;eigrp&nbsp;1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;ipv6&nbsp;authentication&nbsp;mode&nbsp;eigrp&nbsp;1&nbsp;md5
+&nbsp;ipv6&nbsp;authentication&nbsp;key-chain&nbsp;eigrp&nbsp;1&nbsp;EIGRPV6
+&nbsp;ipv6&nbsp;summary-address&nbsp;eigrp&nbsp;1&nbsp;2001::/64&nbsp;leak-map&nbsp;LEAKS
+</code></pre></div>
 <p><em>leak-map för IPv6 summary är en relativt ny feature</em></p>
 <p>Verify, finns både gammal och ny syntax för show-kommandona.</p>
-<p><code>show&nbsp;ipv6&nbsp;route&nbsp;eigrp</code>
-<code>show&nbsp;ipv6&nbsp;eigrp&nbsp;interfaces</code>
-<code>show&nbsp;ipv6&nbsp;eigrp&nbsp;100&nbsp;interfaces&nbsp;detail&nbsp;|&nbsp;i&nbsp;Hello|Split|Authentication</code></p>
-<p><code>show&nbsp;eigrp&nbsp;address-family&nbsp;ipv6&nbsp;neighbors</code>
-<code>show&nbsp;eigrp&nbsp;address-family&nbsp;ipv6&nbsp;topology</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;route&nbsp;eigrp
+show&nbsp;ipv6&nbsp;eigrp&nbsp;interfaces
+show&nbsp;ipv6&nbsp;eigrp&nbsp;100&nbsp;interfaces&nbsp;detail&nbsp;|&nbsp;i&nbsp;Hello|Split|Authentication
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;eigrp&nbsp;address-family&nbsp;ipv6&nbsp;neighbors
+show&nbsp;eigrp&nbsp;address-family&nbsp;ipv6&nbsp;topology
+</code></pre></div>
 <h1 id="named-mode">Named mode</h1>
 <p>Om IOS stödjer Named Mode är det rekommenderat att använda det (IOS
 fr.o.m. 15.0(1)M). Detta ändrar inte på något sätt hur EIGRP fungerar
@@ -10252,40 +10357,47 @@ interfacen kommer den att ignoreras. EIGRP använder automatiskt wide
 metrics om andra sidan också kör named mode.</p>
 <p>Konfigurationen är uppdelad i tre sektioner.</p>
 <p><strong>Address Family section</strong></p>
-<p><code>router&nbsp;eigrp&nbsp;HACKER</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast&nbsp;autonomous-system&nbsp;100</code>
-<code>eigrp&nbsp;router-id&nbsp;1.1.1.1</code>
-<code>network&nbsp;10.0.0.0&nbsp;0.0.0.255</code></p>
-<p><code>address-family&nbsp;ipv4&nbsp;unicast&nbsp;vrf&nbsp;EXAMPLE&nbsp;autonomous-system&nbsp;101</code>
-<code>eigrp&nbsp;router-id&nbsp;1.1.20.1</code>
-<code>network&nbsp;10.0.20.0&nbsp;0.0.0.255</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;HACKER
+&nbsp;address-family&nbsp;ipv4&nbsp;unicast&nbsp;autonomous-system&nbsp;100
+&nbsp;&nbsp;eigrp&nbsp;router-id&nbsp;1.1.1.1
+&nbsp;&nbsp;network&nbsp;10.0.0.0&nbsp;0.0.0.255
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;address-family&nbsp;ipv4&nbsp;unicast&nbsp;vrf&nbsp;EXAMPLE&nbsp;autonomous-system&nbsp;101
+&nbsp;&nbsp;eigrp&nbsp;router-id&nbsp;1.1.20.1
+&nbsp;&nbsp;network&nbsp;10.0.20.0&nbsp;0.0.0.255
+</code></pre></div>
 <p>OBS med <em>address-family ipv6 unicast</em> så enableas alla ipv6-interface
 för EIGRP automatiskt.</p>
 <p><strong>Per-AF-interface section</strong></p>
-<p><code>af-interface&nbsp;default</code>
-<code>passive-interface</code>
-<code>bfd</code>
-<code>exit-af-interface</code>
-<code>!</code>
-<code>af-interface&nbsp;Gi3</code>
-<code>no&nbsp;passive-interface</code>
-<code>authentication&nbsp;mode&nbsp;hmac-sha-256&nbsp;SECRET_KEY</code>
-<code>summary-address&nbsp;10.10.0.0/24</code>
-<code>exit-af-interface</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;af-interface&nbsp;default
+&nbsp;&nbsp;passive-interface
+&nbsp;&nbsp;bfd
+&nbsp;exit-af-interface
+&nbsp;!
+&nbsp;af-interface&nbsp;Gi3
+&nbsp;&nbsp;no&nbsp;passive-interface
+&nbsp;&nbsp;authentication&nbsp;mode&nbsp;hmac-sha-256&nbsp;SECRET_KEY
+&nbsp;&nbsp;summary-address&nbsp;10.10.0.0/24
+&nbsp;exit-af-interface
+</code></pre></div>
 <p><strong>Per-AF-topology section</strong>
 Base är det som finns om man inte slår på Multi Topology Routing.</p>
-<p><code>topology&nbsp;base</code>
-<code>redistribute&nbsp;connected</code>
-<code>distance&nbsp;eigrp&nbsp;90&nbsp;170</code>
-<code>exit-af-topology</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;topology&nbsp;base
+&nbsp;&nbsp;redistribute&nbsp;connected
+&nbsp;&nbsp;distance&nbsp;eigrp&nbsp;90&nbsp;170
+&nbsp;exit-af-topology
+</code></pre></div>
 <p>Automagically convert classic EIGRP configuration into Named EIGRP
 configuration.</p>
-<p><code>eigrp&nbsp;upgrade-cli</code></p>
+<div class="highlight"><pre><span></span><code>eigrp&nbsp;upgrade-cli
+</code></pre></div>
 <p>Show commands har också ny syntax</p>
-<p><code>show&nbsp;eigrp&nbsp;address-family&nbsp;ipv4&nbsp;?</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;eigrp&nbsp;address-family&nbsp;ipv4&nbsp;?
+</code></pre></div>
 <p>Man kan också tagga routes. För att ändra format finns den globala
 inställningen: <strong>route-tag notation dotted-decimal</strong></p>
-<p><code>eigrp&nbsp;default-route-tag&nbsp;1.2.3.4</code></p>
+<div class="highlight"><pre><span></span><code>eigrp&nbsp;default-route-tag&nbsp;1.2.3.4
+</code></pre></div>
 <h3 id="add-path">Add-Path</h3>
 <p>Fr.o.m. IOS 15.3(2)T har EIGRP stöd för tillägget Add-Path som låter en
 router skicka ut uppdateringar som innehåller flera equal-cost vägar
@@ -10295,33 +10407,38 @@ dual homed. För att kunna skicka ut multipla routes måste de finnas i
 routingtabellen samt att Split Horizon är avstängt på multipoint
 tunnel-interfacet mot alla spokes.</p>
 <p>Detta går bara att konfigurera i named mode och sätts per interface.</p>
-<p><code>af-interface&nbsp;Tunnel0</code>
-<code>no&nbsp;split-horizon</code>
-<code>no&nbsp;next-hop-self</code>
-<code>add-paths&nbsp;&lt;1-4&gt;</code>
-<code>exit-af-interface</code></p>
-<p><code>topology&nbsp;base</code>
-<code>variance&nbsp;1</code>
-<code>maximum-paths&nbsp;4</code>
-<code>exit-af-topology</code></p>
+<div class="highlight"><pre><span></span><code>af-interface&nbsp;Tunnel0
+&nbsp;no&nbsp;split-horizon&nbsp;
+&nbsp;no&nbsp;next-hop-self
+&nbsp;add-paths&nbsp;&lt;1-4&gt;
+exit-af-interface
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>topology&nbsp;base
+&nbsp;variance&nbsp;1
+&nbsp;maximum-paths&nbsp;4&nbsp;
+exit-af-topology
+</code></pre></div>
 <p>Maximum-paths måste vara satt till samma eller högre än add-paths annars
 kommer det inte att finnas fler equal-cost routes i routingtabellen.
 Next-hop-self måste deaktiveras annars kommer alla routes som annonseras
 ha samma next-hop. Detta är inte kompatibelt med Unequal Cost LB utan
 variance måste vara satt till 1. Spokes behöver inte konfigurera
 någonting annat än maximum-paths.</p>
-<p><code>no-ecmp-mode</code></p>
+<div class="highlight"><pre><span></span><code>no-ecmp-mode
+</code></pre></div>
 <p>Är rekommenderat om huben använder flera tunnel-interface för att nå
 spokes.</p>
 <h3 id="ipv6-vrf-lite">IPv6 VRF-Lite</h3>
 <p>EIGRP IPv6 <a href="/Cisco_Routing#VRF" title="wikilink">VRF-Lite</a> är endast
 tillgängligt med Named configurations.</p>
-<p><code>vrf&nbsp;definition&nbsp;VRF1</code>
-<code>rd&nbsp;100:1</code>
-<code>address-family&nbsp;ipv6</code>
-<code>exit</code></p>
-<p><code>router&nbsp;eigrp&nbsp;MULTI</code>
-<code>address-family&nbsp;ipv6&nbsp;vrf&nbsp;VRF1&nbsp;autonomous-system&nbsp;200</code></p>
+<div class="highlight"><pre><span></span><code>vrf&nbsp;definition&nbsp;VRF1
+&nbsp;rd&nbsp;100:1
+&nbsp;address-family&nbsp;ipv6
+&nbsp;exit
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;MULTI
+&nbsp;address-family&nbsp;ipv6&nbsp;vrf&nbsp;VRF1&nbsp;autonomous-system&nbsp;200
+</code></pre></div>
 <h1 id="over-the-top">Over the ToP</h1>
 <p>EIGRP Over the ToP (OTP) gör att man kan skapa multipoint overlay VPN:er
 över vanlig L3/L3 VPN. Nyckeln är att
@@ -10336,10 +10453,12 @@ grannskap måste konfigureras manuellt blir det omständigt när miljön
 växer lite. Detta har lett till att man tagit fram Route Reflector även
 för EIGRP, som ger samma funktionalitet som i BGP.</p>
 <p>Man konfigurerar ip, max-hops och lisp-id.</p>
-<p><code>neighbor&nbsp;1.1.1.1&nbsp;Gi2&nbsp;remote&nbsp;10&nbsp;lisp-encap&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;1.1.1.1&nbsp;Gi2&nbsp;remote&nbsp;10&nbsp;lisp-encap&nbsp;1&nbsp;
+</code></pre></div>
 <p>Verify and show OTP learned routes</p>
-<p><code>show&nbsp;interface&nbsp;lisp&nbsp;1</code>
-<code>show&nbsp;ip&nbsp;route&nbsp;eigrp&nbsp;|&nbsp;i&nbsp;LISP</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;interface&nbsp;lisp&nbsp;1
+show&nbsp;ip&nbsp;route&nbsp;eigrp&nbsp;|&nbsp;i&nbsp;LISP
+</code></pre></div>
 <p>Route Reflector har en listen feature (likt BGP) som kan använda sig av
 en ACL för att begränsa vilka som får ansluta. På route reflector bör
 även split-horizon och next-hop-self stängas av.</p>
@@ -10355,32 +10474,39 @@ topologier droppas. LISP Id (LISP Instance ID) mappas till VRF och TID.
 Eftersom LISP bär paket för olika vrf:er på olika virtuella
 LISP-interface måste LISP ID per vrf vara unikt men samma på alla CE
 devices där vrf:en finns.</p>
-<p><code>router&nbsp;eigrp&nbsp;AF</code>
-<code>address-family&nbsp;ipv4&nbsp;autonomous-system&nbsp;10</code>
-<code>topology&nbsp;vrf&nbsp;vrf1&nbsp;tid&nbsp;10&nbsp;lisp-instance-id&nbsp;122</code></p>
-<p><code>topology&nbsp;vrf&nbsp;vrf2&nbsp;tid&nbsp;11&nbsp;lisp-instance-id&nbsp;123</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;AF
+&nbsp;address-family&nbsp;ipv4&nbsp;autonomous-system&nbsp;10
+&nbsp;&nbsp;topology&nbsp;vrf&nbsp;vrf1&nbsp;tid&nbsp;10&nbsp;lisp-instance-id&nbsp;122
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;topology&nbsp;vrf&nbsp;vrf2&nbsp;tid&nbsp;11&nbsp;lisp-instance-id&nbsp;123
+</code></pre></div>
 <h1 id="nx-os">NX-OS</h1>
 <p>Här följer Nexus-specifik syntax. Några grundläggande skillnader mot IOS
 är att det saknas stöd för UCMP och unicast neighbors. Default väljer
 NX-OS Lo0 som Router-ID. Har man ingen manuellt satt RID och konfar Lo0
 så kommer EIGRP direkt att byta till Lo0 och processen startas om.</p>
-<p><code>feature&nbsp;eigrp</code></p>
-<p><code>router&nbsp;eigrp&nbsp;1</code>
-<code>log-adjacency-changes</code>
-<code>autonomous-system&nbsp;100</code>
-<code>bfd</code></p>
-<p><code>interface&nbsp;loopback0</code>
-<code>ip&nbsp;router&nbsp;eigrp&nbsp;1</code></p>
-<p><code>interface&nbsp;Ethernet1/1</code>
-<code>ip&nbsp;router&nbsp;eigrp&nbsp;1</code>
-<code>ipv6&nbsp;router&nbsp;eigrp&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;eigrp
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;1
+&nbsp;log-adjacency-changes
+&nbsp;autonomous-system&nbsp;100
+&nbsp;bfd
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;loopback0
+&nbsp;ip&nbsp;router&nbsp;eigrp&nbsp;1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Ethernet1/1
+&nbsp;ip&nbsp;router&nbsp;eigrp&nbsp;1
+&nbsp;ipv6&nbsp;router&nbsp;eigrp&nbsp;1
+</code></pre></div>
 <p>Maintenance mode</p>
-<p><code>router&nbsp;eigrp&nbsp;1</code>
-<code>isolate</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;1
+&nbsp;isolate
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;run&nbsp;eigrp</code>
-<code>show&nbsp;ip&nbsp;eigrp&nbsp;neighbors</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;run&nbsp;eigrp
+show&nbsp;ip&nbsp;eigrp&nbsp;neighbors
+</code></pre></div></prefix></next-hop></multiplier></sekunder></sekunder></tens></kbps>
 
 
 
@@ -10403,7 +10529,7 @@ så kommer EIGRP direkt att byta till Lo0 och processen startas om.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8843,23 +8871,28 @@
 
 <p>Bcache är en Linux kernel block layer cache.</p>
 <h1 id="installation">Installation</h1>
-<p><code>sudo&nbsp;add-apt-repository&nbsp;ppa:g2p/storage</code>
-<code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;bcache-tools</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;add-apt-repository&nbsp;ppa:g2p/storage
+sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;bcache-tools
+</code></pre></div>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>Först skapar man caching devices, SSDer.</p>
-<p><code>sudo&nbsp;make-bcache&nbsp;-C&nbsp;/dev/sdc1</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;make-bcache&nbsp;-C&nbsp;/dev/sdc1
+</code></pre></div>
 <p>Sedan skapar man backing devices, HDDer.</p>
-<p><code>sudo&nbsp;make-bcache&nbsp;-B&nbsp;/dev/sdb1</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;make-bcache&nbsp;-B&nbsp;/dev/sdb1
+</code></pre></div>
 <p>Registrera samtliga devices. (Endast om inte udev används på systemet)</p>
-<p><code>sudo&nbsp;echo&nbsp;/dev/sdX1&nbsp;&gt;&nbsp;/sys/fs/bcache/register</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;echo&nbsp;/dev/sdX1&nbsp;&gt;&nbsp;/sys/fs/bcache/register
+</code></pre></div>
 <p>Skapa filsystem och mounta.</p>
 <p>Attach</p>
-<p><code>ls&nbsp;/sys/fs/bcache</code>
-<code>echo&nbsp;bcache-UUID&nbsp;&gt;&nbsp;/sys/block/bcache0/bcache/attach</code></p>
+<div class="highlight"><pre><span></span><code>ls&nbsp;/sys/fs/bcache
+echo&nbsp;bcache-UUID&nbsp;&gt;&nbsp;/sys/block/bcache0/bcache/attach
+</code></pre></div>
 <h3 id="writeback">Writeback</h3>
 <p>Default är det read cache (writethrough), för att slå på write cache.</p>
-<p><code>echo&nbsp;writeback&nbsp;&gt;&nbsp;/sys/block/bcache0/bcache/cache_mode</code></p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
+<div class="highlight"><pre><span></span><code>echo&nbsp;writeback&nbsp;&gt;&nbsp;/sys/block/bcache0/bcache/cache_mode
+</code></pre></div>
 
 
 
@@ -8882,7 +8915,7 @@
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8693,6 +8693,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8965,34 +8993,43 @@
 <p>Extreme XOS bygger på linux kärnan och busybox.</p>
 <h2 id="konfiguration">Konfiguration</h2>
 <p><strong>Hostnamn</strong></p>
-<p><code>configure&nbsp;snmp&nbsp;sysName&nbsp;[hostname]</code></p>
+<div class="highlight"><pre><span></span><code>configure&nbsp;snmp&nbsp;sysName&nbsp;[hostname]
+</code></pre></div>
 <p><strong>Sommartid/vintertid</strong></p>
-<p><code>configure&nbsp;timezone&nbsp;name&nbsp;MET&nbsp;60&nbsp;autodst&nbsp;&nbsp;begins&nbsp;every&nbsp;last&nbsp;sunday&nbsp;march&nbsp;at&nbsp;2&nbsp;0&nbsp;ends&nbsp;every&nbsp;last&nbsp;sunday&nbsp;october&nbsp;at&nbsp;3&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>configure&nbsp;timezone&nbsp;name&nbsp;MET&nbsp;60&nbsp;autodst&nbsp;&nbsp;begins&nbsp;every&nbsp;last&nbsp;sunday&nbsp;march&nbsp;at&nbsp;2&nbsp;0&nbsp;ends&nbsp;every&nbsp;last&nbsp;sunday&nbsp;october&nbsp;at&nbsp;3&nbsp;0
+</code></pre></div>
 <p><strong>Mgmt port</strong></p>
-<p><code>configure&nbsp;vlan&nbsp;Mgmt&nbsp;ipaddress&nbsp;192.168.0.1&nbsp;255.255.255.0</code>
-<code>configure&nbsp;iproute&nbsp;add&nbsp;default&nbsp;[gw]&nbsp;vr&nbsp;VR-Mgmt</code></p>
+<div class="highlight"><pre><span></span><code>configure&nbsp;vlan&nbsp;Mgmt&nbsp;ipaddress&nbsp;192.168.0.1&nbsp;255.255.255.0
+configure&nbsp;iproute&nbsp;add&nbsp;default&nbsp;[gw]&nbsp;vr&nbsp;VR-Mgmt
+</code></pre></div>
 <p><strong>Skapa användare</strong></p>
-<p><code>create&nbsp;account&nbsp;admin&nbsp;[username]&nbsp;[password]</code></p>
+<div class="highlight"><pre><span></span><code>create&nbsp;account&nbsp;admin&nbsp;[username]&nbsp;[password]
+</code></pre></div>
 <p><strong>Sätta password på användare</strong></p>
-<p><code>configure&nbsp;account&nbsp;[konto]&nbsp;password</code></p>
+<div class="highlight"><pre><span></span><code>configure&nbsp;account&nbsp;[konto]&nbsp;password
+</code></pre></div>
 <p><strong>Enable SSH</strong></p>
 <p>SSH modulen kan man behöva lägga på i efterhand. Man lägger på modulen
 på samma sätt som man lägger på ny firmware.</p>
-<p><code>enable&nbsp;ssh</code></p>
+<div class="highlight"><pre><span></span><code>enable&nbsp;ssh
+</code></pre></div>
 <p><strong>LLDP</strong></p>
-<p><code>enable&nbsp;lldp&nbsp;ports&nbsp;all</code>
-<code>configure&nbsp;lldp&nbsp;ports&nbsp;all&nbsp;advertise&nbsp;port-description</code>
-<code>configure&nbsp;lldp&nbsp;ports&nbsp;all&nbsp;advertise&nbsp;system-name</code>
-<code>configure&nbsp;lldp&nbsp;ports&nbsp;all&nbsp;advertise&nbsp;management-address</code></p>
+<div class="highlight"><pre><span></span><code>enable&nbsp;lldp&nbsp;ports&nbsp;all
+configure&nbsp;lldp&nbsp;ports&nbsp;all&nbsp;advertise&nbsp;port-description
+configure&nbsp;lldp&nbsp;ports&nbsp;all&nbsp;advertise&nbsp;system-name
+configure&nbsp;lldp&nbsp;ports&nbsp;all&nbsp;advertise&nbsp;management-address
+</code></pre></div>
 <h2 id="firmware">Firmware</h2>
 <p><strong>Byt mellan primary och secondary image.</strong></p>
-<p><code>use&nbsp;image&nbsp;primary/secondary</code></p>
+<div class="highlight"><pre><span></span><code>use&nbsp;image&nbsp;primary/secondary
+</code></pre></div>
 <h3 id="tftp">TFTP</h3>
 <p><strong>Från VR-Mgmt(mgmt port)</strong></p>
-<p><code>download&nbsp;image&nbsp;[ip]&nbsp;firmware/images/exos/[image]</code></p>
+<div class="highlight"><pre><span></span><code>download&nbsp;image&nbsp;[ip]&nbsp;firmware/images/exos/[image]
+</code></pre></div>
 <p><strong>Från VR-Default(vanlig port/vlan)</strong></p>
-<p><code>download&nbsp;image&nbsp;[ip]&nbsp;firmware/images/exos/[image]&nbsp;vr&nbsp;vr-d</code></p>
-<p><a href="/Category:Extreme" title="wikilink">Category:Extreme</a></p>
+<div class="highlight"><pre><span></span><code>download&nbsp;image&nbsp;[ip]&nbsp;firmware/images/exos/[image]&nbsp;vr&nbsp;vr-d
+</code></pre></div>
 
 
 
@@ -9015,7 +9052,7 @@ på samma sätt som man lägger på ny firmware.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

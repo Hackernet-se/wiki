@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8849,24 +8877,32 @@ dator.</p>
 <p>Tmux är enkelt att installera och finns redan färdig packat i dom flesta
 distars repos.</p>
 <p><strong>Debian baserade</strong></p>
-<p><code>apt-get&nbsp;install&nbsp;tmux</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;tmux
+</code></pre></div>
 <p><strong>RHEL baserade</strong></p>
-<p><code>yum&nbsp;install&nbsp;epel-release</code>
-<code>yum&nbsp;install&nbsp;tmux</code></p>
+<div class="highlight"><pre><span></span><code>yum&nbsp;install&nbsp;epel-release
+yum&nbsp;install&nbsp;tmux
+</code></pre></div>
 <h1 id="kommandon">Kommandon</h1>
 <p>Starta tmux,</p>
-<p><code>tmux</code></p>
+<div class="highlight"><pre><span></span><code>tmux
+</code></pre></div>
 <p>Lista tmux sessioner,</p>
-<p><code>tmux&nbsp;ls</code></p>
+<div class="highlight"><pre><span></span><code>tmux&nbsp;ls
+</code></pre></div>
 <p>Attach till en session</p>
-<p><code>tmux&nbsp;attach</code></p>
+<div class="highlight"><pre><span></span><code>tmux&nbsp;attach
+</code></pre></div>
 <p>Attach till en session och detach andra som är anslutna till samma
 session.</p>
-<p><code>tmux&nbsp;attach&nbsp;-d</code></p>
+<div class="highlight"><pre><span></span><code>tmux&nbsp;attach&nbsp;-d
+</code></pre></div>
 <p>Attach till en session om man har flera igång.(Byt # mot siffra)</p>
-<p><code>tmux&nbsp;a&nbsp;-t&nbsp;#</code></p>
+<div class="highlight"><pre><span></span><code>tmux&nbsp;a&nbsp;-t&nbsp;#
+</code></pre></div>
 <p>Stäng en session(Byt # mot en siffra)</p>
-<p><code>tmux&nbsp;kill-session&nbsp;-t&nbsp;#</code></p>
+<div class="highlight"><pre><span></span><code>tmux&nbsp;kill-session&nbsp;-t&nbsp;#
+</code></pre></div>
 <h1 id="keybinds">Keybinds</h1>
 <p>Default prefix för tmux är .</p>
 <p>- Skapa ett nytt fönster.</p>
@@ -8899,27 +8935,34 @@ trevligare.</p>
 <h2 id="installera">Installera</h2>
 <p><code>git&nbsp;clone</code><a href="https://github.com/tmux-plugins/tpm"><code>https://github.com/tmux-plugins/tpm</code></a><code>~/.tmux/plugins/tpm</code></p>
 <p>Skapa filen <code>.tmux.conf</code> i din home folder.</p>
-<p><code>#&nbsp;List&nbsp;of&nbsp;plugins</code>
-<code>set&nbsp;-g&nbsp;@plugin&nbsp;'tmux-plugins/tpm'</code>
-<code>set&nbsp;-g&nbsp;@plugin&nbsp;'tmux-plugins/tmux-sensible'</code></p>
-<p><code>#&nbsp;Other&nbsp;examples:</code>
-<code>#&nbsp;set&nbsp;-g&nbsp;@plugin&nbsp;'github_username/plugin_name'</code>
-<code>#&nbsp;set&nbsp;-g&nbsp;@plugin&nbsp;'git@github.com/user/plugin'</code>
-<code>#&nbsp;set&nbsp;-g&nbsp;@plugin&nbsp;'git@bitbucket.com/user/plugin'</code></p>
-<p><code>#&nbsp;Initialize&nbsp;TMUX&nbsp;plugin&nbsp;manager&nbsp;(keep&nbsp;this&nbsp;line&nbsp;at&nbsp;the&nbsp;very&nbsp;bottom&nbsp;of&nbsp;tmux.conf)</code>
-<code>run&nbsp;'~/.tmux/plugins/tpm/tpm'</code></p>
+<div class="highlight"><pre><span></span><code>#&nbsp;List&nbsp;of&nbsp;plugins
+set&nbsp;-g&nbsp;@plugin&nbsp;'tmux-plugins/tpm'
+set&nbsp;-g&nbsp;@plugin&nbsp;'tmux-plugins/tmux-sensible'
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Other&nbsp;examples:
+#&nbsp;set&nbsp;-g&nbsp;@plugin&nbsp;'github_username/plugin_name'
+#&nbsp;set&nbsp;-g&nbsp;@plugin&nbsp;'git@github.com/user/plugin'
+#&nbsp;set&nbsp;-g&nbsp;@plugin&nbsp;'git@bitbucket.com/user/plugin'
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Initialize&nbsp;TMUX&nbsp;plugin&nbsp;manager&nbsp;(keep&nbsp;this&nbsp;line&nbsp;at&nbsp;the&nbsp;very&nbsp;bottom&nbsp;of&nbsp;tmux.conf)
+run&nbsp;'~/.tmux/plugins/tpm/tpm'
+</code></pre></div>
 <p>Ladda sedan TPM genom att starta om din tmux session eller ladda om
 confen med.</p>
-<p><code>tmux&nbsp;source&nbsp;~/.tmux.conf</code></p>
+<div class="highlight"><pre><span></span><code>tmux&nbsp;source&nbsp;~/.tmux.conf
+</code></pre></div>
 <h2 id="lagga-till-plugins">Lägga till plugins</h2>
 <p>Plugins finns på <a href="https://github.com/tmux-plugins">TPM's Github</a></p>
 <p>Lägg sedan till pluginet i <code>.tmux.conf</code> med kommandot
-<code>set -g @plugin '...'</code></p>
+</p><div class="highlight"><pre><span></span><code>set -g @plugin '...'
+</code></pre></div><p></p>
 <p>Öppna sedan Tmux och tryck för att installera.</p>
-<p><code>prefix&nbsp;+&nbsp;I</code></p>
+<div class="highlight"><pre><span></span><code>prefix&nbsp;+&nbsp;I
+</code></pre></div>
 <p>Ta bort plugin genom att ta bort raden kommentera ut den i <code>.tmux.conf</code>
 och tryck.</p>
-<p><code>prefix&nbsp;+&nbsp;alt&nbsp;+&nbsp;u</code></p>
+<div class="highlight"><pre><span></span><code>prefix&nbsp;+&nbsp;alt&nbsp;+&nbsp;u
+</code></pre></div>
 <h2 id="bra-plugins">Bra plugins</h2>
 <p><a href="https://github.com/tmux-plugins/tmux-sensible">Sensible</a> - Ett gäng
 inställningar som man bör ha.</p>
@@ -8950,29 +8993,34 @@ till en session vid inloggning.</p>
 </code></pre></div>
 <h1 id="tipsntrix">Tips'n'trix</h1>
 <h4 id="for-att-skriva-till-alla-panes-samtidigt">För att skriva till alla panes samtidigt.</h4>
-<p><code>:setw&nbsp;synchronize-panes</code></p>
+<div class="highlight"><pre><span></span><code>:setw&nbsp;synchronize-panes
+</code></pre></div>
 <h4 id="clear-history">Clear-history</h4>
-<p><code>:clear-history</code></p>
+<div class="highlight"><pre><span></span><code>:clear-history
+</code></pre></div>
 <p>Eller binda det till</p>
-<p><code>bind&nbsp;-n&nbsp;C-k&nbsp;clear-history</code></p>
+<div class="highlight"><pre><span></span><code>bind&nbsp;-n&nbsp;C-k&nbsp;clear-history
+</code></pre></div>
 <h4 id="problem-att-piltangenterna-inte-fungerar">Problem att piltangenterna inte fungerar?</h4>
 <p>Upptäckte problemet när jag var ansluten till senare versioner av
 <a href="/Juniper_JunOS" title="wikilink">JunOS</a>. Att jag var tvungen att skriva om
 alla kommandon igen för att jag inte kunde trycka fram det senast körda
 kommandona. Efter att ha lagt till följande i min <strong>.tmux.conf</strong> fil så
 fungera det igen.</p>
-<p><code>set&nbsp;-g&nbsp;default-terminal&nbsp;"xterm-256color"</code></p>
+<div class="highlight"><pre><span></span><code>set&nbsp;-g&nbsp;default-terminal&nbsp;"xterm-256color"
+</code></pre></div>
 <h4 id="byt-pane-snabbt-utan-prefix">Byt pane snabbt utan prefix</h4>
 <p>Lägg till följande i din tmux.conf för att kunna byta pane med .</p>
-<p><code>bind&nbsp;-n&nbsp;M-Left&nbsp;select-pane&nbsp;-L</code>
-<code>bind&nbsp;-n&nbsp;M-Right&nbsp;select-pane&nbsp;-R</code>
-<code>bind&nbsp;-n&nbsp;M-Up&nbsp;select-pane&nbsp;-U</code>
-<code>bind&nbsp;-n&nbsp;M-Down&nbsp;select-pane&nbsp;-D</code></p>
+<div class="highlight"><pre><span></span><code>bind&nbsp;-n&nbsp;M-Left&nbsp;select-pane&nbsp;-L
+bind&nbsp;-n&nbsp;M-Right&nbsp;select-pane&nbsp;-R
+bind&nbsp;-n&nbsp;M-Up&nbsp;select-pane&nbsp;-U
+bind&nbsp;-n&nbsp;M-Down&nbsp;select-pane&nbsp;-D
+</code></pre></div>
 <h4 id="byt-window-utan-prefix">Byt window utan prefix</h4>
 <p>Lägg till följande för att byta window med</p>
-<p><code>bind&nbsp;-n&nbsp;S-Left&nbsp;&nbsp;previous-window</code>
-<code>bind&nbsp;-n&nbsp;S-Right&nbsp;next-window</code></p>
-<p><a href="/Category:Tools" title="wikilink">Category:Tools</a></p>
+<div class="highlight"><pre><span></span><code>bind&nbsp;-n&nbsp;S-Left&nbsp;&nbsp;previous-window
+bind&nbsp;-n&nbsp;S-Right&nbsp;next-window
+</code></pre></div>
 
 
 
@@ -8995,7 +9043,7 @@ fungera det igen.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8719,6 +8719,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9033,38 +9061,45 @@ Denna artikel har fokus på VXLAN för data plane encapsulation.</p>
 <h3 id="underlay">Underlay</h3>
 <p>Underlay routing kan göras med IGP, iBGP eller eBGP. Alla VTEP:s måste
 kunna nå varandra. Simpelt exempel:</p>
-<p><code>net&nbsp;add&nbsp;loopback&nbsp;lo&nbsp;ip&nbsp;address&nbsp;1.1.1.1/32</code>
-<code>net&nbsp;add&nbsp;ospf&nbsp;redistribute&nbsp;connected</code>
-<code>net&nbsp;add&nbsp;ospf&nbsp;network&nbsp;0.0.0.0/0&nbsp;area&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;loopback&nbsp;lo&nbsp;ip&nbsp;address&nbsp;1.1.1.1/32
+net&nbsp;add&nbsp;ospf&nbsp;redistribute&nbsp;connected
+net&nbsp;add&nbsp;ospf&nbsp;network&nbsp;0.0.0.0/0&nbsp;area&nbsp;0
+</code></pre></div>
 <h3 id="overlay">Overlay</h3>
 <p>EVPN-peering kan göras både med iBGP och eBGP, det är designen som
 avgör. Om man kör eBGP mellan leaf och spine får inte spine ändra
 next-hop i EVPN-uppdateringarna. Man kan välja att alla lokala VNI:er
 ska annonseras med BGP.</p>
-<p><code>net&nbsp;add&nbsp;bgp&nbsp;autonomous-system&nbsp;65000</code>
-<code>net&nbsp;add&nbsp;bgp&nbsp;neighbor&nbsp;172.16.0.2&nbsp;remote-as&nbsp;65000</code>
-<code>net&nbsp;add&nbsp;bgp&nbsp;neighbor&nbsp;172.16.0.2&nbsp;update-source&nbsp;lo</code>
-<code>net&nbsp;add&nbsp;bgp&nbsp;l2vpn&nbsp;evpn&nbsp;neighbor&nbsp;172.16.0.2&nbsp;activate</code>
-<code>net&nbsp;add&nbsp;bgp&nbsp;l2vpn&nbsp;evpn&nbsp;advertise-all-vni</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;bgp&nbsp;autonomous-system&nbsp;65000
+net&nbsp;add&nbsp;bgp&nbsp;neighbor&nbsp;172.16.0.2&nbsp;remote-as&nbsp;65000
+net&nbsp;add&nbsp;bgp&nbsp;neighbor&nbsp;172.16.0.2&nbsp;update-source&nbsp;lo
+net&nbsp;add&nbsp;bgp&nbsp;l2vpn&nbsp;evpn&nbsp;neighbor&nbsp;172.16.0.2&nbsp;activate
+net&nbsp;add&nbsp;bgp&nbsp;l2vpn&nbsp;evpn&nbsp;advertise-all-vni
+</code></pre></div>
 <p>EBGP EVPN</p>
-<p><code>net&nbsp;add&nbsp;bgp&nbsp;bestpath&nbsp;as-path&nbsp;multipath-relax</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;bgp&nbsp;bestpath&nbsp;as-path&nbsp;multipath-relax
+</code></pre></div>
 <p>Show</p>
-<p><code>net&nbsp;show&nbsp;bgp&nbsp;evpn&nbsp;summary</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;show&nbsp;bgp&nbsp;evpn&nbsp;summary
+</code></pre></div>
 <h4 id="bridging">Bridging</h4>
 <p>På varje leaf switch mappas local VLAN till ett VNI (VLAN-based mode).
 Man bör disablea data plane MAC learning eftersom EVPN tar hand om att
 utbyta mac-adresser mellan VTEP:s. VNI membership utbyts mellan VTEP:s
 med hjälp av EVPN type-3. RD/RT-derivering samt import och export görs
 automatiskt.</p>
-<p><code>net&nbsp;add&nbsp;vlan&nbsp;100</code></p>
-<p><code>net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;vxlan&nbsp;id&nbsp;10100</code>
-<code>net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;vxlan&nbsp;local-tunnelip&nbsp;1.1.1.1</code>
-<code>net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;bridge&nbsp;access&nbsp;100</code>
-<code>net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;bridge&nbsp;learning&nbsp;off</code>
-<code>net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;mtu&nbsp;9216</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;vlan&nbsp;100
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;vxlan&nbsp;id&nbsp;10100
+net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;vxlan&nbsp;local-tunnelip&nbsp;1.1.1.1
+net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;bridge&nbsp;access&nbsp;100
+net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;bridge&nbsp;learning&nbsp;off
+net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;mtu&nbsp;9216
+</code></pre></div>
 <p>Show</p>
-<p><code>net&nbsp;show&nbsp;evpn&nbsp;vni</code>
-<code>net&nbsp;show&nbsp;bridge&nbsp;macs</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;show&nbsp;evpn&nbsp;vni
+net&nbsp;show&nbsp;bridge&nbsp;macs
+</code></pre></div>
 <h4 id="l3">L3</h4>
 <p>Cumulus kan göra både symmetric och asymmetric VXLAN-routing och har
 stöd för L3 multi-tenancy. För asymmetric mode behövs ingen mer konf än
@@ -9075,44 +9110,52 @@ mac-adresser för remote VTEP:s samt genererar RMAC lokalt med ett
 "dummy"-SVI per switch. RT-import och export görs automatiskt utifrån
 ASN och VNI.</p>
 <p>Distributed symmetric routing</p>
-<p><code>net&nbsp;add&nbsp;vrf&nbsp;Tenant1</code></p>
-<p><code>net&nbsp;add&nbsp;vxlan&nbsp;VNI30001&nbsp;vxlan&nbsp;id&nbsp;30001</code>
-<code>net&nbsp;add&nbsp;vxlan&nbsp;VNI30001&nbsp;bridge&nbsp;access&nbsp;2301</code>
-<code>net&nbsp;add&nbsp;vxlan&nbsp;VNI30001&nbsp;vxlan&nbsp;local-tunnelip&nbsp;1.1.1.1</code>
-<code>net&nbsp;add&nbsp;vxlan&nbsp;VNI30001&nbsp;bridge&nbsp;learning&nbsp;off</code>
-<code>net&nbsp;add&nbsp;vxlan&nbsp;VNI30001&nbsp;bridge&nbsp;arp-nd-suppress&nbsp;on</code>
-<code>net&nbsp;add&nbsp;bridge&nbsp;bridge&nbsp;ports&nbsp;VNI30001</code></p>
-<p><code>net&nbsp;add&nbsp;vlan&nbsp;2301&nbsp;vrf&nbsp;Tenant1</code>
-<code>net&nbsp;add&nbsp;vrf&nbsp;Tenant1&nbsp;vni&nbsp;30001</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;vrf&nbsp;Tenant1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;vxlan&nbsp;VNI30001&nbsp;vxlan&nbsp;id&nbsp;30001
+net&nbsp;add&nbsp;vxlan&nbsp;VNI30001&nbsp;bridge&nbsp;access&nbsp;2301
+net&nbsp;add&nbsp;vxlan&nbsp;VNI30001&nbsp;vxlan&nbsp;local-tunnelip&nbsp;1.1.1.1
+net&nbsp;add&nbsp;vxlan&nbsp;VNI30001&nbsp;bridge&nbsp;learning&nbsp;off
+net&nbsp;add&nbsp;vxlan&nbsp;VNI30001&nbsp;bridge&nbsp;arp-nd-suppress&nbsp;on
+net&nbsp;add&nbsp;bridge&nbsp;bridge&nbsp;ports&nbsp;VNI30001
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;vlan&nbsp;2301&nbsp;vrf&nbsp;Tenant1
+net&nbsp;add&nbsp;vrf&nbsp;Tenant1&nbsp;vni&nbsp;30001
+</code></pre></div>
 <p>Show</p>
-<p><code>net&nbsp;show&nbsp;evpn&nbsp;vni</code>
-<code>net&nbsp;show&nbsp;evpn&nbsp;rmac&nbsp;vni&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;show&nbsp;evpn&nbsp;vni
+net&nbsp;show&nbsp;evpn&nbsp;rmac&nbsp;vni&nbsp;all
+</code></pre></div>
 <p><strong>Anycast GW</strong></p>
-<p><code>net&nbsp;add&nbsp;vlan&nbsp;100&nbsp;ip&nbsp;address-virtual&nbsp;00:00:11:11:22:22&nbsp;10.0.0.1/24</code>
-<code>net&nbsp;add&nbsp;vlan&nbsp;100&nbsp;vrf&nbsp;Tenant1</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;vlan&nbsp;100&nbsp;ip&nbsp;address-virtual&nbsp;00:00:11:11:22:22&nbsp;10.0.0.1/24
+net&nbsp;add&nbsp;vlan&nbsp;100&nbsp;vrf&nbsp;Tenant1
+</code></pre></div>
 <p><strong>ARP/ND Suppression</strong>
 Man kan låta en lokal ARP-proxy hantera requests för att suppressa ARP
 flooding över VXLAN så mycket som möjligt. MAC+IP address advertisement
 behövs för ARP suppression.</p>
-<p><code>net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;bridge&nbsp;arp-nd-suppress&nbsp;on</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;vxlan&nbsp;VNI100&nbsp;bridge&nbsp;arp-nd-suppress&nbsp;on
+</code></pre></div>
 <p>Show</p>
-<p><code>net&nbsp;show&nbsp;evpn&nbsp;arp-cache&nbsp;vni&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;show&nbsp;evpn&nbsp;arp-cache&nbsp;vni&nbsp;all
+</code></pre></div>
 <p><strong>Type-5 Routes</strong>
 Prefix-based routing används primärt för destinations utanför DC.
 EVPN-routes har L3-VNI och RMAC enligt symmetric routing model.</p>
-<p><code>net&nbsp;add&nbsp;bgp&nbsp;vrf&nbsp;Tenant1&nbsp;autonomous-system&nbsp;65000</code>
-<code>net&nbsp;add&nbsp;bgp&nbsp;vrf&nbsp;Tenant1&nbsp;l2vpn&nbsp;evpn&nbsp;advertise&nbsp;ipv4&nbsp;unicast</code></p>
+<div class="highlight"><pre><span></span><code>net&nbsp;add&nbsp;bgp&nbsp;vrf&nbsp;Tenant1&nbsp;autonomous-system&nbsp;65000
+net&nbsp;add&nbsp;bgp&nbsp;vrf&nbsp;Tenant1&nbsp;l2vpn&nbsp;evpn&nbsp;advertise&nbsp;ipv4&nbsp;unicast
+</code></pre></div>
 <h3 id="mlag">MLAG</h3>
 <p>Cumulus har stöd för dual-attached hosts i VXLAN active-active mode. Det
 krävs ingen speciell konfiguration för detta mer än att alla VNI:er
 måste konfas identiskt och att peerlinken tillhör bridge. MAC
 synchronization görs inte med EVPN utan med MLAG.</p>
-<p><code>interface&nbsp;lo</code>
-<code>address&nbsp;1.1.1.1/32</code>
-<code>clagd-vxlan-anycast-ip&nbsp;1.1.1.100</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;lo
+&nbsp;address&nbsp;1.1.1.1/32
+&nbsp;clagd-vxlan-anycast-ip&nbsp;1.1.1.100
+</code></pre></div>
 <p>Denna anycast-adress sätts som next-hop i de EVPN-uppdaterignar som
 skickas ut så den adressen måste annonseras i underlay.</p>
-<p><a href="/Category:Cumulus" title="wikilink">Category:Cumulus</a></p>
 
 
 
@@ -9135,7 +9178,7 @@ skickas ut så den adressen måste annonseras i underlay.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

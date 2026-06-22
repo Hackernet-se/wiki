@@ -8748,6 +8748,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9094,13 +9122,13 @@ på <a href="/Cisco_QoS" title="wikilink">QoS</a>-policy för self-generated pac
 inblandade enheterna.</p>
 <h3 id="paket">Paket</h3>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../img/Cisco_BFD_Control.PNG" data-desc-position="bottom"><img alt="Cisco_BFD_Control.PNG" src="../img/Cisco_BFD_Control.PNG"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_BFD_Control.PNG" data-desc-position="bottom"><img alt="Cisco_BFD_Control.PNG" src="../../images/Cisco_BFD_Control.PNG"></a></p>
 <figcaption>
 <p>Control packet</p>
 </figcaption>
 </figure>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../img/Cisco_BFD_Echo.PNG" data-desc-position="bottom"><img alt="Cisco_BFD_Echo.PNG" src="../img/Cisco_BFD_Echo.PNG"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_BFD_Echo.PNG" data-desc-position="bottom"><img alt="Cisco_BFD_Echo.PNG" src="../../images/Cisco_BFD_Echo.PNG"></a></p>
 <figcaption>
 <p>Echo packet</p>
 </figcaption>
@@ -9118,8 +9146,9 @@ användas eftersom det inte finns några default (OBS ip unnumbered
 interfaces stöds ej). Dessa värden jämförs med andra sidan och de
 behöver inte matcha utan de högsta värdena är de som används. (Den
 första 50 är min_tx)</p>
-<p><code>interface&nbsp;gi2</code>
-<code>bfd&nbsp;interval&nbsp;50&nbsp;min_rx&nbsp;50&nbsp;multiplier&nbsp;3</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;bfd&nbsp;interval&nbsp;50&nbsp;min_rx&nbsp;50&nbsp;multiplier&nbsp;3
+</code></pre></div>
 <p>Sedan måste man registrera det protokoll som ska dra nytta av BFD. Detta
 görs per protokoll, se t.ex. BFD-konfiguration för
 <a href="/Cisco_HSRP#BFD" title="wikilink">HSRP</a>, <a href="/Cisco_OSPF#BFD" title="wikilink">OSPF</a>
@@ -9130,27 +9159,31 @@ inte har slagit på BFD kommer varje BFD Control message besvaras med en
 ICMP (Type 3) Destination Unreachable och grannskapet förblir Down.</p>
 <p>Verifiera genom att kolla grannskap och vilka protokoll som utnyttjar
 BFD.</p>
-<p><code>show&nbsp;bfd&nbsp;neighbors</code>
-<code>show&nbsp;bfd&nbsp;neighbors&nbsp;details&nbsp;|&nbsp;i&nbsp;Registered</code>
-<code>show&nbsp;bfd&nbsp;summary&nbsp;client</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bfd&nbsp;neighbors
+show&nbsp;bfd&nbsp;neighbors&nbsp;details&nbsp;|&nbsp;i&nbsp;Registered
+show&nbsp;bfd&nbsp;summary&nbsp;client
+</code></pre></div>
 <p><strong>Felsök</strong></p>
-<p><code>show&nbsp;monitor&nbsp;event&nbsp;cef&nbsp;bfd&nbsp;all</code>
-<code>show&nbsp;bfd&nbsp;drops</code>
-<code>debug&nbsp;bfd&nbsp;event</code>
-<code>debug&nbsp;bfd&nbsp;packet</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;monitor&nbsp;event&nbsp;cef&nbsp;bfd&nbsp;all
+show&nbsp;bfd&nbsp;drops
+debug&nbsp;bfd&nbsp;event
+debug&nbsp;bfd&nbsp;packet
+</code></pre></div>
 <p>IPv6, vissa plattformar har problem med att BFD-sessioner över IPv6 går
 ner med jämna mellanrum. En workaround för detta är att sätta automatisk
 refresh av ND-cachen.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ipv6&nbsp;nd&nbsp;cache&nbsp;expire&nbsp;120&nbsp;refresh</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ipv6&nbsp;nd&nbsp;cache&nbsp;expire&nbsp;120&nbsp;refresh
+</code></pre></div>
 <p><strong>Avaktivera</strong>
 Man kan även avaktivera BFD per interface utan att ta bort
 konfigurationen, då skickas fem Control messages med code Admin Down
 till andra sidan.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;ospf&nbsp;bfd&nbsp;disable</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;ospf&nbsp;bfd&nbsp;disable
+</code></pre></div>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../img/Cisco_BFD_AdminDown.PNG" data-desc-position="bottom"><img alt="Cisco_BFD_AdminDown" src="../img/Cisco_BFD_AdminDown.PNG"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_BFD_AdminDown.PNG" data-desc-position="bottom"><img alt="Cisco_BFD_AdminDown" src="../../images/Cisco_BFD_AdminDown.PNG"></a></p>
 <figcaption>
 <p>Admin Down</p>
 </figcaption>
@@ -9167,29 +9200,35 @@ går att ställa manuellt med slow-timers och påverkar inte hur ofta echos
 skickas. BFD control packets är UDP från 49152 till 3784 som kan skickas
 multihop. Echo packets är UDP till 3785 och fungerar endast single hop.</p>
 <p><code>bfd&nbsp;slow-timers</code><msec>
-<code>show&nbsp;bfd&nbsp;neighbors&nbsp;details</code></msec></p>
+</msec></p><div class="highlight"><pre><span></span><code>show&nbsp;bfd&nbsp;neighbors&nbsp;details
+</code></pre></div><p></p>
 <p>Stäng av echo mode på ett interface, inga BFD-echos skickas eller
 forwardas. ip redirects behövdes stängas av förr för echo mode men det
 är inte ett krav längre. Om man kör Unicast Reverse Path Forwarding på
 ett interface måste man stänga av echo mode eftersom echo packets
 rejectas av uRPF och grannskapet kommer att flappa kontinuerligt.</p>
-<p><code>no&nbsp;bfd&nbsp;echo</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;bfd&nbsp;echo
+</code></pre></div>
 <p>BFD kan köras i både mjukvara och hårdvara.</p>
-<p><code>show&nbsp;bfd&nbsp;neighbors&nbsp;details&nbsp;|&nbsp;i&nbsp;Session&nbsp;Host</code>
-<code>show&nbsp;bfd&nbsp;neighbors&nbsp;hardware</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bfd&nbsp;neighbors&nbsp;details&nbsp;|&nbsp;i&nbsp;Session&nbsp;Host
+show&nbsp;bfd&nbsp;neighbors&nbsp;hardware
+</code></pre></div>
 <h3 id="template">Template</h3>
 <p>Man kan skapa en template som man sedan använder på alla interface. Då
 kan man använda authentication och dampening samt få stöd för
 microsekunder.</p>
-<p><code>bfd-template&nbsp;single-hop&nbsp;BACKBONE</code>
-<code>interval&nbsp;microseconds&nbsp;min-tx&nbsp;50000&nbsp;min-rx&nbsp;50000&nbsp;multiplier&nbsp;3</code>
-<code>authentication&nbsp;sha-1&nbsp;keychain&nbsp;BFD</code>
-<code>dampening&nbsp;10&nbsp;1000&nbsp;1000&nbsp;10</code></p>
-<p><code>interface&nbsp;Gi2</code>
-<code>bfd&nbsp;template&nbsp;BACKBONE</code></p>
+<div class="highlight"><pre><span></span><code>bfd-template&nbsp;single-hop&nbsp;BACKBONE
+&nbsp;interval&nbsp;microseconds&nbsp;min-tx&nbsp;50000&nbsp;min-rx&nbsp;50000&nbsp;multiplier&nbsp;3
+&nbsp;authentication&nbsp;sha-1&nbsp;keychain&nbsp;BFD
+&nbsp;dampening&nbsp;10&nbsp;1000&nbsp;1000&nbsp;10
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi2
+&nbsp;bfd&nbsp;template&nbsp;BACKBONE
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bfd&nbsp;neighbors&nbsp;dampening</code>
-<code>show&nbsp;bfd&nbsp;neighbors&nbsp;dampened</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bfd&nbsp;neighbors&nbsp;dampening&nbsp;
+show&nbsp;bfd&nbsp;neighbors&nbsp;dampened
+</code></pre></div>
 <h3 id="static-routes">Static routes</h3>
 <p>BFD går faktiskt att använda med static routes, man måste bara berätta
 vilken next-hop som ska monitoreras. I associated mode associeras den
@@ -9197,15 +9236,20 @@ statiska routen med den statiska BFD-grannen om routens next-hop matchar
 den. I unassociated mode kommer alltid grannen att requesta en
 BFD-session om interfacet har BFD-konfiguration, detta är användbart om
 det inte finns någon static route än.</p>
-<p><code>ip&nbsp;route&nbsp;static&nbsp;bfd&nbsp;gi2&nbsp;1.1.1.1&nbsp;[unassociate]</code>
-<code>ip&nbsp;route&nbsp;10.0.0.0&nbsp;255.255.255.0&nbsp;gi2&nbsp;1.1.1.1</code></p>
-<p><code>show&nbsp;ip&nbsp;static&nbsp;route</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;route&nbsp;static&nbsp;bfd&nbsp;gi2&nbsp;1.1.1.1&nbsp;[unassociate]
+ip&nbsp;route&nbsp;10.0.0.0&nbsp;255.255.255.0&nbsp;gi2&nbsp;1.1.1.1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;static&nbsp;route
+</code></pre></div>
 <h3 id="ebgp-multihop">EBGP Multihop</h3>
-<p><code>bfd-template&nbsp;multi-hop&nbsp;MH</code>
-<code>interval&nbsp;both&nbsp;250&nbsp;multiplier&nbsp;3</code></p>
-<p><code>bfd&nbsp;map&nbsp;ipv4&nbsp;2.2.2.2/32&nbsp;1.1.1.1/32&nbsp;MH</code></p>
-<p><code>router&nbsp;bgp&nbsp;1</code>
-<code>neighbor&nbsp;2.2.2.2&nbsp;fall-over&nbsp;bfd&nbsp;multi-hop</code></p>
+<div class="highlight"><pre><span></span><code>bfd-template&nbsp;multi-hop&nbsp;MH
+&nbsp;interval&nbsp;both&nbsp;250&nbsp;multiplier&nbsp;3
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>bfd&nbsp;map&nbsp;ipv4&nbsp;2.2.2.2/32&nbsp;1.1.1.1/32&nbsp;MH
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;1
+&nbsp;neighbor&nbsp;2.2.2.2&nbsp;fall-over&nbsp;bfd&nbsp;multi-hop&nbsp;
+</code></pre></div>
 <p><strong>strict-mode</strong> - Grannskapet går inte upp om inte BFD lyckas, dvs hold
 down neighbor session tills BFD session är uppe.</p>
 <h3 id="nx-os">NX-OS</h3>
@@ -9213,15 +9257,19 @@ down neighbor session tills BFD session är uppe.</p>
 (med eventuell syntaxskillnad) men det finns funktioner som är unika.
 BFD timers kan konfas globalt och det finns default-värden, 50ms x 3. På
 vissa linjekort kan man ställa intervall ner till 15ms.</p>
-<p><code>feature&nbsp;bfd</code></p>
-<p><code>bfd&nbsp;interval&nbsp;50&nbsp;min_rx&nbsp;50&nbsp;multiplier&nbsp;3</code></p>
-<p><code>router&nbsp;ospf&nbsp;1</code>
-<code>bfd</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;bfd
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>bfd&nbsp;interval&nbsp;50&nbsp;min_rx&nbsp;50&nbsp;multiplier&nbsp;3&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;ospf&nbsp;1
+&nbsp;bfd
+</code></pre></div>
 <p>ICMP/ICMPv6 redirects bör stängas av på de interface (även SVI:er) där
 man kör BFD.</p>
-<p><code>interface&nbsp;e1/1</code>
-<code>no&nbsp;ip&nbsp;redirects</code>
-<code>no&nbsp;ipv6&nbsp;redirects</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;e1/1
+&nbsp;no&nbsp;ip&nbsp;redirects&nbsp;
+&nbsp;no&nbsp;ipv6&nbsp;redirects&nbsp;
+</code></pre></div>
 <p><strong>Subinterface</strong>
 BFD upprättar ju sessioner på alla subinterface som är konfade med BFD
 men man kan optimera det. Det subinterface med lägst vlan id blir master
@@ -9229,26 +9277,31 @@ och kommer att använda huvudinterfacets inställningar medans övriga
 subinterface kör med slow timers. Om master får BFD timeout så markeras
 alla subinterface som down av BFD. Detta funkar endast mellan Cisco
 NX-OS devices och konfas på huvudinterfacet.</p>
-<p><code>interface&nbsp;ethernet&nbsp;2/1</code>
-<code>bfd&nbsp;optimize&nbsp;subinterface</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;ethernet&nbsp;2/1
+&nbsp;bfd&nbsp;optimize&nbsp;subinterface
+</code></pre></div>
 <p><strong>Port Channel</strong>
 Detta är ingen Nexus-specifik feature men på en L3 port channel kan
 NX-OS låta BFD upprätta session över varje fysisk länk som ingår i
 LAG:en. Klienterna får det aggregerade resultatet dvs sålänge en länk är
 uppe så rapporterar BFD att länken är uppe. Man måste slå på LACP innan
 man enablear BFD.</p>
-<p><code>interface&nbsp;port-channel&nbsp;20</code>
-<code>bfd&nbsp;per-link</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;port-channel&nbsp;20
+&nbsp;bfd&nbsp;per-link
+</code></pre></div>
 <h3 id="ios-xr">IOS-XR</h3>
 <p>NCS5500</p>
-<p><code>bfd&nbsp;multipath&nbsp;include&nbsp;location&nbsp;0/0/CPU0</code></p>
+<div class="highlight"><pre><span></span><code>bfd&nbsp;multipath&nbsp;include&nbsp;location&nbsp;0/0/CPU0
+</code></pre></div>
 <p>OSPF</p>
-<p><code>router&nbsp;ospf&nbsp;1</code>
-<code>bfd&nbsp;minimum-interval&nbsp;100</code>
-<code>bfd&nbsp;fast-detect</code>
-<code>bfd&nbsp;multiplier&nbsp;3</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;ospf&nbsp;1
+&nbsp;bfd&nbsp;minimum-interval&nbsp;100
+&nbsp;bfd&nbsp;fast-detect
+&nbsp;bfd&nbsp;multiplier&nbsp;3
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bfd&nbsp;session</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bfd&nbsp;session
+</code></pre></div>
 
 
 
@@ -9271,7 +9324,7 @@ man enablear BFD.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="8 april 2025 22:23:23 CEST"><span class="timeago" datetime="2025-04-08T22:23:23+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="8 april 2025 22:23:23 CEST">2025-04-08</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

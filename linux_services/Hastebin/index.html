@@ -8763,6 +8763,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9115,8 +9143,9 @@ output är hastebin.</p>
 <p><code>git&nbsp;clone</code><a href="https://github.com/seejohnrun/haste-server"><code>https://github.com/seejohnrun/haste-server</code></a></p>
 <p>Kör sedan. Vill du ändra nån inställning i <code>config.js</code> gör det före
 detta steget.</p>
-<p><code>npm&nbsp;install</code>
-<code>npm&nbsp;start</code></p>
+<div class="highlight"><pre><span></span><code>npm&nbsp;install
+npm&nbsp;start
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Det finns 3 olika sätt att lagra sina paste på. Memcache, redis eller på
 fil.</p>
@@ -9124,87 +9153,102 @@ fil.</p>
 <p>Förutsätter att du redan har memcache server installerat på samma eller
 en annan server.</p>
 <p>Du behöver också modulen för memcache.</p>
-<p><code>npm&nbsp;install&nbsp;memcache</code></p>
+<div class="highlight"><pre><span></span><code>npm&nbsp;install&nbsp;memcache
+</code></pre></div>
 <p>Under <code>storage</code> i <code>config.js</code> ändra till.</p>
-<p><code>"storage":&nbsp;{</code>
-<code>"type":&nbsp;"memcached",</code>
-<code>"host":&nbsp;"127.0.0.1",</code>
-<code>"port":&nbsp;11211,</code>
-<code>"expire":&nbsp;2592000</code>
-<code>},</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;"storage":&nbsp;{
+&nbsp;&nbsp;&nbsp;"type":&nbsp;"memcached",
+&nbsp;&nbsp;&nbsp;"host":&nbsp;"127.0.0.1",
+&nbsp;&nbsp;&nbsp;"port":&nbsp;11211,
+&nbsp;&nbsp;&nbsp;"expire":&nbsp;2592000
+&nbsp;},
+</code></pre></div>
 <p>expire säger hur många sekunder en paste ska finnas kvar sedan den
 senast öppnades.</p>
 <h3 id="redis">Redis</h3>
 <p>Förutsätter också att du har en redis server och du behöver modulen för
 redis.</p>
-<p><code>npm&nbsp;install&nbsp;redis</code></p>
+<div class="highlight"><pre><span></span><code>npm&nbsp;install&nbsp;redis
+</code></pre></div>
 <p>Under <code>storage</code> i <code>config.js</code> ändra till.</p>
-<p><code>"storage":&nbsp;{</code>
-<code>"type":&nbsp;"redis",</code>
-<code>"host":&nbsp;"0.0.0.0",</code>
-<code>"port":&nbsp;6379,</code>
-<code>"db":&nbsp;2,</code>
-<code>"expire":&nbsp;2592000</code>
-<code>},</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;"storage":&nbsp;{
+&nbsp;&nbsp;&nbsp;"type":&nbsp;"redis",
+&nbsp;&nbsp;&nbsp;"host":&nbsp;"0.0.0.0",
+&nbsp;&nbsp;&nbsp;"port":&nbsp;6379,
+&nbsp;&nbsp;&nbsp;"db":&nbsp;2,
+&nbsp;&nbsp;&nbsp;"expire":&nbsp;2592000
+&nbsp;},
+</code></pre></div>
 <h3 id="file">File</h3>
 <p>Under <code>storage</code> i <code>config.js</code> ändra till.</p>
-<p><code>"storage":&nbsp;{</code>
-<code>"type":&nbsp;"file",</code>
-<code>"path":&nbsp;"./data",</code>
-<code>"expire":&nbsp;2592000</code>
-<code>},</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;"storage":&nbsp;{
+&nbsp;&nbsp;&nbsp;"type":&nbsp;"file",
+&nbsp;&nbsp;&nbsp;"path":&nbsp;"./data",
+&nbsp;&nbsp;&nbsp;"expire":&nbsp;2592000
+&nbsp;},
+</code></pre></div>
 <p>När du är klar med <code>config.js</code> kör sedan.</p>
-<p><code>npm&nbsp;install</code>
-<code>npm&nbsp;start</code></p>
+<div class="highlight"><pre><span></span><code>npm&nbsp;install
+npm&nbsp;start
+</code></pre></div>
 <p>Tjänsten går nu att nå på <a href="http://">http://</a><ip>:7777</ip></p>
 <h2 id="reverse-proxy">Reverse proxy</h2>
 <p>Låt en reverse proxy dela ut tjänsten tex Apache.</p>
-<p><code>&lt;VirtualHost&nbsp;*:80&gt;</code>
-<code>ServerAdmin&nbsp;root@hackernet.se</code>
-<code>ServerName&nbsp;paste.hackernet.se</code></p>
-<p><code>&lt;IfModule&nbsp;mod_proxy.c&gt;</code>
-<code>ProxyVia&nbsp;On</code>
-<code>ProxyRequests&nbsp;Off</code>
+<div class="highlight"><pre><span></span><code>&lt;VirtualHost&nbsp;*:80&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;ServerAdmin&nbsp;root@hackernet.se
+&nbsp;&nbsp;&nbsp;&nbsp;ServerName&nbsp;paste.hackernet.se
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;IfModule&nbsp;mod_proxy.c&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProxyVia&nbsp;On
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProxyRequests&nbsp;Off
+</code></pre></div>
 <code>ProxyPass&nbsp;/</code><a href="http://127.0.0.1:7777/"><code>http://127.0.0.1:7777/</code></a>
 <code>ProxyPassReverse&nbsp;/</code><a href="http://127.0.0.1:7777/"><code>http://127.0.0.1:7777/</code></a>
-<code>ProxyPreserveHost&nbsp;on</code>
-<code>&lt;Proxy&nbsp;*&gt;</code>
-<code>AllowOverride&nbsp;All</code>
-<code>Order&nbsp;allow,deny</code>
-<code>allow&nbsp;from&nbsp;all</code>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProxyPreserveHost&nbsp;on
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Proxy&nbsp;*&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AllowOverride&nbsp;All
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order&nbsp;allow,deny
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow&nbsp;from&nbsp;all
+</code></pre></div>
 <code></code>
-<code></code></p>
-<p><code>ErrorLog&nbsp;${APACHE_LOG_DIR}/hastebin.log</code></p>
-<p><code>#&nbsp;Possible&nbsp;values&nbsp;include:&nbsp;debug,&nbsp;info,&nbsp;notice,&nbsp;warn,&nbsp;error,&nbsp;crit,</code>
-<code>#&nbsp;alert,&nbsp;emerg.</code>
-<code>LogLevel&nbsp;warn</code></p>
-<p><code>CustomLog&nbsp;${APACHE_LOG_DIR}/access.log&nbsp;combined</code></p>
+<code></code><p></p>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ErrorLog&nbsp;${APACHE_LOG_DIR}/hastebin.log
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Possible&nbsp;values&nbsp;include:&nbsp;debug,&nbsp;info,&nbsp;notice,&nbsp;warn,&nbsp;error,&nbsp;crit,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;alert,&nbsp;emerg.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LogLevel&nbsp;warn
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CustomLog&nbsp;${APACHE_LOG_DIR}/access.log&nbsp;combined
+</code></pre></div>
 <p></p>
 <p>Se till att modulerna <code>proxy</code> och <code>proxy_http</code> är igång.</p>
 <h2 id="systemd-service">Systemd service</h2>
 <p>Under <code>/etc/systemd/system</code> skapa filen <code>haste.service</code> med texten.
 Anpassa <code>/opt/haste-server</code> efter vart du installerat det.</p>
-<p><code>[Service]</code>
-<code>ExecStart=/usr/bin/node&nbsp;/opt/haste-server/server.js</code>
-<code>Restart=always</code>
-<code>StandardOutput=syslog</code>
-<code>SyslogIdentifier=hastebin</code>
-<code>User=root</code>
-<code>WorkingDirectory=/opt/haste-server</code></p>
-<p><code>[Install]</code>
-<code>WantedBy=multi-user.target</code></p>
+<div class="highlight"><pre><span></span><code>[Service]
+ExecStart=/usr/bin/node&nbsp;/opt/haste-server/server.js
+Restart=always
+StandardOutput=syslog
+SyslogIdentifier=hastebin
+User=root
+WorkingDirectory=/opt/haste-server
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[Install]
+WantedBy=multi-user.target
+</code></pre></div>
 <p>Kör sedan dessa 2 kommandona för att skapa en symlänk och starta
 hastebin.</p>
-<p><code>systemctl&nbsp;enable&nbsp;/etc/systemd/system/haste.service</code>
-<code>systemctl&nbsp;start&nbsp;haste.service</code></p>
+<div class="highlight"><pre><span></span><code>systemctl&nbsp;enable&nbsp;/etc/systemd/system/haste.service
+systemctl&nbsp;start&nbsp;haste.service
+</code></pre></div>
 <h2 id="klient">Klient</h2>
 <p>Dom har flera klienter för linux och för windows.</p>
 <h3 id="lightweight-client">Lightweight client</h3>
 <p>Skriv denna raden i ditt skal för att klienten ska fungera.</p>
 <p><code>haste()&nbsp;{&nbsp;a=$(cat);&nbsp;curl&nbsp;-X&nbsp;POST&nbsp;-s&nbsp;-d&nbsp;"$a"</code><a href="https://paste.hackernet.se/documents"><code>https://paste.hackernet.se/documents</code></a><code>|&nbsp;awk&nbsp;-F&nbsp;'"'&nbsp;'{print&nbsp;"</code><a href="https://paste.hackernet.se/%22$4"><code>https://paste.hackernet.se/"$4</code></a><code>}';&nbsp;}</code></p>
 <p>För att använda klienten skriv,</p>
-<p><code>cat&nbsp;testfil.txt&nbsp;|&nbsp;haste</code></p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
+<div class="highlight"><pre><span></span><code>cat&nbsp;testfil.txt&nbsp;|&nbsp;haste
+</code></pre></div>
 
 
 
@@ -9227,7 +9271,7 @@ hastebin.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

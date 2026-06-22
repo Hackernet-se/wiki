@@ -8787,6 +8787,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9172,59 +9200,77 @@ Security</a></p>
 <p>Till skillnad från IOS så ändras inget innan man kör commit. Kommandon
 kopplat till konfigurationshantering.</p>
 <p>Visa ändringar som kommer att installeras vid commit:</p>
-<p><code>show&nbsp;configuration</code>
-<code>alias&nbsp;config&nbsp;diff&nbsp;show&nbsp;commit&nbsp;changes&nbsp;diff</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;configuration
+alias&nbsp;config&nbsp;diff&nbsp;show&nbsp;commit&nbsp;changes&nbsp;diff
+</code></pre></div>
 <p>Visa hur hela konfiguration kommer se ut efter commit:</p>
-<p><code>show&nbsp;configuration&nbsp;merge</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;configuration&nbsp;merge
+</code></pre></div>
 <p>Göra commit med en märkning av konfigurationen:</p>
-<p><code>commit&nbsp;label&nbsp;add-loopback1337</code></p>
+<div class="highlight"><pre><span></span><code>commit&nbsp;label&nbsp;add-loopback1337
+</code></pre></div>
 <p>Visa misslyckad commit tex. om något i konfiguration saknas eller är
 inkompatiblet (detta meddelas vid en vanlig commit)</p>
-<p><code>show&nbsp;configuration&nbsp;failed</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;configuration&nbsp;failed
+</code></pre></div>
 <p>Lista historiska förändringar:</p>
-<p><code>show&nbsp;configuration&nbsp;history</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;configuration&nbsp;history
+</code></pre></div>
 <p>Backa konfiguration till specifik konfiguration:</p>
-<p><code>rollback&nbsp;configuration&nbsp;to&nbsp;add-loopback1337</code></p>
+<div class="highlight"><pre><span></span><code>rollback&nbsp;configuration&nbsp;to&nbsp;add-loopback1337
+</code></pre></div>
 <p>Backa konfiguration till senaste konfiguration:</p>
-<p><code>rollback&nbsp;configuration&nbsp;last&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>rollback&nbsp;configuration&nbsp;last&nbsp;1
+</code></pre></div>
 <p>Är man inte helt säker på sin commit kan man köra commit confirmed, då
 måste man aktivt skriva commit confirm annars görs automatiskt en
 rollback.</p>
-<p><code>commit&nbsp;confirmed</code>
-<code>commit&nbsp;confirm</code></p>
+<div class="highlight"><pre><span></span><code>commit&nbsp;confirmed
+commit&nbsp;confirm&nbsp;
+</code></pre></div>
 <p>Export configuration on commit.</p>
 <p><code>configuration&nbsp;commit&nbsp;auto-save&nbsp;filename</code><a href="tftp://10.0.0.11/router1"><code>tftp://10.0.0.11/router1</code></a></p>
 <p>Man kan använda regex-baserad replace av konfiguration, t.ex. om man ska
 döpa om en policy eller acl.</p>
-<p><code>replace&nbsp;pattern&nbsp;'POLICYMAP-WRONG_NAME'&nbsp;with&nbsp;'POLICYMAP-RIGHT_NAME'</code></p>
+<div class="highlight"><pre><span></span><code>replace&nbsp;pattern&nbsp;'POLICYMAP-WRONG_NAME'&nbsp;with&nbsp;'POLICYMAP-RIGHT_NAME'
+</code></pre></div>
 <p>Run silently without the user being prompted for yes/no.</p>
-<p><code>service&nbsp;cli&nbsp;interactive&nbsp;disable</code>
-<code>copy&nbsp;running-config&nbsp;disk0:test_config.txt</code></p>
+<div class="highlight"><pre><span></span><code>service&nbsp;cli&nbsp;interactive&nbsp;disable
+copy&nbsp;running-config&nbsp;disk0:test_config.txt
+</code></pre></div>
 <p>Default listas interface i bokstavsordning, detta går att ändra.</p>
-<p><code>configuration&nbsp;display&nbsp;interface&nbsp;slot-order</code></p>
+<div class="highlight"><pre><span></span><code>configuration&nbsp;display&nbsp;interface&nbsp;slot-order
+</code></pre></div>
 <p>To prevent the re-application of the commands which are already present
 in the running configuration.</p>
-<p><code>service&nbsp;cli&nbsp;commit-optimized&nbsp;enable</code></p>
+<div class="highlight"><pre><span></span><code>service&nbsp;cli&nbsp;commit-optimized&nbsp;enable
+</code></pre></div>
 <p><strong>Konfigurationslås</strong>
 Vid konfigurering kan konfigurationsläget göras exklusivt:</p>
-<p><code>configure&nbsp;exclusive</code></p>
+<div class="highlight"><pre><span></span><code>configure&nbsp;exclusive
+</code></pre></div>
 <p>Visa låst konfiguration:</p>
-<p><code>show&nbsp;configuration&nbsp;lock</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;configuration&nbsp;lock
+</code></pre></div>
 <p>Visa vem som låst konfigurationen:</p>
-<p><code>show&nbsp;configuration&nbsp;sessions</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;configuration&nbsp;sessions
+</code></pre></div>
 <h2 id="admin">Admin</h2>
 <p>Gå till admin läge, här kan man styra användares behörigheter, ändra
 config-register, installera funktioner etc. Kommandon för admin-läget
 kan alltid köras genom tex "admin show running-config"</p>
-<p><code>admin</code></p>
+<div class="highlight"><pre><span></span><code>admin
+</code></pre></div>
 <p>Visa konfiguration (enbat för Admin läge)</p>
-<p><code>(admin)#show&nbsp;running-config</code></p>
+<div class="highlight"><pre><span></span><code>(admin)#show&nbsp;running-config
+</code></pre></div>
 <p>Skapa användare</p>
-<p><code>admin</code>
-<code>conf&nbsp;t</code>
-<code>username&nbsp;juan</code>
-<code>group&nbsp;root-system</code>
-<code>secret&nbsp;cisco</code></p>
+<div class="highlight"><pre><span></span><code>admin
+conf&nbsp;t
+username&nbsp;juan
+&nbsp;group&nbsp;root-system
+&nbsp;secret&nbsp;cisco
+</code></pre></div>
 <h4 id="fordefinierade-grupper">Fördefinierade grupper</h4>
 <ul>
 <li>root-system: Fullständig access</li>
@@ -9252,89 +9298,111 @@ kan alltid köras genom tex "admin show running-config"</p>
 </ul>
 <h4 id="egna-grupper">Egna grupper</h4>
 <p>I XR kan man skapa egna grupper för specifika ändamål</p>
-<p><code>taskgroup&nbsp;BGP</code>
-<code>task&nbsp;execute&nbsp;bgp</code>
-<code>task&nbsp;read&nbsp;bgp</code>
-<code>task&nbsp;write&nbsp;bgp</code></p>
-<p><code>taskgroup&nbsp;ISIS</code>
-<code>task&nbsp;execute&nbsp;isis</code>
-<code>task&nbsp;read&nbsp;isis</code>
-<code>task&nbsp;write&nbsp;isis</code></p>
-<p><code>taskgroup&nbsp;BGPISISTasks</code>
-<code>inherit&nbsp;taskgroup&nbsp;BGP</code>
-<code>inherit&nbsp;taskgroup&nbsp;ISIS</code></p>
-<p><code>usergroup&nbsp;BGPISISAdmins</code>
-<code>taskgroup&nbsp;BGPISISTasks</code></p>
-<p><code>username&nbsp;juan_bgp</code>
-<code>group&nbsp;BGPISISAdmins</code>
-<code>secret&nbsp;cisco</code></p>
+<div class="highlight"><pre><span></span><code>taskgroup&nbsp;BGP
+&nbsp;task&nbsp;execute&nbsp;bgp
+&nbsp;task&nbsp;read&nbsp;bgp
+&nbsp;task&nbsp;write&nbsp;bgp
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>taskgroup&nbsp;ISIS
+&nbsp;task&nbsp;execute&nbsp;isis
+&nbsp;task&nbsp;read&nbsp;isis
+&nbsp;task&nbsp;write&nbsp;isis
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>taskgroup&nbsp;BGPISISTasks
+&nbsp;inherit&nbsp;taskgroup&nbsp;BGP
+&nbsp;inherit&nbsp;taskgroup&nbsp;ISIS
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>usergroup&nbsp;BGPISISAdmins
+taskgroup&nbsp;BGPISISTasks
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>username&nbsp;juan_bgp
+&nbsp;group&nbsp;BGPISISAdmins
+&nbsp;secret&nbsp;cisco
+</code></pre></div>
 <h2 id="grundkonfiguration">Grundkonfiguration</h2>
-<p><code>hostname&nbsp;XR-01</code>
-<code>!</code>
-<code>ipv4&nbsp;netmask-format&nbsp;bit-count</code>
-<code>!</code>
-<code>line&nbsp;console</code>
-<code>exec-timeout&nbsp;30&nbsp;0</code>
-<code>!</code>
-<code>line&nbsp;default</code>
-<code>exec-timeout&nbsp;30&nbsp;0</code>
-<code>access-class&nbsp;ingress&nbsp;ACL-MGMT-ACCESS</code>
-<code>transport&nbsp;input&nbsp;ssh</code></p>
+<div class="highlight"><pre><span></span><code>hostname&nbsp;XR-01
+!
+ipv4&nbsp;netmask-format&nbsp;bit-count
+!
+line&nbsp;console
+&nbsp;exec-timeout&nbsp;30&nbsp;0
+!
+line&nbsp;default
+&nbsp;exec-timeout&nbsp;30&nbsp;0
+&nbsp;access-class&nbsp;ingress&nbsp;ACL-MGMT-ACCESS
+&nbsp;transport&nbsp;input&nbsp;ssh
+</code></pre></div>
 <p><strong>SSH</strong></p>
-<p><code>crypto&nbsp;key&nbsp;generate&nbsp;rsa&nbsp;general-keys</code>
+<p></p><div class="highlight"><pre><span></span><code>crypto&nbsp;key&nbsp;generate&nbsp;rsa&nbsp;general-keys
+</code></pre></div>
 <code>How&nbsp;many&nbsp;bits&nbsp;in&nbsp;the&nbsp;modulus&nbsp;[1024]:</code><enter>
-<code>ssh&nbsp;server&nbsp;v2</code>
-<code>ssh&nbsp;server&nbsp;logging</code>
-<code>line&nbsp;default&nbsp;transport&nbsp;input&nbsp;ssh</code></enter></p>
+<div class="highlight"><pre><span></span><code>ssh&nbsp;server&nbsp;v2
+ssh&nbsp;server&nbsp;logging
+line&nbsp;default&nbsp;transport&nbsp;input&nbsp;ssh
+</code></pre></div><p></p>
 <p>SSH Package behövs.</p>
-<p><code>show&nbsp;install&nbsp;active&nbsp;|&nbsp;include&nbsp;k9</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;install&nbsp;active&nbsp;|&nbsp;include&nbsp;k9
+</code></pre></div>
 <p><strong>Logging</strong></p>
-<p><code>logging&nbsp;on</code>
-<code>logging&nbsp;buffered&nbsp;200000</code>
-<code>logging&nbsp;10.0.10.12</code></p>
+<div class="highlight"><pre><span></span><code>logging&nbsp;on
+&nbsp;logging&nbsp;buffered&nbsp;200000
+&nbsp;logging&nbsp;10.0.10.12
+</code></pre></div>
 <p>Skicka godtyckligt loggmeddelande</p>
-<p><code>logmsg&nbsp;HEJ</code></p>
+<div class="highlight"><pre><span></span><code>logmsg&nbsp;HEJ
+</code></pre></div>
 <p><strong>NTP</strong></p>
-<p><code>clock&nbsp;timezone&nbsp;CET&nbsp;Europe/Stockholm</code></p>
-<p><code>ntp</code>
-<code>server&nbsp;79.136.86.176</code>
-<code>update-calendar</code></p>
+<div class="highlight"><pre><span></span><code>clock&nbsp;timezone&nbsp;CET&nbsp;Europe/Stockholm
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ntp
+&nbsp;server&nbsp;79.136.86.176
+&nbsp;update-calendar
+</code></pre></div>
 <p><strong>Tidszon</strong></p>
-<p><code>clock&nbsp;timezone&nbsp;CET&nbsp;1</code>
-<code>clock&nbsp;summer-time&nbsp;CEST&nbsp;recurring&nbsp;last&nbsp;sunday&nbsp;march&nbsp;02:00&nbsp;last&nbsp;sunday&nbsp;october&nbsp;03:00</code></p>
+<div class="highlight"><pre><span></span><code>clock&nbsp;timezone&nbsp;CET&nbsp;1
+clock&nbsp;summer-time&nbsp;CEST&nbsp;recurring&nbsp;last&nbsp;sunday&nbsp;march&nbsp;02:00&nbsp;last&nbsp;sunday&nbsp;october&nbsp;03:00
+</code></pre></div>
 <p><strong>SNMP</strong>
 För att spara lite CPU-cykler kan man slå på statsd caching. Detta är
 generellt rekommenderat.</p>
-<p><code>snmp-server&nbsp;ifmib&nbsp;stats&nbsp;cache</code></p>
+<div class="highlight"><pre><span></span><code>snmp-server&nbsp;ifmib&nbsp;stats&nbsp;cache
+</code></pre></div>
 <p><strong>pyIOSXR</strong>
 Enable XML agent</p>
-<p><code>xml&nbsp;agent&nbsp;tty&nbsp;iteration&nbsp;off</code></p>
+<div class="highlight"><pre><span></span><code>xml&nbsp;agent&nbsp;tty&nbsp;iteration&nbsp;off
+</code></pre></div>
 <p><strong>CDP</strong>
 CDP är default avstängt globalt och per inteface i XR. För att slå på
 CDP på XR måste det slås på globalt och per interface:</p>
-<p><code>cdp</code>
-<code>interface&nbsp;GigabitEthernet0/0/0/0</code>
-<code>cdp</code></p>
+<div class="highlight"><pre><span></span><code>cdp
+&nbsp;interface&nbsp;GigabitEthernet0/0/0/0
+&nbsp;&nbsp;cdp
+</code></pre></div>
 <p><strong>MTU</strong>
 MTU i IOS-XR räknas lite annorlunda kontra IOS eftersom L2 headern är
 inkluderad. Default har IOS och IOS-XR dock samma MTU på
 Ethernet-interface (L3: 1500B) men ska man köra jumbo frames och vill
 matcha är IOS-XR = IOS + 14, exempel:</p>
 <p>IOS</p>
-<p><code>mtu&nbsp;9216</code></p>
+<div class="highlight"><pre><span></span><code>mtu&nbsp;9216
+</code></pre></div>
 <p>IOS-XR</p>
-<p><code>mtu&nbsp;9230</code></p>
+<div class="highlight"><pre><span></span><code>mtu&nbsp;9230
+</code></pre></div>
 <h2 id="plattform">Plattform</h2>
-<p><code>top</code>
-<code>show&nbsp;redundancy</code>
-<code>show&nbsp;platform</code>
-<code>show&nbsp;install&nbsp;active&nbsp;summary</code>
-<code>show&nbsp;install&nbsp;committed&nbsp;summary</code>
-<code>show&nbsp;fpd&nbsp;package</code></p>
+<div class="highlight"><pre><span></span><code>top
+show&nbsp;redundancy&nbsp;
+show&nbsp;platform
+show&nbsp;install&nbsp;active&nbsp;summary
+show&nbsp;install&nbsp;committed&nbsp;summary
+show&nbsp;fpd&nbsp;package
+</code></pre></div>
 <p>Upgrade</p>
-<p><code>fpd&nbsp;auto-upgrade&nbsp;enable</code></p>
-<p><code>sysadmin-vm:0_RSP0#&nbsp;show&nbsp;install&nbsp;health</code>
-<code>install&nbsp;add&nbsp;source&nbsp;harddisk:&nbsp;asr9k-mini-x64-6.5.3.iso</code></p>
+<div class="highlight"><pre><span></span><code>fpd&nbsp;auto-upgrade&nbsp;enable
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sysadmin-vm:0_RSP0#&nbsp;show&nbsp;install&nbsp;health
+install&nbsp;add&nbsp;source&nbsp;harddisk:&nbsp;asr9k-mini-x64-6.5.3.iso
+</code></pre></div>
 <h3 id="copp">CoPP</h3>
 <p>Control Plane Policing (CoPP) skyddar kontrollplanet för att säkerställa
 stabilitet, nåbarhet och paketleverans. CoPP i IOS-XR implementeras med
@@ -9345,17 +9413,19 @@ lämnas default initialt för att eventuellt modifieras vid ett senare
 tillfälle utifrån behov. IOS-XR kan även hantera viss trafik direkt i
 linjekorten för att avlasta CPU, t.ex. BFD, Netflow och ARP kommer LPTS
 instruera lokal CPU att hantera istället för RSP CPU.</p>
-<p><code>show&nbsp;lpts&nbsp;bindings&nbsp;brief</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;lpts&nbsp;bindings&nbsp;brief
+</code></pre></div>
 <p><strong>MPP</strong>
 Management Plane Protection är på default men alla TCP- och UDP-portar
 kan accessas ifrån alla interface. Detta går att strypa ner för både
 inband och OoB.</p>
-<p><code>control-plane</code>
-<code>management-plane</code>
-<code>out-of-band</code>
-<code>interface&nbsp;MgmtEth0/0/CPU0/0</code>
-<code>allow&nbsp;SSH&nbsp;peer</code>
-<code>address&nbsp;ipv4&nbsp;10.0.0.0/24</code></p>
+<div class="highlight"><pre><span></span><code>control-plane
+&nbsp;management-plane
+&nbsp;&nbsp;out-of-band
+&nbsp;&nbsp;&nbsp;interface&nbsp;MgmtEth0/0/CPU0/0
+&nbsp;&nbsp;&nbsp;&nbsp;allow&nbsp;SSH&nbsp;peer
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;address&nbsp;ipv4&nbsp;10.0.0.0/24
+</code></pre></div>
 <h3 id="rpl">RPL</h3>
 <p>När man editerar en existerande policy och commitar kommer det
 automatiskt att skickas BGP REFRESH, förutsatt att granne har denna
@@ -9363,54 +9433,60 @@ capability. Det görs också en full table refresh eftersom förändringen
 kanske innebär att prefix som inte tidigare importerades nu ska
 importeras. Man behöver alltså inte göra någon soft reset som med IOS.
 Detta går att stänga av.</p>
-<p><code>bgp&nbsp;auto-policy-soft-reset&nbsp;disable</code></p>
+<div class="highlight"><pre><span></span><code>bgp&nbsp;auto-policy-soft-reset&nbsp;disable
+</code></pre></div>
 <p>Troubleshooting - dry run</p>
 <p><code>show&nbsp;bgp&nbsp;route-policy</code><route-policy-name></route-policy-name></p>
 <p>Kolla hur lång tid olika route-policy entries tar för en viss peering</p>
-<p><code>debug&nbsp;pcl&nbsp;profile&nbsp;detail</code>
-<code>!clear&nbsp;bgp&nbsp;peering</code>
-<code>show&nbsp;pcl&nbsp;protocol&nbsp;bgp&nbsp;speaker-0&nbsp;neighbor-in-dflt</code><neighbor><code>policy&nbsp;profile</code></neighbor></p>
+<p></p><div class="highlight"><pre><span></span><code>debug&nbsp;pcl&nbsp;profile&nbsp;detail
+!clear&nbsp;bgp&nbsp;peering
+</code></pre></div>
+<code>show&nbsp;pcl&nbsp;protocol&nbsp;bgp&nbsp;speaker-0&nbsp;neighbor-in-dflt</code><neighbor><code>policy&nbsp;profile</code><p></p>
 <h2 id="hsrp">HSRP</h2>
-<p><code>interface&nbsp;GigabitEthernet&nbsp;0/0/0/0</code>
-<code>ip&nbsp;address&nbsp;10.32.0.3&nbsp;255.255.255.0</code>
-<code>router&nbsp;hsrp</code>
-<code>interface&nbsp;GigabitEthernet&nbsp;0/0/0/0</code>
-<code>hsrp&nbsp;1&nbsp;ipv4&nbsp;10.32.0.1</code>
-<code>hsrp&nbsp;1&nbsp;priority&nbsp;95</code>
-<code>hsrp&nbsp;1&nbsp;preempt</code>
-<code>hsrp&nbsp;1&nbsp;track&nbsp;GigabitEthernet&nbsp;0/0/0/1</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet&nbsp;0/0/0/0
+&nbsp;ip&nbsp;address&nbsp;10.32.0.3&nbsp;255.255.255.0
+router&nbsp;hsrp
+&nbsp;interface&nbsp;GigabitEthernet&nbsp;0/0/0/0
+&nbsp;hsrp&nbsp;1&nbsp;ipv4&nbsp;10.32.0.1
+&nbsp;hsrp&nbsp;1&nbsp;priority&nbsp;95
+&nbsp;hsrp&nbsp;1&nbsp;preempt
+&nbsp;hsrp&nbsp;1&nbsp;track&nbsp;GigabitEthernet&nbsp;0/0/0/1
+</code></pre></div>
 <h2 id="vrrp">VRRP</h2>
-<p><code>interface&nbsp;GigabitEthernet&nbsp;0/0/0/0</code>
-<code>ip&nbsp;address&nbsp;10.32.25.3&nbsp;255.255.255.0</code>
-<code>router&nbsp;vrrp</code>
-<code>interface&nbsp;GigabitEthernet&nbsp;0/0/0/0</code>
-<code>address-family&nbsp;ipv4</code>
-<code>vrrp&nbsp;1</code>
-<code>address&nbsp;10.32.25.1</code>
-<code>priority&nbsp;95</code>
-<code>track&nbsp;interface&nbsp;GigabitEthernet&nbsp;0/0/0/0&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet&nbsp;0/0/0/0
+&nbsp;ip&nbsp;address&nbsp;10.32.25.3&nbsp;255.255.255.0
+router&nbsp;vrrp
+&nbsp;interface&nbsp;GigabitEthernet&nbsp;0/0/0/0
+&nbsp;&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;&nbsp;vrrp&nbsp;1
+&nbsp;&nbsp;&nbsp;&nbsp;address&nbsp;10.32.25.1
+&nbsp;&nbsp;&nbsp;&nbsp;priority&nbsp;95
+&nbsp;&nbsp;&nbsp;&nbsp;track&nbsp;interface&nbsp;GigabitEthernet&nbsp;0/0/0/0&nbsp;10
+</code></pre></div>
 <h2 id="vrf">VRF</h2>
 <p>Nedan exempel används ihop med MPLS och BGP.</p>
-<p><code>vrf&nbsp;1337</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>import&nbsp;route-target</code>
-<code>1337:10</code>
-<code>export&nbsp;route-target</code>
-<code>1337:10</code></p>
-<p><code>router&nbsp;bgp&nbsp;1337</code>
-<code>vrf&nbsp;1337</code>
-<code>rd&nbsp;1337:10</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>redistribute&nbsp;static</code></p>
+<div class="highlight"><pre><span></span><code>vrf&nbsp;1337
+&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;import&nbsp;route-target
+&nbsp;&nbsp;&nbsp;1337:10
+&nbsp;&nbsp;export&nbsp;route-target
+&nbsp;&nbsp;&nbsp;1337:10
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;1337
+&nbsp;vrf&nbsp;1337
+&nbsp;&nbsp;rd&nbsp;1337:10
+&nbsp;&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;&nbsp;redistribute&nbsp;static
+</code></pre></div>
 <p>Protip: I XR när man kör "show run vrf xx" ser man bara det som finns
 konfigurerat under "vrf xx", inte tex det som rör vrf under bgp
 konfigurationen. För att se allt i konfugrationen som rör en specifik
 vrf kan följande kommando användas:</p>
-<p><code>show&nbsp;run&nbsp;formal&nbsp;|&nbsp;i&nbsp;vrf&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;run&nbsp;formal&nbsp;|&nbsp;i&nbsp;vrf&nbsp;10
+</code></pre></div>
 <p><strong>CEF</strong>
 show cef ipv6 exact-route 2001::2:2 2001::1:1 protocol icmp
-ingress-interface GigabitEthernet0/0/0/0.101</p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+ingress-interface GigabitEthernet0/0/0/0.101</p></neighbor></enter>
 
 
 
@@ -9433,7 +9509,7 @@ ingress-interface GigabitEthernet0/0/0/0.101</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

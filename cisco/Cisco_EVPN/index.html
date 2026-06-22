@@ -8621,6 +8621,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8887,128 +8915,135 @@ underlay. Notera att IGP-annonsering av NVE loopback address efter boot
 default kommer att suppressas under 300 sekunder för att overlay ska
 hinna konvergera. Detta går att ställa in under interface nve 1.</p>
 <p>Simpelt NX-OS exempel</p>
-<p><code>feature&nbsp;ospf</code></p>
-<p><code>interface&nbsp;loopback0</code>
-<code>description&nbsp;VTEP</code>
-<code>ip&nbsp;address&nbsp;1.1.1.1/32</code>
-<code>ip&nbsp;router&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0</code></p>
-<p><code>interface&nbsp;Ethernet1/1</code>
-<code>description&nbsp;Uplink</code>
-<code>no&nbsp;switchport</code>
-<code>medium&nbsp;p2p</code>
-<code>mtu&nbsp;9216</code>
-<code>ip&nbsp;address&nbsp;10.0.2.2/30</code>
-<code>no&nbsp;shutdown</code>
-<code>ip&nbsp;router&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;ospf
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;loopback0
+&nbsp;description&nbsp;VTEP
+&nbsp;ip&nbsp;address&nbsp;1.1.1.1/32
+&nbsp;ip&nbsp;router&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Ethernet1/1
+&nbsp;description&nbsp;Uplink
+&nbsp;no&nbsp;switchport
+&nbsp;medium&nbsp;p2p
+&nbsp;mtu&nbsp;9216
+&nbsp;ip&nbsp;address&nbsp;10.0.2.2/30
+&nbsp;no&nbsp;shutdown
+&nbsp;ip&nbsp;router&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0
+</code></pre></div>
 <p>Det går även köra upplänkarna IP unnumbered.</p>
 <h1 id="overlay">Overlay</h1>
 <p>EVPN-peering för DC VXLAN-overlay kan göras både med iBGP och eBGP, det
 är designen som avgör.</p>
 <p>Konfig för leafs oavsett iBGP eller eBGP overlay.</p>
-<p><code>feature&nbsp;bgp</code>
-<code>feature&nbsp;vn-segment-vlan-based</code>
-<code>feature&nbsp;nv&nbsp;overlay</code>
-<code>nv&nbsp;overlay&nbsp;evpn</code></p>
-<p><code>interface&nbsp;nve1</code>
-<code>no&nbsp;shutdown</code>
-<code>host-reachability&nbsp;protocol&nbsp;bgp</code>
-<code>source-interface&nbsp;loopback0</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;bgp
+feature&nbsp;vn-segment-vlan-based
+feature&nbsp;nv&nbsp;overlay
+nv&nbsp;overlay&nbsp;evpn
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve1
+&nbsp;no&nbsp;shutdown
+&nbsp;host-reachability&nbsp;protocol&nbsp;bgp
+&nbsp;source-interface&nbsp;loopback0
+</code></pre></div>
 <h3 id="ibgp">IBGP</h3>
 <p>Den simplaste EVPN fabricen är IBGP overlay med IGP underlay.</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>neighbor&nbsp;2.2.2.2</code>
-<code>remote-as&nbsp;65000</code>
-<code>update-source&nbsp;loopback0</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>send-community</code>
-<code>send-community&nbsp;extended</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;neighbor&nbsp;2.2.2.2
+&nbsp;&nbsp;remote-as&nbsp;65000
+&nbsp;&nbsp;update-source&nbsp;loopback0
+&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;&nbsp;send-community
+&nbsp;&nbsp;&nbsp;&nbsp;send-community&nbsp;extended
+</code></pre></div>
 <p><strong>Route Reflector</strong>
 Precis som med övriga adressfamiljer kan man med hjälp av route
 reflector öka skalbarhet och förenkla konfigurationen. Spine-switchar
 kan t.ex. stå för denna roll i en IBGP EVPN setup.</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>neighbor&nbsp;1.1.1.0/24</code>
-<code>remote-as&nbsp;65000</code>
-<code>update-source&nbsp;loopback0</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>send-community&nbsp;extended</code>
-<code>route-reflector-client</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;neighbor&nbsp;1.1.1.0/24
+&nbsp;&nbsp;&nbsp;remote-as&nbsp;65000
+&nbsp;&nbsp;&nbsp;update-source&nbsp;loopback0
+&nbsp;&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;send-community&nbsp;extended
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;route-reflector-client
+</code></pre></div>
 <h3 id="ebgp">EBGP</h3>
 <p>Om man bygger sin fabric med EBGP EVPN så måste next-hop-unchanged
 konfas på spines peeringar mot leaf. Om man kör med autoderiverade RTs
 måste man skriva om dem innan de når leaf samt att spine switches inte
 har någon VRF-konfig så man måste slå på retain route-target.</p>
-<p><code>route-map&nbsp;NH-Unchanged&nbsp;permit&nbsp;10</code>
-<code>set&nbsp;ip&nbsp;next-hop&nbsp;unchanged</code></p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>retain&nbsp;route-target&nbsp;all</code>
-<code>neighbor&nbsp;1.1.1.0/24</code>
-<code>remote-as&nbsp;65001</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>route-map&nbsp;NH-Unchanged&nbsp;out</code>
-<code>rewrite-evpn-rt-asn</code></p>
+<div class="highlight"><pre><span></span><code>route-map&nbsp;NH-Unchanged&nbsp;permit&nbsp;10
+&nbsp;set&nbsp;ip&nbsp;next-hop&nbsp;unchanged
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000&nbsp;
+&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;&nbsp;retain&nbsp;route-target&nbsp;all
+&nbsp;&nbsp;neighbor&nbsp;1.1.1.0/24
+&nbsp;&nbsp;&nbsp;&nbsp;remote-as&nbsp;65001&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;route-map&nbsp;NH-Unchanged&nbsp;out
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite-evpn-rt-asn
+</code></pre></div>
 <p><strong>All leaf same ASN</strong>
 Spine</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>neighbor&nbsp;1.1.1.1&nbsp;remote-as&nbsp;65001</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>disable-peer-as-check</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;neighbor&nbsp;1.1.1.1&nbsp;remote-as&nbsp;65001
+&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;disable-peer-as-check
+</code></pre></div>
 <p>Leaf</p>
-<p><code>router&nbsp;bgp&nbsp;65001</code>
-<code>neighbor&nbsp;2.2.2.2&nbsp;remote-as&nbsp;65000</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>allowas-in</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65001
+&nbsp;neighbor&nbsp;2.2.2.2&nbsp;remote-as&nbsp;65000
+&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;allowas-in
+</code></pre></div>
 <h3 id="verify-overlay">Verify Overlay</h3>
-<p><code>show&nbsp;nve&nbsp;int&nbsp;nve1</code>
-<code>show&nbsp;nve&nbsp;peers&nbsp;detail</code>
-<code>show&nbsp;bgp&nbsp;l2vpn&nbsp;evpn&nbsp;summary</code>
-<code>show&nbsp;nve&nbsp;internal&nbsp;platform&nbsp;interface&nbsp;nve&nbsp;1&nbsp;detail</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;nve&nbsp;int&nbsp;nve1
+show&nbsp;nve&nbsp;peers&nbsp;detail
+show&nbsp;bgp&nbsp;l2vpn&nbsp;evpn&nbsp;summary
+show&nbsp;nve&nbsp;internal&nbsp;platform&nbsp;interface&nbsp;nve&nbsp;1&nbsp;detail&nbsp;
+</code></pre></div>
 <h2 id="bridging">Bridging</h2>
 <p>På varje leaf switch mappas local VLAN till ett VNI (VLAN-based mode).</p>
-<p><code>vlan&nbsp;100</code>
-<code>vn-segment&nbsp;10100</code>
-<code>vlan&nbsp;101</code>
-<code>vn-segment&nbsp;10101</code></p>
-<div class="mw-collapsible mw-collapsed" style="width:310px">
-
-VLAN modes:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco-evpn-vlan-mode.png>](/File:Cisco-EVPN-VLAN-mode.PNG "wikilink")
-
-</file:cisco-evpn-vlan-mode.png></div>
-</div>
-
+<div class="highlight"><pre><span></span><code>vlan&nbsp;100
+&nbsp;vn-segment&nbsp;10100
+vlan&nbsp;101
+&nbsp;vn-segment&nbsp;10101
+</code></pre></div>
+<p>VLAN modes:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco-EVPN-VLAN-mode.PNG" data-desc-position="bottom"><img alt="Cisco-EVPN-VLAN-mode.PNG" src="../../images/Cisco-EVPN-VLAN-mode.PNG"></a></p>
 <p>HER mha EVPN route typ 3</p>
-<p><code>interface&nbsp;nve1</code>
-<code>member&nbsp;vni&nbsp;10100</code>
-<code>ingress-replication&nbsp;protocol&nbsp;bgp</code>
-<code>member&nbsp;vni&nbsp;10101</code>
-<code>ingress-replication&nbsp;protocol&nbsp;bgp</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve1
+&nbsp;member&nbsp;vni&nbsp;10100
+&nbsp;&nbsp;&nbsp;ingress-replication&nbsp;protocol&nbsp;bgp
+&nbsp;member&nbsp;vni&nbsp;10101
+&nbsp;&nbsp;&nbsp;ingress-replication&nbsp;protocol&nbsp;bgp
+</code></pre></div>
 <p>RD och RT för bridging. RT-import/export görs automatiskt utifrån ASN
 och VNI.</p>
-<p><code>evpn</code>
-<code>vni&nbsp;10100&nbsp;l2</code>
-<code>rd&nbsp;auto</code>
-<code>route-target&nbsp;import&nbsp;auto</code>
-<code>route-target&nbsp;export&nbsp;auto</code>
-<code>exit</code>
-<code>vni&nbsp;10101&nbsp;l2</code>
-<code>rd&nbsp;auto</code>
-<code>route-target&nbsp;import&nbsp;auto</code>
-<code>route-target&nbsp;export&nbsp;auto</code>
-<code>exit</code></p>
+<div class="highlight"><pre><span></span><code>evpn&nbsp;
+&nbsp;vni&nbsp;10100&nbsp;l2&nbsp;
+&nbsp;&nbsp;rd&nbsp;auto&nbsp;
+&nbsp;&nbsp;route-target&nbsp;import&nbsp;auto&nbsp;
+&nbsp;&nbsp;route-target&nbsp;export&nbsp;auto
+&nbsp;&nbsp;exit
+&nbsp;vni&nbsp;10101&nbsp;l2&nbsp;
+&nbsp;&nbsp;rd&nbsp;auto&nbsp;
+&nbsp;&nbsp;route-target&nbsp;import&nbsp;auto&nbsp;
+&nbsp;&nbsp;route-target&nbsp;export&nbsp;auto
+&nbsp;&nbsp;exit
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;nve&nbsp;vni</code>
-<code>show&nbsp;nve&nbsp;peers&nbsp;data-plane&nbsp;detail</code>
-<code>show&nbsp;l2route&nbsp;evpn&nbsp;mac-ip&nbsp;all</code>
-<code>show&nbsp;forwarding&nbsp;nve&nbsp;l3&nbsp;peers</code>
-<code>show&nbsp;mac&nbsp;address-table</code>
-<code>show&nbsp;system&nbsp;internal&nbsp;l2fwder&nbsp;mac&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#Nexus&nbsp;9000v</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;nve&nbsp;vni
+show&nbsp;nve&nbsp;peers&nbsp;data-plane&nbsp;detail
+show&nbsp;l2route&nbsp;evpn&nbsp;mac-ip&nbsp;all
+show&nbsp;forwarding&nbsp;nve&nbsp;l3&nbsp;peers
+show&nbsp;mac&nbsp;address-table
+show&nbsp;system&nbsp;internal&nbsp;l2fwder&nbsp;mac&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#Nexus&nbsp;9000v
+</code></pre></div>
 <h3 id="vpc">vPC</h3>
 <p>Om man kör <a href="/Nexus_vPC" title="wikilink">vPC</a> får man sätta upp sina
 VTEP-interface (loopback) med dubbla IP-adresser där secondary IP
@@ -9019,33 +9054,37 @@ oktetten i loopbacks primära IP-adress används för att generera RMAC när
 man kör vPC. Varje vPC-peer har separata BGP-sessioner till spine. I
 övrigt måste de ha identisk konfiguration när det gäller VLAN, VNI och
 NVE (<em>show vpc consistency-parameters vni</em>).</p>
-<p><code>interface&nbsp;loopback0</code>
-<code>ip&nbsp;address&nbsp;100.0.0.11/32</code>
-<code>ip&nbsp;address&nbsp;100.0.0.100/32&nbsp;secondary</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;loopback0
+&nbsp;ip&nbsp;address&nbsp;100.0.0.11/32
+&nbsp;ip&nbsp;address&nbsp;100.0.0.100/32&nbsp;secondary
+</code></pre></div>
 <p>vPC Domain best practice när man kör EVPN.</p>
-<p><code>vpc&nbsp;domain&nbsp;1</code>
-<code>peer-switch</code>
-<code>peer-keepalive&nbsp;destination&nbsp;10.0.0.2&nbsp;source&nbsp;10.0.0.1</code>
-<code>peer-gateway</code>
-<code>ipv6&nbsp;nd&nbsp;synchronize</code>
-<code>ip&nbsp;arp&nbsp;synchronize</code></p>
+<div class="highlight"><pre><span></span><code>vpc&nbsp;domain&nbsp;1
+&nbsp;peer-switch
+&nbsp;peer-keepalive&nbsp;destination&nbsp;10.0.0.2&nbsp;source&nbsp;10.0.0.1
+&nbsp;peer-gateway
+&nbsp;ipv6&nbsp;nd&nbsp;synchronize
+&nbsp;ip&nbsp;arp&nbsp;synchronize
+</code></pre></div>
 <p><strong>vPC Fabric Peering</strong>
 I nyare NX-OS på N9k behövs ingen fysisk peer-link längre utan man kan
 köra CFSoIP över fabricen, detta sparar portar och kallas vPC Fabric
 Peering. Data plane traffic görs över en VXLAN-tunnel. Man berättar för
 switchen vilka som är fabric-länkar och dessa trackas då.</p>
-<p><code>hardware&nbsp;access-list&nbsp;tcam&nbsp;region&nbsp;in-flow-redirect&nbsp;512</code>
-<code>vpc&nbsp;domain&nbsp;1</code>
-<code>peer-keepalive&nbsp;destination&nbsp;10.0.0.2&nbsp;source&nbsp;10.0.0.1</code>
-<code>virtual&nbsp;peer-link&nbsp;destination&nbsp;10.0.10.2&nbsp;source&nbsp;10.0.10.1/32</code>
-<code>peer-switch</code>
-<code>peer-gateway</code>
-<code>ip&nbsp;arp&nbsp;synchronize</code>
-<code>ipv6&nbsp;nd&nbsp;synchronize</code></p>
+<div class="highlight"><pre><span></span><code>hardware&nbsp;access-list&nbsp;tcam&nbsp;region&nbsp;in-flow-redirect&nbsp;512
+vpc&nbsp;domain&nbsp;1
+&nbsp;peer-keepalive&nbsp;destination&nbsp;10.0.0.2&nbsp;source&nbsp;10.0.0.1
+&nbsp;virtual&nbsp;peer-link&nbsp;destination&nbsp;10.0.10.2&nbsp;source&nbsp;10.0.10.1/32&nbsp;
+&nbsp;peer-switch
+&nbsp;peer-gateway
+&nbsp;ip&nbsp;arp&nbsp;synchronize
+&nbsp;ipv6&nbsp;nd&nbsp;synchronize
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;vpc</code>
-<code>show&nbsp;vpc&nbsp;fabric-ports</code>
-<code>show&nbsp;vpc&nbsp;virtual-peerlink&nbsp;vlan&nbsp;consistency</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;vpc
+show&nbsp;vpc&nbsp;fabric-ports
+show&nbsp;vpc&nbsp;virtual-peerlink&nbsp;vlan&nbsp;consistency
+</code></pre></div>
 <p><strong>advertise-pip</strong>
 Default annonseras alla Layer-3 routes med secondary IP address (VIP) på
 VTEP. Prefix routes och leaf switch generated routes synkas ej mellan
@@ -9055,21 +9094,25 @@ ena eller om man ska agera <a href="/Cisco_DHCP#Relay" title="wikilink">DHCP Rel
 tenants så kan traffic blackholing uppstå med default beteendet. Man kan
 därför konfa att route type 5 routes ska annonseras med primary IP
 address så det blir next-hop för fabricen.</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>advertise-pip</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;advertise-pip
+</code></pre></div>
 <p><strong>Backup routing</strong>
 Om den ena vPC-peeren tappar sina upplänkar till spine och man inte har
 någon backup routing så uppstår traffic blackholing. Detta kan man
 motverka genom att bygga en backup-väg över peer-linken till den andra
 peeren.</p>
-<p><code>vlan&nbsp;99</code></p>
-<p><code>interface&nbsp;vlan99</code>
-<code>ip&nbsp;address&nbsp;10.99.99.1/30</code>
-<code>ip&nbsp;router&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0.0.0.0</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code></p>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;99
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;vlan99
+&nbsp;ip&nbsp;address&nbsp;10.99.99.1/30
+&nbsp;ip&nbsp;router&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0.0.0.0
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+</code></pre></div>
 <p>Nexus 5600</p>
-<p><code>vpc&nbsp;nve&nbsp;peer-link-vlan&nbsp;99</code></p>
+<div class="highlight"><pre><span></span><code>vpc&nbsp;nve&nbsp;peer-link-vlan&nbsp;99
+</code></pre></div>
 <h3 id="bd-oriented-mode">BD-oriented mode</h3>
 <p>I VLAN-based mode är VNI-to-VLAN mapping switch wide men om man lägger
 in bridge domains emellan så kan man uppnå att VNI-to-VLAN mapping
@@ -9077,113 +9120,140 @@ endast är port wide. Dvs man kan använda samma 802.1Q tag på flera
 portar men de är mappade till olika VNI:er. Konfen ser lite annorlunda
 ut men både bridging och routing funkar.</p>
 <p>Nexus 7k</p>
-<p><code>feature&nbsp;vni</code>
-<code>feature-set&nbsp;fabric</code>
-<code>feature&nbsp;fabric&nbsp;forwarding</code></p>
-<p><code>vni&nbsp;10000</code></p>
-<p><code>system&nbsp;bridge-domain&nbsp;100</code>
-<code>bridge-domain&nbsp;100</code>
-<code>member&nbsp;vni&nbsp;10000</code></p>
-<p><code>encapsulation&nbsp;profile&nbsp;vni&nbsp;Tenant1-101</code>
-<code>dot1q&nbsp;101&nbsp;vni&nbsp;10000</code></p>
-<p><code>interface&nbsp;e2/1</code>
-<code>no&nbsp;switchport</code>
-<code>service&nbsp;instance&nbsp;1&nbsp;vni</code>
-<code>no&nbsp;shutdown</code>
-<code>encapsulation&nbsp;profile&nbsp;Tenant1-101&nbsp;default</code></p>
-<p><code>interface&nbsp;Bdi&nbsp;100</code>
-<code>vrf&nbsp;member&nbsp;Tenant1</code>
-<code>ip&nbsp;address&nbsp;10.0.0.1/24</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;vni
+feature-set&nbsp;fabric
+feature&nbsp;fabric&nbsp;forwarding
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>vni&nbsp;10000
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>system&nbsp;bridge-domain&nbsp;100
+bridge-domain&nbsp;100
+&nbsp;member&nbsp;vni&nbsp;10000
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>encapsulation&nbsp;profile&nbsp;vni&nbsp;Tenant1-101
+&nbsp;dot1q&nbsp;101&nbsp;vni&nbsp;10000
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;e2/1
+&nbsp;no&nbsp;switchport
+&nbsp;service&nbsp;instance&nbsp;1&nbsp;vni
+&nbsp;&nbsp;no&nbsp;shutdown
+&nbsp;&nbsp;encapsulation&nbsp;profile&nbsp;Tenant1-101&nbsp;default
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Bdi&nbsp;100
+&nbsp;vrf&nbsp;member&nbsp;Tenant1
+&nbsp;ip&nbsp;address&nbsp;10.0.0.1/24
+</code></pre></div>
 <h2 id="routing">Routing</h2>
 <p>NX-OS gör endast symmetric vxlan routing, dvs EVPN-routes har både L2VNI
 och L3VNI. Man anger NVE overlay VLAN:s. Dessa ska ej användas som
 vanliga VLAN.</p>
-<p><code>system&nbsp;vlan&nbsp;nve-overlay&nbsp;id&nbsp;3001-3200</code></p>
+<div class="highlight"><pre><span></span><code>system&nbsp;vlan&nbsp;nve-overlay&nbsp;id&nbsp;3001-3200
+</code></pre></div>
 <p>RT-import och export görs automatiskt utifrån ASN och VNI.</p>
-<p><code>vrf&nbsp;context&nbsp;Tenant1</code>
-<code>vni&nbsp;30001</code>
-<code>rd&nbsp;auto</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>route-target&nbsp;both&nbsp;auto</code>
-<code>route-target&nbsp;both&nbsp;auto&nbsp;evpn</code></p>
+<div class="highlight"><pre><span></span><code>vrf&nbsp;context&nbsp;Tenant1
+&nbsp;vni&nbsp;30001
+&nbsp;rd&nbsp;auto
+&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;route-target&nbsp;both&nbsp;auto
+&nbsp;&nbsp;route-target&nbsp;both&nbsp;auto&nbsp;evpn
+</code></pre></div>
 <p>Varje tenant VRF behöver ett VRF overlay VLAN och ett SVI för VXLAN
 routing.</p>
-<p><code>interface&nbsp;nve1</code>
-<code>member&nbsp;vni&nbsp;30001&nbsp;associate-vrf</code></p>
-<p><code>vlan&nbsp;3001</code>
-<code>vn-segment&nbsp;30001</code></p>
-<p><code>interface&nbsp;Vlan3001</code>
-<code>no&nbsp;shutdown</code>
-<code>mtu&nbsp;9216</code>
-<code>vrf&nbsp;member&nbsp;Tenant1</code>
-<code>ip&nbsp;forward</code>
-<code>ipv6&nbsp;forward</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve1
+&nbsp;member&nbsp;vni&nbsp;30001&nbsp;associate-vrf
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>vlan&nbsp;3001
+&nbsp;vn-segment&nbsp;30001
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Vlan3001
+&nbsp;&nbsp;no&nbsp;shutdown
+&nbsp;&nbsp;mtu&nbsp;9216
+&nbsp;&nbsp;vrf&nbsp;member&nbsp;Tenant1
+&nbsp;&nbsp;ip&nbsp;forward
+&nbsp;&nbsp;ipv6&nbsp;forward
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;nve&nbsp;vrf</code>
-<code>show&nbsp;nve&nbsp;internal&nbsp;bgp&nbsp;rnh&nbsp;database&nbsp;vni&nbsp;30001</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;nve&nbsp;vrf
+show&nbsp;nve&nbsp;internal&nbsp;bgp&nbsp;rnh&nbsp;database&nbsp;vni&nbsp;30001
+</code></pre></div>
 <p>Exempel, tenant routing table</p>
-<p><code>routing-context&nbsp;vrf&nbsp;Tenant1</code>
-<code>show&nbsp;ip&nbsp;route</code></p>
-<p><code>10.1.0.10/32,&nbsp;ubest/mbest:&nbsp;1/0</code>
-<code>*via&nbsp;100.64.0.11%default,&nbsp;[200/0],&nbsp;00:02:44,&nbsp;bgp-65000,&nbsp;internal,&nbsp;tag&nbsp;65000&nbsp;(evpn)&nbsp;segid:&nbsp;30001</code>
-<code>tunnelid:&nbsp;0xa000003&nbsp;encap:&nbsp;VXLAN</code></p>
+<div class="highlight"><pre><span></span><code>routing-context&nbsp;vrf&nbsp;Tenant1
+show&nbsp;ip&nbsp;route
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>10.1.0.10/32,&nbsp;ubest/mbest:&nbsp;1/0
+&nbsp;&nbsp;&nbsp;*via&nbsp;100.64.0.11%default,&nbsp;[200/0],&nbsp;00:02:44,&nbsp;bgp-65000,&nbsp;internal,&nbsp;tag&nbsp;65000&nbsp;(evpn)&nbsp;segid:&nbsp;30001&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;tunnelid:&nbsp;0xa000003&nbsp;encap:&nbsp;VXLAN
+</code></pre></div>
 <p>Troubleshooting</p>
-<p><code>show&nbsp;troubleshoot&nbsp;l3&nbsp;ipv4&nbsp;10.0.0.10&nbsp;src-ip&nbsp;10.0.0.20&nbsp;vrf&nbsp;Tenant1</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;troubleshoot&nbsp;l3&nbsp;ipv4&nbsp;10.0.0.10&nbsp;src-ip&nbsp;10.0.0.20&nbsp;vrf&nbsp;Tenant1
+</code></pre></div>
 <h4 id="anycast-gw">Anycast GW</h4>
 <p>Om man slår på anycast gateway feature för ett VNI så måste det enableas
 på alla VTEP:s där VNI finns.</p>
-<p><code>fabric&nbsp;forwarding&nbsp;anycast-gateway-mac&nbsp;0000.1111.2222</code></p>
-<p><code>interface&nbsp;Vlan100</code>
-<code>vrf&nbsp;member&nbsp;Tenant1</code>
-<code>ip&nbsp;address&nbsp;10.0.0.1/24</code>
-<code>fabric&nbsp;forwarding&nbsp;mode&nbsp;anycast-gateway</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>fabric&nbsp;forwarding&nbsp;anycast-gateway-mac&nbsp;0000.1111.2222
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Vlan100
+&nbsp;vrf&nbsp;member&nbsp;Tenant1
+&nbsp;ip&nbsp;address&nbsp;10.0.0.1/24
+&nbsp;fabric&nbsp;forwarding&nbsp;mode&nbsp;anycast-gateway
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <h4 id="arp-suppression">ARP Suppression</h4>
 <p>Man kan låta en lokal ARP-proxy hantera requests för att suppressa ARP
 flooding över VXLAN så mycket som möjligt. Notera att ARP Suppression
 inte jobbar med något IPv6-relaterat.</p>
-<p><code>interface&nbsp;nve1</code>
-<code>member&nbsp;vni&nbsp;10100</code>
-<code>suppress-arp</code>
-<code>member&nbsp;vni&nbsp;10101</code>
-<code>suppress-arp</code></p>
-<p><code>show&nbsp;ip&nbsp;arp&nbsp;suppression-cache&nbsp;detail</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve1
+&nbsp;member&nbsp;vni&nbsp;10100
+&nbsp;&nbsp;suppress-arp
+&nbsp;member&nbsp;vni&nbsp;10101
+&nbsp;&nbsp;suppress-arp
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;arp&nbsp;suppression-cache&nbsp;detail
+</code></pre></div>
 <p>OBS på vissa plattformar måste man karva TCAM för att kunna konfigurera
 arp-suppression. Här är ett exempel för <a href="/Cisco_Nexus#Nexus_9000v" title="wikilink">Nexus
 9000v</a>.</p>
-<p><code>show&nbsp;run&nbsp;all&nbsp;|&nbsp;inc&nbsp;"hardware&nbsp;access-list&nbsp;tcam&nbsp;region"</code></p>
-<p><code>hardware&nbsp;access-list&nbsp;tcam&nbsp;region&nbsp;span&nbsp;0</code>
-<code>hardware&nbsp;access-list&nbsp;tcam&nbsp;region&nbsp;racl&nbsp;512</code>
-<code>copy&nbsp;run&nbsp;start</code>
-<code>reload</code></p>
-<p><code>hardware&nbsp;access-list&nbsp;tcam&nbsp;region&nbsp;arp-ether&nbsp;256&nbsp;double-wide</code>
-<code>copy&nbsp;run&nbsp;start</code>
-<code>reload</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;run&nbsp;all&nbsp;|&nbsp;inc&nbsp;"hardware&nbsp;access-list&nbsp;tcam&nbsp;region"
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>hardware&nbsp;access-list&nbsp;tcam&nbsp;region&nbsp;span&nbsp;0
+hardware&nbsp;access-list&nbsp;tcam&nbsp;region&nbsp;racl&nbsp;512
+copy&nbsp;run&nbsp;start
+reload
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>hardware&nbsp;access-list&nbsp;tcam&nbsp;region&nbsp;arp-ether&nbsp;256&nbsp;double-wide
+copy&nbsp;run&nbsp;start
+reload
+</code></pre></div>
 <h4 id="external-connectivity">External Connectivity</h4>
 <p>Prefix-based routing (Type-5 Routes) används primärt för destinations
 utanför DC. IP-VRF till IP-VRF görs enligt interface-less model dvs
 routsen har en RMAC attached.</p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>maximum-paths&nbsp;ibgp&nbsp;4</code></p>
-<p><code>vrf&nbsp;Tenant1</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>advertise&nbsp;l2vpn&nbsp;evpn</code>
-<code>redistribute&nbsp;direct&nbsp;route-map&nbsp;ALLOW-ALL</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;maximum-paths&nbsp;ibgp&nbsp;4
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;&nbsp;vrf&nbsp;Tenant1
+&nbsp;&nbsp;&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;advertise&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redistribute&nbsp;direct&nbsp;route-map&nbsp;ALLOW-ALL
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;bgp&nbsp;ip&nbsp;unicast&nbsp;vrf&nbsp;Tenant1</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;bgp&nbsp;ip&nbsp;unicast&nbsp;vrf&nbsp;Tenant1
+</code></pre></div>
 <p>Exempel på släppa ut en tenant (10.0.0.0/24) ifrån evpn-vxlan-fabricen.
 Vanlig OSPF pratas mellan border leaf och external device. På border
 leaf:</p>
-<p><code>router&nbsp;ospf&nbsp;100</code>
-<code>vrf&nbsp;Tenant1</code>
-<code>redistribute&nbsp;bgp&nbsp;65000&nbsp;route-map&nbsp;ALLOW-ANY</code></p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>vrf&nbsp;Tenant1</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>advertise&nbsp;l2vpn&nbsp;evpn</code>
-<code>redistribute&nbsp;ospf&nbsp;100&nbsp;route-map&nbsp;ALLOW-ANY</code>
-<code>aggregate-address&nbsp;10.0.0.0/24</code></p>
+<div class="highlight"><pre><span></span><code>router&nbsp;ospf&nbsp;100
+&nbsp;&nbsp;vrf&nbsp;Tenant1
+&nbsp;&nbsp;&nbsp;&nbsp;redistribute&nbsp;bgp&nbsp;65000&nbsp;route-map&nbsp;ALLOW-ANY
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;&nbsp;vrf&nbsp;Tenant1
+&nbsp;&nbsp;&nbsp;&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;advertise&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redistribute&nbsp;ospf&nbsp;100&nbsp;route-map&nbsp;ALLOW-ANY
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aggregate-address&nbsp;10.0.0.0/24
+</code></pre></div>
 <h2 id="dhcp-relay">DHCP Relay</h2>
 <p>VXLAN EVPN har stöd för DHCP relay-funktionalitet. I en
 multi-tenant-lösning används tre suboptions av <a href="/Cisco_DHCP#Option_82" title="wikilink">Option
@@ -9193,27 +9263,32 @@ multi-tenant-lösning används tre suboptions av <a href="/Cisco_DHCP#Option_82"
 <li>Sub-option 11 - Server ID Override</li>
 <li>Sub-option 5 - Link Selection</li>
 </ul>
-<p><code>feature&nbsp;dhcp</code></p>
-<p><code>service&nbsp;dhcp</code>
-<code>ip&nbsp;dhcp&nbsp;relay</code>
-<code>ip&nbsp;dhcp&nbsp;relay&nbsp;information&nbsp;option</code>
-<code>ip&nbsp;dhcp&nbsp;relay&nbsp;information&nbsp;option&nbsp;vpn</code>
-<code>ipv6&nbsp;dhcp&nbsp;relay</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;dhcp
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>service&nbsp;dhcp
+ip&nbsp;dhcp&nbsp;relay
+ip&nbsp;dhcp&nbsp;relay&nbsp;information&nbsp;option
+ip&nbsp;dhcp&nbsp;relay&nbsp;information&nbsp;option&nbsp;vpn
+ipv6&nbsp;dhcp&nbsp;relay
+</code></pre></div>
 <p>Om DHCP-server är nåbar i default-VRFen.</p>
-<p><code>interface&nbsp;Vlan1001</code>
-<code>description&nbsp;Tenant&nbsp;facing&nbsp;SVI</code>
-<code>ip&nbsp;dhcp&nbsp;relay&nbsp;address&nbsp;100.0.1.10&nbsp;use-vrf&nbsp;default</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Vlan1001
+&nbsp;description&nbsp;Tenant&nbsp;facing&nbsp;SVI
+&nbsp;ip&nbsp;dhcp&nbsp;relay&nbsp;address&nbsp;100.0.1.10&nbsp;use-vrf&nbsp;default
+</code></pre></div>
 <p>Om DHCP-server finns i tenant-VRF måste man skapa ett unikt
 tenant-loopback per VTEP eftersom det måste vara en unik IP-adress som
 source för de relayade DHCP-paketen för att servern ska kunna svara till
 rätt relay agent.</p>
-<p><code>interface&nbsp;loopback11</code>
-<code>vrf&nbsp;member&nbsp;Tenant1</code>
-<code>ip&nbsp;address&nbsp;11.11.11.11/32</code></p>
-<p><code>interface&nbsp;Vlan1001</code>
-<code>description&nbsp;Tenant&nbsp;facing&nbsp;SVI</code>
-<code>ip&nbsp;dhcp&nbsp;relay&nbsp;address&nbsp;100.0.1.10</code>
-<code>ip&nbsp;dhcp&nbsp;relay&nbsp;source-interface&nbsp;loopback11</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;loopback11
+&nbsp;vrf&nbsp;member&nbsp;Tenant1
+&nbsp;ip&nbsp;address&nbsp;11.11.11.11/32
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Vlan1001
+&nbsp;description&nbsp;Tenant&nbsp;facing&nbsp;SVI
+&nbsp;ip&nbsp;dhcp&nbsp;relay&nbsp;address&nbsp;100.0.1.10&nbsp;
+&nbsp;ip&nbsp;dhcp&nbsp;relay&nbsp;source-interface&nbsp;loopback11
+</code></pre></div>
 <h2 id="multicast">Multicast</h2>
 <p>EVPN kan lösa IPv4 routed multicast för tenants (TRM). Man kör MVPN
 ovanpå vxlan-fabricen för att förhindra onödig multicast-forwardering,
@@ -9225,28 +9300,32 @@ inte PIM BiDir. Man har en multicastgrupp i underlay per vrf (coret
 måste vara multicast-baserat). L2 only mode finns också när man t.ex.
 inte har någon VRF. Med TRM så är inte advertise-pip och advertise
 virtual-rmac supporterat.</p>
-<p><code>feature&nbsp;ngmvpn</code>
-<code>ip&nbsp;igmp&nbsp;snooping&nbsp;vxlan</code>
-<code>advertise&nbsp;evpn&nbsp;multicast</code>
-<code>ip&nbsp;multicast&nbsp;overlay-spt-only</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;ngmvpn
+ip&nbsp;igmp&nbsp;snooping&nbsp;vxlan
+advertise&nbsp;evpn&nbsp;multicast
+ip&nbsp;multicast&nbsp;overlay-spt-only
+</code></pre></div>
 <p>Tenant</p>
-<p><code>interface&nbsp;loopback&nbsp;300</code>
-<code>vrf&nbsp;member&nbsp;Tenant-TRM</code>
-<code>ip&nbsp;address&nbsp;1.1.1.1/32</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code></p>
-<p><code>vrf&nbsp;context&nbsp;Tenant-TRM</code>
-<code>vni&nbsp;30000</code>
-<code>ip&nbsp;pim&nbsp;rp-address&nbsp;1.1.1.1&nbsp;group-list&nbsp;224.0.0.0/4</code>
-<code>ip&nbsp;pim&nbsp;ssm&nbsp;range&nbsp;232.0.0.0/8</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>route-target&nbsp;both&nbsp;auto</code>
-<code>route-target&nbsp;both&nbsp;auto&nbsp;mvpn</code>
-<code>route-target&nbsp;both&nbsp;auto&nbsp;evpn</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;loopback&nbsp;300
+&nbsp;vrf&nbsp;member&nbsp;Tenant-TRM
+&nbsp;ip&nbsp;address&nbsp;1.1.1.1/32
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>vrf&nbsp;context&nbsp;Tenant-TRM
+&nbsp;vni&nbsp;30000
+&nbsp;ip&nbsp;pim&nbsp;rp-address&nbsp;1.1.1.1&nbsp;group-list&nbsp;224.0.0.0/4
+&nbsp;ip&nbsp;pim&nbsp;ssm&nbsp;range&nbsp;232.0.0.0/8
+&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;route-target&nbsp;both&nbsp;auto
+&nbsp;&nbsp;route-target&nbsp;both&nbsp;auto&nbsp;mvpn
+&nbsp;&nbsp;route-target&nbsp;both&nbsp;auto&nbsp;evpn
+</code></pre></div>
 <p>IP 1.1.1.1 ska finnas på alla VTEPs samt att "ip pim sparse-mode" ska
 läggas på tenants L3SVI:er.</p>
 <p>Verify</p>
-<p><code>show&nbsp;fabric&nbsp;multicast&nbsp;vrf&nbsp;all</code>
-<code>show&nbsp;fabric&nbsp;multicast&nbsp;globals</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;fabric&nbsp;multicast&nbsp;vrf&nbsp;all
+show&nbsp;fabric&nbsp;multicast&nbsp;globals
+</code></pre></div>
 <h1 id="vxlan-evpn-multi-site">VXLAN EVPN Multi-Site</h1>
 <p>Man kan bygga en multisite lösning genom att upprätta eBGP-sessioner
 mellan så kallade border gateways och låta dem skriva om next-hop i
@@ -9271,107 +9350,123 @@ undviks. Det finns även pseudo-BGW, dvs leaf utan spine. Då har man
 ingen internal site vtep neighbor. Det är t.ex. användbart vid
 migreringar in i en EVPN/VXLAN fabric.</p>
 <p><code>evpn&nbsp;multisite&nbsp;border-gateway</code><id></id></p>
-<p><code>interface&nbsp;loopback&nbsp;100</code>
-<code>description&nbsp;Anycast&nbsp;BGW&nbsp;IP</code></p>
-<p><code>interface&nbsp;nve&nbsp;1</code>
-<code>source-interface&nbsp;loopback&nbsp;0</code>
-<code>host-reachability&nbsp;protocol&nbsp;bgp</code>
-<code>multisite&nbsp;border-gateway&nbsp;interface&nbsp;loopback&nbsp;100</code>
-<code></code>
-<code>member&nbsp;vni&nbsp;200&nbsp;&nbsp;&nbsp;&nbsp;#Every&nbsp;L2VNI&nbsp;that&nbsp;needs&nbsp;stretch</code>
-<code>multisite&nbsp;ingress-replication</code></p>
-<p><code>interface&nbsp;ethernet1/1</code>
-<code>description&nbsp;DCI</code>
-<code>evpn&nbsp;multisite&nbsp;dci-tracking</code>
-<code></code>
-<code>interface&nbsp;ethernet1/2</code>
-<code>description&nbsp;Spine</code>
-<code>evpn&nbsp;multisite&nbsp;fabric-tracking</code></p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>neighbor&nbsp;10.0.0.2</code>
-<code>remote-as&nbsp;65001</code>
-<code>peer-type&nbsp;fabric-external</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>rewrite-evpn-rt-asn</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;loopback&nbsp;100
+&nbsp;description&nbsp;Anycast&nbsp;BGW&nbsp;IP
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve&nbsp;1
+&nbsp;source-interface&nbsp;loopback&nbsp;0
+&nbsp;host-reachability&nbsp;protocol&nbsp;bgp
+&nbsp;multisite&nbsp;border-gateway&nbsp;interface&nbsp;loopback&nbsp;100
+&nbsp;
+&nbsp;member&nbsp;vni&nbsp;200&nbsp;&nbsp;&nbsp;&nbsp;#Every&nbsp;L2VNI&nbsp;that&nbsp;needs&nbsp;stretch
+&nbsp;&nbsp;multisite&nbsp;ingress-replication
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;ethernet1/1
+&nbsp;description&nbsp;DCI
+&nbsp;evpn&nbsp;multisite&nbsp;dci-tracking
+&nbsp;
+interface&nbsp;ethernet1/2
+&nbsp;description&nbsp;Spine
+&nbsp;evpn&nbsp;multisite&nbsp;fabric-tracking
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.2
+&nbsp;&nbsp;&nbsp;remote-as&nbsp;65001
+&nbsp;&nbsp;&nbsp;peer-type&nbsp;fabric-external
+&nbsp;&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rewrite-evpn-rt-asn
+</code></pre></div>
 <p>Tracking är mandatory annars reorigineras inga EVPN routes, det görs
 endast om det finns DCI/fabric links som är uppe. Man konfar heller inte
 next-hop-self, detta händer av sig själv eftersom EVPN fungerar så
 default.</p>
-<p><code>show&nbsp;nve&nbsp;multisite</code>
-<code>show&nbsp;nve&nbsp;ethernet-segment</code>
-<code>show&nbsp;nve&nbsp;multisite&nbsp;dci-links</code>
-<code>show&nbsp;nve&nbsp;multisite&nbsp;fabric-links</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;nve&nbsp;multisite
+show&nbsp;nve&nbsp;ethernet-segment
+show&nbsp;nve&nbsp;multisite&nbsp;dci-links
+show&nbsp;nve&nbsp;multisite&nbsp;fabric-links
+</code></pre></div>
 <p>För "show nve ethernet-segment" notera att L3VNI alltid står som aktiv
 på alla BGWs eftersom designated-forwarder election inte görs för dem.</p>
 <p><strong>Storm-control</strong></p>
-<p><code>evpn&nbsp;storm-control&nbsp;broadcast&nbsp;level&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>evpn&nbsp;storm-control&nbsp;broadcast&nbsp;level&nbsp;10
+</code></pre></div>
 <h2 id="overlay-stitching">Overlay Stitching</h2>
 <p>Man kan binda ihop overlays med hjälp av EVPN, t.ex. VXLAN \&lt;-&gt; MPLS
 VPN.</p>
 <p><strong>IOS-XE</strong></p>
-<p><code>vrf&nbsp;definition&nbsp;Tenant1</code>
-<code>rd&nbsp;125:101</code>
-<code></code>
-<code>address-family&nbsp;ipv4</code>
-<code>route-target&nbsp;export&nbsp;65000:30001</code>
-<code>route-target&nbsp;import&nbsp;65000:30001</code>
-<code>route-target&nbsp;export&nbsp;65000:30001&nbsp;stitching</code>
-<code>route-target&nbsp;import&nbsp;65000:30001&nbsp;stitching</code>
-<code>exit-address-family</code></p>
-<p><code>bridge-domain&nbsp;3001</code>
-<code>member&nbsp;vni&nbsp;30001</code></p>
-<p><code>interface&nbsp;BDI3001</code>
-<code>vrf&nbsp;forwarding&nbsp;Tenant1</code>
-<code>ip&nbsp;address&nbsp;169.254.0.1&nbsp;255.255.255.0</code>
-<code>encapsulation&nbsp;dot1Q&nbsp;3001</code>
-<code>no&nbsp;shut</code></p>
-<p><code>interface&nbsp;nve1</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>no&nbsp;shutdown</code>
-<code>source-interface&nbsp;Loopback0</code>
-<code>host-reachability&nbsp;protocol&nbsp;bgp</code>
-<code>member&nbsp;vni&nbsp;30001&nbsp;vrf&nbsp;Tenant1</code></p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>bgp&nbsp;log-neighbor-changes</code>
-<code>no&nbsp;bgp&nbsp;default&nbsp;ipv4-unicast</code>
-<code>no&nbsp;bgp&nbsp;default&nbsp;route-target&nbsp;filter</code>
-<code>neighbor&nbsp;10.0.0.11&nbsp;remote-as&nbsp;65000</code>
-<code>neighbor&nbsp;10.0.0.11&nbsp;update-source&nbsp;Loopback0</code>
-<code>neighbor&nbsp;10.0.0.250&nbsp;remote-as&nbsp;65000</code>
-<code>neighbor&nbsp;10.0.0.250&nbsp;update-source&nbsp;Loopback0</code></p>
-<p><code>address-family&nbsp;vpnv4</code>
-<code>import&nbsp;l2vpn&nbsp;evpn&nbsp;re-originate</code>
-<code>neighbor&nbsp;10.0.0.250&nbsp;activate</code>
-<code>neighbor&nbsp;10.0.0.250&nbsp;send-community&nbsp;extended</code>
-<code>exit-address-family</code></p>
-<p><code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>import&nbsp;vpnv4&nbsp;unicast&nbsp;re-originate</code>
-<code>neighbor&nbsp;10.0.0.11&nbsp;activate</code>
-<code>neighbor&nbsp;10.0.0.11&nbsp;send-community&nbsp;both</code>
-<code>exit-address-family</code></p>
+<div class="highlight"><pre><span></span><code>vrf&nbsp;definition&nbsp;Tenant1
+&nbsp;rd&nbsp;125:101
+&nbsp;
+&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;route-target&nbsp;export&nbsp;65000:30001
+&nbsp;&nbsp;route-target&nbsp;import&nbsp;65000:30001
+&nbsp;&nbsp;route-target&nbsp;export&nbsp;65000:30001&nbsp;stitching
+&nbsp;&nbsp;route-target&nbsp;import&nbsp;65000:30001&nbsp;stitching
+&nbsp;exit-address-family
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>bridge-domain&nbsp;3001
+&nbsp;member&nbsp;vni&nbsp;30001
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;BDI3001&nbsp;
+&nbsp;vrf&nbsp;forwarding&nbsp;Tenant1
+&nbsp;ip&nbsp;address&nbsp;169.254.0.1&nbsp;255.255.255.0
+&nbsp;encapsulation&nbsp;dot1Q&nbsp;3001
+&nbsp;no&nbsp;shut
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;nve1
+&nbsp;no&nbsp;ip&nbsp;address
+&nbsp;no&nbsp;shutdown
+&nbsp;source-interface&nbsp;Loopback0
+&nbsp;host-reachability&nbsp;protocol&nbsp;bgp
+&nbsp;member&nbsp;vni&nbsp;30001&nbsp;vrf&nbsp;Tenant1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;bgp&nbsp;log-neighbor-changes
+&nbsp;no&nbsp;bgp&nbsp;default&nbsp;ipv4-unicast
+&nbsp;no&nbsp;bgp&nbsp;default&nbsp;route-target&nbsp;filter
+&nbsp;neighbor&nbsp;10.0.0.11&nbsp;remote-as&nbsp;65000
+&nbsp;neighbor&nbsp;10.0.0.11&nbsp;update-source&nbsp;Loopback0
+&nbsp;neighbor&nbsp;10.0.0.250&nbsp;remote-as&nbsp;65000
+&nbsp;neighbor&nbsp;10.0.0.250&nbsp;update-source&nbsp;Loopback0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;address-family&nbsp;vpnv4
+&nbsp;&nbsp;import&nbsp;l2vpn&nbsp;evpn&nbsp;re-originate&nbsp;
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.250&nbsp;activate
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.250&nbsp;send-community&nbsp;extended
+&nbsp;exit-address-family
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;import&nbsp;vpnv4&nbsp;unicast&nbsp;re-originate
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.11&nbsp;activate
+&nbsp;&nbsp;neighbor&nbsp;10.0.0.11&nbsp;send-community&nbsp;both
+&nbsp;exit-address-family
+</code></pre></div>
 <p>Detta autoskapas på ASR.</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;unnumbered&nbsp;Loopback0</code>
-<code>no&nbsp;ip&nbsp;redirects</code>
-<code>ip&nbsp;mtu&nbsp;9216</code>
-<code>tunnel&nbsp;source&nbsp;10.0.0.25</code>
-<code>tunnel&nbsp;mode&nbsp;udp&nbsp;multipoint</code>
-<code>tunnel&nbsp;src-port&nbsp;4789</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;unnumbered&nbsp;Loopback0
+&nbsp;no&nbsp;ip&nbsp;redirects
+&nbsp;ip&nbsp;mtu&nbsp;9216
+&nbsp;tunnel&nbsp;source&nbsp;10.0.0.25
+&nbsp;tunnel&nbsp;mode&nbsp;udp&nbsp;multipoint
+&nbsp;tunnel&nbsp;src-port&nbsp;4789
+</code></pre></div>
 <p><strong>NXOS</strong></p>
-<p><code>vrf&nbsp;context&nbsp;Tenant1</code>
-<code>vni&nbsp;30001</code>
-<code>rd&nbsp;auto</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>route-target&nbsp;both&nbsp;auto</code>
-<code>route-target&nbsp;both&nbsp;auto&nbsp;evpn</code></p>
-<p><code>router&nbsp;bgp&nbsp;65000</code>
-<code>neighbor&nbsp;10.2.2.2&nbsp;remote-as&nbsp;65000</code>
-<code>address-family&nbsp;vpnv4&nbsp;unicast</code>
-<code>import&nbsp;l2vpn&nbsp;evpn&nbsp;reoriginate</code>
-<code>neighbor&nbsp;10.10.10.201&nbsp;remote-as&nbsp;65000</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>import&nbsp;vpn&nbsp;unicast&nbsp;reoriginate</code></p>
+<div class="highlight"><pre><span></span><code>vrf&nbsp;context&nbsp;Tenant1
+&nbsp;&nbsp;vni&nbsp;30001
+&nbsp;&nbsp;rd&nbsp;auto
+&nbsp;&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;route-target&nbsp;both&nbsp;auto
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;route-target&nbsp;both&nbsp;auto&nbsp;evpn&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;65000
+&nbsp;&nbsp;neighbor&nbsp;10.2.2.2&nbsp;remote-as&nbsp;65000
+&nbsp;&nbsp;&nbsp;&nbsp;address-family&nbsp;vpnv4&nbsp;unicast
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;l2vpn&nbsp;evpn&nbsp;reoriginate
+&nbsp;&nbsp;neighbor&nbsp;10.10.10.201&nbsp;remote-as&nbsp;65000
+&nbsp;&nbsp;&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;vpn&nbsp;unicast&nbsp;reoriginate
+</code></pre></div>
 <h1 id="ios-xr">IOS-XR</h1>
 <p>MPLS Data Plane</p>
 <h3 id="multihoming">Multihoming</h3>
@@ -9381,93 +9476,99 @@ split-horizon. För unicast är det all active men för BUM så finns det en
 DF. Route type 4 används för DF election, detta görs lastdelat
 udda/jämna EVI-ID. Både RD och RT autogenereras.</p>
 <p><strong>Leaf</strong></p>
-<p><code>interface&nbsp;TenGigE0/0/0/1</code>
-<code>description&nbsp;"Link&nbsp;to&nbsp;Host"</code>
-<code>bundle&nbsp;id&nbsp;1&nbsp;mode&nbsp;active</code>
-<code>load-interval&nbsp;30</code>
-<code>!</code>
-<code>interface&nbsp;Bundle-Ether&nbsp;1</code>
-<code>lacp&nbsp;system&nbsp;mac&nbsp;1101.1111.1111</code>
-<code>load-interval&nbsp;30</code>
-<code>!</code>
-<code>evpn</code>
-<code>evi&nbsp;100</code>
-<code>advertise-mac&nbsp;&nbsp;&nbsp;&lt;-&nbsp;enable&nbsp;RT&nbsp;2&nbsp;mac-only</code>
-<code>!</code>
-<code>interface&nbsp;Bundle-Ether&nbsp;1</code>
-<code>ethernet-segment</code>
-<code>identifier&nbsp;type&nbsp;0&nbsp;11.11.11.11.11.11.11.11.11</code>
-<code>bgp&nbsp;route-target&nbsp;1111.1111.1111</code>
-<code>!</code>
-<code>!</code>
-<code>l2vpn</code>
-<code>bridge&nbsp;group&nbsp;Cust1</code>
-<code>bridge-domain&nbsp;100</code>
-<code>interface&nbsp;BE1</code>
-<code>evi&nbsp;100</code>
-<code>!</code>
-<code>!</code>
-<code>router&nbsp;bgp&nbsp;1</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>!</code>
-<code>neighbor-group&nbsp;RR</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;TenGigE0/0/0/1
+&nbsp;description&nbsp;"Link&nbsp;to&nbsp;Host"
+&nbsp;bundle&nbsp;id&nbsp;1&nbsp;mode&nbsp;active
+&nbsp;load-interval&nbsp;30
+!
+interface&nbsp;Bundle-Ether&nbsp;1
+&nbsp;lacp&nbsp;system&nbsp;mac&nbsp;1101.1111.1111
+&nbsp;load-interval&nbsp;30
+!
+evpn
+&nbsp;evi&nbsp;100
+&nbsp;&nbsp;advertise-mac&nbsp;&nbsp;&nbsp;&lt;-&nbsp;enable&nbsp;RT&nbsp;2&nbsp;mac-only
+&nbsp;!
+&nbsp;interface&nbsp;Bundle-Ether&nbsp;1
+&nbsp;&nbsp;ethernet-segment
+&nbsp;&nbsp;&nbsp;identifier&nbsp;type&nbsp;0&nbsp;11.11.11.11.11.11.11.11.11
+&nbsp;&nbsp;&nbsp;bgp&nbsp;route-target&nbsp;1111.1111.1111
+&nbsp;&nbsp;!
+&nbsp;!
+&nbsp;l2vpn
+&nbsp;&nbsp;bridge&nbsp;group&nbsp;Cust1
+&nbsp;&nbsp;&nbsp;bridge-domain&nbsp;100
+&nbsp;&nbsp;&nbsp;&nbsp;interface&nbsp;BE1
+&nbsp;&nbsp;&nbsp;&nbsp;evi&nbsp;100
+&nbsp;!
+!
+router&nbsp;bgp&nbsp;1
+&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;!
+&nbsp;neighbor-group&nbsp;RR
+&nbsp;&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;evpn&nbsp;ethernet-segment&nbsp;detail</code>
-<code>show&nbsp;evpn&nbsp;evi</code>
-<code>show&nbsp;evpn&nbsp;evi&nbsp;mac</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;evpn&nbsp;ethernet-segment&nbsp;detail&nbsp;
+show&nbsp;evpn&nbsp;evi
+show&nbsp;evpn&nbsp;evi&nbsp;mac
+</code></pre></div>
 <p><strong>Bring down AC</strong>
 För att undvika traffic blackholing när man tappar upplänkar kan man
 ange att AC ska stängas när noden är isolerad.</p>
-<p><code>evpn</code>
-<code>group&nbsp;1</code>
+<p></p><div class="highlight"><pre><span></span><code>evpn
+&nbsp;group&nbsp;1
+</code></pre></div>
 <code>core&nbsp;interface</code><uplink1>
 <code>core&nbsp;interface</code><uplink2>
-<code>!</code>
-<code>core-isolation-group&nbsp;1</code></uplink2></uplink1></p>
+<div class="highlight"><pre><span></span><code>&nbsp;!
+&nbsp;core-isolation-group&nbsp;1
+</code></pre></div><p></p>
 <p><strong>Single-Active Multihoming</strong></p>
-<p><code>evpn</code>
-<code>interface&nbsp;Bundle-Ether&nbsp;1</code>
-<code>ethernet-segment</code>
-<code>load-balancing-mode&nbsp;single-active</code></p>
+<div class="highlight"><pre><span></span><code>evpn
+&nbsp;interface&nbsp;Bundle-Ether&nbsp;1
+&nbsp;&nbsp;ethernet-segment
+&nbsp;&nbsp;&nbsp;load-balancing-mode&nbsp;single-active
+</code></pre></div>
 <h3 id="routing_1">Routing</h3>
-<p><code>cef&nbsp;adjacency&nbsp;route&nbsp;override&nbsp;rib</code>
-<code>!</code>
-<code>interface&nbsp;BVI100</code>
-<code>host-routing&nbsp;&nbsp;&nbsp;&nbsp;&lt;-&nbsp;enable&nbsp;RT&nbsp;2&nbsp;mac+IP</code>
-<code>vrf&nbsp;Cust1</code>
-<code>ipv4&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.0</code>
-<code>mac-address&nbsp;0000.0000.0111</code>
-<code>!</code>
-<code>router&nbsp;bgp&nbsp;1</code>
-<code>address-family&nbsp;vpnv4&nbsp;unicast</code>
-<code>!</code>
-<code>vrf&nbsp;Cust1</code>
-<code>rd&nbsp;auto</code>
-<code>address-family&nbsp;ipv4&nbsp;unicast</code>
-<code>additional-path&nbsp;receive</code>
-<code>maximum-paths&nbsp;ibgp&nbsp;2</code>
-<code>redistribute&nbsp;connected</code></p>
+<div class="highlight"><pre><span></span><code>cef&nbsp;adjacency&nbsp;route&nbsp;override&nbsp;rib
+!
+interface&nbsp;BVI100
+&nbsp;host-routing&nbsp;&nbsp;&nbsp;&nbsp;&lt;-&nbsp;enable&nbsp;RT&nbsp;2&nbsp;mac+IP
+&nbsp;vrf&nbsp;Cust1
+&nbsp;ipv4&nbsp;address&nbsp;10.0.0.1&nbsp;255.255.255.0
+&nbsp;mac-address&nbsp;0000.0000.0111
+!
+router&nbsp;bgp&nbsp;1
+&nbsp;address-family&nbsp;vpnv4&nbsp;unicast
+&nbsp;!
+&nbsp;vrf&nbsp;Cust1
+&nbsp;&nbsp;rd&nbsp;auto
+&nbsp;&nbsp;address-family&nbsp;ipv4&nbsp;unicast
+&nbsp;&nbsp;&nbsp;additional-path&nbsp;receive
+&nbsp;&nbsp;&nbsp;maximum-paths&nbsp;ibgp&nbsp;2
+&nbsp;&nbsp;&nbsp;redistribute&nbsp;connected
+</code></pre></div>
 <p><strong>VPN Stitching</strong>
 EVPN\&lt;-&gt;VPNv4/6 interconnect</p>
-<p><code>route-policy&nbsp;rt2-filter</code>
-<code>if&nbsp;destination&nbsp;in&nbsp;(0.0.0.0/0&nbsp;ge&nbsp;32)&nbsp;then</code>
-<code>drop</code>
-<code>else</code>
-<code>pass</code>
-<code>endif</code>
-<code>end-policy</code>
-<code>!</code>
-<code>router&nbsp;bgp&nbsp;1</code>
-<code>address-family&nbsp;l2vpn&nbsp;evpn</code>
-<code>import&nbsp;stitching-rt&nbsp;re-origiante</code>
-<code>advertise&nbsp;vpnv4&nbsp;unicast&nbsp;re-originated&nbsp;stitching-rt</code>
-<code>!</code>
-<code>address-family&nbsp;vpnv4&nbsp;unicast</code>
-<code>import&nbsp;re-originate&nbsp;stitching-rt</code>
-<code>route-policy&nbsp;rt2-filter&nbsp;out</code>
-<code>advertise&nbsp;vpnv4&nbsp;unicast&nbsp;re-originated</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>route-policy&nbsp;rt2-filter
+&nbsp;if&nbsp;destination&nbsp;in&nbsp;(0.0.0.0/0&nbsp;ge&nbsp;32)&nbsp;then
+&nbsp;&nbsp;drop
+&nbsp;else
+&nbsp;&nbsp;pass
+&nbsp;endif
+end-policy
+!
+router&nbsp;bgp&nbsp;1
+&nbsp;address-family&nbsp;l2vpn&nbsp;evpn
+&nbsp;&nbsp;import&nbsp;stitching-rt&nbsp;re-origiante
+&nbsp;&nbsp;advertise&nbsp;vpnv4&nbsp;unicast&nbsp;re-originated&nbsp;stitching-rt
+&nbsp;!
+&nbsp;address-family&nbsp;vpnv4&nbsp;unicast
+&nbsp;&nbsp;import&nbsp;re-originate&nbsp;stitching-rt
+&nbsp;&nbsp;route-policy&nbsp;rt2-filter&nbsp;out
+&nbsp;&nbsp;advertise&nbsp;vpnv4&nbsp;unicast&nbsp;re-originated
+</code></pre></div></uplink2></uplink1>
 
 
 
@@ -9490,7 +9591,7 @@ EVPN\&lt;-&gt;VPNv4/6 interconnect</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

@@ -8691,6 +8691,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8982,69 +9010,79 @@ signalering redan är gjord. Eftersom alla är med i båda träd kan man
 skicka multicastströmmar i valfritt träd. Med MLDP swapas label per hop
 men det finns ingen PHP. Det finns stöd för FRR.</p>
 <p>MLDP utbyts som en capability, alla plattformar har inte stöd för MLDP.</p>
-<p><code>show&nbsp;mpls&nbsp;ldp&nbsp;capabilities</code>
-<code>show&nbsp;mpls&nbsp;mldp&nbsp;neighbors</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mpls&nbsp;ldp&nbsp;capabilities
+show&nbsp;mpls&nbsp;mldp&nbsp;neighbors
+</code></pre></div>
 <p>Core tree types. Ciscos namn kontra RFC:</p>
 <ul>
 <li>Default MDT = Multi-directional inclusive PMSI</li>
 <li>Data MDT = Selective PMSI</li>
 <li>Partitioned MDT = Multi-directional selective PMSI</li>
 </ul>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="img/Cisco_mLDP.PNG" data-desc-position="bottom"><img alt="Cisco_mLDP.PNG" src="img/Cisco_mLDP.PNG"></a></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="img/Cisco_MVPN_in-band.PNG" data-desc-position="bottom"><img alt="Cisco_MVPN_in-band.PNG" src="img/Cisco_MVPN_in-band.PNG"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_mLDP.PNG" data-desc-position="bottom"><img alt="Cisco_mLDP.PNG" src="../../images/Cisco_mLDP.PNG"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_MVPN_in-band.PNG" data-desc-position="bottom"><img alt="Cisco_MVPN_in-band.PNG" src="../../images/Cisco_MVPN_in-band.PNG"></a></p>
 <h2 id="ios">IOS</h2>
 <p>Konfiguration</p>
-<p><code>ip&nbsp;multicast&nbsp;mpls&nbsp;mldp</code>
-<code>mpls&nbsp;mldp&nbsp;logging&nbsp;notifications</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;multicast&nbsp;mpls&nbsp;mldp
+mpls&nbsp;mldp&nbsp;logging&nbsp;notifications
+</code></pre></div>
 <p>Exempel</p>
-<p><code>ip&nbsp;multicast-routing&nbsp;vrf&nbsp;VPN_A&nbsp;distributed</code>
-<code>!</code>
-<code>vrf&nbsp;definition&nbsp;VPN_A</code>
-<code>vpn&nbsp;id&nbsp;100:100</code>
-<code>address-family&nbsp;ipv4</code>
-<code>mdt&nbsp;default&nbsp;mpls&nbsp;mldp&nbsp;11.11.11.11</code>
-<code>mdt&nbsp;data&nbsp;mpls&nbsp;mldp&nbsp;110</code>
-<code>mdt&nbsp;data&nbsp;threshold&nbsp;30</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;multicast-routing&nbsp;vrf&nbsp;VPN_A&nbsp;distributed
+!
+vrf&nbsp;definition&nbsp;VPN_A
+&nbsp;vpn&nbsp;id&nbsp;100:100
+&nbsp;address-family&nbsp;ipv4
+&nbsp;mdt&nbsp;default&nbsp;mpls&nbsp;mldp&nbsp;11.11.11.11
+&nbsp;mdt&nbsp;data&nbsp;mpls&nbsp;mldp&nbsp;110
+&nbsp;mdt&nbsp;data&nbsp;threshold&nbsp;30
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;multicast&nbsp;mpls&nbsp;vif</code>
-<code>show&nbsp;mpls&nbsp;mldp&nbsp;database&nbsp;brief</code>
-<code>show&nbsp;mpls&nbsp;mldp&nbsp;root</code>
-<code>ping&nbsp;mpls&nbsp;mldp&nbsp;mp2mp</code><root><code>mdt</code><vpn-id><code>0</code></vpn-id></root></p>
+<p></p><div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;multicast&nbsp;mpls&nbsp;vif
+show&nbsp;mpls&nbsp;mldp&nbsp;database&nbsp;brief
+show&nbsp;mpls&nbsp;mldp&nbsp;root
+</code></pre></div>
+<code>ping&nbsp;mpls&nbsp;mldp&nbsp;mp2mp</code><root><code>mdt</code><vpn-id><code>0</code><p></p>
 <p>Det finns ingen MBB by default.</p>
-<p><code>mpls&nbsp;mldp&nbsp;make-before-break&nbsp;delay&nbsp;5000</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;mldp&nbsp;make-before-break&nbsp;delay&nbsp;5000
+</code></pre></div>
 <h2 id="ios-xr">IOS-XR</h2>
 <p>Konfiguration</p>
-<p><code>multicast-routing</code>
-<code>address-family&nbsp;ipv4</code>
-<code>interface&nbsp;Loopback0</code>
-<code>enable</code>
-<code>!</code>
-<code>mpls&nbsp;ldp</code>
-<code>mldp</code>
-<code>logging&nbsp;notifications</code></p>
+<div class="highlight"><pre><span></span><code>multicast-routing
+&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;interface&nbsp;Loopback0
+&nbsp;&nbsp;&nbsp;enable
+!
+mpls&nbsp;ldp
+&nbsp;mldp
+&nbsp;&nbsp;logging&nbsp;notifications
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;mpls&nbsp;forwarding&nbsp;p2mp</code>
-<code>show&nbsp;mpls&nbsp;mldp&nbsp;forwarding</code>
-<code>show&nbsp;mrib&nbsp;mpls&nbsp;forwarding</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;mpls&nbsp;forwarding&nbsp;p2mp
+show&nbsp;mpls&nbsp;mldp&nbsp;forwarding
+show&nbsp;mrib&nbsp;mpls&nbsp;forwarding
+</code></pre></div>
 <p>Om man kör t.ex. Segment Routing har man inget behov av LDP, då kan man
 köra MLDP only.</p>
-<p><code>mpls&nbsp;ldp</code>
-<code>capabilities&nbsp;sac&nbsp;mldp-only</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;ldp
+&nbsp;capabilities&nbsp;sac&nbsp;mldp-only
+</code></pre></div>
 <p><strong>MoFRR</strong>
 MoFRR bygger två träd, egress PE måste ha IGP ecmp till ingress PE.</p>
-<p><code>mpls&nbsp;ldp</code>
-<code>mldp</code>
-<code>address-family&nbsp;ipv4</code>
-<code>mofrr</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;ldp
+&nbsp;mldp
+&nbsp;&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;&nbsp;mofrr
+</code></pre></div>
 <h2 id="unified-mpls">Unified MPLS</h2>
 <p>MVPN över unified MPLS eller Inter-AS MPLS option C funkar faktiskt men
 det är en växel man måste slå på i egress PE.</p>
 <p>IOS-XE</p>
-<p><code>mpls&nbsp;mldp&nbsp;forwarding&nbsp;recursive-fec</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;mldp&nbsp;forwarding&nbsp;recursive-fec
+</code></pre></div>
 <p>IOS-XR</p>
-<p><code>mpls&nbsp;ldp&nbsp;mldp&nbsp;address-family&nbsp;ipv4&nbsp;recursive-fec</code></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="img/Cisco_MPLS_Seamless.PNG" data-desc-position="bottom"><img alt="Cisco_MPLS_Seamless.PNG" src="img/Cisco_MPLS_Seamless.PNG"></a></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;ldp&nbsp;mldp&nbsp;address-family&nbsp;ipv4&nbsp;recursive-fec
+</code></pre></div>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_MPLS_Seamless.PNG" data-desc-position="bottom"><img alt="Cisco_MPLS_Seamless.PNG" src="../../images/Cisco_MPLS_Seamless.PNG"></a></p></vpn-id></root>
 
 
 
@@ -9067,7 +9105,7 @@ det är en växel man måste slå på i egress PE.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:23:42 CEST"><span class="timeago" datetime="2026-06-22T17:23:42+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:23:42 CEST">2026-06-22</span>
   </span>
 
     

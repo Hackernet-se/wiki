@@ -8780,6 +8780,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9138,41 +9166,48 @@
 <p>Förutsättningar för att sätta upp VPN-tunnlar är att klocka måste gå
 rätt och att NAT-regler måste ligga i rätt ordning.</p>
 <p>Kolla hur man gör på aktuell version</p>
-<p><code>vpnsetup&nbsp;site-to-site&nbsp;steps</code>
-<code>vpnsetup&nbsp;ipsec-remote-access&nbsp;steps</code></p>
+<div class="highlight"><pre><span></span><code>vpnsetup&nbsp;site-to-site&nbsp;steps
+vpnsetup&nbsp;ipsec-remote-access&nbsp;steps
+</code></pre></div>
 <h3 id="fas-1">Fas 1</h3>
-<p><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10</code>
-<code>authentication&nbsp;pre-share</code>
-<code>encryption&nbsp;aes-256</code>
-<code>hash&nbsp;sha</code>
-<code>lifetime&nbsp;28800</code>
-<code>group&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10
+&nbsp;authentication&nbsp;pre-share
+&nbsp;encryption&nbsp;aes-256
+&nbsp;hash&nbsp;sha
+&nbsp;lifetime&nbsp;28800
+&nbsp;group&nbsp;2
+</code></pre></div>
 <p>PSK</p>
 <p><code>tunnel-group</code><other-side><code>type&nbsp;ipsec-l2l</code>
 <code>tunnel-group</code><other-side><code>ipsec-attributes</code>
-<code>ikev1&nbsp;pre-shared-key&nbsp;*****</code>
-<code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;set&nbsp;peer</code><other-side></other-side></other-side></other-side></p>
+</other-side></other-side></p><div class="highlight"><pre><span></span><code>&nbsp;ikev1&nbsp;pre-shared-key&nbsp;*****
+</code></pre></div>
+<code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;set&nbsp;peer</code><other-side><p></p>
 <p>Visa befintlig PSK</p>
-<p><code>more&nbsp;system:running-config&nbsp;|&nbsp;i&nbsp;pre-shared-key|tunnel-group</code>
-<code>tunnel-group&nbsp;1.3.3.7&nbsp;type&nbsp;ipsec-l2l</code>
-<code>tunnel-group&nbsp;1.3.3.7&nbsp;ipsec-attributes</code>
-<code>ikev1&nbsp;pre-shared-key&nbsp;hemlignyckeln2000</code></p>
+<div class="highlight"><pre><span></span><code>more&nbsp;system:running-config&nbsp;|&nbsp;i&nbsp;pre-shared-key|tunnel-group
+tunnel-group&nbsp;1.3.3.7&nbsp;type&nbsp;ipsec-l2l
+tunnel-group&nbsp;1.3.3.7&nbsp;ipsec-attributes
+&nbsp;ikev1&nbsp;pre-shared-key&nbsp;hemlignyckeln2000
+</code></pre></div>
 <h3 id="fas-2">Fas 2</h3>
-<p><code>crypto&nbsp;ipsec&nbsp;ikev1&nbsp;transform-set&nbsp;SITE2-FAS2&nbsp;esp-aes-256&nbsp;esp-sha-hmac</code>
-<code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;set&nbsp;transform-set&nbsp;SITE2-FAS2</code>
-<code>access-list&nbsp;CRYPTO-to-SITE2&nbsp;extended&nbsp;permit&nbsp;ip&nbsp;172.16.20.0&nbsp;255.255.255.0&nbsp;172.16.40.0&nbsp;255.255.255.0</code>
-<code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;match&nbsp;address&nbsp;CRYPTO-to-SITE2</code>
-<code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;set&nbsp;security-association&nbsp;lifetime&nbsp;seconds&nbsp;3600</code>
-<code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;set&nbsp;pfs&nbsp;group5</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;ikev1&nbsp;transform-set&nbsp;SITE2-FAS2&nbsp;esp-aes-256&nbsp;esp-sha-hmac
+crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;set&nbsp;transform-set&nbsp;SITE2-FAS2
+access-list&nbsp;CRYPTO-to-SITE2&nbsp;extended&nbsp;permit&nbsp;ip&nbsp;172.16.20.0&nbsp;255.255.255.0&nbsp;172.16.40.0&nbsp;255.255.255.0
+crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;match&nbsp;address&nbsp;CRYPTO-to-SITE2
+crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;set&nbsp;security-association&nbsp;lifetime&nbsp;seconds&nbsp;3600
+crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;set&nbsp;pfs&nbsp;group5
+</code></pre></div>
 <p>Följande steg behöver endast göras vid första VPN-tunneluppsättningen.</p>
-<p><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;interface&nbsp;OUTSIDE</code>
-<code>crypto&nbsp;ikev1&nbsp;enable&nbsp;OUTSIDE</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;interface&nbsp;OUTSIDE
+crypto&nbsp;ikev1&nbsp;enable&nbsp;OUTSIDE&nbsp;
+</code></pre></div>
 <h3 id="nat-exempt">NAT Exempt</h3>
-<p><code>object&nbsp;network&nbsp;LAN1</code>
-<code>subnet&nbsp;172.16.20.0&nbsp;255.255.255.0</code>
-<code>object&nbsp;network&nbsp;LAN2</code>
-<code>subnet&nbsp;172.16.40.0&nbsp;255.255.255.0</code>
-<code>nat&nbsp;(inside,outside)&nbsp;1&nbsp;source&nbsp;static&nbsp;LAN1&nbsp;LAN1&nbsp;destination&nbsp;static&nbsp;LAN2&nbsp;LAN2</code></p>
+<div class="highlight"><pre><span></span><code>object&nbsp;network&nbsp;LAN1
+&nbsp;subnet&nbsp;172.16.20.0&nbsp;255.255.255.0
+object&nbsp;network&nbsp;LAN2
+&nbsp;subnet&nbsp;172.16.40.0&nbsp;255.255.255.0
+nat&nbsp;(inside,outside)&nbsp;1&nbsp;source&nbsp;static&nbsp;LAN1&nbsp;LAN1&nbsp;destination&nbsp;static&nbsp;LAN2&nbsp;LAN2
+</code></pre></div>
 <h2 id="route-based">Route-Based</h2>
 <p>I ASA version 9.7 inplementerades stöd för route-based vpn med tunnel
 interface.
@@ -9180,37 +9215,43 @@ För IKEv2 krävs minst version 9.8.1!</p>
 <p>Tunnel interface har ingen security level.</p>
 <p>IKEv2 behåller inte riktigt nomenklaturen med faser men ändå.</p>
 <h3 id="fas-1_1">Fas 1</h3>
-<p><code>crypto&nbsp;ikev2&nbsp;policy&nbsp;5</code>
-<code>encryption&nbsp;aes-256</code>
-<code>integrity&nbsp;sha256</code>
-<code>group&nbsp;19</code>
-<code>prf&nbsp;sha256</code>
-<code>lifetime&nbsp;seconds&nbsp;86400</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ikev2&nbsp;policy&nbsp;5
+&nbsp;encryption&nbsp;aes-256
+&nbsp;integrity&nbsp;sha256
+&nbsp;group&nbsp;19
+&nbsp;prf&nbsp;sha256
+&nbsp;lifetime&nbsp;seconds&nbsp;86400
+</code></pre></div>
 <p>PSK</p>
-<p><code>tunnel-group&nbsp;1.2.3.4&nbsp;type&nbsp;ipsec-l2l</code>
-<code>tunnel-group&nbsp;1.2.3.4&nbsp;ipsec-attributes</code>
-<code>ikev2&nbsp;remote-authentication&nbsp;pre-shared-key&nbsp;hemlig123</code>
-<code>ikev2&nbsp;local-authentication&nbsp;pre-shared-key&nbsp;hemlig123</code></p>
+<div class="highlight"><pre><span></span><code>tunnel-group&nbsp;1.2.3.4&nbsp;type&nbsp;ipsec-l2l
+tunnel-group&nbsp;1.2.3.4&nbsp;ipsec-attributes
+&nbsp;ikev2&nbsp;remote-authentication&nbsp;pre-shared-key&nbsp;hemlig123
+&nbsp;ikev2&nbsp;local-authentication&nbsp;pre-shared-key&nbsp;hemlig123
+</code></pre></div>
 <h3 id="fas-2_1">Fas 2</h3>
-<p><code>crypto&nbsp;ipsec&nbsp;ikev2&nbsp;ipsec-proposal&nbsp;IKEV2-PROPOSAL01</code>
-<code>protocol&nbsp;esp&nbsp;encryption&nbsp;aes-256</code>
-<code>protocol&nbsp;esp&nbsp;integrity&nbsp;sha-256</code></p>
-<p><code>crypto&nbsp;ipsec&nbsp;profile&nbsp;IKEV2-PROFILE01</code>
-<code>set&nbsp;ikev2&nbsp;ipsec-proposal&nbsp;IKEV2-PROPOSAL01</code>
-<code>set&nbsp;pfs&nbsp;group19</code>
-<code>set&nbsp;security-association&nbsp;lifetime&nbsp;seconds&nbsp;3600</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;ikev2&nbsp;ipsec-proposal&nbsp;IKEV2-PROPOSAL01
+&nbsp;protocol&nbsp;esp&nbsp;encryption&nbsp;aes-256
+&nbsp;protocol&nbsp;esp&nbsp;integrity&nbsp;sha-256
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;profile&nbsp;IKEV2-PROFILE01
+&nbsp;set&nbsp;ikev2&nbsp;ipsec-proposal&nbsp;IKEV2-PROPOSAL01
+&nbsp;set&nbsp;pfs&nbsp;group19
+&nbsp;set&nbsp;security-association&nbsp;lifetime&nbsp;seconds&nbsp;3600
+</code></pre></div>
 <p>Följande steg behöver endast göras vid första VPN-tunneluppsättningen.
 crypto ikev2 enable OUTSIDE</p>
 <h3 id="tunnel-interface">Tunnel interface</h3>
-<p><code>interface&nbsp;Tunnel5</code>
-<code>nameif&nbsp;VPN-TUNNEL5</code>
-<code>ip&nbsp;address&nbsp;169.254.2.1&nbsp;255.255.255.0</code>
-<code>tunnel&nbsp;source&nbsp;interface&nbsp;OUTSIDE</code>
-<code>tunnel&nbsp;destination&nbsp;1.2.3.4</code>
-<code>tunnel&nbsp;mode&nbsp;ipsec&nbsp;ipv4</code>
-<code>tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;IKEV2-PROFILE01</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel5
+&nbsp;nameif&nbsp;VPN-TUNNEL5
+&nbsp;ip&nbsp;address&nbsp;169.254.2.1&nbsp;255.255.255.0
+&nbsp;tunnel&nbsp;source&nbsp;interface&nbsp;OUTSIDE
+&nbsp;tunnel&nbsp;destination&nbsp;1.2.3.4
+&nbsp;tunnel&nbsp;mode&nbsp;ipsec&nbsp;ipv4
+&nbsp;tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;IKEV2-PROFILE01
+</code></pre></div>
 <p>Routa det som finns på andra sidan tunneln:</p>
-<p><code>route&nbsp;VPN-TUNNEL5&nbsp;10.10.10.0&nbsp;255.255.255.0&nbsp;169.254.253.1</code></p>
+<div class="highlight"><pre><span></span><code>route&nbsp;VPN-TUNNEL5&nbsp;10.10.10.0&nbsp;255.255.255.0&nbsp;169.254.253.1
+</code></pre></div>
 <p>Next-hop kan vara vad som då en next-hop krävs (namnet på interface som
 styr).</p>
 <h3 id="nat">NAT</h3>
@@ -9222,70 +9263,82 @@ via tunnel interface och ej utsidan tex OUTSIDE.</p>
 automatiskt lägga till allow regler för allt som det byggs tunnel för
 (inklusive ssl vpn) annars kan man styra det med outside-aclen (för
 tunnel interface acl per tunnel). Kolla om autoregler är påslaget:</p>
-<p><code>show&nbsp;run&nbsp;all&nbsp;|&nbsp;i&nbsp;permit-vpn</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;run&nbsp;all&nbsp;|&nbsp;i&nbsp;permit-vpn
+</code></pre></div>
 <p>Notera att autoregler är påslaget som standard. Stäng av autoregel för
 vpn:</p>
-<p><code>no&nbsp;sysopt&nbsp;connection&nbsp;permit-vpn</code></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;sysopt&nbsp;connection&nbsp;permit-vpn
+</code></pre></div>
 <p>Tillåt trafik in från andra sidan med hjälp av ACL:
 Policy-based</p>
-<p><code>access-list&nbsp;OUTSIDE-IN&nbsp;extended&nbsp;permit&nbsp;ip&nbsp;object&nbsp;LAN2&nbsp;object&nbsp;LAN1</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;OUTSIDE-IN&nbsp;extended&nbsp;permit&nbsp;ip&nbsp;object&nbsp;LAN2&nbsp;object&nbsp;LAN1
+</code></pre></div>
 <p>Route-based</p>
-<p><code>access-list&nbsp;ACL-VPN-TUNNEL5&nbsp;extended&nbsp;permit&nbsp;ip&nbsp;object&nbsp;LAN2&nbsp;object&nbsp;LAN1</code>
-<code>access-group&nbsp;ACL-VPN-TUNNEL5&nbsp;in&nbsp;interface&nbsp;VPN-TUNNEL5</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;ACL-VPN-TUNNEL5&nbsp;extended&nbsp;permit&nbsp;ip&nbsp;object&nbsp;LAN2&nbsp;object&nbsp;LAN1
+access-group&nbsp;ACL-VPN-TUNNEL5&nbsp;in&nbsp;interface&nbsp;VPN-TUNNEL5
+</code></pre></div>
 <p><strong>Troubleshoot</strong></p>
-<p><code>show&nbsp;crypto&nbsp;isakmp&nbsp;sa&nbsp;detail</code>
-<code>show&nbsp;crypto&nbsp;ipsec&nbsp;sa</code>
-<code>show&nbsp;vpn-sessiondb&nbsp;detail&nbsp;l2l</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;isakmp&nbsp;sa&nbsp;detail
+show&nbsp;crypto&nbsp;ipsec&nbsp;sa
+show&nbsp;vpn-sessiondb&nbsp;detail&nbsp;l2l
+</code></pre></div>
 <p><strong>Reverse route</strong>
 Reverse route injection (RRI) tillåter att det installeras static routes
 för det som finns på andra sidan av tunneln i routingtabellen när
 tunneln blir aktiv. Kan t.ex. användas om man vill redistribuera
 VPN-routes till ett routingprotokoll.</p>
-<p><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;set&nbsp;reverse-route</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;set&nbsp;reverse-route
+</code></pre></div>
 <h1 id="remote-access">Remote Access</h1>
 <h2 id="anyconnect">AnyConnect</h2>
 <p>AnyConnect SSL split tunnel
 Objekt och pool</p>
-<p><code>ip&nbsp;local&nbsp;pool&nbsp;AnyConnect-Pool&nbsp;172.20.0.51-172.20.0.100&nbsp;mask&nbsp;255.255.255.0</code>
-<code>object&nbsp;network&nbsp;VPN_POOL</code>
-<code>subnet&nbsp;172.20.0.0&nbsp;255.255.255.0</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;local&nbsp;pool&nbsp;AnyConnect-Pool&nbsp;172.20.0.51-172.20.0.100&nbsp;mask&nbsp;255.255.255.0
+object&nbsp;network&nbsp;VPN_POOL
+&nbsp;subnet&nbsp;172.20.0.0&nbsp;255.255.255.0
+</code></pre></div>
 <p>ACL</p>
-<p><code>access-list&nbsp;AnyConnect-SplitTunnel&nbsp;standard&nbsp;permit&nbsp;10.0.0.0&nbsp;255.255.255.0&nbsp;&nbsp;#&nbsp;LAN</code>
-<code>access-list&nbsp;OUTSIDE-V1&nbsp;remark&nbsp;-----&nbsp;Allow&nbsp;AnyConnect&nbsp;to&nbsp;LAN</code>
-<code>access-list&nbsp;OUTSIDE-V1&nbsp;extended&nbsp;permit&nbsp;ip&nbsp;object&nbsp;VPN_POOL&nbsp;object&nbsp;LAN</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;AnyConnect-SplitTunnel&nbsp;standard&nbsp;permit&nbsp;10.0.0.0&nbsp;255.255.255.0&nbsp;&nbsp;#&nbsp;LAN
+access-list&nbsp;OUTSIDE-V1&nbsp;remark&nbsp;-----&nbsp;Allow&nbsp;AnyConnect&nbsp;to&nbsp;LAN
+access-list&nbsp;OUTSIDE-V1&nbsp;extended&nbsp;permit&nbsp;ip&nbsp;object&nbsp;VPN_POOL&nbsp;object&nbsp;LAN
+</code></pre></div>
 <p>Enable anyconnect</p>
-<p><code>webvpn</code>
-<code>enable&nbsp;OUTSIDE</code>
-<code>anyconnect&nbsp;image&nbsp;disk0:/anyconnect-win-3.1.10010-k9.pkg&nbsp;1</code>
-<code>anyconnect&nbsp;enable</code>
-<code>tunnel-group-list&nbsp;enable</code>
-<code>cache</code>
-<code>disable</code>
-<code>error-recovery&nbsp;disable</code></p>
+<div class="highlight"><pre><span></span><code>webvpn
+&nbsp;enable&nbsp;OUTSIDE
+&nbsp;anyconnect&nbsp;image&nbsp;disk0:/anyconnect-win-3.1.10010-k9.pkg&nbsp;1
+&nbsp;anyconnect&nbsp;enable
+&nbsp;tunnel-group-list&nbsp;enable
+&nbsp;cache
+&nbsp;&nbsp;disable
+&nbsp;error-recovery&nbsp;disable
+</code></pre></div>
 <p>Group policy</p>
-<p><code>group-policy&nbsp;GroupPolicy_Hackernet&nbsp;internal</code>
-<code>group-policy&nbsp;GroupPolicy_Hackernet&nbsp;attributes</code>
-<code>wins-server&nbsp;none</code>
-<code>dns-server&nbsp;value&nbsp;10.0.0.10</code>
-<code>vpn-tunnel-protocol&nbsp;ssl-client</code>
-<code>split-tunnel-policy&nbsp;tunnelspecified</code>
-<code>split-tunnel-network-list&nbsp;value&nbsp;AnyConnect-SplitTunnel</code>
-<code>default-domain&nbsp;value&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>group-policy&nbsp;GroupPolicy_Hackernet&nbsp;internal
+group-policy&nbsp;GroupPolicy_Hackernet&nbsp;attributes
+&nbsp;wins-server&nbsp;none
+&nbsp;dns-server&nbsp;value&nbsp;10.0.0.10
+&nbsp;vpn-tunnel-protocol&nbsp;ssl-client&nbsp;
+&nbsp;split-tunnel-policy&nbsp;tunnelspecified
+&nbsp;split-tunnel-network-list&nbsp;value&nbsp;AnyConnect-SplitTunnel
+&nbsp;default-domain&nbsp;value&nbsp;hackernet.se
+</code></pre></div>
 <p>Tunnel group</p>
-<p><code>tunnel-group&nbsp;Hackernet&nbsp;type&nbsp;remote-access</code>
-<code>tunnel-group&nbsp;Hackernet&nbsp;general-attributes</code>
-<code>address-pool&nbsp;AnyConnect-Pool</code>
-<code>default-group-policy&nbsp;GroupPolicy_Hackernet</code>
-<code>tunnel-group&nbsp;Hackernet&nbsp;webvpn-attributes</code>
-<code>group-alias&nbsp;Hackernet&nbsp;enable</code></p>
+<div class="highlight"><pre><span></span><code>tunnel-group&nbsp;Hackernet&nbsp;type&nbsp;remote-access
+tunnel-group&nbsp;Hackernet&nbsp;general-attributes
+&nbsp;address-pool&nbsp;AnyConnect-Pool
+&nbsp;default-group-policy&nbsp;GroupPolicy_Hackernet
+tunnel-group&nbsp;Hackernet&nbsp;webvpn-attributes
+&nbsp;group-alias&nbsp;Hackernet&nbsp;enable
+</code></pre></div>
 <p>no nat</p>
-<p><code>nat&nbsp;(INSIDE,OUTSIDE)&nbsp;5&nbsp;source&nbsp;static&nbsp;any&nbsp;any&nbsp;destination&nbsp;static&nbsp;VPN_POOL&nbsp;VPN_POOL&nbsp;no-proxy-arp&nbsp;route-lookup</code></p>
+<div class="highlight"><pre><span></span><code>nat&nbsp;(INSIDE,OUTSIDE)&nbsp;5&nbsp;source&nbsp;static&nbsp;any&nbsp;any&nbsp;destination&nbsp;static&nbsp;VPN_POOL&nbsp;VPN_POOL&nbsp;no-proxy-arp&nbsp;route-lookup
+</code></pre></div>
 <p>Skapa lokala users</p>
-<p><code>username&nbsp;juan&nbsp;password&nbsp;cisco</code>
-<code>username&nbsp;juan&nbsp;attributes</code>
-<code>service-type&nbsp;remote-access</code>
-<code>vpn-group-policy&nbsp;GroupPolicy_Hackernet</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>username&nbsp;juan&nbsp;password&nbsp;cisco
+username&nbsp;juan&nbsp;attributes
+&nbsp;service-type&nbsp;remote-access
+&nbsp;vpn-group-policy&nbsp;GroupPolicy_Hackernet
+</code></pre></div></other-side>
 
 
 
@@ -9308,7 +9361,7 @@ Objekt och pool</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

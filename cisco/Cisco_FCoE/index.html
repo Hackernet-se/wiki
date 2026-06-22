@@ -96,11 +96,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#konfiguration" class="md-skip">
-          Gå till innehållet
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -5216,24 +5211,6 @@
       
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Cisco FCoE
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -5250,84 +5227,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Innehållsförteckning">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Innehållsförteckning
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#konfiguration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Konfiguration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Konfiguration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#multihop-fcoe" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Multihop FCoE
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enhanced-vpc" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Enhanced vPC
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nexus-7k" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nexus 7k
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#iscsi" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        iSCSI
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -8715,6 +8614,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8917,75 +8844,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Innehållsförteckning
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#konfiguration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Konfiguration
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Konfiguration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#multihop-fcoe" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Multihop FCoE
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enhanced-vpc" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Enhanced vPC
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nexus-7k" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nexus 7k
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#iscsi" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        iSCSI
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -9025,167 +8883,7 @@ lossless transport. FCoE har en egen EtherType (0x8906).</p>
     FCoE.</li>
 </ul>
 <p><strong>Overview</strong>
-<a href="/File:Cisco-FCoE-CNA.png" title="wikilink"><file:cisco-fcoe-cna.png></file:cisco-fcoe-cna.png></a></p>
-<p><strong>Data Center Bridging</strong>
-Ett DCB-nätverk tillhandahåller I/O consolidation. Det betyder att SAN-
-och LAN-trafik går i samma nätverk. DCB kallas även DCE eller CEE.
-Switcharna måste supportera CoS-based traffic differentiation. Fibre
-Channel är känsligt för packet drops och är beroende av att paketen
-kommer fram i samma ordning som de skickades. I ett DCB-nätverk används
-virtuella länkar (VLs) för att differentiera trafik-klasser. VLs är en
-extension av CoS vilket gör att trafik i en klass inte påverkar trafik i
-en annan. Det finns 8 CoS värden. DCBX är på default på Nexus-switchar.</p>
-<p><strong>Priority Flow Control</strong>
-PFC (IEEE 802.1bb) är ett subprotokoll till DCB. Det är en mekanism som
-förhindrar frame loss pga congestion. Det är likt 802.3x Flow Control
-(pause frames) men det jobbar på en per CoS basis. När en buffer
-threshold överstigs pga congestion så skickas en pause frame till andra
-sidan för att den ska sluta skicka frames med ett visst CoS-värde på den
-länken under en viss tid. När sedan trafik går ner under ett visst
-gränsvärde så skickas en resume frame för att dra igång dataflödet på
-länken igen. PFC kommunicerar genom att skicka frames till well-known
-multicast address 01:80:C2:00:00:01.</p>
-<p>Det första som händer när länken mellan FCoE-switch och CNA kommer upp
-är att DCBX (Data Centre Bridging capabilities eXchange protocol)
-berättar för CNA hur den ska vara konfad med avseende på PFC &amp; ETS
-(enhanced transmission selection). ETS jobbar med priority groups som
-man kan assigna bandbredd till. DCBX transporteras on the wire av LLDP.
-När DCBX är klart kan FIP ta vid.</p>
-<p><strong>FCoE Initiation Protocol</strong>
-FIP är en väsentlig del i FCoE. Det används för att upptäcka och
-initiera FCoE-kapabla enheter som är kopplade till ethernetnätverket.
-FIP har hand om vlan och FCF discovery samt FLOGI och Fabric Discovery.
-Det är FIP som sätter upp virtuella FC-länkar. På varje FCoE Ethernet
-port på FCF skapas en virtuell FC-port (vfc). Varje virtuell FC-länk
-identifieras av FCoE VLAN ID samt MAC-adresserna i varje ände på länken.
-Under FIP så får alltså CNA reda på vilken mac-adress man ska prata med
-på FCF. Det betyder också att varje FC-paket måste vara taggat med det
-vlan som vsanet är mappat med, detta vlan kan ej användas till något
-annat än FCoE. Notera dock att FIP använder native vlan först men gör en
-vlan discovery så man får en lista av FCoE-vlan.</p>
-<p>FIP bygger även länkar FCF till FCF för multihop FCoE samt håller koll
-på länkar mha periodiska maintenance messages. E-Nodes använder olika
-MAC-adresser för FIP och FCoE. FIP sourcas med burned in address medans
-FCoE sourcas med den MAC-adress som fabricen tillhandahållit, Fabric
-Provided MAC Address. FPMA utgörs av FCoE MAC address prefix (24 bitar)
-plus FC_ID (24 bitar). För att rymma den maximala FC-framen är qos
-class-fcoe definierad med MTU 2240 bytes. FIP har en dedikerad Ethertype
-(0x8914). Protokollet finns i två versioner (CIN-DCBX &amp; CEE-DCBX) och
-Nexus har stöd för båda.</p>
-<h3 id="konfiguration">Konfiguration</h3>
-<p>Nedan följer FCoE-specifik konfiguration, för övrig konfiguration se
-<a href="/Cisco_FC#Konfiguration" title="wikilink">Cisco FC</a>. Eftersom FCoE och FIP
-använder ett taggat FCoE-vlan så måste ethernetport på FCF mot servrar
-vara vlan-trunk.</p>
-<p><strong>QoS</strong>
-Kontrollera att QoS är konfat med minst en no-drop klass. Default
-används CoS 3 för FCoE.</p>
-<p><code>show&nbsp;policy-map&nbsp;system&nbsp;type&nbsp;network-qos</code></p>
-<p><strong>VSAN</strong>
-Default mappas vsan till vlan med samma ID.</p>
-<p><code>vsan&nbsp;database</code>
-<code>vsan&nbsp;100</code></p>
-<p><code>vlan&nbsp;100</code>
-<code>fcoe&nbsp;vsan&nbsp;100</code></p>
-<p><strong>F-port</strong></p>
-<p><code>interface&nbsp;1/15</code>
-<code>switchport&nbsp;mode&nbsp;trunk</code>
-<code>switchport&nbsp;trunk&nbsp;allowed&nbsp;vlan&nbsp;1,100-105</code>
-<code>spanning-tree&nbsp;port&nbsp;type&nbsp;edge&nbsp;trunk</code></p>
-<p><code>interface&nbsp;vfc&nbsp;315</code>
-<code>bind&nbsp;interface&nbsp;e1/15</code>
-<code>switchport&nbsp;mode&nbsp;f</code></p>
-<p><strong>Verify</strong></p>
-<p><code>show&nbsp;flogi&nbsp;database</code>
-<code>show&nbsp;fcns&nbsp;database</code>
-<code>show&nbsp;vlan&nbsp;fcoe</code>
-<code>show&nbsp;fcoe&nbsp;database</code>
-<code>show&nbsp;topology&nbsp;vsan&nbsp;100</code></p>
-<p><strong>PFC</strong>
-interface ethernet 1/15</p>
-<p><code>priority-flow-control&nbsp;mode&nbsp;auto</code></p>
-<p><code>show&nbsp;interface&nbsp;priority-flow-control</code>
-<code>show&nbsp;qos&nbsp;dcbxp&nbsp;interface</code></p>
-<p>auto betyder att no-drop CoS values ska annonseras och förhandlas med
-hjälp av DCBXP. En successful negotiation slår på PFC på no-drop CoS.
-Medans om det t.ex. är en mismatch i capabilities så kommer inte
-förhandlingen att lyckas och PFC förblir avstängt.</p>
-<p><strong>FC-Map</strong>
-Man kan identifiera FC-fabricen mha MAC-adresser eftersom detta används
-till FPMA. FC-Map är en isoleringsteknik. Frames som inte har detta
-prefix discardas, dvs alla switchar i fabrien måste ha samma FC-map.
-Default value är 0E.FC.00.</p>
-<p><code>fcoe&nbsp;fcmap&nbsp;0xefc10</code></p>
-<p><strong>Fabric Priority</strong>
-Nexus 5000 annonserar sin prioritet, den används av CNA:er för att
-bestämma vilken som är den bästa switchen att ansluta till.</p>
-<p><code>fcoe&nbsp;fcf-priority&nbsp;128</code></p>
-<h4 id="multihop-fcoe">Multihop FCoE</h4>
-<p>Precis som det finns virtuella F-portar finns det även virtuella
-E-portar.</p>
-<p><code>interface&nbsp;vfc&nbsp;15</code>
-<code>bind&nbsp;interface&nbsp;ethernet&nbsp;1/15</code>
-<code>switchport&nbsp;mode&nbsp;e</code>
-<code>no&nbsp;shut</code></p>
-<p><code>interface&nbsp;ethernet&nbsp;1/15</code>
-<code>switchport&nbsp;mode&nbsp;trunk</code>
-<code>no&nbsp;shut</code></p>
-<h4 id="enhanced-vpc">Enhanced vPC</h4>
-<p>Man kan kombinera FCoE med <a href="/Nexus_vPC" title="wikilink">Enhanced vPC</a> men man
-måste separera A- och B-sidan. Detta kan man göra genom att konfa
-FEX:arna att pinna FCoE-trafik till endast den ena parent. Först bygger
-man vPC och sedan FCoE på det. FCoE-vlan får ej traversera vPC
-peer-linken men detta sköts default. Host facing vfc-interfaces binds
-till fysiska ethernetport och inte port-channel interface.</p>
-<p>Nexus1</p>
-<p><code>fex&nbsp;101</code>
-<code>fcoe</code></p>
-<p><code>interface&nbsp;vfc&nbsp;10</code>
-<code>bind&nbsp;interface&nbsp;ethernet101/1/1</code>
-<code>no&nbsp;shutdown</code></p>
-<p>Nexus2</p>
-<p><code>fex&nbsp;102</code>
-<code>fcoe</code></p>
-<p><code>interface&nbsp;vfc&nbsp;10</code>
-<code>bind&nbsp;interface&nbsp;ethernet102/1/1</code>
-<code>no&nbsp;shutdown</code></p>
-<p>Show</p>
-<p><code>show&nbsp;fex&nbsp;detail&nbsp;|&nbsp;i&nbsp;FCoE</code>
-<code>show&nbsp;system&nbsp;internal&nbsp;dcbx&nbsp;info&nbsp;interface&nbsp;ethernet&nbsp;101/1/1</code></p>
-<h4 id="nexus-7k">Nexus 7k</h4>
-<p>FCoE görs med hjälp av Storage VDC.</p>
-<p><code>license&nbsp;fcoe&nbsp;module&nbsp;2</code></p>
-<p><code>system&nbsp;qos</code>
-<code>service-policy&nbsp;type&nbsp;network-qos&nbsp;default-nq-7e-4q8q-policy</code></p>
-<p><code>vdc&nbsp;SAN&nbsp;type&nbsp;storage</code>
-<code>allocate&nbsp;interface&nbsp;e2/1-8</code>
-<code>allocate&nbsp;fcoe-vlan-range&nbsp;100-101</code></p>
-<h2 id="iscsi">iSCSI</h2>
-<p>iSCSI har egentligen inte mycket med switchar att göra men man bör göra
-det lossless.</p>
-<p><code>class-map&nbsp;type&nbsp;qos&nbsp;match-all&nbsp;class-iscsi</code>
-<code>match&nbsp;protocol&nbsp;iscsi</code>
-<code>match&nbsp;cos&nbsp;6</code></p>
-<p><code>policy-map&nbsp;type&nbsp;qos&nbsp;qos_fcoe_and_iscsi</code>
-<code>class&nbsp;class-iscsi</code>
-<code>set&nbsp;qos-group&nbsp;2</code>
-<code>class&nbsp;class-fcoe</code>
-<code>set&nbsp;qos-group&nbsp;1</code></p>
-<p><code>policy-map&nbsp;type&nbsp;network-qos&nbsp;network_fcoe_and_iscsi</code>
-<code>class&nbsp;type&nbsp;network-qos&nbsp;class-iscsi</code>
-<code>mtu&nbsp;9216</code>
-<code>pause&nbsp;no-drop</code>
-<code>class&nbsp;type&nbsp;network-qos&nbsp;class-fcoe</code>
-<code>mtu&nbsp;2158</code>
-<code>pause&nbsp;no-drop</code>
-<code>class&nbsp;type&nbsp;network-qos&nbsp;class-default</code>
-<code>mtu&nbsp;9216</code></p>
-<p><code>system&nbsp;qos</code>
-<code>service-policy&nbsp;type&nbsp;queuing&nbsp;input&nbsp;fcoe-default-in-policy</code>
-<code>service-policy&nbsp;type&nbsp;queuing&nbsp;output&nbsp;fcoe-default-out-policy</code>
-<code>service-policy&nbsp;type&nbsp;qos&nbsp;input&nbsp;qos_fcoe_and_iscsi</code>
-<code>service-policy&nbsp;type&nbsp;network-qos&nbsp;network_fcoe_and_iscsi</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco-FCoE-CNA.png" data-desc-position="bottom"><img alt="Cisco-FCoE-CNA.png" src="../../images/Cisco-FCoE-CNA.png"></a></p>
 
 
 
@@ -9208,7 +8906,7 @@ det lossless.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

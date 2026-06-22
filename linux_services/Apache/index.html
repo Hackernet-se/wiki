@@ -8791,6 +8791,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9164,10 +9192,12 @@
 35-40% av alla hemsidor i världen. Apache är en väldigt enkel webbserver
 att konfigurera och har även flera användbara tillägg.</p>
 <h2 id="installation">Installation</h2>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;apache2</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;apache2
+</code></pre></div>
 <h3 id="apache-kommandon">Apache kommandon</h3>
 <p><code>a2ensite</code> För att aktivera en sida. Tillgängliga sidor finns i mappen
-<code>/etc/apache2/sites-available</code></p>
+</p><div class="highlight"><pre><span></span><code>/etc/apache2/sites-available
+</code></pre></div><p></p>
 <p><code>a2dissite</code> För att inaktivera av en sida. Aktiverade sidor finns i
 mappen <code>/etc/apache2/sites-enabled</code></p>
 <p><code>a2dismod</code> För att stänga av ett tillägg. Aktiverade tillägg finns i
@@ -9179,33 +9209,41 @@ mappen <code>/etc/apache2/mods-available</code></p>
 80/443 med flera hemsidor men ha olika domännamn. För att få virtualhost
 att fungera så räcker det att man lägger till denna raden i apache
 configen.</p>
-<p><code>ServerName&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>ServerName&nbsp;hackernet.se
+</code></pre></div>
 <p>Kopiera default filen under sites-available.</p>
-<p><code>cp&nbsp;/etc/apache2/sites-available/default&nbsp;/etc/apache2/sites-available/hackernet</code></p>
+<div class="highlight"><pre><span></span><code>cp&nbsp;/etc/apache2/sites-available/default&nbsp;/etc/apache2/sites-available/hackernet
+</code></pre></div>
 <p>Öppna den nya filen och lägg till raden precis under <code>ServerAdmin</code> och
 över <code>DocumentRoot</code></p>
 <p>Ändra även <code>DocumentRoot</code> och <code>Directory</code> ifall du vill att en annan
 hemsida ska visas istället för orginal.</p>
 <p>Aktivera sedan sidan med</p>
-<p><code>a2ensite&nbsp;hackernet</code></p>
+<div class="highlight"><pre><span></span><code>a2ensite&nbsp;hackernet
+</code></pre></div>
 <h3 id="apachectl">Apachectl</h3>
 <p>Kolla grundläggande konfiguration:</p>
-<p><code>apachectl&nbsp;-S</code></p>
+<div class="highlight"><pre><span></span><code>apachectl&nbsp;-S
+</code></pre></div>
 <p>Kör ett configtest:</p>
-<p><code>apachectl&nbsp;-t</code></p>
+<div class="highlight"><pre><span></span><code>apachectl&nbsp;-t
+</code></pre></div>
 <h2 id="permissions">Permissions</h2>
 <p>Följande är en bra grund för filrättigheter.</p>
-<p><code>chown&nbsp;root:www-data&nbsp;/var/www/html&nbsp;-R</code>
-<code>chmod&nbsp;g+s&nbsp;/var/www/html</code>
-<code>chmod&nbsp;o-wrx&nbsp;/var/www/html&nbsp;-R</code></p>
+<div class="highlight"><pre><span></span><code>chown&nbsp;root:www-data&nbsp;/var/www/html&nbsp;-R
+chmod&nbsp;g+s&nbsp;/var/www/html
+chmod&nbsp;o-wrx&nbsp;/var/www/html&nbsp;-R
+</code></pre></div>
 <p>www-data, apache2′s user, har nu grupp-ägarskapet för default web root
 och alla filer däri. g+s säger åt filsystemet att alla nya filer som
 skapas får samma grupp-ägarskap.</p>
 <h2 id="log-files">Log files</h2>
-<p><code>tail&nbsp;-f&nbsp;/var/log/apache2/access.log</code></p>
+<div class="highlight"><pre><span></span><code>tail&nbsp;-f&nbsp;/var/log/apache2/access.log
+</code></pre></div>
 <h2 id="ssl">SSL</h2>
 <p>Enable module</p>
-<p><code>sudo&nbsp;a2enmod&nbsp;ssl&nbsp;&amp;&amp;&nbsp;sudo&nbsp;a2enmod&nbsp;headers&nbsp;&amp;&amp;&nbsp;sudo&nbsp;service&nbsp;apache2&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;a2enmod&nbsp;ssl&nbsp;&amp;&amp;&nbsp;sudo&nbsp;a2enmod&nbsp;headers&nbsp;&amp;&amp;&nbsp;sudo&nbsp;service&nbsp;apache2&nbsp;restart
+</code></pre></div>
 <p><strong>Certifikat</strong>
 Fixa ett certifikat, antingen från en CA (t.ex. <a href="/Let%27s_Encrypt" title="wikilink">Let's
 Encrypt</a>) eller
@@ -9213,11 +9251,13 @@ Encrypt</a>) eller
 <p>Konfiguration med säkerhet i fokus.</p>
 <p><a href="https://cipherli.st/"><code>https://cipherli.st/</code></a></p>
 <p>Aktivera vHost</p>
-<p><code>sudo&nbsp;a2ensite&nbsp;hackernet&nbsp;&amp;&amp;&nbsp;sudo&nbsp;service&nbsp;apache2&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;a2ensite&nbsp;hackernet&nbsp;&amp;&amp;&nbsp;sudo&nbsp;service&nbsp;apache2&nbsp;restart
+</code></pre></div>
 <h2 id="dolj-version">Dölj Version</h2>
 <p>Skriv följande i <code>Apache.conf/httpd.conf</code></p>
-<p><code>ServerTokens&nbsp;ProductOnly</code>
-<code>ServerSignature&nbsp;Off</code></p>
+<div class="highlight"><pre><span></span><code>ServerTokens&nbsp;ProductOnly
+ServerSignature&nbsp;Off
+</code></pre></div>
 <h2 id="apachebench">ApacheBench</h2>
 <p>Benchmarking tool</p>
 <p><em><code>sudo`` ``apt-get`` ``install`` ``apache2-utils</code></em>
@@ -9238,7 +9278,6 @@ också problemet att alla olika vhostar på port 443 pekar på samma sida.</p>
 <span class="w">     </span><span class="nb">Listen</span><span class="w"> </span><span class="m">443</span>
 <span class="w"> </span><span class="nt">&lt;/IfModule&gt;</span>
 </code></pre></div>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
 
 
 
@@ -9261,7 +9300,7 @@ också problemet att alla olika vhostar på port 443 pekar på samma sida.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8779,6 +8779,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9188,36 +9216,47 @@ switchar och routrar. T.ex. ip a s är samma som ip address show</p>
 </table>
 <h2 id="ip">ip</h2>
 <p>Version</p>
-<p><code>ip&nbsp;-V</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;-V
+</code></pre></div>
 <p><strong>ip address show</strong></p>
-<p><code>ip&nbsp;a</code>
-<code>ip&nbsp;-br&nbsp;a</code>
-<code>ip&nbsp;a&nbsp;s&nbsp;eth0</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;a
+ip&nbsp;-br&nbsp;a
+ip&nbsp;a&nbsp;s&nbsp;eth0
+</code></pre></div>
 <p><strong>ip routes show</strong></p>
-<p><code>ip&nbsp;r</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;r
+</code></pre></div>
 <p><strong>ip link</strong>
 ifconfig</p>
-<p><code>ip&nbsp;l</code>
-<code>ip&nbsp;-br&nbsp;l</code>
-<code>ip&nbsp;-s&nbsp;l&nbsp;&nbsp;#med&nbsp;statistik</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;l
+ip&nbsp;-br&nbsp;l
+ip&nbsp;-s&nbsp;l&nbsp;&nbsp;#med&nbsp;statistik
+</code></pre></div>
 <p>ifup/ifdown</p>
-<p><code>ip&nbsp;link&nbsp;set&nbsp;eth0&nbsp;up/down</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;set&nbsp;eth0&nbsp;up/down
+</code></pre></div>
 <p>Description</p>
-<p><code>ip&nbsp;link&nbsp;set&nbsp;eth0&nbsp;alias&nbsp;"LAN&nbsp;interface"</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;set&nbsp;eth0&nbsp;alias&nbsp;"LAN&nbsp;interface"
+</code></pre></div>
 <p>Promiscuous mode på interface</p>
-<p><code>ip&nbsp;link&nbsp;set&nbsp;eth0&nbsp;promisc&nbsp;on</code>
-<code>ip&nbsp;a&nbsp;|&nbsp;grep&nbsp;PROMISC</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;set&nbsp;eth0&nbsp;promisc&nbsp;on
+ip&nbsp;a&nbsp;|&nbsp;grep&nbsp;PROMISC
+</code></pre></div>
 <p>Macchanger</p>
-<p><code>ip&nbsp;link&nbsp;set&nbsp;dev&nbsp;eth0&nbsp;address&nbsp;00:11:22:33:44:55</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;set&nbsp;dev&nbsp;eth0&nbsp;address&nbsp;00:11:22:33:44:55
+</code></pre></div>
 <p><strong>ip neigh</strong>
 ARP/NDP</p>
-<p><code>ip&nbsp;n</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;n
+</code></pre></div>
 <p>Flush cache</p>
-<p><code>ip&nbsp;n&nbsp;f</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;n&nbsp;f
+</code></pre></div>
 <p><strong>Monitor</strong>
 Monitor changes in network configuration, routing tables, and ARP/NDP
 tables from terminal.</p>
-<p><code>ip&nbsp;monitor</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;monitor
+</code></pre></div>
 <h3 id="vxlan">VXLAN</h3>
 <p>VXLAN är ett tunnlingsprotokoll designat för att lösa
 skalbarhetsbegränsningar med VLAN. Det ökar från 4096 till 24 bitar (16
@@ -9226,63 +9265,77 @@ EN VXLAN-enhet kan lära sig MAC/IP-adresser tillhörande andra sidan
 tunneln antingen dynamiskt likt en switch eller med statiska forwarding
 entries.</p>
 <p><strong>Unicast</strong></p>
-<p><code>ip&nbsp;link&nbsp;add&nbsp;vxlan0&nbsp;type&nbsp;vxlan&nbsp;id&nbsp;10&nbsp;remote&nbsp;2.2.2.2&nbsp;local&nbsp;1.1.1.1&nbsp;dev&nbsp;eth0</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;add&nbsp;vxlan0&nbsp;type&nbsp;vxlan&nbsp;id&nbsp;10&nbsp;remote&nbsp;2.2.2.2&nbsp;local&nbsp;1.1.1.1&nbsp;dev&nbsp;eth0
+</code></pre></div>
 <p>VTEP-kommunikation görs alternativt med multicast.</p>
-<p><code>ip&nbsp;link&nbsp;add&nbsp;vxlan0&nbsp;type&nbsp;vxlan&nbsp;id&nbsp;10&nbsp;group&nbsp;239.1.1.1&nbsp;dev&nbsp;eth0&nbsp;dstport&nbsp;4789</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;add&nbsp;vxlan0&nbsp;type&nbsp;vxlan&nbsp;id&nbsp;10&nbsp;group&nbsp;239.1.1.1&nbsp;dev&nbsp;eth0&nbsp;dstport&nbsp;4789
+</code></pre></div>
 <p>Vxlan-interfacet kopplas sedan till en <a href="/Open_vSwitch" title="wikilink">Open
 vSwitch</a> eller <a href="/Bridge" title="wikilink">Linux
 Bridge</a>.</p>
-<p><code>brctl&nbsp;addif&nbsp;br0&nbsp;vxlan0</code></p>
+<div class="highlight"><pre><span></span><code>brctl&nbsp;addif&nbsp;br0&nbsp;vxlan0
+</code></pre></div>
 <p>Enablea interface</p>
-<p><code>ip&nbsp;link&nbsp;set&nbsp;up&nbsp;dev&nbsp;vxlan0</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;set&nbsp;up&nbsp;dev&nbsp;vxlan0
+</code></pre></div>
 <p>Kolla interface och forwarding table</p>
-<p><code>ip&nbsp;-d&nbsp;link&nbsp;show&nbsp;vxlan0</code>
-<code>bridge&nbsp;fdb&nbsp;show&nbsp;dev&nbsp;vxlan0</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;-d&nbsp;link&nbsp;show&nbsp;vxlan0
+bridge&nbsp;fdb&nbsp;show&nbsp;dev&nbsp;vxlan0
+</code></pre></div>
 <p>Delete interface</p>
-<p><code>ip&nbsp;link&nbsp;delete&nbsp;vxlan0</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;delete&nbsp;vxlan0
+</code></pre></div>
 <p>Disable source-address learning, detta kan t.ex. göras om man har BGP
 EVPN som synkroniserar FDBs.</p>
 <p><code>ip&nbsp;link&nbsp;add&nbsp;vxlan0&nbsp;type&nbsp;vxlan&nbsp;id&nbsp;10&nbsp;remote&nbsp;2.2.2.2&nbsp;local&nbsp;1.1.1.1&nbsp;dev&nbsp;eth0</code><strong><code>nolearning</code></strong></p>
 <p>Skapa entry manuellt</p>
-<p><code>bridge&nbsp;fdb&nbsp;add&nbsp;to&nbsp;00:00:0c:80:bb:07&nbsp;dst&nbsp;2.2.2.2&nbsp;dev&nbsp;vxlan0</code></p>
+<div class="highlight"><pre><span></span><code>bridge&nbsp;fdb&nbsp;add&nbsp;to&nbsp;00:00:0c:80:bb:07&nbsp;dst&nbsp;2.2.2.2&nbsp;dev&nbsp;vxlan0
+</code></pre></div>
 <h3 id="gretap">GRETAP</h3>
 <p>Generic Routing Encapsulation on linux.</p>
-<p><code>ip&nbsp;link&nbsp;add&nbsp;GRETAP1&nbsp;type&nbsp;gretap&nbsp;local&nbsp;172.16.0.10&nbsp;remote&nbsp;192.168.0.10&nbsp;dev&nbsp;eth0</code>
-<code>ip&nbsp;link&nbsp;add&nbsp;br0&nbsp;type&nbsp;bridge</code>
-<code>ip&nbsp;link&nbsp;set&nbsp;eth1&nbsp;master&nbsp;br0</code>
-<code>ip&nbsp;link&nbsp;set&nbsp;eth1&nbsp;up</code>
-<code>ip&nbsp;link&nbsp;set&nbsp;br0&nbsp;up</code>
-<code>ip&nbsp;link&nbsp;set&nbsp;GRETAP1&nbsp;up</code>
-<code>ip&nbsp;link&nbsp;set&nbsp;GRETAP1&nbsp;master&nbsp;br0</code>
-<code>ifconfig&nbsp;br0&nbsp;promisc</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;add&nbsp;GRETAP1&nbsp;type&nbsp;gretap&nbsp;local&nbsp;172.16.0.10&nbsp;remote&nbsp;192.168.0.10&nbsp;dev&nbsp;eth0
+ip&nbsp;link&nbsp;add&nbsp;br0&nbsp;type&nbsp;bridge
+ip&nbsp;link&nbsp;set&nbsp;eth1&nbsp;master&nbsp;br0
+ip&nbsp;link&nbsp;set&nbsp;eth1&nbsp;up
+ip&nbsp;link&nbsp;set&nbsp;br0&nbsp;up
+ip&nbsp;link&nbsp;set&nbsp;GRETAP1&nbsp;up
+ip&nbsp;link&nbsp;set&nbsp;GRETAP1&nbsp;master&nbsp;br0
+ifconfig&nbsp;br0&nbsp;promisc
+</code></pre></div>
 <h3 id="l2tpv3">L2TPv3</h3>
 <p>Layer Two Tunneling Protocol - Version 3.</p>
-<p><code>modprobe&nbsp;l2tp_eth</code>
-<code>ip&nbsp;l2tp&nbsp;add&nbsp;tunnel&nbsp;local&nbsp;1.1.1.1&nbsp;remote&nbsp;2.2.2.2&nbsp;tunnel_id&nbsp;100&nbsp;peer_tunnel_id&nbsp;200&nbsp;encap&nbsp;udp&nbsp;udp_sport&nbsp;5000&nbsp;udp_dport&nbsp;5000</code>
-<code>ip&nbsp;l2tp&nbsp;add&nbsp;session&nbsp;tunnel_id&nbsp;100&nbsp;session_id&nbsp;300&nbsp;peer_session_id&nbsp;300</code></p>
+<div class="highlight"><pre><span></span><code>modprobe&nbsp;l2tp_eth
+ip&nbsp;l2tp&nbsp;add&nbsp;tunnel&nbsp;local&nbsp;1.1.1.1&nbsp;remote&nbsp;2.2.2.2&nbsp;tunnel_id&nbsp;100&nbsp;peer_tunnel_id&nbsp;200&nbsp;encap&nbsp;udp&nbsp;udp_sport&nbsp;5000&nbsp;udp_dport&nbsp;5000
+ip&nbsp;l2tp&nbsp;add&nbsp;session&nbsp;tunnel_id&nbsp;100&nbsp;session_id&nbsp;300&nbsp;peer_session_id&nbsp;300
+</code></pre></div>
 <p>Show</p>
-<p><code>ip&nbsp;l2tp&nbsp;show&nbsp;tunnel</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;l2tp&nbsp;show&nbsp;tunnel
+</code></pre></div>
 <h3 id="network-namespace">Network Namespace</h3>
 <p>Skapa VRF, assigna interface och sätt adress</p>
-<p><code>ip&nbsp;netns&nbsp;add&nbsp;MGMT</code>
-<code>ip&nbsp;link&nbsp;set&nbsp;eth1&nbsp;netns&nbsp;MGMT</code>
-<code>ip&nbsp;netns&nbsp;exec&nbsp;MGMT&nbsp;ip&nbsp;addr&nbsp;add&nbsp;10.0.0.101/24&nbsp;dev&nbsp;eth1</code>
-<code>ip&nbsp;netns&nbsp;exec&nbsp;MGMT&nbsp;ip&nbsp;route&nbsp;add&nbsp;default&nbsp;via&nbsp;10.0.0.1</code>
-<code>ip&nbsp;netns&nbsp;list</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;netns&nbsp;add&nbsp;MGMT
+ip&nbsp;link&nbsp;set&nbsp;eth1&nbsp;netns&nbsp;MGMT
+ip&nbsp;netns&nbsp;exec&nbsp;MGMT&nbsp;ip&nbsp;addr&nbsp;add&nbsp;10.0.0.101/24&nbsp;dev&nbsp;eth1
+ip&nbsp;netns&nbsp;exec&nbsp;MGMT&nbsp;ip&nbsp;route&nbsp;add&nbsp;default&nbsp;via&nbsp;10.0.0.1
+ip&nbsp;netns&nbsp;list
+</code></pre></div>
 <h3 id="subinterface">Subinterface</h3>
-<p><code>ip&nbsp;link&nbsp;add&nbsp;link&nbsp;eth1&nbsp;name&nbsp;eth1.20&nbsp;type&nbsp;vlan&nbsp;id&nbsp;20</code>
-<code>ip&nbsp;address&nbsp;add&nbsp;192.168.20.1/24&nbsp;dev&nbsp;eth1.20</code>
-<code>ip&nbsp;link&nbsp;set&nbsp;eth1.20&nbsp;up</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;add&nbsp;link&nbsp;eth1&nbsp;name&nbsp;eth1.20&nbsp;type&nbsp;vlan&nbsp;id&nbsp;20
+ip&nbsp;address&nbsp;add&nbsp;192.168.20.1/24&nbsp;dev&nbsp;eth1.20&nbsp;
+ip&nbsp;link&nbsp;set&nbsp;eth1.20&nbsp;up
+</code></pre></div>
 <h3 id="mac-vlan">MAC VLAN</h3>
 <p>Med MAC VLAN kan man assigna flera MAC-adresser till samma interface.
 Man kan uppnå samma resultat som med <a href="/Bridge" title="wikilink">Bridge</a> men
 det är mer light-weight. Det kan skapas i 4 modes: private, vepa, bridge
 eller passthru beroende på säkerhetskraven. Det går att köra MAC VLAN
 tillsammans med <a href="/KVM" title="wikilink">KVM</a>.</p>
-<p><code>ip&nbsp;link&nbsp;add&nbsp;link&nbsp;eth0&nbsp;mac0&nbsp;type&nbsp;macvlan</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;link&nbsp;add&nbsp;link&nbsp;eth0&nbsp;mac0&nbsp;type&nbsp;macvlan
+</code></pre></div>
 <h3 id="blackhole">Blackhole</h3>
 <p>Discard traffic sent to unwanted destinations</p>
-<p><code>ip&nbsp;route&nbsp;add&nbsp;blackhole&nbsp;192.168.2.0/30</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;route&nbsp;add&nbsp;blackhole&nbsp;192.168.2.0/30
+</code></pre></div>
 <h3 id="configuration-caching">Configuration Caching</h3>
 <p>Ska man flytta en IP-adress från ett interface till ett annat är det bra
 att flusha cachen emellan för att säkerställa att det inte hänger kvar
@@ -9291,23 +9344,29 @@ något.</p>
 <h2 id="ss">ss</h2>
 <p>Socket statistics. Användbart och lättmemorerat kommando som ersätter
 netstat:</p>
-<p><code>ss&nbsp;-tulpan</code></p>
+<div class="highlight"><pre><span></span><code>ss&nbsp;-tulpan
+</code></pre></div>
 <h2 id="tc">tc</h2>
 <p>Traffic control. Command wrapper: tcconfig.</p>
 <p><strong>Network Emulator</strong>
 Delay</p>
-<p><code>tc&nbsp;qdisc&nbsp;change&nbsp;dev&nbsp;eth0&nbsp;root&nbsp;netem&nbsp;delay&nbsp;100ms&nbsp;20ms&nbsp;distribution&nbsp;normal</code></p>
+<div class="highlight"><pre><span></span><code>tc&nbsp;qdisc&nbsp;change&nbsp;dev&nbsp;eth0&nbsp;root&nbsp;netem&nbsp;delay&nbsp;100ms&nbsp;20ms&nbsp;distribution&nbsp;normal
+</code></pre></div>
 <p>Packet loss</p>
-<p><code>tc&nbsp;qdisc&nbsp;change&nbsp;dev&nbsp;eth0&nbsp;root&nbsp;netem&nbsp;loss&nbsp;0.3%&nbsp;25%</code></p>
+<div class="highlight"><pre><span></span><code>tc&nbsp;qdisc&nbsp;change&nbsp;dev&nbsp;eth0&nbsp;root&nbsp;netem&nbsp;loss&nbsp;0.3%&nbsp;25%
+</code></pre></div>
 <p>Reorder</p>
-<p><code>tc&nbsp;qdisc&nbsp;change&nbsp;dev&nbsp;eth0&nbsp;root&nbsp;netem&nbsp;delay&nbsp;10ms&nbsp;reorder&nbsp;25%&nbsp;50%</code></p>
+<div class="highlight"><pre><span></span><code>tc&nbsp;qdisc&nbsp;change&nbsp;dev&nbsp;eth0&nbsp;root&nbsp;netem&nbsp;delay&nbsp;10ms&nbsp;reorder&nbsp;25%&nbsp;50%
+</code></pre></div>
 <p>Policing</p>
-<p><code>tc&nbsp;qdisc&nbsp;add&nbsp;dev&nbsp;eth0&nbsp;root&nbsp;tbf&nbsp;rate&nbsp;2mbit&nbsp;burst&nbsp;32kbit&nbsp;latency&nbsp;600ms</code></p>
+<div class="highlight"><pre><span></span><code>tc&nbsp;qdisc&nbsp;add&nbsp;dev&nbsp;eth0&nbsp;root&nbsp;tbf&nbsp;rate&nbsp;2mbit&nbsp;burst&nbsp;32kbit&nbsp;latency&nbsp;600ms
+</code></pre></div>
 <p>Show config</p>
-<p><code>tc&nbsp;qdisc&nbsp;show&nbsp;dev&nbsp;eth0</code></p>
+<div class="highlight"><pre><span></span><code>tc&nbsp;qdisc&nbsp;show&nbsp;dev&nbsp;eth0
+</code></pre></div>
 <p>Clear config</p>
-<p><code>tc&nbsp;qdisc&nbsp;del&nbsp;dev&nbsp;eth0&nbsp;root</code></p>
-<p><a href="/Category:Tools" title="wikilink">Category:Tools</a></p>
+<div class="highlight"><pre><span></span><code>tc&nbsp;qdisc&nbsp;del&nbsp;dev&nbsp;eth0&nbsp;root
+</code></pre></div>
 
 
 
@@ -9330,7 +9389,7 @@ Delay</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8948,6 +8948,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9501,40 +9529,47 @@ Queries till 224.0.0.2.</p>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Global enable. På vissa enheter är kommandot <em>ip multicast-routing
 distributed</em></p>
-<p><code>ip&nbsp;multicast-routing</code>
-<code>show&nbsp;ip&nbsp;multicast</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;multicast-routing
+show&nbsp;ip&nbsp;multicast
+</code></pre></div>
 <p><strong>Default konfiguration</strong> (detta kan skilja mellan IOS-version)</p>
 <p>Globalt</p>
-<p><code>ip&nbsp;pim&nbsp;dm-fallback</code>
-<code>ip&nbsp;pim&nbsp;autorp</code>
-<code>ip&nbsp;pim&nbsp;bidir-offer-interval&nbsp;100&nbsp;msec</code>
-<code>ip&nbsp;pim&nbsp;bidir-offer-limit&nbsp;3</code>
-<code>ip&nbsp;pim&nbsp;v1-rp-reachability</code>
-<code>ip&nbsp;pim&nbsp;log-neighbor-changes</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;dm-fallback
+ip&nbsp;pim&nbsp;autorp
+ip&nbsp;pim&nbsp;bidir-offer-interval&nbsp;100&nbsp;msec
+ip&nbsp;pim&nbsp;bidir-offer-limit&nbsp;3
+ip&nbsp;pim&nbsp;v1-rp-reachability
+ip&nbsp;pim&nbsp;log-neighbor-changes
+</code></pre></div>
 <p>Per interface</p>
-<p><code>ip&nbsp;pim&nbsp;join-prune-interval&nbsp;60</code>
-<code>ip&nbsp;pim&nbsp;dr-priority&nbsp;1</code>
-<code>ip&nbsp;pim&nbsp;query-interval&nbsp;30</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;join-prune-interval&nbsp;60
+ip&nbsp;pim&nbsp;dr-priority&nbsp;1
+ip&nbsp;pim&nbsp;query-interval&nbsp;30
+</code></pre></div>
 <p>Gå med i grupp manuellt</p>
-<p><code>ip&nbsp;igmp&nbsp;join-group&nbsp;224.10.0.10</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;igmp&nbsp;join-group&nbsp;224.10.0.10
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;mroute</code>
-<code>show&nbsp;ip&nbsp;mroute&nbsp;active</code>
-<code>show&nbsp;ip&nbsp;mroute&nbsp;count</code>
-<code>show&nbsp;ip&nbsp;pim&nbsp;interface</code>
-<code>show&nbsp;ip&nbsp;pim&nbsp;neighbor</code>
-<code>show&nbsp;ip&nbsp;rpf&nbsp;x.x.x.x</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;mroute
+show&nbsp;ip&nbsp;mroute&nbsp;active
+show&nbsp;ip&nbsp;mroute&nbsp;count
+show&nbsp;ip&nbsp;pim&nbsp;interface
+show&nbsp;ip&nbsp;pim&nbsp;neighbor
+show&nbsp;ip&nbsp;rpf&nbsp;x.x.x.x&nbsp;
+</code></pre></div>
 <p><strong>Limiting</strong>
 Global multicast mroute limit</p>
 <p><code>ip&nbsp;multicast&nbsp;limit&nbsp;cost</code><acl><code></code><cost></cost></acl></p>
 <p>Maximum number of multicast routes, default är 2147483647.</p>
-<p><code>ip&nbsp;multicast&nbsp;route-limit&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;multicast&nbsp;route-limit&nbsp;100
+</code></pre></div>
 <p>Multicast boundary feature tillåter att man begränsar multicast både
 control plane och data plane per interface. Med standard acl filtreras
 grupp och med extended både grupp och källa. Detta filtrerar också
 Auto-RP announcements. Att begränsa multicast kan även göras med TTL
 scoping.</p>
-<p><code>ip&nbsp;multicast&nbsp;boundary&nbsp;[ACL]</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;multicast&nbsp;boundary&nbsp;[ACL]
+</code></pre></div>
 <p><strong>NBMA</strong>
 Det finns inbyggd loop prevention för multicast i form av split horizon.
 I vissa topologier (t.ex. <a href="/Cisco_DMVPN" title="wikilink">DMVPN</a>) måste
@@ -9542,13 +9577,15 @@ multicast-paket skickas ut på samma interface som det kom in på för att
 det ska fungera och det går att konfigurera per interface. PIM NBMA mode
 gör att PIM håller reda på OIL som interface + NBMA-adress, istället för
 bara interface. Detta är inte kompatibelt med PIM-DM.</p>
-<p><code>ip&nbsp;pim&nbsp;nbma-mode</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;nbma-mode
+</code></pre></div>
 <p><strong>Multipath</strong>
 Att slå på ECMP Multicast Load Splitting gör att Joins till RP kommer
 att skickas på fler än ett interface och man måste använda en hash
 annars kommer RPF-check att faila.</p>
-<p><code>ip&nbsp;multicast&nbsp;multipath</code>
-<code>ip&nbsp;multicast&nbsp;multipath&nbsp;s-g-hash</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;multicast&nbsp;multipath
+ip&nbsp;multicast&nbsp;multipath&nbsp;s-g-hash
+</code></pre></div>
 <h1 id="dense-mode">Dense Mode</h1>
 <p>Dense mode utgår ifrån att alla subnät har någon som vill ta emot
 multicast-trafik därför kommer paketen att forwarderas ut på alla
@@ -9570,11 +9607,13 @@ att skicka ett Graft message upstream som gäller så fort det kommer fram
 vilket sänker konvergeringstiden. Det ackas med Graft Ack. För Dense
 mode kan olika multicast-routingprotokoll användas. PIM Dense mode
 skalar inte superbra pga excessive flooding.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;pim&nbsp;dense-mode</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;pim&nbsp;dense-mode
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;pim&nbsp;interface</code>
-<code>show&nbsp;ip&nbsp;mroute</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;pim&nbsp;interface
+show&nbsp;ip&nbsp;mroute
+</code></pre></div>
 <h1 id="sparse-mode">Sparse Mode</h1>
 <p>Det är inte säkert att alla nät har någon mottagare av multicast, därför
 finns Sparse mode (RFC 4601) som inte använder lika mycket
@@ -9614,42 +9653,51 @@ message att multicast-strömmen inte behöver skickas till den längre.
 Ciscoroutrar gör detta byte direkt efter första paketet, detta går att
 ändra med <strong>ip pim spt-threshold infinity</strong>.</p>
 <p>På alla enheter (static RP):</p>
-<p><code>ip&nbsp;multicast-routing</code>
-<code>ip&nbsp;pim&nbsp;rp-address&nbsp;10.0.0.10&nbsp;[override]</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code>
-<code>interface&nbsp;gi3</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;multicast-routing
+ip&nbsp;pim&nbsp;rp-address&nbsp;10.0.0.10&nbsp;[override]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+interface&nbsp;gi3
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+</code></pre></div>
 <p>På Rendezvous Point utöver det ovan. En router vet om att den är RP om
 den har ett interface med den konfigurerade rp-adressen. Man måste kör
 PIM på det interface man annonserar som RP.</p>
-<p><code>interface&nbsp;lo0</code>
-<code>ip&nbsp;address&nbsp;10.0.0.10&nbsp;255.255.255.0</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;lo0
+&nbsp;ip&nbsp;address&nbsp;10.0.0.10&nbsp;255.255.255.0
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+</code></pre></div>
 <p>För att förhindra att oönskade RPs och grupper blir aktiva i ens nät kan
 man skydda sig med filter. Man skriver standard-acler som listar de
 grupper som är tillåtna, till exempel tillåt endast join och prune
 messages från RP 10.0.0.10 som har med grupp 224.4.4.4 att göra. Det
 räcker att konfigurera detta på RP men det bör göras överallt.</p>
-<p><code>ip&nbsp;access-list&nbsp;standard&nbsp;ALLOWED_GROUPS</code>
-<code>permit&nbsp;224.4.4.4</code></p>
-<p><code>ip&nbsp;pim&nbsp;accept-rp&nbsp;10.0.0.10&nbsp;ALLOWED_GROUPS</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;standard&nbsp;ALLOWED_GROUPS
+&nbsp;permit&nbsp;224.4.4.4
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;accept-rp&nbsp;10.0.0.10&nbsp;ALLOWED_GROUPS
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;mroute</code>
-<code>show&nbsp;ip&nbsp;pim&nbsp;rp&nbsp;mapping</code>
-<code>show&nbsp;derived-config&nbsp;interface&nbsp;tunnel0</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;mroute
+show&nbsp;ip&nbsp;pim&nbsp;rp&nbsp;mapping
+show&nbsp;derived-config&nbsp;interface&nbsp;tunnel0
+</code></pre></div>
 <p>På RP skapas två stycken tunnel interface, ett för att enkapsulera PIM
 Register messages och ett för att dekapsulera.</p>
-<p><code>show&nbsp;ip&nbsp;pim&nbsp;tunnel</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;pim&nbsp;tunnel
+</code></pre></div>
 <h3 id="sparse-dense-mode">Sparse Dense Mode</h3>
 <p>PIM Sparse-Dense mode är en hybrid av Sparse och Dense mode operations.
 En “sparse” multicast-grupp är en som har RP definierat. När man kör <em>ip
 pim sparse-dense-mode</em> på ett interface så kommer det att forwardera
 trafik både för sparse och dense multicast groups ut på det interfacet.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;pim&nbsp;sparse-dense-mode</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;pim&nbsp;sparse-dense-mode
+</code></pre></div>
 <p>Stänga av dense mode fallback.</p>
-<p><code>no&nbsp;ip&nbsp;pim&nbsp;dm-fallback</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;no&nbsp;ip&nbsp;pim&nbsp;dm-fallback
+</code></pre></div>
 <h2 id="auto-rp">Auto-RP</h2>
 <p>I Sparse mode måste alla multicast-routrar känna till RP, i större nät
 blir detta mödosamt att konfigurera. Det finns två mekanismer för att
@@ -9676,24 +9724,31 @@ situationer där olika routrar har valt olika RPs för samma grupp.</p>
 forwardar multicast utan RP så får man antingen köra sparse-dense-mode
 alternativt köra en inbyggd IOS feature som gör undantag för 224.0.1.39
 och 224.0.1.40, detta kallas Auto-RP Listener och konfigureras globalt.</p>
-<p><code>ip&nbsp;pim&nbsp;autorp&nbsp;listener</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;autorp&nbsp;listener
+</code></pre></div>
 <p>Candidate RP</p>
-<p><code>ip&nbsp;access-list&nbsp;standard&nbsp;GROUPS</code>
-<code>permit&nbsp;224.0.0.0&nbsp;7.255.255.255</code></p>
-<p><code>ip&nbsp;pim&nbsp;send-rp-announce&nbsp;Loopback0&nbsp;scope&nbsp;10&nbsp;group-list&nbsp;GROUPS</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;standard&nbsp;GROUPS
+&nbsp;permit&nbsp;224.0.0.0&nbsp;7.255.255.255
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;send-rp-announce&nbsp;Loopback0&nbsp;scope&nbsp;10&nbsp;group-list&nbsp;GROUPS
+</code></pre></div>
 <p>Multicast mapping agent</p>
-<p><code>ip&nbsp;pim&nbsp;send-rp-discovery&nbsp;Loopback0&nbsp;scope&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;send-rp-discovery&nbsp;Loopback0&nbsp;scope&nbsp;10
+</code></pre></div>
 <p>Filtrera announcements från RPs, görs på MA med standard-acler.</p>
 <p><code>ip&nbsp;pim&nbsp;rp-announce-filter&nbsp;rp-list</code><access-list><code>group-list</code><access-list></access-list></access-list></p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;pim&nbsp;autorp</code>
-<code>show&nbsp;ip&nbsp;pim&nbsp;rp&nbsp;mapping</code></p>
-<p><code>clear&nbsp;ip&nbsp;pim&nbsp;rp-mapping</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;pim&nbsp;autorp
+show&nbsp;ip&nbsp;pim&nbsp;rp&nbsp;mapping
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>clear&nbsp;ip&nbsp;pim&nbsp;rp-mapping
+</code></pre></div>
 <p>Auto-RP Cache Filtering
 Accept only (*, G) join messages destined for the specified Auto-RP
 cached address. Accept join and prune messages only for RPs in Auto-RP
 cache.</p>
-<p><code>ip&nbsp;pim&nbsp;accept-rp&nbsp;auto-rp</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;accept-rp&nbsp;auto-rp
+</code></pre></div>
 <h2 id="bsr">BSR</h2>
 <p>En annan metod för att automatiskt hitta RP är PIM Bootstrap Router och
 fungerar på liknande sätt som Auto-RP. BSR fungerar som mapping agent i
@@ -9714,19 +9769,23 @@ lyssnar och tar över när preferred BSR tystnar. Den som blir preferred
 avgörs av högst prio och sedan högst IP. BSR-meddelanden själva
 RPF-checkas.</p>
 <p>BSR (default prio är 0)</p>
-<p><code>interface&nbsp;lo0</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code>
-<code>ip&nbsp;pim&nbsp;bsr-candidate&nbsp;Loopback0</code><prio></prio></p>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;lo0
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+</code></pre></div>
+<code>ip&nbsp;pim&nbsp;bsr-candidate&nbsp;Loopback0</code><prio><p></p>
 <p>RP</p>
-<p><code>interface&nbsp;lo0</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code>
-<code>ip&nbsp;pim&nbsp;rp-candidate&nbsp;Loopback0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;lo0
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+ip&nbsp;pim&nbsp;rp-candidate&nbsp;Loopback0&nbsp;
+</code></pre></div>
 <p>Border</p>
-<p><code>interface&nbsp;gi3</code>
-<code>ip&nbsp;pim&nbsp;bsr-border</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi3
+&nbsp;ip&nbsp;pim&nbsp;bsr-border
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;pim&nbsp;bsr-router</code>
-<code>show&nbsp;ip&nbsp;pim&nbsp;rp&nbsp;mapping</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;pim&nbsp;bsr-router&nbsp;
+show&nbsp;ip&nbsp;pim&nbsp;rp&nbsp;mapping&nbsp;
+</code></pre></div>
 <h2 id="anycast-rp">Anycast RP</h2>
 <p>Behöver man både redundans och lastdelning kan man sätta upp flera RPs
 med samma IP-adress och på så sätt få Anycast RP. Det är inget eget
@@ -9758,10 +9817,12 @@ närmast källan går inte med i något SPT. Detta gör det viktigt var man
 placerar RP. Eftersom det inte finns någon source registration process
 kommer inga tunnlar att skapas.</p>
 <p>Bidirectional PIM måste konfigureras på alla PIM-enheter.</p>
-<p><code>ip&nbsp;pim&nbsp;bidir-enable</code>
-<code>ip&nbsp;pim&nbsp;rp-candidate&nbsp;Loopback0&nbsp;group-list&nbsp;10</code><strong><code>bidir</code></strong></p>
+<p></p><div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;bidir-enable
+</code></pre></div>
+<code>ip&nbsp;pim&nbsp;rp-candidate&nbsp;Loopback0&nbsp;group-list&nbsp;10</code><strong><code>bidir</code></strong><p></p>
 <p>Show designated forwarders</p>
-<p><code>show&nbsp;ip&nbsp;pim&nbsp;interface&nbsp;df</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;pim&nbsp;interface&nbsp;df
+</code></pre></div>
 <p><strong>Phantom RP</strong>
 För redundans kan man använda en RP-IP som faktiskt inte finns konfad på
 någon enhet. Eftersom inga paket har destination RP-IP utan endast ska
@@ -9770,12 +9831,13 @@ med en route i routingtabellen. Man kan t.ex. konfa prefix som
 innehåller RP-IP:n men har olika masklängd på olika enheter, på så sätt
 kan andra noder ta över RP (tack vare IGP-konvergens) när primären går
 ner.</p>
-<p><code>interface&nbsp;Loopback1</code>
-<code>description&nbsp;Primary&nbsp;RP</code>
-<code>ip&nbsp;address&nbsp;10.10.11.1&nbsp;255.255.255.252&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;-&nbsp;/30</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code>
-<code>ip&nbsp;ospf&nbsp;network&nbsp;point-to-point</code>
-<code>ip&nbsp;router&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0.0.0.0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Loopback1
+&nbsp;description&nbsp;Primary&nbsp;RP
+&nbsp;ip&nbsp;address&nbsp;10.10.11.1&nbsp;255.255.255.252&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;-&nbsp;/30
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+&nbsp;ip&nbsp;ospf&nbsp;network&nbsp;point-to-point
+&nbsp;ip&nbsp;router&nbsp;ospf&nbsp;1&nbsp;area&nbsp;0.0.0.0
+</code></pre></div>
 <p><code>ip&nbsp;pim&nbsp;rp-address</code><strong><code>10.10.11.2</code></strong><code>group-list&nbsp;225.0.0.0/24&nbsp;bidir</code></p>
 <h1 id="source-specific-multicast">Source Specific Multicast</h1>
 <p>Med SSM kan hostarna själva välja source för trafikströmmen ifall det
@@ -9787,15 +9849,18 @@ utan allt hanteras som source trees. Det behövs heller inga RPs eftersom
 källan är känd.</p>
 <p>Source Specific Multicast kräver IGMPv3 samt någon variant av sparse
 mode.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;igmp&nbsp;version&nbsp;3</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;igmp&nbsp;version&nbsp;3
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+</code></pre></div>
 <p>Sedan väljer man range som enheterna ska behandla som SSM, dvs droppa
 eventuella (*,G). <em>Default</em> innebär 232.0.0.0-232.255.255.255 som är
 IANA assigned SSM range.</p>
-<p><code>ip&nbsp;pim&nbsp;ssm&nbsp;default</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;ssm&nbsp;default
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;mroute</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;mroute
+</code></pre></div>
 <h1 id="msdp">MSDP</h1>
 <p>Multicast Source Discovery Protocol (RFC 3618) används för inter-domain
 IPv4 multicasting och för att låta RPs i ett enskilt AS dela information
@@ -9809,18 +9874,21 @@ unicast mellan peers och blir besvarade med SA response paket. Detta
 grannskap måste konfigureras och unicast route till andra sidan måste
 finnas. <a href="/Cisco_BGP" title="wikilink">BGP</a> eller <a href="/Cisco_Multicast#BGP" title="wikilink">Multicast
 BGP</a> kan användas för detta.</p>
-<p><code>ip&nbsp;msdp&nbsp;peer&nbsp;[peer_unique_address]&nbsp;connect-source&nbsp;loopback0&nbsp;remote-as&nbsp;100</code>
-<code>ip&nbsp;msdp&nbsp;originator-id&nbsp;[unique_address_interface]</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;msdp&nbsp;peer&nbsp;[peer_unique_address]&nbsp;connect-source&nbsp;loopback0&nbsp;remote-as&nbsp;100
+ip&nbsp;msdp&nbsp;originator-id&nbsp;[unique_address_interface]
+</code></pre></div>
 <p>RPF checken kräver full routing information från andra domäner för att
 multicast ska fungera. Om man t.ex. har en stub multicast domain och
 inte får in all information kan man konfigurera upstream RP som
 <em>default-peer</em> för RPF checkar används inte på default peers utan alla
 SA messages accepteras.</p>
-<p><code>ip&nbsp;msdp&nbsp;default-peer</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;msdp&nbsp;default-peer
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;msdp&nbsp;summary</code>
-<code>show&nbsp;ip&nbsp;msdp&nbsp;peer</code>
-<code>show&nbsp;ip&nbsp;msdp&nbsp;sa-cache</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;msdp&nbsp;summary
+show&nbsp;ip&nbsp;msdp&nbsp;peer
+show&nbsp;ip&nbsp;msdp&nbsp;sa-cache
+</code></pre></div>
 <h3 id="mesh-group">Mesh Group</h3>
 <p>MSDP mesh group är en optimerings-feature som reducerar mängden
 SA-trafik när man har fler än två MSDP peers i samma domän. Alla MSDP
@@ -9830,22 +9898,26 @@ kan optimeras genom att SA messages inte behöver floodas till andra mesh
 group peers. Värt att notera är också att det inte görs någon RPF check
 på inkomna SA messages från mesh group peers utan de accepteras alltid
 när MSDP mesh group är konfigurerat.</p>
-<p><code>ip&nbsp;msdp&nbsp;peer&nbsp;10.1.1.1</code>
-<code>ip&nbsp;msdp&nbsp;peer&nbsp;10.2.2.2</code>
-<code>ip&nbsp;msdp&nbsp;mesh-group&nbsp;mesh-group1&nbsp;10.1.1.1</code>
-<code>ip&nbsp;msdp&nbsp;mesh-group&nbsp;mesh-group1&nbsp;10.2.2.2</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;msdp&nbsp;peer&nbsp;10.1.1.1
+ip&nbsp;msdp&nbsp;peer&nbsp;10.2.2.2
+ip&nbsp;msdp&nbsp;mesh-group&nbsp;mesh-group1&nbsp;10.1.1.1
+ip&nbsp;msdp&nbsp;mesh-group&nbsp;mesh-group1&nbsp;10.2.2.2
+</code></pre></div>
 <h1 id="convergence">Convergence</h1>
 <p>Multicast Subsecond Convergence är möjligt genom att använda flera olika
 tekniker.</p>
-<p><code>ip&nbsp;multicast&nbsp;rpf&nbsp;interval&nbsp;10</code>
-<code>ip&nbsp;pim&nbsp;register-rate-limit&nbsp;rate&nbsp;10</code>
-<code>ip&nbsp;pim&nbsp;spt-threshold&nbsp;0</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;pim&nbsp;query-interval&nbsp;30</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;multicast&nbsp;rpf&nbsp;interval&nbsp;10
+ip&nbsp;pim&nbsp;register-rate-limit&nbsp;rate&nbsp;10
+ip&nbsp;pim&nbsp;spt-threshold&nbsp;0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2&nbsp;
+&nbsp;ip&nbsp;pim&nbsp;query-interval&nbsp;30
+</code></pre></div>
 <p><strong>BFD</strong>
 Konvergenstider går också att trimma med hjälp av
 <a href="/Cisco_BFD" title="wikilink">BFD</a>.</p>
-<p><code>ip&nbsp;pim&nbsp;bfd</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;bfd
+</code></pre></div>
 <h1 id="lan">LAN</h1>
 <p>Detta gäller både PIM-DM och PIM-SM.</p>
 <h3 id="prune-override">Prune Override</h3>
@@ -9871,35 +9943,30 @@ IGP-metricen för att skilja. Är detta också lika går man på högst
 IP-adress på interface. Den som förlorar slutar att flooda multicasten.
 I hub-and-spoke topologier bör alltid hub vinna förutsatt att man inte
 köra PIM i NBMA mode.</p>
-<div class="mw-collapsible mw-collapsed" style="width:310px">
-
-Assert message:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_pim_assert.png>](/File:Cisco_PIM_Assert.PNG "wikilink")
-
-</file:cisco_pim_assert.png></div>
-</div>
-
+<p>Assert message:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_PIM_Assert.PNG" data-desc-position="bottom"><img alt="Cisco_PIM_Assert.PNG" src="../../images/Cisco_PIM_Assert.PNG"></a></p>
 <h3 id="designated-router">Designated Router</h3>
 <p>PIM Designated Router (DR) väljs på varje segment där det finns multipla
 multicast-routrar. Syftet med DR är att ha en nod som signalerar aktiva
 källor till RP. Valet baseras på högsta prioritet och vid lika högsta
 IP-adress. Processen är preemptive så det är alltid den med bäst prio
 som är DR. Detta är en sparse-mode feature.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code>
-<code>ip&nbsp;pim&nbsp;dr-priority&nbsp;100</code></p>
-<p><code>show&nbsp;ip&nbsp;pim&nbsp;neighbor</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+&nbsp;ip&nbsp;pim&nbsp;dr-priority&nbsp;100
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;pim&nbsp;neighbor
+</code></pre></div>
 <p>På RP kan begränsa vem som får skicka PIM Register från olika segment
 med hjälp av en extended acl, dvs man kan vitlista vem som är en giltig
 DR.</p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;VLAN100</code>
-<code>permit&nbsp;ip&nbsp;host&nbsp;100.0.100.10&nbsp;any</code>
-<code>deny&nbsp;&nbsp;&nbsp;ip&nbsp;100.0.100.0&nbsp;0.0.0.255&nbsp;any</code>
-<code>permit&nbsp;ip&nbsp;any&nbsp;any</code></p>
-<p><code>ip&nbsp;pim&nbsp;accept-register&nbsp;list&nbsp;VLAN100</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;VLAN100
+&nbsp;permit&nbsp;ip&nbsp;host&nbsp;100.0.100.10&nbsp;any
+&nbsp;deny&nbsp;&nbsp;&nbsp;ip&nbsp;100.0.100.0&nbsp;0.0.0.255&nbsp;any
+&nbsp;permit&nbsp;ip&nbsp;any&nbsp;any
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;accept-register&nbsp;list&nbsp;VLAN100
+</code></pre></div>
 <h3 id="pim-snooping">PIM Snooping</h3>
 <p>Man kan begränsa multicastpaket för varje grupp så att endast multicast
 router ports som har någon downstream receiver med i gruppen får
@@ -9914,10 +9981,12 @@ den information som står i hellos, joins och prunes. Dense mode trafik
 ses som unknown och kommer att droppas men Auto-RP-paket kommer alltid
 att floodas.</p>
 <p>För att använda PIM snooping måste IGMP snooping vara på.</p>
-<p><code>ip&nbsp;igmp&nbsp;snooping</code>
-<code>ip&nbsp;pim&nbsp;snooping</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;igmp&nbsp;snooping
+ip&nbsp;pim&nbsp;snooping
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;pim&nbsp;snooping</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;pim&nbsp;snooping
+</code></pre></div>
 <h1 id="ipv6">IPv6</h1>
 <p>Multicast routing är inte på default för IPv6 men när man slår på det så
 enableas PIM på alla IPv6-interface. IPv6 PIM kör alltid sparse mode.
@@ -9926,29 +9995,35 @@ precis som för IPv4. PIM-grannskap byggs med hjälp av link-local
 adresser och det finns tre pakettyper: Query, Report och Done. DR väljs
 som vanligt och Hellos skickas var 30:e sekund. Multicast address range:
 FF00::/8.</p>
-<p><code>ipv6&nbsp;multicast-routing</code></p>
-<p><code>interface&nbsp;gi2</code>
-<code>ipv6&nbsp;mld&nbsp;access-group&nbsp;MLD_FILTER</code>
-<code>ipv6&nbsp;mld&nbsp;query-max-response-time&nbsp;10</code>
-<code>ipv6&nbsp;mld&nbsp;query-timeout&nbsp;255</code>
-<code>ipv6&nbsp;mld&nbsp;query-interval&nbsp;125</code>
-<code>ipv6&nbsp;mld&nbsp;join-group&nbsp;ff08::10</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;multicast-routing
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ipv6&nbsp;mld&nbsp;access-group&nbsp;MLD_FILTER
+&nbsp;ipv6&nbsp;mld&nbsp;query-max-response-time&nbsp;10
+&nbsp;ipv6&nbsp;mld&nbsp;query-timeout&nbsp;255
+&nbsp;ipv6&nbsp;mld&nbsp;query-interval&nbsp;125
+&nbsp;ipv6&nbsp;mld&nbsp;join-group&nbsp;ff08::10&nbsp;
+</code></pre></div>
 <p>Stänga av PIM</p>
-<p><code>interface&nbsp;gi3</code>
-<code>no&nbsp;ipv6&nbsp;pim</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi3
+&nbsp;no&nbsp;ipv6&nbsp;pim
+</code></pre></div>
 <p>Static routes, dessa används endast av multicast.</p>
 <p><code>ipv6&nbsp;route&nbsp;2000::/64&nbsp;tun0</code><strong><code>multicast</code></strong></p>
 <p>Verify</p>
-<p><code>show&nbsp;ipv6&nbsp;pim&nbsp;neighbors</code>
-<code>show&nbsp;ipv6&nbsp;pim&nbsp;interface</code>
-<code>show&nbsp;ipv6&nbsp;pim&nbsp;tunnel</code>
-<code>show&nbsp;ipv6&nbsp;mld&nbsp;groups</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;pim&nbsp;neighbors
+show&nbsp;ipv6&nbsp;pim&nbsp;interface
+show&nbsp;ipv6&nbsp;pim&nbsp;tunnel
+show&nbsp;ipv6&nbsp;mld&nbsp;groups&nbsp;
+</code></pre></div>
 <h3 id="rp">RP</h3>
 <p>Med IPv6 kan RP lösas på tre olika sätt. Det finns ingen Auto-RP eller
 MSDP för IPv6.</p>
 <p><strong>Static</strong></p>
-<p><code>ipv6&nbsp;pim&nbsp;rp-address&nbsp;2001:20::20</code></p>
-<p><code>show&nbsp;ipv6&nbsp;pim&nbsp;range-list</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;pim&nbsp;rp-address&nbsp;2001:20::20
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;pim&nbsp;range-list
+</code></pre></div>
 <p><strong>BSR</strong>
 BSR fungerar på samma sätt för IPv4 men nu konfigureras det med en
 adress istället för interface samt att source registration process
@@ -9959,11 +10034,14 @@ under registration process, sedan slår sista-hop-routern över till SPT.
 Man kan också konfigurera BSR med en lista på RP-kandidater genom att
 använda <em>ipv6 pim bsr announced rp <ipv6 address=""></ipv6></em> och därmed behöver
 inte RPs annonsera sig själva som candidates.</p>
-<p><code>ipv6&nbsp;pim&nbsp;bsr&nbsp;candidate&nbsp;bsr&nbsp;2001:20::20</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;pim&nbsp;bsr&nbsp;candidate&nbsp;bsr&nbsp;2001:20::20
+</code></pre></div>
 <p>RP</p>
-<p><code>ipv6&nbsp;pim&nbsp;bsr&nbsp;candidate&nbsp;rp&nbsp;2001:20::20</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;pim&nbsp;bsr&nbsp;candidate&nbsp;rp&nbsp;2001:20::20
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ipv6&nbsp;pim&nbsp;bsr&nbsp;election</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;pim&nbsp;bsr&nbsp;election
+</code></pre></div>
 <p><strong>Embedded RP</strong>
 Med IPv6 kan också övriga routrar ta reda på vem som är RP utifrån en
 adress som kan bakas in i grupp-adressen (RFC 3956). Ser en router denna
@@ -9973,49 +10051,59 @@ direkt börja forwarda i det delade trädet. Endast RP behöver
 konfigureras och övriga kan lära sig det dynamiskt. Fungerar endast med
 grupper i Embedded RP address range: FF70::/12.</p>
 <p>På default:</p>
-<p><code>ipv6&nbsp;pim&nbsp;rp&nbsp;embedded</code></p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>description&nbsp;Pim&nbsp;Register&nbsp;Tunnel&nbsp;(Encap)&nbsp;for&nbsp;Embedded&nbsp;RP</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>ipv6&nbsp;unnumbered&nbsp;Loopback0</code>
-<code>ipv6&nbsp;enable</code>
-<code>tunnel&nbsp;source&nbsp;Loopback0</code>
-<code>tunnel&nbsp;destination&nbsp;::</code>
-<code>tunnel&nbsp;ttl&nbsp;65</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;pim&nbsp;rp&nbsp;embedded
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;description&nbsp;Pim&nbsp;Register&nbsp;Tunnel&nbsp;(Encap)&nbsp;for&nbsp;Embedded&nbsp;RP
+&nbsp;no&nbsp;ip&nbsp;address
+&nbsp;ipv6&nbsp;unnumbered&nbsp;Loopback0
+&nbsp;ipv6&nbsp;enable
+&nbsp;tunnel&nbsp;source&nbsp;Loopback0
+&nbsp;tunnel&nbsp;destination&nbsp;::
+&nbsp;tunnel&nbsp;ttl&nbsp;65
+</code></pre></div>
 <p>RP (loopback-adressen måste annonseras i IGP så alla kan hitta dit)</p>
-<p><code>interface&nbsp;Loopback1</code>
-<code>ipv6&nbsp;address&nbsp;2006:6666::5/128</code></p>
-<p><code>ipv6&nbsp;pim&nbsp;rp-address&nbsp;2006:6666::5</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Loopback1
+&nbsp;ipv6&nbsp;address&nbsp;2006:6666::5/128
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;pim&nbsp;rp-address&nbsp;2006:6666::5
+</code></pre></div>
 <p>Receivers</p>
-<p><code>ipv6&nbsp;mld&nbsp;join-group&nbsp;FF7E:540:2006:6666::1</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;mld&nbsp;join-group&nbsp;FF7E:540:2006:6666::1
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ipv6&nbsp;mroute</code>
-<code>show&nbsp;ipv6&nbsp;pim&nbsp;group-map</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;mroute
+show&nbsp;ipv6&nbsp;pim&nbsp;group-map
+</code></pre></div>
 <p><strong>Anycast RP</strong>
 Man kan använda anycast för att öka tillgängligheten på RP. Att
 distribuera RP-infon görs med någon ovan nämnd metod, detta är endast
 för att hålla mroute-tabellerna synkade mellan alla RPs.
 Loopback-adressen måste annonseras i IGP så alla kan hitta dit.</p>
 <p>RP1</p>
-<p><code>ipv6&nbsp;pim&nbsp;anycast-rp&nbsp;2001:20::20&nbsp;10::2</code>
-<code>interface&nbsp;Loopback1</code>
-<code>ipv6&nbsp;add&nbsp;10::1/128</code>
-<code>ipv6&nbsp;add&nbsp;2001:20::20/128</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;pim&nbsp;anycast-rp&nbsp;2001:20::20&nbsp;10::2
+interface&nbsp;Loopback1
+&nbsp;ipv6&nbsp;add&nbsp;10::1/128
+&nbsp;ipv6&nbsp;add&nbsp;2001:20::20/128
+</code></pre></div>
 <p>RP2</p>
-<p><code>ipv6&nbsp;pim&nbsp;anycast-rp&nbsp;2001:20::20&nbsp;10::1</code>
-<code>interface&nbsp;Loopback1</code>
-<code>ipv6&nbsp;add&nbsp;10::2/128</code>
-<code>ipv6&nbsp;add&nbsp;2001:20::20/128</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;pim&nbsp;anycast-rp&nbsp;2001:20::20&nbsp;10::1
+interface&nbsp;Loopback1
+&nbsp;ipv6&nbsp;add&nbsp;10::2/128
+&nbsp;ipv6&nbsp;add&nbsp;2001:20::20/128
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ipv6&nbsp;pim&nbsp;anycast-rp</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;pim&nbsp;anycast-rp
+</code></pre></div>
 <h3 id="ssm">SSM</h3>
 <p>IPv6 SSM fungerar ungefär som embedded RP multicast fast det inte finns
 något embedded RP prefix eftersom MLD tillhandahåller den informationen.
 SSM mapping kan användas för hostar som inte stödjer MLDv2, då kan man
 antingen använda DNS eller static maps för att kolla upp källan i MLDv1
 report.</p>
-<p><code>interface&nbsp;gi3</code>
-<code>ipv6&nbsp;mld&nbsp;join-group&nbsp;FF36:10::10&nbsp;2001:20::20</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi3
+&nbsp;ipv6&nbsp;mld&nbsp;join-group&nbsp;FF36:10::10&nbsp;2001:20::20
+</code></pre></div>
 <h1 id="nx-os">NX-OS</h1>
 <p>Här följer <a href="/Cisco_Nexus" title="wikilink">Nexus</a>-specifik information.
 Beroende på skillnader i hårdvara mellan de olika Nexusplattformarna
@@ -10026,72 +10114,84 @@ dense mode operation. PIM har även SSM group range 232.0.0.0/8 by
 default (även i VRF:er). Se även <a href="/Cisco_IGMP#NX-OS" title="wikilink">IGMP</a>
 för NX-OS.</p>
 <h3 id="konfiguration_1">Konfiguration</h3>
-<p><code>feature&nbsp;pim</code></p>
-<p><code>ip&nbsp;pim&nbsp;log-neighbor-changes</code>
-<code>ip&nbsp;pim&nbsp;rp-address&nbsp;172.16.1.10&nbsp;group-list&nbsp;224.0.0.0/4</code>
-<code>ip&nbsp;pim&nbsp;bfd</code></p>
-<p><code>interface&nbsp;Ethernet1/1</code>
-<code>ip&nbsp;address&nbsp;192.168.1.1/24</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;pim
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;log-neighbor-changes
+ip&nbsp;pim&nbsp;rp-address&nbsp;172.16.1.10&nbsp;group-list&nbsp;224.0.0.0/4
+ip&nbsp;pim&nbsp;bfd
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Ethernet1/1
+&nbsp;ip&nbsp;address&nbsp;192.168.1.1/24
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+</code></pre></div>
 <p><strong>VRF</strong></p>
-<p><code>vrf&nbsp;context&nbsp;Tenant1</code>
-<code>ip&nbsp;pim&nbsp;rp-address&nbsp;172.16.1.10&nbsp;group-list&nbsp;224.0.0.0/4</code></p>
+<div class="highlight"><pre><span></span><code>vrf&nbsp;context&nbsp;Tenant1
+&nbsp;ip&nbsp;pim&nbsp;rp-address&nbsp;172.16.1.10&nbsp;group-list&nbsp;224.0.0.0/4
+</code></pre></div>
 <p><strong>Auto-RP</strong></p>
-<p><code>ip&nbsp;pim&nbsp;auto-rp&nbsp;rp-candidate&nbsp;loopback1&nbsp;group-list&nbsp;224.0.0.0/4</code>
-<code>ip&nbsp;pim&nbsp;auto-rp&nbsp;mapping-agent&nbsp;loopback1</code>
-<code>ip&nbsp;pim&nbsp;auto-rp&nbsp;forward&nbsp;listen</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;auto-rp&nbsp;rp-candidate&nbsp;loopback1&nbsp;group-list&nbsp;224.0.0.0/4
+ip&nbsp;pim&nbsp;auto-rp&nbsp;mapping-agent&nbsp;loopback1
+ip&nbsp;pim&nbsp;auto-rp&nbsp;forward&nbsp;listen
+</code></pre></div>
 <p><strong>BSR</strong></p>
-<p><code>ip&nbsp;pim&nbsp;bsr&nbsp;bsr-candidate&nbsp;loopback1</code>
-<code>ip&nbsp;pim&nbsp;bsr&nbsp;rp-candidate&nbsp;loopback1&nbsp;group-list&nbsp;224.0.0.0/4</code>
-<code>ip&nbsp;pim&nbsp;bsr&nbsp;forward&nbsp;listen</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;bsr&nbsp;bsr-candidate&nbsp;loopback1
+ip&nbsp;pim&nbsp;bsr&nbsp;rp-candidate&nbsp;loopback1&nbsp;group-list&nbsp;224.0.0.0/4
+ip&nbsp;pim&nbsp;bsr&nbsp;forward&nbsp;listen
+</code></pre></div>
 <p><strong>Neighbor Authentication</strong></p>
-<p><code>interface&nbsp;Ethernet1/1</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code>
-<code>ip&nbsp;pim&nbsp;hello-authentication&nbsp;ah-md5&nbsp;3&nbsp;a667d47acc18ea6b</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Ethernet1/1
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+&nbsp;ip&nbsp;pim&nbsp;hello-authentication&nbsp;ah-md5&nbsp;3&nbsp;a667d47acc18ea6b
+</code></pre></div>
 <p><strong>Anycast RP</strong>
 Anycast-RP (RFC 4610) innebär att man assignar en grupp routrar till en
 RP-adress som finns konfad på flera routrar. PIM messages skickas till
 den router som routingtabellen tycker är närmast. Detta ger lastdelning
 och redundans. Denna feature finns inte på IOS.</p>
-<p><code>interface&nbsp;loopback10</code>
-<code>description&nbsp;Anycast-RP-Address</code>
-<code>ip&nbsp;address&nbsp;172.16.1.10/32</code>
-<code>ip&nbsp;pim&nbsp;sparse-mode</code></p>
-<p><code>ip&nbsp;pim&nbsp;rp-address&nbsp;172.16.1.10</code>
-<code>ip&nbsp;pim&nbsp;anycast-rp&nbsp;172.16.1.10&nbsp;192.168.10.1</code>
-<code>ip&nbsp;pim&nbsp;anycast-rp&nbsp;172.16.1.10&nbsp;192.168.10.2</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;loopback10
+&nbsp;description&nbsp;Anycast-RP-Address
+&nbsp;ip&nbsp;address&nbsp;172.16.1.10/32
+&nbsp;ip&nbsp;pim&nbsp;sparse-mode
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;rp-address&nbsp;172.16.1.10
+ip&nbsp;pim&nbsp;anycast-rp&nbsp;172.16.1.10&nbsp;192.168.10.1
+ip&nbsp;pim&nbsp;anycast-rp&nbsp;172.16.1.10&nbsp;192.168.10.2
+</code></pre></div>
 <p><strong>Verify</strong></p>
-<p><code>show&nbsp;running-configuration&nbsp;pim</code>
-<code>show&nbsp;ip&nbsp;mroute</code>
-<code>show&nbsp;ip&nbsp;pim&nbsp;interface</code>
-<code>show&nbsp;ip&nbsp;pim&nbsp;group-range</code>
-<code>show&nbsp;ip&nbsp;route&nbsp;rpf</code>
-<code>show&nbsp;ip&nbsp;static-route&nbsp;multicast</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;running-configuration&nbsp;pim
+show&nbsp;ip&nbsp;mroute
+show&nbsp;ip&nbsp;pim&nbsp;interface
+show&nbsp;ip&nbsp;pim&nbsp;group-range
+show&nbsp;ip&nbsp;route&nbsp;rpf
+show&nbsp;ip&nbsp;static-route&nbsp;multicast
+</code></pre></div>
 <p>Maintenance mode
 Man kan isolera routern (ur ett PIM-perspektiv) genom att skicka ut PIM
 Hello message med holdtime 0 (goodbye) till alla grannar, då rivs alla
 PIM-grannskap direkt.</p>
-<p><code>ip&nbsp;pim&nbsp;isolate</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;pim&nbsp;isolate
+</code></pre></div>
 <h1 id="ios-xr">IOS-XR</h1>
 <p>IOS-XR har SSM group range 232.0.0.0/8 by default.</p>
 <p><strong>Konfiguration</strong></p>
-<p><code>multicast-routing</code>
-<code>address-family&nbsp;ipv4</code>
-<code>interface&nbsp;HundredGigE0/0/0/0</code>
-<code>enable</code>
-<code>!</code>
-<code>!</code>
-<code>!</code>
-<code>router&nbsp;pim</code>
-<code>address-family&nbsp;ipv4</code>
-<code>rp-address&nbsp;10.0.0.10</code>
-<code>log&nbsp;neighbor&nbsp;changes</code></p>
+<div class="highlight"><pre><span></span><code>multicast-routing
+&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;interface&nbsp;HundredGigE0/0/0/0
+&nbsp;&nbsp;&nbsp;enable
+&nbsp;&nbsp;!
+&nbsp;!
+!
+router&nbsp;pim
+&nbsp;address-family&nbsp;ipv4
+&nbsp;&nbsp;rp-address&nbsp;10.0.0.10
+&nbsp;&nbsp;log&nbsp;neighbor&nbsp;changes
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;pim&nbsp;group-map</code>
-<code>show&nbsp;mfib&nbsp;route</code>
-<code>show&nbsp;pim&nbsp;rpf&nbsp;192.168.0.10</code>
-<code>show&nbsp;pim&nbsp;rpf&nbsp;hash</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;pim&nbsp;group-map&nbsp;
+show&nbsp;mfib&nbsp;route
+show&nbsp;pim&nbsp;rpf&nbsp;192.168.0.10
+show&nbsp;pim&nbsp;rpf&nbsp;hash
+</code></pre></div></prio>
 
 
 
@@ -10114,7 +10214,7 @@ PIM-grannskap direkt.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

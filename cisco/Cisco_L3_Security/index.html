@@ -8720,6 +8720,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9019,8 +9047,9 @@
 <p>Se även <a href="/Cisco_L2_Security" title="wikilink">Cisco L2 Security</a>.</p>
 <h3 id="routing">Routing</h3>
 <p>Tillåt ej IP options och source routing är bra praktik!</p>
-<p><code>ip&nbsp;options&nbsp;drop</code>
-<code>no&nbsp;ip&nbsp;source-route</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;options&nbsp;drop
+no&nbsp;ip&nbsp;source-route
+</code></pre></div>
 <p>Notera att "ip options drop" kan störa ut IGMP.</p>
 <h2 id="acl">ACL</h2>
 <p>Accesslistor finns i flera olika varianter förutom standard och
@@ -9028,8 +9057,9 @@ extended.</p>
 <p><strong>Logging</strong>
 Access list logging interval (milliseconds) &amp; log-update threshold
 (number of hits)</p>
-<p><code>ip&nbsp;access-list&nbsp;logging&nbsp;interval&nbsp;1000</code>
-<code>ip&nbsp;access-list&nbsp;log-update&nbsp;threshold&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;logging&nbsp;interval&nbsp;1000
+ip&nbsp;access-list&nbsp;log-update&nbsp;threshold&nbsp;10
+</code></pre></div>
 <p><strong>Reflexive ACL</strong>
 För att använda reflexive ACL behövs det en ACL för inbound traffic, en
 för outbound och en reflexive för att hålla koll på dynamic entries.
@@ -9037,29 +9067,36 @@ Några begränsningar är att trafik endast kan initieras från ena sidan
 och det går inte ge olika trafikklasser olika access. Trafik initierad
 lokalt i routern behandlas ej heller. Det funkar inte heller med
 applikationer som jobbar med olika portnummer, t.ex. FTP.</p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;Egress</code>
-<code>permit&nbsp;ip&nbsp;any&nbsp;any&nbsp;reflect&nbsp;Mirror</code>
-<code>ip&nbsp;access-list&nbsp;extended&nbsp;Ingress</code>
-<code>evaluate&nbsp;Mirror</code>
-<code>deny&nbsp;ip&nbsp;any&nbsp;any</code></p>
-<p><code>interface&nbsp;gi0/1</code>
-<code>description&nbsp;Outside</code>
-<code>ip&nbsp;access-group&nbsp;out&nbsp;Egress</code>
-<code>ip&nbsp;access-group&nbsp;in&nbsp;Ingress</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;Egress
+&nbsp;permit&nbsp;ip&nbsp;any&nbsp;any&nbsp;reflect&nbsp;Mirror
+ip&nbsp;access-list&nbsp;extended&nbsp;Ingress
+&nbsp;evaluate&nbsp;Mirror
+&nbsp;deny&nbsp;ip&nbsp;any&nbsp;any
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/1
+&nbsp;description&nbsp;Outside
+&nbsp;ip&nbsp;access-group&nbsp;out&nbsp;Egress
+&nbsp;ip&nbsp;access-group&nbsp;in&nbsp;Ingress
+</code></pre></div>
 <p>Timeout</p>
-<p><code>ip&nbsp;reflexive-list&nbsp;timeout&nbsp;30</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;reflexive-list&nbsp;timeout&nbsp;30
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;access-lists&nbsp;Mirror</code>
-<code>show&nbsp;ip&nbsp;access-lists</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;access-lists&nbsp;Mirror
+show&nbsp;ip&nbsp;access-lists
+</code></pre></div>
 <p><strong>IPv6</strong>
 För IPv6 finns det endast extended named ACL:er. Wildcard mask används
 inte heller utan det är CIDR notation som gäller.</p>
-<p><code>ipv6&nbsp;access-list&nbsp;Deny_ABC</code>
-<code>deny&nbsp;ipv6&nbsp;2001:A:B:C::/64&nbsp;any</code>
-<code>permit&nbsp;ipv6&nbsp;any&nbsp;any</code></p>
-<p><code>interface&nbsp;Gi0/1</code>
-<code>ipv6&nbsp;traffic-filter&nbsp;Deny_ABC&nbsp;out</code></p>
-<p><code>show&nbsp;ipv6&nbsp;access-list</code></p>
+<div class="highlight"><pre><span></span><code>ipv6&nbsp;access-list&nbsp;Deny_ABC
+&nbsp;deny&nbsp;ipv6&nbsp;2001:A:B:C::/64&nbsp;any
+&nbsp;permit&nbsp;ipv6&nbsp;any&nbsp;any
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/1
+&nbsp;ipv6&nbsp;traffic-filter&nbsp;Deny_ABC&nbsp;out
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ipv6&nbsp;access-list
+</code></pre></div>
 <p><strong>Lock and Key</strong> (Dynamic ACLs)
 Lock and key configuration starts with the application of an extended
 ACL to block traffic through the router. Users that want to traverse the
@@ -9068,37 +9105,45 @@ and are authenticated. The Telnet connection then drops and a
 single-entry dynamic ACL is added to the extended ACL that exists. This
 permits traffic for a particular time period; idle and absolute timeouts
 are possible.</p>
-<p><code>username&nbsp;DYN&nbsp;autocommand&nbsp;access-enable&nbsp;timeout&nbsp;5</code></p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;100</code>
-<code>permit&nbsp;tcp&nbsp;10.0.0.0&nbsp;0.0.0.255&nbsp;host&nbsp;10.0.0.1&nbsp;eq&nbsp;telnet</code>
-<code>dynamic&nbsp;DYN&nbsp;timeout&nbsp;5&nbsp;permit&nbsp;ip&nbsp;10.0.0.0&nbsp;0.0.0.255&nbsp;any</code></p>
+<div class="highlight"><pre><span></span><code>username&nbsp;DYN&nbsp;autocommand&nbsp;access-enable&nbsp;timeout&nbsp;5
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;100&nbsp;
+&nbsp;permit&nbsp;tcp&nbsp;10.0.0.0&nbsp;0.0.0.255&nbsp;host&nbsp;10.0.0.1&nbsp;eq&nbsp;telnet
+&nbsp;dynamic&nbsp;DYN&nbsp;timeout&nbsp;5&nbsp;permit&nbsp;ip&nbsp;10.0.0.0&nbsp;0.0.0.255&nbsp;any
+</code></pre></div>
 <p><strong>Turbo ACL</strong>
 The turbo ACL feature is designed in order to process ACLs more
 efficiently in order to improve router performance. Found only on
 high-end platforms.</p>
-<p><code>show&nbsp;access-list&nbsp;compiled</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;access-list&nbsp;compiled
+</code></pre></div>
 <h2 id="cbac">CBAC</h2>
 <p>Context-Based Access Control tillhandahåller stateful packet inspection
 på IOS-enheter. Man väljer vilka protokoll som ska inspekteras, det
 finns många protokoll default. Detta är ett konfigurationsexempel för
 ett interface som endast ska släppa in webbtrafik initierad från
 insidan.</p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;DENY_ALL</code>
-<code>deny&nbsp;ip&nbsp;any&nbsp;any</code>
-<code>ip&nbsp;inspect&nbsp;name&nbsp;Web&nbsp;http</code>
-<code>ip&nbsp;inspect&nbsp;name&nbsp;Web&nbsp;https</code></p>
-<p><code>interface&nbsp;gi0/0</code>
-<code>description&nbsp;Outside</code>
-<code>ip&nbsp;access-group&nbsp;DENY_ALL&nbsp;in</code>
-<code>ip&nbsp;inspect&nbsp;Web&nbsp;out</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;DENY_ALL
+&nbsp;deny&nbsp;ip&nbsp;any&nbsp;any
+ip&nbsp;inspect&nbsp;name&nbsp;Web&nbsp;http
+ip&nbsp;inspect&nbsp;name&nbsp;Web&nbsp;https
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/0
+&nbsp;description&nbsp;Outside
+&nbsp;ip&nbsp;access-group&nbsp;DENY_ALL&nbsp;in
+&nbsp;ip&nbsp;inspect&nbsp;Web&nbsp;out
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;inspect&nbsp;all</code>
-<code>show&nbsp;ip&nbsp;inspect&nbsp;sessions</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;inspect&nbsp;all
+show&nbsp;ip&nbsp;inspect&nbsp;sessions
+</code></pre></div>
 <p>Vill man att CBAC ska inspektera protokoll som inte använder
 standardportar kan lägga till dessa med port-map-kommandot.</p>
-<p><code>ip&nbsp;port-map&nbsp;http&nbsp;port&nbsp;tcp&nbsp;8081</code>
-<code>ip&nbsp;port-map&nbsp;smtp&nbsp;port&nbsp;tcp&nbsp;2500</code></p>
-<p><code>show&nbsp;ip&nbsp;port-map</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;port-map&nbsp;http&nbsp;port&nbsp;tcp&nbsp;8081
+ip&nbsp;port-map&nbsp;smtp&nbsp;port&nbsp;tcp&nbsp;2500
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;port-map
+</code></pre></div>
 <h2 id="zfw">ZFW</h2>
 <p>Zone-based policy firewall är stateful packet inspection som är en
 vidareutveckling av CBAC. Det är
@@ -9110,52 +9155,61 @@ Language. ZFW kan inte inspektera
 <a href="/Cisco_Multicast" title="wikilink">multicast</a> eller
 <a href="/Cisco_MPLS" title="wikilink">MPLS</a>-trafik men det går att att köra ZFW i
 transparent mode samt att man kan policea trafiken.</p>
-<p><code>zone&nbsp;security&nbsp;INTERNET</code>
-<code>zone&nbsp;security&nbsp;INSIDE</code>
-<code>interface&nbsp;Gi1</code>
-<code>zone-member&nbsp;security&nbsp;INTERNET</code>
-<code>interface&nbsp;Gi2</code>
-<code>zone-member&nbsp;security&nbsp;INSIDE</code></p>
+<div class="highlight"><pre><span></span><code>zone&nbsp;security&nbsp;INTERNET
+zone&nbsp;security&nbsp;INSIDE
+interface&nbsp;Gi1
+&nbsp;zone-member&nbsp;security&nbsp;INTERNET
+interface&nbsp;Gi2
+&nbsp;zone-member&nbsp;security&nbsp;INSIDE
+</code></pre></div>
 <p>Bind ihop zonerna och ange source zon.</p>
-<p><code>zone-pair&nbsp;security&nbsp;ZONE-PAIR&nbsp;source&nbsp;INSIDE&nbsp;destination&nbsp;INTERNET</code>
-<code>service-policy&nbsp;type&nbsp;inspect&nbsp;INSIDE-TO-INTERNET</code></p>
+<div class="highlight"><pre><span></span><code>zone-pair&nbsp;security&nbsp;ZONE-PAIR&nbsp;source&nbsp;INSIDE&nbsp;destination&nbsp;INTERNET
+&nbsp;service-policy&nbsp;type&nbsp;inspect&nbsp;INSIDE-TO-INTERNET
+</code></pre></div>
 <p>För att tillåta trafik mellan zoner måste en policy skapas. ZFW inspect
 class-map kan matcha: access-groups, class-maps, group-objects och
 protokoll.</p>
-<p><code>class-map&nbsp;type&nbsp;inspect&nbsp;match-any&nbsp;ALLOW-TRAFFIC</code>
-<code>match&nbsp;protocol&nbsp;icmp</code>
-<code>match&nbsp;protocol&nbsp;dns</code>
-<code>match&nbsp;protocol&nbsp;http</code></p>
-<p><code>policy-map&nbsp;type&nbsp;inspect&nbsp;INSIDE-TO-INTERNET</code>
-<code>class&nbsp;type&nbsp;inspect&nbsp;ALLOW-TRAFFIC</code>
-<code>inspect</code>
-<code>class&nbsp;class-default</code>
-<code>drop</code></p>
+<div class="highlight"><pre><span></span><code>class-map&nbsp;type&nbsp;inspect&nbsp;match-any&nbsp;ALLOW-TRAFFIC
+&nbsp;match&nbsp;protocol&nbsp;icmp
+&nbsp;match&nbsp;protocol&nbsp;dns
+&nbsp;match&nbsp;protocol&nbsp;http
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;type&nbsp;inspect&nbsp;INSIDE-TO-INTERNET
+&nbsp;class&nbsp;type&nbsp;inspect&nbsp;ALLOW-TRAFFIC
+&nbsp;&nbsp;inspect
+&nbsp;class&nbsp;class-default
+&nbsp;&nbsp;drop
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;zone-pair&nbsp;security</code>
-<code>show&nbsp;policy-map&nbsp;type&nbsp;inspect&nbsp;zone-pair</code>
-<code>show&nbsp;policy-firewall&nbsp;config</code>
-<code>show&nbsp;policy-firewall&nbsp;session&nbsp;zone-pair&nbsp;ZONE-PAIR</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;zone-pair&nbsp;security
+show&nbsp;policy-map&nbsp;type&nbsp;inspect&nbsp;zone-pair
+show&nbsp;policy-firewall&nbsp;config&nbsp;
+show&nbsp;policy-firewall&nbsp;session&nbsp;zone-pair&nbsp;ZONE-PAIR
+</code></pre></div>
 <p><strong>High Availability</strong>
 ZFW stödjer HA och session state replikeras för inspect actions mellan
 ACTIVE och STANDBY. Dock görs det endast för L4 protokoll TCP/UDP så
 ingen ICMP eller L7 inspections. Enheten med högst prio blir ACTIVE, vid
 lika avgör högsta IP på control link.</p>
-<p><code>interface&nbsp;GigabitEthernet0/1</code>
-<code>description&nbsp;Control&nbsp;link</code>
-<code>ip&nbsp;address&nbsp;10.1.1.2&nbsp;255.255.255.0</code></p>
-<p><code>parameter-map&nbsp;type&nbsp;inspect&nbsp;global</code>
-<code>redundancy</code></p>
-<p><code>redundancy</code>
-<code>application&nbsp;redundancy</code>
-<code>group&nbsp;1</code>
-<code>name&nbsp;ZFW</code>
-<code>preempt</code>
-<code>priority&nbsp;100</code>
-<code>control&nbsp;GigabitEthernet0/1&nbsp;protocol&nbsp;1</code>
-<code>data&nbsp;GigabitEthernet0/1</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;GigabitEthernet0/1
+&nbsp;description&nbsp;Control&nbsp;link
+&nbsp;ip&nbsp;address&nbsp;10.1.1.2&nbsp;255.255.255.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>parameter-map&nbsp;type&nbsp;inspect&nbsp;global
+&nbsp;redundancy
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>redundancy
+&nbsp;application&nbsp;redundancy
+&nbsp;&nbsp;group&nbsp;1
+&nbsp;&nbsp;&nbsp;name&nbsp;ZFW
+&nbsp;&nbsp;&nbsp;preempt
+&nbsp;&nbsp;&nbsp;priority&nbsp;100
+&nbsp;&nbsp;&nbsp;control&nbsp;GigabitEthernet0/1&nbsp;protocol&nbsp;1
+&nbsp;&nbsp;&nbsp;data&nbsp;GigabitEthernet0/1
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;redundancy&nbsp;application&nbsp;group&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;redundancy&nbsp;application&nbsp;group&nbsp;1
+</code></pre></div>
 <h2 id="urpf">uRPF</h2>
 <p>Unicast Reverse Path Forwarding är en mekanism som förhindrar spoofing
 attacks. Source-adressen på paket som kommer in kollas och jämförs mot
@@ -9166,21 +9220,25 @@ två modes och tar hänsyn till equal och unequal cost load sharing. Om
 default-routen också ska användas vid kontrollen måste <strong>allow-default</strong>
 sättas efter interface-kommandot.</p>
 <p><strong>Strict mode</strong>, fungerar såklart inte med asymmetric routing.</p>
-<p><code>ip&nbsp;verify&nbsp;unicast&nbsp;source&nbsp;reachable-via&nbsp;rx</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;verify&nbsp;unicast&nbsp;source&nbsp;reachable-via&nbsp;rx
+</code></pre></div>
 <p>Med <strong>Loose mode</strong> räcker det att sourcen är reachable via något
 interface.</p>
-<p><code>ip&nbsp;verify&nbsp;unicast&nbsp;source&nbsp;reachable-via&nbsp;any</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;verify&nbsp;unicast&nbsp;source&nbsp;reachable-via&nbsp;any
+</code></pre></div>
 <p>uRPF exemptions, vill man inte kontrollera all trafik kan man matcha
 RPF-checken mot en ACL, dvs permita det som RPF inte ska bry sig om att
 droppa om det inte klarar checken.</p>
 <p><code>ip&nbsp;verify&nbsp;unicast&nbsp;source&nbsp;reachable-via&nbsp;rx</code><acl><code></code></acl></p>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;traffic</code>
-<code>show&nbsp;ip&nbsp;verify&nbsp;source</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;traffic
+show&nbsp;ip&nbsp;verify&nbsp;source
+</code></pre></div>
 <p>Trick för att logga all packets med spoofed sources.</p>
-<p><code>access-list&nbsp;100&nbsp;deny&nbsp;ip&nbsp;any&nbsp;any&nbsp;log</code>
-<code>interface&nbsp;GigabitEthernet0/1</code>
-<code>ip&nbsp;verify&nbsp;unicast&nbsp;source&nbsp;reachable-via&nbsp;any&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>access-list&nbsp;100&nbsp;deny&nbsp;ip&nbsp;any&nbsp;any&nbsp;log
+interface&nbsp;GigabitEthernet0/1
+&nbsp;ip&nbsp;verify&nbsp;unicast&nbsp;source&nbsp;reachable-via&nbsp;any&nbsp;100
+</code></pre></div>
 <h2 id="ipsg">IPSG</h2>
 <p>IP Source Guard hjälper till att skydda mot IP spoofing. Det
 konfigureras på access-lagret och använder sig av <a href="/Cisco_DHCP#Snooping" title="wikilink">DHCP
@@ -9194,21 +9252,25 @@ MAC-adresser. Det bör konfigureras konsekvent på alla accessportar på
 network edge.</p>
 <p>Prereq, DHCP Snooping måste faktiskt vara påslaget även om man bara
 använder manuella bindings.</p>
-<p><code>ip&nbsp;dhcp&nbsp;snooping</code>
-<code>ip&nbsp;dhcp&nbsp;snooping&nbsp;vlan&nbsp;10</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;dhcp&nbsp;snooping
+ip&nbsp;dhcp&nbsp;snooping&nbsp;vlan&nbsp;10
+</code></pre></div>
 <p><strong>L3 check</strong></p>
-<p><code>interface&nbsp;gi0/7</code>
-<code>ip&nbsp;verify&nbsp;source</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/7
+&nbsp;ip&nbsp;verify&nbsp;source
+</code></pre></div>
 <p><strong>L3+L2 check</strong></p>
-<p><code>interface&nbsp;gi0/7</code>
-<code>switchport&nbsp;port-security</code>
-<code>ip&nbsp;verify&nbsp;source&nbsp;port-security</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/7
+&nbsp;switchport&nbsp;port-security
+&nbsp;ip&nbsp;verify&nbsp;source&nbsp;port-security
+</code></pre></div>
 <p>Static binding</p>
-<p><code>ip&nbsp;source&nbsp;binding&nbsp;0011.2233.4455&nbsp;vlan&nbsp;10&nbsp;172.20.0.10&nbsp;int&nbsp;gi0/7</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;source&nbsp;binding&nbsp;0011.2233.4455&nbsp;vlan&nbsp;10&nbsp;172.20.0.10&nbsp;int&nbsp;gi0/7
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;verify&nbsp;source</code>
-<code>show&nbsp;ip&nbsp;source&nbsp;binding</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;verify&nbsp;source
+show&nbsp;ip&nbsp;source&nbsp;binding
+</code></pre></div>
 
 
 
@@ -9231,7 +9293,7 @@ använder manuella bindings.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

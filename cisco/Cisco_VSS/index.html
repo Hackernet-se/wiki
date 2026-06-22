@@ -8726,6 +8726,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9046,85 +9074,102 @@ behövs Cisco Catalyst Supervisor Engine 7-E eller 7-LE men i
 x-modellerna är den inbyggd.</p>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>sätt Virtual Switch domain samt switch nummer</p>
-<p><code>SW1#conf&nbsp;t</code>
-<code>Enter&nbsp;configuration&nbsp;commands,&nbsp;one&nbsp;per&nbsp;line.&nbsp;End&nbsp;with&nbsp;CNTL/Z.</code>
-<code>SW1(config)#switch&nbsp;virtual&nbsp;domain&nbsp;10</code>
-<code>Domain&nbsp;ID&nbsp;10&nbsp;config&nbsp;will&nbsp;take&nbsp;effect&nbsp;only</code>
-<code>after&nbsp;the&nbsp;exec&nbsp;command&nbsp;'switch&nbsp;convert&nbsp;mode&nbsp;virtual'&nbsp;is&nbsp;issued</code>
-<code>SW1(config-vs-domain)#switch&nbsp;1</code>
-<code>SW1(config-vs-domain)#exit</code>
-<code>SW1(config)#</code></p>
-<p><code>SW2#conf&nbsp;t</code>
-<code>Enter&nbsp;configuration&nbsp;commands,&nbsp;one&nbsp;per&nbsp;line.&nbsp;End&nbsp;with&nbsp;CNTL/Z.</code>
-<code>SW2(config)#switch&nbsp;virtual&nbsp;domain&nbsp;10</code>
-<code>Domain&nbsp;ID&nbsp;10&nbsp;config&nbsp;will&nbsp;take&nbsp;effect&nbsp;only</code>
-<code>after&nbsp;the&nbsp;exec&nbsp;command&nbsp;'switch&nbsp;convert&nbsp;mode&nbsp;virtual'&nbsp;is&nbsp;issued</code>
-<code>SW2(config-vs-domain)#switch&nbsp;2</code>
-<code>SW2(config-vs-domain)#exit</code>
-<code>SW2(config)#</code></p>
+<div class="highlight"><pre><span></span><code>SW1#conf&nbsp;t
+Enter&nbsp;configuration&nbsp;commands,&nbsp;one&nbsp;per&nbsp;line.&nbsp;End&nbsp;with&nbsp;CNTL/Z.
+SW1(config)#switch&nbsp;virtual&nbsp;domain&nbsp;10
+Domain&nbsp;ID&nbsp;10&nbsp;config&nbsp;will&nbsp;take&nbsp;effect&nbsp;only
+after&nbsp;the&nbsp;exec&nbsp;command&nbsp;'switch&nbsp;convert&nbsp;mode&nbsp;virtual'&nbsp;is&nbsp;issued
+SW1(config-vs-domain)#switch&nbsp;1
+SW1(config-vs-domain)#exit
+SW1(config)#
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>SW2#conf&nbsp;t
+Enter&nbsp;configuration&nbsp;commands,&nbsp;one&nbsp;per&nbsp;line.&nbsp;End&nbsp;with&nbsp;CNTL/Z.
+SW2(config)#switch&nbsp;virtual&nbsp;domain&nbsp;10
+Domain&nbsp;ID&nbsp;10&nbsp;config&nbsp;will&nbsp;take&nbsp;effect&nbsp;only
+after&nbsp;the&nbsp;exec&nbsp;command&nbsp;'switch&nbsp;convert&nbsp;mode&nbsp;virtual'&nbsp;is&nbsp;issued
+SW2(config-vs-domain)#switch&nbsp;2
+SW2(config-vs-domain)#exit
+SW2(config)#
+</code></pre></div>
 <p>Konfigurera VSL Port Channel</p>
-<p><code>SW1(config)#int&nbsp;port-channel&nbsp;5</code>
-<code>SW1(config-if)#switchport</code>
-<code>SW1(config-if)#switch&nbsp;virtual&nbsp;link&nbsp;1</code>
-<code>SW1(config-if)#no&nbsp;shut</code>
-<code>SW1(config-if)#exit</code>
-<code>*Jan&nbsp;24&nbsp;05:19:57.092:&nbsp;%SPANTREE-6-PORTDEL_ALL_VLANS:&nbsp;Port-channel5&nbsp;deleted&nbsp;from&nbsp;all&nbsp;Vlans</code></p>
-<p><code>SW2(config)#int&nbsp;port-channel&nbsp;10</code>
-<code>SW2(config-if)#switchport</code>
-<code>SW2(config-if)#switch&nbsp;virtual&nbsp;link&nbsp;2</code>
-<code>SW2(config-if)#no&nbsp;shut</code>
-<code>SW2(config-if)#exit</code>
-<code>SW2(config)#</code>
-<code>*Jan&nbsp;24&nbsp;05:14:17.273:&nbsp;%SPANTREE-6-PORTDEL_ALL_VLANS:&nbsp;Port-channel10&nbsp;deleted&nbsp;from&nbsp;all&nbsp;Vlans</code></p>
+<div class="highlight"><pre><span></span><code>SW1(config)#int&nbsp;port-channel&nbsp;5
+SW1(config-if)#switchport
+SW1(config-if)#switch&nbsp;virtual&nbsp;link&nbsp;1
+SW1(config-if)#no&nbsp;shut
+SW1(config-if)#exit
+*Jan&nbsp;24&nbsp;05:19:57.092:&nbsp;%SPANTREE-6-PORTDEL_ALL_VLANS:&nbsp;Port-channel5&nbsp;deleted&nbsp;from&nbsp;all&nbsp;Vlans
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>SW2(config)#int&nbsp;port-channel&nbsp;10
+SW2(config-if)#switchport
+SW2(config-if)#switch&nbsp;virtual&nbsp;link&nbsp;2
+SW2(config-if)#no&nbsp;shut
+SW2(config-if)#exit
+SW2(config)#
+*Jan&nbsp;24&nbsp;05:14:17.273:&nbsp;%SPANTREE-6-PORTDEL_ALL_VLANS:&nbsp;Port-channel10&nbsp;deleted&nbsp;from&nbsp;all&nbsp;Vlans
+</code></pre></div>
 <p>Konfigurera VSL portarna</p>
-<p><code>SW1(config)#int&nbsp;range&nbsp;gig7/3&nbsp;-&nbsp;4</code>
-<code>SW1(config-if-range)#switchport&nbsp;mode&nbsp;trunk</code>
-<code>SW1(config-if-range)#channel-group&nbsp;5&nbsp;mode&nbsp;on</code>
-<code>WARNING:&nbsp;Interface&nbsp;GigabitEthernet7/3&nbsp;placed&nbsp;in&nbsp;restricted&nbsp;config&nbsp;mode.&nbsp;All&nbsp;extraneous&nbsp;configs&nbsp;removed!</code>
-<code>WARNING:&nbsp;Interface&nbsp;GigabitEthernet7/4&nbsp;placed&nbsp;in&nbsp;restricted&nbsp;config&nbsp;mode.&nbsp;All&nbsp;extraneous&nbsp;configs&nbsp;removed!</code>
-<code>SW1(config-if-range)#exit</code></p>
-<p><code>SW2(config)#int&nbsp;range&nbsp;gig4/45&nbsp;-&nbsp;46</code>
-<code>SW2(config-if-range)#switchport&nbsp;mode&nbsp;trunk</code>
-<code>SW2(config-if-range)#channel-group&nbsp;10&nbsp;mode&nbsp;on</code>
-<code>WARNING:&nbsp;Interface&nbsp;GigabitEthernet4/45&nbsp;placed&nbsp;in&nbsp;restricted&nbsp;config&nbsp;mode.&nbsp;All&nbsp;extraneous&nbsp;configs&nbsp;removed!</code>
-<code>WARNING:&nbsp;Interface&nbsp;GigabitEthernet4/46&nbsp;placed&nbsp;in&nbsp;restricted&nbsp;config&nbsp;mode.&nbsp;All&nbsp;extraneous&nbsp;configs&nbsp;removed!</code>
-<code>SW2(config-if-range)#exit</code></p>
+<div class="highlight"><pre><span></span><code>SW1(config)#int&nbsp;range&nbsp;gig7/3&nbsp;-&nbsp;4
+SW1(config-if-range)#switchport&nbsp;mode&nbsp;trunk
+SW1(config-if-range)#channel-group&nbsp;5&nbsp;mode&nbsp;on
+WARNING:&nbsp;Interface&nbsp;GigabitEthernet7/3&nbsp;placed&nbsp;in&nbsp;restricted&nbsp;config&nbsp;mode.&nbsp;All&nbsp;extraneous&nbsp;configs&nbsp;removed!
+WARNING:&nbsp;Interface&nbsp;GigabitEthernet7/4&nbsp;placed&nbsp;in&nbsp;restricted&nbsp;config&nbsp;mode.&nbsp;All&nbsp;extraneous&nbsp;configs&nbsp;removed!
+SW1(config-if-range)#exit
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>SW2(config)#int&nbsp;range&nbsp;gig4/45&nbsp;-&nbsp;46
+SW2(config-if-range)#switchport&nbsp;mode&nbsp;trunk
+SW2(config-if-range)#channel-group&nbsp;10&nbsp;mode&nbsp;on
+WARNING:&nbsp;Interface&nbsp;GigabitEthernet4/45&nbsp;placed&nbsp;in&nbsp;restricted&nbsp;config&nbsp;mode.&nbsp;All&nbsp;extraneous&nbsp;configs&nbsp;removed!
+WARNING:&nbsp;Interface&nbsp;GigabitEthernet4/46&nbsp;placed&nbsp;in&nbsp;restricted&nbsp;config&nbsp;mode.&nbsp;All&nbsp;extraneous&nbsp;configs&nbsp;removed!
+SW2(config-if-range)#exit
+</code></pre></div>
 <p>Switcha över till VSS från vanlig</p>
-<p><code>SW1#switch&nbsp;convert&nbsp;mode&nbsp;virtual</code></p>
-<p><code>SW2#switch&nbsp;convert&nbsp;mode&nbsp;virtual</code></p>
+<div class="highlight"><pre><span></span><code>SW1#switch&nbsp;convert&nbsp;mode&nbsp;virtual&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>SW2#switch&nbsp;convert&nbsp;mode&nbsp;virtual&nbsp;
+</code></pre></div>
 <p>Kolla så att det fungerar</p>
-<p><code>SW1#show&nbsp;switch&nbsp;virtual</code></p>
-<p><code>Executing&nbsp;the&nbsp;command&nbsp;on&nbsp;VSS&nbsp;member&nbsp;switch&nbsp;role&nbsp;=&nbsp;VSS&nbsp;Active,&nbsp;id&nbsp;=&nbsp;1</code></p>
-<p><code>Switch&nbsp;mode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Virtual&nbsp;Switch</code>
-<code>Virtual&nbsp;switch&nbsp;domain&nbsp;number&nbsp;:&nbsp;10</code>
-<code>Local&nbsp;switch&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1</code>
-<code>Local&nbsp;switch&nbsp;operational&nbsp;role:&nbsp;Virtual&nbsp;Switch&nbsp;Active</code>
-<code>Peer&nbsp;switch&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;2</code>
-<code>Peer&nbsp;switch&nbsp;operational&nbsp;role&nbsp;:&nbsp;Virtual&nbsp;Switch&nbsp;Standby</code></p>
-<p><code>Executing&nbsp;the&nbsp;command&nbsp;on&nbsp;VSS&nbsp;member&nbsp;switch&nbsp;role&nbsp;=&nbsp;VSS&nbsp;Standby,&nbsp;id&nbsp;=&nbsp;2</code></p>
-<p><code>Switch&nbsp;mode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Virtual&nbsp;Switch</code>
-<code>Virtual&nbsp;switch&nbsp;domain&nbsp;number&nbsp;:&nbsp;10</code>
-<code>Local&nbsp;switch&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;2</code>
-<code>Local&nbsp;switch&nbsp;operational&nbsp;role:&nbsp;Virtual&nbsp;Switch&nbsp;Standby</code>
-<code>Peer&nbsp;switch&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1</code>
-<code>Peer&nbsp;switch&nbsp;operational&nbsp;role&nbsp;:&nbsp;Virtual&nbsp;Switch&nbsp;Active</code></p>
+<div class="highlight"><pre><span></span><code>SW1#show&nbsp;switch&nbsp;virtual&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Executing&nbsp;the&nbsp;command&nbsp;on&nbsp;VSS&nbsp;member&nbsp;switch&nbsp;role&nbsp;=&nbsp;VSS&nbsp;Active,&nbsp;id&nbsp;=&nbsp;1&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Switch&nbsp;mode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Virtual&nbsp;Switch
+Virtual&nbsp;switch&nbsp;domain&nbsp;number&nbsp;:&nbsp;10
+Local&nbsp;switch&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1
+Local&nbsp;switch&nbsp;operational&nbsp;role:&nbsp;Virtual&nbsp;Switch&nbsp;Active
+Peer&nbsp;switch&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;2
+Peer&nbsp;switch&nbsp;operational&nbsp;role&nbsp;:&nbsp;Virtual&nbsp;Switch&nbsp;Standby&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Executing&nbsp;the&nbsp;command&nbsp;on&nbsp;VSS&nbsp;member&nbsp;switch&nbsp;role&nbsp;=&nbsp;VSS&nbsp;Standby,&nbsp;id&nbsp;=&nbsp;2&nbsp;&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Switch&nbsp;mode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Virtual&nbsp;Switch
+Virtual&nbsp;switch&nbsp;domain&nbsp;number&nbsp;:&nbsp;10
+Local&nbsp;switch&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;2
+Local&nbsp;switch&nbsp;operational&nbsp;role:&nbsp;Virtual&nbsp;Switch&nbsp;Standby
+Peer&nbsp;switch&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1
+Peer&nbsp;switch&nbsp;operational&nbsp;role&nbsp;:&nbsp;Virtual&nbsp;Switch&nbsp;Active
+</code></pre></div>
 <h3 id="dual-active-detection">Dual-Active Detection</h3>
 <p>Förhindra att båda supervisors blir aktiva vid VSL link failure.</p>
-<p><code>switch&nbsp;virtual&nbsp;domain&nbsp;10</code>
-<code>dual-active&nbsp;detection&nbsp;fast-hello</code></p>
-<p><code>interface&nbsp;te1/1/24</code>
-<code>description&nbsp;VSS&nbsp;Fast-Hello</code>
-<code>no&nbsp;switchport</code>
-<code>no&nbsp;ip&nbsp;address</code>
-<code>no&nbsp;cdp&nbsp;enable</code>
-<code>dual-active&nbsp;fast-hello</code>
-<code>no&nbsp;shut</code></p>
+<div class="highlight"><pre><span></span><code>switch&nbsp;virtual&nbsp;domain&nbsp;10
+&nbsp;dual-active&nbsp;detection&nbsp;fast-hello
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;te1/1/24
+&nbsp;description&nbsp;VSS&nbsp;Fast-Hello
+&nbsp;no&nbsp;switchport
+&nbsp;no&nbsp;ip&nbsp;address
+&nbsp;no&nbsp;cdp&nbsp;enable
+&nbsp;dual-active&nbsp;fast-hello
+&nbsp;no&nbsp;shut
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;switch&nbsp;virtual&nbsp;dual-active&nbsp;fast-hello</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;switch&nbsp;virtual&nbsp;dual-active&nbsp;fast-hello
+</code></pre></div>
 <h3 id="felsokning">Felsökning</h3>
-<p><code>show&nbsp;switch&nbsp;virtual</code>
-<code>show&nbsp;switch&nbsp;virtual&nbsp;role</code>
-<code>show&nbsp;switch&nbsp;virtual&nbsp;link</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;switch&nbsp;virtual&nbsp;
+show&nbsp;switch&nbsp;virtual&nbsp;role
+show&nbsp;switch&nbsp;virtual&nbsp;link
+</code></pre></div>
 <p><strong>Giants</strong>
 Om man ser giants counter gå upp på VSL interface så är det normalt
 eftersom VSL inter-switch control frame packets skickas som 1518 bytes +
@@ -9132,22 +9177,26 @@ eftersom VSL inter-switch control frame packets skickas som 1518 bytes +
 <h3 id="tips-n-trix">Tips N Trix</h3>
 <p>Man kan använda sig av 10ge interface också och inte enbart 1ge som står
 i guiden. Kommando för att byta vilken switch som är aktiv.</p>
-<p><code>redundancy&nbsp;force-switchover</code></p>
+<div class="highlight"><pre><span></span><code>redundancy&nbsp;force-switchover
+</code></pre></div>
 <h1 id="stackwise">StackWise</h1>
 <p>För de lite mindre switchmodellerna finns StackWise för att koppla ihop
 flera enheter till en logisk. Switcharna kopplas ihop med speciella
 StackWise-kablar på baksidan. Man väljer en switch som man konfigurerar
 som master och sedan kopplar man ihop dem och bootar upp dem.</p>
-<p><code>switch&nbsp;1&nbsp;priority&nbsp;15</code></p>
+<div class="highlight"><pre><span></span><code>switch&nbsp;1&nbsp;priority&nbsp;15
+</code></pre></div>
 <p>Kolla status på stacken</p>
-<p><code>show&nbsp;switch</code>
-<code>show&nbsp;switch&nbsp;stack-bandwidth</code>
-<code>show&nbsp;switch&nbsp;stack-mode</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;switch
+show&nbsp;switch&nbsp;stack-bandwidth
+show&nbsp;switch&nbsp;stack-mode
+</code></pre></div>
 <p>Firmware</p>
-<p><code>software&nbsp;auto-upgrade&nbsp;enable</code></p>
+<div class="highlight"><pre><span></span><code>software&nbsp;auto-upgrade&nbsp;enable
+</code></pre></div>
 <p>Reset the switch mode to N+1</p>
-<p><code>switch&nbsp;clear&nbsp;stack-mode</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>switch&nbsp;clear&nbsp;stack-mode
+</code></pre></div>
 
 
 
@@ -9170,7 +9219,7 @@ som master och sedan kopplar man ihop dem och bootar upp dem.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8726,6 +8726,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9045,132 +9073,140 @@ IETF-standard,
 <h3 id="paket">Paket</h3>
 <p>Ett NetFlow-paket skickas med UDP och kan innehålla metadata om flera
 trafikflöden.</p>
-<div class="mw-collapsible mw-collapsed" style="width:310px">
-
--   NetFlow v9:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_netflow_v9.png>](/File:Cisco_Netflow_v9.png "wikilink")
-
-</file:cisco_netflow_v9.png></div>
-</div>
-
+<ul>
+<li>NetFlow v9:</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_Netflow_v9.png" data-desc-position="bottom"><img alt="Cisco_Netflow_v9.png" src="../../images/Cisco_Netflow_v9.png"></a></p>
 <p>Om man använder version 9 så skickar Cisco-enheter en NetFlow-template
 var 20:e paket så mottagare vet vilken information NetFlow-paketen
 innehåller.</p>
-<div class="mw-collapsible mw-collapsed" style="width:310px">
-
--   NetFlow template:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_netflow_template.png>](/File:Cisco_NetFlow_Template.png "wikilink")
-
-</file:cisco_netflow_template.png></div>
-</div>
-
+<ul>
+<li>NetFlow template:</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_NetFlow_Template.png" data-desc-position="bottom"><img alt="Cisco_NetFlow_Template.png" src="../../images/Cisco_NetFlow_Template.png"></a></p>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>Legacy IOS syntax</p>
-<p><code>int&nbsp;gi0/0</code>
-<code>ip&nbsp;flow&nbsp;ingress</code>
-<code>ip&nbsp;flow&nbsp;egress</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;gi0/0
+&nbsp;ip&nbsp;flow&nbsp;ingress
+&nbsp;ip&nbsp;flow&nbsp;egress
+</code></pre></div>
 <p>Top-talkers</p>
-<p><code>ip&nbsp;flow-top-talkers</code>
-<code>sort-by&nbsp;bytes</code>
-<code>top&nbsp;5</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;flow-top-talkers
+&nbsp;sort-by&nbsp;bytes
+&nbsp;top&nbsp;5
+</code></pre></div>
 <p>Show</p>
-<p><code>show&nbsp;ip&nbsp;flow&nbsp;top-talkers</code>
-<code>show&nbsp;ip&nbsp;cache&nbsp;flow</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;flow&nbsp;top-talkers&nbsp;
+show&nbsp;ip&nbsp;cache&nbsp;flow&nbsp;
+</code></pre></div>
 <h3 id="asr">ASR</h3>
 <p>IOS-XE använder den modernare syntaxen som kallas Flexible NetFlow. Man
 kan även definiera och använda egna flow records, dvs vilken information
 som ska exporteras.
 OBS en ASR 1000 kan inte använda sitt management-interface som source
 för NetFlow-exporten.</p>
-<p><code>flow&nbsp;exporter&nbsp;COLLECTOR</code>
-<code>destination&nbsp;10.0.0.10</code>
-<code>transport&nbsp;udp&nbsp;2055</code>
-<code>source&nbsp;gi0/1</code>
-<code>export-protocol&nbsp;netflow-v9</code></p>
-<p><code>flow&nbsp;monitor&nbsp;FLOW-MONITOR</code>
-<code>record&nbsp;netflow&nbsp;ipv4&nbsp;original-input</code>
-<code>exporter&nbsp;COLLECTOR</code>
-<code>cache&nbsp;timeout&nbsp;active&nbsp;60</code></p>
-<p><code>interface&nbsp;gi0/3</code>
-<code>ip&nbsp;flow&nbsp;monitor&nbsp;FLOW-MONITOR&nbsp;input</code></p>
+<div class="highlight"><pre><span></span><code>flow&nbsp;exporter&nbsp;COLLECTOR
+&nbsp;destination&nbsp;10.0.0.10
+&nbsp;transport&nbsp;udp&nbsp;2055
+&nbsp;source&nbsp;gi0/1
+&nbsp;export-protocol&nbsp;netflow-v9
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>flow&nbsp;monitor&nbsp;FLOW-MONITOR
+&nbsp;record&nbsp;netflow&nbsp;ipv4&nbsp;original-input&nbsp;
+&nbsp;exporter&nbsp;COLLECTOR
+&nbsp;cache&nbsp;timeout&nbsp;active&nbsp;60
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi0/3
+&nbsp;ip&nbsp;flow&nbsp;monitor&nbsp;FLOW-MONITOR&nbsp;input
+</code></pre></div>
 <p>"Random Sampled NetFlow is more statistically accurate than Sampled
 NetFlow." - Cisco</p>
-<p><code>sampler&nbsp;SAMPLER-1</code>
-<code>mode&nbsp;random&nbsp;1&nbsp;out-of&nbsp;1000</code>
-<code>interface&nbsp;gi0/3</code>
-<code>ip&nbsp;flow&nbsp;monitor&nbsp;FLOW-MONITOR&nbsp;sampler&nbsp;SAMPLER-1&nbsp;input</code></p>
+<div class="highlight"><pre><span></span><code>sampler&nbsp;SAMPLER-1
+&nbsp;mode&nbsp;random&nbsp;1&nbsp;out-of&nbsp;1000
+interface&nbsp;gi0/3
+&nbsp;ip&nbsp;flow&nbsp;monitor&nbsp;FLOW-MONITOR&nbsp;sampler&nbsp;SAMPLER-1&nbsp;input
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;flow&nbsp;exporter</code>
-<code>show&nbsp;flow&nbsp;interface</code>
-<code>show&nbsp;flow&nbsp;monitor</code>
-<code>show&nbsp;flow&nbsp;exporter&nbsp;statistics</code>
-<code>show&nbsp;flow&nbsp;record</code>
-<code>show&nbsp;sampler</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;flow&nbsp;exporter
+show&nbsp;flow&nbsp;interface
+show&nbsp;flow&nbsp;monitor
+show&nbsp;flow&nbsp;exporter&nbsp;statistics
+show&nbsp;flow&nbsp;record
+show&nbsp;sampler
+</code></pre></div>
 <p><strong>MPLS-aware NetFlow</strong></p>
-<p><code>interface&nbsp;gi2</code>
-<code>mpls&nbsp;netflow&nbsp;egress</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;mpls&nbsp;netflow&nbsp;egress
+</code></pre></div>
 <h3 id="ezpm">EzPM</h3>
 <p>Med Easy Performance Monitoring så autokonfas allt man behöver utifrån
 en färdig profil, man kan välja mellan prestanda, upplevelse och
 statistik. Man får tillgång till alla Application, Visibility and
 Control (AVC) features.</p>
-<p><code>performance&nbsp;monitor&nbsp;context&nbsp;EzPM&nbsp;profile&nbsp;application-experience</code>
-<code>exporter&nbsp;destination&nbsp;10.0.0.10&nbsp;source&nbsp;loopback0&nbsp;transport&nbsp;udp&nbsp;port&nbsp;2055&nbsp;[vrf]</code>
-<code>traffic-monitor&nbsp;all</code></p>
-<p><code>interface&nbsp;Gi0/1</code>
-<code>performance&nbsp;monitor&nbsp;context&nbsp;EzPM</code></p>
+<div class="highlight"><pre><span></span><code>performance&nbsp;monitor&nbsp;context&nbsp;EzPM&nbsp;profile&nbsp;application-experience
+&nbsp;exporter&nbsp;destination&nbsp;10.0.0.10&nbsp;source&nbsp;loopback0&nbsp;transport&nbsp;udp&nbsp;port&nbsp;2055&nbsp;[vrf]
+&nbsp;traffic-monitor&nbsp;all
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi0/1
+&nbsp;performance&nbsp;monitor&nbsp;context&nbsp;EzPM
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;performance&nbsp;monitor&nbsp;context&nbsp;EzPM</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;performance&nbsp;monitor&nbsp;context&nbsp;EzPM
+</code></pre></div>
 <h3 id="nexus">Nexus</h3>
-<p><code>feature&nbsp;netflow</code></p>
-<p><code>flow&nbsp;exporter&nbsp;COLLECTOR</code>
-<code>destination&nbsp;10.0.0.10&nbsp;use-vrf&nbsp;management</code>
-<code>version&nbsp;9</code>
-<code>transport&nbsp;udp&nbsp;2055</code>
-<code>source&nbsp;mgmt&nbsp;0</code></p>
-<p><code>flow&nbsp;monitor&nbsp;FLOW-MONITOR</code>
-<code>exporter&nbsp;COLLECTOR</code>
-<code>record&nbsp;netflow-original</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;netflow
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>flow&nbsp;exporter&nbsp;COLLECTOR
+&nbsp;destination&nbsp;10.0.0.10&nbsp;use-vrf&nbsp;management
+&nbsp;version&nbsp;9
+&nbsp;transport&nbsp;udp&nbsp;2055
+&nbsp;source&nbsp;mgmt&nbsp;0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>flow&nbsp;monitor&nbsp;FLOW-MONITOR
+&nbsp;exporter&nbsp;COLLECTOR
+&nbsp;record&nbsp;netflow-original
+</code></pre></div>
 <p>Ska man samla in netflow på ett interface i ett F3-kort måste sampler
 användas.</p>
-<p><code>sampler&nbsp;SAMPLER-1</code>
-<code>mode&nbsp;1&nbsp;out-of&nbsp;5</code></p>
+<div class="highlight"><pre><span></span><code>sampler&nbsp;SAMPLER-1
+&nbsp;mode&nbsp;1&nbsp;out-of&nbsp;5
+</code></pre></div>
 <p>Interface</p>
-<p><code>interface&nbsp;Ethernet1/1</code>
-<code>ip&nbsp;flow&nbsp;monitor&nbsp;FLOW-MONITOR&nbsp;input&nbsp;sampler&nbsp;SAMPLER-1</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Ethernet1/1
+&nbsp;ip&nbsp;flow&nbsp;monitor&nbsp;FLOW-MONITOR&nbsp;input&nbsp;sampler&nbsp;SAMPLER-1
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;flow&nbsp;record&nbsp;netflow-original</code>
-<code>show&nbsp;flow&nbsp;exporter</code>
-<code>show&nbsp;flow&nbsp;monitor</code>
-<code>show&nbsp;flow&nbsp;interface</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;flow&nbsp;record&nbsp;netflow-original
+show&nbsp;flow&nbsp;exporter
+show&nbsp;flow&nbsp;monitor&nbsp;
+show&nbsp;flow&nbsp;interface
+</code></pre></div>
 <p><strong>Layer 2</strong>
 Man kan även exportera metadata för L2-trafik med netflow. Notera att
 flow monitor måste ha flow records för L2, dvs Vlan, MAC och ethertype.</p>
-<p><code>interface&nbsp;e1/1</code>
-<code>switchport</code>
-<code>layer2-switched&nbsp;flow&nbsp;monitor&nbsp;FLOW-MONITOR&nbsp;input</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;e1/1
+&nbsp;switchport
+&nbsp;layer2-switched&nbsp;flow&nbsp;monitor&nbsp;FLOW-MONITOR&nbsp;input
+</code></pre></div>
 <h1 id="ip-accounting">IP Accounting</h1>
 <p>IP Accounting är en annan feature i IOS som också kan användas för att
 kolla trafik lokalt, dock mindre populär än NetFlow.</p>
-<p><code>ip&nbsp;accounting-threshold&nbsp;1200</code>
-<code>ip&nbsp;accounting-list&nbsp;10.0.10.0&nbsp;0.0.0.255</code>
-<code>int&nbsp;g2/0</code>
-<code>ip&nbsp;accounting&nbsp;output-packets</code></p>
-<p><code>show&nbsp;ip&nbsp;accounting</code>
-<code>clear&nbsp;ip&nbsp;accounting</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;accounting-threshold&nbsp;1200
+ip&nbsp;accounting-list&nbsp;10.0.10.0&nbsp;0.0.0.255
+int&nbsp;g2/0
+&nbsp;ip&nbsp;accounting&nbsp;output-packets
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;accounting
+clear&nbsp;ip&nbsp;accounting
+</code></pre></div>
 <p>Stores the old accounting database into a checkpoint</p>
-<p><code>show&nbsp;ip&nbsp;accounting&nbsp;checkpoint</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;accounting&nbsp;checkpoint
+</code></pre></div>
 <p>Det går även att kolla MAC-adresser.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ip&nbsp;accounting&nbsp;mac-address&nbsp;input</code>
-<code>show&nbsp;interface&nbsp;gi2&nbsp;mac-accounting</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ip&nbsp;accounting&nbsp;mac-address&nbsp;input
+show&nbsp;interface&nbsp;gi2&nbsp;mac-accounting
+</code></pre></div>
 
 
 
@@ -9193,7 +9229,7 @@ kolla trafik lokalt, dock mindre populär än NetFlow.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

@@ -8741,6 +8741,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9066,7 +9094,8 @@ VirtualBox, VMware, <a href="/KVM" title="wikilink">KVM</a> och Linux Containers
 Sedan version 1.6 har Vagrant inbyggt stöd för Docker containers.</p>
 <h2 id="installation">Installation</h2>
 <p>Fedora</p>
-<p><code>dnf&nbsp;install&nbsp;vagrant</code></p>
+<div class="highlight"><pre><span></span><code>dnf&nbsp;install&nbsp;vagrant&nbsp;
+</code></pre></div>
 <h2 id="providers">Providers</h2>
 <p>Vagrant gör ingen virtualisering utan det görs av en underliggande
 provider, t.ex. virtualbox, vmware, AWS eller docker. Virtualbox är
@@ -9075,7 +9104,8 @@ ska användas. Installera virtualbox:</p>
 <p><a href="http://www.if-not-true-then-false.com/2010/install-virtualbox-with-yum-on-fedora-centos-red-hat-rhel/"><code>http://www.if-not-true-then-false.com/2010/install-virtualbox-with-yum-on-fedora-centos-red-hat-rhel/</code></a></p>
 <p>Providers installeras som plugins och listas med. För virtualbox behövs
 ingen plugin.</p>
-<p><code>vagrant&nbsp;plugin&nbsp;list</code></p>
+<div class="highlight"><pre><span></span><code>vagrant&nbsp;plugin&nbsp;list
+</code></pre></div>
 <h5 id="vmware-workstation">VMware Workstation</h5>
 <p>vagrant-vmware-workstation är en kommersiell produkt och kräver licens.</p>
 <h2 id="boxes">Boxes</h2>
@@ -9085,26 +9115,31 @@ Dessa imagear kallas på Vagrantspråk för boxes. Att ange vilken box som
 ska användas för din Vagrantmiljö är alltid det första steget när du ska
 skapa en ny Vagrantfile. Tillgängliga boxes:
 <a href="https://atlas.hashicorp.com/boxes/search">https://atlas.hashicorp.com/boxes/search</a></p>
-<p><code>vagrant&nbsp;box&nbsp;add&nbsp;ubuntu/trusty64</code></p>
+<div class="highlight"><pre><span></span><code>vagrant&nbsp;box&nbsp;add&nbsp;ubuntu/trusty64&nbsp;
+</code></pre></div>
 <p>Boxes lagras i \~/.vagrant.d/boxes/</p>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Generera Vagrantfile</p>
-<p><code>mkdir&nbsp;vagrant&nbsp;&amp;&amp;&nbsp;cd&nbsp;vagrant</code>
-<code>vagrant&nbsp;init&nbsp;ubuntu/trusty64</code></p>
+<div class="highlight"><pre><span></span><code>mkdir&nbsp;vagrant&nbsp;&amp;&amp;&nbsp;cd&nbsp;vagrant
+vagrant&nbsp;init&nbsp;ubuntu/trusty64
+</code></pre></div>
 <p>Starta environment. Detta kommando startar miljö utifrån den Vagrantfile
 som finns det directory du kör kommandot i.</p>
-<p><code>vagrant&nbsp;up&nbsp;--provider&nbsp;virtualbox</code></p>
+<div class="highlight"><pre><span></span><code>vagrant&nbsp;up&nbsp;--provider&nbsp;virtualbox
+</code></pre></div>
 <p>Anslut till den virtuella maskinen</p>
-<p><code>vagrant&nbsp;ssh</code></p>
+<div class="highlight"><pre><span></span><code>vagrant&nbsp;ssh
+</code></pre></div>
 <p>Städa</p>
-<p><code>vagrant&nbsp;destroy</code></p>
+<div class="highlight"><pre><span></span><code>vagrant&nbsp;destroy
+</code></pre></div>
 <p>Lista skapade vagrantmiljöer</p>
-<p><code>vagrant&nbsp;global-status</code></p>
+<div class="highlight"><pre><span></span><code>vagrant&nbsp;global-status
+</code></pre></div>
 <h2 id="plugins">Plugins</h2>
 <p>Det finns många plugins till vagrant. <a href="http://vagrant-lists.github.io/">http://vagrant-lists.github.io/</a></p>
 <h3 id="vsphere">vSphere</h3>
 <p>Se <a href="https://github.com/nsidc/vagrant-vsphere">https://github.com/nsidc/vagrant-vsphere</a></p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
 
 
 
@@ -9127,7 +9162,7 @@ som finns det directory du kör kommandot i.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

@@ -8663,6 +8663,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8907,106 +8935,131 @@
 <h2 id="unattended">Unattended</h2>
 <p>Bootparameter</p>
 <p><code>append&nbsp;vga=normal&nbsp;initrd=os/debian7/initrd.gz&nbsp;preseed/url=</code><a href="http://"><code>http://</code></a><url><code>/Debian.conf&nbsp;interface=auto&nbsp;priority=critical&nbsp;auto=true</code></url></p>
-<p><code>####################################################################</code>
-<code>#&nbsp;&nbsp;PRESEED&nbsp;-&nbsp;Created&nbsp;Wed&nbsp;Apr&nbsp;&nbsp;1&nbsp;13:18:08&nbsp;2015</code>
-<code>####################################################################</code></p>
+<div class="highlight"><pre><span></span><code>####################################################################
+#&nbsp;&nbsp;PRESEED&nbsp;-&nbsp;Created&nbsp;Wed&nbsp;Apr&nbsp;&nbsp;1&nbsp;13:18:08&nbsp;2015
+####################################################################
+</code></pre></div>
 <p><code>#&nbsp;Wiki:</code><a href="http://wiki.debian.org/DebianInstaller/Preseed"><code>http://wiki.debian.org/DebianInstaller/Preseed</code></a>
-<code>#&nbsp;Great&nbsp;work!&nbsp;&nbsp;Thanks&nbsp;for&nbsp;preseed&nbsp;and&nbsp;the&nbsp;d-i&nbsp;installer</code></p>
-<p><code>####################################################################</code>
-<code>#&nbsp;Installation&nbsp;Sources</code>
-<code>####################################################################</code></p>
-<p><code>#&nbsp;Where&nbsp;are&nbsp;we&nbsp;pulling&nbsp;bits&nbsp;from?</code>
-<code>#</code>
-<code>#&nbsp;Note:&nbsp;&nbsp;To&nbsp;use&nbsp;your&nbsp;own&nbsp;local&nbsp;repository,&nbsp;this&nbsp;is&nbsp;what&nbsp;you&nbsp;want</code>
-<code>#&nbsp;to&nbsp;edit.</code>
-<code>#</code>
-<code>#&nbsp;It&nbsp;should&nbsp;look&nbsp;like&nbsp;this:</code>
-<code>#d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mirror/http/hostname&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;(IP&nbsp;Address&nbsp;of&nbsp;your&nbsp;local&nbsp;server)</code>
-<code>#d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mirror/http/directory&nbsp;&nbsp;&nbsp;string&nbsp;(HTTP&nbsp;Path&nbsp;to&nbsp;your&nbsp;Repository&nbsp;-&nbsp;like&nbsp;/natty&nbsp;)</code></p>
-<p><code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mirror/http/hostname&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;ftp.se.debian.org</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mirror/http/directory&nbsp;&nbsp;&nbsp;string&nbsp;/debian/</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mirror/suite&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string</code></p>
-<p><code>#&nbsp;Post&nbsp;install&nbsp;APT&nbsp;setup</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/uri_type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select&nbsp;d-i</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/hostname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;ftp.se.debian.org</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/directory&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;/debian/</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/another&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;false</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/security-updates&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;false</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish-install/reboot_in_progress&nbsp;note</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prebaseconfig/reboot_in_progress&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;note</code></p>
-<p><code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/non-free&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;true</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/contrib&nbsp;&nbsp;boolean&nbsp;true</code></p>
-<p><code>####################################################################</code>
-<code>#&nbsp;Networking</code>
-<code>####################################################################</code></p>
-<p><code>#&nbsp;Network&nbsp;Configuration</code></p>
-<p><code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netcfg/get_hostname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;unassigned-hostname</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;netcfg/get_hostname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seen&nbsp;true</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netcfg/get_domain&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;unassigned-domain</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;netcfg/get_domain&nbsp;&nbsp;&nbsp;seen&nbsp;true</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netcfg/disable_dhcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;false</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;mirror/http/proxy&nbsp;&nbsp;&nbsp;string</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netcfg/choose_interface&nbsp;select&nbsp;eth0</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netcfg/wireless_wep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string</code></p>
-<p><code>####################################################################</code>
-<code>#&nbsp;Disk&nbsp;Partitioning/Boot&nbsp;loader</code>
-<code>####################################################################</code></p>
-<p><code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman-auto/disk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;/dev/sda</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman-auto/method&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;regular</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;partman-auto/choose_recipe&nbsp;&nbsp;select&nbsp;atomic</code></p>
-<p><code>#&nbsp;This&nbsp;makes&nbsp;partman&nbsp;automatically&nbsp;partition&nbsp;without&nbsp;confirmation.</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman/confirm&nbsp;boolean&nbsp;true</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman-partitioning/confirm_write_new_label&nbsp;boolean&nbsp;true</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman/choose_partition&nbsp;select&nbsp;finish</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman/confirm_nooverwrite&nbsp;boolean&nbsp;true</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;partman/confirm_write_new_label&nbsp;boolean&nbsp;true</code></p>
-<p><code>#&nbsp;This&nbsp;one&nbsp;makes&nbsp;grub-installer&nbsp;install&nbsp;to&nbsp;the&nbsp;MBR&nbsp;even&nbsp;if&nbsp;finds&nbsp;some&nbsp;other&nbsp;OS</code>
-<code>#&nbsp;too,&nbsp;which&nbsp;is&nbsp;less&nbsp;safe&nbsp;as&nbsp;it&nbsp;might&nbsp;not&nbsp;be&nbsp;able&nbsp;to&nbsp;boot&nbsp;that&nbsp;other&nbsp;OS.</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grub-installer/with_other_os&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;true</code></p>
-<p><code>####################################################################</code>
-<code>#&nbsp;Localizations</code>
-<code>####################################################################</code></p>
-<p><code>#&nbsp;Install&nbsp;Time</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;console-tools/archs&nbsp;string&nbsp;skip-config</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;debian-installer/locale&nbsp;string&nbsp;en_US</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;console-keymaps-at/keymap&nbsp;select&nbsp;sv</code></p>
-<p><code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;languagechooser/language-name-fb&nbsp;&nbsp;&nbsp;&nbsp;select&nbsp;English</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;debian-installer/locale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select&nbsp;en_US.UTF-8</code></p>
-<p><code>#&nbsp;Timezone</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tzconfig/gmt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;true</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tzconfig/choose_country_zone/Europe&nbsp;select&nbsp;Stockholm</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tzconfig/choose_country_zone_single&nbsp;boolean&nbsp;true</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;time/zone&nbsp;&nbsp;&nbsp;select&nbsp;&nbsp;Europe/Stockholm</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;clock-setup/utc&nbsp;boolean&nbsp;true</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;kbd-chooser/method&nbsp;&nbsp;select&nbsp;&nbsp;American&nbsp;English</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;mirror/country&nbsp;&nbsp;string&nbsp;&nbsp;manual</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clock-setup/ntp&nbsp;boolean&nbsp;false</code></p>
-<p><code>#&nbsp;X11&nbsp;config</code>
-<code>xserver-xorg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xserver-xorg/autodetect_monitor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;true</code>
-<code>xserver-xorg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xserver-xorg/config/monitor/selection-method&nbsp;select&nbsp;medium</code>
-<code>xserver-xorg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xserver-xorg/config/monitor/mode-list&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select&nbsp;1024x768&nbsp;@&nbsp;60&nbsp;Hz</code>
-<code>xserver-xorg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xserver-xorg/config/display/modes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multiselect&nbsp;1024x768,&nbsp;800x600</code></p>
-<p><code>####################################################################</code>
-<code>#&nbsp;User&nbsp;Creation</code>
-<code>####################################################################</code></p>
-<p><code>#&nbsp;Root&nbsp;User</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;passwd/root-password-crypted&nbsp;&nbsp;&nbsp;&nbsp;passwd&nbsp;&nbsp;&nbsp;Pa$$w0rd</code></p>
-<p><code>#&nbsp;Mortal&nbsp;User</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;passwd/user-fullname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;passwd/username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;hacker</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;passwd/user-password-crypted&nbsp;&nbsp;&nbsp;&nbsp;passwd&nbsp;Pa$$w0rd</code></p>
-<p><code>####################################################################</code>
-<code>#&nbsp;Software&nbsp;Selections</code>
-<code>####################################################################</code></p>
-<p><code>popularity-contest&nbsp;popularity-contest/participate&nbsp;boolean&nbsp;false</code></p>
-<p><code>tasksel&nbsp;&nbsp;&nbsp;&nbsp;tasksel/first&nbsp;&nbsp;&nbsp;multiselect&nbsp;standard</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;pkgsel/include&nbsp;&nbsp;string&nbsp;&nbsp;&nbsp;openssh-server&nbsp;open-vm-tools&nbsp;systemd-sysv</code>
-<code>d-i&nbsp;&nbsp;&nbsp;&nbsp;grub-installer/only_debian&nbsp;&nbsp;boolean&nbsp;true</code>
-<code>####################################################################</code>
-<code>#&nbsp;Additional&nbsp;preseed&nbsp;entries&nbsp;(from&nbsp;data/debconf)</code>
-<code>####################################################################</code></p>
-<p><code>exim4-config&nbsp;exim4/no_config&nbsp;boolean&nbsp;true</code></p>
-<p><a href="/Category:Kickstart" title="wikilink">Category:Kickstart</a></p>
+</p><div class="highlight"><pre><span></span><code>#&nbsp;Great&nbsp;work!&nbsp;&nbsp;Thanks&nbsp;for&nbsp;preseed&nbsp;and&nbsp;the&nbsp;d-i&nbsp;installer
+</code></pre></div><p></p>
+<div class="highlight"><pre><span></span><code>####################################################################
+#&nbsp;Installation&nbsp;Sources
+####################################################################
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Where&nbsp;are&nbsp;we&nbsp;pulling&nbsp;bits&nbsp;from?
+#
+#&nbsp;Note:&nbsp;&nbsp;To&nbsp;use&nbsp;your&nbsp;own&nbsp;local&nbsp;repository,&nbsp;this&nbsp;is&nbsp;what&nbsp;you&nbsp;want
+#&nbsp;to&nbsp;edit.
+#
+#&nbsp;It&nbsp;should&nbsp;look&nbsp;like&nbsp;this:
+#d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mirror/http/hostname&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;(IP&nbsp;Address&nbsp;of&nbsp;your&nbsp;local&nbsp;server)
+#d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mirror/http/directory&nbsp;&nbsp;&nbsp;string&nbsp;(HTTP&nbsp;Path&nbsp;to&nbsp;your&nbsp;Repository&nbsp;-&nbsp;like&nbsp;/natty&nbsp;)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mirror/http/hostname&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;ftp.se.debian.org
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mirror/http/directory&nbsp;&nbsp;&nbsp;string&nbsp;/debian/
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mirror/suite&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Post&nbsp;install&nbsp;APT&nbsp;setup
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/uri_type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select&nbsp;d-i
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/hostname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;ftp.se.debian.org
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/directory&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;/debian/
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/another&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;false
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/security-updates&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;false
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finish-install/reboot_in_progress&nbsp;note
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prebaseconfig/reboot_in_progress&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;note
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/non-free&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;true
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apt-setup/contrib&nbsp;&nbsp;boolean&nbsp;true
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>####################################################################
+#&nbsp;Networking
+####################################################################
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Network&nbsp;Configuration
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netcfg/get_hostname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;unassigned-hostname
+d-i&nbsp;&nbsp;&nbsp;&nbsp;netcfg/get_hostname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seen&nbsp;true&nbsp;
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netcfg/get_domain&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;unassigned-domain
+d-i&nbsp;&nbsp;&nbsp;&nbsp;netcfg/get_domain&nbsp;&nbsp;&nbsp;seen&nbsp;true&nbsp;&nbsp;
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netcfg/disable_dhcp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;false
+d-i&nbsp;&nbsp;&nbsp;&nbsp;mirror/http/proxy&nbsp;&nbsp;&nbsp;string&nbsp;&nbsp;
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netcfg/choose_interface&nbsp;select&nbsp;eth0
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;netcfg/wireless_wep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>####################################################################
+#&nbsp;Disk&nbsp;Partitioning/Boot&nbsp;loader
+####################################################################
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman-auto/disk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;/dev/sda
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman-auto/method&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;regular
+d-i&nbsp;&nbsp;&nbsp;&nbsp;partman-auto/choose_recipe&nbsp;&nbsp;select&nbsp;atomic
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;This&nbsp;makes&nbsp;partman&nbsp;automatically&nbsp;partition&nbsp;without&nbsp;confirmation.
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman/confirm&nbsp;boolean&nbsp;true
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman-partitioning/confirm_write_new_label&nbsp;boolean&nbsp;true
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman/choose_partition&nbsp;select&nbsp;finish
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partman/confirm_nooverwrite&nbsp;boolean&nbsp;true&nbsp;
+d-i&nbsp;&nbsp;&nbsp;&nbsp;partman/confirm_write_new_label&nbsp;boolean&nbsp;true
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;This&nbsp;one&nbsp;makes&nbsp;grub-installer&nbsp;install&nbsp;to&nbsp;the&nbsp;MBR&nbsp;even&nbsp;if&nbsp;finds&nbsp;some&nbsp;other&nbsp;OS
+#&nbsp;too,&nbsp;which&nbsp;is&nbsp;less&nbsp;safe&nbsp;as&nbsp;it&nbsp;might&nbsp;not&nbsp;be&nbsp;able&nbsp;to&nbsp;boot&nbsp;that&nbsp;other&nbsp;OS.
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grub-installer/with_other_os&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;true
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>####################################################################
+#&nbsp;Localizations
+####################################################################
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Install&nbsp;Time&nbsp;
+d-i&nbsp;&nbsp;&nbsp;&nbsp;console-tools/archs&nbsp;string&nbsp;skip-config
+d-i&nbsp;&nbsp;&nbsp;&nbsp;debian-installer/locale&nbsp;string&nbsp;en_US
+d-i&nbsp;&nbsp;&nbsp;&nbsp;console-keymaps-at/keymap&nbsp;select&nbsp;sv
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;languagechooser/language-name-fb&nbsp;&nbsp;&nbsp;&nbsp;select&nbsp;English
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;debian-installer/locale&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select&nbsp;en_US.UTF-8
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Timezone
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tzconfig/gmt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;true
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tzconfig/choose_country_zone/Europe&nbsp;select&nbsp;Stockholm
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tzconfig/choose_country_zone_single&nbsp;boolean&nbsp;true
+d-i&nbsp;&nbsp;&nbsp;&nbsp;time/zone&nbsp;&nbsp;&nbsp;select&nbsp;&nbsp;Europe/Stockholm
+d-i&nbsp;&nbsp;&nbsp;&nbsp;clock-setup/utc&nbsp;boolean&nbsp;true
+d-i&nbsp;&nbsp;&nbsp;&nbsp;kbd-chooser/method&nbsp;&nbsp;select&nbsp;&nbsp;American&nbsp;English
+d-i&nbsp;&nbsp;&nbsp;&nbsp;mirror/country&nbsp;&nbsp;string&nbsp;&nbsp;manual
+d-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clock-setup/ntp&nbsp;boolean&nbsp;false
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;X11&nbsp;config
+xserver-xorg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xserver-xorg/autodetect_monitor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean&nbsp;true
+xserver-xorg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xserver-xorg/config/monitor/selection-method&nbsp;select&nbsp;medium
+xserver-xorg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xserver-xorg/config/monitor/mode-list&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select&nbsp;1024x768&nbsp;@&nbsp;60&nbsp;Hz
+xserver-xorg&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xserver-xorg/config/display/modes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;multiselect&nbsp;1024x768,&nbsp;800x600
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>####################################################################
+#&nbsp;User&nbsp;Creation
+####################################################################
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Root&nbsp;User
+d-i&nbsp;&nbsp;&nbsp;&nbsp;passwd/root-password-crypted&nbsp;&nbsp;&nbsp;&nbsp;passwd&nbsp;&nbsp;&nbsp;Pa$$w0rd
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Mortal&nbsp;User
+d-i&nbsp;&nbsp;&nbsp;&nbsp;passwd/user-fullname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;
+d-i&nbsp;&nbsp;&nbsp;&nbsp;passwd/username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;hacker
+d-i&nbsp;&nbsp;&nbsp;&nbsp;passwd/user-password-crypted&nbsp;&nbsp;&nbsp;&nbsp;passwd&nbsp;Pa$$w0rd
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>####################################################################
+#&nbsp;Software&nbsp;Selections
+####################################################################
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>popularity-contest&nbsp;popularity-contest/participate&nbsp;boolean&nbsp;false
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tasksel&nbsp;&nbsp;&nbsp;&nbsp;tasksel/first&nbsp;&nbsp;&nbsp;multiselect&nbsp;standard
+d-i&nbsp;&nbsp;&nbsp;&nbsp;pkgsel/include&nbsp;&nbsp;string&nbsp;&nbsp;&nbsp;openssh-server&nbsp;open-vm-tools&nbsp;systemd-sysv
+d-i&nbsp;&nbsp;&nbsp;&nbsp;grub-installer/only_debian&nbsp;&nbsp;boolean&nbsp;true
+####################################################################
+#&nbsp;Additional&nbsp;preseed&nbsp;entries&nbsp;(from&nbsp;data/debconf)
+####################################################################
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>exim4-config&nbsp;exim4/no_config&nbsp;boolean&nbsp;true
+</code></pre></div>
 
 
 
@@ -9029,7 +9082,7 @@
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

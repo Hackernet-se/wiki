@@ -8770,6 +8770,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9134,84 +9162,108 @@ köra distribuerat över flera hostar likt VMwares vDS och Cisco <a href="/Nexus
 </ul>
 <h2 id="installation">Installation</h2>
 <p><em>Ubuntu</em></p>
-<p><code>apt-cache&nbsp;show&nbsp;openvswitch-switch&nbsp;|&nbsp;grep&nbsp;Version</code>
-<code>sudo&nbsp;apt-get&nbsp;install&nbsp;openvswitch-switch</code></p>
+<div class="highlight"><pre><span></span><code>apt-cache&nbsp;show&nbsp;openvswitch-switch&nbsp;|&nbsp;grep&nbsp;Version
+sudo&nbsp;apt-get&nbsp;install&nbsp;openvswitch-switch
+</code></pre></div>
 <p><em>Fedora</em></p>
-<p><code>sudo&nbsp;dnf&nbsp;info&nbsp;openvswitch&nbsp;|&nbsp;grep&nbsp;Version</code>
-<code>sudo&nbsp;dnf&nbsp;install&nbsp;openvswitch</code></p>
-<p><code>sudo&nbsp;systemctl&nbsp;start&nbsp;openvswitch</code>
-<code>lsmod&nbsp;|&nbsp;grep&nbsp;openv</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;dnf&nbsp;info&nbsp;openvswitch&nbsp;|&nbsp;grep&nbsp;Version
+sudo&nbsp;dnf&nbsp;install&nbsp;openvswitch
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;systemctl&nbsp;start&nbsp;openvswitch
+lsmod&nbsp;|&nbsp;grep&nbsp;openv
+</code></pre></div>
 <p>Start at boot</p>
-<p><code>sudo&nbsp;systemctl&nbsp;enable&nbsp;openvswitch</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;systemctl&nbsp;enable&nbsp;openvswitch
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
 <p>Skapa en virtuell switch och koppla interface till den.</p>
-<p><code>ovs-vsctl&nbsp;add-br&nbsp;br0</code>
-<code>ovs-vsctl&nbsp;add-port&nbsp;br0&nbsp;eth0</code>
-<code>ovs-vsctl&nbsp;list-ifaces&nbsp;br0</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;add-br&nbsp;br0
+ovs-vsctl&nbsp;add-port&nbsp;br0&nbsp;eth0
+ovs-vsctl&nbsp;list-ifaces&nbsp;br0
+</code></pre></div>
 <p>Show</p>
-<p><code>ovs-vsctl&nbsp;show</code>
-<code>ovs-vsctl&nbsp;list-br</code>
-<code>ovs-ofctl&nbsp;show&nbsp;br0</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;show
+ovs-vsctl&nbsp;list-br
+ovs-ofctl&nbsp;show&nbsp;br0
+</code></pre></div>
 <p>/etc/network/interfaces</p>
-<p><code>allow-ovs&nbsp;ovsbr0</code>
-<code>iface&nbsp;ovsbr0&nbsp;inet&nbsp;manual</code>
-<code>ovs_type&nbsp;OVSBridge</code>
-<code>ovs_ports&nbsp;eth1</code></p>
+<div class="highlight"><pre><span></span><code>allow-ovs&nbsp;ovsbr0
+iface&nbsp;ovsbr0&nbsp;inet&nbsp;manual
+&nbsp;&nbsp;ovs_type&nbsp;OVSBridge
+&nbsp;&nbsp;ovs_ports&nbsp;eth1
+</code></pre></div>
 <p>Adress till hosten</p>
-<p><code>ifconfig&nbsp;eth0&nbsp;0</code>
-<code>dhclient&nbsp;br0</code></p>
+<div class="highlight"><pre><span></span><code>ifconfig&nbsp;eth0&nbsp;0
+dhclient&nbsp;br0
+</code></pre></div>
 <h3 id="interface">Interface</h3>
 <p><em>default all ports are VLAN trunks</em>
 Access</p>
-<p><code>ovs-vsctl&nbsp;set&nbsp;port&nbsp;eth1&nbsp;vlan_mode=access&nbsp;tag=1</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;set&nbsp;port&nbsp;eth1&nbsp;vlan_mode=access&nbsp;tag=1
+</code></pre></div>
 <p>Trunk</p>
-<p><code>ovs-vsctl&nbsp;set&nbsp;port&nbsp;eth1&nbsp;vlan_mode=tagged</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;set&nbsp;port&nbsp;eth1&nbsp;vlan_mode=tagged
+</code></pre></div>
 <p>Hybrid</p>
-<p><code>ovs-vsctl&nbsp;set&nbsp;port&nbsp;eth1&nbsp;vlan_mode=native-untagged&nbsp;trunks=[1,3]&nbsp;tag=2</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;set&nbsp;port&nbsp;eth1&nbsp;vlan_mode=native-untagged&nbsp;trunks=[1,3]&nbsp;tag=2
+</code></pre></div>
 <p>Show</p>
-<p><code>ovs-vsctl&nbsp;list&nbsp;port&nbsp;eth1</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;list&nbsp;port&nbsp;eth1
+</code></pre></div>
 <h3 id="bond">Bond</h3>
-<p><code>ovs-vsctl&nbsp;add-bond&nbsp;br0&nbsp;bond0&nbsp;eth0&nbsp;eth1&nbsp;lacp=active&nbsp;trunks=10,11,12</code>
-<code>ovs-vsctl&nbsp;list&nbsp;port&nbsp;bond0</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;add-bond&nbsp;br0&nbsp;bond0&nbsp;eth0&nbsp;eth1&nbsp;lacp=active&nbsp;trunks=10,11,12
+ovs-vsctl&nbsp;list&nbsp;port&nbsp;bond0
+</code></pre></div>
 <h3 id="stp">STP</h3>
-<p><code>ovs-vsctl&nbsp;set&nbsp;bridge&nbsp;br0&nbsp;stp_enable=true</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;set&nbsp;bridge&nbsp;br0&nbsp;stp_enable=true
+</code></pre></div>
 <h3 id="svi">SVI</h3>
-<p><code>ovs-vsctl&nbsp;add-port&nbsp;br0&nbsp;vlan90&nbsp;tag=09&nbsp;--&nbsp;set&nbsp;interface&nbsp;vlan09&nbsp;type=internal</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;add-port&nbsp;br0&nbsp;vlan90&nbsp;tag=09&nbsp;--&nbsp;set&nbsp;interface&nbsp;vlan09&nbsp;type=internal
+</code></pre></div>
 <p>Interface till vms</p>
-<p><code>ip&nbsp;tuntap&nbsp;add&nbsp;mode&nbsp;tap&nbsp;vport1</code>
-<code>ip&nbsp;tuntap&nbsp;add&nbsp;mode&nbsp;tap&nbsp;vport2</code>
-<code>ovs-vsctl&nbsp;add-port&nbsp;testbridge&nbsp;vport1</code>
-<code>ovs-vsctl&nbsp;add-port&nbsp;testbridge&nbsp;vport2</code>
-<code>ovs-vsctl&nbsp;show</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;tuntap&nbsp;add&nbsp;mode&nbsp;tap&nbsp;vport1
+ip&nbsp;tuntap&nbsp;add&nbsp;mode&nbsp;tap&nbsp;vport2
+ovs-vsctl&nbsp;add-port&nbsp;testbridge&nbsp;vport1
+ovs-vsctl&nbsp;add-port&nbsp;testbridge&nbsp;vport2
+ovs-vsctl&nbsp;show
+</code></pre></div>
 <p>Kolla mac-tabell</p>
-<p><code>ovs-appctl&nbsp;fdb/show&nbsp;testbridge</code></p>
+<div class="highlight"><pre><span></span><code>ovs-appctl&nbsp;fdb/show&nbsp;testbridge
+</code></pre></div>
 <h2 id="controller">Controller</h2>
-<p><code>ovs-vsctl&nbsp;set-controller&nbsp;br0&nbsp;tcp:10.0.0.20:6633</code>
-<code>ovs-vsctl&nbsp;list&nbsp;controller</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;set-controller&nbsp;br0&nbsp;tcp:10.0.0.20:6633
+ovs-vsctl&nbsp;list&nbsp;controller
+</code></pre></div>
 <p>Tappar man konnektivitet med controllern sätter man antingen upp flows
 själv eller inte alls beroende på standalone eller secure mode.</p>
-<p><code>ovs-vsctl&nbsp;get-fail-mode&nbsp;br0</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;get-fail-mode&nbsp;br0
+</code></pre></div>
 <p>Ta bort controller</p>
-<p><code>ovs-vsctl&nbsp;del-controller&nbsp;br0</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;del-controller&nbsp;br0
+</code></pre></div>
 <h2 id="openflow">OpenFlow</h2>
 <p>Open vSwitch har stöd för OpenFlow.</p>
-<p><code>ovs-vsctl&nbsp;--&nbsp;set&nbsp;bridge&nbsp;br0&nbsp;protocols=openflow14</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;--&nbsp;set&nbsp;bridge&nbsp;br0&nbsp;protocols=openflow14
+</code></pre></div>
 <h2 id="patch-port">Patch Port</h2>
 <p>Med patchportar kan man koppla ihop flera ovs:er med varandra internt
 inom en host.
 Sw1</p>
-<p><code>ovs-vsctl&nbsp;add-port&nbsp;br1&nbsp;patch1-2</code>
-<code>ovs-vsctl&nbsp;set&nbsp;interface&nbsp;patch1-2&nbsp;type=patch</code>
-<code>ovs-vsctl&nbsp;set&nbsp;interface&nbsp;patch1-2&nbsp;options:peer=patch2-1</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;add-port&nbsp;br1&nbsp;patch1-2
+ovs-vsctl&nbsp;set&nbsp;interface&nbsp;patch1-2&nbsp;type=patch
+ovs-vsctl&nbsp;set&nbsp;interface&nbsp;patch1-2&nbsp;options:peer=patch2-1
+</code></pre></div>
 <p>Sw2</p>
-<p><code>ovs-vsctl&nbsp;add-port&nbsp;br2&nbsp;patch2-1</code>
-<code>ovs-vsctl&nbsp;set&nbsp;interface&nbsp;patch2-1&nbsp;type=patch</code>
-<code>ovs-vsctl&nbsp;set&nbsp;interface&nbsp;patch2-1&nbsp;options:peer=patch1-2</code></p>
-<p><code>ovs-vsctl&nbsp;show</code></p>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;add-port&nbsp;br2&nbsp;patch2-1
+ovs-vsctl&nbsp;set&nbsp;interface&nbsp;patch2-1&nbsp;type=patch
+ovs-vsctl&nbsp;set&nbsp;interface&nbsp;patch2-1&nbsp;options:peer=patch1-2
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ovs-vsctl&nbsp;show
+</code></pre></div>
 <h2 id="sflow">sFlow</h2>
 <p>Open vSwitch kan streama telemetry med sFlow.</p>
-<p><code>service&nbsp;sflowovsd&nbsp;start</code></p>
-<p><a href="/Category:Network" title="wikilink">Category:Network</a></p>
+<div class="highlight"><pre><span></span><code>service&nbsp;sflowovsd&nbsp;start
+</code></pre></div>
 
 
 
@@ -9234,7 +9286,7 @@ Sw1</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

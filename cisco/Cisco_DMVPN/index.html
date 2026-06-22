@@ -8848,6 +8848,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9307,38 +9335,14 @@ det sköts av NHRP. Man kan se NHRP som ARP fast det mappar IP till NBMA
 IP istället för IP till MAC.</p>
 <p>NHRP har stöd för autentisering, detta konfigureras under
 tunnel-interfacet.</p>
-<p><code>ip&nbsp;nhrp&nbsp;authentication&nbsp;NHRP_AUTH_STRING</code></p>
-<div class="mw-collapsible mw-collapsed" style="width:310px">
-
-Registration request:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_nhrp_registration_request.png>](/File:Cisco_NHRP_Registration_Request.png "wikilink")
-
-</file:cisco_nhrp_registration_request.png></div>
-</div>
-<div class="mw-collapsible mw-collapsed" style="width:310px">
-
-Registration reply:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_nhrp_registration_reply.png>](/File:Cisco_NHRP_Registration_Reply.png "wikilink")
-
-</file:cisco_nhrp_registration_reply.png></div>
-</div>
-<div class="mw-collapsible mw-collapsed" style="width:310px">
-
-Resolution request:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_nhrp_resolution_request.png>](/File:Cisco_NHRP_Resolution_Request.png "wikilink")
-
-</file:cisco_nhrp_resolution_request.png></div>
-</div>
-
+<div class="highlight"><pre><span></span><code>ip&nbsp;nhrp&nbsp;authentication&nbsp;NHRP_AUTH_STRING
+</code></pre></div>
+<p>Registration request:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_NHRP_Registration_Request.png" data-desc-position="bottom"><img alt="Cisco_NHRP_Registration_Request.png" src="../../images/Cisco_NHRP_Registration_Request.png"></a></p>
+<p>Registration reply:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_NHRP_Registration_Reply.png" data-desc-position="bottom"><img alt="Cisco_NHRP_Registration_Reply.png" src="../../images/Cisco_NHRP_Registration_Reply.png"></a></p>
+<p>Resolution request:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_NHRP_Resolution_Request.png" data-desc-position="bottom"><img alt="Cisco_NHRP_Resolution_Request.png" src="../../images/Cisco_NHRP_Resolution_Request.png"></a></p>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>DMVPN kan fungera på olika sätt och detta kallas olika faser.</p>
 <h2 id="fas-1">Fas 1</h2>
@@ -9347,24 +9351,29 @@ Inga tunnlar sätts upp dynamiskt och all trafik går igenom hubben, enda
 fördelen är något simplare konfiguration.</p>
 <p><strong>Static mapping</strong>
 Hub</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;nhrp&nbsp;map&nbsp;multicast&nbsp;172.16.15.X</code>
-<code>ip&nbsp;nhrp&nbsp;map&nbsp;192.168.0.X&nbsp;172.16.15.X</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;nhrp&nbsp;map&nbsp;multicast&nbsp;172.16.15.X
+&nbsp;ip&nbsp;nhrp&nbsp;map&nbsp;192.168.0.X&nbsp;172.16.15.X
+</code></pre></div>
 <p>Spoke</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;nhrp&nbsp;map&nbsp;192.168.0.X&nbsp;172.16.15.2</code>
-<code>tunnel&nbsp;destination&nbsp;172.16.15.2</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;nhrp&nbsp;map&nbsp;192.168.0.X&nbsp;172.16.15.2
+&nbsp;tunnel&nbsp;destination&nbsp;172.16.15.2
+</code></pre></div>
 <p><strong>Dynamic mapping</strong>
 Hub</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;nhrp&nbsp;map&nbsp;multicast&nbsp;dynamic</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;nhrp&nbsp;map&nbsp;multicast&nbsp;dynamic
+</code></pre></div>
 <p>Spoke</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;nhrp&nbsp;map&nbsp;192.168.0.1&nbsp;172.16.15.2</code>
-<code>ip&nbsp;nhrp&nbsp;nhs&nbsp;192.168.0.1</code>
-<code>tunnel&nbsp;destination&nbsp;172.16.15.2</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;nhrp&nbsp;map&nbsp;192.168.0.1&nbsp;172.16.15.2
+&nbsp;ip&nbsp;nhrp&nbsp;nhs&nbsp;192.168.0.1
+&nbsp;tunnel&nbsp;destination&nbsp;172.16.15.2
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;dmvpn</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;dmvpn
+</code></pre></div>
 <h2 id="fas-2">Fas 2</h2>
 <p>Hub and Spoke with Spoke-to-Spoke tunnels: Routingprotokollet på spokes
 lär sig prefix direkt av varandra på tunneln. Forwarding görs
@@ -9373,24 +9382,27 @@ då CEF kan behövas stängas av på spokes. Med Fas 2 används mGRE. Fas 2
 går också att köra som static och då nhrp-mappas alla grannskap
 manuellt.</p>
 <p>Hub</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nhrp&nbsp;map&nbsp;multicast&nbsp;dynamic</code>
-<code>ip&nbsp;nhrp&nbsp;network-id&nbsp;1</code>
-<code>tunnel&nbsp;source&nbsp;172.16.15.2</code>
-<code>tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nhrp&nbsp;map&nbsp;multicast&nbsp;dynamic
+&nbsp;ip&nbsp;nhrp&nbsp;network-id&nbsp;1
+&nbsp;tunnel&nbsp;source&nbsp;172.16.15.2
+&nbsp;tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint
+</code></pre></div>
 <p>Spoke</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;address&nbsp;192.168.0.2&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nhrp&nbsp;network-id&nbsp;1</code>
-<code>ip&nbsp;nhrp&nbsp;nhs&nbsp;192.168.0.1&nbsp;nbma&nbsp;172.16.15.2&nbsp;multicast</code>
-<code>tunnel&nbsp;source&nbsp;10.10.10.10</code>
-<code>tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;address&nbsp;192.168.0.2&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nhrp&nbsp;network-id&nbsp;1
+&nbsp;ip&nbsp;nhrp&nbsp;nhs&nbsp;192.168.0.1&nbsp;nbma&nbsp;172.16.15.2&nbsp;multicast
+&nbsp;tunnel&nbsp;source&nbsp;10.10.10.10
+&nbsp;tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;dmvpn</code>
-<code>show&nbsp;ip&nbsp;nhrp</code>
-<code>show&nbsp;ip&nbsp;nhrp&nbsp;nhs&nbsp;redundancy</code>
-<code>clear&nbsp;ip&nbsp;nhrp</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;dmvpn
+show&nbsp;ip&nbsp;nhrp
+show&nbsp;ip&nbsp;nhrp&nbsp;nhs&nbsp;redundancy
+clear&nbsp;ip&nbsp;nhrp
+</code></pre></div>
 <p><em>Kolla ip nhrp registration timeout ifall recovery tar lång tid efter en
 clear</em></p>
 <h2 id="fas-3">Fas 3</h2>
@@ -9404,67 +9416,81 @@ den spoke som är lämplig.
 Hub: <em>ip nhrp redirect</em>
 Spoke: <em>ip nhrp shortcut</em></p>
 <p>Hub</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nhrp&nbsp;map&nbsp;multicast&nbsp;dynamic</code>
-<code>ip&nbsp;nhrp&nbsp;network-id&nbsp;1</code>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;address&nbsp;192.168.0.1&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nhrp&nbsp;map&nbsp;multicast&nbsp;dynamic
+&nbsp;ip&nbsp;nhrp&nbsp;network-id&nbsp;1
+</code></pre></div>
 <code></code><strong><code>ip`` ``nhrp`` ``redirect</code></strong>
-<code>tunnel&nbsp;source&nbsp;172.16.15.2</code>
-<code>tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;tunnel&nbsp;source&nbsp;172.16.15.2
+&nbsp;tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint
+</code></pre></div><p></p>
 <p>Spoke</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;address&nbsp;192.168.0.2&nbsp;255.255.255.0</code>
-<code>ip&nbsp;nhrp&nbsp;network-id&nbsp;1</code>
-<code>ip&nbsp;nhrp&nbsp;nhs&nbsp;192.168.0.1&nbsp;nbma&nbsp;172.16.15.2&nbsp;multicast</code>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;address&nbsp;192.168.0.2&nbsp;255.255.255.0
+&nbsp;ip&nbsp;nhrp&nbsp;network-id&nbsp;1
+&nbsp;ip&nbsp;nhrp&nbsp;nhs&nbsp;192.168.0.1&nbsp;nbma&nbsp;172.16.15.2&nbsp;multicast
+</code></pre></div>
 <code></code><strong><code>ip`` ``nhrp`` ``shortcut</code></strong>
-<code>tunnel&nbsp;source&nbsp;10.10.10.10</code>
-<code>tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;tunnel&nbsp;source&nbsp;10.10.10.10
+&nbsp;tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint
+</code></pre></div><p></p>
 <p>Verify</p>
-<p><code>show&nbsp;dmvpn</code>
-<code>show&nbsp;ip&nbsp;nhrp</code>
-<code>show&nbsp;ip&nbsp;nhrp&nbsp;nhs&nbsp;redundancy</code>
-<code>clear&nbsp;ip&nbsp;nhrp</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;dmvpn
+show&nbsp;ip&nbsp;nhrp
+show&nbsp;ip&nbsp;nhrp&nbsp;nhs&nbsp;redundancy
+clear&nbsp;ip&nbsp;nhrp
+</code></pre></div>
 <p><em>Kolla ip nhrp registration timeout ifall recovery tar lång tid efter en
 clear</em></p>
 <h2 id="ipv6">IPv6</h2>
 <p>Både underlay och overlay kan köras med IPv6. Detta är oberoende av fas.</p>
 <p>Hub</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ipv6&nbsp;address&nbsp;192:168:1::1/64</code>
-<code>ipv6&nbsp;nhrp&nbsp;map&nbsp;multicast&nbsp;dynamic</code>
-<code>ipv6&nbsp;nhrp&nbsp;network-id&nbsp;1</code>
-<code>tunnel&nbsp;source&nbsp;2000:192:168:1::1</code>
-<code>tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint</code><strong><code>ipv6</code></strong></p>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ipv6&nbsp;address&nbsp;192:168:1::1/64
+&nbsp;ipv6&nbsp;nhrp&nbsp;map&nbsp;multicast&nbsp;dynamic
+&nbsp;ipv6&nbsp;nhrp&nbsp;network-id&nbsp;1
+&nbsp;tunnel&nbsp;source&nbsp;2000:192:168:1::1
+</code></pre></div>
+<code>tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint</code><strong><code>ipv6</code></strong><p></p>
 <p>Spoke</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ipv6&nbsp;address&nbsp;192:168:1::2/64</code>
-<code>ipv6&nbsp;nhrp&nbsp;network-id&nbsp;1</code>
-<code>ipv6&nbsp;nhrp&nbsp;nhs&nbsp;192:168:1::1&nbsp;nbma&nbsp;2000:192:168:1::1&nbsp;multicast</code>
-<code>tunnel&nbsp;source&nbsp;2000:10:10::10</code>
-<code>tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint</code><strong><code>ipv6</code></strong></p>
+<p></p><div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ipv6&nbsp;address&nbsp;192:168:1::2/64
+&nbsp;ipv6&nbsp;nhrp&nbsp;network-id&nbsp;1
+&nbsp;ipv6&nbsp;nhrp&nbsp;nhs&nbsp;192:168:1::1&nbsp;nbma&nbsp;2000:192:168:1::1&nbsp;multicast
+&nbsp;tunnel&nbsp;source&nbsp;2000:10:10::10
+</code></pre></div>
+<code>tunnel&nbsp;mode&nbsp;gre&nbsp;multipoint</code><strong><code>ipv6</code></strong><p></p>
 <p>Verify</p>
-<p><code>show&nbsp;dmvpn&nbsp;ipv6</code>
-<code>show&nbsp;ipv6&nbsp;nhrp</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;dmvpn&nbsp;ipv6
+show&nbsp;ipv6&nbsp;nhrp&nbsp;
+</code></pre></div>
 <h1 id="ipsec">IPsec</h1>
 <p>Vill man skydda sin trafik kan man kryptera all tunneltrafik. Se även
 <a href="/Cisco_IPsec" title="wikilink">Cisco IPsec</a>.</p>
-<p><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10</code>
-<code>encryption&nbsp;aes&nbsp;256</code>
-<code>authentication&nbsp;pre-share</code>
-<code>hash&nbsp;sha512</code>
-<code>group&nbsp;14</code></p>
-<p><code>crypto&nbsp;isakmp&nbsp;key&nbsp;SECRET&nbsp;address&nbsp;0.0.0.0&nbsp;0.0.0.0</code></p>
-<p><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;AES256_SHA512&nbsp;esp-sha512-hmac&nbsp;esp-aes&nbsp;256</code>
-<code>mode&nbsp;transport</code></p>
-<p><code>crypto&nbsp;ipsec&nbsp;profile&nbsp;DMVPN</code>
-<code>set&nbsp;transform-set&nbsp;AES256_SHA512</code></p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;DMVPN</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10
+&nbsp;encryption&nbsp;aes&nbsp;256
+&nbsp;authentication&nbsp;pre-share
+&nbsp;hash&nbsp;sha512
+&nbsp;group&nbsp;14
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;key&nbsp;SECRET&nbsp;address&nbsp;0.0.0.0&nbsp;0.0.0.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;AES256_SHA512&nbsp;esp-sha512-hmac&nbsp;esp-aes&nbsp;256
+&nbsp;mode&nbsp;transport
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;profile&nbsp;DMVPN
+&nbsp;set&nbsp;transform-set&nbsp;AES256_SHA512
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;DMVPN
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;crypto&nbsp;isakmp&nbsp;sa</code>
-<code>show&nbsp;crypto&nbsp;ipsec&nbsp;sa</code>
-<code>show&nbsp;crypto&nbsp;socket</code>
-<code>show&nbsp;crypto&nbsp;map</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;isakmp&nbsp;sa
+show&nbsp;crypto&nbsp;ipsec&nbsp;sa
+show&nbsp;crypto&nbsp;socket
+show&nbsp;crypto&nbsp;map
+</code></pre></div>
 <p>För att effektivisera krypteringen på en hub när man kör dual dmvpn kan
 man använda en delad socket för crypto-anslutningarna.</p>
 <p><code>tunnel&nbsp;protection&nbsp;ipsec&nbsp;profile&nbsp;DMVPN</code><strong><code>shared</code></strong></p>
@@ -9477,43 +9503,56 @@ och security policies distribueras till GMs av Key Server som t.ex. kan
 vara en separat IOS-router bakom hubb. Se även <a href="/Cisco_IPsec#GET_VPN" title="wikilink">GET
 VPN</a>.</p>
 <p>Key Server</p>
-<p><code>crypto&nbsp;key&nbsp;generate&nbsp;rsa&nbsp;general-keys&nbsp;label&nbsp;GDOI&nbsp;modulus&nbsp;2048&nbsp;exportable</code></p>
-<p><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10</code>
-<code>authentication&nbsp;pre-share</code></p>
-<p><code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;2.2.2.2</code>
-<code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;3.3.3.3</code>
-<code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address</code><next spoke=""></next></p>
-<p><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;PHASE2&nbsp;esp-aes&nbsp;esp-sha-hmac</code></p>
-<p><code>crypto&nbsp;ipsec&nbsp;profile&nbsp;GDOI_PROFILE</code>
-<code>set&nbsp;transform-set&nbsp;PHASE2</code></p>
-<p><code>ip&nbsp;access-list&nbsp;extended&nbsp;ACL_GRE</code>
-<code>permit&nbsp;gre&nbsp;any&nbsp;any</code></p>
-<p><code>crypto&nbsp;gdoi&nbsp;group&nbsp;GDOI_GROUP</code>
-<code>identity&nbsp;number&nbsp;123</code>
-<code>server&nbsp;local</code>
-<code>rekey&nbsp;transport&nbsp;unicast</code>
-<code>rekey&nbsp;authentication&nbsp;mypubkey&nbsp;rsa&nbsp;GDOI</code>
-<code>rekey&nbsp;retransmit&nbsp;60&nbsp;number&nbsp;2</code>
-<code>sa&nbsp;ipsec&nbsp;1</code>
-<code>profile&nbsp;GDOI_PROFILE</code>
-<code>match&nbsp;address&nbsp;ipv4&nbsp;ACL_GRE</code>
-<code>replay&nbsp;time&nbsp;window-size&nbsp;5</code>
-<code>address&nbsp;ipv4&nbsp;1.1.1.1</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;key&nbsp;generate&nbsp;rsa&nbsp;general-keys&nbsp;label&nbsp;GDOI&nbsp;modulus&nbsp;2048&nbsp;exportable
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10
+&nbsp;authentication&nbsp;pre-share
+</code></pre></div>
+<p></p><div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;2.2.2.2
+crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;3.3.3.3
+</code></pre></div>
+<code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address</code><next spoke=""><p></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;transform-set&nbsp;PHASE2&nbsp;esp-aes&nbsp;esp-sha-hmac
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;ipsec&nbsp;profile&nbsp;GDOI_PROFILE
+&nbsp;set&nbsp;transform-set&nbsp;PHASE2
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ip&nbsp;access-list&nbsp;extended&nbsp;ACL_GRE
+&nbsp;permit&nbsp;gre&nbsp;any&nbsp;any&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;gdoi&nbsp;group&nbsp;GDOI_GROUP
+&nbsp;identity&nbsp;number&nbsp;123
+&nbsp;server&nbsp;local
+&nbsp;&nbsp;rekey&nbsp;transport&nbsp;unicast
+&nbsp;&nbsp;rekey&nbsp;authentication&nbsp;mypubkey&nbsp;rsa&nbsp;GDOI
+&nbsp;&nbsp;rekey&nbsp;retransmit&nbsp;60&nbsp;number&nbsp;2
+&nbsp;&nbsp;sa&nbsp;ipsec&nbsp;1
+&nbsp;&nbsp;&nbsp;profile&nbsp;GDOI_PROFILE
+&nbsp;&nbsp;&nbsp;match&nbsp;address&nbsp;ipv4&nbsp;ACL_GRE
+&nbsp;&nbsp;&nbsp;replay&nbsp;time&nbsp;window-size&nbsp;5
+&nbsp;&nbsp;address&nbsp;ipv4&nbsp;1.1.1.1&nbsp;
+</code></pre></div>
 <p>Hubb och Spoke</p>
-<p><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10</code>
-<code>authentication&nbsp;pre-share</code></p>
-<p><code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;1.1.1.1</code></p>
-<p><code>crypto&nbsp;gdoi&nbsp;group&nbsp;GDOI</code>
-<code>identity&nbsp;number&nbsp;123</code>
-<code>server&nbsp;address&nbsp;ipv4&nbsp;1.1.1.1</code></p>
-<p><code>crypto&nbsp;map&nbsp;DMVPN&nbsp;local-address&nbsp;Loopback0</code>
-<code>crypto&nbsp;map&nbsp;DMVPN&nbsp;10&nbsp;gdoi</code>
-<code>set&nbsp;group&nbsp;GDOI</code></p>
-<p><code>interface&nbsp;Gi2</code>
-<code>description&nbsp;Tunnel&nbsp;Source</code>
-<code>crypto&nbsp;map&nbsp;DMVPN</code></p>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;policy&nbsp;10
+&nbsp;authentication&nbsp;pre-share
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;isakmp&nbsp;key&nbsp;0&nbsp;SECRET&nbsp;address&nbsp;1.1.1.1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;gdoi&nbsp;group&nbsp;GDOI
+&nbsp;identity&nbsp;number&nbsp;123
+&nbsp;server&nbsp;address&nbsp;ipv4&nbsp;1.1.1.1&nbsp;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;DMVPN&nbsp;local-address&nbsp;Loopback0
+crypto&nbsp;map&nbsp;DMVPN&nbsp;10&nbsp;gdoi
+&nbsp;set&nbsp;group&nbsp;GDOI
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Gi2
+&nbsp;description&nbsp;Tunnel&nbsp;Source
+&nbsp;crypto&nbsp;map&nbsp;DMVPN
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;crypto&nbsp;gdoi</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;gdoi
+</code></pre></div>
 <h1 id="routingprotokoll">Routingprotokoll</h1>
 <p><strong>EIGRP</strong>
 Med Fas 1 kan man antingen stänga av split-horizon eller skicka en
@@ -9522,9 +9561,10 @@ default route från hub.</p>
 tunnel-interfacet för att uppdateringar och routing mellan spokes ska
 funka. Nackdelen är att man inte kan summera routes på hub utan att
 bryta spoke-to-spoke-kommunikation utan då måste allt gå igenom hub.</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>no&nbsp;ip&nbsp;next-hop-self&nbsp;eigrp&nbsp;100</code>
-<code>no&nbsp;ip&nbsp;split-horizon&nbsp;eigrp&nbsp;100</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;no&nbsp;ip&nbsp;next-hop-self&nbsp;eigrp&nbsp;100
+&nbsp;no&nbsp;ip&nbsp;split-horizon&nbsp;eigrp&nbsp;100
+</code></pre></div>
 <p>Med fas 3 kommer endast det första paketet att gå via hub tack vare nhrp
 redirect/shortcut och man kan skicka ut aggregerade routes på hub utan
 att påverka spoke-to-spoke. Detta är bra design.</p>
@@ -9536,40 +9576,48 @@ bara man ser till att hubb är DR. Det man bör ha i åtanke är att
 beroende på nätverkstyp så ändras next-hop eller ej. OSPF är inget
 optimalt protokoll för DMVPN.</p>
 <p>Hub</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;ospf&nbsp;network&nbsp;broadcast</code>
-<code>ip&nbsp;ospf&nbsp;priority&nbsp;255</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;ospf&nbsp;network&nbsp;broadcast
+&nbsp;ip&nbsp;ospf&nbsp;priority&nbsp;255
+</code></pre></div>
 <p>Spoke, ska inte vara med i DR-election.</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;ospf&nbsp;network&nbsp;broadcast</code>
-<code>ip&nbsp;ospf&nbsp;prio&nbsp;0</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;ospf&nbsp;network&nbsp;broadcast
+&nbsp;ip&nbsp;ospf&nbsp;prio&nbsp;0
+</code></pre></div>
 <p><strong>BGP</strong>
 Med Fas 1 och BGP måste next-hop-self användas på alla grannskap.</p>
 <p>Fas 2 och BGP-konfiguration är som vanligt men för eBGP mellan spokes
 måste multihop användas.</p>
-<p><code>neighbor&nbsp;2.2.2.2&nbsp;ebgp-multihop&nbsp;2</code></p>
+<div class="highlight"><pre><span></span><code>neighbor&nbsp;2.2.2.2&nbsp;ebgp-multihop&nbsp;2
+</code></pre></div>
 <p><strong>RIP</strong>
 Med Fas 1 och RIP behöver split horizon stängas av på hubb.</p>
 <h1 id="others">Others</h1>
 <h3 id="monitoring">Monitoring</h3>
 <p>Man kan övervaka sitt DMVPN med hjälp av <a href="/Cisco_SNMP" title="wikilink">SNMP</a>.</p>
-<p><code>snmp-server&nbsp;enable&nbsp;traps&nbsp;nhrp&nbsp;nhs</code>
-<code>snmp-server&nbsp;enable&nbsp;traps&nbsp;nhrp&nbsp;nhc</code>
-<code>snmp-server&nbsp;enable&nbsp;traps&nbsp;nhrp&nbsp;nhp</code></p>
+<div class="highlight"><pre><span></span><code>snmp-server&nbsp;enable&nbsp;traps&nbsp;nhrp&nbsp;nhs
+snmp-server&nbsp;enable&nbsp;traps&nbsp;nhrp&nbsp;nhc
+snmp-server&nbsp;enable&nbsp;traps&nbsp;nhrp&nbsp;nhp
+</code></pre></div>
 <p>När man använder <em>if-state nhrp</em> på en spoke kan den kolla om
 NHRP-registreringen fungerar och på så sätt veta om interfacet ska vara
 up eller ej när man kör fas 2 eller 3. Detta fungerar ej på hub
 interface för det gör ingen registrering utan är alltid up.</p>
-<p><code>interface&nbsp;tun0</code>
-<code>if-state&nbsp;nhrp</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;tun0
+&nbsp;if-state&nbsp;nhrp&nbsp;
+</code></pre></div>
 <p>På nyare IOS (XE 16.3) kan man även använda <a href="/Cisco_BFD" title="wikilink">BFD</a>
 för snabbare feldetektering och NHRP kan då registrera sig som klient
 till BFD-processen.</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>bfd&nbsp;interval&nbsp;1000&nbsp;min_rx&nbsp;1000&nbsp;multiplier&nbsp;5</code></p>
-<p><code>router&nbsp;eigrp&nbsp;1</code>
-<code>bfd&nbsp;interface&nbsp;Tunnel0</code></p>
-<p><code>show&nbsp;nhrp&nbsp;interfaces&nbsp;&nbsp;&nbsp;#hidden</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;bfd&nbsp;interval&nbsp;1000&nbsp;min_rx&nbsp;1000&nbsp;multiplier&nbsp;5
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;1
+&nbsp;bfd&nbsp;interface&nbsp;Tunnel0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;nhrp&nbsp;interfaces&nbsp;&nbsp;&nbsp;#hidden
+</code></pre></div>
 <h3 id="nat">NAT</h3>
 <p>Man kan köra all sorts nat på spokes men på hubb fungerar endast static
 nat. Om en spoke befinner sig bakom dynamisk nat, dvs att dennes
@@ -9580,23 +9628,28 @@ efterhand vilket inte är fallet default. Befinner sig två spokes bakom
 PAT så kommer de ej att kunna upprätta någon spoke-to-spoke tunnel
 mellan varandra. När man kör NAT med DMVPN så måste IPsec transport mode
 användas. Se även <a href="/Cisco_NAT" title="wikilink">Cisco NAT</a>.</p>
-<p><code>interface&nbsp;tun0</code>
-<code>ip&nbsp;nhrp&nbsp;registration&nbsp;no-unique</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;tun0
+&nbsp;ip&nbsp;nhrp&nbsp;registration&nbsp;no-unique
+</code></pre></div>
 <h3 id="vrf">VRF</h3>
 <p>Man kan bygga det precis som man vill routingmässigt genom att separera
 underlay och overlay i olika VRF:er (detta kallas också front door VRF).
 Detta möjliggör t.ex. att ha default route över DMVPN utan att få
 problem med recursive routing. I övrigt görs konfiguration som vanligt.</p>
-<p><code>vrf&nbsp;definition&nbsp;UNDERLAY</code>
-<code>address-family&nbsp;ipv4</code>
-<code>exit</code></p>
-<p><code>crypto&nbsp;keyring&nbsp;VRF_AWARE_PSK&nbsp;vrf&nbsp;UNDERLAY</code>
-<code>pre-shared-key&nbsp;address&nbsp;0.0.0.0&nbsp;0.0.0.0&nbsp;key&nbsp;DMVPN</code></p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>tunnel&nbsp;vrf&nbsp;UNDERLAY</code></p>
+<div class="highlight"><pre><span></span><code>vrf&nbsp;definition&nbsp;UNDERLAY
+&nbsp;address-family&nbsp;ipv4
+&nbsp;exit
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>crypto&nbsp;keyring&nbsp;VRF_AWARE_PSK&nbsp;vrf&nbsp;UNDERLAY
+&nbsp;pre-shared-key&nbsp;address&nbsp;0.0.0.0&nbsp;0.0.0.0&nbsp;key&nbsp;DMVPN
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;tunnel&nbsp;vrf&nbsp;UNDERLAY
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;crypto&nbsp;session&nbsp;fvrf&nbsp;UNDERLAY</code>
-<code>show&nbsp;crypto&nbsp;session&nbsp;ivrf</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;session&nbsp;fvrf&nbsp;UNDERLAY
+show&nbsp;crypto&nbsp;session&nbsp;ivrf&nbsp;
+</code></pre></div>
 <h3 id="mpls">MPLS</h3>
 <p>Man kan köra <a href="/Cisco_MPLS" title="wikilink">MPLS</a> över DMVPN och därmed MPLS
 VPN, detta kallas 2547oDMVPN. Det man ska tänka på är att label switch
@@ -9605,10 +9658,12 @@ två spokes måste det gå spoke-hub-spoke. T.ex. om man kör BGP får man
 använda <em>next-hop-self all</em> för att säkerställa att MPLS VPN-trafik
 alltid går igenom hub. Man förlorar dynamiska tunnlar men man kan ha
 riktig PE-funkionalitet över DMVPN.</p>
-<p><code>mpls&nbsp;ip</code>
-<code>mpls&nbsp;ldp&nbsp;router-id&nbsp;loopback0</code></p>
-<p><code>interface&nbsp;tunnel0</code>
-<code>mpls&nbsp;ip</code></p>
+<div class="highlight"><pre><span></span><code>mpls&nbsp;ip
+mpls&nbsp;ldp&nbsp;router-id&nbsp;loopback0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>interface&nbsp;tunnel0
+&nbsp;mpls&nbsp;ip
+</code></pre></div>
 <h3 id="per-tunnel-qos">Per-Tunnel QoS</h3>
 <p>Med Per-Tunnel QoS feature kan man ha en egress QoS-policy på hubb på
 tunnelinstansen som man kan konfigurera antingen per endpoint eller per
@@ -9618,25 +9673,28 @@ med en child policy. Innan man konfigurerar detta måste man ha en
 fungerande DMVPN-uppsättning.</p>
 <p>Class default shaper policy map får endast innehålla class class-default
 och shape-kommando.</p>
-<p><code>policy-map&nbsp;Parent1</code>
-<code>class&nbsp;class-default</code>
-<code>shape&nbsp;average&nbsp;1000000</code>
-<code>service-policy&nbsp;Child1</code></p>
+<div class="highlight"><pre><span></span><code>policy-map&nbsp;Parent1
+&nbsp;class&nbsp;class-default
+&nbsp;&nbsp;shape&nbsp;average&nbsp;1000000&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;service-policy&nbsp;Child1
+</code></pre></div>
 <p>Man kan använda NHRP för att bära information om vilken spoke som ska ha
 vilken QoS-policy. Definiera en NHRP-grupp på spokes och mappa sedan den
 till en policy på hubb.</p>
 <p>Spoke 1</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;nhrp&nbsp;group&nbsp;GROUP1</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;nhrp&nbsp;group&nbsp;GROUP1
+</code></pre></div>
 <p>Hub</p>
-<p><code>interface&nbsp;Tunnel0</code>
-<code>ip&nbsp;nhrp&nbsp;map&nbsp;group&nbsp;GROUP1&nbsp;service-policy&nbsp;output&nbsp;Parent1</code>
-<code>ip&nbsp;nhrp&nbsp;map&nbsp;group&nbsp;GROUP2&nbsp;service-policy&nbsp;output&nbsp;Parent2</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
+&nbsp;ip&nbsp;nhrp&nbsp;map&nbsp;group&nbsp;GROUP1&nbsp;service-policy&nbsp;output&nbsp;Parent1
+&nbsp;ip&nbsp;nhrp&nbsp;map&nbsp;group&nbsp;GROUP2&nbsp;service-policy&nbsp;output&nbsp;Parent2
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;policy-map&nbsp;multipoint</code>
-<code>show&nbsp;dmvpn&nbsp;detail</code>
-<code>show&nbsp;tunnel&nbsp;endpoints&nbsp;|&nbsp;i&nbsp;Endpoint|QoS</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;policy-map&nbsp;multipoint&nbsp;
+show&nbsp;dmvpn&nbsp;detail
+show&nbsp;tunnel&nbsp;endpoints&nbsp;|&nbsp;i&nbsp;Endpoint|QoS
+</code></pre></div></next>
 
 
 
@@ -9659,7 +9717,7 @@ till en policy på hubb.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     

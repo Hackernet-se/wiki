@@ -8674,6 +8674,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8926,59 +8954,67 @@
 
   <h1>ISC DHCP</h1>
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a> "ISC's DHCP software is
-the most widely used open source DHCP implementation on the Internet.
-The same software can be used for LAN too. It is a carrier and
-enterprise grade solution to your host configuration needs." - nixCraft</p>
-<p>Se även <a href="/Kea" title="wikilink">Kea DHCP</a>.</p>
+<p>.</p>
 <h2 id="installation">Installation</h2>
-<p><code>sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;isc-dhcp-server</code>
-<code>sudo&nbsp;sed&nbsp;-i&nbsp;-r&nbsp;'s/INTERFACES=""/INTERFACES="eth0"/g'&nbsp;/etc/default/isc-dhcp-server</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;isc-dhcp-server
+sudo&nbsp;sed&nbsp;-i&nbsp;-r&nbsp;'s/INTERFACES=""/INTERFACES="eth0"/g'&nbsp;/etc/default/isc-dhcp-server
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
-<p><code>sudo&nbsp;dd&nbsp;of=/etc/dhcp/dhcpd.conf&nbsp;&lt;&lt;&nbsp;EOF</code>
-<code>#&nbsp;Uppsatt&nbsp;av:</code></p>
-<p><code>#&nbsp;You&nbsp;must&nbsp;prevent&nbsp;the&nbsp;DHCP&nbsp;server&nbsp;from&nbsp;receiving&nbsp;DNS&nbsp;information</code>
-<code>#&nbsp;from&nbsp;clients,&nbsp;set&nbsp;the&nbsp;following&nbsp;global&nbsp;option&nbsp;(this&nbsp;is&nbsp;a&nbsp;security&nbsp;feature):</code>
-<code>ddns-update-style&nbsp;none;</code></p>
-<p><code>#&nbsp;You&nbsp;need&nbsp;to&nbsp;set&nbsp;your&nbsp;domain&nbsp;name&nbsp;and&nbsp;name&nbsp;server:</code>
-<code>option&nbsp;domain-name&nbsp;"exempel.se";</code>
-<code>option&nbsp;domain-name-servers&nbsp;8.8.8.8,&nbsp;208.67.222.222;</code></p>
-<p><code>#&nbsp;Increase&nbsp;the&nbsp;lease&nbsp;time.&nbsp;The&nbsp;time&nbsp;is&nbsp;set&nbsp;in&nbsp;seconds:</code>
-<code>default-lease-time&nbsp;7200;</code>
-<code>max-lease-time&nbsp;14400;</code></p>
-<p><code>#&nbsp;If&nbsp;this&nbsp;DHCP&nbsp;server&nbsp;is&nbsp;the&nbsp;official&nbsp;DHCP&nbsp;server&nbsp;for&nbsp;the&nbsp;local</code>
-<code>#&nbsp;network,&nbsp;the&nbsp;authoritative&nbsp;directive&nbsp;should&nbsp;be&nbsp;uncommented.</code>
-<code>#&nbsp;The&nbsp;authoritative&nbsp;directive&nbsp;indicate&nbsp;that&nbsp;the&nbsp;DHCP&nbsp;server</code>
-<code>#&nbsp;should&nbsp;send&nbsp;DHCPNAK&nbsp;messages&nbsp;to&nbsp;misconfigured&nbsp;clients.</code>
-<code>#&nbsp;If&nbsp;this&nbsp;is&nbsp;not&nbsp;done,&nbsp;clients&nbsp;will&nbsp;be&nbsp;unable&nbsp;to&nbsp;get&nbsp;a&nbsp;correct</code>
-<code>#&nbsp;IP&nbsp;address&nbsp;after&nbsp;changing&nbsp;subnets&nbsp;until&nbsp;their&nbsp;old&nbsp;lease&nbsp;has</code>
-<code>#&nbsp;expired,&nbsp;which&nbsp;could&nbsp;take&nbsp;quite&nbsp;a&nbsp;long&nbsp;time.</code>
-<code>authoritative;</code></p>
-<p><code>#&nbsp;Use&nbsp;this&nbsp;to&nbsp;send&nbsp;dhcp&nbsp;log&nbsp;messages&nbsp;to&nbsp;a&nbsp;different&nbsp;log&nbsp;file&nbsp;(you&nbsp;also</code>
-<code>#&nbsp;have&nbsp;to&nbsp;hack&nbsp;syslog.conf&nbsp;to&nbsp;complete&nbsp;the&nbsp;redirection).</code>
-<code>log-facility&nbsp;local7;</code></p>
-<p><code>#&nbsp;No&nbsp;service&nbsp;will&nbsp;be&nbsp;given&nbsp;on&nbsp;this&nbsp;subnet,&nbsp;but&nbsp;declaring&nbsp;it&nbsp;helps&nbsp;the</code>
-<code>#&nbsp;DHCP&nbsp;server&nbsp;to&nbsp;understand&nbsp;the&nbsp;network&nbsp;topology.</code>
-<code>subnet&nbsp;10.0.100.0&nbsp;netmask&nbsp;255.255.255.0&nbsp;{</code>
-<code>}</code></p>
-<p><code>#Ranges</code>
-<code></code>
-<code>subnet&nbsp;10.0.1.0&nbsp;netmask&nbsp;255.255.255.0&nbsp;{</code>
-<code>range&nbsp;10.0.1.100&nbsp;10.0.1.200;</code>
-<code>option&nbsp;subnet-mask&nbsp;255.255.255.0;</code>
-<code>option&nbsp;broadcast-address&nbsp;10.0.1.255;</code>
-<code>option&nbsp;routers&nbsp;10.0.1.1;</code>
-<code>}</code></p>
-<p><code>subnet&nbsp;10.0.2.0&nbsp;netmask&nbsp;255.255.255.0&nbsp;{</code>
-<code>range&nbsp;10.0.2.100&nbsp;10.0.2.200;</code>
-<code>option&nbsp;subnet-mask&nbsp;255.255.255.0;</code>
-<code>option&nbsp;broadcast-address&nbsp;10.0.2.255;</code>
-<code>option&nbsp;routers&nbsp;10.0.2.1;</code>
-<code>}</code></p>
-<p><code>##&nbsp;Slut</code>
-<code>EOF</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;dd&nbsp;of=/etc/dhcp/dhcpd.conf&nbsp;&lt;&lt;&nbsp;EOF
+#&nbsp;Uppsatt&nbsp;av:
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;You&nbsp;must&nbsp;prevent&nbsp;the&nbsp;DHCP&nbsp;server&nbsp;from&nbsp;receiving&nbsp;DNS&nbsp;information&nbsp;
+#&nbsp;from&nbsp;clients,&nbsp;set&nbsp;the&nbsp;following&nbsp;global&nbsp;option&nbsp;(this&nbsp;is&nbsp;a&nbsp;security&nbsp;feature):
+ddns-update-style&nbsp;none;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;You&nbsp;need&nbsp;to&nbsp;set&nbsp;your&nbsp;domain&nbsp;name&nbsp;and&nbsp;name&nbsp;server:
+option&nbsp;domain-name&nbsp;"exempel.se";
+option&nbsp;domain-name-servers&nbsp;8.8.8.8,&nbsp;208.67.222.222;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Increase&nbsp;the&nbsp;lease&nbsp;time.&nbsp;The&nbsp;time&nbsp;is&nbsp;set&nbsp;in&nbsp;seconds:
+default-lease-time&nbsp;7200;
+max-lease-time&nbsp;14400;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;If&nbsp;this&nbsp;DHCP&nbsp;server&nbsp;is&nbsp;the&nbsp;official&nbsp;DHCP&nbsp;server&nbsp;for&nbsp;the&nbsp;local
+#&nbsp;network,&nbsp;the&nbsp;authoritative&nbsp;directive&nbsp;should&nbsp;be&nbsp;uncommented.
+#&nbsp;The&nbsp;authoritative&nbsp;directive&nbsp;indicate&nbsp;that&nbsp;the&nbsp;DHCP&nbsp;server&nbsp;
+#&nbsp;should&nbsp;send&nbsp;DHCPNAK&nbsp;messages&nbsp;to&nbsp;misconfigured&nbsp;clients.&nbsp;
+#&nbsp;If&nbsp;this&nbsp;is&nbsp;not&nbsp;done,&nbsp;clients&nbsp;will&nbsp;be&nbsp;unable&nbsp;to&nbsp;get&nbsp;a&nbsp;correct&nbsp;
+#&nbsp;IP&nbsp;address&nbsp;after&nbsp;changing&nbsp;subnets&nbsp;until&nbsp;their&nbsp;old&nbsp;lease&nbsp;has&nbsp;
+#&nbsp;expired,&nbsp;which&nbsp;could&nbsp;take&nbsp;quite&nbsp;a&nbsp;long&nbsp;time.
+authoritative;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;Use&nbsp;this&nbsp;to&nbsp;send&nbsp;dhcp&nbsp;log&nbsp;messages&nbsp;to&nbsp;a&nbsp;different&nbsp;log&nbsp;file&nbsp;(you&nbsp;also
+#&nbsp;have&nbsp;to&nbsp;hack&nbsp;syslog.conf&nbsp;to&nbsp;complete&nbsp;the&nbsp;redirection).
+log-facility&nbsp;local7;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#&nbsp;No&nbsp;service&nbsp;will&nbsp;be&nbsp;given&nbsp;on&nbsp;this&nbsp;subnet,&nbsp;but&nbsp;declaring&nbsp;it&nbsp;helps&nbsp;the
+#&nbsp;DHCP&nbsp;server&nbsp;to&nbsp;understand&nbsp;the&nbsp;network&nbsp;topology.
+subnet&nbsp;10.0.100.0&nbsp;netmask&nbsp;255.255.255.0&nbsp;{
+}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>#Ranges
+&nbsp;
+subnet&nbsp;10.0.1.0&nbsp;netmask&nbsp;255.255.255.0&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range&nbsp;10.0.1.100&nbsp;10.0.1.200;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;option&nbsp;subnet-mask&nbsp;255.255.255.0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;option&nbsp;broadcast-address&nbsp;10.0.1.255;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;option&nbsp;routers&nbsp;10.0.1.1;
+}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>subnet&nbsp;10.0.2.0&nbsp;netmask&nbsp;255.255.255.0&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range&nbsp;10.0.2.100&nbsp;10.0.2.200;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;option&nbsp;subnet-mask&nbsp;255.255.255.0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;option&nbsp;broadcast-address&nbsp;10.0.2.255;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;option&nbsp;routers&nbsp;10.0.2.1;
+}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>##&nbsp;Slut
+EOF
+</code></pre></div>
 <p>Testa</p>
-<p><code>sudo&nbsp;dhcpd&nbsp;-t&nbsp;/etc/dhcp/dhcpd.conf</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;dhcpd&nbsp;-t&nbsp;/etc/dhcp/dhcpd.conf
+</code></pre></div>
 
 
 
@@ -9001,7 +9037,7 @@ enterprise grade solution to your host configuration needs." - nixCraft</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

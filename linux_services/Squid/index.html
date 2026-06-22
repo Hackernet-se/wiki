@@ -8619,6 +8619,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8845,24 +8873,28 @@
 FTP mycket annat.</p>
 <h1 id="installation">Installation</h1>
 <p><strong>Ubuntu</strong></p>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;squid</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;squid
+</code></pre></div>
 <p><strong>CentOS</strong></p>
-<p><code>yum&nbsp;-y&nbsp;install&nbsp;squid</code></p>
+<div class="highlight"><pre><span></span><code>yum&nbsp;-y&nbsp;install&nbsp;squid
+</code></pre></div>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>All konfiguration av squid sker i /etc/squid/squid.conf. Denna guide går
 igenom hur man installerar väldigt grundläggande proxy server.</p>
 <p>Öppna suid.conf och avkommentera följande rad:</p>
-<p><code>#http_access&nbsp;allow&nbsp;localnet</code></p>
+<div class="highlight"><pre><span></span><code>#http_access&nbsp;allow&nbsp;localnet
+</code></pre></div>
 <p>Därefter behöver vi definera vilka nät som ska få använda proxy servern.
 Leta efter denna rad:</p>
-<p><code>#acl&nbsp;localnet&nbsp;src</code></p>
+<div class="highlight"><pre><span></span><code>#acl&nbsp;localnet&nbsp;src
+</code></pre></div>
 <p>avkommentera den och ändra den till:</p>
 <p><code>acl&nbsp;localnet&nbsp;src</code><intern ip="" range=""><code>/</code><subnät mask=""></subnät></intern></p>
 <p>Starta om squid:</p>
-<p><code>sudo&nbsp;service&nbsp;squid&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;service&nbsp;squid&nbsp;restart
+</code></pre></div>
 <p>Nu har vi konfigurerat en väldig basic proxy server som svarar på port
 3128 som standard.</p>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
 
 
 
@@ -8885,7 +8917,7 @@ Leta efter denna rad:</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

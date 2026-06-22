@@ -8746,6 +8746,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9110,7 +9138,8 @@ upp vid login.</p>
 <span class="s">__EOF__</span>
 </code></pre></div>
 <h3 id="tmux">Tmux</h3>
-<p><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;upgrade&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;tmux</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;upgrade&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt-get&nbsp;-y&nbsp;install&nbsp;tmux
+</code></pre></div>
 <p>Attacha automatiskt till din tmux session vid inloggning.</p>
 <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w">  </span>-z<span class="w"> </span><span class="s2">"</span><span class="nv">$TMUX</span><span class="s2">"</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">   </span>tmux<span class="w"> </span>has-session<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null
@@ -9126,33 +9155,40 @@ upp vid login.</p>
 <p><strong>Keep-Alive</strong>
 Håll SSH-sessioner vid liv genom att skicka ett litet paket med jämna
 mellanrum.</p>
-<p><code>echo&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;ServerAliveInterval&nbsp;120"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/ssh/ssh_config</code></p>
+<div class="highlight"><pre><span></span><code>echo&nbsp;"&nbsp;&nbsp;&nbsp;&nbsp;ServerAliveInterval&nbsp;120"&nbsp;|&nbsp;sudo&nbsp;tee&nbsp;-a&nbsp;/etc/ssh/ssh_config
+</code></pre></div>
 <h2 id="ssh-autentisering">SSH Autentisering</h2>
 <p>För att göra inloggning mot andra maskiner smidigare kan man använda sig
 av SSH-nycklar som autentisering. Och för att göra det mindre smidigt se
 <a href="/Google_Authenticator" title="wikilink">Google Authenticator</a>.</p>
 <p>Först måste man skaffa sig nyckelpar man kan distribuera till övriga
 hostar. Detta görs endast en gång.</p>
-<p><code>ssh-keygen&nbsp;-t&nbsp;rsa&nbsp;-b&nbsp;4096</code>
-<code>ssh-keygen&nbsp;-t&nbsp;ecdsa&nbsp;-b&nbsp;521</code>
-<code>ssh-keygen&nbsp;-t&nbsp;ed25519</code></p>
+<div class="highlight"><pre><span></span><code>ssh-keygen&nbsp;-t&nbsp;rsa&nbsp;-b&nbsp;4096
+ssh-keygen&nbsp;-t&nbsp;ecdsa&nbsp;-b&nbsp;521
+ssh-keygen&nbsp;-t&nbsp;ed25519
+</code></pre></div>
 <p>Sedan skicka ut nyckeln till hostarna med:</p>
-<p><code>ssh-copy-id&nbsp;192.168.0.10</code></p>
+<div class="highlight"><pre><span></span><code>ssh-copy-id&nbsp;192.168.0.10
+</code></pre></div>
 <p><em>Om ssh-copy-id ej finns tillgängligt</em></p>
-<p><code>cat&nbsp;~/.ssh/id_rsa.pub&nbsp;|&nbsp;ssh&nbsp;user@192.168.0.10&nbsp;"mkdir&nbsp;-p&nbsp;~/.ssh&nbsp;&amp;&amp;&nbsp;cat&nbsp;&gt;&gt;&nbsp;~/.ssh/authorized_keys"</code></p>
+<div class="highlight"><pre><span></span><code>cat&nbsp;~/.ssh/id_rsa.pub&nbsp;|&nbsp;ssh&nbsp;user@192.168.0.10&nbsp;"mkdir&nbsp;-p&nbsp;~/.ssh&nbsp;&amp;&amp;&nbsp;cat&nbsp;&gt;&gt;&nbsp;~/.ssh/authorized_keys"
+</code></pre></div>
 <p>Alternativt skicka med den vid automatiserad PXE-installation.</p>
 <h2 id="anvandarnamn">Användarnamn</h2>
 <p>För att slippa skriva olika användarnamn beroende på host kan man lägga
 in dem så de autoanvänds vid anslutning.</p>
-<p><code>dd&nbsp;of=~/.ssh/config&nbsp;&lt;&lt;&nbsp;EOF</code>
-<code>Host&nbsp;server1</code>
-<code>User&nbsp;root</code></p>
-<p><code>Host&nbsp;192.168.0.1</code>
-<code>User&nbsp;elnacho</code></p>
-<p><code>Host&nbsp;fw02</code>
-<code>User&nbsp;admin</code>
-<code>ServerAliveInterval&nbsp;60</code>
-<code>EOF</code></p>
+<div class="highlight"><pre><span></span><code>dd&nbsp;of=~/.ssh/config&nbsp;&lt;&lt;&nbsp;EOF
+Host&nbsp;server1
+User&nbsp;root
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Host&nbsp;192.168.0.1
+User&nbsp;elnacho
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Host&nbsp;fw02
+User&nbsp;admin
+ServerAliveInterval&nbsp;60
+EOF
+</code></pre></div>
 <h2 id="login-notification">Login Notification</h2>
 <p>Sshd kan trigga script via PAM, t.ex. om man vill få en notis i slack
 när någon loggar in på en server.</p>
@@ -9171,20 +9207,23 @@ sudo<span class="w"> </span>dd<span class="w"> </span><span class="nv">of</span>
 sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/sbin/sshd-login_notify-slack.sh
 </code></pre></div>
 <p>Testa</p>
-<p><code>PAM_USER=test&nbsp;PAM_RHOST=1.2.3.4&nbsp;PAM_TYPE=open_session&nbsp;/usr/sbin/sshd-login_notify-slack.sh</code></p>
+<div class="highlight"><pre><span></span><code>PAM_USER=test&nbsp;PAM_RHOST=1.2.3.4&nbsp;PAM_TYPE=open_session&nbsp;/usr/sbin/sshd-login_notify-slack.sh
+</code></pre></div>
 <h2 id="bastion">Bastion</h2>
 <p>En bastion fungerar som en reverse proxy för SSH-servrar. Komponenten
 som behövs är SSH Agent Forwarding och finns inbyggt i OpenSSH. För att
 göra hoppet genom proxyn transparent måste SSH-nycklar användas för
 autentisering. DNS-uppslag på alla maskiner måste fungera.</p>
 <p><a href="/File:ssh-bastion.png" title="wikilink">500px</a></p>
-<p><code>nano&nbsp;~/.ssh/config</code>
-<code>Host&nbsp;inside-server</code>
-<code>ProxyJump&nbsp;bastion</code></p>
-<p><code>Host&nbsp;bastion</code>
-<code>User&nbsp;basse</code>
-<code>IdentityFile&nbsp;~/.ssh/ed25519</code>
-<code>ForwardAgent&nbsp;yes</code></p>
+<div class="highlight"><pre><span></span><code>nano&nbsp;~/.ssh/config
+Host&nbsp;inside-server
+&nbsp;ProxyJump&nbsp;bastion
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Host&nbsp;bastion
+&nbsp;User&nbsp;basse
+&nbsp;IdentityFile&nbsp;~/.ssh/ed25519
+&nbsp;ForwardAgent&nbsp;yes
+</code></pre></div>
 <h2 id="bashrc">.bashrc</h2>
 <p>.bashrc är en fil som körs varje gång bash laddas. I denna filen kan du
 skriva egna kommandon som du kan köra i kommandoprompten.</p>
@@ -9211,7 +9250,6 @@ Skriv <code>extract</code><filnamn> för att packa upp en fil.</filnamn></p>
 <span class="w">    </span><span class="k">fi</span>
 <span class="w">  </span><span class="o">}</span>
 </code></pre></div>
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a></p>
 
 
 
@@ -9234,7 +9272,7 @@ Skriv <code>extract</code><filnamn> för att packa upp en fil.</filnamn></p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

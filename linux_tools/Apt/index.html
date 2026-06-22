@@ -8879,6 +8879,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -9354,13 +9382,15 @@ start på alla Debian-baserade distar.</p>
 <p>Apt är en programsvit med flera olika program för att managera dina
 program.</p>
 <p>Lista installerade paket och deras versioner:</p>
-<p><code>apt&nbsp;list&nbsp;--installed</code></p>
+<div class="highlight"><pre><span></span><code>apt&nbsp;list&nbsp;--installed
+</code></pre></div>
 <h2 id="apt-get">apt-get</h2>
 <p>Apt-get är programmet som tar hand om nerladdning och installation av
 ett program.</p>
 <h4 id="update">update</h4>
 <p>Uppdatera din lista med paket.</p>
-<p><code>apt-get&nbsp;update</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;update
+</code></pre></div>
 <h4 id="install">install</h4>
 <p>Installera ett paket. Hämtar alltid senaste versionen som finns i din
 lista.</p>
@@ -9371,10 +9401,12 @@ show</a> om hur du ser vilka versioner som finns.</p>
 <h4 id="upgrade">upgrade</h4>
 <p>Kolla om det finns en ny version av ett program du har installerat och
 uppgradera det.</p>
-<p><code>apt-get&nbsp;upgrade</code>
-<code>apt-get&nbsp;-s&nbsp;upgrade&nbsp;#Dry&nbsp;run</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;upgrade
+apt-get&nbsp;-s&nbsp;upgrade&nbsp;#Dry&nbsp;run
+</code></pre></div>
 <p>För att uppgradera hela din dist från tex Debian 7 till Debian 8 kör.</p>
-<p><code>apt-get&nbsp;dist-upgrade</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;dist-upgrade
+</code></pre></div>
 <h4 id="remove">remove</h4>
 <p>Ta bort ett program. Config filer finns fortfarande kvar.</p>
 <p><code>apt-get&nbsp;remove</code><paket></paket></p>
@@ -9384,7 +9416,8 @@ uppgradera det.</p>
 då installeras det paketet också. Men sen om du väljer att ta bort
 paketet du ville installera så finns fortfarande dom andra paketen kvar.
 Om du vill ta bort paket som inte behövs så kör.</p>
-<p><code>apt-get&nbsp;autoremove</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;autoremove
+</code></pre></div>
 <h2 id="apt-cache">apt-cache</h2>
 <p>apt-cache är ett program för att söka och få fram information om ett
 paket i din lista.</p>
@@ -9422,17 +9455,20 @@ kommer inte tas bort automatiskt.</p>
 <p><code>apt-mark&nbsp;manual</code><paket></paket></p>
 <h4 id="show_1">show</h4>
 <p>Tre kommandon där man ser på namnet vad som händer.</p>
-<p><code>apt-mark&nbsp;showauto</code>
-<code>apt-mark&nbsp;showmanual</code>
-<code>apt-mark&nbsp;showhold</code></p>
+<div class="highlight"><pre><span></span><code>apt-mark&nbsp;showauto
+apt-mark&nbsp;showmanual
+apt-mark&nbsp;showhold
+</code></pre></div>
 <h2 id="apt-proxy">Apt Proxy</h2>
 <p>För att spara bandbredd kan man sätta upp en egen cache av Ubuntus repo
 och peka sina servrar mot den.
 På cachen:</p>
-<p><code>sudo&nbsp;apt-get&nbsp;install&nbsp;apt-cacher-ng</code></p>
+<div class="highlight"><pre><span></span><code>sudo&nbsp;apt-get&nbsp;install&nbsp;apt-cacher-ng
+</code></pre></div>
 <p>På övriga maskiner</p>
-<p><code>sudo&nbsp;nano&nbsp;/etc/apt/apt.conf</code>
-<code>Acquire::http&nbsp;{&nbsp;Proxy&nbsp;"</code><a href="http://10.0.0.500:3142"><code>http://10.0.0.500:3142</code></a><code>";&nbsp;};</code></p>
+<p></p><div class="highlight"><pre><span></span><code>sudo&nbsp;nano&nbsp;/etc/apt/apt.conf
+</code></pre></div>
+<code>Acquire::http&nbsp;{&nbsp;Proxy&nbsp;"</code><a href="http://10.0.0.500:3142"><code>http://10.0.0.500:3142</code></a><code>";&nbsp;};</code><p></p>
 <h2 id="ansible">Ansible</h2>
 <p><a href="/Ansible" title="wikilink">Ansible</a> update-playbook</p>
 <div class="highlight"><pre><span></span><code><span class="nn">---</span>
@@ -9451,7 +9487,6 @@ På cachen:</p>
 <span class="w">     </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt-get -y autoremove</span>
 <span class="w">     </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="s">"'packages</span><span class="nv"> </span><span class="s">will</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">REMOVED'</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">check_autoremove.stdout"</span>
 </code></pre></div>
-<p><a href="/Category:Tools" title="wikilink">Category:Tools</a></p>
 
 
 
@@ -9474,7 +9509,7 @@ På cachen:</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

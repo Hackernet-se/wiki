@@ -2947,6 +2947,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#konfiguration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2959,10 +2970,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#master" class="md-nav__link">
+  <a href="#primary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Master
+        Primary
       
     </span>
   </a>
@@ -8728,6 +8739,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8950,6 +8989,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#konfiguration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8962,10 +9012,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#master" class="md-nav__link">
+  <a href="#primary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Master
+        Primary
       
     </span>
   </a>
@@ -9030,7 +9080,7 @@
   
 
 
-<p><a href="/Category:Guider" title="wikilink">Category:Guider</a> PowerDNS är en open
+<p>PowerDNS är en open
 source DNS som skapades i slutet av 1990 talet. PowerDNS är väldigt
 anpassningsbart för man är inte bunden att använda enbart text filer
 utan man kan ha sina records i databaser också. Det har gjort att
@@ -9040,9 +9090,9 @@ interface på nätet. PowerDNS har också något dom kallar för en
 supermaster, som gör att nya zoner som skapas automatiskt finns på alla
 slavar. PowerDNS har också ett väldigt bra DNSSEC stöd och driver 90% av
 Europas DNSSEC domäner.</p>
-<p>PowerDNS har delats upp i två delar, <strong><a href="https://www.powerdns.com/auth.html">PowerDNS Authoritative
-Server</a></strong> och <strong><a href="https://www.powerdns.com/recursor.html">PowerDNS
-Recursor</a></strong>.</p>
+<p>PowerDNS har delats upp i två delar:
+* <a href="https://www.powerdns.com/auth.html">PowerDNS Authoritative Server</a>
+* <a href="https://www.powerdns.com/recursor.html">PowerDNS Recursor</a></p>
 <h1 id="powerdns-authoritative-server">PowerDNS Authoritative Server</h1>
 <p>Authoritative server är den sort DNS server som har hand om en domän.
 Klienter frågar denna servern för att få svar på sina DNS uppslag.</p>
@@ -9052,118 +9102,79 @@ en DNS update notification. Utan tar förgivet att backend systemet tar
 hand om replikeringen. Att låta databaser ta hand om replication har
 visat sig väldigt stabilt enligt PowerDNS även vid dålig anslutning.
 Native väljs default på nya zoner.</p>
-<p><strong>Master operation</strong>: PowerDNS skickar ut notifikationer till sina
-slavar vid en zone ändring och sköter själv replikeringen till en slav
-server.</p>
-<p><strong>Slave operation</strong>: Vid uppstart skickar PowerDNS en request till alla
-backends en lista med domäner som nyligen inte kollat om dom ändrats.
-Alla domäner som inte har senaste versionen kommer laddas ner.</p>
-<p><strong>Supermaster</strong>: En supermaster automatiskt konfigurerar slavar med nya
-zoner när dom skapas. För att det ska fungera krävs bla att slaven vet
-om vem som är supermaster, supermastern har ett SOA record i domänen och
-att ett NS record måste finnas som stämmer överens med supermastern IP'n
+<p><strong>Primary Replication</strong>: PowerDNS skickar ut notifikationer till sina
+secondaries vid en zone ändring och sköter själv replikeringen med hjälp av AXFR/IXFR.</p>
+<p><strong>Secondary operation</strong>: Vid uppstart ber PowerDNS sina backends skicka en lista med domäner som nyligen inte kollat om dom ändrats.
+Alla domäner som inte har senaste versionen kommer därför refreshas</p>
+<p><strong>Autoprimary</strong>: Autoprimaries konfigurerar secondaries med nya
+zoner när dom skapas. För att det ska fungera krävs bla att secondaries vet
+om vem som är autoprimarien. Autoprimaries har ett SOA record i domänen och
+att ett NS record måste finnas som stämmer överens med autoprimaries IP'n
 som konfigurerats på slaven.</p>
-<ul>
-<li><btn data-toggle="tab" class="">#tab1|CentOS 7</btn></li>
-<li><btn data-toggle="tab" class="">#tab2|Ubuntu 16.04</btn></li>
-</ul>
-<div class="tab-content">
-<div id="tab1" class="tab-pane fade in active">
-
-Lägg till PowerDNS repo och installera epel samt yum priority plugin.
-
-`yum&nbsp;install&nbsp;epel-release&nbsp;yum-plugin-priorities`
-`curl&nbsp;-o&nbsp;/etc/yum.repos.d/powerdns-auth-master.repo&nbsp;`[`https://repo.powerdns.com/repo-files/centos-auth-master.repo`](https://repo.powerdns.com/repo-files/centos-auth-master.repo)
-
-Installera sedan PowerDNS servern.
-
-`yum&nbsp;install&nbsp;pdns`
-
-</div>
-<div id="tab2" class="tab-pane fade">
-
-Börja med att lägga till PowerDNS repot:
-
-`echo&nbsp;"deb&nbsp;[arch=amd64]&nbsp;`[`http://repo.powerdns.com/ubuntu`](http://repo.powerdns.com/ubuntu)`&nbsp;xenial-auth-master&nbsp;main"&nbsp;&gt;&nbsp;/etc/apt/sources.list.d/pdns.list`
-
-Skapa sedan **/etc/apt/preferences.d/pdns** med följande innehåll:
-
-`Package:&nbsp;pdns-*`
-`Pin:&nbsp;origin&nbsp;repo.powerdns.com`
-`Pin-Priority:&nbsp;600`
-
-Kör sedan dessa kommandon:
-
-`curl&nbsp;`[`https://repo.powerdns.com/CBC8B383-pub.asc`](https://repo.powerdns.com/CBC8B383-pub.asc)`&nbsp;|&nbsp;sudo&nbsp;apt-key&nbsp;add&nbsp;-&nbsp;&amp;&amp;`
-`sudo&nbsp;apt-get&nbsp;update`
-
-Installera sedan PowerDNS servern.
-
-`sudo&nbsp;apt-get&nbsp;install&nbsp;pdns-server`
-`&nbsp;&nbsp;`
-
-</div>
-</div>
-
-<p>Välj vilken backend du vill använda, olika backends har olika stöd se
-följande <a href="https://doc.powerdns.com/md/authoritative/">lista</a>.(Bind stöd
-är inbyggt)</p>
-<p><code>pdns-backend-geoip&nbsp;-&nbsp;geoip&nbsp;backend&nbsp;for&nbsp;PowerDNS</code>
-<code>pdns-backend-ldap&nbsp;-&nbsp;LDAP&nbsp;backend&nbsp;for&nbsp;PowerDNS</code>
-<code>pdns-backend-lua&nbsp;-&nbsp;Lua&nbsp;backend&nbsp;for&nbsp;PowerDNS</code>
-<code>pdns-backend-mydns&nbsp;-&nbsp;MyDNS&nbsp;compatibility&nbsp;backend&nbsp;for&nbsp;PowerDNS</code>
-<code>pdns-backend-mysql&nbsp;-&nbsp;generic&nbsp;MySQL&nbsp;backend&nbsp;for&nbsp;PowerDNS</code>
-<code>pdns-backend-pgsql&nbsp;-&nbsp;generic&nbsp;PostgreSQL&nbsp;backend&nbsp;for&nbsp;PowerDNS</code>
-<code>pdns-backend-pipe&nbsp;-&nbsp;pipe/coprocess&nbsp;backend&nbsp;for&nbsp;PowerDNS</code>
-<code>pdns-backend-remote&nbsp;-&nbsp;remote&nbsp;backend&nbsp;for&nbsp;PowerDNS</code>
-<code>pdns-backend-sqlite3&nbsp;-&nbsp;sqlite&nbsp;3&nbsp;backend&nbsp;for&nbsp;PowerDNS</code>
-<code>pdns-backend-tinydns&nbsp;-&nbsp;tinydns&nbsp;compatibility&nbsp;backend&nbsp;for&nbsp;PowerDNS</code></p>
+<h2 id="installation">Installation</h2>
+<p>För EL9 baserade system gör följande
+</p><div class="highlight"><pre><span></span><code>dnf<span class="w"> </span>install<span class="w"> </span>epel-release
+curl<span class="w"> </span>-o<span class="w"> </span>/etc/yum.repos.d/powerdns-auth-49.repo<span class="w"> </span>https://repo.powerdns.com/repo-files/el-auth-49.repo
+dnf<span class="w"> </span>install<span class="w"> </span>pdns<span class="w"> </span>pdns-backend-<span class="nv">$backend</span>
+</code></pre></div>
+Välj och installera sedan vilken backend du vill använda, olika backends har olika stöd se
+följande <a href="https://doc.powerdns.com/md/authoritative/">lista</a>.<p></p>
+<p>(BIND stöd är inbyggt)</p>
+<div class="highlight"><pre><span></span><code>pdns-backend-geoip<span class="w"> </span>:<span class="w"> </span>Geo<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+pdns-backend-ldap<span class="w"> </span>:<span class="w"> </span>LDAP<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+pdns-backend-lmdb<span class="w"> </span>:<span class="w"> </span>LMDB<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+pdns-backend-lua2<span class="w"> </span>:<span class="w"> </span>Lua<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+pdns-backend-mysql<span class="w"> </span>:<span class="w"> </span>MySQL<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+pdns-backend-odbc<span class="w"> </span>:<span class="w"> </span>UnixODBC<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+pdns-backend-pipe<span class="w"> </span>:<span class="w"> </span>Pipe<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+pdns-backend-postgresql<span class="w"> </span>:<span class="w"> </span>PostgreSQL<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+pdns-backend-remote<span class="w"> </span>:<span class="w"> </span>Remote<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+pdns-backend-sqlite<span class="w"> </span>:<span class="w"> </span>SQLite<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+pdns-backend-tinydns<span class="w"> </span>:<span class="w"> </span>TinyDNS<span class="w"> </span>backend<span class="w"> </span><span class="k">for</span><span class="w"> </span>pdns
+</code></pre></div>
 <h2 id="konfiguration">Konfiguration</h2>
-<p><strong>10.0.0.1</strong> Supermaster.hackernet.se</p>
+<p><strong>10.0.0.1</strong> autoprimary.hackernet.se</p>
 <p><strong>10.0.0.2</strong> ns1.hackernet.se</p>
 <p><strong>10.0.0.3</strong> ns2.hackernet.se</p>
-<p>I guiden har vi valt att använda <a href="/MySQL" title="wikilink">MySQL</a> som backend.
-Och skapa en supermaster server som låter PowerDNS sköta replikeringen.</p>
-<h3 id="master">Master</h3>
+<p>I guiden har vi valt att använda MySQL som backend.
+Och skapa en autoprimary server som låter PowerDNS sköta replikeringen.</p>
+<h3 id="primary">Primary</h3>
 <p>Lägg in följande i <code>/etc/powerdns/pdns.conf</code>:</p>
-<p><code>allow-recursion=0.0.0.0/0</code>
-<code>allow-axfr-ips=10.0.0.2/32,10.0.0.3/32</code>
-<code>also-notify=10.0.0.2,10.0.0.3</code>
-<code>config-dir=/etc/powerdns</code>
-<code>daemon=yes</code>
-<code>disable-axfr=no</code>
-<code>guardian=yes</code>
-<code>local-address=0.0.0.0</code>
-<code>local-port=53</code>
-<code>log-dns-details=on</code>
-<code>loglevel=3</code>
-<code>module-dir=/usr/lib/x86_64-linux-gnu/pdns/</code>
-<code>master=yes</code>
-<code>slave=no</code>
-<code>setgid=pdns</code>
-<code>setuid=pdns</code>
-<code>socket-dir=/var/run</code>
-<code>version-string=powerdns</code>
-<code>include-dir=/etc/powerdns/pdns.d</code>
-<code>launch=gmysql</code></p>
+<div class="highlight"><pre><span></span><code>allow-recursion=0.0.0.0/0
+allow-axfr-ips=10.0.0.2/32,10.0.0.3/32
+also-notify=10.0.0.2,10.0.0.3
+config-dir=/etc/powerdns
+daemon=yes
+disable-axfr=no
+guardian=yes
+local-address=0.0.0.0
+local-port=53
+log-dns-details=on
+loglevel=3
+primary=yes
+secondary=no
+setgid=pdns
+setuid=pdns
+socket-dir=/var/run
+version-string=powerdns
+include-dir=/etc/powerdns/pdns.d
+launch=gmysql
+</code></pre></div>
 <p>I <strong>/etc/powerdns/pdns.d</strong> skapa filen <code>pdns.local.gmysql.conf</code>. Om
 filen redan fanns gå till nästa steg.</p>
-<p><code>gmysql-host=localhost</code>
-<code>gmysql-port=</code>
-<code>gmysql-dbname=pdns</code>
-<code>gmysql-user=pdns</code>
+<p></p><div class="highlight"><pre><span></span><code>gmysql-host=localhost
+gmysql-port=
+gmysql-dbname=pdns
+gmysql-user=pdns
+</code></pre></div>
 <code>gmysql-password=</code><passw0rd>
-<code>gmysql-dnssec=yes</code></passw0rd></p>
+<div class="highlight"><pre><span></span><code>gmysql-dnssec=yes
+</code></pre></div><p></p>
 <p>Om filen skulle finnas med ett lösenord redan i så är det troligt att
 under installationen så skapades det en databas och fylldes med default
 tables. Ifall du behöver skapa tables själv så kör följande MySQL
 kommando för att skapa dom.</p>
-<div class="toccolours mw-collapsible mw-collapsed" style="width:800px">
-
-MySQL kommandon.
-
-<div class="mw-collapsible-content">
-
+<p>MySQL kommandon.</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">domains</span><span class="w"> </span><span class="p">(</span>
 <span class="w">  </span><span class="n">id</span><span class="w">                    </span><span class="kt">INT</span><span class="w"> </span><span class="k">AUTO_INCREMENT</span><span class="p">,</span>
 <span class="w">  </span><span class="k">name</span><span class="w">                  </span><span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="no">NULL</span><span class="p">,</span>
@@ -9255,100 +9266,118 @@ MySQL kommandon.
 
 <span class="k">CREATE</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">namealgoindex</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">tsigkeys</span><span class="p">(</span><span class="k">name</span><span class="p">,</span><span class="w"> </span><span class="k">algorithm</span><span class="p">);</span>
 </code></pre></div>
-
-</div>
-</div>
-
 <p>Ta bort <code>pdns.simplebind.conf</code> om du inte tänkt använda bind som
 backend.</p>
 <p>Starta sedan om PowerDNS tjänsten.</p>
-<p><code>service&nbsp;pdns&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>service&nbsp;pdns&nbsp;restart
+</code></pre></div>
 <h3 id="slave">Slave</h3>
 <p>Gör exakt samma på slaven med databasen fast lägg in följande i
 <code>pdns.conf</code> istället:</p>
-<p><code>allow-recursion=0.0.0.0/0</code>
-<code>config-dir=/etc/powerdns</code>
-<code>daemon=yes</code>
-<code>disable-axfr=yes</code>
-<code>guardian=yes</code>
-<code>local-address=0.0.0.0</code>
-<code>local-port=53</code>
-<code>log-dns-details=on</code>
-<code>loglevel=3</code>
-<code>module-dir=/usr/lib/x86_64-linux-gnu/pdns/</code>
-<code>master=no</code>
-<code>slave=yes</code>
-<code>slave-cycle-interval=60</code>
-<code>setgid=pdns</code>
-<code>setuid=pdns</code>
-<code>socket-dir=/var/run</code>
-<code>version-string=powerdns</code>
-<code>include-dir=/etc/powerdns/pdns.d</code>
-<code>launch=gmysql</code></p>
+<div class="highlight"><pre><span></span><code>allow-recursion=0.0.0.0/0
+config-dir=/etc/powerdns
+daemon=yes
+disable-axfr=yes
+guardian=yes
+local-address=0.0.0.0
+local-port=53
+log-dns-details=on
+loglevel=3
+module-dir=/usr/lib/x86_64-linux-gnu/pdns/
+master=no
+slave=yes
+slave-cycle-interval=60
+setgid=pdns
+setuid=pdns
+socket-dir=/var/run
+version-string=powerdns
+include-dir=/etc/powerdns/pdns.d
+launch=gmysql
+</code></pre></div>
 <p>Slaven kommer fråga supermastern efter ny zone update var 60 sekund.
 Vanligast är att mastern skickar ut en notifikation till slaven men om
 det skulle vara problem med anslutningen under den tiden så kommer
 slaven fråga mastern när dom kan nå varandra igen.</p>
 <p>Lägg till en supermaster för slaven.</p>
 <p>Logga in på databasen med:</p>
-<p><code>mysql&nbsp;-u&nbsp;pdns&nbsp;-p</code></p>
+<div class="highlight"><pre><span></span><code>mysql&nbsp;-u&nbsp;pdns&nbsp;-p
+</code></pre></div>
 <p>Byt till databasen:</p>
-<p><code>USE&nbsp;pdns;</code></p>
+<div class="highlight"><pre><span></span><code>USE&nbsp;pdns;
+</code></pre></div>
 <p>Lägg in en rad i supermasters table:</p>
-<p><code>insert&nbsp;into&nbsp;supermasters&nbsp;values&nbsp;('10.0.0.1',&nbsp;'supermaster.hackernet.se',&nbsp;'admin');</code></p>
+<div class="highlight"><pre><span></span><code>insert&nbsp;into&nbsp;supermasters&nbsp;values&nbsp;('10.0.0.1',&nbsp;'supermaster.hackernet.se',&nbsp;'admin');
+</code></pre></div>
 <p>Lämna MySQL:</p>
-<p><code>exit;</code></p>
+<div class="highlight"><pre><span></span><code>exit;
+</code></pre></div>
 <p>Starta om PowerDNS:</p>
-<p><code>service&nbsp;pdns&nbsp;restart</code></p>
+<div class="highlight"><pre><span></span><code>service&nbsp;pdns&nbsp;restart
+</code></pre></div>
 <h2 id="skapa-zone">Skapa zone</h2>
 <p>Skapa en zone med hjälp av <strong>pdnsutil</strong>:</p>
-<p><code>pdnsutil&nbsp;create-zone&nbsp;hackernet.se&nbsp;supermaster.hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;create-zone&nbsp;hackernet.se&nbsp;supermaster.hackernet.se
+</code></pre></div>
 <p>Lägg till några <strong>A</strong> record:</p>
-<p><code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;supermaster&nbsp;A&nbsp;10.0.0.1</code>
-<code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;ns1&nbsp;A&nbsp;10.0.0.2</code>
-<code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;ns2&nbsp;A&nbsp;10.0.0.3</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;supermaster&nbsp;A&nbsp;10.0.0.1
+pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;ns1&nbsp;A&nbsp;10.0.0.2
+pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;ns2&nbsp;A&nbsp;10.0.0.3
+</code></pre></div>
 <p>Lägg till fler <strong>NS</strong> record:</p>
-<p><code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;@&nbsp;NS&nbsp;ns1.hackernet.se</code>
-<code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;@&nbsp;NS&nbsp;ns2.hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;@&nbsp;NS&nbsp;ns1.hackernet.se
+pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;@&nbsp;NS&nbsp;ns2.hackernet.se
+</code></pre></div>
 <p>Ändra zonen från native zone till master zone.</p>
-<p><code>pdnsutil&nbsp;set-kind&nbsp;hackernet.se&nbsp;master</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;set-kind&nbsp;hackernet.se&nbsp;master
+</code></pre></div>
 <p>Verifiera att zonen är master:</p>
-<p><code>pdnsutil&nbsp;show-zone&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;show-zone&nbsp;hackernet.se
+</code></pre></div>
 <p>Skicka ut en notifikation med mastern eller vänta tills slaven själv
 hämtar zonen:</p>
-<p><code>pdns_control&nbsp;notify&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>pdns_control&nbsp;notify&nbsp;hackernet.se
+</code></pre></div>
 <h2 id="sakra-upp-zonetransfer">Säkra upp zonetransfer</h2>
 <p>Man kan säkra upp zonetransfer med hjälp av en TSIG nykel.</p>
 <p>Börja med att generera en TSIG nyckel på master servern.</p>
-<p><code>pdnsutil&nbsp;generate-tsig-key&nbsp;tsig-transfer&nbsp;hmac-sha512</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;generate-tsig-key&nbsp;tsig-transfer&nbsp;hmac-sha512
+</code></pre></div>
 <p>Aktivera sedan nykel på det zoner du vill säkra upp.</p>
-<p><code>pdnsutil&nbsp;activate-tsig-key&nbsp;hackernet.se&nbsp;tsig-transfer&nbsp;master</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;activate-tsig-key&nbsp;hackernet.se&nbsp;tsig-transfer&nbsp;master
+</code></pre></div>
 <p>Lista sedan TSIG nykeln så du kan kopiera den till slaven.</p>
-<p><code>pdnsutil&nbsp;list-tsig-keys</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;list-tsig-keys
+</code></pre></div>
 <p>Importera nyckeln på slaven.</p>
-<p><code>pdnsutil&nbsp;import-tsig-key&nbsp;tsig-transfer&nbsp;hmac-sha512&nbsp;'Långsuperhackerkod'</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;import-tsig-key&nbsp;tsig-transfer&nbsp;hmac-sha512&nbsp;'Långsuperhackerkod'
+</code></pre></div>
 <p>Aktivera sedan TSIG nykeln på samma zoner som på mastern.</p>
-<p><code>pdnsutil&nbsp;activate-tsig-key&nbsp;hackernet.se&nbsp;tsig-transfer&nbsp;slave</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;activate-tsig-key&nbsp;hackernet.se&nbsp;tsig-transfer&nbsp;slave
+</code></pre></div>
 <p><strong>Att tänka på:</strong> Det är viktigt att nyckeln har samma namn på både
 mastern och slaven.</p>
 <h1 id="powerdns-recursor">PowerDNS Recursor</h1>
 <p>Skickar vidare din fråga till olika DNS servrar tills den hittar svaret.</p>
-<h2 id="installation">Installation</h2>
+<h2 id="installation_1">Installation</h2>
 <p><strong>Debian/Ubuntu</strong></p>
-<p><code>apt-get&nbsp;install&nbsp;pdns-recursor</code></p>
+<div class="highlight"><pre><span></span><code>apt-get&nbsp;install&nbsp;pdns-recursor
+</code></pre></div>
 <h2 id="konfiguration_1">Konfiguration</h2>
 <p>Recursor är väldigt simpelt att konfigurera upp. Om man vill köra
 recursor och authoritative på samma server så behöver man byta vilken
 port recursor lyssnar på. Och sedan skicka vidare svar från
 authoritative servern som den inte kan svara på.</p>
 <p><strong>recursor.conf</strong></p>
-<p><code>forward-zones=8.8.8.8,8.8.4.4</code>
-<code>trace=on</code></p>
+<div class="highlight"><pre><span></span><code>forward-zones=8.8.8.8,8.8.4.4
+trace=on
+</code></pre></div>
 <h3 id="recursor-och-authoritative">Recursor och authoritative</h3>
 <p>Lägg till följande rad i <strong>pdns.conf</strong>:</p>
-<p><code>recursor=127.0.0.1:5678</code></p>
+<div class="highlight"><pre><span></span><code>recursor=127.0.0.1:5678
+</code></pre></div>
 <p>Och ändra vilken port recursor lyssnar på i <strong>recursor.conf</strong>:</p>
-<p><code>local-port=5678</code></p>
+<div class="highlight"><pre><span></span><code>local-port=5678
+</code></pre></div>
 <p>Var noga med att peka på rätt port så att du inte pekar tillbaka på
 authoritative servern för då kommer man få en loop.</p>
 <h1 id="dnssec">DNSSEC</h1>
@@ -9357,16 +9386,20 @@ så att man kan säkerställa att det svaret man fått kommit från rätt
 källa, och inte manipulerats på vägen. Med DNSSEC skyddas du från bland
 annat cacheförgiftning och pharming som är dom vanligaste attackerna.</p>
 <p>För att sätta på DNSSEC:</p>
-<p><code>pdnsutil&nbsp;secure-zone&nbsp;ZONE</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;secure-zone&nbsp;ZONE
+</code></pre></div>
 <p>För att stänga av DNSSEC:</p>
-<p><code>pdnsutil&nbsp;disable-dnssec&nbsp;ZONE</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;disable-dnssec&nbsp;ZONE
+</code></pre></div>
 <p>Kör sedan följande kommando för visa dina DS record:</p>
-<p><code>pdnsutil&nbsp;show-zone&nbsp;ZONE</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;show-zone&nbsp;ZONE
+</code></pre></div>
 <p>Outputen du är intresserad av är i slutet och ser ut som följande:</p>
-<p><code>...</code>
-<code>DS&nbsp;=&nbsp;hackernet.se.&nbsp;IN&nbsp;DS&nbsp;17379&nbsp;13&nbsp;1&nbsp;75a7f4a06792509298bfb0996df3614b129a6570&nbsp;;&nbsp;(&nbsp;SHA1&nbsp;digest&nbsp;)</code>
-<code>DS&nbsp;=&nbsp;hackernet.se.&nbsp;IN&nbsp;DS&nbsp;17379&nbsp;13&nbsp;2&nbsp;c72f7424c86a46866499ae284bec1b55095ca32e0f6955a9a9ba21df5d010d57&nbsp;;&nbsp;(&nbsp;SHA256&nbsp;digest&nbsp;)</code>
-<code>...</code></p>
+<div class="highlight"><pre><span></span><code>...
+DS&nbsp;=&nbsp;hackernet.se.&nbsp;IN&nbsp;DS&nbsp;17379&nbsp;13&nbsp;1&nbsp;75a7f4a06792509298bfb0996df3614b129a6570&nbsp;;&nbsp;(&nbsp;SHA1&nbsp;digest&nbsp;)
+DS&nbsp;=&nbsp;hackernet.se.&nbsp;IN&nbsp;DS&nbsp;17379&nbsp;13&nbsp;2&nbsp;c72f7424c86a46866499ae284bec1b55095ca32e0f6955a9a9ba21df5d010d57&nbsp;;&nbsp;(&nbsp;SHA256&nbsp;digest&nbsp;)
+...
+</code></pre></div>
 <p>Formatet för ett DS record är:</p>
 <p><code>DS&nbsp;=</code><zone name=""><code>IN&nbsp;DS</code><key tag=""><code></code><dnskey algo=""><code></code><digest type=""><code></code><key digest=""></key></digest></dnskey></key></zone></p>
 <p>Det din domän återförsäljare kommer vara intresserad av för att kunna
@@ -9391,26 +9424,34 @@ uppdatera zoner.</p>
 </ul>
 <p>Börja med att generera en TSIG nykel som kommer användas för att göra
 uppdateringen säkrare:</p>
-<p><code>pdnsutil&nbsp;generate-tsig-key&nbsp;ddns_update&nbsp;hmac-sha512</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;generate-tsig-key&nbsp;ddns_update&nbsp;hmac-sha512
+</code></pre></div>
 <p>Aktivera nykeln på dom domäner du vill uppdatera.</p>
-<p><code>pdnsutil&nbsp;set-meta&nbsp;hackernet.se&nbsp;TSIG-ALLOW-DNSUPDATE&nbsp;ddns_update</code></p>
+<div class="highlight"><pre><span></span><code>&nbsp;pdnsutil&nbsp;set-meta&nbsp;hackernet.se&nbsp;TSIG-ALLOW-DNSUPDATE&nbsp;ddns_update
+</code></pre></div>
 <p>Tillåt enbart vissa nät att få uppdatera zonen.</p>
-<p><code>pdnsutil&nbsp;set-meta&nbsp;hackernet.se&nbsp;ALLOW-DNSUPDATE-FROM&nbsp;192.168.1.0/24</code>
-<code>pdnsutil&nbsp;set-meta&nbsp;hackernet.se&nbsp;ALLOW-DNSUPDATE-FROM&nbsp;10.100.0.0/24</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;set-meta&nbsp;hackernet.se&nbsp;ALLOW-DNSUPDATE-FROM&nbsp;192.168.1.0/24
+pdnsutil&nbsp;set-meta&nbsp;hackernet.se&nbsp;ALLOW-DNSUPDATE-FROM&nbsp;10.100.0.0/24
+</code></pre></div>
 <p>Se till så att mastern skickar en notification till slavarna vid varje
 uppdatering. Annars får man vänta tills slaven själv frågar mastern.</p>
-<p><code>pdnsutil&nbsp;set-meta&nbsp;hackernet.se&nbsp;NOTIFY-DNSUPDATE&nbsp;1</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;set-meta&nbsp;hackernet.se&nbsp;NOTIFY-DNSUPDATE&nbsp;1
+</code></pre></div>
 <p>Lägg sedan till följande rad i <strong>pdns.conf</strong></p>
-<p><code>dnsupdate=yes</code></p>
+<div class="highlight"><pre><span></span><code>dnsupdate=yes
+</code></pre></div>
 <p>Starta om PowerDNS, för att verifiera att det funkar kan du köra
 följande kommando:</p>
-<p><code>nsupdate&nbsp;&lt;&lt;!</code>
+<p></p><div class="highlight"><pre><span></span><code>nsupdate&nbsp;&lt;&lt;!
+</code></pre></div>
 <code>server</code><ip><code></code><port>
-<code>zone&nbsp;hackernet.se</code>
-<code>update&nbsp;add&nbsp;ddnstest.hackernet.se&nbsp;3600&nbsp;A&nbsp;10.13.37.1</code>
+<div class="highlight"><pre><span></span><code>zone&nbsp;hackernet.se
+update&nbsp;add&nbsp;ddnstest.hackernet.se&nbsp;3600&nbsp;A&nbsp;10.13.37.1
+</code></pre></div>
 <code>key&nbsp;ddns_update</code><lång nykel="">
-<code>send</code>
-<code>!</code></lång></port></ip></p>
+<div class="highlight"><pre><span></span><code>send
+!&nbsp;
+</code></pre></div><p></p>
 <p>Om det funkar kommer ett record i hackernet.se zonen att skapas som
 heter ddnstest. Repitera på fler domäner samt reverse zoner om sådana
 finns. Samma nykel kan användas på alla zoner om man vill.</p>
@@ -9420,25 +9461,31 @@ nykeln i detta fallet <strong>ddns_update</strong>.</p>
 <p>Under här kommer ett exempel för <a href="/ISC_DHCP" title="wikilink">ISC_DHCP</a>.</p>
 <p>Skapa en fil som heter ddns.key med följande innehåll under
 <strong>/etc/dhcp/</strong>:</p>
-<p><code>key&nbsp;"ddns_update"&nbsp;{</code>
-<code>algorithm&nbsp;hmac-sha512;</code>
+<p></p><div class="highlight"><pre><span></span><code>key&nbsp;"ddns_update"&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;algorithm&nbsp;hmac-sha512;
+</code></pre></div>
 <code>secret&nbsp;"</code><lång nykel=""><code>";</code>
-<code>};</code></lång></p>
+<div class="highlight"><pre><span></span><code>};
+</code></pre></div><p></p>
 <p>Lägg sedan in följande rader i DHCP conf filen:</p>
-<p><code>ddns-updates&nbsp;on;</code>
-<code>ddns-update-style&nbsp;interim;</code>
-<code>update-static-leases&nbsp;on;</code></p>
-<p><code>ddns-domainname&nbsp;"hackernet.se";</code>
-<code>ddns-rev-domainname&nbsp;"in-addr.arpa.";</code></p>
-<p><code>include&nbsp;"/etc/dhcp/ddns.key";</code>
-<code>zone&nbsp;hackernet.se&nbsp;{</code>
-<code>primary&nbsp;127.0.0.1;</code>
-<code>key&nbsp;ddns_update;</code>
-<code>}</code></p>
-<p><code>zone&nbsp;0.168.192.in-addr.arpa.&nbsp;{</code>
-<code>primary&nbsp;127.0.0.1;</code>
-<code>key&nbsp;ddns_update;</code>
-<code>}</code></p>
+<div class="highlight"><pre><span></span><code>ddns-updates&nbsp;on;
+ddns-update-style&nbsp;interim;
+update-static-leases&nbsp;on;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ddns-domainname&nbsp;"hackernet.se";
+ddns-rev-domainname&nbsp;"in-addr.arpa.";
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>include&nbsp;"/etc/dhcp/ddns.key";
+zone&nbsp;hackernet.se&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;primary&nbsp;127.0.0.1;
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;ddns_update;
+}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>zone&nbsp;0.168.192.in-addr.arpa.&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;primary&nbsp;127.0.0.1;
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;ddns_update;
+}
+</code></pre></div>
 <p>Byt ut 127.0.0.1 mot din primära dns server.</p>
 <p>Starta om DHCP servern.</p>
 <h1 id="tools">Tools</h1>
@@ -9460,26 +9507,36 @@ användare.</p>
 zoner tex generera och lägga till tsig nycklar, migrera backend lösning,
 benchmarka backend delen och mycket mer.</p>
 <p><strong>Skapa en native zone</strong>:</p>
-<p><code>pdnsutil&nbsp;create-zone&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;create-zone&nbsp;hackernet.se
+</code></pre></div>
 <p><strong>Skapa en native zone med ett NS record</strong>:</p>
-<p><code>pdnsutil&nbsp;create-zone&nbsp;hackernet.se&nbsp;ns1.hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;create-zone&nbsp;hackernet.se&nbsp;ns1.hackernet.se
+</code></pre></div>
 <p><strong>Skapa en slave zone där IP'n i slutet är master server</strong>:</p>
-<p><code>pdnsutil&nbsp;create-slave-zone&nbsp;hackernet.se&nbsp;10.0.0.1</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;create-slave-zone&nbsp;hackernet.se&nbsp;10.0.0.1
+</code></pre></div>
 <p><strong>Editera en zone</strong>:</p>
-<p><code>pdnsutil&nbsp;edit-zone&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;edit-zone&nbsp;hackernet.se
+</code></pre></div>
 <p><strong>Skapa ett NS record</strong>:</p>
-<p><code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;@&nbsp;NS&nbsp;ns1.hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;@&nbsp;NS&nbsp;ns1.hackernet.se
+</code></pre></div>
 <p><strong>Skapa ett record</strong>:</p>
-<p><code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;ns1&nbsp;[A/AAAA/MX/CNAME/...]&nbsp;10.0.0.2</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;add-record&nbsp;hackernet.se&nbsp;ns1&nbsp;[A/AAAA/MX/CNAME/...]&nbsp;10.0.0.2
+</code></pre></div>
 <p><strong>Lista alla zoner</strong>:</p>
-<p><code>pdnsutil&nbsp;list-all-zones</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;list-all-zones
+</code></pre></div>
 <p><strong>Ändra zone operation</strong>:</p>
-<p><code>pdnsutil&nbsp;set-kind&nbsp;hackernet.se&nbsp;master/native/slave</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;set-kind&nbsp;hackernet.se&nbsp;master/native/slave
+</code></pre></div>
 <p><strong>Tillåt alla IP's som är inlagda som en namnserver för domänen att göra
 zone transfers</strong>:</p>
-<p><code>pdnsutil&nbsp;set-meta&nbsp;hackernet.se&nbsp;ALLOW-AXFR-FROM&nbsp;AUTO-NS</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;set-meta&nbsp;hackernet.se&nbsp;ALLOW-AXFR-FROM&nbsp;AUTO-NS
+</code></pre></div>
 <p><strong>Öka SOA serial med 1</strong>:</p>
-<p><code>pdnsutil&nbsp;increase-serial&nbsp;hackernet.se</code></p>
+<div class="highlight"><pre><span></span><code>pdnsutil&nbsp;increase-serial&nbsp;hackernet.se
+</code></pre></div>
 <h2 id="pdnscat">pdnscat</h2>
 <p>pdnscat är ett bash script som hämtar alla records genom PowerDNS API
 och gör så att man kan greppa på records. När man filtrerat ner till ett
@@ -9487,7 +9544,8 @@ resultat så kan man välja att SSHa mot det recordet med förinställda
 username som root, admin och den användaren du är.</p>
 <p><strong>Curl</strong> och <strong>JQ</strong> behövs för att scriptet ska fungera.</p>
 <p><code>git&nbsp;clone</code><a href="https://github.com/Hackernet-se/pdnscat"><code>https://github.com/Hackernet-se/pdnscat</code></a>
-<code>./pdnscat&nbsp;arg1&nbsp;arg2&nbsp;arg3&nbsp;...&nbsp;[f]&nbsp;[a|r|q]&nbsp;..."</code></p>
+</p><div class="highlight"><pre><span></span><code>./pdnscat&nbsp;arg1&nbsp;arg2&nbsp;arg3&nbsp;...&nbsp;[f]&nbsp;[a|r|q]&nbsp;..."
+</code></pre></div><p></p>
 <h4 id="exempel">Exempel</h4>
 <div class="panel-group" id="accordion">
 
@@ -9548,7 +9606,7 @@ Abbreviation
 **AXFR**= Är en full zone transfer som överför hela zonen.
 
 **IXFR**= Är en incremental zone transfer som endast överför det som har
-förändrats.</div></div></div>
+förändrats.</div></div></div></lång></lång></port></ip></passw0rd>
 
 
 
@@ -9571,7 +9629,7 @@ förändrats.</div></div></div>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
   </span>
 
     

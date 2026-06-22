@@ -8621,6 +8621,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/winget/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Winget - Windows Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8849,23 +8877,27 @@ mgmt och filöverföring.</p>
 open-ports</strong></p>
 <p>Samt vilken service som använder vilken port: <strong>show ip port-map</strong></p>
 <h1 id="http">HTTP</h1>
-<p><code>ip&nbsp;http&nbsp;server</code>
-<code>ip&nbsp;http&nbsp;secure-server</code>
-<code>show&nbsp;ip&nbsp;http&nbsp;server&nbsp;all</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;http&nbsp;server
+ip&nbsp;http&nbsp;secure-server&nbsp;
+show&nbsp;ip&nbsp;http&nbsp;server&nbsp;all
+</code></pre></div>
 <p>Filöverföring med HTTP brukar vara snabbare än tftp och scp.</p>
 <p><code>copy</code><a href="http://10.0.0.10/ios.bin"><code>http://10.0.0.10/ios.bin</code></a><code>flash:</code></p>
 <h1 id="dns">DNS</h1>
 <p>Server</p>
-<p><code>ip&nbsp;dns&nbsp;server</code>
-<code>ip&nbsp;dns&nbsp;spoofing&nbsp;2.2.2.2</code>
-<code>ip&nbsp;name-server&nbsp;8.8.4.4&nbsp;8.8.8.8</code>
-<code>ip&nbsp;domain&nbsp;round-robin</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;dns&nbsp;server
+ip&nbsp;dns&nbsp;spoofing&nbsp;2.2.2.2
+ip&nbsp;name-server&nbsp;8.8.4.4&nbsp;8.8.8.8&nbsp;
+ip&nbsp;domain&nbsp;round-robin
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ip&nbsp;dns&nbsp;primary</code>
-<code>debug&nbsp;domain</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;dns&nbsp;primary
+debug&nbsp;domain
+</code></pre></div>
 <p>Hosts</p>
-<p><code>ip&nbsp;host&nbsp;r1&nbsp;10.0.0.10</code>
-<code>show&nbsp;hosts</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;host&nbsp;r1&nbsp;10.0.0.10
+show&nbsp;hosts
+</code></pre></div>
 <h1 id="ntp">NTP</h1>
 <p>NTP är väldigt effektivt för att synkronisera klockan mellan två system,
 ett paket i minuten räcker för att synka det till en millisekunds
@@ -8879,43 +8911,31 @@ kommer synk-processen att ta lång tid.</p>
 <li>Control messages: peer status och set management parameters</li>
 <li>Update/request messages: time synchronization</li>
 </ul>
-<div class="mw-collapsible mw-collapsed" style="width:200px">
-
-Client:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_ntp_client.png>](/File:Cisco_NTP_client.png "wikilink")
-
-</file:cisco_ntp_client.png></div>
-</div>
-<div class="mw-collapsible mw-collapsed" style="width:200px">
-
-Server:
-
-<div class="mw-collapsible-content">
-
-[<file:cisco_ntp_server.png>](/File:Cisco_NTP_server.png "wikilink")
-
-</file:cisco_ntp_server.png></div>
-</div>
-
-<p><code>ntp&nbsp;logging</code>
-<code>debug&nbsp;ntp&nbsp;all</code></p>
+<p>Client:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_NTP_client.png" data-desc-position="bottom"><img alt="Cisco_NTP_client.png" src="../../images/Cisco_NTP_client.png"></a></p>
+<p>Server:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_NTP_server.png" data-desc-position="bottom"><img alt="Cisco_NTP_server.png" src="../../images/Cisco_NTP_server.png"></a></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;logging
+debug&nbsp;ntp&nbsp;all
+</code></pre></div>
 <p><strong>Tidszon</strong> (Sverige)</p>
-<p><code>clock&nbsp;timezone&nbsp;CET&nbsp;1</code>
-<code>clock&nbsp;summer-time&nbsp;CEST&nbsp;recurring&nbsp;last&nbsp;sunday&nbsp;march&nbsp;02:00&nbsp;last&nbsp;sunday&nbsp;october&nbsp;03:00</code></p>
+<div class="highlight"><pre><span></span><code>clock&nbsp;timezone&nbsp;CET&nbsp;1
+clock&nbsp;summer-time&nbsp;CEST&nbsp;recurring&nbsp;last&nbsp;sunday&nbsp;march&nbsp;02:00&nbsp;last&nbsp;sunday&nbsp;october&nbsp;03:00
+</code></pre></div>
 <p><strong>Server</strong></p>
 <p><code>ntp&nbsp;master</code><stratum><code>#8&nbsp;är&nbsp;default</code>
-<code>show&nbsp;ntp&nbsp;packets&nbsp;mode&nbsp;server</code></stratum></p>
+</stratum></p><div class="highlight"><pre><span></span><code>show&nbsp;ntp&nbsp;packets&nbsp;mode&nbsp;server
+</code></pre></div><p></p>
 <p><strong>Klient</strong></p>
-<p><code>ntp&nbsp;server&nbsp;10.0.0.10</code>
-<code>ntp&nbsp;server&nbsp;vrf&nbsp;Mgmt&nbsp;130.236.254.102</code></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;server&nbsp;10.0.0.10
+ntp&nbsp;server&nbsp;vrf&nbsp;Mgmt&nbsp;130.236.254.102
+</code></pre></div>
 <p><em>OBS det kan ta lång tid innan klient synkar med server första gången.</em></p>
 <p><strong>Peer</strong>
 Båda enheter kan uppdatera sina klockor mot varandra, som ett
 NTP-kluster</p>
-<p><code>ntp&nbsp;peer&nbsp;10.0.0.10&nbsp;[key&nbsp;20]</code></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;peer&nbsp;10.0.0.10&nbsp;[key&nbsp;20]
+</code></pre></div>
 <p><strong>Verify</strong>
 För att veta att NTP fungerar som det ska kan man kolla på reach-fältet.
 Det är en 8-bitars buffer där varje lyckat paket representeras av en 1:a
@@ -8925,60 +8945,76 @@ fram. När server och klient närmar sig synk och inga paket droppas
 kommer poll-intervallet att öka över tid, till max 1024. Det går ej att
 ändra routerns NTP poll intervall eftersom det bestäms av en heuristisk
 algorithm.</p>
-<p><code>show&nbsp;ntp&nbsp;status</code>
-<code>show&nbsp;ntp&nbsp;associations</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ntp&nbsp;status
+show&nbsp;ntp&nbsp;associations&nbsp;
+</code></pre></div>
 <p>Ställ klockan manuellt. Kan göras för att skynda på klocksynkronisering.</p>
-<p><code>clock&nbsp;set&nbsp;12:00:00&nbsp;20&nbsp;July&nbsp;2020</code></p>
+<div class="highlight"><pre><span></span><code>clock&nbsp;set&nbsp;12:00:00&nbsp;20&nbsp;July&nbsp;2020
+</code></pre></div>
 <p><strong>Access control</strong>
 Med ACL, NTP Access control levels:</p>
 <p><code>ntp&nbsp;access-group&nbsp;ipv4</code><acl></acl></p>
 <p><strong>Authentication</strong>
 enable authentication, configure a key with a key index, trust the key.</p>
-<p><code>ntp&nbsp;authenticate</code>
-<code>ntp&nbsp;authentication-key&nbsp;20&nbsp;md5&nbsp;SECRET</code>
-<code>ntp&nbsp;trusted-key&nbsp;20</code></p>
-<p><code>show&nbsp;ntp&nbsp;associations&nbsp;detail&nbsp;&nbsp;|&nbsp;inc&nbsp;auth</code></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;authenticate
+ntp&nbsp;authentication-key&nbsp;20&nbsp;md5&nbsp;SECRET
+ntp&nbsp;trusted-key&nbsp;20
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>show&nbsp;ntp&nbsp;associations&nbsp;detail&nbsp;&nbsp;|&nbsp;inc&nbsp;auth
+</code></pre></div>
 <p><strong>Broadcast</strong>
 NTP-paket går även att skicka med broadcast eller multicast, detta
 händer alltså utan att klienten "beställer" det.</p>
-<p><code>interface&nbsp;gi2</code>
-<code>ntp&nbsp;broadcast|multicast</code>
-<code>ntp&nbsp;broadcast&nbsp;key&nbsp;20</code></p>
+<div class="highlight"><pre><span></span><code>interface&nbsp;gi2
+&nbsp;ntp&nbsp;broadcast|multicast
+&nbsp;ntp&nbsp;broadcast&nbsp;key&nbsp;20
+</code></pre></div>
 <p>Receiver</p>
-<p><code>int&nbsp;vlan&nbsp;101</code>
-<code>ntp&nbsp;broadcast|multicast&nbsp;client</code></p>
+<div class="highlight"><pre><span></span><code>int&nbsp;vlan&nbsp;101
+&nbsp;ntp&nbsp;broadcast|multicast&nbsp;client
+</code></pre></div>
 <p><strong>Others</strong>
 Default-inställningar</p>
-<p><code>ntp&nbsp;max-associations&nbsp;100</code>
-<code>ntp&nbsp;allow&nbsp;mode&nbsp;control&nbsp;3</code>
-<code>ntp&nbsp;mindistance&nbsp;1</code>
-<code>ntp&nbsp;maxdistance&nbsp;8</code></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;max-associations&nbsp;100
+ntp&nbsp;allow&nbsp;mode&nbsp;control&nbsp;3
+ntp&nbsp;mindistance&nbsp;1
+ntp&nbsp;maxdistance&nbsp;8
+</code></pre></div>
 <p>Enable hardware clock synchronization</p>
-<p><code>ntp&nbsp;update-calendar</code></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;update-calendar
+</code></pre></div>
 <p>If my peer or configured master's clock is more than 1,000 seconds
 (default) off of my clock, reject the update and syslog.</p>
-<p><code>ntp&nbsp;panic&nbsp;update</code></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;panic&nbsp;update
+</code></pre></div>
 <p>Distance, 1 är slow convergence, 16 är fast</p>
-<p><code>ntp&nbsp;maxdistance&nbsp;&lt;1-16&gt;</code></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;maxdistance&nbsp;&lt;1-16&gt;
+</code></pre></div>
 <p>Orphan kicks in when we lose sync with our server. The number here is a
 stratum number, and must be a number lower than your real upstream NTP
 server</p>
-<p><code>ntp&nbsp;orphan&nbsp;&lt;1-16&gt;</code></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;orphan&nbsp;&lt;1-16&gt;
+</code></pre></div>
 <h3 id="nx-os">NX-OS</h3>
 <p>NX-OS kör också NTPv4.</p>
-<p><code>feature&nbsp;ntp</code>
-<code>ntp&nbsp;logging</code></p>
+<div class="highlight"><pre><span></span><code>feature&nbsp;ntp
+ntp&nbsp;logging
+</code></pre></div>
 <p>Cisco Fabric Services (CFS) kan användas för att distribuera
 NTP-konfigurationen mellan Nexus-switchar. När man gör NTP-konfiguration
 så blir NTP låst network-wide (Fabric Lock).</p>
-<p><code>ntp&nbsp;distribute</code></p>
-<p><code>ntp&nbsp;master</code>
-<code>ntp&nbsp;server&nbsp;10.0.1.10</code>
-<code>ntp&nbsp;source-interface&nbsp;loopback0</code></p>
-<p><code>ntp&nbsp;commit&nbsp;/&nbsp;abort</code></p>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;distribute
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;master
+ntp&nbsp;server&nbsp;10.0.1.10
+ntp&nbsp;source-interface&nbsp;loopback0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ntp&nbsp;commit&nbsp;/&nbsp;abort
+</code></pre></div>
 <p>Verify</p>
-<p><code>show&nbsp;ntp&nbsp;status</code>
-<code>show&nbsp;ntp&nbsp;peers</code></p>
+<div class="highlight"><pre><span></span><code>show&nbsp;ntp&nbsp;status
+show&nbsp;ntp&nbsp;peers
+</code></pre></div>
 <p>Notera att det endast är en <a href="/Nexus_VDC" title="wikilink">VDC</a> som synkar
 klockan i switchen.</p>
 <p><code>clock&nbsp;protocol&nbsp;ntp&nbsp;vdc</code><vdc-id></vdc-id></p>
@@ -8986,32 +9022,39 @@ klockan i switchen.</p>
 <p>Secure copy protocol på IOS kräver AAA för user authentication och
 authorization eftersom copy är ett exec-kommando.</p>
 <p>Server</p>
-<p><code>ip&nbsp;scp&nbsp;server&nbsp;enable</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;scp&nbsp;server&nbsp;enable
+</code></pre></div>
 <p>Push ios to switch</p>
-<p><code>scp&nbsp;ios.bin&nbsp;admin@10.0.0.10:ios.bin</code></p>
+<div class="highlight"><pre><span></span><code>scp&nbsp;ios.bin&nbsp;admin@10.0.0.10:ios.bin
+</code></pre></div>
 <p>Fetch ios from server</p>
-<p><code>copy&nbsp;scp://10.0.0.10:ios.bin&nbsp;flash:ios.bin</code></p>
+<div class="highlight"><pre><span></span><code>copy&nbsp;scp://10.0.0.10:ios.bin&nbsp;flash:ios.bin
+</code></pre></div>
 <h1 id="tftp">TFTP</h1>
 <p>Server, dela ut fil med TFTP.</p>
-<p><code>tftp-server&nbsp;nvram:startup-config&nbsp;alias&nbsp;TEST</code></p>
+<div class="highlight"><pre><span></span><code>tftp-server&nbsp;nvram:startup-config&nbsp;alias&nbsp;TEST
+</code></pre></div>
 <p>Klient</p>
-<p><code>ip&nbsp;tftp&nbsp;source-interface&nbsp;loopback0</code>
-<code>copy</code><a href="tftp://10.0.0.10/TEST"><code>tftp://10.0.0.10/TEST</code></a><code>null:</code></p>
+<p></p><div class="highlight"><pre><span></span><code>ip&nbsp;tftp&nbsp;source-interface&nbsp;loopback0
+</code></pre></div>
+<code>copy</code><a href="tftp://10.0.0.10/TEST"><code>tftp://10.0.0.10/TEST</code></a><code>null:</code><p></p>
 <p>För att säkerställa interoperability med gamla TFTP-servrar kan man
 behöva ställa ner blocksize.</p>
-<p><code>ip&nbsp;tftp&nbsp;blocksize&nbsp;1024</code></p>
+<div class="highlight"><pre><span></span><code>ip&nbsp;tftp&nbsp;blocksize&nbsp;1024
+</code></pre></div>
 <p>Debug</p>
-<p><code>debug&nbsp;tftp&nbsp;events</code></p>
+<div class="highlight"><pre><span></span><code>debug&nbsp;tftp&nbsp;events
+</code></pre></div>
 <h1 id="ftp">FTP</h1>
 <p>Server, because of numerous vulnerabilities (bug ID CSCse29244, IOS
 crash when transferring files via FTP) Cisco has removed the FTP server
 functionality from recent IOS releases.</p>
 <p>Klient</p>
-<p><code>no&nbsp;ip&nbsp;ftp&nbsp;passive</code>
-<code>ip&nbsp;ftp&nbsp;source-interface&nbsp;Loopback0</code>
-<code>ip&nbsp;ftp&nbsp;username&nbsp;USER</code>
-<code>ip&nbsp;ftp&nbsp;password&nbsp;SECRET</code></p>
-<p><a href="/Category:Cisco" title="wikilink">Category:Cisco</a></p>
+<div class="highlight"><pre><span></span><code>no&nbsp;ip&nbsp;ftp&nbsp;passive
+ip&nbsp;ftp&nbsp;source-interface&nbsp;Loopback0
+ip&nbsp;ftp&nbsp;username&nbsp;USER
+ip&nbsp;ftp&nbsp;password&nbsp;SECRET
+</code></pre></div>
 
 
 
@@ -9034,7 +9077,7 @@ functionality from recent IOS releases.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2 april 2025 22:50:31 CEST"><span class="timeago" datetime="2025-04-02T22:50:31+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2 april 2025 22:50:31 CEST">2025-04-02</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
   </span>
 
     
