@@ -194,13 +194,13 @@ vlan 101
  vn-segment 10101
 ```
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 VLAN modes:
 
 
 
-![Cisco-EVPN-VLAN-mode.PNG](../img/Cisco-EVPN-VLAN-mode.PNG)
+![Cisco-EVPN-VLAN-mode.PNG](../images/Cisco-EVPN-VLAN-mode.PNG)
 
 
 

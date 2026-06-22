@@ -163,7 +163,7 @@ Importera ldif filen och starta om slapd.
 ldapadd -Y EXTERNAL -H ldapi:/// -f postfix-book.ldif
 ```
 
-<div class="toccolours mw-collapsible mw-collapsed" style="width:800px">
+
 
 Exempel LDIF på hur en mail användare kan se ut.
 

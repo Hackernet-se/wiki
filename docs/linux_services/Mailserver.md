@@ -27,7 +27,7 @@ Konfiguration
 
 Konfigurations filerna finns under `/etc/postfix`
 
-<div class="toccolours mw-collapsible mw-collapsed" style="width:800px">
+
 
 `main.cf` Detta är main konfigurations filen.
 
@@ -218,7 +218,7 @@ smtpd_client_restrictions = check_client_access cidr:/etc/postfix/drop.cidr
 
 
 
-<div class="toccolours mw-collapsible mw-collapsed" style="width:800px">
+
 
 `virtual_domains` Innehåller vilka domäner server tar emot mail för.
 
@@ -232,7 +232,7 @@ example.com     OK
 
 
 
-<div class="toccolours mw-collapsible mw-collapsed" style="width:800px">
+
 
 `ldap_virtual_recipients.cf` LDAP fråga för att validera mottagaren.
 
@@ -252,7 +252,7 @@ result_attribute = mail
 
 
 
-<div class="toccolours mw-collapsible mw-collapsed" style="width:800px">
+
 
 `ldap_virtual_aliases.cf` LDAP fråga för att få fram aliases och
 forwarding adress.
@@ -273,7 +273,7 @@ result_attribute = mail, email
 
 
 
-<div class="toccolours mw-collapsible mw-collapsed" style="width:800px">
+
 
 `identitycheck.pcre` Regexp för att blocka klienter som använder ditt
 hostnamn.
@@ -291,7 +291,7 @@ hostnamn.
 
 
 
-<div class="toccolours mw-collapsible mw-collapsed" style="width:800px">
+
 
 `drop.cidr` Innehåller svartlistade IP-adresser.
 

@@ -280,4 +280,4 @@ fallback session gör att man slipper nertid när primary session går ner
 och man får lite tid på sig att fixa problemet.
 
 **Overview**
-![Cisco-MACsec.PNG](../img/Cisco-MACsec.PNG)
+![Cisco-MACsec.PNG](../images/Cisco-MACsec.PNG)

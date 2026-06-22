@@ -29,13 +29,13 @@ om. Rotbryggan avgör dessa timers. Root Path Cost skickas med i varje
 Hello och genom att addera det med costen på interfacet där Hellon kom
 in vet switchen hur långt det är till rotbryggan.
 
-<div class="mw-collapsible mw-collapsed" style="width:210px">
+
 
 **BPDU**
 
 
 
-![Cisco_STP_BPDU.png](../img/Cisco_STP_BPDU.png)
+![Cisco_STP_BPDU.png](../images/Cisco_STP_BPDU.png)
 
 
 

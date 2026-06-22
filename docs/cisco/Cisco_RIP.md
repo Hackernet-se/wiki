@@ -47,13 +47,13 @@ upp, ett RIP-interface kommer upp eller *clear ip route \** körs.
 [CSR](/Cisco_CSR "wikilink"):er verkar inte använda sig av Requests
 överhuvudtaget.
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 Response packet:
 
 
 
-![Cisco_RIP_Update.PNG](../img/Cisco_RIP_Update.PNG)
+![Cisco_RIP_Update.PNG](../images/Cisco_RIP_Update.PNG)
 
 
 
@@ -551,13 +551,13 @@ inte Ciscos implementation stöd för detta. Passive interfaces och static
 neighbors finns inte heller men nyheter är Route Poisoning (utökning av
 Split Horizon) och multipla RIPng-processer.
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 Response packet:
 
 
 
-![Cisco_RIPng_Update.png](../img/Cisco_RIPng_Update.png)
+![Cisco_RIPng_Update.png](../images/Cisco_RIPng_Update.png)
 
 
 

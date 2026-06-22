@@ -24,4 +24,4 @@ udp 4342 och data plane trafik skickas till udp 4341.
 -   Egress/Ingress Tunnel Router (xTR)
 -   Proxy Ingress Tunnel Router (P-ITR)
 
-![Cisco_LISP.png](../img/Cisco_LISP.png)
+![Cisco_LISP.png](../images/Cisco_LISP.png)

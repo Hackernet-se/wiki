@@ -622,13 +622,13 @@ IP-adress på interface. Den som förlorar slutar att flooda multicasten.
 I hub-and-spoke topologier bör alltid hub vinna förutsatt att man inte
 köra PIM i NBMA mode.
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 Assert message:
 
 
 
-![Cisco_PIM_Assert.PNG](../img/Cisco_PIM_Assert.PNG)
+![Cisco_PIM_Assert.PNG](../images/Cisco_PIM_Assert.PNG)
 
 
 

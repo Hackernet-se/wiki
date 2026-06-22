@@ -19,7 +19,7 @@ För konfiguration se [Cisco PIM](/Cisco_PIM "wikilink"), [Cisco
 IGMP](/Cisco_IGMP "wikilink") och [Cisco MLDP](/Cisco_MLDP "wikilink").
 Även om framtiden kanske stavas Bit Indexed Explicit Replication.
 
-![Cisco_Multicast.png](../img/Cisco_Multicast.png)
+![Cisco_Multicast.png](../images/Cisco_Multicast.png)
 
 Multicast Addressing
 --------------------

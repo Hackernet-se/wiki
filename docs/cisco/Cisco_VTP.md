@@ -49,13 +49,13 @@ revision number, identity of last updater, time stamp of last update,
 MD5 sum of VLAN database, VTP password och antalet efterkommande Subset
 advertisements.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_VTP_Summary.png](../img/Cisco_VTP_Summary.png)
+![Cisco_VTP_Summary.png](../images/Cisco_VTP_Summary.png)
 
 
 
@@ -64,13 +64,13 @@ Exempel:
 Skickas ut efter en VLAN-förändring och innehåller hela databasen. Kan
 dock behövas flera paket ifall det är en stor databas.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_VTP_Subset.png](../img/Cisco_VTP_Subset.png)
+![Cisco_VTP_Subset.png](../images/Cisco_VTP_Subset.png)
 
 
 
@@ -80,13 +80,13 @@ Skickas av server och client när de vill ha hela VLAN-databasen, t.ex.
 när de får in en Summary Advertisement med högre revisionsnummer.
 Skickas även av klienter när de startas om eller blir client.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_VTP_Request.png](../img/Cisco_VTP_Request.png)
+![Cisco_VTP_Request.png](../images/Cisco_VTP_Request.png)
 
 
 
@@ -95,13 +95,13 @@ Exempel:
 Skickas av server och client var 6 sekund om pruning är påslaget.
 Berättar om vilka VLAN som är aktiva.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_VTP_Join.png](../img/Cisco_VTP_Join.png)
+![Cisco_VTP_Join.png](../images/Cisco_VTP_Join.png)
 
 
 

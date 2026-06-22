@@ -25,13 +25,13 @@ Komponenter:
 Ett NetFlow-paket skickas med UDP och kan innehålla metadata om flera
 trafikflöden.
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 -   NetFlow v9:
 
 
 
-![Cisco_Netflow_v9.png](../img/Cisco_Netflow_v9.png)
+![Cisco_Netflow_v9.png](../images/Cisco_Netflow_v9.png)
 
 
 
@@ -40,13 +40,13 @@ Om man använder version 9 så skickar Cisco-enheter en NetFlow-template
 var 20:e paket så mottagare vet vilken information NetFlow-paketen
 innehåller.
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 -   NetFlow template:
 
 
 
-![Cisco_NetFlow_Template.png](../img/Cisco_NetFlow_Template.png)
+![Cisco_NetFlow_Template.png](../images/Cisco_NetFlow_Template.png)
 
 
 

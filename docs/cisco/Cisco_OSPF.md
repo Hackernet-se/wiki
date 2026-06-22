@@ -66,14 +66,14 @@ Alla paket kan vara unicast eller multicast, det avgörs av nätverkstyp.
     timers, flaggor (capabilities), DR/BDR (om det finns) och router-ID
     för grannar.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 
 Exempel:
 
 
 
-![Cisco_OSPF_Hello.PNG](../img/Cisco_OSPF_Hello.PNG)
+![Cisco_OSPF_Hello.PNG](../images/Cisco_OSPF_Hello.PNG)
 
 
 
@@ -82,14 +82,14 @@ Exempel:
     topologi-synken. Används först för att avgöra master/slave i
     grannskapet, högst router-id blir master.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 
 Exempel:
 
 
 
-![Cisco_OSPF_DD.PNG](../img/Cisco_OSPF_DD.PNG)
+![Cisco_OSPF_DD.PNG](../images/Cisco_OSPF_DD.PNG)
 
 
 
@@ -97,14 +97,14 @@ Exempel:
 -   **Link-State Request:** Innehåller vilka LSA:er som avsändaren vill
     ha alla detaljer om.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 
 Exempel:
 
 
 
-![Cisco_OSPF_Request.PNG](../img/Cisco_OSPF_Request.PNG)
+![Cisco_OSPF_Request.PNG](../images/Cisco_OSPF_Request.PNG)
 
 
 
@@ -112,28 +112,28 @@ Exempel:
 -   **Link-State Update:** Innehåller alla typer och detaljer om LSA:er
     och skickas på förfrågan eller vid topologiändring
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 
 Exempel:
 
 
 
-![Cisco_OSPF_Update.PNG](../img/Cisco_OSPF_Update.PNG)
+![Cisco_OSPF_Update.PNG](../images/Cisco_OSPF_Update.PNG)
 
 
 
 
 -   **Link-State Acknowledgment:** LSU confirmation.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 
 Exempel:
 
 
 
-![Cisco_OSPF_Ack.PNG](../img/Cisco_OSPF_Ack.PNG)
+![Cisco_OSPF_Ack.PNG](../images/Cisco_OSPF_Ack.PNG)
 
 
 

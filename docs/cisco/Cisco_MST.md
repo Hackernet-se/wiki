@@ -15,13 +15,13 @@ distribuera med hjälp av [VTPv3](/Cisco_VTP#VTPv3 "wikilink").
 
 MST använder en BPDU för att skicka information om alla instanser.
 
-<div class="mw-collapsible mw-collapsed" style="width:190px">
+
 
 Exempel
 
 
 
-![Cisco_MST_BPDU.png](../img/Cisco_MST_BPDU.png)
+![Cisco_MST_BPDU.png](../images/Cisco_MST_BPDU.png)
 
 
 

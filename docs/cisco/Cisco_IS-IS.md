@@ -58,33 +58,33 @@ segment används separata Hellos för L1 och L2 medans på point-to-point
 interface används gemensamma L1L2 Hellos pga effektivitet. Hello padding
 görs default för att ta reda på hur stora frames som kan skickas.
 
-<div class="mw-collapsible mw-collapsed" style="width:450px">
+
 
 L1 Hello:
 
 
 
-![Cisco_ISIS_Hello_L1.png](../img/Cisco_ISIS_Hello_L1.png)
+![Cisco_ISIS_Hello_L1.png](../images/Cisco_ISIS_Hello_L1.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:450px">
+
 
 L1L2 Hello:
 
 
 
-![Cisco_ISIS_Hello_L1L2.png](../img/Cisco_ISIS_Hello_L1L2.png)
+![Cisco_ISIS_Hello_L1L2.png](../images/Cisco_ISIS_Hello_L1L2.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:450px">
+
 
 P2P Hello: (finns ingen prio utan istället finns Local Circuit ID)
 
 
 
-![Cisco_ISIS_Hello_P2P.png](../img/Cisco_ISIS_Hello_P2P.png)
+![Cisco_ISIS_Hello_P2P.png](../images/Cisco_ISIS_Hello_P2P.png)
 
 
 
@@ -144,13 +144,13 @@ får man manuellt ställa lsp-storlek på alla enheter så det inte
 lsp-mtu 1400
 ```
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_ISIS_LSP.png](../img/Cisco_ISIS_LSP.png)
+![Cisco_ISIS_LSP.png](../images/Cisco_ISIS_LSP.png)
 
 
 
@@ -170,13 +170,13 @@ broadcast skickas det regelbundet av DIS. Eftersom ack sköts av PSNP på
 point-to-point-länkar skickas inga CSNP periodiskt, detta kan man slå på
 manuellt med interface-kommandot **isis csnp-interval <nonzero value>**
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_ISIS_CSNP.png](../img/Cisco_ISIS_CSNP.png)
+![Cisco_ISIS_CSNP.png](../images/Cisco_ISIS_CSNP.png)
 
 
 
@@ -186,13 +186,13 @@ acka en LSP (fungerar både som OSPF LSR och LSAck). En PSNP kan requesta
 eller acka flera LSPer. På broadcast används dock PSNP endast för
 Request eftersom Ack görs av CSNP från DIS.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_ISIS_PSNP.png](../img/Cisco_ISIS_PSNP.png)
+![Cisco_ISIS_PSNP.png](../images/Cisco_ISIS_PSNP.png)
 
 
 

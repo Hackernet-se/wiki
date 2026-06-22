@@ -38,4 +38,4 @@ annonseras ut från båda noderna i vPC-domänen, detta kallas vPC+. Se
 även [Nexus vPC](/Nexus_vPC "wikilink").
 
 Wireshark kan inte avkoda FabricPath-frames.
-![Cisco_FabricPath.PNG](../img/Cisco_FabricPath.PNG)
+![Cisco_FabricPath.PNG](../images/Cisco_FabricPath.PNG)

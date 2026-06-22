@@ -30,53 +30,53 @@ finns även extensions för att registrera klienters FQDN till DNS.
 
 ### Paket
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Discover
 
 
 
-![Cisco_DHCP_Discover.png](../img/Cisco_DHCP_Discover.png)
+![Cisco_DHCP_Discover.png](../images/Cisco_DHCP_Discover.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Offer
 
 
 
-![Cisco_DHCP_Offer.png](../img/Cisco_DHCP_Offer.png)
+![Cisco_DHCP_Offer.png](../images/Cisco_DHCP_Offer.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Request
 
 
 
-![Cisco_DHCP_Request.png](../img/Cisco_DHCP_Request.png)
+![Cisco_DHCP_Request.png](../images/Cisco_DHCP_Request.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   ACK
 
 
 
-![Cisco_DHCP_ACK.png](../img/Cisco_DHCP_ACK.png)
+![Cisco_DHCP_ACK.png](../images/Cisco_DHCP_ACK.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Release
 
 
 
-![Cisco_DHCP_Release.png](../img/Cisco_DHCP_Release.png)
+![Cisco_DHCP_Release.png](../images/Cisco_DHCP_Release.png)
 
 
 
@@ -319,7 +319,7 @@ relayen. Det är påslaget default om man kör DHCP snooping vilket innebär
 att denna information samt giaddr 0.0.0.0 läggs till DHCP-paketen men
 det går att stänga av med *no ip dhcp snooping information option*.
 
-![Cisco_DHCP_Option82.png](../img/Cisco_DHCP_Option82.png)
+![Cisco_DHCP_Option82.png](../images/Cisco_DHCP_Option82.png)
 
 DHCPv6
 ======

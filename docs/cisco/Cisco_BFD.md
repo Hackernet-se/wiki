@@ -28,12 +28,12 @@ på [QoS](/Cisco_QoS "wikilink")-policy för self-generated packets. BFD
 inblandade enheterna.
 
 ### Paket
-![Cisco_BFD_Control.PNG](../img/Cisco_BFD_Control.PNG)
+![Cisco_BFD_Control.PNG](../images/Cisco_BFD_Control.PNG)
 /// caption
 Control packet
 ///
 
-![Cisco_BFD_Echo.PNG](../img/Cisco_BFD_Echo.PNG)
+![Cisco_BFD_Echo.PNG](../images/Cisco_BFD_Echo.PNG)
 /// caption
 Echo packet
 ///
@@ -106,7 +106,7 @@ interface gi2
  ip ospf bfd disable
 ```
 
-![Cisco_BFD_AdminDown](../img/Cisco_BFD_AdminDown.PNG)
+![Cisco_BFD_AdminDown](../images/Cisco_BFD_AdminDown.PNG)
 /// caption
 Admin Down
 ///

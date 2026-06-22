@@ -97,13 +97,13 @@ LACPDU varje sekund. Sedan ändras det beroende på keepalive mode, slow
 (30 sek interval) är default. Att ändra görs per interface, **lacp rate
 fast**, men alla switchmodeller stödjer inte fast rate (1 sek interval).
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 LACPDU
 
 
 
-![Cisco_LACP.png](../img/Cisco_LACP.png)
+![Cisco_LACP.png](../images/Cisco_LACP.png)
 
 
 

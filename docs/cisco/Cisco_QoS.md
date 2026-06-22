@@ -84,7 +84,7 @@ Om service-policy rejectas kan det bero på avsaknad av
 Packet Marking
 --------------
 
-![Cisco_QoS_Markings.png](../img/Cisco_QoS_Markings.png) matchar inte ICMP echo
+![Cisco_QoS_Markings.png](../images/Cisco_QoS_Markings.png) matchar inte ICMP echo
 packets under icmp utan har eget kommando.
 
 ```
@@ -238,7 +238,7 @@ Verify
 show policy-map interface
 ```
 
-![Cisco_QoS_Queues.png](../img/Cisco_QoS_Queues.png)
+![Cisco_QoS_Queues.png](../images/Cisco_QoS_Queues.png)
 
 ### Ethernet Subinterface
 
@@ -480,7 +480,7 @@ DSCP eller IP precedence tas QoS-nivån ifrån L3 headern. Att lita på CoS
 är endast giltigt på trunk-länkar och DSCP/precedence fungerar endast på
 IP-paket.
 
-![Cisco_QoS_L2.png](../img/Cisco_QoS_L2.png)
+![Cisco_QoS_L2.png](../images/Cisco_QoS_L2.png)
 
 Global
 

@@ -28,13 +28,13 @@ best. Se även [BGP Multicast](/Cisco_Multicast#BGP "wikilink") och
 upprätta grannskap, innehåller grundläggande parametrar och
 capabilities.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_BGP_Open.PNG](../img/Cisco_BGP_Open.PNG)
+![Cisco_BGP_Open.PNG](../images/Cisco_BGP_Open.PNG)
 
 
 
@@ -42,13 +42,13 @@ Exempel:
 **UPDATE**: En update innehåller routinginformation. Varje NLRI skickas
 endast en gång.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_BGP_Update.PNG](../img/Cisco_BGP_Update.PNG)
+![Cisco_BGP_Update.PNG](../images/Cisco_BGP_Update.PNG)
 
 
 
@@ -57,13 +57,13 @@ Exempel:
 grannskap. För alla error codes se [IANAs
 lista](http://www.iana.org/assignments/bgp-parameters/bgp-parameters.xhtml)
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_BGP_Notification.PNG](../img/Cisco_BGP_Notification.PNG)
+![Cisco_BGP_Notification.PNG](../images/Cisco_BGP_Notification.PNG)
 
 
 
@@ -72,26 +72,26 @@ Exempel:
 lever. Peers måste komma överens om holdtime för keepalives, default är
 holdtime 180 sek och då skickas keepalives var 60 sek.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_BGP_Keepalive.PNG](../img/Cisco_BGP_Keepalive.PNG)
+![Cisco_BGP_Keepalive.PNG](../images/Cisco_BGP_Keepalive.PNG)
 
 
 
 
 **ROUTE REFRESH**: (RFC 2918) Båda sidor måste stödja denna capability.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 Exempel:
 
 
 
-![Cisco_BGP_RouteRefresh.PNG](../img/Cisco_BGP_RouteRefresh.PNG)
+![Cisco_BGP_RouteRefresh.PNG](../images/Cisco_BGP_RouteRefresh.PNG)
 
 
 
@@ -493,7 +493,7 @@ Route Refresh är en capability som finns i olika varianter och skickas i
 open message. Det IOS-XE kallar "new" decodar wireshark som "Cisco". En
 BGP-peer kan annonsera flera varianter.
 
-![Cisco_BGP_Route_Refresh_Capability.PNG](../img/Cisco_BGP_Route_Refresh_Capability.PNG)-tunnlar. Det är dock viktigt att se till
+![Cisco_BGP_Route_Refresh_Capability.PNG](../images/Cisco_BGP_Route_Refresh_Capability.PNG)-tunnlar. Det är dock viktigt att se till
 att next hop blir rätt.
 
 ### Next Hop
@@ -1279,13 +1279,13 @@ till eller ta bort routes och next-hop. MP-BGP listas som capability i
 Open-paketen och körs för det mesta inom samma AS. Se även [Cisco
 MPLS](/Cisco_MPLS "wikilink").
 
-<div class="mw-collapsible mw-collapsed" style="width:270px">
+
 
 Exempel:
 
 
 
-![Cisco_BGP_MP.png](../img/Cisco_BGP_MP.png)
+![Cisco_BGP_MP.png](../images/Cisco_BGP_MP.png)
 
 
 

@@ -35,13 +35,13 @@ vPC peers skickar varje sekund keepalives mellan varandra. Man kan t.ex.
 använda mgmt-portarna för keepalives, det är endast små UDP-paket som
 ska skickas och tas emot.
 
-<div class="mw-collapsible mw-collapsed" style="width:300px">
+
 
 Keepalive message:
 
 
 
-![Nexus-vPC-Keepalive.PNG](../img/Nexus-vPC-Keepalive.PNG)
+![Nexus-vPC-Keepalive.PNG](../images/Nexus-vPC-Keepalive.PNG)
 
 
 
@@ -331,4 +331,4 @@ Det finns inga speciella kommandon eller hårdvarukrav för detta utan det
 är en implementationsvariant, man konfar vpc på båda sidor. Dock måste
 vPC domain ID skilja sig mellan paren.
 
-![Cisco_vPC_B2B.PNG](../img/Cisco_vPC_B2B.PNG)
+![Cisco_vPC_B2B.PNG](../images/Cisco_vPC_B2B.PNG)

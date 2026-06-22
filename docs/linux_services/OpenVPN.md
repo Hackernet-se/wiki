@@ -181,7 +181,7 @@ HTTPS
 
 OpenVPN och HTTPS kan samsas på samma port.
 
-![Openvpn1.png](../img/Openvpn1.png)
+![Openvpn1.png](../images/Openvpn1.png)
 
 Dölja trafik
 ------------

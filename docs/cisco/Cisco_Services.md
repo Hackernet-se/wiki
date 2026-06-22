@@ -66,23 +66,23 @@ Packet types
 -   Control messages: peer status och set management parameters
 -   Update/request messages: time synchronization
 
-<div class="mw-collapsible mw-collapsed" style="width:200px">
+
 
 Client:
 
 
 
-![Cisco_NTP_client.png](../img/Cisco_NTP_client.png)
+![Cisco_NTP_client.png](../images/Cisco_NTP_client.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:200px">
+
 
 Server:
 
 
 
-![Cisco_NTP_server.png](../img/Cisco_NTP_server.png)
+![Cisco_NTP_server.png](../images/Cisco_NTP_server.png)
 
 
 

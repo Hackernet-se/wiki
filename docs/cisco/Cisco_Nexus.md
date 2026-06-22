@@ -312,23 +312,23 @@ queuing eller snarare delays in queues kan en switch agera enligt
 transparent clock model eller boundary clock model. PTP är inte
 supporterat på FEX interface.
 
-<div class="mw-collapsible mw-collapsed" style="width:300px">
+
 
 Sync message:
 
 
 
-![Cisco-PTP-Sync.PNG](../img/Cisco-PTP-Sync.PNG)
+![Cisco-PTP-Sync.PNG](../images/Cisco-PTP-Sync.PNG)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:300px">
+
 
 Announce message:
 
 
 
-![Cisco-PTP-Announce.PNG](../img/Cisco-PTP-Announce.PNG)
+![Cisco-PTP-Announce.PNG](../images/Cisco-PTP-Announce.PNG)
 
 
 

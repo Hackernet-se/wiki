@@ -25,10 +25,10 @@ mottagande router ser att det är en mismatch i key value kommer paketet
 att droppas.
 
 Utan key, 4 bytes header.
-![Cisco_GRE.png](../img/Cisco_GRE.png)
+![Cisco_GRE.png](../images/Cisco_GRE.png)
 
 Med key, 8 bytes header.
-![Cisco_GRE_key.png](../img/Cisco_GRE_key.png)
+![Cisco_GRE_key.png](../images/Cisco_GRE_key.png)
 
 Konfiguration
 =============
@@ -80,7 +80,7 @@ En keepalive är ett tomt GRE-paket till sig själv som enkapsuleras och
 skickas till andra sidan. När paketet packas upp kommer
 destinationsadressen att kollas upp för att avgöra vart det ska skickas
 vilket resulterar i att det skickas tillbaka.
-![Cisco_GRE_Keepalive.png](../img/Cisco_GRE_Keepalive.png)
+![Cisco_GRE_Keepalive.png](../images/Cisco_GRE_Keepalive.png)
 
 ```
 interface Tunnel0
@@ -158,23 +158,23 @@ olika tekniker, IPv4 end-to-end reachability är det som krävs.
 
 **Protokoll 41:**
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 Över IPv6, "tunnel mode ipv6"
 
 
 
-![Cisco_GRE_IPv6.PNG](../img/Cisco_GRE_IPv6.PNG)
+![Cisco_GRE_IPv6.PNG](../images/Cisco_GRE_IPv6.PNG)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 Över IPv4, "tunnel mode ipv6ip"
 
 
 
-![Cisco_GRE_IPv6IP.PNG](../img/Cisco_GRE_IPv6IP.PNG)
+![Cisco_GRE_IPv6IP.PNG](../images/Cisco_GRE_IPv6IP.PNG)
 
 
 

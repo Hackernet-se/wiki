@@ -23,4 +23,4 @@ lossless transport. FCoE har en egen EtherType (0x8906).
     FCoE.
 
 **Overview**
-![Cisco-FCoE-CNA.png](../img/Cisco-FCoE-CNA.png)
+![Cisco-FCoE-CNA.png](../images/Cisco-FCoE-CNA.png)

@@ -40,43 +40,43 @@ address assignment. När LCP har förhandlat klart om Link Quality
 Monitoring, Looped link detection, LB/MLPPP och autentiseringsmetoder
 och sett resultat av dessa tar NCP vid.
 
-<div class="mw-collapsible mw-collapsed" style="width:270px">
+
 
 LCP Request:
 
 
 
-![Cisco_WAN_LCP_Request.png](../img/Cisco_WAN_LCP_Request.png)
+![Cisco_WAN_LCP_Request.png](../images/Cisco_WAN_LCP_Request.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:270px">
+
 
 LCP Ack:
 
 
 
-![Cisco_WAN_LCP_Ack.png](../img/Cisco_WAN_LCP_Ack.png)
+![Cisco_WAN_LCP_Ack.png](../images/Cisco_WAN_LCP_Ack.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:270px">
+
 
 IPCP Request:
 
 
 
-![Cisco_WAN_IPCP_Request.png](../img/Cisco_WAN_IPCP_Request.png)
+![Cisco_WAN_IPCP_Request.png](../images/Cisco_WAN_IPCP_Request.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:270px">
+
 
 IPCP Ack:
 
 
 
-![Cisco_WAN_IPCP_Ack.png](../img/Cisco_WAN_IPCP_Ack.png)
+![Cisco_WAN_IPCP_Ack.png](../images/Cisco_WAN_IPCP_Ack.png)
 
 
 
@@ -224,53 +224,53 @@ i gamla DSL-tjänster. Det använder en ethernet-baserad
 discovery-funktion för att klient ska hitta till server. PPPoE har inte
 support för MLPPP.
 
-<div class="mw-collapsible mw-collapsed" style="width:270px">
+
 
 Initiation (broadcast):
 
 
 
-![Cisco_WAN_PPPoE_PADI.png](../img/Cisco_WAN_PPPoE_PADI.png)
+![Cisco_WAN_PPPoE_PADI.png](../images/Cisco_WAN_PPPoE_PADI.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:270px">
+
 
 Offer:
 
 
 
-![Cisco_WAN_PPPoE_PADO.png](../img/Cisco_WAN_PPPoE_PADO.png)
+![Cisco_WAN_PPPoE_PADO.png](../images/Cisco_WAN_PPPoE_PADO.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:270px">
+
 
 Request:
 
 
 
-![Cisco_WAN_PPPoE_PADR.png](../img/Cisco_WAN_PPPoE_PADR.png)
+![Cisco_WAN_PPPoE_PADR.png](../images/Cisco_WAN_PPPoE_PADR.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:270px">
+
 
 Session-confirmation:
 
 
 
-![Cisco_WAN_PPPoE_PADS.png](../img/Cisco_WAN_PPPoE_PADS.png)
+![Cisco_WAN_PPPoE_PADS.png](../images/Cisco_WAN_PPPoE_PADS.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:270px">
+
 
 Termination:
 
 
 
-![Cisco_WAN_PPPoE_PADT.png](../img/Cisco_WAN_PPPoE_PADT.png)
+![Cisco_WAN_PPPoE_PADT.png](../images/Cisco_WAN_PPPoE_PADT.png)
 
 
 

@@ -20,7 +20,7 @@ Cumulus Networks hemsida. Det finns image för [KVM](/KVM "wikilink") och
 
 ### Architecture
 
-![Cumulus_Linux_Architecture.PNG](../img/Cumulus_Linux_Architecture.PNG)
+![Cumulus_Linux_Architecture.PNG](../images/Cumulus_Linux_Architecture.PNG)
 
 Konfiguration
 -------------

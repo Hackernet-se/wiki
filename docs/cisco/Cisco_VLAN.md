@@ -103,13 +103,13 @@ trunk (ena sidan kan ha vtp domain NULL så funkar det också). DTP är
 påslaget default och skickas både som vanlig ethernet men också
 ISL-enkapsulerat. DTP är inte supporterat på någon Nexus-plattform.
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 DTP frame:
 
 
 
-![Cisco_DTP.png](../img/Cisco_DTP.png)
+![Cisco_DTP.png](../images/Cisco_DTP.png)
 
 
 

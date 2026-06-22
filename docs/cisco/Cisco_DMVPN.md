@@ -51,33 +51,33 @@ tunnel-interfacet.
 ip nhrp authentication NHRP_AUTH_STRING
 ```
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 Registration request:
 
 
 
-![Cisco_NHRP_Registration_Request.png](../img/Cisco_NHRP_Registration_Request.png)
+![Cisco_NHRP_Registration_Request.png](../images/Cisco_NHRP_Registration_Request.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 Registration reply:
 
 
 
-![Cisco_NHRP_Registration_Reply.png](../img/Cisco_NHRP_Registration_Reply.png)
+![Cisco_NHRP_Registration_Reply.png](../images/Cisco_NHRP_Registration_Reply.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:310px">
+
 
 Resolution request:
 
 
 
-![Cisco_NHRP_Resolution_Request.png](../img/Cisco_NHRP_Resolution_Request.png)
+![Cisco_NHRP_Resolution_Request.png](../images/Cisco_NHRP_Resolution_Request.png)
 
 
 

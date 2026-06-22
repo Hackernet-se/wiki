@@ -81,13 +81,13 @@ discovery skickas Hello-paket till 224.0.0.2 UDP 646 var 5:e sekund. När
 grannskap är bildat görs all informationsöverföring (updates) med
 unicast som skickas på TCP 646.
 
-<div class="mw-collapsible mw-collapsed" style="width:240px">
+
 
 **LDP Hello:**
 
 
 
-![Cisco_MPLS_LDP_Hello.PNG](../img/Cisco_MPLS_LDP_Hello.PNG)
+![Cisco_MPLS_LDP_Hello.PNG](../images/Cisco_MPLS_LDP_Hello.PNG)
 
 
 
@@ -546,23 +546,23 @@ ICMP
 MPLS Echo skickas unicast till LDP-grannen med L3 destination address
 127.0.0.1 på UDP 3503.
 
-<div class="mw-collapsible mw-collapsed" style="width:240px">
+
 
 **Echo Request:**
 
 
 
-![Cisco_MPLS_Echo_Request.png](../img/Cisco_MPLS_Echo_Request.png)
+![Cisco_MPLS_Echo_Request.png](../images/Cisco_MPLS_Echo_Request.png)
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:240px">
+
 
 **Echo Reply:**
 
 
 
-![Cisco_MPLS_Echo_Reply.png](../img/Cisco_MPLS_Echo_Reply.png)
+![Cisco_MPLS_Echo_Reply.png](../images/Cisco_MPLS_Echo_Reply.png)
 
 
 

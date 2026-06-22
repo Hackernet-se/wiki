@@ -3,20 +3,20 @@ import os
 
 def process_content(content):
     # 1. Fix image links
-    # [<File:Cisco_BGP_Open.PNG>](/File:Cisco_BGP_Open.PNG "wikilink") -> ![Cisco_BGP_Open.PNG](../img/Cisco_BGP_Open.PNG)
-    content = re.sub(r'\[<File:([^>]+)>\]\(/File:[^>]+ "wikilink"\)', r'![\1](../img/\1)', content)
+    # [<File:Cisco_BGP_Open.PNG>](/File:Cisco_BGP_Open.PNG "wikilink") -> ![Cisco_BGP_Open.PNG](../images/Cisco_BGP_Open.PNG)
+    content = re.sub(r'\[<File:([^>]+)>\]\(/File:[^>]+ "wikilink"\)', r'![\1](../images/\1)', content)
 
     # 2. Remove Category links
     # [Category:Cisco](/Category:Cisco "wikilink") -> 
     content = re.sub(r'\[Category:[^\]]+\]\(/Category:[^>]+ "wikilink"\)', '', content)
 
-    # 3. Remove DIV tags (specifically mw-collapsible-content)
+    # 3. Remove DIV tags (specifically mw-collapsible and mw-collapsible-content)
+    content = re.sub(r'<div [^>]*class="[^"]*mw-collapsible[^"]*"[^>]*>', '', content, flags=re.IGNORECASE)
     content = re.sub(r'<div class="mw-collapsible-content">', '', content)
     # Note: removing all </div> might be risky if there are other divs, 
     # but based on the TODO it seems they want to clean up these wiki-artifacts.
-    # We'll remove </div> that are likely associated with these.
-    # Since we don't have a full HTML parser, we'll remove </div> tags.
-    content = re.sub(r'</div>', '', content)
+    # We'll remove </div> tags.
+    content = re.sub(r'</div>', '', content, flags=re.IGNORECASE)
 
     # 4. Fix code blocks
     # Convert sequences of single backtick lines to a single code block

@@ -22,7 +22,7 @@ datacenter baserat på olika leverantörer eller preferenser men här
 beskriver vi grundläggande hur designen ser ut med spine och leaf
 uppsättning och vad som är viktigt att tänka på när man bygger och
 integrerar sina system.
-![ACI-Fabric_layers](../img/ACI-Fabric_layers.png)
+![ACI-Fabric_layers](../images/ACI-Fabric_layers.png)
 
 ## Spine
 Spine kallas de Nexus switchar som sitter på toppen av de andra fabric
@@ -167,4 +167,4 @@ GUI: apic:fallback\\\\username
 Collecting Metrics - Example
 ----------------------------
 
-![ACI_Metrics](../img/Cisco_ACI_Metrics.PNG)
+![ACI_Metrics](../images/Cisco_ACI_Metrics.PNG)

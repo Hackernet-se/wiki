@@ -20,13 +20,13 @@ kan användas i kombination med
 kör Bridge Assurance eller [BFD](/Cisco_BFD "wikilink") bör man köra
 UDLD.
 
-<div class="mw-collapsible mw-collapsed" style="width:200px">
+
 
 UDLD-paket:
 
 
 
-![Cisco_UDLD.png](../img/Cisco_UDLD.png)
+![Cisco_UDLD.png](../images/Cisco_UDLD.png)
 
 
 

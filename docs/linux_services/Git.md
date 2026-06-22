@@ -13,7 +13,7 @@ repository består av tre "trees" som git håller koll på.
 
 ### Overview
 
-![Hackernet-Git.PNG](../img/Hackernet-Git.PNG)
+![Hackernet-Git.PNG](../images/Hackernet-Git.PNG)
 
 Installation
 ------------

@@ -50,7 +50,7 @@ Packets
 
 **Version 1**
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Advertise:
 
@@ -60,7 +60,7 @@ Packets
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Hello Speak:
 
@@ -70,7 +70,7 @@ Packets
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Hello Standby:
 
@@ -80,7 +80,7 @@ Packets
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Hello Active:
 
@@ -93,7 +93,7 @@ Packets
 
 **Version 2**
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Advertise:
 
@@ -103,7 +103,7 @@ Packets
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Hello Speak:
 
@@ -113,7 +113,7 @@ Packets
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Hello Standby:
 
@@ -123,7 +123,7 @@ Packets
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:250px">
+
 
 -   Hello Active:
 
@@ -133,7 +133,7 @@ Packets
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:830px">
+
 
 För att ta över active-rollen skickas ett Coup message, detta används
 vid preemption.
@@ -144,7 +144,7 @@ vid preemption.
 
 
 
-<div class="mw-collapsible mw-collapsed" style="width:830px">
+
 
 När ett interface shutas på active device skickas det ut ett Resign
 message så att standby kan bli active direkt.
