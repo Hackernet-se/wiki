@@ -101,7 +101,7 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-copyright: Copyright &copy; 2025 Hackernets Riddare
+copyright: Copyright &copy; 2026 Hackernets Riddare
 extra:
   consent:
     title: Cookie consent
