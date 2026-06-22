@@ -81,5 +81,3 @@ Dessa tre tjänster går att slå av manuellt via **Host** -\>
 **Configure** -\> **System** -\> **Services**. SSH och ESXi Shell kan
 även slås av via **DCUI** -\> **F2** -\> **Troubleshooting options**,
 här kan även timeout-värden för dessa två tjänster, samt DCUI, ändras.
-
-[Category:VMware](/Category:VMware "wikilink")

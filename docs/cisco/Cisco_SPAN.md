@@ -38,39 +38,49 @@ en oanvänd port för att switchen ska kunna spegla trafik.
 SPAN
 ====
 
-`monitor session 1 source interface fa0/2 rx`
-`monitor session 1 source interface fa0/3 both`
-`monitor session 1 destination interface fa0/10 encapsulation replicate`
+```
+monitor session 1 source interface fa0/2 rx
+monitor session 1 source interface fa0/3 both
+monitor session 1 destination interface fa0/10 encapsulation replicate
+```
 
 Encapsulation replicate gör att exakt alla frames speglas.
 
-`monitor session 1 filter vlan 2 - 5`
+```
+monitor session 1 filter vlan 2 - 5
+```
 
 Speglar man en trunkport kan man filtrera så att endast vissa VLAN
 speglas.
 
 **Verify**
 
-`show monitor session 1`
-`show platform software monitor session 1`
+```
+show monitor session 1
+show platform software monitor session 1
+```
 
 **NX-OS**
 Destination
 
-`interface Ethernet1/1`
-` description MONITOR-SESSION-1`
-` switchport`
-` switchport monitor`
-` no shutdown`
+```
+interface Ethernet1/1
+ description MONITOR-SESSION-1
+ switchport
+ switchport monitor
+ no shutdown
+```
 
 Monitor session
 
-`monitor session 1`
-` description SPAN-to-SERVER`
-` source vlan 10-20 both`
-` rate-limit auto`
-` destination interface Ethernet1/1`
-` no shut`
+```
+monitor session 1
+ description SPAN-to-SERVER
+ source vlan 10-20 both
+ rate-limit auto
+ destination interface Ethernet1/1
+ no shut
+```
 
 RSPAN
 =====
@@ -79,25 +89,33 @@ Skapa RSPAN VLAN på alla switchar. RSPAN vlan stänger av mac learning
 och allt som kommer in floodas till alla portar som är konfigurerade som
 destination.
 
-`vlan 999`
-` name RSPAN`
-` remote span`
-` exit`
+```
+vlan 999
+ name RSPAN
+ remote span
+ exit
+```
 
 Source
 
-`monitor session 1 source interface fa0/3 both`
-`monitor session 1 destination remote vlan 999`
+```
+monitor session 1 source interface fa0/3 both
+monitor session 1 destination remote vlan 999
+```
 
 Switch 2
 
-`monitor session 1 source remote vlan 999`
-`monitor session 1 destination interface gi0/8`
+```
+monitor session 1 source remote vlan 999
+monitor session 1 destination interface gi0/8
+```
 
 **Verify**
 
-`show monitor session 1`
-`show vlan remote-span`
+```
+show monitor session 1
+show vlan remote-span
+```
 
 ERSPAN
 ======
@@ -112,44 +130,54 @@ hjälp av GRE Protocol Type value, 0x88BE och 0x22EB.
 
 Source
 
-`monitor session 1 type erspan-source`
-`source interface gi0/1 both`
-`no shut`
-`destination`
-` erspan-id 101`
-` ip address 10.0.0.20`
-` origin ip address 172.20.0.10`
+```
+monitor session 1 type erspan-source
+source interface gi0/1 both
+no shut
+destination
+ erspan-id 101
+ ip address 10.0.0.20
+ origin ip address 172.20.0.10
+```
 
 Destination
 
-`monitor session 1 type erspan-destination`
-`destination interface gi0/2 `
-`no shut`
-`source`
-` erspan-id 101`
-` ip address 10.0.0.20`
+```
+monitor session 1 type erspan-destination
+destination interface gi0/2 
+no shut
+source
+ erspan-id 101
+ ip address 10.0.0.20
+```
 
 Verify
 
-`show monitor session 1`
-`show capability feature monitor erspan-source`
-`show capability feature monitor erspan-destination`
+```
+show monitor session 1
+show capability feature monitor erspan-source
+show capability feature monitor erspan-destination
+```
 
 **NX-OS**
 
-`monitor erspan origin ip-address 10.1.2.1`
-`monitor session 1 type erspan-source`
-` description ERSPAN direct to Sniffer PC`
-` erspan-id 32                              # required, # between 1-1023`
-` vrf default                               # required`
-` destination ip 10.1.2.3                   # IP address of Sniffer PC`
-` source interface port-channel1 both       # Port(s) to be sniffed`
-` filter vlan 3900                          # limit VLAN(s) (optional)`
-` no shut                                   # enable`
+```
+monitor erspan origin ip-address 10.1.2.1
+monitor session 1 type erspan-source
+ description ERSPAN direct to Sniffer PC
+ erspan-id 32                              # required, # between 1-1023
+ vrf default                               # required
+ destination ip 10.1.2.3                   # IP address of Sniffer PC
+ source interface port-channel1 both       # Port(s) to be sniffed
+ filter vlan 3900                          # limit VLAN(s) (optional)
+ no shut                                   # enable
+```
 
 Verify
 
-`show monitor session all`
+```
+show monitor session all
+```
 
 Embedded Packet Capture
 =======================
@@ -159,22 +187,30 @@ paket i båda riktningen på ett interface samt begränsa så att inte allt
 fångas. Man kan såklart ha en permit ip any any acl men något slags
 filter måste konfigureras. Detta är IOS-XE syntax.
 
-`ip access-list extended CAPTURE`
-` permit udp host 172.17.0.13 host 172.16.0.14 eq 53`
-` permit udp host 172.16.0.14 host 172.17.0.13 eq 53`
+```
+ip access-list extended CAPTURE
+ permit udp host 172.17.0.13 host 172.16.0.14 eq 53
+ permit udp host 172.16.0.14 host 172.17.0.13 eq 53
+```
 
-`monitor capture 1 access-list CAPTURE interface g0/0 both`
+```
+monitor capture 1 access-list CAPTURE interface g0/0 both
+```
 
 Start / Stop / Clean up
 
-`monitor capture 1 start`
-`monitor capture 1 stop`
-`no monitor capture 1`
+```
+monitor capture 1 start
+monitor capture 1 stop
+no monitor capture 1
+```
 
 Show
 
-`show mon cap 1 buffer brief`
-`show mon cap 1 parameter`
+```
+show mon cap 1 buffer brief
+show mon cap 1 parameter
+```
 
 Ethanalyzer
 ===========
@@ -188,29 +224,39 @@ stöd för filter.
 
 Exempel: titta på trafik till och från supervisor på mgmt-interface.
 
-`ethanalyzer local interface mgmt`
-`ethanalyzer local interface mgmt capture-filter "host 10.0.0.10" limit-captured-frames 50 write bootflash:CAP_MGMT.pcap`
+```
+ethanalyzer local interface mgmt
+ethanalyzer local interface mgmt capture-filter "host 10.0.0.10" limit-captured-frames 50 write bootflash:CAP_MGMT.pcap
+```
 
 Man kan inte se trafik som går i hårdvaran (ASIC) men man kan använda en
 ACL med log option som workaround.
 
-`ip access-list ACL-CAP`
-` permit tcp 10.0.0.3/32 10.0.0.10/32 eq 5000 log`
-` permit ip any any`
-`interface e1/1`
-` ip access-group ACL-CAP in`
+```
+ip access-list ACL-CAP
+ permit tcp 10.0.0.3/32 10.0.0.10/32 eq 5000 log
+ permit ip any any
+interface e1/1
+ ip access-group ACL-CAP in
+```
 
-`ethanalyzer local interface inband capture-filter “tcp port 5000”`
+```
+ethanalyzer local interface inband capture-filter “tcp port 5000”
+```
 
 En annan mer kraftfull workaround man kan göra är att spegla trafik från
 ASIC (cloud scale) till CPU och sedan använda ethanalyzer.
 
-`monitor session 1`
-` source interface e1/15`
-` destination interface sup-eth 0`
-` no shut`
+```
+monitor session 1
+ source interface e1/15
+ destination interface sup-eth 0
+ no shut
+```
 
-`ethanalyzer local interface inband mirror limit-captured-frames 50`
+```
+ethanalyzer local interface inband mirror limit-captured-frames 50
+```
 
 RITE
 ====
@@ -220,15 +266,17 @@ anger en mac-adress man vill skicka paketen till, det skulle t.ex. kunna
 vara en IDS. Man kan matcha det man vill ska skickas mot en acl och man
 kan sampla.
 
-`ip traffic-export profile IDS`
-` interface Gi0/0`
-` mac-address 0123.0005.abcd`
-` incoming sample one-in-every 5`
-`interface Gi0/2`
-` ip traffic-export apply IDS`
+```
+ip traffic-export profile IDS
+ interface Gi0/0
+ mac-address 0123.0005.abcd
+ incoming sample one-in-every 5
+interface Gi0/2
+ ip traffic-export apply IDS
+```
 
 Show
 
-`show ip traffic-export`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show ip traffic-export
+```

@@ -25,20 +25,22 @@ mottagande router ser att det är en mismatch i key value kommer paketet
 att droppas.
 
 Utan key, 4 bytes header.
-[<File:Cisco_GRE.png>](/File:Cisco_GRE.png "wikilink")
+![Cisco_GRE.png](../img/Cisco_GRE.png)
 
 Med key, 8 bytes header.
-[<File:Cisco_GRE_key.png>](/File:Cisco_GRE_key.png "wikilink")
+![Cisco_GRE_key.png](../img/Cisco_GRE_key.png)
 
 Konfiguration
 =============
 
 **R1**
 
-`interface Tunnel0`
-` ip address 10.0.0.1 255.255.255.252`
-` ip mtu 1400`
-` ip tcp adjust-mss 1360`
+```
+interface Tunnel0
+ ip address 10.0.0.1 255.255.255.252
+ ip mtu 1400
+ ip tcp adjust-mss 1360
+```
 ` tunnel source `<local-ip>
 ` tunnel destination `<R2-ip>
 
@@ -47,18 +49,22 @@ interfacet.
 
 **R2**
 
-`interface Tunnel0`
-` ip address 10.0.0.2 255.255.255.252`
-` ip mtu 1400`
-` ip tcp adjust-mss 1360`
+```
+interface Tunnel0
+ ip address 10.0.0.2 255.255.255.252
+ ip mtu 1400
+ ip tcp adjust-mss 1360
+```
 ` tunnel source `<local-ip>
 ` tunnel destination `<R1-ip>
 
 Verify. Utan keepalives är ett tunnel-interface UP/UP sålänge det inte
 är administratively shutdown.
 
-`show ip int br`
-`show interface | i Tunnel protocol`
+```
+show ip int br
+show interface | i Tunnel protocol
+```
 
 ### Keepalive
 
@@ -74,24 +80,30 @@ En keepalive är ett tomt GRE-paket till sig själv som enkapsuleras och
 skickas till andra sidan. När paketet packas upp kommer
 destinationsadressen att kollas upp för att avgöra vart det ska skickas
 vilket resulterar i att det skickas tillbaka.
-[<File:Cisco_GRE_Keepalive.png>](/File:Cisco_GRE_Keepalive.png "wikilink")
+![Cisco_GRE_Keepalive.png](../img/Cisco_GRE_Keepalive.png)
 
-`interface Tunnel0`
+```
+interface Tunnel0
+```
 ` keepalive `<interval>` `<retries>
 
 Verify
 
-`show interface tunnel 0 | i Keepalive`
+```
+show interface tunnel 0 | i Keepalive
+```
 
 ### VRF
 
 Man kan ha tunnel-interfacet i en VRF medans tunneln själv terminerar i
 en annan VRF.
 
-`interface Tunnel0`
-` vrf forwarding VRF-1`
-` ip address 10.0.0.1 255.255.255.252`
-` tunnel vrf VRF-2`
+```
+interface Tunnel0
+ vrf forwarding VRF-1
+ ip address 10.0.0.1 255.255.255.252
+ tunnel vrf VRF-2
+```
 ` tunnel source `<vrf2-ip>
 ` tunnel destination `<vrf2-ip>
 
@@ -115,21 +127,27 @@ QoS](/Cisco_QoS "wikilink").
 
 Enable QoS for VPNs feature:
 
-`interface Tunnel0`
-` qos pre-classify`
+```
+interface Tunnel0
+ qos pre-classify
+```
 
 ### Others
 
 Man kan koppla ihop loopback-interface med hjälp av GRE genom att sätta
 tunnelinterfacen som unnumbered.
 
-`interface Tunnel0`
-` ip unnumbered Loopback0`
+```
+interface Tunnel0
+ ip unnumbered Loopback0
+```
 
 Drop corrupted and out-of-order VPN packets
 
-`tunnel checksum  `
-`tunnel sequence-datagrams`
+```
+tunnel checksum  
+tunnel sequence-datagrams
+```
 
 IPv6
 ====
@@ -144,22 +162,22 @@ olika tekniker, IPv4 end-to-end reachability är det som krävs.
 
 Över IPv6, "tunnel mode ipv6"
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_GRE_IPv6.PNG>](/File:Cisco_GRE_IPv6.PNG "wikilink")
 
-</div>
-</div>
+![Cisco_GRE_IPv6.PNG](../img/Cisco_GRE_IPv6.PNG)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:310px">
 
 Över IPv4, "tunnel mode ipv6ip"
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_GRE_IPv6IP.PNG>](/File:Cisco_GRE_IPv6IP.PNG "wikilink")
 
-</div>
-</div>
+![Cisco_GRE_IPv6IP.PNG](../img/Cisco_GRE_IPv6IP.PNG)
+
+
+
 
 #### Manual tunnel
 
@@ -167,11 +185,13 @@ IPv6-IP-tunnlar använder IP-protokoll 41 och vill man filtrera det i en
 acl får man använda protokollnumret. Detta har något lägre overhead än
 GRE.
 
-`interface Tunnel0`
-` ipv6 address 10::1/64`
-` tunnel source loopback0`
-` tunnel destination 10.0.0.20`
-` tunnel mode ipv6ip`
+```
+interface Tunnel0
+ ipv6 address 10::1/64
+ tunnel source loopback0
+ tunnel destination 10.0.0.20
+ tunnel mode ipv6ip
+```
 
 #### Automatic 6to4
 
@@ -186,16 +206,22 @@ inklusive adressen på tunnel-interfacet måste tas ut från den range som
 är en kombination av det reserverade IPv6-prefixet och 6to4 border
 routerns för övriga nåbara IPv4-adress, dvs 2002:\<32-bitar ipv4\>::/48.
 
-`interface Loopback0`
-` description Border Router IPv4 Address`
-` ip address 192.168.0.1 255.255.255.255`
+```
+interface Loopback0
+ description Border Router IPv4 Address
+ ip address 192.168.0.1 255.255.255.255
+```
 
-`interface Tunnel0`
-` tunnel source Loopback0`
-` tunnel mode ipv6ip 6to4`
-` ipv6 address 2002:C0A8:0001::10/64`
+```
+interface Tunnel0
+ tunnel source Loopback0
+ tunnel mode ipv6ip 6to4
+ ipv6 address 2002:C0A8:0001::10/64
+```
 
-`ipv6 route 2002::/16 tunnel 0`
+```
+ipv6 route 2002::/16 tunnel 0
+```
 
 #### ISATAP
 
@@ -214,10 +240,12 @@ ISATAP är också point-to-multipoint natively
 
 Man behöver ej ange destination address manuellt.
 
-`interface Tunnel0`
-` ip address 2001:0:0:500::/64 eui-64`
-` no ipv6 nd suppress-ra`
-` tunnel mode ipv6ip isatap`
+```
+interface Tunnel0
+ ip address 2001:0:0:500::/64 eui-64
+ no ipv6 nd suppress-ra
+ tunnel mode ipv6ip isatap
+```
 
 Ett äldre alternativ till ISATAP är "IPv6 Automatic IPv4-compatible"
 (*tunnel mode ipv6ip automatic*) men det är inte rekommenderat att köra.
@@ -255,38 +283,42 @@ Tunnel 6rd ipv4 prefix-len 0 är default.
 
 BR
 
-`ipv6 general-prefix RD 6rd Tunnel0`
-`!`
-`interface Tunnel0`
-` no ip address`
-` ipv6 address RD ::/128 anycast`
-` tunnel source Loopback0`
-` tunnel mode ipv6ip 6rd`
-` tunnel 6rd prefix 2002::/32`
-`! `
-`ipv6 route 2002::/32 Tunnel0`
+```
+ipv6 general-prefix RD 6rd Tunnel0
+!
+interface Tunnel0
+ no ip address
+ ipv6 address RD ::/128 anycast
+ tunnel source Loopback0
+ tunnel mode ipv6ip 6rd
+ tunnel 6rd prefix 2002::/32
+! 
+ipv6 route 2002::/32 Tunnel0
+```
 
 CE
 
-`ipv6 general-prefix RD 6rd Tunnel0`
-`!`
-`interface Tunnel0`
-` no ip address`
-` ipv6 enable`
-` tunnel source Loopback0`
-` tunnel mode ipv6ip 6rd`
-` tunnel 6rd prefix 2002::/32`
-` tunnel 6rd br 4.4.4.4`
-`!`
-`ipv6 route 2002::/32 Tunnel0`
-`ipv6 route ::/0 Tunnel0 2002:0:404:404::`
-`!`
-`interface GigabitEthernet1`
-` description LAN`
-` ipv6 address RD ::/64 eui-64`
+```
+ipv6 general-prefix RD 6rd Tunnel0
+!
+interface Tunnel0
+ no ip address
+ ipv6 enable
+ tunnel source Loopback0
+ tunnel mode ipv6ip 6rd
+ tunnel 6rd prefix 2002::/32
+ tunnel 6rd br 4.4.4.4
+!
+ipv6 route 2002::/32 Tunnel0
+ipv6 route ::/0 Tunnel0 2002:0:404:404::
+!
+interface GigabitEthernet1
+ description LAN
+ ipv6 address RD ::/64 eui-64
+```
 
 Verify
 
-`show tunnel 6rd`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show tunnel 6rd
+```

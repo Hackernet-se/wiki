@@ -9,7 +9,9 @@ en viss mängd på ett filsystem.
 Installation
 ------------
 
-`apt-get install quota`
+```
+apt-get install quota
+```
 
 Konfiguration
 -------------
@@ -17,30 +19,42 @@ Konfiguration
 Börja med att ändra i `fstab` och lägg till **usrquota** eller/och
 **grpquota** på det filsystemet du vill använda det på.
 
-`# /home was on /dev/sda6 during installation`
+```
+# /home was on /dev/sda6 during installation
+```
 `UUID=9ca5cef9-f734-4396-9f29-ddaeedc21e28 /home           ext4    defaults,`**`usrquota`**`        0       2`
 
 Mounta om filsystemet.
 
-`mount -o remount /home`
+```
+mount -o remount /home
+```
 
 Skapa en quota index fil. I filen sparas användarens/gruppens limit och
 hur mycket utrymme som används.
 
-`quotacheck -cum /home`
+```
+quotacheck -cum /home
+```
 
 Slå av och på quotas med följande kommandon.
 
-`quotaon /home`
-`quotaoff /home`
+```
+quotaon /home
+quotaoff /home
+```
 
 För att sätta en quota på en användare med max limit på 1Gb skriv och
 ändra: [Byte converter](http://www.whatsabyte.com/P1/byteconverter.htm)
 
-`edquota user1`
+```
+edquota user1
+```
 
-`Disk quotas for user user1 (uid 1001):`
-` Filesystem                   blocks       soft       hard     inodes     soft     hard`
+```
+Disk quotas for user user1 (uid 1001):
+ Filesystem                   blocks       soft       hard     inodes     soft     hard
+```
 ` /dev/disk/by-label/DOROOT         8      `**`1000000`**`    `**`1048576`**`        2        0        0`
 
 |            |                                                                             |
@@ -66,11 +80,15 @@ period**.
 
 Kolla quotan på en användare/grupp.
 
-`quota user1`
+```
+quota user1
+```
 
 Skapa en rapport som visar varje användare/grupp quota inställningar.
 
-`repquota -a`
+```
+repquota -a
+```
 
 ### Grace Period
 
@@ -78,13 +96,15 @@ Grace period sätter hur länge en användare får överstiga sin soft limit.
 Denna inställningen är system wide och gäller för alla grupper och
 användare.
 
-`edquota -t`
+```
+edquota -t
+```
 
 Tips'N'Trix
 -----------
 
 Prova din quota genom att skapa en 1Gb fil.
 
-`dd if=/dev/zero of=/home/$USER/DDfile bs=1M count=1024 oflag=direct`
-
-[Category:Guider](/Category:Guider "wikilink")
+```
+dd if=/dev/zero of=/home/$USER/DDfile bs=1M count=1024 oflag=direct
+```

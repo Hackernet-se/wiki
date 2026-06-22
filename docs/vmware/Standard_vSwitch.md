@@ -45,5 +45,3 @@ i L2-headern kommer paketet att droppas.
 Per default är endast Promiscuous Mode inställt på Reject i en Standard
 vSwitch. I en DvSwitch däremot är samtliga inställda på Reject från
 början.
-
-[Category:VMware](/Category:VMware "wikilink")

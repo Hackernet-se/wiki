@@ -11,7 +11,9 @@ databasen förr. MySQL är en av programmen du får när du installerar
 Installation
 ------------
 
-`apt-get install mysql-server`
+```
+apt-get install mysql-server
+```
 
 Konfiguration
 -------------
@@ -21,7 +23,9 @@ Konfiguration av MySQL görs i `/etc/mysql/my.cnf`.
 By default så lyssnar MySQL enbart på 127.0.0.1, för att fixa det kan
 man ändra i my.cnf till,
 
-`bind-address = 0.0.0.0`
+```
+bind-address = 0.0.0.0
+```
 
 Då kommer MySQL lyssna på alla interface.
 
@@ -30,7 +34,9 @@ Skapa en databas
 
 Logga in som root.
 
-`mysql -u root -p`
+```
+mysql -u root -p
+```
 
 Skapa en databas.
 
@@ -49,14 +55,15 @@ Backup/Dumpa databas
 
 Dumpa en databas till en fil för att göra en backup på den.
 
-`mysqldump --user=[username] --password=[password] [databas] > dbcontent.sql`
+```
+mysqldump --user=[username] --password=[password] [databas] > dbcontent.sql
+```
 
 Importera en databas
 --------------------
 
 För att importera en databas dump.
 
-`mysql -u [username] -p[password] [databas] < dumpfilename.sql`
-
-[Category:Guider](/Category:Guider "wikilink")
-[Category:Sparco](/Category:Sparco "wikilink")
+```
+mysql -u [username] -p[password] [databas] < dumpfilename.sql
+```

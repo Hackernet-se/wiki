@@ -39,7 +39,9 @@ satt.
     från, Source-Specifik Multicast. Det är bakåtkompatilbelt med IGMPv1
     och v2.
 
-`show ip igmp interface`
+```
+show ip igmp interface
+```
 
 Packets
 =======
@@ -84,13 +86,17 @@ själv men lyssnar efter Queries och när det slutar komma in kan den ta
 Interval plus en halv Query Response Interval, default är detta 255
 sekunder.
 
-`show ip igmp interface | i querying`
+```
+show ip igmp interface | i querying
+```
 
 Med IGMPv1 finns det inget inbyggt sätt för hostarna att avgöra vem som
 ska stå för Queries. Därför väljer routrarna en som blir DR och den
 kommer att skicka IGMP Queries, routern med högst IP vinner.
 
-`show ip igmp interface | i DR `
+```
+show ip igmp interface | i DR 
+```
 
 Timers
 ------
@@ -100,28 +106,38 @@ query message innehåller ett timer-värde (8 bit field) som anger hur
 lång tid hostarna har på sig att besvara meddelandet, det räcker att en
 host svarar på det så kommer inte multicast-strömmen att upphöra.
 
-`interface gi2`
-` ip igmp query-max-response-time 10`
-` ip igmp query-interval 60`
+```
+interface gi2
+ ip igmp query-max-response-time 10
+ ip igmp query-interval 60
+```
 
 Querier
 
-` ip igmp querier-timeout 120`
+```
+ ip igmp querier-timeout 120
+```
 
 Verify
 
-`show ip igmp interface | i IGMP`
+```
+show ip igmp interface | i IGMP
+```
 
 **Last Member**
 
-`interface gi2`
-` ip igmp last-member-query-count 2`
-` ip igmp last-member-query-interval 1000`
+```
+interface gi2
+ ip igmp last-member-query-count 2
+ ip igmp last-member-query-interval 1000
+```
 
 Man kan även ange att strömmen ska upphöra direkt om det kommer in ett
 Leave group message.
 
-` ip igmp immediate-leave group-list IMMEDIATE_LEAVE`
+```
+ ip igmp immediate-leave group-list IMMEDIATE_LEAVE
+```
 
 Filtering
 ---------
@@ -135,27 +151,35 @@ trunk kan man filtrera per VLAN.
 
 ACL Group and channel access control & limit (per interface)
 
-`access-list 12 permit 224.10.10.0 0.0.0.255`
-`interface Gi0/0`
-` ip igmp access-group 12`
-` ip igmp limit 10`
+```
+access-list 12 permit 224.10.10.0 0.0.0.255
+interface Gi0/0
+ ip igmp access-group 12
+ ip igmp limit 10
+```
 
 Profile, only allow the specific multicast range
 
-`ip igmp profile 1`
-` permit`
-` range 224.0.O.O 224.255.255.255`
-`int Gi0/0`
-` ip igmp filter 1`
+```
+ip igmp profile 1
+ permit
+ range 224.0.O.O 224.255.255.255
+int Gi0/0
+ ip igmp filter 1
+```
 
 IGMP minimum version (global)
 
-`ip igmp snooping minimum-version 2`
+```
+ip igmp snooping minimum-version 2
+```
 
 Verify
 
-`show ip igmp snooping filter`
-`show ip igmp profile`
+```
+show ip igmp snooping filter
+show ip igmp profile
+```
 
 IGMP Snooping
 =============
@@ -188,19 +212,25 @@ Suppression.
 
 Global
 
-`ip igmp snooping`
-`no ip igmp snooping vlan 10`
+```
+ip igmp snooping
+no ip igmp snooping vlan 10
+```
 
 Immediately remove a VLAN from multicast forwarding when an IGMP leave
 is received.
 
-`ip igmp snooping vlan 11 immediate-leave`
+```
+ip igmp snooping vlan 11 immediate-leave
+```
 
 Verify
 
-`show ip igmp snooping`
-`show ip igmp snooping groups`
-`show ip igmp snooping mrouter`
+```
+show ip igmp snooping
+show ip igmp snooping groups
+show ip igmp snooping mrouter
+```
 
 **L2 only environment**
 Om en switch inte har någon mrouter port, t.ex. om det är en L2 only
@@ -211,8 +241,10 @@ reports att skickas på den. Man kan även ändra detta beteende så att en
 switch agerar proxy och själv skickar ut membership queries för att
 komma runt detta problem så att det forwarderas multicast-trafik.
 
-`ip igmp snooping querier`
-`show ip igmp snooping mrouter `
+```
+ip igmp snooping querier
+show ip igmp snooping mrouter 
+```
 
 ### CGMP
 
@@ -243,13 +275,17 @@ det, detta funkar ej om RGMP används.
 
 L3-enhet
 
-`interface gi2`
-` ip cgmp`
+```
+interface gi2
+ ip cgmp
+```
 
 Clear, skicka ut ett CGMP Leave med USA = 0 och GDA = 0 då kommer alla
 switchar att rensa alla CAM-entries som de satt tack vare CGMP.
 
-`clear ip cgmp`
+```
+clear ip cgmp
+```
 
 **RGMP**
 Router-Port Group Management Protocol (RFC 3488) är ett annat
@@ -268,8 +304,10 @@ disableas CGMP och vice versa.
 -   **Bye:** när man slår av RGMP skickas ett RGMP Bye och switchen
     återgår till att forwardera all multicast-trafik.
 
-`interface gi2`
-` ip rgmp`
+```
+interface gi2
+ ip rgmp
+```
 
 IGMP Proxy
 ==========
@@ -278,17 +316,21 @@ IGMP proxy låter hostar i unidirectional link routing (UDLR) miljöer som
 inte har någon direktkoppling till någon downstream router att joina
 multicast-grupper.
 
-`interface gi2`
-` ip igmp unidirectional-link `
-`interface gi3`
-` ip igmp mroute-proxy lo2`
-`interface lo2`
-` ip igmp helper-address udl gi2 `
-` ip igmp proxy-service `
+```
+interface gi2
+ ip igmp unidirectional-link 
+interface gi3
+ ip igmp mroute-proxy lo2
+interface lo2
+ ip igmp helper-address udl gi2 
+ ip igmp proxy-service 
+```
 
 Verify
 
-`show ip igmp udlr`
+```
+show ip igmp udlr
+```
 
 MVR
 ===
@@ -301,24 +343,32 @@ receivers. Man måste ange detta, dvs i vilket VLAN källan för trafiken
 befinner sig. MVR går ej att köra samtidigt som multicast routing är
 påslaget.
 
-`no ip multicast-routing`
-`mvr`
-`mvr vlan 200`
-`mvr group 239.1.1.10`
-`mvr mode dynamic  #skapa mroute states dynamiskt`
+```
+no ip multicast-routing
+mvr
+mvr vlan 200
+mvr group 239.1.1.10
+mvr mode dynamic  #skapa mroute states dynamiskt
+```
 
-`interface gi1`
-` description Uplink`
-` mvr type source`
+```
+interface gi1
+ description Uplink
+ mvr type source
+```
 
-`interface gi2`
-` mvr type receiver`
+```
+interface gi2
+ mvr type receiver
+```
 
 Verify
 
-`show mvr`
-`show mvr interface`
-`show mvr members`
+```
+show mvr
+show mvr interface
+show mvr members
+```
 
 MLD
 ===
@@ -339,26 +389,36 @@ Multicast, RFC 4604.
 
 Gå med i grupp manuellt
 
-`ipv6 mld join-group FF08::10`
+```
+ipv6 mld join-group FF08::10
+```
 
 Gå med i SSM-grupp
 
-`ipv6 mld join-group FF36::8 2001::25`
+```
+ipv6 mld join-group FF36::8 2001::25
+```
 
 Verify
 
-`show ipv6 mld interface`
-`show ipv6 mld snooping querier`
+```
+show ipv6 mld interface
+show ipv6 mld snooping querier
+```
 
 Defaults per interface
 
-`ipv6 mld query-max-response-time 10`
-`ipv6 mld query-timeout 255`
-`ipv6 mld query-interval 125`
+```
+ipv6 mld query-max-response-time 10
+ipv6 mld query-timeout 255
+ipv6 mld query-interval 125
+```
 
 Membership limit on interface
 
-`ipv6 mld limit 100`
+```
+ipv6 mld limit 100
+```
 
 NX-OS
 =====
@@ -369,18 +429,22 @@ Lite. IGMP Snooping är på default och gör IP lookups default. En annan
 skillnad är att IGMP snooping querier inte konfas på L3 interface utan
 under VLAN:et. Se även [PIM](/Cisco_PIM#NX-OS "wikilink") för NX-OS.
 
-`interface Ethernet1/1`
-` ip address 192.168.10.1/24`
-` ip pim sparse-mode`
-` ip igmp version 3`
+```
+interface Ethernet1/1
+ ip address 192.168.10.1/24
+ ip pim sparse-mode
+ ip igmp version 3
+```
 
-`vlan configuration 10`
-` ip igmp snooping querier 192.168.1.1`
+```
+vlan configuration 10
+ ip igmp snooping querier 192.168.1.1
+```
 
 Verify
 
-`show ip igmp snooping`
-`show ip igmp snooping querier`
-`show ip igmp route`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show ip igmp snooping
+show ip igmp snooping querier
+show ip igmp route
+```

@@ -97,5 +97,3 @@ De fördefinierade Sample Roles är: Virtual Machine Power User, Virtual
 Machine User, Resource Pool Administrator, VMWare Consolidated Backup
 User, Datastore Consumer, Network Administrator, Content Library
 Administrator
-
-[Category:VMware](/Category:VMware "wikilink")

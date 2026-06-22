@@ -11,8 +11,10 @@ Se även [Cisco L2 Security](/Cisco_L2_Security "wikilink").
 
 Tillåt ej IP options och source routing är bra praktik!
 
-`ip options drop`
-`no ip source-route`
+```
+ip options drop
+no ip source-route
+```
 
 Notera att "ip options drop" kan störa ut IGMP.
 
@@ -26,8 +28,10 @@ extended.
 Access list logging interval (milliseconds) & log-update threshold
 (number of hits)
 
-`ip access-list logging interval 1000`
-`ip access-list log-update threshold 10`
+```
+ip access-list logging interval 1000
+ip access-list log-update threshold 10
+```
 
 **Reflexive ACL**
 För att använda reflexive ACL behövs det en ACL för inbound traffic, en
@@ -37,38 +41,52 @@ och det går inte ge olika trafikklasser olika access. Trafik initierad
 lokalt i routern behandlas ej heller. Det funkar inte heller med
 applikationer som jobbar med olika portnummer, t.ex. FTP.
 
-`ip access-list extended Egress`
-` permit ip any any reflect Mirror`
-`ip access-list extended Ingress`
-` evaluate Mirror`
-` deny ip any any`
+```
+ip access-list extended Egress
+ permit ip any any reflect Mirror
+ip access-list extended Ingress
+ evaluate Mirror
+ deny ip any any
+```
 
-`interface gi0/1`
-` description Outside`
-` ip access-group out Egress`
-` ip access-group in Ingress`
+```
+interface gi0/1
+ description Outside
+ ip access-group out Egress
+ ip access-group in Ingress
+```
 
 Timeout
 
-`ip reflexive-list timeout 30`
+```
+ip reflexive-list timeout 30
+```
 
 Verify
 
-`show ip access-lists Mirror`
-`show ip access-lists`
+```
+show ip access-lists Mirror
+show ip access-lists
+```
 
 **IPv6**
 För IPv6 finns det endast extended named ACL:er. Wildcard mask används
 inte heller utan det är CIDR notation som gäller.
 
-`ipv6 access-list Deny_ABC`
-` deny ipv6 2001:A:B:C::/64 any`
-` permit ipv6 any any`
+```
+ipv6 access-list Deny_ABC
+ deny ipv6 2001:A:B:C::/64 any
+ permit ipv6 any any
+```
 
-`interface Gi0/1`
-` ipv6 traffic-filter Deny_ABC out`
+```
+interface Gi0/1
+ ipv6 traffic-filter Deny_ABC out
+```
 
-`show ipv6 access-list`
+```
+show ipv6 access-list
+```
 
 **Lock and Key** (Dynamic ACLs)
 Lock and key configuration starts with the application of an extended
@@ -79,18 +97,24 @@ single-entry dynamic ACL is added to the extended ACL that exists. This
 permits traffic for a particular time period; idle and absolute timeouts
 are possible.
 
-`username DYN autocommand access-enable timeout 5`
+```
+username DYN autocommand access-enable timeout 5
+```
 
-`ip access-list extended 100 `
-` permit tcp 10.0.0.0 0.0.0.255 host 10.0.0.1 eq telnet`
-` dynamic DYN timeout 5 permit ip 10.0.0.0 0.0.0.255 any`
+```
+ip access-list extended 100 
+ permit tcp 10.0.0.0 0.0.0.255 host 10.0.0.1 eq telnet
+ dynamic DYN timeout 5 permit ip 10.0.0.0 0.0.0.255 any
+```
 
 **Turbo ACL**
 The turbo ACL feature is designed in order to process ACLs more
 efficiently in order to improve router performance. Found only on
 high-end platforms.
 
-`show access-list compiled`
+```
+show access-list compiled
+```
 
 CBAC
 ----
@@ -101,28 +125,38 @@ finns många protokoll default. Detta är ett konfigurationsexempel för
 ett interface som endast ska släppa in webbtrafik initierad från
 insidan.
 
-`ip access-list extended DENY_ALL`
-` deny ip any any`
-`ip inspect name Web http`
-`ip inspect name Web https`
+```
+ip access-list extended DENY_ALL
+ deny ip any any
+ip inspect name Web http
+ip inspect name Web https
+```
 
-`interface gi0/0`
-` description Outside`
-` ip access-group DENY_ALL in`
-` ip inspect Web out`
+```
+interface gi0/0
+ description Outside
+ ip access-group DENY_ALL in
+ ip inspect Web out
+```
 
 Verify
 
-`show ip inspect all`
-`show ip inspect sessions`
+```
+show ip inspect all
+show ip inspect sessions
+```
 
 Vill man att CBAC ska inspektera protokoll som inte använder
 standardportar kan lägga till dessa med port-map-kommandot.
 
-`ip port-map http port tcp 8081`
-`ip port-map smtp port tcp 2500`
+```
+ip port-map http port tcp 8081
+ip port-map smtp port tcp 2500
+```
 
-`show ip port-map`
+```
+show ip port-map
+```
 
 ZFW
 ---
@@ -138,39 +172,49 @@ Language. ZFW kan inte inspektera
 [MPLS](/Cisco_MPLS "wikilink")-trafik men det går att att köra ZFW i
 transparent mode samt att man kan policea trafiken.
 
-`zone security INTERNET`
-`zone security INSIDE`
-`interface Gi1`
-` zone-member security INTERNET`
-`interface Gi2`
-` zone-member security INSIDE`
+```
+zone security INTERNET
+zone security INSIDE
+interface Gi1
+ zone-member security INTERNET
+interface Gi2
+ zone-member security INSIDE
+```
 
 Bind ihop zonerna och ange source zon.
 
-`zone-pair security ZONE-PAIR source INSIDE destination INTERNET`
-` service-policy type inspect INSIDE-TO-INTERNET`
+```
+zone-pair security ZONE-PAIR source INSIDE destination INTERNET
+ service-policy type inspect INSIDE-TO-INTERNET
+```
 
 För att tillåta trafik mellan zoner måste en policy skapas. ZFW inspect
 class-map kan matcha: access-groups, class-maps, group-objects och
 protokoll.
 
-`class-map type inspect match-any ALLOW-TRAFFIC`
-` match protocol icmp`
-` match protocol dns`
-` match protocol http`
+```
+class-map type inspect match-any ALLOW-TRAFFIC
+ match protocol icmp
+ match protocol dns
+ match protocol http
+```
 
-`policy-map type inspect INSIDE-TO-INTERNET`
-` class type inspect ALLOW-TRAFFIC`
-`  inspect`
-` class class-default`
-`  drop`
+```
+policy-map type inspect INSIDE-TO-INTERNET
+ class type inspect ALLOW-TRAFFIC
+  inspect
+ class class-default
+  drop
+```
 
 Verify
 
-`show zone-pair security`
-`show policy-map type inspect zone-pair`
-`show policy-firewall config `
-`show policy-firewall session zone-pair ZONE-PAIR`
+```
+show zone-pair security
+show policy-map type inspect zone-pair
+show policy-firewall config 
+show policy-firewall session zone-pair ZONE-PAIR
+```
 
 **High Availability**
 ZFW stödjer HA och session state replikeras för inspect actions mellan
@@ -178,25 +222,33 @@ ACTIVE och STANDBY. Dock görs det endast för L4 protokoll TCP/UDP så
 ingen ICMP eller L7 inspections. Enheten med högst prio blir ACTIVE, vid
 lika avgör högsta IP på control link.
 
-`interface GigabitEthernet0/1`
-` description Control link`
-` ip address 10.1.1.2 255.255.255.0`
+```
+interface GigabitEthernet0/1
+ description Control link
+ ip address 10.1.1.2 255.255.255.0
+```
 
-`parameter-map type inspect global`
-` redundancy`
+```
+parameter-map type inspect global
+ redundancy
+```
 
-`redundancy`
-` application redundancy`
-`  group 1`
-`   name ZFW`
-`   preempt`
-`   priority 100`
-`   control GigabitEthernet0/1 protocol 1`
-`   data GigabitEthernet0/1`
+```
+redundancy
+ application redundancy
+  group 1
+   name ZFW
+   preempt
+   priority 100
+   control GigabitEthernet0/1 protocol 1
+   data GigabitEthernet0/1
+```
 
 Verify
 
-`show redundancy application group 1`
+```
+show redundancy application group 1
+```
 
 uRPF
 ----
@@ -212,12 +264,16 @@ sättas efter interface-kommandot.
 
 **Strict mode**, fungerar såklart inte med asymmetric routing.
 
-`ip verify unicast source reachable-via rx`
+```
+ip verify unicast source reachable-via rx
+```
 
 Med **Loose mode** räcker det att sourcen är reachable via något
 interface.
 
-`ip verify unicast source reachable-via any`
+```
+ip verify unicast source reachable-via any
+```
 
 uRPF exemptions, vill man inte kontrollera all trafik kan man matcha
 RPF-checken mot en ACL, dvs permita det som RPF inte ska bry sig om att
@@ -227,14 +283,18 @@ droppa om det inte klarar checken.
 
 Verify
 
-`show ip traffic`
-`show ip verify source`
+```
+show ip traffic
+show ip verify source
+```
 
 Trick för att logga all packets med spoofed sources.
 
-`access-list 100 deny ip any any log`
-`interface GigabitEthernet0/1`
-` ip verify unicast source reachable-via any 100`
+```
+access-list 100 deny ip any any log
+interface GigabitEthernet0/1
+ ip verify unicast source reachable-via any 100
+```
 
 IPSG
 ----
@@ -253,27 +313,35 @@ network edge.
 Prereq, DHCP Snooping måste faktiskt vara påslaget även om man bara
 använder manuella bindings.
 
-`ip dhcp snooping`
-`ip dhcp snooping vlan 10`
+```
+ip dhcp snooping
+ip dhcp snooping vlan 10
+```
 
 **L3 check**
 
-`interface gi0/7`
-` ip verify source`
+```
+interface gi0/7
+ ip verify source
+```
 
 **L3+L2 check**
 
-`interface gi0/7`
-` switchport port-security`
-` ip verify source port-security`
+```
+interface gi0/7
+ switchport port-security
+ ip verify source port-security
+```
 
 Static binding
 
-`ip source binding 0011.2233.4455 vlan 10 172.20.0.10 int gi0/7`
+```
+ip source binding 0011.2233.4455 vlan 10 172.20.0.10 int gi0/7
+```
 
 Verify
 
-`show ip verify source`
-`show ip source binding`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show ip verify source
+show ip source binding
+```

@@ -28,38 +28,48 @@ Konfiguration
 
 Prereq
 
-`ipv6 unicast-routing`
+```
+ipv6 unicast-routing
+```
 
 Process, det måste finnas en RID som är 32-bitar och skrivs som en
 IPv4-adress. Den väljs på samma sätt som i OSPFv2. Finns det ingen
 IPv4-adress konfigurerad så måste man konfigurera detta manuellt innan
 processen kan starta.
 
-`ipv6 router ospf 1`
-` router-id 1.1.1.1`
+```
+ipv6 router ospf 1
+ router-id 1.1.1.1
+```
 
 Interface, det finns inget network-kommando utan man slår på det per
 interface. Finns det flera adresser på ett interface kommer alla att
 annonseras av OSPFv3. IPv6-granne konfigureras under interface och inte
 processen.
 
-`interface gi2`
-` ipv6 ospf 1 area 0`
-` ipv6 ospf neighbor 2000:1::2`
-` ipv6 ospf priority 1`
-` ipv6 ospf hello-interval 10`
-` ipv6 ospf dead-interval 40`
+```
+interface gi2
+ ipv6 ospf 1 area 0
+ ipv6 ospf neighbor 2000:1::2
+ ipv6 ospf priority 1
+ ipv6 ospf hello-interval 10
+ ipv6 ospf dead-interval 40
+```
 
 Verify
 
-`show ipv6 ospf neighbor`
-`show ipv6 ospf database`
+```
+show ipv6 ospf neighbor
+show ipv6 ospf database
+```
 
 **Instance**, OSPFv3 har stöd för multipla instanser per länk. Endast
 routrar med samma instance-nummer bildar grannskap.
 
-`interface gi2`
-` ipv6 ospf 1 area 2 instance 3`
+```
+interface gi2
+ ipv6 ospf 1 area 2 instance 3
+```
 
 ### Authentication
 
@@ -68,46 +78,60 @@ IPsec-autentisering så det finns ingen egen. Eftersom OSPFv3 inte
 använder ISAKMP för nyckelutbyte i fas 1 måste fas 2 autentisering och
 kryptering konfigureras manuellt.
 
-`interface gi2`
-` ipv6 ospf encryption ipsec spi 2001 esp aes-cbc 256 4F814B37EA44ED42549955036FC0A68830A45FAC16424B093511EB4ACF20962D sha1 8A4481AF1A1444A92BB405F3A7FA392DF7222E5F`
+```
+interface gi2
+ ipv6 ospf encryption ipsec spi 2001 esp aes-cbc 256 4F814B37EA44ED42549955036FC0A68830A45FAC16424B093511EB4ACF20962D sha1 8A4481AF1A1444A92BB405F3A7FA392DF7222E5F
+```
 
-` ipv6 ospf authentication ?`
-`   ipsec `
-`   null`
+```
+ ipv6 ospf authentication ?
+   ipsec 
+   null
+```
 
 ### Prefix Suppression
 
 Fungerar som med OSPFv2.
 
-`interface gi2`
-` ipv6 ospf prefix-suppression`
+```
+interface gi2
+ ipv6 ospf prefix-suppression
+```
 
 ### Summarization
 
 Fungerar som med OSPFv2.
 
-`ipv6 router ospf 1`
-` area 0 range 2000:1::/60`
+```
+ipv6 router ospf 1
+ area 0 range 2000:1::/60
+```
 
 ### Redistribution
 
 Default metric: 1 för BGP, 20 för övrigt
 
-`ipv6 router ospf 1`
-` redistribute connected metric 10`
-` redistribute rip RIPNG tag 123`
-` redistribute eigrp 100 route-map FILTER`
+```
+ipv6 router ospf 1
+ redistribute connected metric 10
+ redistribute rip RIPNG tag 123
+ redistribute eigrp 100 route-map FILTER
+```
 
 ### Virtual Links
 
 Virtual link kan byggas över IPv4 precis som med OSPFv2.
 
-`ipv6 router ospf 1`
-` area 1 virtual-link 10.0.0.20`
+```
+ipv6 router ospf 1
+ area 1 virtual-link 10.0.0.20
+```
 
 Verify
 
-`show ipv6 ospf virtual-links `
+```
+show ipv6 ospf virtual-links 
+```
 
 Multi AF Mode
 -------------
@@ -116,63 +140,87 @@ Denna konfigurationen är mer homogen med [BGP
 AFI-format](/Cisco_BGP#Konfiguration "wikilink") och [EIGRP Named
 mode](/Cisco_EIGRP#Named_mode "wikilink").
 
-`router ospfv3 1`
-` router-id 1.1.1.1`
+```
+router ospfv3 1
+ router-id 1.1.1.1
+```
 
-` address-family ipv4 unicast`
-`  maximum-paths 4`
-`  redistribute connected`
-` exit-address-family`
+```
+ address-family ipv4 unicast
+  maximum-paths 4
+  redistribute connected
+ exit-address-family
+```
 
-` address-family ipv6 unicast`
-`  maximum-paths 16`
-`  area 0 range 2001:100:1::/48`
-` exit-address-family`
+```
+ address-family ipv6 unicast
+  maximum-paths 16
+  area 0 range 2001:100:1::/48
+ exit-address-family
+```
 
-`interface gi2`
-` ospfv3 1 ipv4 area 0`
-` ospfv3 1 ipv6 area 0`
+```
+interface gi2
+ ospfv3 1 ipv4 area 0
+ ospfv3 1 ipv6 area 0
+```
 
 Verify
 
-`show ospfv3`
-`show ospfv3 neighbor`
-`show ospfv3 interface brief`
+```
+show ospfv3
+show ospfv3 neighbor
+show ospfv3 interface brief
+```
 
 Man måste köra IPv6 också eftersom det används för control plane.
 
-`ospfv3 1 ipv4 area 0`
-`% OSPFv3: IPV6 is not enabled on this interface`
+```
+ospfv3 1 ipv4 area 0
+% OSPFv3: IPV6 is not enabled on this interface
+```
 
 ### Authentication
 
 Med OSPFv3 kan man använda ESP header eller Authentication Header och
 det konfigureras antingen per-link eller globalt under arean.
 
-`router ospfv3 1`
-` area 10 authentication ipsec spi 500 sha1 8a4481af1a1444a92bb405f3a7fa392df7222e5f`
+```
+router ospfv3 1
+ area 10 authentication ipsec spi 500 sha1 8a4481af1a1444a92bb405f3a7fa392df7222e5f
+```
 
-`interface gi2`
-` ospfv3 encryption ipsec spi 700 esp aes-cbc 256 4F814B37EA44ED42549955036FC0A68830A45FAC16424B093511EB4ACF20962D sha1 8A4481AF1A1444A92BB405F3A7FA392DF7222E5F`
+```
+interface gi2
+ ospfv3 encryption ipsec spi 700 esp aes-cbc 256 4F814B37EA44ED42549955036FC0A68830A45FAC16424B093511EB4ACF20962D sha1 8A4481AF1A1444A92BB405F3A7FA392DF7222E5F
+```
 
 Innan OSPFv3 Authentication Trailer var IPsec det enda sättet att
 autentisera OSPF-paketen.
 
-`key chain OSPFv3`
-` key 1`
-`  key-string SECRET`
-`  cryptographic-algorithm hmac-sha-512`
+```
+key chain OSPFv3
+ key 1
+  key-string SECRET
+  cryptographic-algorithm hmac-sha-512
+```
 
-`interface gi2`
-` ospfv3 authentication ?`
-`   ipsec`
+```
+interface gi2
+ ospfv3 authentication ?
+   ipsec
+```
 `   `**`key-chain`**
-`   null`
+```
+   null
+```
 
 Verify
 
-`show ospfv3 interface | i Ethernet|authentication|encryption`
-`show crypto ipsec policy`
+```
+show ospfv3 interface | i Ethernet|authentication|encryption
+show crypto ipsec policy
+```
 
 ### TTL Security
 
@@ -185,10 +233,12 @@ OSPFv3 control plane görs med link-local-adresser.
 BFD-support för OSPFv3 kan konfigureras på två sätt, under processen
 eller interface. Se även [Cisco BFD](/Cisco_BFD "wikilink").
 
-`address-family ipv4 unicast`
-` bfd all-interfaces`
+```
+address-family ipv4 unicast
+ bfd all-interfaces
+```
 
-`interface gi2`
-` ospfv3 bfd `
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+interface gi2
+ ospfv3 bfd 
+```

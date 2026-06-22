@@ -92,7 +92,9 @@ färdigbyggd!! '''
 
 **RHEL/CentOS/Fedora:**
 
-`mdadm --detail --scan >> /etc/mdadm.conf`
+```
+mdadm --detail --scan >> /etc/mdadm.conf
+```
 
 Nu kan vi skapa ett filsystem på vår raid
 
@@ -156,11 +158,11 @@ sig.
 7\. När raiden har byggt ihop sig så kan du mounta, jag föredrar att
 mounta via fstab och UUID. Exempel på fstab conf:
 
-`UUID='''"RaidUUID" ''' /mount/point xfs defaults 0 0`
+```
+UUID='''"RaidUUID" ''' /mount/point xfs defaults 0 0
+```
 
 **OBS** Vet inte om det står något värdefullt här men det kan nog dut
 avgöra bättre //Alex
 
 [`http://h3x.no/2011/07/09/tuning-ubuntu-mdadm-raid56`](http://h3x.no/2011/07/09/tuning-ubuntu-mdadm-raid56)
-
-[Category:Tools](/Category:Tools "wikilink")

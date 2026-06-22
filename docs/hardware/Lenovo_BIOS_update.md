@@ -3,7 +3,7 @@ title: Lenovo BIOS update
 permalink: /Lenovo_BIOS_update/
 ---
 
-[Category:Hardware](/Category:Hardware "wikilink") Ladda ner senaste
+ Ladda ner senaste
 BIOS versionen för din x220a @
 <http://support.lenovo.com/us/en/products/laptops-and-netbooks/thinkpad-x-series-laptops/thinkpad-x220/downloads/>
 (I mitt fall så laddade jag ner "8duj25us.iso" )

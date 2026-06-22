@@ -8,26 +8,36 @@ psql är terminalgränssnittet för att jobba mot PostgreSQL.
 Dokumentation: <https://www.postgresql.org/docs/current/app-psql.html>
 Anslutning
 
-`psql -h värdnamn -d databas -U användare -W`
+```
+psql -h värdnamn -d databas -U användare -W
+```
 
 Lista Databaser
 
-`\l `
+```
+\l 
+```
 
 Anslut till en specifik databas
 
-`\c databas`
+```
+\c databas
+```
 
 Lista tabeller
 
-`\dt`
+```
+\dt
+```
 
 Beskriv en tabell
 
-`\d tabellnamn`
+```
+\d tabellnamn
+```
 
 Visa kommandhistoriken
 
-`\s`
-
-[Category:Tools](/Category:Tools "wikilink")
+```
+\s
+```

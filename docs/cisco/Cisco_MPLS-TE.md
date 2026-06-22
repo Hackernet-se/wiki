@@ -48,22 +48,28 @@ interface flödena ska traversera. Det behöver inte köras på alla enheter
 för att det ska funka men då kan man inte reservera bandbredd på dem
 heller.
 
-`interface Gi2`
-` ip rsvp bandwidth 1000 100  #kbps`
+```
+interface Gi2
+ ip rsvp bandwidth 1000 100  #kbps
+```
 
 Om man inte specificerar total bandbredd och per-flow bandbredd kommer
 75% av interfacets bandbredd kunna reserveras av ett enskilt flöde.
 
 Verify
 
-`show ip rsvp`
-`show ip rsvp interface`
-`show ip rsvp reservation`
+```
+show ip rsvp
+show ip rsvp interface
+show ip rsvp reservation
+```
 
 Om man kör LLQ/CBWFQ bör man stänga av RSVPs WFQ och klassificering.
 
-`ip rsvp resource-provider none`
-`ip rsvp data-packet classification none`
+```
+ip rsvp resource-provider none
+ip rsvp data-packet classification none
+```
 
 Traffic Engineering
 -------------------
@@ -93,56 +99,74 @@ LSP manuellt. Om det finns en bättre väg kommer trafiken att skiftas
 
 **Konfiguration**
 
-`mpls traffic-eng tunnels`
+```
+mpls traffic-eng tunnels
+```
 
 Per interface, detta måste konfas på alla core-interface.
 
-`interface gi2`
-` mpls traffic-eng tunnels`
-` ip rsvp bandwidth`
+```
+interface gi2
+ mpls traffic-eng tunnels
+ ip rsvp bandwidth
+```
 
 IGP, OSPF använder opaque LSA:er och IS-IS använder nya TLV:er för att
 skicka TE attribut.
 
-`router ospf 1`
-` mpls traffic-eng router-id Loopback0`
-` mpls traffic-eng area 0`
+```
+router ospf 1
+ mpls traffic-eng router-id Loopback0
+ mpls traffic-eng area 0
+```
 
-`router isis 1`
-` mpls traffic-eng router-id Loopback0`
-` mpls traffic-eng level-2`
+```
+router isis 1
+ mpls traffic-eng router-id Loopback0
+ mpls traffic-eng level-2
+```
 
 Tunnel. För att tunneln ska användas måste man routa över den, detta kan
 t.ex. göras med statisk routing eller autoroute. Eftersom det inte är en
 vanlig GRE-tunnel uppstår ingen recursive routing. Record route används
 för loop detection.
 
-`interface Tunnel0`
-` ip unnumbered Loopback0`
-` tunnel mode mpls traffic-eng`
-` tunnel destination x.x.x.x`
-` tunnel mpls traffic-eng path-option 1 dynamic`
-` tunnel mpls traffic-eng autoroute destination`
-` tunnel mpls traffic-eng record-route`
+```
+interface Tunnel0
+ ip unnumbered Loopback0
+ tunnel mode mpls traffic-eng
+ tunnel destination x.x.x.x
+ tunnel mpls traffic-eng path-option 1 dynamic
+ tunnel mpls traffic-eng autoroute destination
+ tunnel mpls traffic-eng record-route
+```
 
 Verify
 
-`show mpls traffic-eng tunnel`
-`show ip rsvp interface`
-`show ip route`
-`show ip rsvp reservation detail`
+```
+show mpls traffic-eng tunnel
+show ip rsvp interface
+show ip route
+show ip rsvp reservation detail
+```
 
-`traceroute mpls traffic-eng tunnel 0`
+```
+traceroute mpls traffic-eng tunnel 0
+```
 
 Dry run
 
-`show mpls traffic-eng topology path destination 10.10.10.10 bandwidth 50000 `
-`show mpls traffic-eng link-management admission-control `
+```
+show mpls traffic-eng topology path destination 10.10.10.10 bandwidth 50000 
+show mpls traffic-eng link-management admission-control 
+```
 
 Logging, detta är för att skicka traps.
 
-`mpls traffic-eng logging lsp`
-`mpls traffic-eng logging tunnel`
+```
+mpls traffic-eng logging lsp
+mpls traffic-eng logging tunnel
+```
 
 **Auto-Bandwidth**
 Med auto-bw mäter routern själv trafikmängden på tunneln periodiskt.
@@ -155,8 +179,10 @@ event-baserad statistikinsamling. Detta är inte heller alltid
 supersnabbt vid förändring. Det är rekommenderat att köra: tunnel
 load-interval \< global sampling frequency \< tunnel adjust frequency.
 
-`int tun0`
-` tunnel mpls traffic-eng auto-bw`
+```
+int tun0
+ tunnel mpls traffic-eng auto-bw
+```
 
 Notera att senaste requested/signaled bandwidth sparas i running config.
 
@@ -171,7 +197,9 @@ genom en loose hop expanderas i den fullt definierade explicita path:en,
 dvs Head End och ABRs definierar de hop som finns i den egna lokala
 flooding domain.
 
-`ip explicit-path name INTER_AREA_TE enable`
+```
+ip explicit-path name INTER_AREA_TE enable
+```
 ` next-address loose `<ABR1>
 ` next-address loose `<ABR2>
 
@@ -188,45 +216,59 @@ route.
 
 PLR
 
-`mpls traffic-eng auto-tunnel backup`
+```
+mpls traffic-eng auto-tunnel backup
+```
 
 Head-end
 
-`interface Tunnel0`
-` tunnel mpls traffic-eng fast-reroute`
+```
+interface Tunnel0
+ tunnel mpls traffic-eng fast-reroute
+```
 
 **SRLG**
 SRLG-information distribueras med IGP och funkar endast för backup
 tunnels som är skapade av Autotunnel backup.
 
-`interface Gi0/1`
-` mpls traffic-eng srlg 1`
-` mpls traffic-eng srlg 2`
-`!`
-`interface Gi0/2`
-` mpls traffic-eng srlg 2`
-` mpls traffic-eng srlg 3`
-`!`
-`mpls traffic-eng auto-tunnel backup`
-`mpls traffic-eng auto-tunnel backup srlg exclude force `
+```
+interface Gi0/1
+ mpls traffic-eng srlg 1
+ mpls traffic-eng srlg 2
+!
+interface Gi0/2
+ mpls traffic-eng srlg 2
+ mpls traffic-eng srlg 3
+!
+mpls traffic-eng auto-tunnel backup
+mpls traffic-eng auto-tunnel backup srlg exclude force 
+```
 
 ### Autotunnel - Mesh
 
 Autoskapa tunnlar till alla PE:s som finns med i en acl.
 
-`mpls traffic-eng auto-tunnel mesh`
+```
+mpls traffic-eng auto-tunnel mesh
+```
 
-`interface Auto-Template1`
-` ip unnumbered Loopback0`
-` tunnel mode mpls traffic-eng`
-` tunnel destination access-list 1`
+```
+interface Auto-Template1
+ ip unnumbered Loopback0
+ tunnel mode mpls traffic-eng
+ tunnel destination access-list 1
+```
 
-`access-list 1 permit 1.1.1.1`
-`access-list 1 permit 1.1.1.2`
+```
+access-list 1 permit 1.1.1.1
+access-list 1 permit 1.1.1.2
+```
 
 Primary, configure tunnels to directly connected neighbors.
 
-`mpls traffic-eng auto-tunnel primary onehop`
+```
+mpls traffic-eng auto-tunnel primary onehop
+```
 
 ### Inter-AS TE
 
@@ -234,7 +276,9 @@ Med ASBR Forced Link Flooding kan man låta länkar som inte är med i IGP
 att installeras i TE database som point-to-point. Man konfigurerar
 länken som passiv för MPLS TE och anger neighbor TE-ID och ip-adress.
 
-`mpls traffic-eng passive-interface nbr-te-id 1.1.1.2 nbr-if-addr 10.0.0.2 nbr-igp-id isis 49.0000.0000.0002.00`
+```
+mpls traffic-eng passive-interface nbr-te-id 1.1.1.2 nbr-if-addr 10.0.0.2 nbr-igp-id isis 49.0000.0000.0002.00
+```
 
 ### Multicast
 
@@ -244,46 +288,52 @@ att slå på att IGP håller två set med best paths under SPF calculation,
 en för unicast (TE tunnels och physical interfaces) och en för multicast
 (endast physical interfaces).
 
-`router ospf 1`
-` mpls traffic-eng multicast-intact`
+```
+router ospf 1
+ mpls traffic-eng multicast-intact
+```
 
 IOS-XR
 ======
 
 ### Auto-Tunnel Backup
 
-`ipv4 unnumbered mpls traffic-eng lo0`
-`mpls traffic-eng`
-` auto-tunnel backup`
-`  tunnel-id min 6000 max 6500`
-` !`
-` interface GigabitEthernet0/0/0/0`
-`  auto-tunnel backup`
+```
+ipv4 unnumbered mpls traffic-eng lo0
+mpls traffic-eng
+ auto-tunnel backup
+  tunnel-id min 6000 max 6500
+ !
+ interface GigabitEthernet0/0/0/0
+  auto-tunnel backup
+```
 
 Verify
 
-`show mpls traffic-eng auto-tunnel backup summary`
+```
+show mpls traffic-eng auto-tunnel backup summary
+```
 
 ### Mesh
 
-`ipv4 unnumbered mpls traffic-eng Loopback0`
-`ipv4 prefix-list PE`
-` 10 permit 10.0.0.1/32`
-` 20 permit 10.0.0.2/32`
-`!`
-`mpls traffic-eng`
-` auto-tunnel mesh`
-`  group 1`
-`   attribute-set PE`
-`   destination-list PE`
-`  !`
-`  tunnel-id min 1000 max 1499`
-` !`
-` attribute-set auto-mesh PE`
-`  logging events lsp-status state`
-`  signalled-bandwidth 100 class-type 0`
-`  autoroute announce`
-`  fast-reroute`
-`  record-route`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+ipv4 unnumbered mpls traffic-eng Loopback0
+ipv4 prefix-list PE
+ 10 permit 10.0.0.1/32
+ 20 permit 10.0.0.2/32
+!
+mpls traffic-eng
+ auto-tunnel mesh
+  group 1
+   attribute-set PE
+   destination-list PE
+  !
+  tunnel-id min 1000 max 1499
+ !
+ attribute-set auto-mesh PE
+  logging events lsp-status state
+  signalled-bandwidth 100 class-type 0
+  autoroute announce
+  fast-reroute
+  record-route
+```

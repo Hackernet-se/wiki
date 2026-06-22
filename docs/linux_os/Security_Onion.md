@@ -3,7 +3,7 @@ title: Security Onion
 permalink: /Security_Onion/
 ---
 
-[Category:Distar](/Category:Distar "wikilink") *Artikel under arbete*
+ *Artikel under arbete*
 
 "Security Onion is a Linux distro for intrusion detection, network
 security monitoring, and log management. It's based on Ubuntu and

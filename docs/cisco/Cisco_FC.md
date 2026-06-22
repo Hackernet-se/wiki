@@ -112,81 +112,115 @@ detta går att ändra med interoperability mode.
 
 Prereqs
 
-`feature fcoe`
+```
+feature fcoe
+```
 
-`slot 1 `
-` port 44-48 type fc`
+```
+slot 1 
+ port 44-48 type fc
+```
 
-`copy run start`
-`reload`
+```
+copy run start
+reload
+```
 
 Verify
 
-`show int br  `
-`show int e1/44 trans`
+```
+show int br  
+show int e1/44 trans
+```
 
 VSAN och trunk
 
-`feature fport-channel-trunk`
+```
+feature fport-channel-trunk
+```
 
-`vsan database`
-` vsan 100`
-` vsan 100 interface fc1/44 - 48`
+```
+vsan database
+ vsan 100
+ vsan 100 interface fc1/44 - 48
+```
 
-`interface fc1/44 - 45`
-` channel-group 10 `
+```
+interface fc1/44 - 45
+ channel-group 10 
+```
 
-`interface san-port-channel 10`
-` channel mode active`
-` switchport trunk mode on`
-` switchport trunk allowed vsan 100`
+```
+interface san-port-channel 10
+ channel mode active
+ switchport trunk mode on
+ switchport trunk allowed vsan 100
+```
 
 Noter att båda sidor bör konfas klart innan man gör no shutdown på
 port-channel.
 
-`show san-port-channel database`
+```
+show san-port-channel database
+```
 
 TE port
 
-`interface fc1/1 - 2`
-` switchport speed 8000`
-` switchport mode E`
-` switchport trunk allowed vsan 101`
+```
+interface fc1/1 - 2
+ switchport speed 8000
+ switchport mode E
+ switchport trunk allowed vsan 101
+```
 
 TE Port-channel
 
-`interface fc2/1 - 2`
-` switchport speed 8000`
-` switchport mode E`
-` channel-group 11 force`
-` no shutdown`
+```
+interface fc2/1 - 2
+ switchport speed 8000
+ switchport mode E
+ channel-group 11 force
+ no shutdown
+```
 
-`interface san-port-channel 11`
-` channel mode active`
-` switchport mode E`
-` switchport trunk allowed vsan 101`
+```
+interface san-port-channel 11
+ channel mode active
+ switchport mode E
+ switchport trunk allowed vsan 101
+```
 
 **Verify**
 show flogi database
 
-`show fcns database`
-`show fcdomain domain-list`
-`show fcroute unicast`
+```
+show fcns database
+show fcdomain domain-list
+show fcroute unicast
+```
 
 Traffic Engineering
 
-`interface fc1/24`
-` fspf cost 50 vsan 100`
+```
+interface fc1/24
+ fspf cost 50 vsan 100
+```
 
-`show fspf vsan 100`
+```
+show fspf vsan 100
+```
 
 Persistent FC ID
 
-`fcdomain fcid persistent vsan 100`
-`fcdomain fcid database`
-` vsan 100 wwn 11:22:11:22:33:44:33:44 fcid 0x66ee00`
+```
+fcdomain fcid persistent vsan 100
+fcdomain fcid database
+ vsan 100 wwn 11:22:11:22:33:44:33:44 fcid 0x66ee00
+```
 
-`show fcdomain fcid persistent vsan 100`
+```
+show fcdomain fcid persistent vsan 100
+```
 
 #### Zoning
 
@@ -196,72 +230,96 @@ single initiatior och att man använder pwwn eller alias. Det kan vara
 bra att känna till att vissa system är case sensitive när det gäller
 WWN:er. Hard zoning går ej att stänga av på Nexus.
 
-`zoneset name PROD-A vsan 100`
-` zone name Server1-to-SAN`
-`  member pwwn 10:00:00:23:45:00:00:10`
-`  member pwwn 10:00:00:23:45:00:00:20`
+```
+zoneset name PROD-A vsan 100
+ zone name Server1-to-SAN
+  member pwwn 10:00:00:23:45:00:00:10
+  member pwwn 10:00:00:23:45:00:00:20
+```
 
-`zoneset activate name PROD-A vsan 100`
+```
+zoneset activate name PROD-A vsan 100
+```
 
 Show
 
-`show zone status vsan 100`
-`show zoneset active`
+```
+show zone status vsan 100
+show zoneset active
+```
 
 Permit all
 
-`zone default-zone permit vsan 100`
+```
+zone default-zone permit vsan 100
+```
 
 **Enhanced Zoning**
 Gör att varje gång man konfar det så låses konfen fabric wide av CFS. Om
 t.ex. ett vsan isoleras på en länk kolla att zoning mode överenstämmer
 (tänk VTP).
 
-`zone mode enhanced vsan 100`
-`zone confirm-commit`
-`zoneset overwrite-control vsan 100`
-`zone commit vsan 100`
+```
+zone mode enhanced vsan 100
+zone confirm-commit
+zoneset overwrite-control vsan 100
+zone commit vsan 100
+```
 
 Verify
 
-`show zone status vsan 100`
+```
+show zone status vsan 100
+```
 
 Man kan även distribuera sitt zoneset över fabricen
 
-`zoneset distribute full vsan 100`
+```
+zoneset distribute full vsan 100
+```
 
 **Smart Zoning**
 För att förenkla sin konfig lite kan man använda taggar för att ange
 vilka pwwn som är initiators kontra targets. Detta måste vara påslaget
 på alla switchar i fabricen.
 
-`zone smart-zone enable vsan 100`
-`zone convert smart-zone vsan 100`
+```
+zone smart-zone enable vsan 100
+zone convert smart-zone vsan 100
+```
 
 ACLTCAM usage MDS
 
-`show system internal acl tcam-usage`
-`show system internal acltcam-soc tcam-usage`
+```
+show system internal acl tcam-usage
+show system internal acltcam-soc tcam-usage
+```
 
 **Alias**
 Man bör använda alias för att förenkla zonhantering och felsökning. Även
 detta kan distribueras mha CFS, det kallas då enhanced device aliases
 och valfri nod kan göra ändringar som propagerar genom nätet.
 
-`device-alias mode enhanced `
-`device-alias database`
-` name Server1-HBA1 pwwn 00:11:11...`
-` name SAN-Array1-port1 pwwn 00:22:22...`
+```
+device-alias mode enhanced 
+device-alias database
+ name Server1-HBA1 pwwn 00:11:11...
+ name SAN-Array1-port1 pwwn 00:22:22...
+```
 
-`device-alias commit `
-`show device-alias status`
+```
+device-alias commit 
+show device-alias status
+```
 
 **Zone Merge**
 Om man ska koppla ihop två SAN kan man skydda sig mot felkonfad zoning
 genom att ställa merge-control till restrict. Kopplar man ihop två SAN
 med olika zonesets blir ISL:en isolated för de vsan som har mismatch.
 
-`zone merge-control restrict vsan 100`
+```
+zone merge-control restrict vsan 100
+```
 
 #### Port Security
 
@@ -279,27 +337,37 @@ security första gången eftersom det sparar arbete genom att man inte
 måste gå igenom alla portar manuellt, detta konfas per VSAN. När man
 aktiverar port security så aktiveras auto-learn automatiskt.
 
-`feature fc-port-security`
-`fc-port-security activate vsan 1`
+```
+feature fc-port-security
+fc-port-security activate vsan 1
+```
 
 Lock vsan for new entries
 
-`no fc-port-security auto-learn vsan 1`
+```
+no fc-port-security auto-learn vsan 1
+```
 
 Diff
 
-`fc-port-security database diff active vsan 1`
+```
+fc-port-security database diff active vsan 1
+```
 
 Verify
 
-`show fc-port-security status`
-`show fc-port-security database active`
-`show fc-port-security database config`
-`show fc-port-security violations`
+```
+show fc-port-security status
+show fc-port-security database active
+show fc-port-security database config
+show fc-port-security violations
+```
 
 CFS
 
-`fc-port-security distribute`
+```
+fc-port-security distribute
+```
 
 NPV
 ---
@@ -318,9 +386,13 @@ slussar bara vidare inlogg till ovanliggande switch. Notera att
 ovanliggande switch måste ha NPIV enableat. Nested NPV är inte möjligt.
 Notera att "feature npv" kräver en write erase och reload.
 
-`feature fcoe-npv`
-`feature npv`
+```
+feature fcoe-npv
+feature npv
+```
 
 Ovanliggande switch
 
-`feature npiv`
+```
+feature npiv
+```

@@ -25,7 +25,9 @@ Förberedelse
 
 Du behöver ett extra A record tex `services.hackernet.se`
 
-`apt-get install gettext`
+```
+apt-get install gettext
+```
 
 Installation
 ------------
@@ -34,15 +36,19 @@ Shaltúre installerar sig i användarens home folder som default. Därför
 behöver man klona från git till en mapp som inte heter `Shalture`
 
 `git clone `[`git://github.com/shalture/shalture.git`](git://github.com/shalture/shalture.git)` shalture-source`
-`cd shalture-source`
-`git submodule init`
-`git submodule update`
+```
+cd shalture-source
+git submodule init
+git submodule update
+```
 
 Sedan är det bara att kompilera programmet.
 
-`./configure --enable-contrib`
-`make`
-`make install`
+```
+./configure --enable-contrib
+make
+make install
+```
 
 Konfiguration
 -------------
@@ -53,33 +59,43 @@ servrar.
 
 Börja med att kopiera exempel filen.
 
-`cd ~/shalture/etc && cp shalture.conf.example shalture.conf`
+```
+cd ~/shalture/etc && cp shalture.conf.example shalture.conf
+```
 
 Ändra rad 66 så rätt IRCd modul laddas.
 
-`loadmodule "modules/protocol/inspircd";`
+```
+loadmodule "modules/protocol/inspircd";
+```
 
 På rad 793 i `serverinfo` fältet ändra följande så dom passar dig.
 
-`name = "services.hackernet.se";`
-`desc = "Hackernet IRC Services";`
-`numeric = "00A"; #Denna är viktigt att den inte har samma ID som i konfigurationsfilen för din IRC server.`
-`netname = "Hackernet";`
-`adminname = "Sparco";`
-`adminemail = "root@hackernet.se";`
-`registeremail = "root@hackernet.se";`
+```
+name = "services.hackernet.se";
+desc = "Hackernet IRC Services";
+numeric = "00A"; #Denna är viktigt att den inte har samma ID som i konfigurationsfilen för din IRC server.
+netname = "Hackernet";
+adminname = "Sparco";
+adminemail = "root@hackernet.se";
+registeremail = "root@hackernet.se";
+```
 
 Leta sedan upp `uplink` fältet på rad 938.
 
-`uplink "services.hackernet.se" {`
-`host = "irc.hackernet.se";`
-`port = "6666";`
-`send_password = "password";`
-`receive_password = "password";`
+```
+uplink "services.hackernet.se" {
+host = "irc.hackernet.se";
+port = "6666";
+send_password = "password";
+receive_password = "password";
+```
 
 På rad 971 i `nickserv` ändra.
 
-`host = "hackernet.se";`
+```
+host = "hackernet.se";
+```
 
 Det kommer ge nickserv FQDN namnet nickserv@hackernet.se. Ändra nu
 `host=` på resterande services som kommer i filen.
@@ -118,15 +134,19 @@ Följande moduler behöver också vara laddade.
 
 Starta nu Shaltúre
 
-`cd $HOME/shalture/bin/ && ./shalture-services`
+```
+cd $HOME/shalture/bin/ && ./shalture-services
+```
 
 Exempel
 -------
 
 På din IRC server skriv nu för att få hjälp.
 
-`/msg Nickserv help`
-`/msg Chanserv help`
+```
+/msg Nickserv help
+/msg Chanserv help
+```
 
 Crontab
 -------
@@ -134,7 +154,6 @@ Crontab
 Lägg in följande i din crontab för att checka att Shaltúre är igång var
 5e minut.
 
-`*/5 * * * * /home/shalture/shalture/etc/shalture.cron >/dev/null 2>&1`
-
-[Category:Guider](/Category:Guider "wikilink")
-[Category:Sparco](/Category:Sparco "wikilink")
+```
+*/5 * * * * /home/shalture/shalture/etc/shalture.cron >/dev/null 2>&1
+```

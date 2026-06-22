@@ -3,10 +3,7 @@ title: Gitlab
 permalink: /Gitlab/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") Gitlab är ett webbaserad
-git repositry manager med bland annat en inbyggd wiki. Gitlab fungerar
-som Github gör och dom erbjuder att så man kan hosta sin egna lösning på
-sin egen server. Se även [Git](/Git "wikilink").
+.
 
 Det finns 2 version av Gitlab:
 
@@ -19,16 +16,22 @@ Installation
 Installera dom nödvändiga paketen. Postfix kan man skippa om man har en
 annan mailserver.
 
-`sudo apt-get install curl openssh-server ca-certificates postfix`
+```
+sudo apt-get install curl openssh-server ca-certificates postfix
+```
 
 Lägg till Gitlab's repo och installera sedan Gitlab CE.
 
 `curl -sS `[`https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh`](https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh)` | sudo bash`
-`sudo apt-get install gitlab-ce`
+```
+sudo apt-get install gitlab-ce
+```
 
 Konfigurera sedan Gitlab och starta det.
 
-`sudo gitlab-ctl reconfigure`
+```
+sudo gitlab-ctl reconfigure
+```
 
 Konfiguration
 =============
@@ -51,13 +54,17 @@ under `/etc/gitlab/ssl/`.
 Om du behöver ändra vart cert filerna finns och vad dom heter ändra
 dessa 2 rader.
 
-`nginx['ssl_certificate'] = "/opt/cert/fullchain.pem"`
-`nginx['ssl_certificate_key'] = "/opt/cert/privkey.pem"`
+```
+nginx['ssl_certificate'] = "/opt/cert/fullchain.pem"
+nginx['ssl_certificate_key'] = "/opt/cert/privkey.pem"
+```
 
 **Redirect HTTP till HTTPS**
 Ändra följande rad till true.
 
-`nginx['redirect_http_to_https'] = true`
+```
+nginx['redirect_http_to_https'] = true
+```
 
 LDAP authentication
 -------------------
@@ -65,41 +72,49 @@ LDAP authentication
 För mer info kolla [Gitlab LDAP
 document](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/settings/ldap.md)
 
-`gitlab_rails['ldap_enabled'] = true`
-`gitlab_rails['ldap_servers'] = YAML.load <<-'EOS' # remember to close this block with 'EOS' below`
-`main: # 'main' is the GitLab 'provider ID' of this LDAP server`
-`     label: 'Hackernet'`
-`     host: 'openldap.hackernet.se'`
-`     port: 389`
-`     uid: 'uid'`
-`     method: 'plain'`
-`     bind_dn: '>ldap bind username>'`
+```
+gitlab_rails['ldap_enabled'] = true
+gitlab_rails['ldap_servers'] = YAML.load <<-'EOS' # remember to close this block with 'EOS' below
+main: # 'main' is the GitLab 'provider ID' of this LDAP server
+     label: 'Hackernet'
+     host: 'openldap.hackernet.se'
+     port: 389
+     uid: 'uid'
+     method: 'plain'
+     bind_dn: '>ldap bind username>'
+```
 `     password: '`<ldap bind password>`'`
-`     active_directory: false`
-`     allow_username_or_email_login: true`
-`     block_auto_created_users: false`
+```
+     active_directory: false
+     allow_username_or_email_login: true
+     block_auto_created_users: false
+```
 `     base: '`<base DN>`'`
-`     user_filter: ''`
-`     attributes:`
-`       username: ['uid', 'userid', 'sAMAccountName']`
-`       email:    ['mail', 'email', 'userPrincipalName']`
-`       name:       'cn'`
-`       first_name: 'givenName'`
-`       last_name:  'sn'`
-`     ## EE only`
-`     group_base: 'dc=hackernet,dc=se'`
-`     admin_group: 'cn=wiki'`
-`     sync_ssh_keys: false`
-` EOS`
+```
+     user_filter: ''
+     attributes:
+       username: ['uid', 'userid', 'sAMAccountName']
+       email:    ['mail', 'email', 'userPrincipalName']
+       name:       'cn'
+       first_name: 'givenName'
+       last_name:  'sn'
+     ## EE only
+     group_base: 'dc=hackernet,dc=se'
+     admin_group: 'cn=wiki'
+     sync_ssh_keys: false
+ EOS
+```
 
 **Gör LDAP användare till admin**
 För att göra en LDAP användare till admin kör följande kommando i shell:
 
-`sudo gitlab-rails console`
-`u = User.find_by_username("LDAPadmin")`
-`u.admin = true`
-`u.save`
-`exit`
+```
+sudo gitlab-rails console
+u = User.find_by_username("LDAPadmin")
+u.admin = true
+u.save
+exit
+```
 
 Schemalagd backup
 -----------------
@@ -107,13 +122,17 @@ Schemalagd backup
 Simpel backup görs mha crontab och /var/opt/gitlab/backups kan sedan
 <rsync:as> iväg till remote site.
 
-`0 4 * * 7 /opt/gitlab/bin/gitlab-backup create CRON=1`
-`1 4 * * 7 cp /etc/gitlab/gitlab-secrets.json /var/opt/gitlab/backups/ >/dev/null`
-`1 4 * * 7 cp /etc/gitlab/gitlab.rb /var/opt/gitlab/backups/ >/dev/null`
+```
+0 4 * * 7 /opt/gitlab/bin/gitlab-backup create CRON=1
+1 4 * * 7 cp /etc/gitlab/gitlab-secrets.json /var/opt/gitlab/backups/ >/dev/null
+1 4 * * 7 cp /etc/gitlab/gitlab.rb /var/opt/gitlab/backups/ >/dev/null
+```
 
 Limit backup lifetime to 60 days, /etc/gitlab/gitlab.rb.
 
-`gitlab_rails['backup_keep_time'] = 5184000`
+```
+gitlab_rails['backup_keep_time'] = 5184000
+```
 
 CI/CD
 =====

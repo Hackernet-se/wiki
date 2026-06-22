@@ -106,21 +106,29 @@ Installation
 
 Skapa Oxidized användaren
 
-`useradd -d /opt/oxidized oxidized`
+```
+useradd -d /opt/oxidized oxidized
+```
 
 Installera EPEL och SCL
 
-`yum install epel-release centos-release-scl-rh centos-release-scl`
+```
+yum install epel-release centos-release-scl-rh centos-release-scl
+```
 
 Installera Ruby samt extra paket för att kompilera Oxidized.
 
-`yum install make cmake which sqlite-devel openssl-devel libssh2-devel gcc libicu-devel gcc-c++ rh-ruby26-ruby-devel rh-ruby26-ruby git`
+```
+yum install make cmake which sqlite-devel openssl-devel libssh2-devel gcc libicu-devel gcc-c++ rh-ruby26-ruby-devel rh-ruby26-ruby git
+```
 
 Installera Oxidized
 
-`scl enable rh-ruby26 bash`
-`gem install oxidized`
-`gem install oxidized-script oxidized-web`
+```
+scl enable rh-ruby26 bash
+gem install oxidized
+gem install oxidized-script oxidized-web
+```
 
 Skapa en systemd fil åt Oxidized.
 
@@ -156,17 +164,19 @@ Skapa en systemd fil åt Oxidized.
 
 </accordion>
 
-</div>
-</div>
+
+
 <div id="tab2" class="tab-pane fade">
 
-`sudo add-apt-repository universe`
-`sudo apt-get -y install ruby ruby-dev libsqlite3-dev libssl-dev pkg-config cmake libssh2-1-dev libicu-dev zlib1g-dev g++`
-`sudo gem install oxidized`
-`sudo gem install oxidized-script oxidized-web`
+```
+sudo add-apt-repository universe
+sudo apt-get -y install ruby ruby-dev libsqlite3-dev libssl-dev pkg-config cmake libssh2-1-dev libicu-dev zlib1g-dev g++
+sudo gem install oxidized
+sudo gem install oxidized-script oxidized-web
+```
 
-</div>
-</div>
+
+
 
 Konfiguration
 =============
@@ -176,29 +186,37 @@ Konfigurationen är på YAML-format. Default-konf finns i:
 
 För att initiera oxidized i ditt home directory kör:
 
-`mkdir -p ~/.config/oxidized`
-`oxidized`
-`nano ~/.config/oxidized/config`
+```
+mkdir -p ~/.config/oxidized
+oxidized
+nano ~/.config/oxidized/config
+```
 
 Man kan ändra var man vill att oxidized ska lägga sig genom att ändra
 environment variable
 
-`OXIDIZED_HOME=/etc/oxidized`
+```
+OXIDIZED_HOME=/etc/oxidized
+```
 
 Logging
 
-`log: "/home/$USER/.config/oxidized/oxidized.log"`
+```
+log: "/home/$USER/.config/oxidized/oxidized.log"
+```
 
 Input
 -----
 
 Input hämtar konfiguration från enheterna.
 
-`input:`
-`  default: ssh, telnet`
-`  debug: false`
-`  ssh:`
-`    secure: false`
+```
+input:
+  default: ssh, telnet
+  debug: false
+  ssh:
+    secure: false
+```
 
 Source
 ------
@@ -229,8 +247,10 @@ rancid-kompatibel fil.
 **router.db**
 Format: 0:1:2:3:4
 
-`router01.example.com:ios:user:pw:enablepw`
-`172.20.0.1:ios:user:pw:enablepw`
+```
+router01.example.com:ios:user:pw:enablepw
+172.20.0.1:ios:user:pw:enablepw
+```
 
 ### HTTP
 
@@ -273,19 +293,23 @@ Output
 Output lagrar konfigurationen. Man måste köra git för att få
 versionshantering på konfig-filerna.
 
-`output:`
-`  default: file`
-`  file:`
-`    directory: "/home/$USER/.config/oxidized/configs"`
+```
+output:
+  default: file
+  file:
+    directory: "/home/$USER/.config/oxidized/configs"
+```
 
 GIT
 
-`output:`
-`  default: git`
-`  git:`
-`      user: Oxidized`
-`      email: oxidized@example.com`
-`      repo: "/home/$USER/.config/oxidized/oxidized.git"`
+```
+output:
+  default: git
+  git:
+      user: Oxidized
+      email: oxidized@example.com
+      repo: "/home/$USER/.config/oxidized/oxidized.git"
+```
 
 **Exceptions**
 Man kan lägga in egna undantag för rader som ej borde vara med i
@@ -358,7 +382,9 @@ Execute
 
 För att starta oxidized och ta en första backup
 
-`oxidized`
+```
+oxidized
+```
 
 RESTful web API
 
@@ -371,20 +397,26 @@ Skapa en service med hjälp av [Systemd](/Systemd "wikilink"). Om du
 installera Oxidized enligt denna guiden för CentOS använd isåfall
 systemd filen som angetts där.
 
-`sudo cat <<'__EOF__'>> /lib/systemd/system/oxidized.service`
-`[Unit]`
-`Description=Oxidized - Network Device Configuration Backup Tool`
+```
+sudo cat <<'__EOF__'>> /lib/systemd/system/oxidized.service
+[Unit]
+Description=Oxidized - Network Device Configuration Backup Tool
+```
 
-`[Service]`
-`ExecStart=/usr/local/bin/oxidized`
-`User=oxidized`
+```
+[Service]
+ExecStart=/usr/local/bin/oxidized
+User=oxidized
+```
 
-`[Install]`
-`WantedBy=multi-user.target`
-`__EOF__`
+```
+[Install]
+WantedBy=multi-user.target
+__EOF__
+```
 
-`sudo systemctl enable oxidized`
-`sudo systemctl start oxidized`
-`sudo systemctl status oxidized`
-
-[Category:Guider](/Category:Guider "wikilink")
+```
+sudo systemctl enable oxidized
+sudo systemctl start oxidized
+sudo systemctl status oxidized
+```

@@ -25,11 +25,15 @@ Rancid kan hjälpa till i arbetet med följande frågor:
 Installation
 ------------
 
-`sudo apt-get -y install rancid subversion postfix`
+```
+sudo apt-get -y install rancid subversion postfix
+```
 
 Rancid-användare skapas under installationen.
 
-`apt-cache show rancid | grep Version`
+```
+apt-cache show rancid | grep Version
+```
 
 Konfiguration
 -------------
@@ -43,46 +47,62 @@ Filer
 Byt från cvs till subversion samt skapa grupper för dina enheter. Det
 går även använda [Git](/Git "wikilink").
 
-`sudo sed -i.bak 's/RCSSYS=cvs; export RCSSYS/RCSSYS=svn; export RCSSYS/g' /etc/rancid/rancid.conf`
-`sudo sed -i 's#CVSROOT=$BASEDIR/CVS; export CVSROOT#CVSROOT=$BASEDIR/svn; export CVSROOT#g' /etc/rancid/rancid.conf`
-`echo 'LIST_OF_GROUPS="routers switches fws"' | sudo tee -a /etc/rancid/rancid.conf`
+```
+sudo sed -i.bak 's/RCSSYS=cvs; export RCSSYS/RCSSYS=svn; export RCSSYS/g' /etc/rancid/rancid.conf
+sudo sed -i 's#CVSROOT=$BASEDIR/CVS; export CVSROOT#CVSROOT=$BASEDIR/svn; export CVSROOT#g' /etc/rancid/rancid.conf
+echo 'LIST_OF_GROUPS="routers switches fws"' | sudo tee -a /etc/rancid/rancid.conf
+```
 
 Slipp att det räknas som en ändring varje gång en loggfil ändrar
 storlek. Modifiera */var/lib/rancid/bin/rancid* (kan behövas kommenteras
 ut fler beroende på enhet, man får testa sig fram)
 
-`#{‘dir /all bootflash:’         => ‘DirSlotN’},`
-`#{'dir /all disk0:'             => 'DirSlotN'},`
+```
+#{‘dir /all bootflash:’         => ‘DirSlotN’},
+#{'dir /all disk0:'             => 'DirSlotN'},
+```
 
 Don't strip passwords from backed up configurations
 
-`sudo sed -i 's/FILTER_PWDS=YES/FILTER_PWDS=NO/g' /etc/rancid/rancid.conf`
+```
+sudo sed -i 's/FILTER_PWDS=YES/FILTER_PWDS=NO/g' /etc/rancid/rancid.conf
+```
 
 Fixa rättigheter för rancid user
 
-`sudo chown -R rancid:rancid /var/lib/rancid`
-`sudo su -s /bin/bash rancid`
+```
+sudo chown -R rancid:rancid /var/lib/rancid
+sudo su -s /bin/bash rancid
+```
 
 User rancid
 
-`cd && nano .cloginrc`
-`#add autoenable * 0 (tex Cisco ASA kräver manuell enable)`
-`add cyphertype * aes256-ctr,aes256-ctr,aes128-cbc,aes256-cbc`
-`add method * ssh`
-`add user * cisco`
-`add password * {cisco} {cisco}`
+```
+cd && nano .cloginrc
+#add autoenable * 0 (tex Cisco ASA kräver manuell enable)
+add cyphertype * aes256-ctr,aes256-ctr,aes128-cbc,aes256-cbc
+add method * ssh
+add user * cisco
+add password * {cisco} {cisco}
+```
 
-`chmod 600 .cloginrc`
+```
+chmod 600 .cloginrc
+```
 
 **Testa inlogg**
 
-`/var/lib/rancid/bin/clogin 172.20.0.100`
+```
+/var/lib/rancid/bin/clogin 172.20.0.100
+```
 
 ### SVN
 
 Lagra i SVN repo. Går även att köra med cvs. Kör som user rancid.
 
-`/var/lib/rancid/bin/rancid-cvs`
+```
+/var/lib/rancid/bin/rancid-cvs
+```
 
 Lista filer i SVN:
 
@@ -91,9 +111,11 @@ Lista filer i SVN:
 **Add devices**
 nano /var/lib/rancid/switches/router.db
 
-`192.168.0.100:cisco:up`
-`sw01.local:cisco:up`
-`10.0.0.10:hp:up`
+```
+192.168.0.100:cisco:up
+sw01.local:cisco:up
+10.0.0.10:hp:up
+```
 
 **Removal**
 För devices raderas entryt ur router.db.
@@ -104,14 +126,18 @@ också!):
 
 Kör igång
 
-`/usr/lib/rancid/bin/rancid-run`
+```
+/usr/lib/rancid/bin/rancid-run
+```
 
 ### Schemaläggning
 
-`su - rancid`
-`crontab -e`
-`0 * * * * /usr/lib/rancid/bin/rancid-run`
-`0 1 * * * find /opt/rancid/var/logs -type f -mtime +30 -exec rm {} \; # Slang gamla loggar`
+```
+su - rancid
+crontab -e
+0 * * * * /usr/lib/rancid/bin/rancid-run
+0 1 * * * find /opt/rancid/var/logs -type f -mtime +30 -exec rm {} \; # Slang gamla loggar
+```
 
 Web GUI
 -------
@@ -119,54 +145,70 @@ Web GUI
 **CVSWeb**
 Endast om man valde cvs.
 
-`sudo apt-get -y install cvsweb`
+```
+sudo apt-get -y install cvsweb
+```
 
 ### WebSVN
 
-`sudo apt-get -y install websvn`
+```
+sudo apt-get -y install websvn
+```
 
 path: /var/lib/rancid/svn
 repo: /var/lib/rancid/svn
 
-`sudo ln -s /etc/websvn/apache.conf /etc/apache2/conf-available/websvn.conf`
-`sudo a2enconf websvn.conf`
-`sudo service apache2 reload`
-`sudo chgrp -R www-data /var/lib/rancid/svn`
-`sudo chmod g+w -R /var/lib/rancid/svn`
+```
+sudo ln -s /etc/websvn/apache.conf /etc/apache2/conf-available/websvn.conf
+sudo a2enconf websvn.conf
+sudo service apache2 reload
+sudo chgrp -R www-data /var/lib/rancid/svn
+sudo chmod g+w -R /var/lib/rancid/svn
+```
 
 <http://172.20.0.10/websvn>
 
 **Auth**
 HTTP authentication för /websvn
 
-`sudo apt-get -y install apache2-utils`
-`sudo htpasswd -c /opt/websvnpassword admin`
+```
+sudo apt-get -y install apache2-utils
+sudo htpasswd -c /opt/websvnpassword admin
+```
 
-`sudo nano /etc/websvn/apache.conf`
-`AuthType Basic`
-`AuthName "Restricted Access"`
-`AuthBasicProvider file`
-`AuthUserFile /opt/websvnpassword`
-`Require user admin`
+```
+sudo nano /etc/websvn/apache.conf
+AuthType Basic
+AuthName "Restricted Access"
+AuthBasicProvider file
+AuthUserFile /opt/websvnpassword
+Require user admin
+```
 
-`sudo service apache2 reload`
+```
+sudo service apache2 reload
+```
 
 **Others**
 "ln: failed to create symbolic link ‘/etc/apache2/conf.d/websvn’: No
 such file or directory"
 workaround:
 
-`sudo mkdir /etc/apache2/conf.d`
+```
+sudo mkdir /etc/apache2/conf.d
+```
 
 Mailnotifiering
 ---------------
 
 *Postfix*
 
-`sudo nano /etc/aliases`
-`rancid-routers:     sysadm`
-`rancid-admin-routers:   sysadm`
-`sudo newaliases`
+```
+sudo nano /etc/aliases
+rancid-routers:     sysadm
+rancid-admin-routers:   sysadm
+sudo newaliases
+```
 
 Slacknotifiering
 ----------------
@@ -197,5 +239,3 @@ ERRORMESSAGE='{"text": "Rancid report: There seems to be some issues :(", "attac
 # If no errors was found a static message is posted to the channel
 [ -z "$FAILEDDEVICES" ] && curl -X POST --data '{"text":"Rancid report: No failed backups last rancid run :)"}' -H "Content-Type: application/json" https://hooks.slack.com/services/XXX/XXX/XXXXX
 ```
-
-[Category:Guider](/Category:Guider "wikilink")

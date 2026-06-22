@@ -17,17 +17,21 @@ Installation
 <div id="tab1" class="tab-pane fade in active">
 Kör sedan:
 
-`sudo yum install jq`
-`  `
+```
+sudo yum install jq
+  
+```
 
-</div>
+
 <div id="tab2" class="tab-pane fade">
 
-`sudo apt-get install jq`
-`  `
+```
+sudo apt-get install jq
+  
+```
 
-</div>
-</div>
+
+
 
 Användning
 ==========
@@ -61,5 +65,3 @@ Tips'N'Tricks
 =============
 
 Använd [jqplay](https://jqplay.org/) för att enkelt skriva jq filter.
-
-[Category:Guider](/Category:Guider "wikilink")

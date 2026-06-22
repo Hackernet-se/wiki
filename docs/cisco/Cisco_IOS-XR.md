@@ -33,40 +33,56 @@ kopplat till konfigurationshantering.
 
 Visa ändringar som kommer att installeras vid commit:
 
-`show configuration`
-`alias config diff show commit changes diff`
+```
+show configuration
+alias config diff show commit changes diff
+```
 
 Visa hur hela konfiguration kommer se ut efter commit:
 
-`show configuration merge`
+```
+show configuration merge
+```
 
 Göra commit med en märkning av konfigurationen:
 
-`commit label add-loopback1337`
+```
+commit label add-loopback1337
+```
 
 Visa misslyckad commit tex. om något i konfiguration saknas eller är
 inkompatiblet (detta meddelas vid en vanlig commit)
 
-`show configuration failed`
+```
+show configuration failed
+```
 
 Lista historiska förändringar:
 
-`show configuration history`
+```
+show configuration history
+```
 
 Backa konfiguration till specifik konfiguration:
 
-`rollback configuration to add-loopback1337`
+```
+rollback configuration to add-loopback1337
+```
 
 Backa konfiguration till senaste konfiguration:
 
-`rollback configuration last 1`
+```
+rollback configuration last 1
+```
 
 Är man inte helt säker på sin commit kan man köra commit confirmed, då
 måste man aktivt skriva commit confirm annars görs automatiskt en
 rollback.
 
-`commit confirmed`
-`commit confirm `
+```
+commit confirmed
+commit confirm 
+```
 
 Export configuration on commit.
 
@@ -75,34 +91,48 @@ Export configuration on commit.
 Man kan använda regex-baserad replace av konfiguration, t.ex. om man ska
 döpa om en policy eller acl.
 
-`replace pattern 'POLICYMAP-WRONG_NAME' with 'POLICYMAP-RIGHT_NAME'`
+```
+replace pattern 'POLICYMAP-WRONG_NAME' with 'POLICYMAP-RIGHT_NAME'
+```
 
 Run silently without the user being prompted for yes/no.
 
-`service cli interactive disable`
-`copy running-config disk0:test_config.txt`
+```
+service cli interactive disable
+copy running-config disk0:test_config.txt
+```
 
 Default listas interface i bokstavsordning, detta går att ändra.
 
-`configuration display interface slot-order`
+```
+configuration display interface slot-order
+```
 
 To prevent the re-application of the commands which are already present
 in the running configuration.
 
-`service cli commit-optimized enable`
+```
+service cli commit-optimized enable
+```
 
 **Konfigurationslås**
 Vid konfigurering kan konfigurationsläget göras exklusivt:
 
-`configure exclusive`
+```
+configure exclusive
+```
 
 Visa låst konfiguration:
 
-`show configuration lock`
+```
+show configuration lock
+```
 
 Visa vem som låst konfigurationen:
 
-`show configuration sessions`
+```
+show configuration sessions
+```
 
 Admin
 -----
@@ -111,19 +141,25 @@ Gå till admin läge, här kan man styra användares behörigheter, ändra
 config-register, installera funktioner etc. Kommandon för admin-läget
 kan alltid köras genom tex "admin show running-config"
 
-`admin`
+```
+admin
+```
 
 Visa konfiguration (enbat för Admin läge)
 
-`(admin)#show running-config`
+```
+(admin)#show running-config
+```
 
 Skapa användare
 
-`admin`
-`conf t`
-`username juan`
-` group root-system`
-` secret cisco`
+```
+admin
+conf t
+username juan
+ group root-system
+ secret cisco
+```
 
 #### Fördefinierade grupper
 
@@ -150,95 +186,129 @@ Skapa användare
 
 I XR kan man skapa egna grupper för specifika ändamål
 
-`taskgroup BGP`
-` task execute bgp`
-` task read bgp`
-` task write bgp`
+```
+taskgroup BGP
+ task execute bgp
+ task read bgp
+ task write bgp
+```
 
-`taskgroup ISIS`
-` task execute isis`
-` task read isis`
-` task write isis`
+```
+taskgroup ISIS
+ task execute isis
+ task read isis
+ task write isis
+```
 
-`taskgroup BGPISISTasks`
-` inherit taskgroup BGP`
-` inherit taskgroup ISIS`
+```
+taskgroup BGPISISTasks
+ inherit taskgroup BGP
+ inherit taskgroup ISIS
+```
 
-`usergroup BGPISISAdmins`
-`taskgroup BGPISISTasks`
+```
+usergroup BGPISISAdmins
+taskgroup BGPISISTasks
+```
 
-`username juan_bgp`
-` group BGPISISAdmins`
-` secret cisco`
+```
+username juan_bgp
+ group BGPISISAdmins
+ secret cisco
+```
 
 Grundkonfiguration
 ------------------
 
-`hostname XR-01`
-`!`
-`ipv4 netmask-format bit-count`
-`!`
-`line console`
-` exec-timeout 30 0`
-`!`
-`line default`
-` exec-timeout 30 0`
-` access-class ingress ACL-MGMT-ACCESS`
-` transport input ssh`
+```
+hostname XR-01
+!
+ipv4 netmask-format bit-count
+!
+line console
+ exec-timeout 30 0
+!
+line default
+ exec-timeout 30 0
+ access-class ingress ACL-MGMT-ACCESS
+ transport input ssh
+```
 
 **SSH**
 
-`crypto key generate rsa general-keys`
+```
+crypto key generate rsa general-keys
+```
 `How many bits in the modulus [1024]: `<enter>
-`ssh server v2`
-`ssh server logging`
-`line default transport input ssh`
+```
+ssh server v2
+ssh server logging
+line default transport input ssh
+```
 
 SSH Package behövs.
 
-`show install active | include k9`
+```
+show install active | include k9
+```
 
 **Logging**
 
-`logging on`
-` logging buffered 200000`
-` logging 10.0.10.12`
+```
+logging on
+ logging buffered 200000
+ logging 10.0.10.12
+```
 
 Skicka godtyckligt loggmeddelande
 
-`logmsg HEJ`
+```
+logmsg HEJ
+```
 
 **NTP**
 
-`clock timezone CET Europe/Stockholm`
+```
+clock timezone CET Europe/Stockholm
+```
 
-`ntp`
-` server 79.136.86.176`
-` update-calendar`
+```
+ntp
+ server 79.136.86.176
+ update-calendar
+```
 
 **Tidszon**
 
-`clock timezone CET 1`
-`clock summer-time CEST recurring last sunday march 02:00 last sunday october 03:00`
+```
+clock timezone CET 1
+clock summer-time CEST recurring last sunday march 02:00 last sunday october 03:00
+```
 
 **SNMP**
 För att spara lite CPU-cykler kan man slå på statsd caching. Detta är
 generellt rekommenderat.
 
-`snmp-server ifmib stats cache`
+```
+snmp-server ifmib stats cache
+```
 
 **pyIOSXR**
 Enable XML agent
 
-`xml agent tty iteration off`
+```
+xml agent tty iteration off
+```
 
 **CDP**
 CDP är default avstängt globalt och per inteface i XR. För att slå på
 CDP på XR måste det slås på globalt och per interface:
 
-`cdp`
-` interface GigabitEthernet0/0/0/0`
-`  cdp`
+```
+cdp
+ interface GigabitEthernet0/0/0/0
+  cdp
+```
 
 **MTU**
 MTU i IOS-XR räknas lite annorlunda kontra IOS eftersom L2 headern är
@@ -248,28 +318,38 @@ matcha är IOS-XR = IOS + 14, exempel:
 
 IOS
 
-`mtu 9216`
+```
+mtu 9216
+```
 
 IOS-XR
 
-`mtu 9230`
+```
+mtu 9230
+```
 
 Plattform
 ---------
 
-`top`
-`show redundancy `
-`show platform`
-`show install active summary`
-`show install committed summary`
-`show fpd package`
+```
+top
+show redundancy 
+show platform
+show install active summary
+show install committed summary
+show fpd package
+```
 
 Upgrade
 
-`fpd auto-upgrade enable`
+```
+fpd auto-upgrade enable
+```
 
-`sysadmin-vm:0_RSP0# show install health`
-`install add source harddisk: asr9k-mini-x64-6.5.3.iso`
+```
+sysadmin-vm:0_RSP0# show install health
+install add source harddisk: asr9k-mini-x64-6.5.3.iso
+```
 
 ### CoPP
 
@@ -283,19 +363,23 @@ tillfälle utifrån behov. IOS-XR kan även hantera viss trafik direkt i
 linjekorten för att avlasta CPU, t.ex. BFD, Netflow och ARP kommer LPTS
 instruera lokal CPU att hantera istället för RSP CPU.
 
-`show lpts bindings brief`
+```
+show lpts bindings brief
+```
 
 **MPP**
 Management Plane Protection är på default men alla TCP- och UDP-portar
 kan accessas ifrån alla interface. Detta går att strypa ner för både
 inband och OoB.
 
-`control-plane`
-` management-plane`
-`  out-of-band`
-`   interface MgmtEth0/0/CPU0/0`
-`    allow SSH peer`
-`     address ipv4 10.0.0.0/24`
+```
+control-plane
+ management-plane
+  out-of-band
+   interface MgmtEth0/0/CPU0/0
+    allow SSH peer
+     address ipv4 10.0.0.0/24
+```
 
 ### RPL
 
@@ -306,7 +390,9 @@ kanske innebär att prefix som inte tidigare importerades nu ska
 importeras. Man behöver alltså inte göra någon soft reset som med IOS.
 Detta går att stänga av.
 
-`bgp auto-policy-soft-reset disable`
+```
+bgp auto-policy-soft-reset disable
+```
 
 Troubleshooting - dry run
 
@@ -314,62 +400,72 @@ Troubleshooting - dry run
 
 Kolla hur lång tid olika route-policy entries tar för en viss peering
 
-`debug pcl profile detail`
-`!clear bgp peering`
+```
+debug pcl profile detail
+!clear bgp peering
+```
 `show pcl protocol bgp speaker-0 neighbor-in-dflt `<neighbor>` policy profile`
 
 HSRP
 ----
 
-`interface GigabitEthernet 0/0/0/0`
-` ip address 10.32.0.3 255.255.255.0`
-`router hsrp`
-` interface GigabitEthernet 0/0/0/0`
-` hsrp 1 ipv4 10.32.0.1`
-` hsrp 1 priority 95`
-` hsrp 1 preempt`
-` hsrp 1 track GigabitEthernet 0/0/0/1`
+```
+interface GigabitEthernet 0/0/0/0
+ ip address 10.32.0.3 255.255.255.0
+router hsrp
+ interface GigabitEthernet 0/0/0/0
+ hsrp 1 ipv4 10.32.0.1
+ hsrp 1 priority 95
+ hsrp 1 preempt
+ hsrp 1 track GigabitEthernet 0/0/0/1
+```
 
 VRRP
 ----
 
-`interface GigabitEthernet 0/0/0/0`
-` ip address 10.32.25.3 255.255.255.0`
-`router vrrp`
-` interface GigabitEthernet 0/0/0/0`
-`  address-family ipv4`
-`   vrrp 1`
-`    address 10.32.25.1`
-`    priority 95`
-`    track interface GigabitEthernet 0/0/0/0 10`
+```
+interface GigabitEthernet 0/0/0/0
+ ip address 10.32.25.3 255.255.255.0
+router vrrp
+ interface GigabitEthernet 0/0/0/0
+  address-family ipv4
+   vrrp 1
+    address 10.32.25.1
+    priority 95
+    track interface GigabitEthernet 0/0/0/0 10
+```
 
 VRF
 ---
 
 Nedan exempel används ihop med MPLS och BGP.
 
-`vrf 1337`
-` address-family ipv4 unicast`
-`  import route-target`
-`   1337:10`
-`  export route-target`
-`   1337:10`
+```
+vrf 1337
+ address-family ipv4 unicast
+  import route-target
+   1337:10
+  export route-target
+   1337:10
+```
 
-`router bgp 1337`
-` vrf 1337`
-`  rd 1337:10`
-`  address-family ipv4 unicast`
-`   redistribute static`
+```
+router bgp 1337
+ vrf 1337
+  rd 1337:10
+  address-family ipv4 unicast
+   redistribute static
+```
 
 Protip: I XR när man kör "show run vrf xx" ser man bara det som finns
 konfigurerat under "vrf xx", inte tex det som rör vrf under bgp
 konfigurationen. För att se allt i konfugrationen som rör en specifik
 vrf kan följande kommando användas:
 
-`show run formal | i vrf 10`
+```
+show run formal | i vrf 10
+```
 
 **CEF**
 show cef ipv6 exact-route 2001::2:2 2001::1:1 protocol icmp
 ingress-interface GigabitEthernet0/0/0/0.101
-
-[Category:Cisco](/Category:Cisco "wikilink")

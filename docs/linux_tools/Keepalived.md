@@ -19,5 +19,3 @@ Exitkod 2 och högre sätts som vikt-2, exitkod 252 t.ex. kommer ge dig en
 vikt på 250.
 
 <https://www.keepalived.org/>
-
-[Category:Tools](/Category:Tools "wikilink")

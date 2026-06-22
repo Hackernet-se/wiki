@@ -45,7 +45,9 @@ Self-signed
 
 Man kan skapa certifikat och signera dem själv med OpenSSL.
 
-`openssl req -newkey rsa:4096 -nodes -keyout selfsigned.key -x509 -days 3650 -out selfsigned.crt`
+```
+openssl req -newkey rsa:4096 -nodes -keyout selfsigned.key -x509 -days 3650 -out selfsigned.crt
+```
 
 XCA
 ---
@@ -83,18 +85,22 @@ Det följer med en CA-template som är en bra utgångspunkt, Apply all.
 
 #### Subject
 
-`Internal name: Används endast lokalt i din databas, sätt något informativt.`
+```
+Internal name: Används endast lokalt i din databas, sätt något informativt.
+```
 
 Här kan du välja vad du vill. Nedan är exempel från GeoTrusts rootcert
 som bland annat har signerat Googles hemsidecertifikat.
 
-`countryName: US`
-`stateOrProvinceName:`
-`localityName:`
-`organizationName: GeoTrust Inc.`
-`organizationalUnitName`
-`commonName: GeoTrust Global CA`
-`emailAddress:`
+```
+countryName: US
+stateOrProvinceName:
+localityName:
+organizationName: GeoTrust Inc.
+organizationalUnitName
+commonName: GeoTrust Global CA
+emailAddress:
+```
 
 Private key: Välj en befintlig nyckel eller generera en ny
 
@@ -142,19 +148,25 @@ högre krypteringsprestanda. OpenSSL har stöd för Elliptic Curve
 Cryptography-certifikat men tyvärr har inte XCA det.
 Working directory
 
-`sudo mkdir /etc/nginx/ssl`
+```
+sudo mkdir /etc/nginx/ssl
+```
 
 Skapa privat nyckel
 
-`sudo openssl ecparam -out /etc/nginx/ssl/nginx.key -name prime256v1 -genkey`
+```
+sudo openssl ecparam -out /etc/nginx/ssl/nginx.key -name prime256v1 -genkey
+```
 
 Skapa CSR
 
-`sudo openssl req -new -key /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/csr.pem`
+```
+sudo openssl req -new -key /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/csr.pem
+```
 
 Nu kan du signera csr:n med ditt rootcert alternativt själv-signera med
 följande:
 
-`sudo openssl req -x509 -nodes -days 365 -key /etc/nginx/ssl/nginx.key -in /etc/nginx/ssl/csr.pem -out /etc/nginx/ssl/nginx.pem `
-
-[Category:Guider](/Category:Guider "wikilink")
+```
+sudo openssl req -x509 -nodes -days 365 -key /etc/nginx/ssl/nginx.key -in /etc/nginx/ssl/csr.pem -out /etc/nginx/ssl/nginx.pem 
+```

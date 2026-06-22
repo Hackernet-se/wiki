@@ -27,7 +27,9 @@ iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.p
 
 Se till att `Get-ExecutionPolicy` är satt till bypass.
 
-`Set-ExecutionPolicy bypass`
+```
+Set-ExecutionPolicy bypass
+```
 
 Exempel
 -------
@@ -36,15 +38,19 @@ Exempel
 
 Starta cmd som admin och skriv,
 
-`choco install git 7zip vlc firefox -y`
+```
+choco install git 7zip vlc firefox -y
+```
 
 **Söka**
 
-`choco search firefox`
+```
+choco search firefox
+```
 
 GUI
 ---
 
-`choco install chocolateygui`
-
-[Category:Windows](/Category:Windows "wikilink")
+```
+choco install chocolateygui
+```

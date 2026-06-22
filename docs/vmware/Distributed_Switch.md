@@ -362,5 +362,3 @@ elementet **<rollback>** till false.
 
 </code>
 Spara och stäng filen, och starta om vCenter.
-
-[Category:VMware](/Category:VMware "wikilink")

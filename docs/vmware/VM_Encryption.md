@@ -70,4 +70,4 @@ operations.Manage encryption policies*-behörigheten. Policyn skapas via
 Den virtuella maskinen kan krypteras för sig medan diskarna kan lämnas
 okrypterade, då man endast applicerar Encryption Storage Policy:n på VM
 Home och inte på diskarna. Krypterade diskar kan däremot inte användas
-av en okrypterad VM. [Category:VMware](/Category:VMware "wikilink")
+av en okrypterad VM. 

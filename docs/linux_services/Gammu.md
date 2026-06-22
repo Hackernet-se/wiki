@@ -24,7 +24,9 @@ Du behöver en mobil eller modem som Gammu har stöd för. Se deras
 Installera
 ----------
 
-`apt-get install gammu usb-modeswitch`
+```
+apt-get install gammu usb-modeswitch
+```
 
 Usb-modeswitch behöver man om man ska använda ett usb modem som visar
 sig som både ett usb storage och 3g modem.
@@ -44,7 +46,9 @@ Kommandon
 
 Ta reda på om du behöver slå in pin eller puk kod.
 
-`gammu --getsecuritystatus`
+```
+gammu --getsecuritystatus
+```
 
 Slå in pin eller puk kod.
 
@@ -60,12 +64,11 @@ Huawei
 För att få igång ett Huawei E367 3G modem behövde jag använda
 usb-modeswitch. Samma knep funkar säkert på fler Huawei modem.
 
-`cd /etc/usb_modeswitch.d`
-`sudo tar xzf /usr/share/usb_modeswitch/configPack.tar.gz 12d1:1446`
-`sudo sed -i -e 's/14ac"/14ac,1506"/' 12d1:1446`
-`modprobe usbserial vendor=0x12d1 product=0x1506`
+```
+cd /etc/usb_modeswitch.d
+sudo tar xzf /usr/share/usb_modeswitch/configPack.tar.gz 12d1:1446
+sudo sed -i -e 's/14ac"/14ac,1506"/' 12d1:1446
+modprobe usbserial vendor=0x12d1 product=0x1506
+```
 
 Sedan krävs det att man startar om eller återansluter modemet.
-
-[Category:Guider](/Category:Guider "wikilink")
-[Category:Sparco](/Category:Sparco "wikilink")

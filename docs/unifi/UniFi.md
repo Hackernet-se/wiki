@@ -14,9 +14,11 @@ Installation
 `echo "deb `[`http://www.ubnt.com/downloads/unifi/debian`](http://www.ubnt.com/downloads/unifi/debian)` unifi4 ubiquiti" > /etc/apt/sources.list.d/20ubiquiti.list`
 `echo "deb `[`http://downloads-distro.mongodb.org/repo/debian-sysvinit`](http://downloads-distro.mongodb.org/repo/debian-sysvinit)` dist 10gen" > /etc/apt/sources.list.d/21mongodb.list`
 
-`apt-key adv --keyserver keyserver.ubuntu.com --recv C0A52C50`
-`apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10`
-`apt-get -q update && apt-get install -qy --force-yes unifi `
+```
+apt-key adv --keyserver keyserver.ubuntu.com --recv C0A52C50
+apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+apt-get -q update && apt-get install -qy --force-yes unifi 
+```
 
 Access web interface
 
@@ -45,28 +47,36 @@ Access point
 
 SSHa och kör följande kommando:
 
-`syswrapper.sh restore-default`
+```
+syswrapper.sh restore-default
+```
 
 Switch
 ------
 
 SSHa eller console och kör följande:
 
-`set-default`
+```
+set-default
+```
 
 CLI kommandon
 =============
 
 Visa arp och mac tabellen:
 
-`ubntbox swctrl -d mac show`
+```
+ubntbox swctrl -d mac show
+```
 
 Visa port status:
 
-`ubntbox swctrl -d port show`
+```
+ubntbox swctrl -d port show
+```
 
 Visa startup-config:
 
-`cat /var/run/fastpath/startup-config`
-
-[Category:Guider](/Category:Guider "wikilink")
+```
+cat /var/run/fastpath/startup-config
+```

@@ -28,7 +28,9 @@ I fältet X display location skriv, `localhost:0`
 
 Testa nu att ansluta till en server och skriv,
 
-`echo $DISPLAY`
+```
+echo $DISPLAY
+```
 
 Då bör du få ett svar i stil med `localhost:10.0`
 Annars dubbelkolla att X11Forwarding Yes är konfat i
@@ -41,7 +43,9 @@ Tips and tricks
 
 Skriv ett `&` efter kommandot.
 
-`firefox &`
+```
+firefox &
+```
 
 #### För att inte tappa X11 forwarding om man SSHar till en annan maskin.
 
@@ -60,5 +64,3 @@ rdesktop - RDP klient.
 Wireshark - Lyssna på paket.
 
 Firefox - Webbläsare
-
-[Category:Guider](/Category:Guider "wikilink")

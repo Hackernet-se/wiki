@@ -13,69 +13,97 @@ Man kan använda lite olika format på sina loggmeddelanden, detta går
 ifrån den tidszon enheten är konfad med kan man lägga till **localtime**
 efter datetime-kommandona.
 
-`(Utan tidsstämpel)`
-`%LINK-3-UPDOWN: Interface Port-channel1, changed state to up`
+```
+(Utan tidsstämpel)
+%LINK-3-UPDOWN: Interface Port-channel1, changed state to up
+```
 
 **`service`` ``timestamps`` ``log`` ``uptime`**
-`00:00:46: %LINK-3-UPDOWN: Interface Port-channel1, changed state to up`
+```
+00:00:46: %LINK-3-UPDOWN: Interface Port-channel1, changed state to up
+```
 
 **`service`` ``timestamps`` ``log`` ``datetime`**
-`*Feb  8 18:24:02: %LINK-3-UPDOWN: Interface Port-channel1, changed state to up`
+```
+*Feb  8 18:24:02: %LINK-3-UPDOWN: Interface Port-channel1, changed state to up
+```
 
 **`service`` ``timestamps`` ``log`` ``datetime`` ``msec`**
-`*Feb  8 18:24:02:355 %LINK-3-UPDOWN: Interface Port-channel1, changed state to up`
+```
+*Feb  8 18:24:02:355 %LINK-3-UPDOWN: Interface Port-channel1, changed state to up
+```
 
 [NX-OS](/Cisco_Nexus "wikilink") har lite annan struktur på syslog
 
-`2016 Feb  8 18:41:55.911853  DC01-SW02  %BGP-3-UNEXPECT:  the-message...`
+```
+2016 Feb  8 18:41:55.911853  DC01-SW02  %BGP-3-UNEXPECT:  the-message...
+```
 
 ### Diverse
 
 Default har de flesta IOS-enheter en rätt liten logg-buffer men det går
 att ställa upp.
 
-`logging buffered 131072`
+```
+logging buffered 131072
+```
 
 Count every log message and timestamp last occurance
 
-`logging count`
-`show logging count`
+```
+logging count
+show logging count
+```
 
 Persistent, no buffering
 
-`logging persistent immediate`
+```
+logging persistent immediate
+```
 
 Rate limit
 
-`logging rate-limit console all 1`
+```
+logging rate-limit console all 1
+```
 
 Numrera loggrader, gör det svårare att manipulera lagrade loggar i
 efterhand.
 
-`service sequence-numbers`
+```
+service sequence-numbers
+```
 
 **Message Discriminator**
 Innan ett loggmeddelande levereras kan man ha det checkat mot en
 manuellt definierad kriterielista. På så sätt kan man t.ex. specificera
 om några speciella loggmeddelanden ska droppas.
 
-`logging discriminator BLOCK msg-body drops Interface Port-channel1`
+```
+logging discriminator BLOCK msg-body drops Interface Port-channel1
+```
 
-`logging monitor discriminator BLOCK`
-`logging host 1.1.1.1 discriminator BLOCK`
+```
+logging monitor discriminator BLOCK
+logging host 1.1.1.1 discriminator BLOCK
+```
 
 Local Storage
 =============
 
 Man kan lagra loggar lokalt på flash.
 
-`mkdir flash:/logs`
-`logging persistent url flash:/logs`
-`logging on`
+```
+mkdir flash:/logs
+logging persistent url flash:/logs
+logging on
+```
 
 Verify
 
-`show logging`
+```
+show logging
+```
 
 Syslog
 ======
@@ -87,33 +115,45 @@ Syslog-meddelanden går även att skicka med
 speciell history buffer och sedan replikerar SNMP agenten det till
 traps.
 
-`logging on`
+```
+logging on
+```
 
 Set syslog server logging level, 0-7.
 
-`logging trap ?`
+```
+logging trap ?
+```
 
 Source
 
-`logging origin-id HOSTNAME`
-`logging source-interface Loopback 0`
+```
+logging origin-id HOSTNAME
+logging source-interface Loopback 0
+```
 
 Bytt protokoll och port
 
-`logging host 1.1.1.1 transport tcp port 5514`
+```
+logging host 1.1.1.1 transport tcp port 5514
+```
 
 Kommandologgning
 ================
 
-`archive`
-` log config`
-`  logging enable`
-`  notify syslog`
-`  hidekeys`
+```
+archive
+ log config
+  logging enable
+  notify syslog
+  hidekeys
+```
 
 Verify
 
-`show archive log config all`
+```
+show archive log config all
+```
 
 ACL
 ===
@@ -121,22 +161,28 @@ ACL
 Förutom att öka hit count generera ett loggmeddelande när en ACL-regel
 träffas.
 
-`ip access-list extended Block_HTTP`
+```
+ip access-list extended Block_HTTP
+```
 ` 10 deny tcp any any eq 80 `**`log`**
-` 20 permit ip any any`
+```
+ 20 permit ip any any
+```
 
 För L2-info också använd *log-input* istället för log.
 
 Access list logging interval (milliseconds) & log-update threshold
 (number of hits)
 
-`ip access-list logging interval 1000`
-`ip access-list log-update threshold 10`
+```
+ip access-list logging interval 1000
+ip access-list log-update threshold 10
+```
 
 IOS kan generera och lägga på en MD5 hash på varje access-list entry.
 Denna hash kan användas för att enklare söka och filtrera på
 loggmeddelanden utifrån en viss regel. Hashen ligger kvar efter reboot.
 
-`ip access-list logging hash-generation `
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+ip access-list logging hash-generation 
+```

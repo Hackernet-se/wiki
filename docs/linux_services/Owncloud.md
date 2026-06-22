@@ -3,8 +3,7 @@ title: Owncloud
 permalink: /Owncloud/
 ---
 
-[Category:Guider](/Category:Guider "wikilink")
-[Category:Sparco](/Category:Sparco "wikilink") Owncloud är precis som
+ Owncloud är precis som
 namnet antyder ett eget cloud. Funkar precis som Dropbox och liknande
 tjänster bara att du själv måste hosta filerna på en egen server och på
 så sätt ha full kontroll på dom.

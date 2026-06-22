@@ -19,16 +19,20 @@ RIP metricen från andra sidan. Detta gör att man kan få till bra path
 selection även om det finns backdoor links. RIPv1 stöds inte. Se även
 [Cisco RIP](/Cisco_RIP "wikilink").
 
-`router rip`
-` version 2`
-` address-family ipv4 vrf Cust_A`
-`  redistribute bgp 100 metric transparent`
-`  network 192.168.1.0`
+```
+router rip
+ version 2
+ address-family ipv4 vrf Cust_A
+  redistribute bgp 100 metric transparent
+  network 192.168.1.0
+```
 
-`router bgp 100`
-` address-family ipv4 vrf Cust_A`
-`  redistribute rip`
-` exit-address-family`
+```
+router bgp 100
+ address-family ipv4 vrf Cust_A
+  redistribute rip
+ exit-address-family
+```
 
 OSPF
 ----
@@ -46,20 +50,28 @@ routes att exporteras som type-5 external LSA. Om man inte specifikt
 anger något Domain ID på IOS så kommer process ID att användas. På
 IOS-XR sätts NULL ifall man inte har konfigurerat något.
 
-`interface gi0/0`
-` description Link to CE`
-` vrf forwarding Cust_A`
-` ip ospf 2 area 0`
+```
+interface gi0/0
+ description Link to CE
+ vrf forwarding Cust_A
+ ip ospf 2 area 0
+```
 
-`router ospf 2 vrf Cust_A`
-` router-id 10.0.0.10`
+```
+router ospf 2 vrf Cust_A
+ router-id 10.0.0.10
+```
 ` `**`domain-id`` ``1.1.1.1`**
-` redistribute bgp 100 subnets`
+```
+ redistribute bgp 100 subnets
+```
 
-`router bgp 100`
-` address-family ipv4 vrf Cust_A`
-`  redistribute ospf 2 vrf Cust_A`
-` exit-address-family`
+```
+router bgp 100
+ address-family ipv4 vrf Cust_A
+  redistribute ospf 2 vrf Cust_A
+ exit-address-family
+```
 
 OSPF har inbyggd loop prevention genom att tagga alla routes som har
 redistribuerats från MPLS-nätet till OSPF med en down bit i LSA:n. Om
@@ -72,8 +84,10 @@ IOS sätts down bit på både typ 3 och typ 5 LSA, förr var det endast typ
 prevention, det är fallback för DN bit som man kan behöva att kringgå om
 man kör vrf-lite.
 
-`router ospf 1 vrf Cust_A`
-` capability vrf-lite `
+```
+router ospf 1 vrf Cust_A
+ capability vrf-lite 
+```
 
 ### Sham-Link
 
@@ -92,25 +106,35 @@ IP-adresser bör annonseras på något annat sätt än OSPF (typ BGP).
 
 PE1
 
-`interface Loopback 20`
-` ip vrf forwarding Cust_A`
-` ip address 3.3.3.3 255.255.255.255`
+```
+interface Loopback 20
+ ip vrf forwarding Cust_A
+ ip address 3.3.3.3 255.255.255.255
+```
 
-`router ospf 2 vrf Cust_A`
-` area 0 sham-link 3.3.3.3 1.1.1.1 cost 10`
+```
+router ospf 2 vrf Cust_A
+ area 0 sham-link 3.3.3.3 1.1.1.1 cost 10
+```
 
 PE2
 
-`interface Loopback 20`
-` ip vrf forwarding Cust_A`
-` ip address 1.1.1.1 255.255.255.255`
+```
+interface Loopback 20
+ ip vrf forwarding Cust_A
+ ip address 1.1.1.1 255.255.255.255
+```
 
-`router ospf 2 vrf Cust_A`
-` area 0 sham-link 1.1.1.1 3.3.3.3 cost 10`
+```
+router ospf 2 vrf Cust_A
+ area 0 sham-link 1.1.1.1 3.3.3.3 cost 10
+```
 
 Verify
 
-`show ip ospf sham-links`
+```
+show ip ospf sham-links
+```
 
 EIGRP
 -----
@@ -124,16 +148,20 @@ perspektiv. EIGRP-prefix som redistribueras in i BGP kommer också att ha
 ett Cost value som används för path selection. Se även [Cisco
 EIGRP](/Cisco_EIGRP "wikilink").
 
-`router eigrp 100`
-` address-family ipv4 vrf Cust_A autonomous-system 200`
-`  redistribute bgp 100 metric 10000000 0 255 1 1500`
-`  no auto-summary`
-` exit-address-family`
+```
+router eigrp 100
+ address-family ipv4 vrf Cust_A autonomous-system 200
+  redistribute bgp 100 metric 10000000 0 255 1 1500
+  no auto-summary
+ exit-address-family
+```
 
-`router bgp 100`
-` address-family ipv4 vrf Cust_A`
-`  redistribute eigrp 200`
-` exit-address-family`
+```
+router bgp 100
+ address-family ipv4 vrf Cust_A
+  redistribute eigrp 200
+ exit-address-family
+```
 
 ### Site-of-Origin
 
@@ -144,13 +172,17 @@ går också att uppnå med route tagging men är lite mer omständigt att
 konfigurera. Beroende på designval så sätter man samma SoO-värde på båda
 PE downlinks.
 
-`route-map SoO permit 10`
-` set extcommunity soo 100:2`
+```
+route-map SoO permit 10
+ set extcommunity soo 100:2
+```
 
-`interface Gi2`
-` description Link to CE`
-` vrf forwarding Cust_A`
-` ip vrf sitemap SoO`
+```
+interface Gi2
+ description Link to CE
+ vrf forwarding Cust_A
+ ip vrf sitemap SoO
+```
 
 BGP
 ---
@@ -164,8 +196,10 @@ Cost Community
 Syftet med Cost Communities är att förhindra suboptimal routing och
 routing loops. Det går att stänga av.
 
-`router bgp 100`
-` bgp bestpath cost-community ignore`
+```
+router bgp 100
+ bgp bestpath cost-community ignore
+```
 
 **SoO Attribute**
 Site-of-Origin används för loop prevention och konfigureras på PEs
@@ -173,9 +207,11 @@ grannskap till CE. Uppdateringar med det konfigurerade SoO-värdet kommer
 varken skickas eller accepteras, dvs det är filtrering både ingress och
 egress.
 
-`router bgp 100`
-` address-family ipv4 vrf Cust_A`
-`  neighbor 1.1.1.1 soo 10:12`
+```
+router bgp 100
+ address-family ipv4 vrf Cust_A
+  neighbor 1.1.1.1 soo 10:12
+```
 
 Samma resultat går att uppnå med en route-map som sätter denna community
 men det kan bli omständigt att konfigurera.
@@ -187,10 +223,12 @@ IS-IS är inget vanligt PE-CE protokoll men det går at köra på IOS. ISIS
 har ingen loop prevention så man måste filtrera om man ska köra dual
 homed/redundant kopplat till mpls-nätet.
 
-`router isis 10`
-` vrf CustA`
-` net 49.0000.0000.0010.00`
-` redistribute bgp 100 level-1-2`
+```
+router isis 10
+ vrf CustA
+ net 49.0000.0000.0010.00
+ redistribute bgp 100 level-1-2
+```
 
 Route Leaking
 -------------
@@ -198,23 +236,27 @@ Route Leaking
 Med hjälp av route targets kan man bygga vilken logisk topologi man vill
 för sina L3 VPN:er.
 
-`vrf definition Cust_A`
-` rd 65000:1`
-` address-family ipv4`
-`  route-target both 65000:1`
-`  route-target import 65000:999`
+```
+vrf definition Cust_A
+ rd 65000:1
+ address-family ipv4
+  route-target both 65000:1
+  route-target import 65000:999
+```
 
-`vrf definition Cust_B`
-` rd 65000:2`
-` address-family ipv4`
-`  route-target both 65000:2`
-`  route-target import 65000:999`
+```
+vrf definition Cust_B
+ rd 65000:2
+ address-family ipv4
+  route-target both 65000:2
+  route-target import 65000:999
+```
 
-`vrf definition Shared`
-` rd 65000:999`
-` address-family ipv4`
-`  route-target export 65000:999`
-`  route-target import 65000:1`
-`  route-target import 65000:2`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+vrf definition Shared
+ rd 65000:999
+ address-family ipv4
+  route-target export 65000:999
+  route-target import 65000:1
+  route-target import 65000:2
+```

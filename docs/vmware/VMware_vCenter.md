@@ -26,12 +26,16 @@ webui.
 
 -   Default användarnamn och lösenord på vmwares appliance är,
 
-`root/vmware`
+```
+root/vmware
+```
 
 -   Börja med att öppna en console och logga in. Kör scriptet under för
     att sätta ip, hostnamn, gw, dns.
 
-`/opt/vmware/share/vami/vami_config_net`
+```
+/opt/vmware/share/vami/vami_config_net
+```
 
 -   Surfa sedan in på <https://><ip>:5480, här görs den initiala
     setupen.
@@ -46,7 +50,9 @@ webui.
     `Administration > Single Sign-On > Configuration > Identity Sources`.
     Tryck på det gröna plustecknet.
 
-`Om inte Single Sign-On finns under Administration så är du antagligen inloggad som användaren root.`
+```
+Om inte Single Sign-On finns under Administration så är du antagligen inloggad som användaren root.
+```
 
 -   Fyll sedan i dina uppgifter och tryck på "Test connection".
 
@@ -70,14 +76,18 @@ och sedan klicka på vCenterns hostnamn.
 
 För att kunna SCP'a filer till vCenter skriv följande:
 
-`chsh –s /bin/bash`
+```
+chsh –s /bin/bash
+```
 
 Då ändrar man login skalet från **appliancesh** till **bash** och kan då
 SCP filer.
 
 För att ändra tillbaka till vanliga skriv:
 
-`chsh -s /bin/appliancesh`
+```
+chsh -s /bin/appliancesh
+```
 
 VMware Client Integration Plugin
 --------------------------------
@@ -133,15 +143,19 @@ UI](https://github.com/Hackernet-se/vmware-custom-login)
 
 **VCSA 6.0**
 
-`/usr/lib/vmware-sso/vmware-sts/webapps/websso/WEB-INF/views/unpentry.jsp`
-`/usr/lib/vmware-sso/vmware-sts/webapps/websso/resources/css/login.css`
-`/usr/lib/vmware-sso/vmware-sts/webapps/websso/resources/img`
+```
+/usr/lib/vmware-sso/vmware-sts/webapps/websso/WEB-INF/views/unpentry.jsp
+/usr/lib/vmware-sso/vmware-sts/webapps/websso/resources/css/login.css
+/usr/lib/vmware-sso/vmware-sts/webapps/websso/resources/img
+```
 
 **Windows vCenter Server 6.0**
 
-`C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\WEB-INF\views`
-`C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\resources\css`
-`C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\resources\img`
+```
+C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\WEB-INF\views
+C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\resources\css
+C:\ProgramData\VMware\vCenterServer\runtime\VMwareSTSService\webapps\websso\resources\img
+```
 
 Regenerate certificates
 -----------------------
@@ -149,7 +163,9 @@ Regenerate certificates
 För att skapa nya cert eller lägga in ett eget cert från tex [Let's
 Encrypt](/Let's_Encrypt "wikilink") så använder man certificate manager.
 
-`/usr/lib/vmware-vmca/bin/certificate-manager`
+```
+/usr/lib/vmware-vmca/bin/certificate-manager
+```
 
 Reset the VMware vCenter Single Sign-On administrator password
 --------------------------------------------------------------
@@ -157,10 +173,9 @@ Reset the VMware vCenter Single Sign-On administrator password
 Om man glömt sitt lösenord till en användare tex
 Administrator@vSphere.local kan man skapa ett nytt.
 
-`/usr/lib/vmware-vmdir/bin/vdcadmintool`
+```
+/usr/lib/vmware-vmdir/bin/vdcadmintool
+```
 
 -   Välj nr 3: **Reset account password**
 -   Ange följande som UPN: '''Administrator@vSphere.
-
-[Category:VMware](/Category:VMware "wikilink")
-[Category:Guider](/Category:Guider "wikilink")

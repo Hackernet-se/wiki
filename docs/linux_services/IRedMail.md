@@ -3,7 +3,7 @@ title: IRedMail
 permalink: /IRedMail/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") Att sätta upp en
+ Att sätta upp en
 e-postserver är ett relativt stort projekt. Innan du börjar att
 installera och konfigurera de nödvändiga paketen på mailservern bör du
 lära dig vad allt betyder och förstå hur komponenterna samverkar för att
@@ -35,16 +35,22 @@ installationsprocess är iRedMail ett utmärkt alternativ. Man får även
 ett webgui för kontohantering
 Rekommenderat OS: Ubuntu 14.04 / Debian 7
 
-`sudo su -`
-`mkdir /mailroot `
+```
+sudo su -
+mkdir /mailroot 
+```
 `wget `[`https://bitbucket.org/zhb/iredmail/downloads/iRedMail-0.9.2.tar.bz2`](https://bitbucket.org/zhb/iredmail/downloads/iRedMail-0.9.2.tar.bz2)
-`tar xjf iRedMail-0.9.2.tar.bz2 && cd iRedMail-0.9.2`
-`bash iRedMail.sh`
+```
+tar xjf iRedMail-0.9.2.tar.bz2 && cd iRedMail-0.9.2
+bash iRedMail.sh
+```
 
 Kör igenom den självförklarande guiden
 
-`rm /root/iRedMail-0.9.2/config`
-`reboot`
+```
+rm /root/iRedMail-0.9.2/config
+reboot
+```
 
 Administration
 --------------
@@ -73,4 +79,6 @@ Loggar
 
 Kolla sammanställning av din loggfil.
 
-`pflogsumm /var/log/mail.log`
+```
+pflogsumm /var/log/mail.log
+```

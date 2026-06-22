@@ -31,76 +31,106 @@ Konfiguration
 
 Dead Peer Detection (DPD) & NAT Keepalives
 
-`crypto isakmp keepalive 30 `
-`crypto isakmp nat keepalive 30`
+```
+crypto isakmp keepalive 30 
+crypto isakmp nat keepalive 30
+```
 
 Capabilities, Encryption Layer Interface
 
-`show crypto eli`
+```
+show crypto eli
+```
 
 Errors and Invalid SPI Recovery Feature
 
-`crypto isakmp invalid-spi-recovery `
+```
+crypto isakmp invalid-spi-recovery 
+```
 
 ### Legacy
 
 IPsec VPN med crypto maps och IKEv1 är den äldsta och minst skalbara
 varianten av IPsec VPN.
 
-`crypto isakmp policy 10`
-` encryption aes 256`
-` authentication pre-share`
-` group 20`
-` lifetime 86400`
+```
+crypto isakmp policy 10
+ encryption aes 256
+ authentication pre-share
+ group 20
+ lifetime 86400
+```
 
-`show crypto isakmp policy`
+```
+show crypto isakmp policy
+```
 
 PSK Authentication
 
-`crypto isakmp key S3cr3ts address 3.3.3.3`
+```
+crypto isakmp key S3cr3ts address 3.3.3.3
+```
 
-`show crypto isakmp key`
+```
+show crypto isakmp key
+```
 
 **Fas 2**
 
-`crypto ipsec transform-set PHASE2 esp-aes esp-sha-hmac`
-` mode tunnel`
-`ip access-list extended CRYPTO`
-` permit ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255`
+```
+crypto ipsec transform-set PHASE2 esp-aes esp-sha-hmac
+ mode tunnel
+ip access-list extended CRYPTO
+ permit ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255
+```
 
-`crypto map VPNMAP 10 ipsec-isakmp`
-` set peer 3.3.3.3`
-` set transform-set PHASE2`
-` match address CRYPTO`
+```
+crypto map VPNMAP 10 ipsec-isakmp
+ set peer 3.3.3.3
+ set transform-set PHASE2
+ match address CRYPTO
+```
 
 Interfaces
 
-`interface GigabitEthernet0/1`
-` description Internet`
-` ip address 2.2.2.2 255.255.255.0`
-` crypto map VPNMAP`
+```
+interface GigabitEthernet0/1
+ description Internet
+ ip address 2.2.2.2 255.255.255.0
+ crypto map VPNMAP
+```
 
-`interface GigabitEthernet0/2`
-` description Inside`
-` ip address 192.168.1.1 255.255.255.0`
+```
+interface GigabitEthernet0/2
+ description Inside
+ ip address 192.168.1.1 255.255.255.0
+```
 
 Verify Fas 1 och 2. Inget förhandlas förens det skickas trafik som
 triggar tunneln.
 
-`show crypto isakmp sa`
-`show crypto ipsec sa`
-`show crypto session`
+```
+show crypto isakmp sa
+show crypto ipsec sa
+show crypto session
+```
 
 Loopback
 
-`crypto map VPNMAP local-address Loopback0`
+```
+crypto map VPNMAP local-address Loopback0
+```
 
 Reverse Route Injection
 
-`crypto map VPNMAP 10 ipsec-isakmp`
-` set reverse-route distance 10`
+```
+crypto map VPNMAP 10 ipsec-isakmp
+ set reverse-route distance 10
+```
 
-`show crypto route`
+```
+show crypto route
+```
 
 GRE over IPsec with Profile
 ---------------------------
@@ -111,32 +141,44 @@ att det har enkapsulerats med GRE. Man bör manuellt ange **ip mtu** på
 tunnel-interfacet för det tar ej hänsyn till ESP-enkapsuleringen som
 lägger till overhead.
 
-`crypto isakmp policy 10`
-` encryption aes 256`
-` authentication pre-share`
-` group 20`
-` lifetime 86400`
+```
+crypto isakmp policy 10
+ encryption aes 256
+ authentication pre-share
+ group 20
+ lifetime 86400
+```
 
-`crypto isakmp key S3cr3ts address 3.3.3.3    `
+```
+crypto isakmp key S3cr3ts address 3.3.3.3    
+```
 
-`crypto ipsec transform-set PHASE2 esp-aes esp-sha-hmac `
+```
+crypto ipsec transform-set PHASE2 esp-aes esp-sha-hmac 
+```
 ` mode transport  #`*`Spara`` ``overhead`` ``genom`` ``att`` ``köra`` ``i`` ``transport`` ``mode`*
 
-`crypto ipsec profile GRE_OVER_IPSEC`
-` set transform-set PHASE2 `
+```
+crypto ipsec profile GRE_OVER_IPSEC
+ set transform-set PHASE2 
+```
 
-`interface Tunnel0`
-` ip address 1.1.1.1 255.255.255.0`
-` ip mtu 1400`
-` ip tcp adjust-mss 1360`
-` tunnel source Loopback0`
-` tunnel destination 3.3.3.3`
-` tunnel protection ipsec profile GRE_OVER_IPSEC`
+```
+interface Tunnel0
+ ip address 1.1.1.1 255.255.255.0
+ ip mtu 1400
+ ip tcp adjust-mss 1360
+ tunnel source Loopback0
+ tunnel destination 3.3.3.3
+ tunnel protection ipsec profile GRE_OVER_IPSEC
+```
 
 Verify
 
-`show crypto ipsec profile`
-`show crypto session`
+```
+show crypto ipsec profile
+show crypto session
+```
 
 Local och remote i IPsec SA kommer att förhandlas som
 *tunnel-endpoint*/32 \<-\> *tunnel-endpoint*/32 protokoll GRE vilket gör
@@ -147,13 +189,17 @@ att det aldrig behövs mer än en entry per tunnel.
 Om interfacet som terminerar tunneln ligger i en vrf måste man använda
 en keyring som man lägger i en isakmp-profil.
 
-`crypto keyring VPN_PEERS vrf Outside`
-` pre-shared-key address 3.3.3.3 key SecretKey`
+```
+crypto keyring VPN_PEERS vrf Outside
+ pre-shared-key address 3.3.3.3 key SecretKey
+```
 
-`crypto isakmp profile VPN_PROFILE`
-`  keyring VPN_PEERS`
-`  match identity address 3.3.3.3 255.255.255.255`
-`  keepalive 10 retry 5`
+```
+crypto isakmp profile VPN_PROFILE
+  keyring VPN_PEERS
+  match identity address 3.3.3.3 255.255.255.255
+  keepalive 10 retry 5
+```
 
 VTI
 ---
@@ -167,17 +213,23 @@ mtu. VTI konfigureras likadant som GRE över IPsec med profil men med en
 skillnad, här följer därför endast skillnaden samt att transform set
 alltid måste köras i tunnel mode.
 
-`crypto ipsec transform-set PHASE2 esp-aes esp-sha-hmac `
-` mode tunnel`
+```
+crypto ipsec transform-set PHASE2 esp-aes esp-sha-hmac 
+ mode tunnel
+```
 
-`interface Tunnel0`
+```
+interface Tunnel0
+```
 ` `**`tunnel`` ``mode`` ``ipsec`` ``ipv4`**
 
 Verify
 
-`show crypto ipsec sa`
-`show crypto route`
-`show crypto session`
+```
+show crypto ipsec sa
+show crypto route
+show crypto session
+```
 
 Local och remote kommer alltid att förhandlas som **0.0.0.0/0 \<-\>
 0.0.0.0/0** vilket gör att det aldrig behövs mer än en entry per tunnel.
@@ -186,39 +238,49 @@ Local och remote kommer alltid att förhandlas som **0.0.0.0/0 \<-\>
 
 Man kan även låta VTI:s skapas dynamiskt.
 
-`interface Virtual-Template1 type tunnel  `
-` ip unnumbered Loopback0 `
-` tunnel mode ipsec ipv4 `
-` tunnel protection ipsec profile VTI_PROFILE`
+```
+interface Virtual-Template1 type tunnel  
+ ip unnumbered Loopback0 
+ tunnel mode ipsec ipv4 
+ tunnel protection ipsec profile VTI_PROFILE
+```
 
-`crypto isakmp profile VTI_ISAKMP_PROFILE`
-` keyring default  `
-` match identity address 0.0.0.0    `
-` virtual-template 1`
+```
+crypto isakmp profile VTI_ISAKMP_PROFILE
+ keyring default  
+ match identity address 0.0.0.0    
+ virtual-template 1
+```
 
 Verify
 
-`show interfaces virtual-template 1`
-` ...`
-` Tunnel linestate evaluation down - no IPv4 tunnel destination address`
-` Tunnel source UNKNOWN`
-` ...`
+```
+show interfaces virtual-template 1
+ ...
+ Tunnel linestate evaluation down - no IPv4 tunnel destination address
+ Tunnel source UNKNOWN
+ ...
+```
 
-`show interfaces virtual-access 1`
-` ...`
-` Tunnel vaccess, cloned from Virtual-Template1`
-` Tunnel linestate evaluation up`
-` Tunnel source 10.0.0.1, destination 10.0.0.2`
-` ...`
+```
+show interfaces virtual-access 1
+ ...
+ Tunnel vaccess, cloned from Virtual-Template1
+ Tunnel linestate evaluation up
+ Tunnel source 10.0.0.1, destination 10.0.0.2
+ ...
+```
 
 Andra sidan konfigureras som en vanlig point-to-point IPsec tunnel.
 
-`interface Tunnel10`
-` ip address 10.0.0.2 255.255.255.0`
-` tunnel source Loopback0  `
-` tunnel mode ipsec ipv4  `
-` tunnel destination 1.1.1.1`
-` tunnel protection ipsec profile IPSEC`
+```
+interface Tunnel10
+ ip address 10.0.0.2 255.255.255.0
+ tunnel source Loopback0  
+ tunnel mode ipsec ipv4  
+ tunnel destination 1.1.1.1
+ tunnel protection ipsec profile IPSEC
+```
 
 NAT-T
 -----
@@ -228,7 +290,9 @@ från remote peer natas och byter då till UDP 4500. Detta är på default
 men kan stängas av. Båda sidor måste ha stöd NAT-T för att det ska
 funka.
 
-`no crypto ipsec nat-transparency udp-encapsulation`
+```
+no crypto ipsec nat-transparency udp-encapsulation
+```
 
 IKEv2
 -----
@@ -238,61 +302,83 @@ skillnad från IKEv1 aggressive mode.
 
 Key ring
 
-`crypto ikev2 keyring IKEv2_KEYRING`
-` peer SITE2`
-`  address 3.3.3.3`
-`  pre-shared-key local PSK01`
-`  pre-shared-key remote PSK02`
+```
+crypto ikev2 keyring IKEv2_KEYRING
+ peer SITE2
+  address 3.3.3.3
+  pre-shared-key local PSK01
+  pre-shared-key remote PSK02
+```
 
 Proposal
 
-`crypto ikev2 proposal IKEv2_PROPOSAL`
-` encryption aes-cbc-256`
-` integrity sha512`
-` group 20`
+```
+crypto ikev2 proposal IKEv2_PROPOSAL
+ encryption aes-cbc-256
+ integrity sha512
+ group 20
+```
 
-`show crypto ikev2 proposal`
+```
+show crypto ikev2 proposal
+```
 
 *Används aes-gcm måste prf köras på båda sidor.*
 
 Profile
 
-`crypto ikev2 profile IKEv2_PROFILE`
-` match identity remote address 3.3.3.3 255.255.255.255`
-` identity local address 2.2.2.2`
-` authentication remote pre-share`
-` authentication local pre-share`
-` keyring local IKEv2_KEYRING`
+```
+crypto ikev2 profile IKEv2_PROFILE
+ match identity remote address 3.3.3.3 255.255.255.255
+ identity local address 2.2.2.2
+ authentication remote pre-share
+ authentication local pre-share
+ keyring local IKEv2_KEYRING
+```
 
-`show crypto ikev2 profile`
+```
+show crypto ikev2 profile
+```
 
 Policy
 
-`crypto ikev2 policy IKEv2_POLICY`
-` proposal IKEv2_PROPOSAL`
+```
+crypto ikev2 policy IKEv2_POLICY
+ proposal IKEv2_PROPOSAL
+```
 
-`show crypto ikev2 policy`
+```
+show crypto ikev2 policy
+```
 
 Transform set
 
-`crypto ipsec transform-set SITE2 esp-aes 256 esp-sha-hmac`
-` mode tunnel`
+```
+crypto ipsec transform-set SITE2 esp-aes 256 esp-sha-hmac
+ mode tunnel
+```
 
-`show crypto ipsec transform-set`
+```
+show crypto ipsec transform-set
+```
 
 Crypto map
 
-`crypto map IKEv2_MAP 1000 ipsec-isakmp`
-` set peer 3.3.3.3`
-` set transform-set SITE2`
-` match address CRYPTO`
-`interface gi2`
-` crypto map IKEv2_MAP`
-`show crypto map`
+```
+crypto map IKEv2_MAP 1000 ipsec-isakmp
+ set peer 3.3.3.3
+ set transform-set SITE2
+ match address CRYPTO
+interface gi2
+ crypto map IKEv2_MAP
+show crypto map
+```
 
 Verify
 
-`show crypto ikev2 sa`
+```
+show crypto ikev2 sa
+```
 
 High Availability
 -----------------
@@ -302,9 +388,11 @@ loopbacks som tunnel endpoints och sedan sköta konvergering med
 routingprotokoll. Man kan även bygga redundans genom att ha flera
 peer-adresser i sin crypto-map.
 
-`crypto map VPNMAP 10 ipsec-isakmp`
-` set peer 2.2.2.2 default`
-` set peer 3.3.3.3`
+```
+crypto map VPNMAP 10 ipsec-isakmp
+ set peer 2.2.2.2 default
+ set peer 3.3.3.3
+```
 
 **Stateless IPsec redundancy**
 Det finns inget samspel mellan IPSec och [HSRP](/Cisco_HSRP "wikilink"),
@@ -317,16 +405,22 @@ renegotiation. Därför är denna metod inte optimal utan det man t.ex. kan
 göra istället är att ha uppe två tunnlar parallellt och sedan styra
 routingen med [IP SLA](/Cisco_Routing#IP_SLA "wikilink").
 
-`crypto dynamic-map VPNMAP 10`
-` set transform-set PHASE2`
-` match address ACL`
-` reverse-route`
+```
+crypto dynamic-map VPNMAP 10
+ set transform-set PHASE2
+ match address ACL
+ reverse-route
+```
 
-`crypto map CRYPTO 10 ipsec-isakmp dynamic VPNMAP`
+```
+crypto map CRYPTO 10 ipsec-isakmp dynamic VPNMAP
+```
 
-`interface GigabitEthernet0/1`
-` standby 1 name IPSEC`
-` crypto map CRYPTO redundancy IPSEC`
+```
+interface GigabitEthernet0/1
+ standby 1 name IPSEC
+ crypto map CRYPTO redundancy IPSEC
+```
 
 **Stateful IPsec redundancy**
 Det går även att synka SA-states mellan IOS-routrar vilket möjliggör
@@ -336,21 +430,27 @@ sköts automatiskt med hjälp av SCTP, men ingen konfiguration synkas utan
 det måste sättas upp symmetriskt. Utöver ovanstående
 HSRP/IPsec-konfiguration behövs synkronisering sättas upp.
 
-`ipc zone default`
-` association 1`
-`  protocol sctp`
-`   local-port 5000`
-`   local-ip 10.0.0.1`
-`   remote-port 5000`
-`   remote-ip 10.0.0.2`
+```
+ipc zone default
+ association 1
+  protocol sctp
+   local-port 5000
+   local-ip 10.0.0.1
+   remote-port 5000
+   remote-ip 10.0.0.2
+```
 
-`redundancy inter-device`
-` scheme standby IPSEC`
+```
+redundancy inter-device
+ scheme standby IPSEC
+```
 
 Verify
 
-`show redundancy inter-device`
-`show crypto ha`
+```
+show redundancy inter-device
+show crypto ha
+```
 
 QoS
 ---
@@ -359,8 +459,10 @@ Eftersom trafiken är enkapsulerad och krypterad måste
 QoS-markeringar/beslut fattas innan, man kan använda QoS pre-classify på
 crypto map. Se även [Cisco QoS](/Cisco_QoS "wikilink").
 
-`crypto map VPNMAP 10 ipsec-isakmp `
-` qos pre-classify`
+```
+crypto map VPNMAP 10 ipsec-isakmp 
+ qos pre-classify
+```
 
 GET VPN
 =======
@@ -407,61 +509,87 @@ GDOI Payloads
 **Key Server**
 Generera RSA-nycklar
 
-`crypto key generate rsa general-keys label GDOI_KEYS modulus 2048 exportable`
+```
+crypto key generate rsa general-keys label GDOI_KEYS modulus 2048 exportable
+```
 
 KS har all IPsec-konfiguration som sedan laddas ner av gruppmedlemmarna
 
-`crypto isakmp policy 10`
-` authentication pre-share`
+```
+crypto isakmp policy 10
+ authentication pre-share
+```
 
-`crypto isakmp key 0 SECRET address 2.2.2.2   #GM-1`
-`crypto isakmp key 0 SECRET address 3.3.3.3   #GM-2 `
-`crypto isakmp key 0 SECRET address 4.4.4.4   #GM-3 `
+```
+crypto isakmp key 0 SECRET address 2.2.2.2   #GM-1
+crypto isakmp key 0 SECRET address 3.3.3.3   #GM-2 
+crypto isakmp key 0 SECRET address 4.4.4.4   #GM-3 
+```
 
-`crypto ipsec transform-set PHASE2 esp-aes esp-sha-hmac`
+```
+crypto ipsec transform-set PHASE2 esp-aes esp-sha-hmac
+```
 
-`crypto ipsec profile GDOI_PROFILE`
-` set transform-set PHASE2`
+```
+crypto ipsec profile GDOI_PROFILE
+ set transform-set PHASE2
+```
 
-`ip access-list extended SYMMETRIC_ACL`
-` permit ip 172.16.0.0 0.0.255.255 172.16.0.0 0.0.255.255 `
+```
+ip access-list extended SYMMETRIC_ACL
+ permit ip 172.16.0.0 0.0.255.255 172.16.0.0 0.0.255.255 
+```
 
-`crypto gdoi group GDOI_GROUP`
-` identity number 123`
-` server local`
-`  rekey transport unicast`
-`  rekey authentication mypubkey rsa GDOI_KEYS`
-`  rekey retransmit 60 number 2`
-`  sa ipsec 1`
-`   profile GDOI_PROFILE`
-`   match address ipv4 SYMMETRIC_ACL`
-`   replay time window-size 5`
-`  address ipv4 1.1.1.1 `
+```
+crypto gdoi group GDOI_GROUP
+ identity number 123
+ server local
+  rekey transport unicast
+  rekey authentication mypubkey rsa GDOI_KEYS
+  rekey retransmit 60 number 2
+  sa ipsec 1
+   profile GDOI_PROFILE
+   match address ipv4 SYMMETRIC_ACL
+   replay time window-size 5
+  address ipv4 1.1.1.1 
+```
 
 **Group Member**
 
-`crypto isakmp policy 10`
-` authentication pre-share`
+```
+crypto isakmp policy 10
+ authentication pre-share
+```
 
-`crypto isakmp key 0 SECRET address 1.1.1.1   #KS`
+```
+crypto isakmp key 0 SECRET address 1.1.1.1   #KS
+```
 
-`crypto gdoi group GDOI_GROUP`
-` identity number 123`
-` server address ipv4 1.1.1.1 `
+```
+crypto gdoi group GDOI_GROUP
+ identity number 123
+ server address ipv4 1.1.1.1 
+```
 
-`crypto map GETVPN local-address Loopback 0`
-`crypto map GETVPN 10 gdoi`
-` set group GDOI_GROUP`
+```
+crypto map GETVPN local-address Loopback 0
+crypto map GETVPN 10 gdoi
+ set group GDOI_GROUP
+```
 
-`interface Gi2`
-` description To KS`
-` crypto map GETVPN`
+```
+interface Gi2
+ description To KS
+ crypto map GETVPN
+```
 
 **Verify**
 
-`show crypto gdoi`
-`show crypto gdoi ks`
-`show crypto gdoi gm`
+```
+show crypto gdoi
+show crypto gdoi ks
+show crypto gdoi gm
+```
 
 **COOP KS**
 För redundans och lastdelning kan man ha flera KS som då konfigureras
@@ -469,13 +597,15 @@ likadant. Generera RSA-nycklar på primary KS och exportera både public
 och private till alla COOP KS. Notera att på vissa IOS-versioner går det
 att köra KS och GM på samma enhet men det är inte officially supported.
 
-`crypto key export rsa GDOI_KEYS pem terminal 3des CISCO123 `
-`crypto key import rsa GDOI_KEYS pem exportable terminal CISCO123`
+```
+crypto key export rsa GDOI_KEYS pem terminal 3des CISCO123 
+crypto key import rsa GDOI_KEYS pem exportable terminal CISCO123
+```
 
 **Suite B**
 GET VPN har stöd för Suite B men måste sättas upp för det genom att på
 KS konfigurera de säkra algoritmer som ska användas.
 
-`show crypto gdoi feature suite-b `
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show crypto gdoi feature suite-b 
+```

@@ -27,7 +27,9 @@ användbart om next-hop finns multipla hopp bort och det går att nå via
 flera vägar. I nyare IOS:er finns det inte stöd för unicast fast
 switching. When IPv6 routing is enabled, CEFv6 is automatically enabled.
 
-`show cef state`
+```
+show cef state
+```
 
 ### FIB
 
@@ -35,23 +37,31 @@ CEF har två nyckelkomponenter, FIB och Adjacency. L2 address resolution
 tas direkt från CEF med **ip cef optimize neighbor resolution**, det är
 på default.
 
-`show ip cef`
-`show ipv6 cef`
-`clear cef table ipv4`
+```
+show ip cef
+show ipv6 cef
+clear cef table ipv4
+```
 
 Adjacency
 
-`show adjacency`
+```
+show adjacency
+```
 
 Kolla en specifik route
 
 `show ip cef exact-route `*`source`*` `*`destination`*
-`show ip cef exact-route 10.0.0.5 172.16.1.2`
+```
+show ip cef exact-route 10.0.0.5 172.16.1.2
+```
 
 Consistency
 
-`test cef table consistency`
-`show cef table consistency-check `
+```
+test cef table consistency
+show cef table consistency-check 
+```
 
 ### Load Sharing
 
@@ -62,32 +72,42 @@ detta kallas CEF polarization. För att undvika detta använder numera CEF
 default en algoritm som väljer ett slumpat Universal ID som sedan
 används som seed för hashen.
 
-`ip cef load-sharing algorithm`
-` include-ports  Algorithm that includes layer 4 ports`
-` original       Original algorithm`
-` tunnel         Algorithm for use in tunnel only environments`
-` universal      Algorithm for use in most environments`
+```
+ip cef load-sharing algorithm
+ include-ports  Algorithm that includes layer 4 ports
+ original       Original algorithm
+ tunnel         Algorithm for use in tunnel only environments
+ universal      Algorithm for use in most environments
+```
 
 ### Interface
 
 CEF
 
-`ip cef`
-`show ip interface | i protocol|CEF`
+```
+ip cef
+show ip interface | i protocol|CEF
+```
 
 Fast-switched
 
-`int gi1`
-` no ip route-cache cef`
+```
+int gi1
+ no ip route-cache cef
+```
 
 Process-switched
 
-`int gi1`
-` no ip route-cache`
+```
+int gi1
+ no ip route-cache
+```
 
 Debug
 
-`debug ip packet detail`
+```
+debug ip packet detail
+```
 
 För detta krävs att CEF stängs av, *no ip route-cache*
 
@@ -97,6 +117,6 @@ Med Distributed CEF så har alla line cards egna kopior av FIB och
 adjacency table, på så sätt kan de göra express forwarding själva och
 behöver inte fråga main processor.
 
-`show cef linecard`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show cef linecard
+```

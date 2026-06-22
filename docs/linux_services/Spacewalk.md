@@ -21,19 +21,27 @@ Lägg till lite nya repositories som behövs.
 
 **EPEL repository:**
 
-`yum install epel-release`
+```
+yum install epel-release
+```
 
 **JPackage repository:**
 
-`cat > /etc/yum.repos.d/jpackage-generic.repo << EOF`
-`[jpackage-generic]`
-`name=JPackage generic`
+```
+cat > /etc/yum.repos.d/jpackage-generic.repo << EOF
+[jpackage-generic]
+name=JPackage generic
+```
 `#baseurl=`[`http://mirrors.dotsrc.org/pub/jpackage/5.0/generic/free/`](http://mirrors.dotsrc.org/pub/jpackage/5.0/generic/free/)
 `mirrorlist=`[`http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0`](http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=5.0)
-`enabled=1`
-`gpgcheck=1`
+```
+enabled=1
+gpgcheck=1
+```
 `gpgkey=`[`http://www.jpackage.org/jpackage.asc`](http://www.jpackage.org/jpackage.asc)
-`EOF`
+```
+EOF
+```
 
 **Spacewalk repository:**
 
@@ -58,7 +66,9 @@ Beror på vilket dist du kommer köra. I skrivande stund är version
 
 Uppdatera repona.
 
-`yum repolist && yum update`
+```
+yum repolist && yum update
+```
 
 Installera
 ----------
@@ -69,17 +79,23 @@ version 10g eller högre.
 
 Denna guiden använder den inbyggda databasen:
 
-`yum install spacewalk-setup-postgresql`
+```
+yum install spacewalk-setup-postgresql
+```
 
 Installera sedan Spacewalk:
 
-`yum install spacewalk-postgresql`
+```
+yum install spacewalk-postgresql
+```
 
 För att kunna nå web interfacet och kunna använda andra tjänster behöver
 man sätta på några portar.
 
-`firewall-cmd --add-service=https --permanent`
-`firewall-cmd --add-service=http --permanent`
+```
+firewall-cmd --add-service=https --permanent
+firewall-cmd --add-service=http --permanent
+```
 
 För att kunna pusha saker till dina klienter behöver man enabla port
 **5222**. Om man tänkt använda Spacewalk proxy behöver man porten
@@ -87,16 +103,18 @@ För att kunna pusha saker till dina klienter behöver man enabla port
 
 Ladda sedan om brandväggen.
 
-`firewall-cmd --reload`
+```
+firewall-cmd --reload
+```
 
 Spacewalk måste kunna resolva sitt FQDN. Går inte det så lägg in det i
 host filen **/etc/hosts**
 
 Kör följande kommando och svara på frågorna.
 
-`spacewalk-setup --disconnected`
+```
+spacewalk-setup --disconnected
+```
 
 Surfa sedan in på din spacewalk server **<https://hostname/>** och skapa
 ett inlogg.
-
-[Category:Guider](/Category:Guider "wikilink")

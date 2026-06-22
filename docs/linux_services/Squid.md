@@ -11,11 +11,15 @@ Installation
 
 **Ubuntu**
 
-`sudo apt-get install squid`
+```
+sudo apt-get install squid
+```
 
 **CentOS**
 
-`yum -y install squid`
+```
+yum -y install squid
+```
 
 Konfiguration
 =============
@@ -25,12 +29,16 @@ igenom hur man installerar väldigt grundläggande proxy server.
 
 Öppna suid.conf och avkommentera följande rad:
 
-`#http_access allow localnet`
+```
+#http_access allow localnet
+```
 
 Därefter behöver vi definera vilka nät som ska få använda proxy servern.
 Leta efter denna rad:
 
-`#acl localnet src`
+```
+#acl localnet src
+```
 
 avkommentera den och ändra den till:
 
@@ -38,9 +46,9 @@ avkommentera den och ändra den till:
 
 Starta om squid:
 
-`sudo service squid restart`
+```
+sudo service squid restart
+```
 
 Nu har vi konfigurerat en väldig basic proxy server som svarar på port
 3128 som standard.
-
-[Category:Guider](/Category:Guider "wikilink")

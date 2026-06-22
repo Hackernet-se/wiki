@@ -24,16 +24,18 @@ eller fysiskt interface.
 Basic
 -----
 
-`{master:0}[edit interfaces irb unit 10]`
-`root@R1# show`
-`family inet {`
-`    address 192.168.1.2/24 {`
-`        vrrp-group 10 {`
-`            virtual-address 192.168.1.1;`
-`            priority 250;`
-`        }`
-`    }`
-`}`
+```
+{master:0}[edit interfaces irb unit 10]
+root@R1# show
+family inet {
+    address 192.168.1.2/24 {
+        vrrp-group 10 {
+            virtual-address 192.168.1.1;
+            priority 250;
+        }
+    }
+}
+```
 
 Autentisering
 -------------
@@ -47,7 +49,7 @@ kommer inte sparas i klartext.
 Verify
 ------
 
-`show vrrp`
+```
+show vrrp
+```
 `show vrrp interface `**`interface-name`**
-
-[Category:Juniper](/Category:Juniper "wikilink")

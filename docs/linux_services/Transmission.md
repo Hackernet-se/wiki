@@ -3,14 +3,15 @@ title: Transmission
 permalink: /Transmission/
 ---
 
-[Category:Guider](/Category:Guider "wikilink")
-[Category:Sparco](/Category:Sparco "wikilink") Transmission är en liten
+ Transmission är en liten
 men väldigt kraftfull torrent client för linux.
 
 Installation
 ------------
 
-`apt-get update && apt-get install transmission transmission-daemon`
+```
+apt-get update && apt-get install transmission transmission-daemon
+```
 
 Konfiguration
 -------------
@@ -22,7 +23,9 @@ Körs enklast via webinterface eller remote GUI
 För att aktivera webinterfacet och även RPC.
 
 Öppna `/etc/transmission-daemon/settings.json`och ändra till
-`"rpc-enabled":true`
+```
+"rpc-enabled":true
+```
 
 Webinterfacet nås sedan på
 [`http://IP:9091/transmission/web/`](http://IP:9091/transmission/web/)
@@ -56,7 +59,9 @@ Kör ett script varje gång en torrent blir klar.
 
 Lägg till
 
-`"script-torrent-done-enabled": true,`
-`"script-torrent-done-filename": "/vart/finns/scriptet.sh",`
+```
+"script-torrent-done-enabled": true,
+"script-torrent-done-filename": "/vart/finns/scriptet.sh",
+```
 
 i din conf fil `/etc/transmission-daemon/settings.json`

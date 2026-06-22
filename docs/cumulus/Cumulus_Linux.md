@@ -20,7 +20,7 @@ Cumulus Networks hemsida. Det finns image för [KVM](/KVM "wikilink") och
 
 ### Architecture
 
-[<File:Cumulus_Linux_Architecture.PNG>](/File:Cumulus_Linux_Architecture.PNG "wikilink")
+![Cumulus_Linux_Architecture.PNG](../img/Cumulus_Linux_Architecture.PNG)
 
 Konfiguration
 -------------
@@ -31,65 +31,91 @@ med hjälp av **net example *<feature>***.
 
 Hostname
 
-`net add hostname Cum01`
+```
+net add hostname Cum01
+```
 
 Configuration, kan visas i olika format
 
-`net show configuration`
-`net show configuration commands`
+```
+net show configuration
+net show configuration commands
+```
 
 Commit
 
-`net pending`
-`net commit`
+```
+net pending
+net commit
+```
 
-`net show commit last `
-`net show commit history`
+```
+net show commit last 
+net show commit history
+```
 
 Switch upgrade
 
-`sudo apt-get update && sudo apt-get upgrade`
+```
+sudo apt-get update && sudo apt-get upgrade
+```
 
 Mgmt VRF. Notera att services som syslog, ntp etc default ligger i
 default-tabellen och måste bindas om ifall de ska nyttja mgmt-vrf:en.
 
-`net add vrf mgmt`
+```
+net add vrf mgmt
+```
 
 Skapa vlan. Cumulus reserverar default vlan 3000-3999 för internal usage
 men det går att ändra.
 
-`net add vlan 100-200`
+```
+net add vlan 100-200
+```
 
 Access port
 
-`net add interface swp4 bridge access 100`
+```
+net add interface swp4 bridge access 100
+```
 
 SVI
 
-`net add vlan 100 ip address 192.168.10.1/24`
+```
+net add vlan 100 ip address 192.168.10.1/24
+```
 
 Switchport trunk allowed vlan
 
-`net add interface swp3 bridge vids 200,205`
+```
+net add interface swp3 bridge vids 200,205
+```
 
 Det spelar inte någon roll vad man väljer att konfigurera först. När man
 commitar något switchrelaterat så skapas det en global switch (bridge).
 
 Useful show commands
 
-`net show version`
-`net show interface`
-`net show bridge vlan`
-`net show bridge macs`
+```
+net show version
+net show interface
+net show bridge vlan
+net show bridge macs
+```
 
 Factory reset, detta rensar ej mgmt vrf.
 
-`net del all`
+```
+net del all
+```
 
 Adding Question Mark Ability to NCLU. Logga ut, logga in för att
 ändringen ska läsas in.
 
-`sed -i "s/# ?: complete/ ?: complete/g" /home/cumulus/.inputrc`
+```
+sed -i "s/# ?: complete/ ?: complete/g" /home/cumulus/.inputrc
+```
 
 ### Prescriptive Topology Manager
 
@@ -124,12 +150,14 @@ Ska man aktivera mgmt-vrf bör det göras sist.
 
 Enable ztp on next switch boot.
 
-`sudo ztp -e`
+```
+sudo ztp -e
+```
 
 Status & Debugging
 
-`sudo ztp -s`
-`sudo systemctl -l status ztp.service`
+```
+sudo ztp -s
+sudo systemctl -l status ztp.service
+```
 `sudo ztp -v -r `[`http://192.168.0.50/ztp-script.sh`](http://192.168.0.50/ztp-script.sh)
-
-[Category:Cumulus](/Category:Cumulus "wikilink")

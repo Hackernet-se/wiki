@@ -12,58 +12,78 @@ Tips'n'trix
 
 Skapa en volume group av en disk.
 
-`vgcreate cs_log02_data /dev/sdb`
+```
+vgcreate cs_log02_data /dev/sdb
+```
 
 Skapa en logical volume av volume groupen du skapa.
 
-`lvcreate -l 100%FREE -n logs cs_log02_data`
-`mkfs.xfs /dev/cs_log02_data/logs`
+```
+lvcreate -l 100%FREE -n logs cs_log02_data
+mkfs.xfs /dev/cs_log02_data/logs
+```
 
 Skapa en folder och mounta nya disken.
 
-`mkdir -p /data/logs`
-`mount /dev/cs_log02_data/logs /data/logs`
+```
+mkdir -p /data/logs
+mount /dev/cs_log02_data/logs /data/logs
+```
 
 Se till att mounten är permanenet när servern rebootar.
 
-`echo "/dev/mapper/cs_log02_data-logs /data/logs                       xfs     defaults        0 0" >> /etc/fstab`
+```
+echo "/dev/mapper/cs_log02_data-logs /data/logs                       xfs     defaults        0 0" >> /etc/fstab
+```
 
 #### Expandera disk
 
-`Scanna om disken du vill expandera efter du utökat i exempelvis vmware.`
-`echo 1>/sys/class/block/sdc/device/rescan`
-`fdisk -l kolla så den är utökad`
-`Utöka PVn`
-`pvresize /dev/sdc`
-`utöka lv lvextend -l +100%FREE /dev/mapper/datavg`
-`expandera volymen med.`
-`xfs_growfs /dev/mapper/datavg`
+```
+Scanna om disken du vill expandera efter du utökat i exempelvis vmware.
+echo 1>/sys/class/block/sdc/device/rescan
+fdisk -l kolla så den är utökad
+Utöka PVn
+pvresize /dev/sdc
+utöka lv lvextend -l +100%FREE /dev/mapper/datavg
+expandera volymen med.
+xfs_growfs /dev/mapper/datavg
+```
 
 #### Skapa egna selinux med grep och audit2allow.
 
 Kommando
 
-`cat /var/log/audit/audit.log |grep postgres_expo |grep denied |audit2allow`
+```
+cat /var/log/audit/audit.log |grep postgres_expo |grep denied |audit2allow
+```
 
 Resultat som visar vad det är du skapar en regel på
 
-`#============= init_t ==============`
-`allow init_t postgresql_port_t:tcp_socket name_connect;`
+```
+#============= init_t ==============
+allow init_t postgresql_port_t:tcp_socket name_connect;
+```
 
 Kommando
 
-`cat /var/log/audit/audit.log |grep postgres_expo |grep denied |audit2allow -M postgres`
+```
+cat /var/log/audit/audit.log |grep postgres_expo |grep denied |audit2allow -M postgres
+```
 
 Resultat som bara visar vad du skall köra för att implementera selinux
 regeln ovan
 
-`******************** IMPORTANT ***********************`
-`To make this policy package active, execute:`
-`semodule -i postgres.pp`
+```
+******************** IMPORTANT ***********************
+To make this policy package active, execute:
+semodule -i postgres.pp
+```
 
 kommando
 
-`semodule -i postgres.pp`
+```
+semodule -i postgres.pp
+```
 
 #### Ansluta till trådlöst nätverk.
 
@@ -73,7 +93,9 @@ kommando
 
 Finns på Github och [PyPI](../scripting/Python/#pip)
 
-`glances `
+```
+glances 
+```
 
 #### Ta reda på publik IP du har
 
@@ -81,57 +103,83 @@ Finns på Github och [PyPI](../scripting/Python/#pip)
 
 #### Testa hårdvaruaccelerering
 
-`openssl speed -evp AES256`
+```
+openssl speed -evp AES256
+```
 
 #### Speedtest mot internet med cli
 
 `wget -O speedtest-cli `[`https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py`](https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py)
-`chmod +x speedtest-cli`
-`./speedtest-cli --simple`
+```
+chmod +x speedtest-cli
+./speedtest-cli --simple
+```
 
 #### Lista filer efter storlek
 
-`for i in T G M K; do du -hsx * | grep "[0-9]$i\b" | sort -nr; done 2>/dev/null`
+```
+for i in T G M K; do du -hsx * | grep "[0-9]$i\b" | sort -nr; done 2>/dev/null
+```
 
 #### Summera alla filer i en mapp och printa storleken.
 
-`du -hs *`
+```
+du -hs *
+```
 
 #### Restricted Shell
 
-`useradd[mod] -s /usr/sbin/scponly user1`
+```
+useradd[mod] -s /usr/sbin/scponly user1
+```
 
 #### Process Run Time
 
-`ps -p PID -o etime=`
+```
+ps -p PID -o etime=
+```
 
 #### Skydda mot SYN flood
 
-`ss -a | grep SYN-RECV | awk '{print $4}' | awk -F":" '{print $1}' | sort | uniq -c | sort -n`
+```
+ss -a | grep SYN-RECV | awk '{print $4}' | awk -F":" '{print $1}' | sort | uniq -c | sort -n
+```
 
-`sudo netstat -antp | grep SYN_RECV|awk '{print $4}'|sort|uniq -c | sort -n`
+```
+sudo netstat -antp | grep SYN_RECV|awk '{print $4}'|sort|uniq -c | sort -n
+```
 
 #### Parallellpinga IP-adresser från fil
 
-`echo $(cat iplist.txt) | xargs -n 1 -P0 ping -w 1 -c 1`
+```
+echo $(cat iplist.txt) | xargs -n 1 -P0 ping -w 1 -c 1
+```
 
 #### Kolla vilken tjänst som vanligtvis ligger på vilken port, t.ex.
 
-`cat /etc/services | grep mysql`
+```
+cat /etc/services | grep mysql
+```
 
 #### Kör en filesystem check vid nästa uppstart
 
-`touch /forcefsck`
+```
+touch /forcefsck
+```
 
 #### Kolla distinfo
 
-`lsb_release -a`
-`eller`
-`cat /etc/*release`
+```
+lsb_release -a
+eller
+cat /etc/*release
+```
 
 #### Titta på senaste uppstart grafiskt
 
-`systemd-analyze plot > plot.svg`
+```
+systemd-analyze plot > plot.svg
+```
 
 #### Kolla vad ett kommando kör för systemfrågor. Väldigt användbart vid felsökning.
 
@@ -139,41 +187,59 @@ Finns på Github och [PyPI](../scripting/Python/#pip)
 
 #### Kör ett kommando tex 1 gång i sekunden. (Default 2 sekunder)
 
-`watch -n 1 date`
+```
+watch -n 1 date
+```
 
 #### Kopiera directory-struktur utan att kopiera filer
 
-`rsync -a -f"+ */" -f"- *" source/ destination/`
+```
+rsync -a -f"+ */" -f"- *" source/ destination/
+```
 
 #### Lista hårddiskar, partitioner och RAID.
 
-`lsblk`
+```
+lsblk
+```
 
 #### Simpelt prestandatest av hårddiskar
 
-`dd if=/dev/zero of=(fil på disken/raiden) bs=1G count=1 oflag=dsync`
+```
+dd if=/dev/zero of=(fil på disken/raiden) bs=1G count=1 oflag=dsync
+```
 
 #### Packa upp initrd.
 
-`gunzip -dc ../initrd | cpio -idmuv`
+```
+gunzip -dc ../initrd | cpio -idmuv
+```
 
 #### Packa ner initrd.
 
-`find . -print |cpio -o -H newc | xz --format=lzma > ../initrd`
+```
+find . -print |cpio -o -H newc | xz --format=lzma > ../initrd
+```
 
 #### Byt namn på alla filer och mappar från uppercase till lowercase i en mapp.
 
 **Upper till lower**.
 
-`for i in *; do mv "$i" "$(echo $i|tr A-Z a-z)"; done`
+```
+for i in *; do mv "$i" "$(echo $i|tr A-Z a-z)"; done
+```
 
 **Lower till upper**.
 
-`for i in *; do mv "$i" "$(echo $i|tr a-z A-Z)"; done`
+```
+for i in *; do mv "$i" "$(echo $i|tr a-z A-Z)"; done
+```
 
 #### Sök efter en text i alla filer i en mapp
 
-`grep -r "string" .`
+```
+grep -r "string" .
+```
 
 #### Kollar antal dagar det är kvar på ett certifikat
 
@@ -181,7 +247,9 @@ Finns på Github och [PyPI](../scripting/Python/#pip)
  remote_cert_remaining_days() { cert_remaining_time=$(date -d "$(openssl s_client -connect $1 2>/dev/null </dev/null | openssl x509  -enddate -noout | cut -d'=' -f2)" "+%s");  current_time=$(date "+%s"); echo remaining $((($cert_remaining_time - $current_time) / 60 / 60 / 24)) days; }
 ```
 
-`remote_cert_remaining_days fqdn:443`
+```
+remote_cert_remaining_days fqdn:443
+```
 
 #### Räkna ut option 121 för DHCP
 

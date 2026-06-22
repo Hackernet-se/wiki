@@ -3,17 +3,7 @@ title: MediaWiki
 permalink: /MediaWiki/
 ---
 
-[Category:Guider](/Category:Guider "wikilink")
-[Category:Sparco](/Category:Sparco "wikilink") MediaWiki är en
-open-source wiki application som driver två av dom största och bästa
-wiki hemsidorna på nätet [Hackernet](http://hackernet.se) och
-[Wikipedia](https://www.wikipedia.org/).
-
-Förberedelser
--------------
-
-För att kunna köra mediawiki krävs det att du har
-[LAMP](/LAMP "wikilink").
+.
 
 ### Valfria program
 
@@ -31,7 +21,9 @@ behöver dom.
 
 Exempel:
 
-` sudo apt-get install php-apc php5-intl imagemagick phpmyadmin vsftpd php5-cli`
+```
+ sudo apt-get install php-apc php5-intl imagemagick phpmyadmin vsftpd php5-cli
+```
 
 Installation
 ------------
@@ -204,7 +196,9 @@ echo "Backup completed $endtime, TAR file at $tarname. " >> $logfile
 Scriptet funkar att köra som ett cronjob. Raden gör att det körs en
 backup kl 05:00 varje dag.
 
-`0 05 * * * cd /path/to/script && sh Backup_script.sh`
+```
+0 05 * * * cd /path/to/script && sh Backup_script.sh
+```
 
 Sitemap
 -------
@@ -217,7 +211,9 @@ Scriptet finns under `maintenance` och heter `generateSitemap.php`.
 
 Skapa en mapp att spara sitemapen i.
 
-`mkdir /var/www/mediawiki/sitemap`
+```
+mkdir /var/www/mediawiki/sitemap
+```
 
 Kör kommandot,
 
@@ -250,8 +246,10 @@ Ersätt dom gammla filerna med dom nya filerna. Via skalet kör sedan
 maintenance script för att uppdatera databas tabeller och bygg om
 filstrukturen för bla filer:
 
-`php /var/www/mediawiki/maintenance/update.php`
-`php /var/www/mediawiki/maintenance/rebuildall.php`
+```
+php /var/www/mediawiki/maintenance/update.php
+php /var/www/mediawiki/maintenance/rebuildall.php
+```
 
 Gå in på din wiki sida och kolla *Special:Version* för att verifiera att
 uppgraderingen.

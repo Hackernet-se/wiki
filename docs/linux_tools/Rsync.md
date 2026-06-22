@@ -21,17 +21,23 @@ variant.
 Installation
 ------------
 
-`sudo apt-get install rsync`
-`sudo yum install rsync`
+```
+sudo apt-get install rsync
+sudo yum install rsync
+```
 
 Kommando
 --------
 
-`rsync [options] [source directory] [target directory]`
+```
+rsync [options] [source directory] [target directory]
+```
 
 Exempel
 
-`rsync -Pavz /local/directory/ root@10.0.0.11:/remote/directory/`
+```
+rsync -Pavz /local/directory/ root@10.0.0.11:/remote/directory/
+```
 
 Jämför source och destination och kopiera över det som inte finns i
 remote directory.
@@ -60,5 +66,3 @@ med cron. Använd SSH-nycklar för smidig autentisering.
 
 Link Destination
 ----------------
-
-[Category:Tools](/Category:Tools "wikilink")

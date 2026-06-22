@@ -28,17 +28,21 @@ sudo vagrant box remove cisco/nexus9300v --provider virtualbox
 
 Topology file
 
-`---`
-`defaults:`
-`  device: nxos`
+```
+---
+defaults:
+  device: nxos
+```
 
-`nodes: [ sw1, sw2 ]`
-`links: [ sw1-sw2 ]`
+```
+nodes: [ sw1, sw2 ]
+links: [ sw1-sw2 ]
+```
 
 Setup lab and start devices
 
-`sudo netlab create`
-`sudo netlab up`
-`netlab connect sw1`
-
-[Category:Network](/Category:Network "wikilink")
+```
+sudo netlab create
+sudo netlab up
+netlab connect sw1
+```

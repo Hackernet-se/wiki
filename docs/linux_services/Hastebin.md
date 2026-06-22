@@ -21,8 +21,10 @@ Clona hastebins git repo,
 Kör sedan. Vill du ändra nån inställning i `config.js` gör det före
 detta steget.
 
-`npm install`
-`npm start`
+```
+npm install
+npm start
+```
 
 Konfiguration
 -------------
@@ -37,16 +39,20 @@ en annan server.
 
 Du behöver också modulen för memcache.
 
-`npm install memcache`
+```
+npm install memcache
+```
 
 Under `storage` i `config.js` ändra till.
 
-` "storage": {`
-`   "type": "memcached",`
-`   "host": "127.0.0.1",`
-`   "port": 11211,`
-`   "expire": 2592000`
-` },`
+```
+ "storage": {
+   "type": "memcached",
+   "host": "127.0.0.1",
+   "port": 11211,
+   "expire": 2592000
+ },
+```
 
 expire säger hur många sekunder en paste ska finnas kvar sedan den
 senast öppnades.
@@ -56,32 +62,40 @@ senast öppnades.
 Förutsätter också att du har en redis server och du behöver modulen för
 redis.
 
-`npm install redis`
+```
+npm install redis
+```
 
 Under `storage` i `config.js` ändra till.
 
-` "storage": {`
-`   "type": "redis",`
-`   "host": "0.0.0.0",`
-`   "port": 6379,`
-`   "db": 2,`
-`   "expire": 2592000`
-` },`
+```
+ "storage": {
+   "type": "redis",
+   "host": "0.0.0.0",
+   "port": 6379,
+   "db": 2,
+   "expire": 2592000
+ },
+```
 
 ### File
 
 Under `storage` i `config.js` ändra till.
 
-` "storage": {`
-`   "type": "file",`
-`   "path": "./data",`
-`   "expire": 2592000`
-` },`
+```
+ "storage": {
+   "type": "file",
+   "path": "./data",
+   "expire": 2592000
+ },
+```
 
 När du är klar med `config.js` kör sedan.
 
-`npm install`
-`npm start`
+```
+npm install
+npm start
+```
 
 Tjänsten går nu att nå på <http://><IP>:7777
 
@@ -90,30 +104,42 @@ Reverse proxy
 
 Låt en reverse proxy dela ut tjänsten tex Apache.
 
-`<VirtualHost *:80>`
-`    ServerAdmin root@hackernet.se`
-`    ServerName paste.hackernet.se`
+```
+<VirtualHost *:80>
+    ServerAdmin root@hackernet.se
+    ServerName paste.hackernet.se
+```
 
-`    <IfModule mod_proxy.c>`
-`        ProxyVia On`
-`        ProxyRequests Off`
+```
+    <IfModule mod_proxy.c>
+        ProxyVia On
+        ProxyRequests Off
+```
 `        ProxyPass / `[`http://127.0.0.1:7777/`](http://127.0.0.1:7777/)
 `        ProxyPassReverse / `[`http://127.0.0.1:7777/`](http://127.0.0.1:7777/)
-`        ProxyPreserveHost on`
-`        <Proxy *>`
-`            AllowOverride All`
-`            Order allow,deny`
-`            allow from all`
+```
+        ProxyPreserveHost on
+        <Proxy *>
+            AllowOverride All
+            Order allow,deny
+            allow from all
+```
 `        `</Proxy>
 `    `</IfModule>
 
-`        ErrorLog ${APACHE_LOG_DIR}/hastebin.log`
+```
+        ErrorLog ${APACHE_LOG_DIR}/hastebin.log
+```
 
-`        # Possible values include: debug, info, notice, warn, error, crit,`
-`        # alert, emerg.`
-`        LogLevel warn`
+```
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+```
 
-`        CustomLog ${APACHE_LOG_DIR}/access.log combined`
+```
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+```
 
 
 </VirtualHost>
@@ -126,22 +152,28 @@ Systemd service
 Under `/etc/systemd/system` skapa filen `haste.service` med texten.
 Anpassa `/opt/haste-server` efter vart du installerat det.
 
-`[Service]`
-`ExecStart=/usr/bin/node /opt/haste-server/server.js`
-`Restart=always`
-`StandardOutput=syslog`
-`SyslogIdentifier=hastebin`
-`User=root`
-`WorkingDirectory=/opt/haste-server`
+```
+[Service]
+ExecStart=/usr/bin/node /opt/haste-server/server.js
+Restart=always
+StandardOutput=syslog
+SyslogIdentifier=hastebin
+User=root
+WorkingDirectory=/opt/haste-server
+```
 
-`[Install]`
-`WantedBy=multi-user.target`
+```
+[Install]
+WantedBy=multi-user.target
+```
 
 Kör sedan dessa 2 kommandona för att skapa en symlänk och starta
 hastebin.
 
-`systemctl enable /etc/systemd/system/haste.service`
-`systemctl start haste.service`
+```
+systemctl enable /etc/systemd/system/haste.service
+systemctl start haste.service
+```
 
 Klient
 ------
@@ -156,6 +188,6 @@ Skriv denna raden i ditt skal för att klienten ska fungera.
 
 För att använda klienten skriv,
 
-`cat testfil.txt | haste`
-
-[Category:Guider](/Category:Guider "wikilink")
+```
+cat testfil.txt | haste
+```

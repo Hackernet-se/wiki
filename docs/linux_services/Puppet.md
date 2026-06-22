@@ -3,8 +3,7 @@ title: Puppet
 permalink: /Puppet/
 ---
 
-[Category:Guider](/Category:Guider "wikilink")
-[Category:Sparco](/Category:Sparco "wikilink") Puppet är ett
+ Puppet är ett
 automatiseringsverktyg för servrar. Puppet är ett väldigt kraftfullt
 verktyg, du kan få en fil att se likadan ut på 1000 olika servrar på
 bara 2 minuter eller att se till att SSH confen är den samma. Puppet kan
@@ -38,18 +37,24 @@ agent för att inte få några kompatibilitets problem.
 
 #### Debian/Ubuntu
 
-`sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y install puppetmaster rdoc ntp`
-`sudo touch /etc/puppet/manifests/site.pp`
+```
+sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y install puppetmaster rdoc ntp
+sudo touch /etc/puppet/manifests/site.pp
+```
 
 #### CentOS/RedHat
 
-`sudo yum update && sudo yum install puppet-server ntp`
-`sudo touch /etc/puppet/manifests/site.pp `
+```
+sudo yum update && sudo yum install puppet-server ntp
+sudo touch /etc/puppet/manifests/site.pp 
+```
 
 ### Klient
 
-`sudo apt-get update && sudo apt-get upgrade && sudo apt-get -y install puppet ntp`
-`sudo yum update && sudo yum install puppet ntp`
+```
+sudo apt-get update && sudo apt-get upgrade && sudo apt-get -y install puppet ntp
+sudo yum update && sudo yum install puppet ntp
+```
 
 Namnuppslag
 ===========
@@ -58,12 +63,16 @@ Default för att hitta till mastern gör klienterna ett namnuppslag på
 *puppet*. Sätt upp i din DNS så att puppet pekar mot mastern. T.ex.
 puppet.exempel.se. Sedan på klienten:
 
-`echo "search exempel.se" | sudo tee -a /etc/resolv.conf`
+```
+echo "search exempel.se" | sudo tee -a /etc/resolv.conf
+```
 
 Om klienten använder DHCP kan det hända att resolv.conf skrivs över.
 Testa
 
-`ping puppet`
+```
+ping puppet
+```
 
 Det måste också vara öppet för klienterna mot mastern på TCP 8140
 
@@ -91,11 +100,15 @@ Konfigurations av puppet görs under `/etc/puppet/`
 Börja med att skapa ett CA cert för din master server. Under `[main]` i
 `puppet.conf` lägg till,
 
-`dns_alt_names = puppet,puppet.domän.se`
+```
+dns_alt_names = puppet,puppet.domän.se
+```
 
 Skapa sedan CA certet med kommandot,
 
-`sudo puppet master --verbose --no-daemonize`
+```
+sudo puppet master --verbose --no-daemonize
+```
 
 När det står `Notice: Starting Puppet master version `<VERSION> har
 certet skapats. Tryck ctrl-c för att stoppa.
@@ -108,7 +121,9 @@ med hiera använder man sig av yaml kod.
 
 Skapa filen `site.pp` i mappen `manifests` och skriv,
 
-`hiera_include('classes')`
+```
+hiera_include('classes')
+```
 
 Skapa sedan filen `hiera.yaml` i rooten av puppet och fyll den med,
 
@@ -155,26 +170,34 @@ ny conf automatiskt.
 Har man ett annat FQDN på sin puppet master än puppet.domän.se bör man
 lägga till under `[main]` i `/etc/puppet/puppet.conf`
 
-`server = FQDN`
+```
+server = FQDN
+```
 
 ### Cron job
 
 För att köra puppet agent som ett cron job skriv följande.
 
-`sudo puppet resource cron puppet-agent ensure=present user=root minute=30 command='/opt/puppet/bin/puppet agent --onetime --no-daemonize --splay --splaylimit 60'`
+```
+sudo puppet resource cron puppet-agent ensure=present user=root minute=30 command='/opt/puppet/bin/puppet agent --onetime --no-daemonize --splay --splaylimit 60'
+```
 
 ### Service
 
 I filen `/etc/default/puppet` ändra till `START=yes`. För att starta
 puppet agenten och att den autostartar vid omstart.
 
-`sudo puppet resource service puppet ensure=running enable=true`
+```
+sudo puppet resource service puppet ensure=running enable=true
+```
 
 Vill man ändra intervalen på hur ofta agenten frågar mastern efter ny
 conf. Default är 30 minuter, lägg till följande under `[agent]` i
 `puppet.conf`.
 
-`runinterval = 2h`
+```
+runinterval = 2h
+```
 
 Certifikat
 ----------
@@ -183,21 +206,29 @@ All kommunikation görs med SSL och certifikat används för
 autentisering.
 På klient:
 
-`sudo puppet agent --waitforcert 120 --test`
+```
+sudo puppet agent --waitforcert 120 --test
+```
 
 På master:
 
-`sudo puppet cert list`
+```
+sudo puppet cert list
+```
 `sudo puppet cert sign `<hostname>
 
 För att autosigna certifikat så lägg till detta under `[master]` i
 `puppet.conf` på din puppet master.
 
-`autosign = true`
+```
+autosign = true
+```
 
 Lista alla cert på puppet master:
 
-`puppet cert list -a`
+```
+puppet cert list -a
+```
 
 Ta bort klient cert på puppet master:
 
@@ -228,7 +259,9 @@ Autofs
 
 Modul som styr upp autofs mounts på din server.
 
-`puppet module install EagleDelta2-autofs`
+```
+puppet module install EagleDelta2-autofs
+```
 
 Exempel conf för hiera.
 
@@ -264,7 +297,9 @@ Utils är en modul som installerar paket på en node. Den har stöd för
 följande operativsystem. RedHat, Windows, Ubuntu, Debian, Solaris, SLES,
 Scientific, CentOS, OracleLinux, AIX, SLED
 
-`puppet module install ghoneycutt-utils`
+```
+puppet module install ghoneycutt-utils
+```
 
 Exempel conf för hiera.
 
@@ -285,7 +320,9 @@ Mer om modulen finns på
 Rsyslog
 -------
 
-`puppet module install saz-rsyslog`
+```
+puppet module install saz-rsyslog
+```
 
 Exempel conf för hiera.
 

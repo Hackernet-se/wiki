@@ -110,5 +110,3 @@ set -x
 ......
 set +x
 ```
-
-[Category:Tools](/Category:Tools "wikilink")

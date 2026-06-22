@@ -16,40 +16,56 @@ distars repos.
 
 **Debian baserade**
 
-`apt-get install tmux`
+```
+apt-get install tmux
+```
 
 **RHEL baserade**
 
-`yum install epel-release`
-`yum install tmux`
+```
+yum install epel-release
+yum install tmux
+```
 
 Kommandon
 =========
 
 Starta tmux,
 
-`tmux`
+```
+tmux
+```
 
 Lista tmux sessioner,
 
-`tmux ls`
+```
+tmux ls
+```
 
 Attach till en session
 
-`tmux attach`
+```
+tmux attach
+```
 
 Attach till en session och detach andra som är anslutna till samma
 session.
 
-`tmux attach -d`
+```
+tmux attach -d
+```
 
 Attach till en session om man har flera igång.(Byt \# mot siffra)
 
-`tmux a -t #`
+```
+tmux a -t #
+```
 
 Stäng en session(Byt \# mot en siffra)
 
-`tmux kill-session -t #`
+```
+tmux kill-session -t #
+```
 
 Keybinds
 ========
@@ -105,22 +121,30 @@ Installera
 
 Skapa filen `.tmux.conf` i din home folder.
 
-`# List of plugins`
-`set -g @plugin 'tmux-plugins/tpm'`
-`set -g @plugin 'tmux-plugins/tmux-sensible'`
+```
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+```
 
-`# Other examples:`
-`# set -g @plugin 'github_username/plugin_name'`
-`# set -g @plugin 'git@github.com/user/plugin'`
-`# set -g @plugin 'git@bitbucket.com/user/plugin'`
+```
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'git@github.com/user/plugin'
+# set -g @plugin 'git@bitbucket.com/user/plugin'
+```
 
-`# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)`
-`run '~/.tmux/plugins/tpm/tpm'`
+```
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+```
 
 Ladda sedan TPM genom att starta om din tmux session eller ladda om
 confen med.
 
-`tmux source ~/.tmux.conf`
+```
+tmux source ~/.tmux.conf
+```
 
 Lägga till plugins
 ------------------
@@ -128,16 +152,22 @@ Lägga till plugins
 Plugins finns på [TPM's Github](https://github.com/tmux-plugins)
 
 Lägg sedan till pluginet i `.tmux.conf` med kommandot
-`set -g @plugin '...'`
+```
+set -g @plugin '...'
+```
 
 Öppna sedan Tmux och tryck för att installera.
 
-`prefix + I`
+```
+prefix + I
+```
 
 Ta bort plugin genom att ta bort raden kommentera ut den i `.tmux.conf`
 och tryck.
 
-`prefix + alt + u`
+```
+prefix + alt + u
+```
 
 Bra plugins
 -----------
@@ -185,15 +215,21 @@ Tips'n'trix
 
 #### För att skriva till alla panes samtidigt.
 
-`:setw synchronize-panes`
+```
+:setw synchronize-panes
+```
 
 #### Clear-history
 
-`:clear-history`
+```
+:clear-history
+```
 
 Eller binda det till
 
-`bind -n C-k clear-history`
+```
+bind -n C-k clear-history
+```
 
 #### Problem att piltangenterna inte fungerar?
 
@@ -203,22 +239,26 @@ alla kommandon igen för att jag inte kunde trycka fram det senast körda
 kommandona. Efter att ha lagt till följande i min **.tmux.conf** fil så
 fungera det igen.
 
-`set -g default-terminal "xterm-256color"`
+```
+set -g default-terminal "xterm-256color"
+```
 
 #### Byt pane snabbt utan prefix
 
 Lägg till följande i din tmux.conf för att kunna byta pane med .
 
-`bind -n M-Left select-pane -L`
-`bind -n M-Right select-pane -R`
-`bind -n M-Up select-pane -U`
-`bind -n M-Down select-pane -D`
+```
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+```
 
 #### Byt window utan prefix
 
 Lägg till följande för att byta window med
 
-`bind -n S-Left  previous-window`
-`bind -n S-Right next-window`
-
-[Category:Tools](/Category:Tools "wikilink")
+```
+bind -n S-Left  previous-window
+bind -n S-Right next-window
+```

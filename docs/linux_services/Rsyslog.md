@@ -3,7 +3,7 @@ title: Rsyslog
 permalink: /Rsyslog/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") RSYSLOG står för
+ RSYSLOG står för
 **ro**cket-fast **sys**tem for **log** processing. Rsyslog är väldigt
 flexibelt har en mängd olika input plugins och output plugins som gör
 att du kan forwarda dina loggar till andra system som Elasticsearch,
@@ -20,16 +20,20 @@ Installation
 <div class="tab-content">
 <div id="tab1" class="tab-pane fade in active">
 
-`yum -y install rsyslog`
+```
+yum -y install rsyslog
+```
 
-</div>
+
 <div id="tab2" class="tab-pane fade">
 
-`apt-get install rsyslog`
-`  `
+```
+apt-get install rsyslog
+  
+```
 
-</div>
-</div>
+
+
 
 Konfiguration
 =============
@@ -72,16 +76,20 @@ pluginet.
 <div class="tab-content">
 <div id="tab3" class="tab-pane fade in active">
 
-`yum -y install rsyslog-kafka`
+```
+yum -y install rsyslog-kafka
+```
 
-</div>
+
 <div id="tab4" class="tab-pane fade">
 
-`apt-get install rsyslog-kafka`
-`  `
+```
+apt-get install rsyslog-kafka
+  
+```
 
-</div>
-</div>
+
+
 
 Simpel syslog server som tar emot på port 514 TCP/UDP och som exportar
 till en Kafka instans direkt.
@@ -110,7 +118,9 @@ variabler kan man hitta
 
 För att slå på denna funktion använder man sig av:
 
-`DynaTopic="on"`
+```
+DynaTopic="on"
+```
 
 Det gör att **topic** parametern pekar på en template istället.
 
@@ -150,7 +160,9 @@ ordningen dom skapades.
 
 För att fixa detta använder man sig av:
 
-`DynaKey="on"`
+```
+DynaKey="on"
+```
 
 Det gör att **key** parametern pekar på en template istället.
 
@@ -184,7 +196,9 @@ action(type="omkafka" Broker=["<BROKER IP>","<BROKER IP>","<BROKER IP>"] Partiti
 
 Det är också bra om man sätter på:
 
-`Partitions.Auto="on"`
+```
+Partitions.Auto="on"
+```
 
 Det gör att man automatiskt kommer att last balansera alla meddelande
 man skapar till alla partioner för den topicen.

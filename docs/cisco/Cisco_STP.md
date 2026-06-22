@@ -33,12 +33,12 @@ in vet switchen hur långt det är till rotbryggan.
 
 **BPDU**
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_STP_BPDU.png>](/File:Cisco_STP_BPDU.png "wikilink")
 
-</div>
-</div>
+![Cisco_STP_BPDU.png](../img/Cisco_STP_BPDU.png)
+
+
+
 
 **Process**
 STP-processen börjar med att alla switchar ser sig själva som root och
@@ -81,9 +81,11 @@ värden satta på rotbryggan, har andra switchar andra värden
 konfigurerade spelar det ingen roll för det är rotbryggan som bestämmer.
 Hellos skickas default var 2 sekund.
 
-`spanning-tree vlan 1-4094 hello-time 2`
-`spanning-tree vlan 1-4094 forward-time 15`
-`spanning-tree vlan 1-4094 max-age 20`
+```
+spanning-tree vlan 1-4094 hello-time 2
+spanning-tree vlan 1-4094 forward-time 15
+spanning-tree vlan 1-4094 max-age 20
+```
 
 **Interface states**
 När nätverket konvergerar kan portar byta mellan Blocking och Forwarding
@@ -190,54 +192,72 @@ Bridge ID med VLAN, detta är default och går ej att ta bort på nyare
 switchar för det konsumerar fler MAC-adresser. Kolla den lokala
 MAC-adressen som används till Bridge ID: **show version \| i bia\|Base**
 
-`spanning-tree extend system-id`
-`spanning-tree mode rapid-pvst`
-`show spanning-tree`
+```
+spanning-tree extend system-id
+spanning-tree mode rapid-pvst
+show spanning-tree
+```
 
 **Cost**
 802.1D-1998, 1G = 4
 
-`spanning-tree pathcost method short`
+```
+spanning-tree pathcost method short
+```
 
 802.1D-2004, 1G = 20000
 
-`spanning-tree pathcost method long`
-`show spanning-tree pathcost method`
+```
+spanning-tree pathcost method long
+show spanning-tree pathcost method
+```
 
 **Root Bridge**
 Konfigurera root brygga. Priority 0 är det absolut lägsta medans root
 primary sätter prio till 24k förutsatt att det ger root-rollen, detta
 ändras inte dynamiskt.
 
-`spanning-tree priority 0`
-`spanning-tree root primary`
+```
+spanning-tree priority 0
+spanning-tree root primary
+```
 
 Verify
 
-`show spanning-tree root`
+```
+show spanning-tree root
+```
 
 Default-värden
 
-`default spanning-tree vlan 1-4094 priority`
+```
+default spanning-tree vlan 1-4094 priority
+```
 
 **Portar**
 Root Port och Designated Port
 
-`interface range gi0/7`
-` spanning-tree cost 1000`
-` spanning-tree port-priority 128`
+```
+interface range gi0/7
+ spanning-tree cost 1000
+ spanning-tree port-priority 128
+```
 
 Restart the protocol migration process
 
-`clear spanning-tree detected-protocols`
+```
+clear spanning-tree detected-protocols
+```
 
 **Troubleshoot**
 
-`test spanning-tree diameter 3`
-`test spanning-tree get configuration vlan`
-`debug spanning-tree events`
-`debug spanning-tree backbone fast`
-`debug spanning-tree pvst+`
+```
+test spanning-tree diameter 3
+test spanning-tree get configuration vlan
+debug spanning-tree events
+debug spanning-tree backbone fast
+debug spanning-tree pvst+
+```
 
 Legacy Extensions
 -----------------
@@ -256,8 +276,10 @@ dummy frames till mac 01:00:0c:cc:cc:cc från alla adresser i cam
 tabellen för att snabba upp konvergens i övriga nätet. Uplinkfast på
 default och konfigureras globalt.
 
-`spanning-tree uplinkfast`
-`show spanning-tree uplinkfast`
+```
+spanning-tree uplinkfast
+show spanning-tree uplinkfast
+```
 
 **BackboneFast**
 Cisco-proprietary teknik som används för att snabba upp konvergens vid
@@ -269,7 +291,7 @@ att dubbelkollla att man sjäv inte tappat root. RSTP och MST har detta
 inbyggt men bör i övrigt användas på alla enheter, så förhoppningsvis
 inga...
 
-`spanning-tree backbonefast`
-`show spanning-tree backbonefast`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+spanning-tree backbonefast
+show spanning-tree backbonefast
+```

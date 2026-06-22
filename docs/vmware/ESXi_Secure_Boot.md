@@ -33,7 +33,9 @@ nyckel.
 Man kan köra följande skript för att verifiera om Secure Boot kan slås
 på eller inte:
 
-`/usr/lib/vmware/secureboot/bin/secureboot.py -c`
+```
+/usr/lib/vmware/secureboot/bin/secureboot.py -c
+```
 
 VIB:ar & Secure Boot
 --------------------
@@ -65,5 +67,3 @@ Det finns vissa krav för att en virtuell maskin ska stödja Secure Boot:
 
 För att slå på VM Secure Boot: **Edit Settings** -\> **VM Options** -\>
 ändra **Firmware** från "**BIOS**" till "**EFI**" och tryck **OK**.
-
-[Category:VMware](/Category:VMware "wikilink")

@@ -3,7 +3,7 @@ title: OSSEC
 permalink: /OSSEC/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") OSSEC är ett host
+ OSSEC är ett host
 intrusion detection system. OSSEC monitorerar aktivt dina filer, logar,
 processer och letar efter rootkit's. OSSEC använder agenter för att
 övervaka system, det går också att köra agentless och via remote syslog.
@@ -81,15 +81,21 @@ Om du istället kör Ubuntu så finns det stöd för **xenial**, **precise**,
 
 Uppdatera repot.
 
-`apt-get update`
+```
+apt-get update
+```
 
 För att installera **Server/Manager**.
 
-`apt-get install ossec-hids`
+```
+apt-get install ossec-hids
+```
 
 Eller installera **agenten**.
 
-`apt-get install ossec-hids-agent`
+```
+apt-get install ossec-hids-agent
+```
 
 ### RPM based
 
@@ -99,11 +105,15 @@ Lägg till yum repo.
 
 Installera sedan servern/managern.
 
-`yum install ossec-hids ossec-hids-server`
+```
+yum install ossec-hids ossec-hids-server
+```
 
 Eller agenten.
 
-`yum install ossec-hids ossec-hids-client`
+```
+yum install ossec-hids ossec-hids-client
+```
 
 WEBui
 -----
@@ -114,7 +124,9 @@ För att köra webui krävs:
 -   OSSEC (version \>= 0.9-3)
 
 `git clone `[`https://github.com/ossec/ossec-wui.git`](https://github.com/ossec/ossec-wui.git)` /var/www/ossec`
-`cd /var/www/ossec && ./setup.sh`
+```
+cd /var/www/ossec && ./setup.sh
+```
 
 Om man har selinux på gör det att man inte kan nå visa ossec log filer.
 För att fixa kan man lägga till en policy.
@@ -122,24 +134,32 @@ För att fixa kan man lägga till en policy.
 Skapa en TE fil: `/etc/seliinux/targeted/ossec-wui/ossec-wui.te` med
 följande innehåll.
 
-`module ossec-wui 1.0;`
+```
+module ossec-wui 1.0;
+```
 
-`   require {`
-`       type var_log_t;`
-`       type httpd_t;`
-`       type var_t;`
-`       class file { read getattr open };`
-`   }`
+```
+   require {
+       type var_log_t;
+       type httpd_t;
+       type var_t;
+       class file { read getattr open };
+   }
+```
 
-`   #============= httpd_t ==============`
-`   allow httpd_t var_log_t:file read;`
-`   allow httpd_t var_t:file { read getattr open };`
+```
+   #============= httpd_t ==============
+   allow httpd_t var_log_t:file read;
+   allow httpd_t var_t:file { read getattr open };
+```
 
 Kör sedan följande kommandon som root:
 
-`checkmodule -M -m ossec-wui.te -o ossec-wui.mod`
-`semodule_package -o ossec-wui.pp -m ossec-wui.mod`
-`semodule -i ossec-wui.pp`
+```
+checkmodule -M -m ossec-wui.te -o ossec-wui.mod
+semodule_package -o ossec-wui.pp -m ossec-wui.mod
+semodule -i ossec-wui.pp
+```
 
 Försök nå ossec via <http://><host>/ossec
 
@@ -168,7 +188,9 @@ Det finns 2 sätt att lägga till en agent i ossec.
 
 Kör följande kommando på servern och välj **(A)dd an agent**.
 
-`/var/ossec/bin/manage_agents`
+```
+/var/ossec/bin/manage_agents
+```
 
 När man ska fylla i ett IP kan du också skriva en IP range (10.0.0.0/24)
 eller **any** ifall hosten byter IP ofta.
@@ -178,7 +200,9 @@ valde i sista steget.
 
 Kopiera nykeln och kör följande kommando på agenten.
 
-`/var/ossec/bin/manage_agents`
+```
+/var/ossec/bin/manage_agents
+```
 
 Välj **(I)mport key from the server** och kopiera in nykeln. Starta
 sedan OSSEC agenten.
@@ -187,7 +211,9 @@ sedan OSSEC agenten.
 
 Kör följande på **servern**.
 
-`/var/ossec/bin/ossec-authd -p 1515`
+```
+/var/ossec/bin/ossec-authd -p 1515
+```
 
 På **agenten** kör du.
 
@@ -214,20 +240,26 @@ SSH. Tex brandväggar, switchar, routrar.
 
 Börja med att aktivera agentless stödet på ossec servern.
 
-`/var/ossec/bin/ossec-control enable agentless`
+```
+/var/ossec/bin/ossec-control enable agentless
+```
 
 För att lägga till en agentless host så behöver sätta SSH lösenord eller
 använda SSH nykel. På Cisco saker (PIX, routers) behöver du ange en
 extra parameter för **enable lösenordet**. Samma gäller om du vill lägga
 till **su** stöd för linux.
 
-`/var/ossec/agentless/register_host.sh add root@test.hackernet.se sshpass supass`
-`/var/ossec/agentless/register_host.sh add pix@pix.fw.hackernet.se pixpass enablepass`
+```
+/var/ossec/agentless/register_host.sh add root@test.hackernet.se sshpass supass
+/var/ossec/agentless/register_host.sh add pix@pix.fw.hackernet.se pixpass enablepass
+```
 
 Om du vill använda SSH nykel så anger du **NOPASS** som lösenord. Skapa
 sedan nycklar åt ossec.
 
-`sudo -u ossec ssh-keygen`
+```
+sudo -u ossec ssh-keygen
+```
 
 Nykeln sparas i `/var/ossec/.ssh`, kopiera sedan över den publika nykeln
 till dina enheter.
@@ -243,7 +275,9 @@ mapparna **/bin, /etc, /sbin** var 10h. Och en PIX övervakning som
 kollar ifall configen ändrats varje timme.
 
 <ossec_config>
-`...`
+```
+...
+```
 <agentless>
 `   `<type>`ssh_integrity_check_linux`</type>
 `   `<frequency>`36000`</frequency>
@@ -258,7 +292,9 @@ kollar ifall configen ändrats varje timme.
 `   `<host>`pix@pix.fw.hackernet.se`</host>
 `   `<state>`periodic_diff`</state>
 </agentless>
-`...`
+```
+...
+```
 </ossec_config>
 
 **<type>**
@@ -309,13 +345,19 @@ Det finns 2 olika states.
 Fyll i dom kommandona du vill jämföra. För flera kommandon kan man
 separera med ett **;**.
 
-`...`
+```
+...
+```
 <arguments>`ls -la /etc; cat /etc/passwd`</arguments>
-`...`
+```
+...
+```
 
 #### Prova manuellt
 
 Man kan köra scripten manuellt för att prova att det fungerar. Krävs att
 lösenordet/nykeln blivit inlagd.
 
-`cd /var/ossec && ./agentless/ssh_integrity_check_linux root@test.hackernet.se /bin`
+```
+cd /var/ossec && ./agentless/ssh_integrity_check_linux root@test.hackernet.se /bin
+```

@@ -13,19 +13,27 @@ Installation
 
 För att installera Flexget verifera att du har Python*' 2.6.x - 2.7.x.*'
 
-`python -v`
+```
+python -v
+```
 
 Sedan behöver du pip.
 
-`apt-get update && apt-get install python-pip`
+```
+apt-get update && apt-get install python-pip
+```
 
 Installera sedan Flexget med kommandot.
 
-`pip install flexget`
+```
+pip install flexget
+```
 
 Verifera att Flexget är installerat med
 
-`flexget -V`
+```
+flexget -V
+```
 
 Konfiguration
 -------------
@@ -39,15 +47,21 @@ Tips n Trix
 -----------
 
 Har du conf filen i din hemmapp måste du använda växeln `-c` tex,
-`flexget -c /home/user/flexget.yml`
+```
+flexget -c /home/user/flexget.yml
+```
 
 För att validera din conf fil att den fungerar använd kommandot.
 
-`flexget -c flexget.yml check`
+```
+flexget -c flexget.yml check
+```
 
 För att köra flexget använd kommandot
 
-`flexget -c flexget.yml execute`
+```
+flexget -c flexget.yml execute
+```
 
 ### Crontab
 
@@ -56,7 +70,9 @@ när den ska kolla efter saker eller så kan man använda crontab.
 
 För att köra Flexget var 30e minut.
 
-`*/30 * * * * /usr/local/bin/flexget -c /root/flexget.yml execute`
+```
+*/30 * * * * /usr/local/bin/flexget -c /root/flexget.yml execute
+```
 
 ### Pushover
 
@@ -68,11 +84,11 @@ missa nerladdningen.
 Enda man behöver är några få rader i din YAML fil och ett konto hos
 pushover.
 
-`pushover:`
-`userkey:`
-`- uasdfVQ`
-`apikey: aasdf6`
-`title: Downloading {{series_name}}`
-`message: Episode {{series_id}}`
-
-[Category:Guider](/Category:Guider "wikilink")
+```
+pushover:
+userkey:
+- uasdfVQ
+apikey: aasdf6
+title: Downloading {{series_name}}
+message: Episode {{series_id}}
+```

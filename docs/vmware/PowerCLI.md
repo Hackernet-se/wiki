@@ -3,7 +3,7 @@ title: PowerCLI
 permalink: /PowerCLI/
 ---
 
-[Category:VMware](/Category:VMware "wikilink") PowerCLI är ett Windows
+ PowerCLI är ett Windows
 Powershell-gränssnitt för hantering av VMware vSphere. PowerCLI
 distribueras som en Powershell snapin, och innehåller över 370
 Powershell-cmdlets för att hantera och automatisera vSphere och vCloud.
@@ -25,35 +25,49 @@ Get-PowerCLIVersion
 
 Anslut till din ESXi/vCenter med:
 
-`Connect-VIServer`
+```
+Connect-VIServer
+```
 
 Untrusted certificate
 
-`Set-PowerCLIConfiguration -InvalidCertificateAction ignore -confirm:$false`
+```
+Set-PowerCLIConfiguration -InvalidCertificateAction ignore -confirm:$false
+```
 
 Exempel
 -------
 
 Flytta alla vms från en datastore till en annan.
 
-`Get-Datastore`
-`Get-VM -Datastore Datastore1 | Move-VM -Datastore Datastore2 -DiskStorageFormat thin`
+```
+Get-Datastore
+Get-VM -Datastore Datastore1 | Move-VM -Datastore Datastore2 -DiskStorageFormat thin
+```
 
 Flytta alla vms från en host till en annan.
 
-`Get-VMHost 172.20.0.2 | Get-VM | Move-VM -destination 172.20.0.8`
+```
+Get-VMHost 172.20.0.2 | Get-VM | Move-VM -destination 172.20.0.8
+```
 
 Visa alla **notes**
 
-`Get-VM | Select-Object -ExpandProperty Notes`
+```
+Get-VM | Select-Object -ExpandProperty Notes
+```
 
 Lista **hardware version** för alla vms
 
-`Get-VM | Select Name, Version`
+```
+Get-VM | Select Name, Version
+```
 
 Ladda upp fil till datastore
 
-`Copy-DatastoreItem -Item linux.iso -Destination vmstore:\DC\DATASTORE\linux.iso`
+```
+Copy-DatastoreItem -Item linux.iso -Destination vmstore:\DC\DATASTORE\linux.iso
+```
 
 Hitta vilken vm som har en viss **MAC-adress**
 
@@ -103,8 +117,10 @@ Get-Cluster cluster | Get-VMHost | Get-AdvancedSetting -Name Syslog.global.logHo
 
 Lagra logg på persistant storage
 
-`Get-Cluster cluster | Get-VMhost | Get-AdvancedSetting -Name Syslog.global.logDirUnique | Set-AdvancedSetting -Value $True -Confirm:$False`
-`Get-Cluster cluster | Get-VMHost | Get-AdvancedSetting -Name Syslog.global.logDir | Set-AdvancedSetting -value "[datastore] esxi_logs" -Confirm:$False`
+```
+Get-Cluster cluster | Get-VMhost | Get-AdvancedSetting -Name Syslog.global.logDirUnique | Set-AdvancedSetting -Value $True -Confirm:$False
+Get-Cluster cluster | Get-VMHost | Get-AdvancedSetting -Name Syslog.global.logDir | Set-AdvancedSetting -value "[datastore] esxi_logs" -Confirm:$False
+```
 
 **DNS**
 

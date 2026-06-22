@@ -152,5 +152,3 @@ deployment: <https://kb.vmware.com/kb/2147672>
 
 Om extern PSC används måste alla PSC-instanser uppgraderas i sekvens.
 Efter detta är gjort kan VCSA uppgraderas.
-
-[Category:VMware](/Category:VMware "wikilink")

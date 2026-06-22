@@ -13,13 +13,15 @@ Installation
 ------------
 
 `wget `[`https://raw.github.com/mininet/mininet/master/util/vm/install-mininet-vm.sh`](https://raw.github.com/mininet/mininet/master/util/vm/install-mininet-vm.sh)
-`bash -v install-mininet-vm.sh master`
-`~/mininet/bin/mn --version`
-`cd ~/mininet; git fetch --all; git checkout master; git pull --rebase origin master`
-`sudo -n make install`
-`sudo -n mn --test pingall`
-`sudo sed -i -e 's/^GRUB_TERMINAL=serial/#GRUB_TERMINAL=serial/' /etc/default/grub; sudo update-grub`
-`reboot`
+```
+bash -v install-mininet-vm.sh master
+~/mininet/bin/mn --version
+cd ~/mininet; git fetch --all; git checkout master; git pull --rebase origin master
+sudo -n make install
+sudo -n mn --test pingall
+sudo sed -i -e 's/^GRUB_TERMINAL=serial/#GRUB_TERMINAL=serial/' /etc/default/grub; sudo update-grub
+reboot
+```
 
 ### OVF
 
@@ -35,7 +37,9 @@ Basic
 
 Kör igenom kommandona för att komma igång.
 
-`sudo mn`
+```
+sudo mn
+```
 
 Setups
 ------
@@ -60,16 +64,20 @@ Se [OpenDaylight](/OpenDaylight "wikilink")
 
 **Installation**
 
-`sudo apt-get update && sudo apt-get -y install build-essential default-jdk ant python-dev eclipse screen`
+```
+sudo apt-get update && sudo apt-get -y install build-essential default-jdk ant python-dev eclipse screen
+```
 `git clone `[`git://github.com/floodlight/floodlight.git`](git://github.com/floodlight/floodlight.git)
-`cd floodlight && git checkout fl-last-passed-build`
-`ant;`
-`sudo mkdir /var/lib/floodlight && sudo chmod 777 /var/lib/floodlight`
-`screen`
-`java -jar target/floodlight.jar`
+```
+cd floodlight && git checkout fl-last-passed-build
+ant;
+sudo mkdir /var/lib/floodlight && sudo chmod 777 /var/lib/floodlight
+screen
+java -jar target/floodlight.jar
+```
 
 **<http://IP:8080/ui/index.html>**
 
-`sudo mn --controller=remote,ip=127.0.0.1,port=6633 --switch ovsk,protocols=OpenFlow13`
-
-[Category:Network](/Category:Network "wikilink")
+```
+sudo mn --controller=remote,ip=127.0.0.1,port=6633 --switch ovsk,protocols=OpenFlow13
+```

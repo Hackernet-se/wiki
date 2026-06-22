@@ -20,5 +20,3 @@ liknande webbplatform. Tex:
 
 Flera stora hemsidor använder idag LAMP som sin platform, stora aktörer
 är bl.a: Wikipedia, [MediaWiki](/MediaWiki "wikilink") och Wordpress.
-
-[Category:Guider](/Category:Guider "wikilink")

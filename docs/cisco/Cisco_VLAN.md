@@ -18,21 +18,27 @@ VLAN
 
 Stäng ett VLAN lokalt i switchen och suspenda det i VTP.
 
-`vlan 20`
-` shutdown`
-` state suspend`
+```
+vlan 20
+ shutdown
+ state suspend
+```
 
 Show
 
-`show vlan brief`
-`show vlan internal usage`
+```
+show vlan brief
+show vlan internal usage
+```
 
 **Layer 2 Traceroute**
 Man kan tracea mac-adresser i ett vlan. OBS
 [CDP](/Cisco_IOS#CDP "wikilink") är ett prereq för detta annars blir det
 *Unable to send a l2trace request*. Max hops är 10.
 
-`traceroute mac 0050.5600.0001 0000.aabb.ccdd vlan 20`
+```
+traceroute mac 0050.5600.0001 0000.aabb.ccdd vlan 20
+```
 
 Det går även att ta reda på vilken väg en frame tar utifrån IP-adresser.
 ARP används för IP-to-MAC resolution och båda adresserna måste finnas i
@@ -40,10 +46,12 @@ samma subnät.
 
 **Voice**
 
-`interface GigabitEthernet0/1`
-` switchport mode access`
-` switchport access vlan 20`
-` switchport voice vlan 30`
+```
+interface GigabitEthernet0/1
+ switchport mode access
+ switchport access vlan 20
+ switchport voice vlan 30
+```
 
 Alternativt konfigurera en trunk som tillåter voice-vlanet. Så fort man
 använder kommandot *switchport voice vlan* enableas portfast.
@@ -51,9 +59,11 @@ använder kommandot *switchport voice vlan* enableas portfast.
 **Database mode**
 Är gammalt och stöds inte längre på alla switchar.
 
-`vlan database`
-` vlan 20 name Old-school`
-`apply`
+```
+vlan database
+ vlan 20 name Old-school
+apply
+```
 
 Trunking
 ========
@@ -62,18 +72,24 @@ IEEE 802.1q är standarden för att supportera VLAN över ethernet.
 
 Vitlista VLAN
 
-`switchport trunk allowed vlan 1-5,8`
-`show interface trunk`
+```
+switchport trunk allowed vlan 1-5,8
+show interface trunk
+```
 
 Se till att native VLAN matchar på trunkar, både CDP och DTP kan
 upptäcka mismatch.
 
-`switchport trunk native vlan 20`
+```
+switchport trunk native vlan 20
+```
 
 Man kan tagga alla frames på en trunk.
 
-`vlan dot1q tag native`
-`show vlan dot1q tag native`
+```
+vlan dot1q tag native
+show vlan dot1q tag native
+```
 
 DTP
 ---
@@ -91,14 +107,16 @@ ISL-enkapsulerat. DTP är inte supporterat på någon Nexus-plattform.
 
 DTP frame:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_DTP.png>](/File:Cisco_DTP.png "wikilink")
 
-</div>
-</div>
+![Cisco_DTP.png](../img/Cisco_DTP.png)
 
-`show dtp`
+
+
+
+```
+show dtp
+```
 
 Port Modes, vissa switchmodeller har desirable som default (3560) och
 vissa har auto (2960)
@@ -112,13 +130,17 @@ Stänga av DTP. OBS porten måste vara konfad som något för att kunna
 använda nonegotiate, annars blir det *Conflict between 'nonegotiate' and
 'dynamic' status.*
 
-`switchport mode trunk / access`
-`switchport nonegotiate`
+```
+switchport mode trunk / access
+switchport nonegotiate
+```
 
 Verify
 
-`show dtp interface`
-`show interfaces switchport | i Name|Negotiation`
+```
+show dtp interface
+show interfaces switchport | i Name|Negotiation
+```
 
 Private VLAN
 ============
@@ -181,48 +203,62 @@ Source Guard på primary VLANet enablear det även på secondary VLANs.
 
 ### Konfiguration
 
-`vtp mode transparent`
+```
+vtp mode transparent
+```
 
 Alternativt kan [VTP](/Cisco_VTP "wikilink") version 3 användas.
 
 VLAN
 
-`vlan 101`
-` private-vlan isolated`
-`vlan 102`
-` private-vlan community`
-`vlan 100`
-` private-vlan primary`
-` private-vlan assoc 101,102`
+```
+vlan 101
+ private-vlan isolated
+vlan 102
+ private-vlan community
+vlan 100
+ private-vlan primary
+ private-vlan assoc 101,102
+```
 
 Access Ports
 
-`interface g0/1`
-` description Gateway`
-` switchport mode private-vlan promiscuous`
-` switchport private-vlan mapping 100 101-102`
+```
+interface g0/1
+ description Gateway
+ switchport mode private-vlan promiscuous
+ switchport private-vlan mapping 100 101-102
+```
 
-`interface g0/2`
-` description Isolated`
-` switchport mode private-vlan host`
-` switchport private-vlan host-association 100 101`
+```
+interface g0/2
+ description Isolated
+ switchport mode private-vlan host
+ switchport private-vlan host-association 100 101
+```
 
-`interface g0/3`
-` description Community`
-` switchport mode private-vlan host`
-` switchport private-vlan host-association 100 102`
+```
+interface g0/3
+ description Community
+ switchport mode private-vlan host
+ switchport private-vlan host-association 100 102
+```
 
 Other switch
 
-`interface g0/4`
-` switchport mode trunk`
+```
+interface g0/4
+ switchport mode trunk
+```
 
 Promiscuous PVLAN Trunk Port
 
-`interface g0/5`
-` switchport private-vlan trunk allowed vlan 100-103`
-` switchport private-vlan mapping trunk 103 130-135`
-` switchport mode private-vlan trunk promiscuous`
+```
+interface g0/5
+ switchport private-vlan trunk allowed vlan 100-103
+ switchport private-vlan mapping trunk 103 130-135
+ switchport mode private-vlan trunk promiscuous
+```
 
 Notera att primary vlan ska vara med i allowed vlan list. Om man har
 t.ex. en [ASA](/Cisco_ASA "wikilink") kan man köra med en vanlig
@@ -230,15 +266,19 @@ switchport mode trunk om man vill för ASA har native stöd för PVLAN.
 
 SVI
 
-`interface Vlan100`
-` ip address 10.0.0.1 255.255.255.0`
-` private-vlan mapping 101,102`
+```
+interface Vlan100
+ ip address 10.0.0.1 255.255.255.0
+ private-vlan mapping 101,102
+```
 
 Verify
 
-`show vlan private-vlan`
-`show interfaces vlan100 private-vlan mapping`
-`ping 255.255.255.255`
+```
+show vlan private-vlan
+show interfaces vlan100 private-vlan mapping
+ping 255.255.255.255
+```
 
 Q-in-Q
 ======
@@ -248,25 +288,33 @@ dubbeltagga Ethernet-frames.
 
 prereq
 
-`system mtu 1504`
-`reload`
-`show system mtu`
+```
+system mtu 1504
+reload
+show system mtu
+```
 
 Port
 
-`switchport mode dot1q-tunnel`
-`l2protocol-tunnel cdp`
+```
+switchport mode dot1q-tunnel
+l2protocol-tunnel cdp
+```
 
 Verify
 
-`show dot1q-tunnel`
+```
+show dot1q-tunnel
+```
 
 Dubbeltaggning på router
 
-`int gi2`
-` mtu 1504`
-`int gi2.10`
-` encapsulation dot1q 10 second-dot1q 100,101`
+```
+int gi2
+ mtu 1504
+int gi2.10
+ encapsulation dot1q 10 second-dot1q 100,101
+```
 
 Bridging
 ========
@@ -278,17 +326,23 @@ switch fungerar. För IOS-XE se längre ner.
 Routern blir precis som en L2-switch, dvs ingen IP routing och
 [STP](/Cisco_STP "wikilink") används för loop prevention.
 
-`no ip routing`
-`bridge 1 protocol vlan-bridge`
+```
+no ip routing
+bridge 1 protocol vlan-bridge
+```
 
-`interface gi0`
-` bridge-group 1`
-`interface gi1`
-` bridge-group 1`
+```
+interface gi0
+ bridge-group 1
+interface gi1
+ bridge-group 1
+```
 
 Verify
 
-`show bridge`
+```
+show bridge
+```
 
 **CRB**
 Transparent bridging har en stor nackdel, en router kan inte både routa
@@ -296,19 +350,27 @@ paket och brygga interface, därför finns Concurrent Routing and Bridging
 som tillåter både routing och bridging samtidigt. Dock inte på samma
 interface-grupper.
 
-`bridge crb`
-`ip routing`
+```
+bridge crb
+ip routing
+```
 
-`bridge 1 protocol vlan-bridge`
+```
+bridge 1 protocol vlan-bridge
+```
 
-`interface gi0`
-` bridge-group 1`
-`interface gi1`
-` bridge-group 1`
+```
+interface gi0
+ bridge-group 1
+interface gi1
+ bridge-group 1
+```
 
 Verify
 
-`show bridge`
+```
+show bridge
+```
 
 **IRB**
 En nackdel med CRB är att det inte går att koppla ihop en routed domain
@@ -318,60 +380,80 @@ fungerar som SVI på L3-switchar.
 
 Prereqs & Configuration
 
-`bridge irb`
-`ip routing`
+```
+bridge irb
+ip routing
+```
 
-`bridge 1 route ip `
-`bridge 1 protocol vlan-bridge`
+```
+bridge 1 route ip 
+bridge 1 protocol vlan-bridge
+```
 
-`interface gi0`
-` bridge-group 1`
-`interface gi1`
-` bridge-group 1`
-`interface bvi1`
-` ip address 10.0.0.10 255.255.255.0`
+```
+interface gi0
+ bridge-group 1
+interface gi1
+ bridge-group 1
+interface bvi1
+ ip address 10.0.0.10 255.255.255.0
+```
 
 Verify
 
-`show bridge`
+```
+show bridge
+```
 
 **Fallback Bridging**
 Fallback Bridging används för att brygga icke-routebara protokoll mellan
 SVIer och routade interface. Ett protokoll kan routas medans det andra
 bryggas, t.ex. IPv4 kan routas medans IPv6 bryggas.
 
-`bridge 1 protocol vlan-bridge`
+```
+bridge 1 protocol vlan-bridge
+```
 
-`interface Gi0/2`
-` no switchport`
-` ip address 10.0.2.10 255.255.255.0`
-` bridge-group 1`
+```
+interface Gi0/2
+ no switchport
+ ip address 10.0.2.10 255.255.255.0
+ bridge-group 1
+```
 
-`interface Vlan10`
-` ip address 10.0.10.10 255.255.255.0`
-` bridge-group 1`
+```
+interface Vlan10
+ ip address 10.0.10.10 255.255.255.0
+ bridge-group 1
+```
 
 **IOS-XE**
 På IOS-XE görs bridging med bridge domains och Ethernet flow points
 (EFP).
 
-`interface gi0/0/1`
-` service instance 1 ethernet`
-`  encapsulation untagged`
-`  bridge-domain 1`
+```
+interface gi0/0/1
+ service instance 1 ethernet
+  encapsulation untagged
+  bridge-domain 1
+```
 
-`interface gi0/0/2`
-` service instance 1 ethernet`
-`  encapsulation untagged`
-`  bridge-domain 1`
-`  l2protocol peer stp`
-`  mac limit maximum addresses 50`
+```
+interface gi0/0/2
+ service instance 1 ethernet
+  encapsulation untagged
+  bridge-domain 1
+  l2protocol peer stp
+  mac limit maximum addresses 50
+```
 
-`interface bdi1`
-` ip address 10.0.0.10 255.255.255.0`
+```
+interface bdi1
+ ip address 10.0.0.10 255.255.255.0
+```
 
 Verify
 
-`show bridge-domain`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show bridge-domain
+```

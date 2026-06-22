@@ -27,7 +27,9 @@ följande kommando:
 
 Exempel
 
-`configure manager add 10.11.12.13 my_reg_key`
+```
+configure manager add 10.11.12.13 my_reg_key
+```
 
 `Hostname/IP` används för att peka ut FMC.
 
@@ -39,7 +41,9 @@ unikt ID tillsammans med `DONTRESOLVE` istället för hostname.
 
 Exempel med NAT
 
-`configure manager add DONTRESOLVE my_reg_key my_nat_id`
+```
+configure manager add DONTRESOLVE my_reg_key my_nat_id
+```
 
 Firepower Management Center
 ---------------------------
@@ -54,32 +58,54 @@ FMC kan testköras i 90 dagar, detta aktiveras under samma meny som
 används för Smart Licenses. För att aktivera din Smart License eller
 Evaluation Period, gör såhär:
 
-`   1. Klicka eller hovra på System-fliken i övre höger hörn.`
+```
+   1. Klicka eller hovra på System-fliken i övre höger hörn.
+```
 
-`   2. Under Licenses-fliken, välj Smart Licenses.`
+```
+   2. Under Licenses-fliken, välj Smart Licenses.
+```
 
-`   3. Aktivera din Evaluation Period eller registrera dina Smart Licenses.`
+```
+   3. Aktivera din Evaluation Period eller registrera dina Smart Licenses.
+```
 
 ### Managera FTD
 
 Logga in i FMC via din webbläsare och gör följande för att lägga till
 din FTD-enhet för managering:
 
-`   1. Klicka på Devices-fliken längst upp på sidan.`
+```
+   1. Klicka på Devices-fliken längst upp på sidan.
+```
 
-`   2. Klicka på Add...-knappen längst till höger, välj Add Device.`
+```
+   2. Klicka på Add...-knappen längst till höger, välj Add Device.
+```
 
-`   3. Fyll i IP/Hostname i Host-fältet.`
+```
+   3. Fyll i IP/Hostname i Host-fältet.
+```
 
-`   4. Fyll i samma registration key som konfigurerats på FTD-enheten.`
+```
+   4. Fyll i samma registration key som konfigurerats på FTD-enheten.
+```
 
-`   5. Tilldela/skapa en Access Control Policy till enheten.`
+```
+   5. Tilldela/skapa en Access Control Policy till enheten.
+```
 
-`   6. Bocka för önskade licenser under Smart Licensing.`
+```
+   6. Bocka för önskade licenser under Smart Licensing.
+```
 
-`   7. Om nat_id använts i FTD, fyll i detta efter Unique NAT ID under Advanced.`
+```
+   7. Om nat_id använts i FTD, fyll i detta efter Unique NAT ID under Advanced.
+```
 
-`   8. Tryck Register.`
+```
+   8. Tryck Register.
+```
 
 ### Omstart av FMC
 
@@ -93,5 +119,3 @@ Finns under Devices -\> Device Management, klicka sedan på
 Advanced Troubleshooting, så finner du Packet Tracer som en separat
 flik. Det går även att nå Packet Tracer via System -\> Health -\>
 Monitor, för att sedan klicka sig fram till enheten.
-
-[Category:Cisco](/Category:Cisco "wikilink")

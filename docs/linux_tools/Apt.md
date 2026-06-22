@@ -26,7 +26,9 @@ program.
 
 Lista installerade paket och deras versioner:
 
-`apt list --installed`
+```
+apt list --installed
+```
 
 apt-get
 -------
@@ -38,7 +40,9 @@ ett program.
 
 Uppdatera din lista med paket.
 
-`apt-get update`
+```
+apt-get update
+```
 
 #### install
 
@@ -57,12 +61,16 @@ show](/Apt#show "wikilink") om hur du ser vilka versioner som finns.
 Kolla om det finns en ny version av ett program du har installerat och
 uppgradera det.
 
-`apt-get upgrade`
-`apt-get -s upgrade #Dry run`
+```
+apt-get upgrade
+apt-get -s upgrade #Dry run
+```
 
 För att uppgradera hela din dist från tex Debian 7 till Debian 8 kör.
 
-`apt-get dist-upgrade`
+```
+apt-get dist-upgrade
+```
 
 #### remove
 
@@ -79,7 +87,9 @@ då installeras det paketet också. Men sen om du väljer att ta bort
 paketet du ville installera så finns fortfarande dom andra paketen kvar.
 Om du vill ta bort paket som inte behövs så kör.
 
-`apt-get autoremove`
+```
+apt-get autoremove
+```
 
 apt-cache
 ---------
@@ -149,9 +159,11 @@ kommer inte tas bort automatiskt.
 
 Tre kommandon där man ser på namnet vad som händer.
 
-`apt-mark showauto`
-`apt-mark showmanual`
-`apt-mark showhold`
+```
+apt-mark showauto
+apt-mark showmanual
+apt-mark showhold
+```
 
 Apt Proxy
 ---------
@@ -160,11 +172,15 @@ För att spara bandbredd kan man sätta upp en egen cache av Ubuntus repo
 och peka sina servrar mot den.
 På cachen:
 
-`sudo apt-get install apt-cacher-ng`
+```
+sudo apt-get install apt-cacher-ng
+```
 
 På övriga maskiner
 
-`sudo nano /etc/apt/apt.conf`
+```
+sudo nano /etc/apt/apt.conf
+```
 `Acquire::http { Proxy "`[`http://10.0.0.500:3142`](http://10.0.0.500:3142)`"; };`
 
 Ansible
@@ -189,5 +205,3 @@ Ansible
      command: apt-get -y autoremove
      when: "'packages will be REMOVED' in check_autoremove.stdout"
 ```
-
-[Category:Tools](/Category:Tools "wikilink")

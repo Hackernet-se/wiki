@@ -12,21 +12,31 @@ Setup
 
 Installera
 
-`pip install pyats[full]`
+```
+pip install pyats[full]
+```
 
 Skapa ett inventory, även kallat testbed.
 
-`pyats create testbed interactive --output testbed1.yml --encode-password`
+```
+pyats create testbed interactive --output testbed1.yml --encode-password
+```
 
 Diff
 ----
 
-`pyats learn ospf interface routing pim mcast vrf ntp arp vlan config --testbed-file=aci_ipn.yml --output=before_change`
+```
+pyats learn ospf interface routing pim mcast vrf ntp arp vlan config --testbed-file=aci_ipn.yml --output=before_change
+```
 
-`**make change to network**`
+```
+**make change to network**
+```
 
-`pyats learn ospf interface routing pim mcast vrf ntp arp vlan config --testbed-file=aci_ipn.yml --output=after_change`
+```
+pyats learn ospf interface routing pim mcast vrf ntp arp vlan config --testbed-file=aci_ipn.yml --output=after_change
+```
 
-`pyats diff before_change after_change`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+pyats diff before_change after_change
+```

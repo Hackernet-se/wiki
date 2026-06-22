@@ -19,27 +19,35 @@ local connects, L2 point-to-point xconnects, L2 multipoint-to-multipoint
 VPLS och andra tjänster. Man kan genom att välja encapsulation även
 vlan-tagga, dubbel-tagga eller skriva om vlan-tag.
 
-`interface GigabitEthernet2`
-` no ip address`
-` service instance 10 ethernet`
-`  encapsulation default`
-`  xconnect 19.19.19.19 219 encapsulation mpls`
+```
+interface GigabitEthernet2
+ no ip address
+ service instance 10 ethernet
+  encapsulation default
+  xconnect 19.19.19.19 219 encapsulation mpls
+```
 
 Verification
 
-`show ethernet service instance summary`
-`show ethernet service instance id 10 interface gig2 detail`
-`show l2vpn service all `
+```
+show ethernet service instance summary
+show ethernet service instance id 10 interface gig2 detail
+show l2vpn service all 
+```
 
 **BFD**
 bfd-template multi-hop MH
 
-` interval min-tx 200 min-rx 200 multiplier 3 `
-`bfd map ipv4 1.1.1.0/24 1.1.1.1/32 MH`
+```
+ interval min-tx 200 min-rx 200 multiplier 3 
+bfd map ipv4 1.1.1.0/24 1.1.1.1/32 MH
+```
 
-`pseudowire-class MPLS-BFD`
-` encapsulation mpls`
-` monitor peer bfd local interface Loopback0`
+```
+pseudowire-class MPLS-BFD
+ encapsulation mpls
+ monitor peer bfd local interface Loopback0
+```
 
 VPLS
 ====
@@ -62,47 +70,61 @@ Manual VPLS, legacy syntax. Bridge domain används för mac learning samt
 att binda ihop Ethernet UNI med LSP. Man kan ej blanda gammal och ny
 syntax pga att bridge-domain betyder olika beroende på config context.
 
-`l2 vfi VPLS manual`
-` vpn id 100`
-` bridge-domain 1`
-` neighbor 10.0.0.2 encapsulation mpls`
-` neighbor 10.0.0.3 encapsulation mpls`
+```
+l2 vfi VPLS manual
+ vpn id 100
+ bridge-domain 1
+ neighbor 10.0.0.2 encapsulation mpls
+ neighbor 10.0.0.3 encapsulation mpls
+```
 
-`interface gi2`
-` service instance 10 ethernet`
-`  encapsulation default`
-`  bridge-domain 1`
+```
+interface gi2
+ service instance 10 ethernet
+  encapsulation default
+  bridge-domain 1
+```
 
 Bridge Domain Centric (preferred syntax). Full mesh scaling är ett
 administrativt problem oavsett syntax.
 
-`l2vpn vfi context VPLS`
-` vpn id 100`
-` member 10.0.0.2 encapsulation mpls`
-` member 10.0.0.3 encapsulation mpls`
-` member 10.0.0.4 encapsulation mpls`
+```
+l2vpn vfi context VPLS
+ vpn id 100
+ member 10.0.0.2 encapsulation mpls
+ member 10.0.0.3 encapsulation mpls
+ member 10.0.0.4 encapsulation mpls
+```
 
-`interface gi2`
-` service instance 10 ethernet`
-`  encapsulation default`
+```
+interface gi2
+ service instance 10 ethernet
+  encapsulation default
+```
 
-`bridge-domain 1`
-` mac limit maximum addresses 50`
-` member gi2 service-instance 10`
-` member vfi VPLS `
+```
+bridge-domain 1
+ mac limit maximum addresses 50
+ member gi2 service-instance 10
+ member vfi VPLS 
+```
 
 Verify
 
-`show l2vpn vfi`
-`show bridge-domain`
-`show l2vpn service all `
-`show mpls l2transport vc`
-`show mpls forwarding-table | i l2ckt`
+```
+show l2vpn vfi
+show bridge-domain
+show l2vpn service all 
+show mpls l2transport vc
+show mpls forwarding-table | i l2ckt
+```
 
 Man kan även koppla in L3-interface på sin bridge-domain.
 
-`interface BDI1`
-` ip address 172.20.0.10 255.255.255.0`
+```
+interface BDI1
+ ip address 172.20.0.10 255.255.255.0
+```
 
 ### BGP Autodiscovery
 
@@ -111,36 +133,48 @@ upptäcka VPLS-endpoints automatiskt för varje VPN och VC-grannar
 konfigureras ej maneullt. Varje VPLS får en egen rd och detta går att
 använda i kombination med route reflector.
 
-`l2vpn vfi context VPLS`
-` vpn id 100`
-` autodiscovery bgp signaling ldp`
-`  auto-route-target  #på default`
+```
+l2vpn vfi context VPLS
+ vpn id 100
+ autodiscovery bgp signaling ldp
+  auto-route-target  #på default
+```
 
-`router bgp 100`
-` address-family l2vpn vpls`
-`  neighbor 1.1.1.1 activate`
-`  neighbor 1.1.1.1 send-comunity extended`
+```
+router bgp 100
+ address-family l2vpn vpls
+  neighbor 1.1.1.1 activate
+  neighbor 1.1.1.1 send-comunity extended
+```
 
 Verify
 
-`show bgp l2vpn vpls all summary`
+```
+show bgp l2vpn vpls all summary
+```
 
 **BGP** based VPLS med BGP Autodiscovery (RFC 4761). BGP används för att
 upptäcka VPLS-endpoints men också för att signalera labels. Man måste
 suppress ldp signaling för att slå på bgp signaling.
 
-`l2vpn vfi context VPLS`
-` vpn id 100`
-` autodiscovery bgp signaling bgp`
-`  ve id 11  #unik per VPLS Edge device `
+```
+l2vpn vfi context VPLS
+ vpn id 100
+ autodiscovery bgp signaling bgp
+  ve id 11  #unik per VPLS Edge device 
+```
 
-`router bgp 100`
-` address-family l2vpn vpls`
-`  neighbor 1.1.1.1 suppress-signaling-protocol ldp`
+```
+router bgp 100
+ address-family l2vpn vpls
+  neighbor 1.1.1.1 suppress-signaling-protocol ldp
+```
 
 Verify
 
-`show bgp l2vpn vpls all`
+```
+show bgp l2vpn vpls all
+```
 
 ### H-VPLS
 
@@ -161,11 +195,15 @@ För CDP, LACP, STP frames etc krävs l2 tunneling protocol. Detta finns
 det inte stöd för på alla plattformar, *l2protocol action not
 supported*.
 
-`interface gi2`
-` service instance 100 ethernet`
-`  l2protocol tunnel`
+```
+interface gi2
+ service instance 100 ethernet
+  l2protocol tunnel
+```
 
-`show ethernet service instance detail | i L2protocol`
+```
+show ethernet service instance detail | i L2protocol
+```
 
 EoMPLS/AToM
 ===========
@@ -187,66 +225,80 @@ men med type 4 (Vlan) som fallback (*show mpls l2transport binding*).
 
 PW logging
 
-`xconnect logging pseudowire status `
+```
+xconnect logging pseudowire status 
+```
 
 PE1
 
-`interface gi2`
-` xconnect 2.2.2.2 102 encapsulation mpls`
+```
+interface gi2
+ xconnect 2.2.2.2 102 encapsulation mpls
+```
 
 PE2, VCID måste matcha på båda sidor
 
-`interface gi2`
-` xconnect 1.1.1.1 102 encapsulation mpls`
+```
+interface gi2
+ xconnect 1.1.1.1 102 encapsulation mpls
+```
 
 Verify
 
-`show xconnect all`
-`show xconnect peer 2.2.2.2 vcid 102`
-`show l2vpn service all `
-`show mpls l2transport vc 102 detail`
-`ping mpls pseudowire 10.0.0.10 102`
+```
+show xconnect all
+show xconnect peer 2.2.2.2 vcid 102
+show l2vpn service all 
+show mpls l2transport vc 102 detail
+ping mpls pseudowire 10.0.0.10 102
+```
 
 Segment 1 är de interface som kunden sitter på, segment 2 är core.
 
 **Pseudowire Redundancy**
 Pseudowire redundancy innebär att man sätter upp en backup PW.
 
-`l2vpn xconnect context Redundancy`
-` member 1.1.1.1 10 encapsulation mpls group 1 priority 1`
-` member 2.2.2.2 10 encapsulation mpls group 1 priority 2`
+```
+l2vpn xconnect context Redundancy
+ member 1.1.1.1 10 encapsulation mpls group 1 priority 1
+ member 2.2.2.2 10 encapsulation mpls group 1 priority 2
+```
 
 EVPN-VPWS
 ---------
 
-`l2vpn evpn`
-` replication-type ingress`
-` router-id Loopback0`
-` mpls label mode per-ce`
-`!`
-`l2vpn evpn instance 10 vlan-based`
-` route-distinguisher 1.1.1.1:10`
-` route-target both 10:10`
-` no auto-route-target`
-`! `
-`member evpn-instance 10`
-` member GigabitEthernet0/0/1 service-instance 10`
-`!`
-`interface GigabitEthernet0/0/1`
-` no ip address`
-` service instance 10 ethernet`
-`  encapsulation dot1q 100`
-`! `
-`router bgp 1`
-` address-family l2vpn evpn `
-`  neighbor IBGP activate`
-`  neighbor IBGP send-community both`
+```
+l2vpn evpn
+ replication-type ingress
+ router-id Loopback0
+ mpls label mode per-ce
+!
+l2vpn evpn instance 10 vlan-based
+ route-distinguisher 1.1.1.1:10
+ route-target both 10:10
+ no auto-route-target
+! 
+member evpn-instance 10
+ member GigabitEthernet0/0/1 service-instance 10
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ service instance 10 ethernet
+  encapsulation dot1q 100
+! 
+router bgp 1
+ address-family l2vpn evpn 
+  neighbor IBGP activate
+  neighbor IBGP send-community both
+```
 
 Verify
 
-`show l2vpn evpn evi detail `
-`show l2vpn evpn mac `
-`show l2vpn l2route evpn mac`
+```
+show l2vpn evpn evi detail 
+show l2vpn evpn mac 
+show l2vpn l2route evpn mac
+```
 
 L2TPv3
 ------
@@ -255,62 +307,84 @@ Layer 2 Tunneling Protocol (RFC 3931, RFC 4719) kräver
 [CEF](/Cisco_CEF "wikilink") och IP-konnektivitet end-to-end. Det är
 endast point-to-point. IP protocol: 115.
 
-`pseudowire-class L2TP-PWCLASS`
-` encapsulation l2tpv3`
-` ip local interface Loopback0`
+```
+pseudowire-class L2TP-PWCLASS
+ encapsulation l2tpv3
+ ip local interface Loopback0
+```
 
-`interface gi2`
-` xconnect 2.2.2.2 102 pw-class L2TP-PWCLASS`
+```
+interface gi2
+ xconnect 2.2.2.2 102 pw-class L2TP-PWCLASS
+```
 
 Verify
 
-`show l2tp session all`
-`show l2tun tunnel all`
+```
+show l2tp session all
+show l2tun tunnel all
+```
 
 Default kopieras inte DF bit som finns i paketen som kommer in ifrån CE
 när L2TPv3 IP header adderas. Man kan ändra det i pw-klassen.
 
-`pseudowire-class L2TP-PWCLASS`
-` ip pmtu`
+```
+pseudowire-class L2TP-PWCLASS
+ ip pmtu
+```
 
 Inter-AS Option B
 -----------------
 
 PE
 
-`mpls ldp discovery targeted-hello accept`
+```
+mpls ldp discovery targeted-hello accept
+```
 
-`l2vpn`
-` pseudowire routing `
-`  terminating-pe tie-breaker`
+```
+l2vpn
+ pseudowire routing 
+  terminating-pe tie-breaker
+```
 
-`l2vpn vfi context vfiA`
-` vpn id 111`
-` autodiscovery bgp signaling ldp`
-` vpls-id 111:111`
-` rd 111:111`
-` route-target 111:111`
+```
+l2vpn vfi context vfiA
+ vpn id 111
+ autodiscovery bgp signaling ldp
+ vpls-id 111:111
+ rd 111:111
+ route-target 111:111
+```
 
 ASBR
 
-`mpls ldp discovery targeted-hello accept`
+```
+mpls ldp discovery targeted-hello accept
+```
 
-`l2vpn`
-` pseudowire routing`
+```
+l2vpn
+ pseudowire routing
+```
 
-`router bgp 1`
-` no bgp default route-target filter`
-` address-family l2vpn vpls`
+```
+router bgp 1
+ no bgp default route-target filter
+ address-family l2vpn vpls
+```
 `  neighbor `<ibgp>` activate`
 `  neighbor `<ibgp>` send-community extended`
 `  neighbor `<ibgp>` next-hop-self`
 `  neighbor `<ebgp>` activate`
 `  neighbor `<ebgp>` send-community extended`
 
-`interface GigabitEthernet1`
-` description ASBR-to-ASBR`
-` mpls ip`
-` mpls ldp discovery transport-address interface`
+```
+interface GigabitEthernet1
+ description ASBR-to-ASBR
+ mpls ip
+ mpls ldp discovery transport-address interface
+```
 
 IOS-XR
 ======
@@ -324,34 +398,42 @@ IOS-XR implementerar ett strukturerat CLI för EFP och EVC konfiguration.
 
 Exempel:
 
-`interface Bundle-Ether1.20 l2transport`
-` encapsulation dot1q 20`
-` rewrite ingress tag pop 1 symmetric`
-` mtu 9022`
+```
+interface Bundle-Ether1.20 l2transport
+ encapsulation dot1q 20
+ rewrite ingress tag pop 1 symmetric
+ mtu 9022
+```
 
 **Loggning**
 
-`l2vpn`
-` logging`
-`  bridge-domain`
-`  pseudowire`
-`  vfi`
+```
+l2vpn
+ logging
+  bridge-domain
+  pseudowire
+  vfi
+```
 
 **Static VPLS**
 
-`l2vpn`
-` bridge group PROD`
-`  bridge-domain 101`
-`   mtu 9000`
-`   interface Bundle-Ether1.101`
-`   !`
-`   vfi 101`
-`    neighbor 10.0.10.15 pw-id 101`
-`    neighbor 10.0.10.16 pw-id 101`
+```
+l2vpn
+ bridge group PROD
+  bridge-domain 101
+   mtu 9000
+   interface Bundle-Ether1.101
+   !
+   vfi 101
+    neighbor 10.0.10.15 pw-id 101
+    neighbor 10.0.10.16 pw-id 101
+```
 
 Verify
 
-`show l2vpn bridge-domain brief`
+```
+show l2vpn bridge-domain brief
+```
 
 **Static P2P**
 EoMPLS tillhandahåller en tunnlingsmekanism för Ethernet-trafik över ett
@@ -361,28 +443,34 @@ upp.
 
 "VC Type 5" = Port Based
 
-`interface GigabitEthernet0/0/0/1`
-` l2transport`
-` no cdp`
-`!`
-`l2vpn`
-` !`
-` xconnect group GROUP1`
-`  p2p TO_XR2`
-`   interface GigabitEthernet0/0/0/1`
-`   neighbor ipv4 2.2.2.2 pw-id 100`
+```
+interface GigabitEthernet0/0/0/1
+ l2transport
+ no cdp
+!
+l2vpn
+ !
+ xconnect group GROUP1
+  p2p TO_XR2
+   interface GigabitEthernet0/0/0/1
+   neighbor ipv4 2.2.2.2 pw-id 100
+```
 
 "VC-Type 4" = VLAN based pseudowire
 
-`l2vpn`
-` pw-class VLAN`
-`  encapsulation mpls`
-`   no transport-mode`
-`   transport-mode vlan`
+```
+l2vpn
+ pw-class VLAN
+  encapsulation mpls
+   no transport-mode
+   transport-mode vlan
+```
 
 Verify
 
-`show l2vpn forwarding neighbor 2.2.2.2 pw-id 100 detail location 0/0/CPU0`
+```
+show l2vpn forwarding neighbor 2.2.2.2 pw-id 100 detail location 0/0/CPU0
+```
 
 ### Control Word
 
@@ -397,9 +485,9 @@ och därmed finns det ingen risk att load sharing blir fel. Control-Word
 spelar en viktig roll för ECMP och det är rekommenderat att man slår på
 det.
 
-`l2vpn`
-` pw-class CONTROL`
-`  encapsulation mpls`
-`   control-word`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+l2vpn
+ pw-class CONTROL
+  encapsulation mpls
+   control-word
+```

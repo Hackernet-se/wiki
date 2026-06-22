@@ -21,42 +21,56 @@ Konfiguration
 
 BGP-LS på P/PE
 
-`router isis 1`
-` distribute link-state`
-` address-family ipv4 unicast`
+```
+router isis 1
+ distribute link-state
+ address-family ipv4 unicast
+```
 
-`router bgp 100`
-` neighbor 11.11.11.11`
-`  remote-as 100`
-`  update-source Loopback0`
-`  address-family link-state link-state`
+```
+router bgp 100
+ neighbor 11.11.11.11
+  remote-as 100
+  update-source Loopback0
+  address-family link-state link-state
+```
 
-`show bgp link-state link-state summary`
+```
+show bgp link-state link-state summary
+```
 
 XTC
 
-`pce`
-` address ipv4 11.11.11.11   #own loopback`
+```
+pce
+ address ipv4 11.11.11.11   #own loopback
+```
 
-`show pce ipv4 peer`
+```
+show pce ipv4 peer
+```
 
 PCC på P/PE
 
-`segment-routing`
-` traffic-eng`
-`  maximum-sid-depth 5`
-`  pcc`
-`   source-address ipv4 1.1.1.1   #own loopback`
-`   pce address ipv4 11.11.11.11  #XTC`
-`   !`
-`   report-all`
+```
+segment-routing
+ traffic-eng
+  maximum-sid-depth 5
+  pcc
+   source-address ipv4 1.1.1.1   #own loopback
+   pce address ipv4 11.11.11.11  #XTC
+   !
+   report-all
+```
 
-`show segment-routing traffic-eng pcc ipv4 peer brief`
+```
+show segment-routing traffic-eng pcc ipv4 peer brief
+```
 
 Förutom vanlig IGP link metric information kan PCE även lära sig prefix
 SID och adjacency SID för alla länkar. Detta gör att PCE kan göra path
 computation baserat på IOS-XR's CSPF-algoritmer.
 
-`show pce ipv4 topology summary`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show pce ipv4 topology summary
+```

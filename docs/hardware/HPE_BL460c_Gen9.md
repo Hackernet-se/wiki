@@ -3,7 +3,7 @@ title: HPE BL460c Gen9
 permalink: /HPE_BL460c_Gen9/
 ---
 
-[Category:Hardware](/Category:Hardware "wikilink") Generation 9 av HPE's
+ Generation 9 av HPE's
 bladservrar.
 
 Problem

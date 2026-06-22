@@ -3,7 +3,7 @@ title: Prometheus
 permalink: /Prometheus/
 ---
 
-[Category:Guider](/Category:Guider "wikilink")
+
 
 Prometheus is a an open source monitoring and alerting toolkit.
 Originally built by a couple of Soundcloud engineers to modernize
@@ -52,21 +52,29 @@ Node Exporters
 Följande är veriferat på pfsense 2.4.2 som kör FreeBSD 11.1. Ändra till
 **yes** i följande 3 filer:
 
-`vi /usr/local/etc/pkg/repos/FreeBSD.conf`
-`vi /usr/local/etc/pkg/repos/pfSense.conf               `
-`vi /etc/pkg/FreeBSD.conf`
+```
+vi /usr/local/etc/pkg/repos/FreeBSD.conf
+vi /usr/local/etc/pkg/repos/pfSense.conf               
+vi /etc/pkg/FreeBSD.conf
+```
 
 Installera sedan **node_exporter**
 
-`pkg install node_exporter`
+```
+pkg install node_exporter
+```
 
 Lägg sedan till så node_exporter startar vid omboot.
 
-`echo "node_exporter_enable="YES"" >> /etc/rc.conf`
+```
+echo "node_exporter_enable="YES"" >> /etc/rc.conf
+```
 
 Starta sedan tjänsten:
 
-`service node_exporter start`
+```
+service node_exporter start
+```
 
 Exportern går att nå på default porten 9100.
 

@@ -99,10 +99,10 @@ Launch
 Graylog får inte binda till port 514 eftersom det är en lågnummerport
 utan man får lösa det med en redirect.
 
-`iptables -t nat -A PREROUTING -i eth0 -p udp -m udp --dport 514 -j REDIRECT --to-ports 5514`
+```
+iptables -t nat -A PREROUTING -i eth0 -p udp -m udp --dport 514 -j REDIRECT --to-ports 5514
+```
 
 ### Klienter
 
 Ställ in så dina maskiner skickar sin syslog till <Graylog-IP> UDP 514.
-
-[Category:Guider](/Category:Guider "wikilink")

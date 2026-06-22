@@ -10,10 +10,14 @@ Installation
 
 Ubuntu 14.04
 
-`sudo apt-get update && sudo apt-get upgrade && sudo apt-get -y install snmpd snmp mysql-server \`
-`apache2 libapache2-mod-php5 php5-mysql php5-cli php5-snmp php5-gd ntp`
+```
+sudo apt-get update && sudo apt-get upgrade && sudo apt-get -y install snmpd snmp mysql-server \
+apache2 libapache2-mod-php5 php5-mysql php5-cli php5-snmp php5-gd ntp
+```
 
-`sudo apt-get -y install cacti`
+```
+sudo apt-get -y install cacti
+```
 
 “libphp-adodb” = “Ok”. “Configuring Cacti” = “Apache2” “Configuring
 cacti” = dbconfig-common MySQL = lösenordet du skapa tidigare
@@ -47,7 +51,9 @@ VM-snapshots är din vän.
 Spine Polling Daemon är en ersättare för polling-scriptet som körs
 default.
 
-`sudo apt-get install cacti-spine`
+```
+sudo apt-get install cacti-spine
+```
 
 “Settings” -\> “Configuration” -\> “Poller” -\> “Poller Type” och välj
 “Spine”.
@@ -61,7 +67,9 @@ Höj vissa standardvärden för att kunna se längre descriptions.
 
 **Interface Description**
 
-`|host_description| - |query_ifName| - |query_ifAlias|`
+```
+|host_description| - |query_ifName| - |query_ifAlias|
+```
 
 Plugins
 -------
@@ -113,64 +121,82 @@ editorn.
 **wmap.conf**
 Storlek i pixlar
 
-`WIDTH 1900`
-`HEIGHT 900`
+```
+WIDTH 1900
+HEIGHT 900
+```
 
 Tidsstämpel
 
-`TIMEPOS 1300 40 Created: %b %d %Y %H:%M:%S`
+```
+TIMEPOS 1300 40 Created: %b %d %Y %H:%M:%S
+```
 
 Template nodes
 
-`NODE DEFAULT`
-` LABELBGCOLOR 169 5 10`
-` LABELFONTCOLOR 216 248 3`
-` MAXVALUE 100`
+```
+NODE DEFAULT
+ LABELBGCOLOR 169 5 10
+ LABELFONTCOLOR 216 248 3
+ MAXVALUE 100
+```
 
 Template links
 
-`LINK DEFAULT`
-` WIDTH 5`
-` BANDWIDTH 1000M`
+```
+LINK DEFAULT
+ WIDTH 5
+ BANDWIDTH 1000M
+```
 
 **Noder**
 
-`NODE Firewall01`
-` LABEL Firewall01`
-` LABELOFFSET W   #Sätt label i förhållande till nod. N, S, W, E, C`
-` ICON images/Firewall.png`
-` POSITION 500 500`
+```
+NODE Firewall01
+ LABEL Firewall01
+ LABELOFFSET W   #Sätt label i förhållande till nod. N, S, W, E, C
+ ICON images/Firewall.png
+ POSITION 500 500
+```
 
 **Länkar**
 
-`LINK Switch01-Firewall01`
-` WIDTH 8   #i pixlar`
-` INFOURL /cacti/graph.php?rra_id=all&local_graph_id=101`
-` OVERLIBGRAPH /cacti/graph_image.php?local_graph_id=101&rra_id=0&graph_nolegend=true&graph_height=100&graph_width=300`
-` BWSTYLE angled   #skriv längs med istället för horisontellt`
-` BWLABEL bits   #byt från procent till bits`
-` BWFONT 106   #måste finnas definierade `
-` BWLABELPOS 75 25   #placera label`
-` TARGET /var/www/cacti/rra/traffic_in_1000.rrd`
-` NODES Switch01 Firewall01`
-` BANDWIDTH 100M`
-` ARROWSTYLE compact`
+```
+LINK Switch01-Firewall01
+ WIDTH 8   #i pixlar
+ INFOURL /cacti/graph.php?rra_id=all&local_graph_id=101
+ OVERLIBGRAPH /cacti/graph_image.php?local_graph_id=101&rra_id=0&graph_nolegend=true&graph_height=100&graph_width=300
+ BWSTYLE angled   #skriv längs med istället för horisontellt
+ BWLABEL bits   #byt från procent till bits
+ BWFONT 106   #måste finnas definierade 
+ BWLABELPOS 75 25   #placera label
+ TARGET /var/www/cacti/rra/traffic_in_1000.rrd
+ NODES Switch01 Firewall01
+ BANDWIDTH 100M
+ ARROWSTYLE compact
+```
 
 **Aggregera länkar**
 
-`TARGET /var/www/cacti/rra/traffic_in_1000.rrd /var/www/cacti/rra/traffic_in_1001.rrd`
+```
+TARGET /var/www/cacti/rra/traffic_in_1000.rrd /var/www/cacti/rra/traffic_in_1001.rrd
+```
 
 **Multiple via**
 
-`VIA x y`
-`VIA x2 y2`
+```
+VIA x y
+VIA x2 y2
+```
 
 **Visningssida för Weathermap**
 Detta är ett exempel på en simpel visningssida för den nyskapade
 Weathermap:n Med lite html-kunskaper och fantasi går detta att utveckla
 väldigt mycket. [Inspiration](http://forums.cacti.net/about24433.html)
 
-`sudo ln -s /usr/share/cacti/site/plugins/weathermap/output /var/www/html/`
+```
+sudo ln -s /usr/share/cacti/site/plugins/weathermap/output /var/www/html/
+```
 
 ``` html4strict
  sudo dd of=/var/www/html/index.html << EOF
@@ -186,8 +212,10 @@ väldigt mycket. [Inspiration](http://forums.cacti.net/about24433.html)
  EOF
 ```
 
-`sudo sed -i "s/12345/$(find /usr/share/cacti/site/plugins/weathermap/output/ \`
-`-name "*.thumb.png" -exec basename \{} .thumb.png \;)/g" /var/www/html/index.html`
+```
+sudo sed -i "s/12345/$(find /usr/share/cacti/site/plugins/weathermap/output/ \
+-name "*.thumb.png" -exec basename \{} .thumb.png \;)/g" /var/www/html/index.html
+```
 
 **Felsökning**
 Om error codes i loggen:
@@ -216,5 +244,3 @@ cactin
 
 &local_graph_id=55 där 55 är IDet på grafen, &rra_id=1 1an betyder
 att den kör på en dag 2 är 1 vecka osv.
-
-[Category:Guider](/Category:Guider "wikilink")

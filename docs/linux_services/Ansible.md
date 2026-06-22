@@ -19,16 +19,22 @@ Installation
 Till skillnad mot t.ex. puppet finns det inga agenter/klienter utan man
 installerar endast på en maskin, dvs standalone.
 
-`#Ubuntu `
-`sudo apt-get install software-properties-common`
-`sudo apt-add-repository ppa:ansible/ansible`
-`sudo apt-get update && sudo apt-get -y install ansible`
+```
+#Ubuntu 
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update && sudo apt-get -y install ansible
+```
 
-`#CentOS/Fedora`
-`sudo yum install ansible`
+```
+#CentOS/Fedora
+sudo yum install ansible
+```
 
-`#Alternativt`
-`sudo pip install ansible`
+```
+#Alternativt
+sudo pip install ansible
+```
 
 Grunder
 -------
@@ -50,31 +56,41 @@ Konfiguration
 I ditt inventory läggs alla maskiner till och finns default i:
 /etc/ansible/hosts
 
-`#[all] gäller alla`
-`cacti`
-`ns02`
-`beeswarm:2222`
+```
+#[all] gäller alla
+cacti
+ns02
+beeswarm:2222
+```
 
-`[dbservers]`
-`dbsrv1`
-`dbsrv2`
+```
+[dbservers]
+dbsrv1
+dbsrv2
+```
 
-`[webservers]`
-`websrv1`
-`websrv2`
+```
+[webservers]
+websrv1
+websrv2
+```
 
 Moduler
 -------
 
 <http://docs.ansible.com/modules_by_category.html>
 
-`ansible -m [modulnamn] all`
-`ansible -m shell -a 'free -m' host1:host3`
+```
+ansible -m [modulnamn] all
+ansible -m shell -a 'free -m' host1:host3
+```
 
 Testa så att det funkar. Ping-modulen loggar in på maskinerna och kör
 ping 127.0.0.1, output blir success eller fail.
 
-`ansible all -m ping`
+```
+ansible all -m ping
+```
 
 Default används SSH-nyckel för autentisering, för pw-fråga istället lägg
 till: -k
@@ -85,7 +101,9 @@ Playbooks
 En playbook är en uppsättning instruktioner skrivna i yaml. Yaml är
 lättläst för oss människor.
 
-`ansible-playbook -i inventory_file dinplaybook.yml`
+```
+ansible-playbook -i inventory_file dinplaybook.yml
+```
 
 Exempel på playbook:
 
@@ -108,26 +126,36 @@ Exempel på playbook:
 Om man har angett hosts i playbooken behövs de inte anges när man kör
 kommandot. Annars kan man specificera enskilda hosts.
 
-`ansible-playbook -l host5 apache.yml`
+```
+ansible-playbook -l host5 apache.yml
+```
 
 Kolla vilka hostar som eventuellt skulle beröras
 
-`ansible-playbook playbook.yml --list-hosts`
+```
+ansible-playbook playbook.yml --list-hosts
+```
 
 Sudo
 
-`ansible-playbook apache.yml -K  #--ask-sudo-pass`
+```
+ansible-playbook apache.yml -K  #--ask-sudo-pass
+```
 
 ### Ladda upp filer
 
 Man kan ladda upp lokala filer i tasken.
 
-`   - name: Upload default index.html for host`
-`     copy: src=localfiles/index.html dest=/var/www/html/ mode=0644`
+```
+   - name: Upload default index.html for host
+     copy: src=localfiles/index.html dest=/var/www/html/ mode=0644
+```
 
 ### Ladda ner filer
 
-`   - name: Download file from website`
+```
+   - name: Download file from website
+```
 `     get_url: url=`[`http://hackernet.se/file.htm`](http://hackernet.se/file.htm)` dest=/var/www/html/index.html`
 
 ### Roller
@@ -135,7 +163,9 @@ Man kan ladda upp lokala filer i tasken.
 Med roller kan man kalla på variabler, tasks och handlers som är
 fördefinierade. Det kräver att man har en filstruktur för det.
 
-`mkdir -p /etc/ansible/roles/`
+```
+mkdir -p /etc/ansible/roles/
+```
 
 ### YAML
 
@@ -189,8 +219,8 @@ Vault
 Med vault kan man skydda sina lösenord och nycklar med assymetrisk
 AES-kryptering.
 
-`ansible-vault create vault.yml`
-`ansible-vault edit vault.yml`
-`ansible-playbook vault.yml --ask-vault-pass`
-
-[Category:Guider](/Category:Guider "wikilink")
+```
+ansible-vault create vault.yml
+ansible-vault edit vault.yml
+ansible-playbook vault.yml --ask-vault-pass
+```

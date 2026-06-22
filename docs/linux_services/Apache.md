@@ -10,12 +10,16 @@ att konfigurera och har även flera användbara tillägg.
 Installation
 ------------
 
-`sudo apt-get install apache2`
+```
+sudo apt-get install apache2
+```
 
 ### Apache kommandon
 
 `a2ensite` För att aktivera en sida. Tillgängliga sidor finns i mappen
-`/etc/apache2/sites-available`
+```
+/etc/apache2/sites-available
+```
 
 `a2dissite` För att inaktivera av en sida. Aktiverade sidor finns i
 mappen `/etc/apache2/sites-enabled`
@@ -34,11 +38,15 @@ vHosts är bra att använda om man bara har en IP utåt och vill dela port
 att fungera så räcker det att man lägger till denna raden i apache
 configen.
 
-`ServerName hackernet.se`
+```
+ServerName hackernet.se
+```
 
 Kopiera default filen under sites-available.
 
-`cp /etc/apache2/sites-available/default /etc/apache2/sites-available/hackernet`
+```
+cp /etc/apache2/sites-available/default /etc/apache2/sites-available/hackernet
+```
 
 Öppna den nya filen och lägg till raden precis under `ServerAdmin` och
 över `DocumentRoot`
@@ -48,26 +56,34 @@ hemsida ska visas istället för orginal.
 
 Aktivera sedan sidan med
 
-`a2ensite hackernet`
+```
+a2ensite hackernet
+```
 
 ### Apachectl
 
 Kolla grundläggande konfiguration:
 
-`apachectl -S`
+```
+apachectl -S
+```
 
 Kör ett configtest:
 
-`apachectl -t`
+```
+apachectl -t
+```
 
 Permissions
 -----------
 
 Följande är en bra grund för filrättigheter.
 
-`chown root:www-data /var/www/html -R`
-`chmod g+s /var/www/html`
-`chmod o-wrx /var/www/html -R`
+```
+chown root:www-data /var/www/html -R
+chmod g+s /var/www/html
+chmod o-wrx /var/www/html -R
+```
 
 www-data, apache2′s user, har nu grupp-ägarskapet för default web root
 och alla filer däri. g+s säger åt filsystemet att alla nya filer som
@@ -76,14 +92,18 @@ skapas får samma grupp-ägarskap.
 Log files
 ---------
 
-`tail -f /var/log/apache2/access.log`
+```
+tail -f /var/log/apache2/access.log
+```
 
 SSL
 ---
 
 Enable module
 
-`sudo a2enmod ssl && sudo a2enmod headers && sudo service apache2 restart`
+```
+sudo a2enmod ssl && sudo a2enmod headers && sudo service apache2 restart
+```
 
 **Certifikat**
 Fixa ett certifikat, antingen från en CA (t.ex. [Let's
@@ -96,15 +116,19 @@ Konfiguration med säkerhet i fokus.
 
 Aktivera vHost
 
-`sudo a2ensite hackernet && sudo service apache2 restart`
+```
+sudo a2ensite hackernet && sudo service apache2 restart
+```
 
 Dölj Version
 ------------
 
 Skriv följande i `Apache.conf/httpd.conf`
 
-`ServerTokens ProductOnly`
-`ServerSignature Off`
+```
+ServerTokens ProductOnly
+ServerSignature Off
+```
 
 ApacheBench
 -----------
@@ -136,5 +160,3 @@ För att fixa lägg till `NameVirtualHost *:443` i din `ports.conf` eller
      Listen 443
  </IfModule>
 ```
-
-[Category:Guider](/Category:Guider "wikilink")

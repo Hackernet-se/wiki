@@ -13,12 +13,16 @@ eller remote kommandon samt uppladdning / nerladdning av filer. Man kan
 Installation
 ============
 
-`sudo apt-get install fabric `
+```
+sudo apt-get install fabric 
+```
 
 Eller med hjälp av Python PIP.
 
-`pip install -e git+https://github.com/paramiko/paramiko/#egg=paramiko`
-`pip install -e git+https://github.com/fabric/fabric/#egg=fabric`
+```
+pip install -e git+https://github.com/paramiko/paramiko/#egg=paramiko
+pip install -e git+https://github.com/fabric/fabric/#egg=fabric
+```
 
 Konfiguration
 =============
@@ -115,5 +119,3 @@ Med serverlista och roller
 Med enskilda hostar
 
     fab -H host1,host2 task
-
-[Category:Guider](/Category:Guider "wikilink")

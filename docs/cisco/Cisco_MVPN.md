@@ -36,8 +36,10 @@ men det finns ingen PHP. Det finns stöd för FRR.
 
 MLDP utbyts som en capability, alla plattformar har inte stöd för MLDP.
 
-`show mpls ldp capabilities`
-`show mpls mldp neighbors`
+```
+show mpls ldp capabilities
+show mpls mldp neighbors
+```
 
 Core tree types. Ciscos namn kontra RFC:
 
@@ -54,64 +56,80 @@ IOS
 
 Konfiguration
 
-`ip multicast mpls mldp`
-`mpls mldp logging notifications`
+```
+ip multicast mpls mldp
+mpls mldp logging notifications
+```
 
 Exempel
 
-`ip multicast-routing vrf VPN_A distributed`
-`!`
-`vrf definition VPN_A`
-` vpn id 100:100`
-` address-family ipv4`
-` mdt default mpls mldp 11.11.11.11`
-` mdt data mpls mldp 110`
-` mdt data threshold 30`
+```
+ip multicast-routing vrf VPN_A distributed
+!
+vrf definition VPN_A
+ vpn id 100:100
+ address-family ipv4
+ mdt default mpls mldp 11.11.11.11
+ mdt data mpls mldp 110
+ mdt data threshold 30
+```
 
 Verify
 
-`show ip multicast mpls vif`
-`show mpls mldp database brief`
-`show mpls mldp root`
+```
+show ip multicast mpls vif
+show mpls mldp database brief
+show mpls mldp root
+```
 `ping mpls mldp mp2mp `<root>` mdt `<vpn-id>` 0`
 
 Det finns ingen MBB by default.
 
-`mpls mldp make-before-break delay 5000`
+```
+mpls mldp make-before-break delay 5000
+```
 
 IOS-XR
 ------
 
 Konfiguration
 
-`multicast-routing`
-` address-family ipv4`
-`  interface Loopback0`
-`   enable`
-`!`
-`mpls ldp`
-` mldp`
-`  logging notifications`
+```
+multicast-routing
+ address-family ipv4
+  interface Loopback0
+   enable
+!
+mpls ldp
+ mldp
+  logging notifications
+```
 
 Verify
 
-`show mpls forwarding p2mp`
-`show mpls mldp forwarding`
-`show mrib mpls forwarding`
+```
+show mpls forwarding p2mp
+show mpls mldp forwarding
+show mrib mpls forwarding
+```
 
 Om man kör t.ex. Segment Routing har man inget behov av LDP, då kan man
 köra MLDP only.
 
-`mpls ldp`
-` capabilities sac mldp-only`
+```
+mpls ldp
+ capabilities sac mldp-only
+```
 
 **MoFRR**
 MoFRR bygger två träd, egress PE måste ha IGP ecmp till ingress PE.
 
-`mpls ldp`
-` mldp`
-`  address-family ipv4`
-`   mofrr`
+```
+mpls ldp
+ mldp
+  address-family ipv4
+   mofrr
+```
 
 Unified MPLS
 ------------
@@ -121,12 +139,14 @@ det är en växel man måste slå på i egress PE.
 
 IOS-XE
 
-`mpls mldp forwarding recursive-fec`
+```
+mpls mldp forwarding recursive-fec
+```
 
 IOS-XR
 
-`mpls ldp mldp address-family ipv4 recursive-fec`
+```
+mpls ldp mldp address-family ipv4 recursive-fec
+```
 
 ![Cisco_MPLS_Seamless.PNG](img/Cisco_MPLS_Seamless.PNG)
-
-[Category:Cisco](/Category:Cisco "wikilink")

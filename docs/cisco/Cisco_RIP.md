@@ -51,12 +51,12 @@ upp, ett RIP-interface kommer upp eller *clear ip route \** körs.
 
 Response packet:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_RIP_Update.PNG>](/File:Cisco_RIP_Update.PNG "wikilink")
 
-</div>
-</div>
+![Cisco_RIP_Update.PNG](../img/Cisco_RIP_Update.PNG)
+
+
+
 
 ### Metric
 
@@ -98,7 +98,9 @@ stänger av split horizon. Det går att stänga av split horizon men det är
 inte rekommenderat. Det kan dock behövas stängas av på
 [DMVPN](/Cisco_DMVPN "wikilink")-hubb.
 
-`no ip split-horizon`
+```
+no ip split-horizon
+```
 
 Om två routergrannar ser sig själva som next-hop för samma nätverk (kan
 hända om Split Horizon är avstängt) kommer de att turas om att uppdatera
@@ -114,7 +116,9 @@ uppdateringar oavsett vilken IP de kommer ifrån. Följande RIP-kommando
 stänger av sanity checks against source address of routing updates.
 Unnumbered IP interfaces har inte denna check.
 
-`no validate-update-source`
+```
+no validate-update-source
+```
 
 **Route tag**
 Med RIPv2 kom stöd för route tags, det är ett 2 byte integer value som
@@ -127,37 +131,49 @@ Konfiguration
 
 RIP-processen startar inte utan ett network-kommando.
 
-`router rip`
-` version 2`
-` no auto-summary`
-` distance 120`
-` network 10.0.0.0`
+```
+router rip
+ version 2
+ no auto-summary
+ distance 120
+ network 10.0.0.0
+```
 
 Version per interface
 
-`interface gi2`
-` ip rip send version 1`
-` ip rip receive version 1`
+```
+interface gi2
+ ip rip send version 1
+ ip rip receive version 1
+```
 
 Ett passivt interface skickar inte ut några uppdateringar men däremot
 tas fortfarande uppdateringar emot och behandlas.
 
-` passive-interface default`
-` no passive-interface gi2`
+```
+ passive-interface default
+ no passive-interface gi2
+```
 
 Verify
 
-`show ip protocols`
-`show ip rip database`
+```
+show ip protocols
+show ip rip database
+```
 
 Clearing routing process
 
-`clear ip route *`
+```
+clear ip route *
+```
 
 Debug
 
-`debug ip ripv2`
-`debug ip ripv2 events`
+```
+debug ip ripv2
+debug ip ripv2 events
+```
 
 **Unicast**
 RIP bygger inga grannskap men man kan använda unicast. Det skickas då
@@ -165,18 +181,24 @@ dubbla uppdateringar, en till konfigurerad granne med unicast och en
 till multicast/broadcast som vanligt. Neighbor-kommandot används på
 vissa nätverkstyper, t.ex. multipoint Frame Relay subinterface.
 
-`neighbor 10.0.0.10`
+```
+neighbor 10.0.0.10
+```
 
 **Broadcast**
 255.255.255.255
 
-`interface gi2`
-` ip rip v2-broadcast`
+```
+interface gi2
+ ip rip v2-broadcast
+```
 
 Subnet broadcast
 
-`interface gi2`
-` ip broadcast-address 10.0.0.255`
+```
+interface gi2
+ ip broadcast-address 10.0.0.255
+```
 
 Authentication
 --------------
@@ -189,17 +211,23 @@ men ej tvärtom. Använder man autentisering sänks antalet prefix som får
 plats i ett RIP-meddelande från 25 till 24. Key chain måste skapas innan
 det används för RIP authentication!
 
-`key chain RIP-KEYS`
-` key 1`
-`  key-string HACKER`
+```
+key chain RIP-KEYS
+ key 1
+  key-string HACKER
+```
 
-`interface gi2`
-` ip rip authentication mode md5`
-` ip rip authentication key-chain RIP-KEYS`
+```
+interface gi2
+ ip rip authentication mode md5
+ ip rip authentication key-chain RIP-KEYS
+```
 
 Verifiera vilka interface som använder vilken key chain
 
-`show ip protocols | b rip`
+```
+show ip protocols | b rip
+```
 
 Convergence
 -----------
@@ -216,7 +244,9 @@ detta.
 
 Hur många obehandlade uppdateringar som tillåts.
 
-`input-queue 150`
+```
+input-queue 150
+```
 
 **Triggered Updates**
 RIP går att göra till ett event-drivet protokoll (RFC 2091), då skickas
@@ -227,13 +257,17 @@ update skickas ut direkt. Eftersom RIP använder UDP går det inte att
 lita på att exakt alla paket är rätt. Det konfigureras per interface och
 shut/noshut för att aktivera.
 
-`ip rip triggered`
+```
+ip rip triggered
+```
 
 Suppress triggered updates when next regular update due within 10
 seconds
 
-`flash-update-threshold 10`
-`show ip protocols | i Flash`
+```
+flash-update-threshold 10
+show ip protocols | i Flash
+```
 
 **Timers**
 Varje router har för varje route en tillhörande *invalid after* timer
@@ -260,8 +294,10 @@ denna timer är disabled default.
 
 Timers går att tuna men det bör vara samma överallt.
 
-`timers basic 10 60 60 80 100 `
-`show ip protocols | include seconds`
+```
+timers basic 10 60 60 80 100 
+show ip protocols | include seconds
+```
 
 Per interface
 
@@ -270,21 +306,27 @@ Per interface
 **BFD**
 [BFD](/Cisco_BFD "wikilink") kan användas med RIP unicast.
 
-`router rip`
-` bfd all-interfaces`
-` neighbor 1.1.1.1 bfd`
+```
+router rip
+ bfd all-interfaces
+ neighbor 1.1.1.1 bfd
+```
 
 RIP requires you to be advertising a route other than the transit link
 for the BFD relationship to establish.
 
-`show ip rip neighbors`
+```
+show ip rip neighbors
+```
 
 Summarization
 -------------
 
 Make RIPv2 classless
 
-`no auto-summary`
+```
+no auto-summary
+```
 
 Eftersom RIP är ett distance vector routingprotokoll görs summary per
 interface. Det måste finnas en mindre specifik route i rib för att
@@ -292,8 +334,10 @@ summeringen ska annonseras ut. Däremot installerar inte RIP någon
 discard route default men man kan manuellt skapa null routes om man
 vill.
 
-`int gi2`
-` ip summary-address rip 10.0.0.0 255.255.0.0`
+```
+int gi2
+ ip summary-address rip 10.0.0.0 255.255.0.0
+```
 
 *no auto-summary* behövs också för detta.
 
@@ -304,57 +348,75 @@ Det finns flera olika metoder för att skicka en default route till en
 granne. Det krävs ingen gateway of last resort för att RIP ska kunna
 originera en default route.
 
-`int gi2`
-` ip summary-address rip 0.0.0.0 0.0.0.0`
+```
+int gi2
+ ip summary-address rip 0.0.0.0 0.0.0.0
+```
 
 Default-information
 
-`router rip`
-` default-information originate`
+```
+router rip
+ default-information originate
+```
 
 Static
 
-`ip route 0.0.0.0 0.0.0.0 null 0`
-`router rip`
-` network 0.0.0.0      #Alt 1`
-` redistribute static  #Alt 2`
+```
+ip route 0.0.0.0 0.0.0.0 null 0
+router rip
+ network 0.0.0.0      #Alt 1
+ redistribute static  #Alt 2
+```
 
 Default-network (deprecated)
 
-`ip route 20.0.0.0 255.0.0.0 null 0`
-`ip default-network 20.0.0.0 `
+```
+ip route 20.0.0.0 255.0.0.0 null 0
+ip default-network 20.0.0.0 
+```
 
 Finns det en default route i rib så skickas det ut men metricen måste
 vara valid för RIP.
 
-`router rip`
-` default-metric 3`
+```
+router rip
+ default-metric 3
+```
 
 **Conditional Default Routing**
 
-`ip prefix-list TRACK seq 5 permit 1.1.1.1/32`
-`route-map TRACK_ROUTE permit 10`
-` match ip address prefix-list TRACK`
-`router rip`
-` default-information originate route-map TRACK_ROUTE`
+```
+ip prefix-list TRACK seq 5 permit 1.1.1.1/32
+route-map TRACK_ROUTE permit 10
+ match ip address prefix-list TRACK
+router rip
+ default-information originate route-map TRACK_ROUTE
+```
 
 Filtering
 ---------
 
 **Prefix-list**
 
-`router rip`
-` distribute-list gateway     #Filtering incoming updates based on gateway`
-` distribute-list prefix      #Filter prefixes in routing updates`
+```
+router rip
+ distribute-list gateway     #Filtering incoming updates based on gateway
+ distribute-list prefix      #Filter prefixes in routing updates
+```
 
 Exempel, filtrera allt från en RIP sender.
 
-`ip prefix-list ROUTERS seq 5 deny 192.168.0.3/32`
-`ip prefix-list ROUTERS seq 10 permit 0.0.0.0/0 le 32`
-`ip prefix-list PREFIXLIST seq 10 permit 0.0.0.0/0 le 32`
+```
+ip prefix-list ROUTERS seq 5 deny 192.168.0.3/32
+ip prefix-list ROUTERS seq 10 permit 0.0.0.0/0 le 32
+ip prefix-list PREFIXLIST seq 10 permit 0.0.0.0/0 le 32
+```
 
-`router rip`
-` distribute-list prefix PREFIXLIST gateway ROUTERS in`
+```
+router rip
+ distribute-list prefix PREFIXLIST gateway ROUTERS in
+```
 
 **ACL**
 Extended ACL tolkas av RIP distribute som:
@@ -363,28 +425,40 @@ Extended ACL tolkas av RIP distribute som:
 
 Exempel
 
-`access-list 100 deny ip host 10.0.0.10 host 172.20.0.0`
-`access-list 100 permit ip any any`
+```
+access-list 100 deny ip host 10.0.0.10 host 172.20.0.0
+access-list 100 permit ip any any
+```
 
-`router rip`
-` distribute-list 100 in Gi2`
+```
+router rip
+ distribute-list 100 in Gi2
+```
 
 Det går även att blockera specifika avsändare med hjälp av interface ACL
 
-`access-list 10 deny 2.2.2.2 0.0.0.0`
-`access-list 10 permit any`
+```
+access-list 10 deny 2.2.2.2 0.0.0.0
+access-list 10 permit any
+```
 
-`interface gi2`
-` ip access-group 10 in`
+```
+interface gi2
+ ip access-group 10 in
+```
 
 **Offset list**
 Lägg till 5 på hop count till det som skickas ut på interface Gi2
 
-`router rip`
-` offset-list 10 out 5 Gi2`
-`access-list 10 permit any`
+```
+router rip
+ offset-list 10 out 5 Gi2
+access-list 10 permit any
+```
 
-`show ip protocols | i metric`
+```
+show ip protocols | i metric
+```
 
 *offset-list 0* träffar alla routes
 
@@ -392,15 +466,21 @@ Lägg till 5 på hop count till det som skickas ut på interface Gi2
 Det går att filtrera routes med hjälp av AD. Exempel: filtrera vissa
 prefix från en viss granne. AD 255 = UNKNOWN.
 
-`access-list 10 permit 192.168.0.0`
-`access-list 10 permit 172.30.0.0`
+```
+access-list 10 permit 192.168.0.0
+access-list 10 permit 172.30.0.0
+```
 
-`router rip`
-` distance 255 20.0.0.20 0.0.0.0 10`
+```
+router rip
+ distance 255 20.0.0.20 0.0.0.0 10
+```
 
 Filtrera routes som träffar acl 10 men kan komma från alla routrar.
 
-` distance 255 0.0.0.0 255.255.255.255 10`
+```
+ distance 255 0.0.0.0 255.255.255.255 10
+```
 
 Redistribution
 --------------
@@ -408,9 +488,11 @@ Redistribution
 Med auto-summary påslaget redistribueras endast classful networks. RIP
 har heller ingen seed metric.
 
-`router rip`
-` no auto-summary`
-` redistribute ospf 1 metric 3`
+```
+router rip
+ no auto-summary
+ redistribute ospf 1 metric 3
+```
 
 Detta sätter samma metric på alla routes som redistribueras. Vill man ha
 ökad flexibilitet kan man använda en route-map som matchar routes mot
@@ -419,7 +501,9 @@ ifall en route inte träffar route-mapen. T.ex. redistribuerade OSPF E2
 routes (cost 20) kommar att ha infinite metric när **transparent**
 används om man inte manipulerar metricen.
 
-`default-metric 5`
+```
+default-metric 5
+```
 
 Om man redistribuerar mellan t.ex. RIP och
 [OSPF](/Cisco_OSPF "wikilink") på flera punkter måste man förhindra
@@ -428,21 +512,27 @@ redistribuerade routes med högre AD lokalt på redistributionsnoderna.
 RIP kan inte skilja på internal och external routes så det andra
 routingprotokollet får lösa det.
 
-`router ospf 1`
-` distance ospf external 180`
+```
+router ospf 1
+ distance ospf external 180
+```
 
 Man kan också tagga routes som blivit redistribuerade för att kunna
 filtrera bort dem och på så sätt undvika routingloop.
 
-`route-map TAG`
-` set tag 100`
-`route-map FILTER-TAG deny 10`
-` match tag 100`
-`route-map FILTER-TAG permit 20`
+```
+route-map TAG
+ set tag 100
+route-map FILTER-TAG deny 10
+ match tag 100
+route-map FILTER-TAG permit 20
+```
 
-`router rip`
-` redistribute ospf 1 route-map TAG`
-` distribute-list route-map FILTER-TAG in`
+```
+router rip
+ redistribute ospf 1 route-map TAG
+ distribute-list route-map FILTER-TAG in
+```
 
 RIPng
 =====
@@ -465,60 +555,74 @@ Split Horizon) och multipla RIPng-processer.
 
 Response packet:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_RIPng_Update.png>](/File:Cisco_RIPng_Update.png "wikilink")
 
-</div>
-</div>
+![Cisco_RIPng_Update.png](../img/Cisco_RIPng_Update.png)
+
+
+
 
 ### Konfiguration
 
 Prereq
 
-`ipv6 unicast-routing`
-`ipv6 cef`
+```
+ipv6 unicast-routing
+ipv6 cef
+```
 
 En del features konfigureras under RIP-processen.
 
-`ipv6 router rip 1`
-` poison-reverse`
-` no split-horizon`
-` maximum-paths 16  #Max är 32`
-` distance 120`
+```
+ipv6 router rip 1
+ poison-reverse
+ no split-horizon
+ maximum-paths 16  #Max är 32
+ distance 120
+```
 
 Sätt IP-adresser på interfacen och enablea sedan RIP.
 
-`interface gi 0/0`
-` ipv6 address 2001:10:10:10::1/64`
-` ipv6 rip 1 enable`
+```
+interface gi 0/0
+ ipv6 address 2001:10:10:10::1/64
+ ipv6 rip 1 enable
+```
 
 Verify
 
-`show ipv6 rip`
-`show ipv6 protocols`
-`show ipv6 rip next-hops`
-`debug ipv6 rip events`
+```
+show ipv6 rip
+show ipv6 protocols
+show ipv6 rip next-hops
+debug ipv6 rip events
+```
 
 Annonsera endast default route. Precis som med RIPv2 behöver det inte
 finnas någon default-route i RIB för att det ska kunna annonseras.
 Default metric för denna är 1.
 
-`interface gi2`
-` ipv6 rip 1 default-information only `
+```
+interface gi2
+ ipv6 rip 1 default-information only 
+```
 
 Aggregate
 
-`interface gi2`
-` ipv6 rip 1 summary-address 2001:10:10:10::/64`
+```
+interface gi2
+ ipv6 rip 1 summary-address 2001:10:10:10::/64
+```
 
 Filtering
 
-`ipv6 router rip 1`
-` distribute-list prefix-list FILTER in`
+```
+ipv6 router rip 1
+ distribute-list prefix-list FILTER in
+```
 
 Slå på [VRF](/Cisco_Routing#VRF "wikilink")-stöd.
 
-`ipv6 rip vrf-mode enable`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+ipv6 rip vrf-mode enable
+```

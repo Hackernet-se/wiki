@@ -35,37 +35,49 @@ endast högst prio som ändra rollerna.
 Slå på VRRPv3 och Virtual Router Redundancy Service (VRRS) globalt. När
 man växlar till VRRPv3 stängs VRRPv2 av.
 
-`fhrp version vrrp v3`
+```
+fhrp version vrrp v3
+```
 
 ### Konfiguration
 
 Konfiguration görs per interface. VRRP tillåter inte virtual router
 group 0 och har därmed aldrig en tom grupp.
 
-`interface gi0`
-` vrrp 1 description HA-gateway`
-` vrrp 1 priority <1-254>`
-` vrrp 1 timers advertise [msec] interval`
+```
+interface gi0
+ vrrp 1 description HA-gateway
+ vrrp 1 priority <1-254>
+ vrrp 1 timers advertise [msec] interval
+```
 
 Timers måste matcha och man kan låta VRRP-gruppen lära sig advertisement
 interval från master virtual router.
 
-` vrrp 1 timers learn`
+```
+ vrrp 1 timers learn
+```
 
 Preempt delay
 
-`vrrp delay minimum 30`
-`vrrp delay reload 60`
+```
+vrrp delay minimum 30
+vrrp delay reload 60
+```
 
 Autentisering
 
-`vrrp 1 authentication cisco`
+```
+vrrp 1 authentication cisco
+```
 
 **Verify**
 
-`show vrrp brief`
-`show vrrp interface gi0`
-`show vrrp all`
+```
+show vrrp brief
+show vrrp interface gi0
+show vrrp all
+```
 
 GLBP
 ====
@@ -82,31 +94,37 @@ varje host alltid ska använda samma router och använd weighted när man
 vill ha unequal load balancing, t.ex. om routrarna har olika
 forwarderingskapacitet.
 
-`interface gi2`
-` glbp 1 ip 10.0.0.10`
-` glbp 1 priority 150`
-` glbp 1 preempt`
-` glbp 1 weighting 50`
-` glbp 1 load-balancing weighted`
+```
+interface gi2
+ glbp 1 ip 10.0.0.10
+ glbp 1 priority 150
+ glbp 1 preempt
+ glbp 1 weighting 50
+ glbp 1 load-balancing weighted
+```
 
 **Verify**
 
-`show glbp brief`
+```
+show glbp brief
+```
 
 **Authentication**
 En router ignorerar alla GLBP-meddelanden som har fel autentisering.
 
 Plain-text
 
-`glbp 1 authentication text secret`
+```
+glbp 1 authentication text secret
+```
 
 MD5
 
-`glbp 1 authentication md5 key-string GLBP-Key`
+```
+glbp 1 authentication md5 key-string GLBP-Key
+```
 
 **Stateful NAT**
 Om GLBP används i kombination med
 [SNAT](/Cisco_NAT#Stateful_NAT "wikilink") måste load-balancing vara
 satt till host-dependent.
-
-[Category:Cisco](/Category:Cisco "wikilink")

@@ -11,22 +11,28 @@ Cryptsetup, device-mapper och LVM2.
 Installera
 ==========
 
-`yum install system-storage-manager.noarch`
-`apt-get install system-storage-manager`
+```
+yum install system-storage-manager.noarch
+apt-get install system-storage-manager
+```
 
 Verify
 
-`sudo ssm list`
+```
+sudo ssm list
+```
 
 Utöka en LVM volume
 -------------------
 
 Ta reda på vilken volume du vill utöka:
 
-`ssm list volumes`
+```
+ssm list volumes
+```
 
 För att utöka med 10Gb:
 
-`ssm resize -s+10G /dev/centos/root`
-
-[Category:Tools](/Category:Tools "wikilink")
+```
+ssm resize -s+10G /dev/centos/root
+```

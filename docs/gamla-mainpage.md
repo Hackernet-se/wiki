@@ -19,7 +19,7 @@ Har du tips, idéer eller feedback på det som skrivs, hör gärna av dig.
 
 root\[at\]hackernet.se
 
-</div>
+
 <div class="row-fluid clearfix" style="width:90%;margin:auto;text-align:center">
 <div class="col-md-4">
 <h2>
@@ -43,7 +43,7 @@ som tillsammans skrivit **** artiklar
 och gjort **** redigeringar.
 
 </h4>
-</div>
+
 <div class="col-md-4">
 <h2>
 
@@ -55,7 +55,7 @@ Senaste artikeln
 <DynamicPageList> namespace=Special:RecentChanges count=5 mode=none
 </DynamicPageList>
 
-</div>
+
 <div class="col-md-4">
 <h2>
 
@@ -69,5 +69,3 @@ Wishlist
 **[HAProxy](/HAProxy "wikilink")**
 **[Wazuh](/Wazuh "wikilink")**
 
-</div>
-</div>

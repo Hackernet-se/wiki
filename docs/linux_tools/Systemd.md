@@ -24,38 +24,52 @@ Systemctl är det centrala verktyget för att kontrollera init-systemet.
 Systemctl ersätter service och chkconfig.
 Grundfunktioner
 
-`systemctl start sshd`
-`systemctl stop sshd`
-`systemctl reload sshd`
-`systemctl restart sshd`
+```
+systemctl start sshd
+systemctl stop sshd
+systemctl reload sshd
+systemctl restart sshd
+```
 
 Status
 
-`systemctl status sshd`
+```
+systemctl status sshd
+```
 
 Autostarta en service
 
-`systemctl enable sshd`
-`systemctl disable sshd`
+```
+systemctl enable sshd
+systemctl disable sshd
+```
 
 Lista alla aktiva enheter
 
-`systemctl `
+```
+systemctl 
+```
 
 Lista alla enheter
 
-`systemctl list-units --all`
+```
+systemctl list-units --all
+```
 
 OBS .service behöver inte skrivas ut, det läggs till efter tjänsten
 automatiskt
 Fler kommandon
 
-`systemctl show sshd.service`
-`systemctl list-dependencies sshd.service`
+```
+systemctl show sshd.service
+systemctl list-dependencies sshd.service
+```
 
 Titta på senaste uppstart grafiskt. Testa detta, seriöst det är coolt!
 
-`systemd-analyze plot > plot.svg`
+```
+systemd-analyze plot > plot.svg
+```
 
 Lägga till egna services
 ------------------------
@@ -65,16 +79,22 @@ vill hantera med systemd.
 
 En basic service fil ser ut så här.
 
-`[Unit]`
-`Description=Hello world`
-`After=network-online.target`
-`Wants=network-online.target`
+```
+[Unit]
+Description=Hello world
+After=network-online.target
+Wants=network-online.target
+```
 
-`[Service]`
-`ExecStart=/usr/bin/echo "Hello world!"`
+```
+[Service]
+ExecStart=/usr/bin/echo "Hello world!"
+```
 
-`[Install]`
-`WantedBy=multi-user.target`
+```
+[Install]
+WantedBy=multi-user.target
+```
 
 Om servicen kräver att det finns nätverk före den startar kan man skriva
 **After/Wants=network-online.target** då kommer servicen att försöka
@@ -83,11 +103,15 @@ IP.
 
 För att systemd ska köra servicen vid boot måste man köra enable.
 
-`systemctl enable /etc/systemd/system/hello.service`
+```
+systemctl enable /etc/systemd/system/hello.service
+```
 
 För att starta tjänsten skriv.
 
-`systemctl start hello.service`
+```
+systemctl start hello.service
+```
 
 Övervaka en service
 -------------------
@@ -95,12 +119,16 @@ För att starta tjänsten skriv.
 Med systemd kan man övervaka en tjänst så att den startas automatiskt om
 den skulle krasha.
 
-`systemctl edit sshd`
+```
+systemctl edit sshd
+```
 
 Skriv sedan in:
 
-`[Service]`
-`Restart=always`
+```
+[Service]
+Restart=always
+```
 
 Spara sedan filen. Den kommer att sparas under
 **/etc/systemd/system/sshd.service.d/overrides.conf**
@@ -108,11 +136,15 @@ Spara sedan filen. Den kommer att sparas under
 Vill du ha en delay innan systemd startas tjänsten igen så går det också
 med:
 
-`RestartSec=30`
+```
+RestartSec=30
+```
 
 Kör sedan en reload:
 
-`systemctl daemon-reload`
+```
+systemctl daemon-reload
+```
 
 Journald
 ========
@@ -122,19 +154,23 @@ applikationer och kärna. Kommandot man använder är journalctl. Kör
 igenom dessa för att bilda dig en uppfattning av vad de gör och hur de
 fungerar.
 
-`journalctl`
-`journalctl -k`
-`journalctl -u nginx.service`
-`journalctl -u nginx.service --since today`
-`journalctl _PID=8088`
-`journalctl --disk-usage`
+```
+journalctl
+journalctl -k
+journalctl -u nginx.service
+journalctl -u nginx.service --since today
+journalctl _PID=8088
+journalctl --disk-usage
+```
 
 Networkd
 ========
 
-`systemctl start systemd-networkd`
-`networkctl`
-`networkctl status`
+```
+systemctl start systemd-networkd
+networkctl
+networkctl status
+```
 
 Nspawn
 ======
@@ -142,20 +178,26 @@ Nspawn
 Systemd-nspawn är en container manager som är inbyggd i systemd.
 *Debian*
 
-`apt-get install -y dbus debootstrap bridge-utils`
-`debootstrap --arch=amd64 jessie /var/lib/machines/container1/`
-`systemd-nspawn -D /var/lib/machines/container1/ --machine first_container -b`
+```
+apt-get install -y dbus debootstrap bridge-utils
+debootstrap --arch=amd64 jessie /var/lib/machines/container1/
+systemd-nspawn -D /var/lib/machines/container1/ --machine first_container -b
+```
 
 OBS med denna setup delas network namespace med värdhosten. Annars måste
 man skapa en brygga och koppla containern till den.
 
-`systemd-nspawn -D /var/lib/machines/container1/ --machine second_container --network-bridge=my-bridge -b`
+```
+systemd-nspawn -D /var/lib/machines/container1/ --machine second_container --network-bridge=my-bridge -b
+```
 
 Kolla containers
 
-`machinectl`
-`machinectl status first_container`
-`machinectl login first_container`
+```
+machinectl
+machinectl status first_container
+machinectl login first_container
+```
 
 Template unit
 =============
@@ -163,7 +205,9 @@ Template unit
 En template unit går att identifera med hjälp av **@** som är efter base
 unit namnet och före unit type suffixen.
 
-`openvpn-client@.service`
+```
+openvpn-client@.service
+```
 
 För att använda sig av en template unit så lägger man in en instance
 identifier mellan **@** och punkten när man kallar på den med
@@ -198,5 +242,3 @@ Variabler
 
 Exempel template unit
 ---------------------
-
-[Category:Tools](/Category:Tools "wikilink")

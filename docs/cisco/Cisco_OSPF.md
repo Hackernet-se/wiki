@@ -30,9 +30,11 @@ Metric
 OSPF i IOS använder 100MBit/s som referensbandbredd för att räkna ut
 cost på varje länk. Man kan ändra detta till t.ex. 100G.
 
-`router ospf 1`
-` auto-cost reference-bandwidth 100000  #Mbits per second`
-`show ip ospf interface | i Cost`
+```
+router ospf 1
+ auto-cost reference-bandwidth 100000  #Mbits per second
+show ip ospf interface | i Cost
+```
 
 Om man stänger av auto-cost får alla länkar samma cost (10) oavsett
 bandbredd, så som [IS-IS](/Cisco_IS-IS "wikilink") fungerar.
@@ -50,8 +52,10 @@ detta att ändra.
 Routrar föredrar default N2 routes över E2 routes som injicerats av
 typ-7 till typ-5 translator men detta går att ändra.
 
-`router ospf 1`
-` compatible rfc1587`
+```
+router ospf 1
+ compatible rfc1587
+```
 
 Packets
 -------
@@ -67,12 +71,12 @@ Alla paket kan vara unicast eller multicast, det avgörs av nätverkstyp.
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_OSPF_Hello.PNG>](/File:Cisco_OSPF_Hello.PNG "wikilink")
 
-</div>
-</div>
+![Cisco_OSPF_Hello.PNG](../img/Cisco_OSPF_Hello.PNG)
+
+
+
 
 -   **Database Description:** Innehåller LSA headers under den initiala
     topologi-synken. Används först för att avgöra master/slave i
@@ -83,12 +87,12 @@ Exempel:
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_OSPF_DD.PNG>](/File:Cisco_OSPF_DD.PNG "wikilink")
 
-</div>
-</div>
+![Cisco_OSPF_DD.PNG](../img/Cisco_OSPF_DD.PNG)
+
+
+
 
 -   **Link-State Request:** Innehåller vilka LSA:er som avsändaren vill
     ha alla detaljer om.
@@ -98,12 +102,12 @@ Exempel:
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_OSPF_Request.PNG>](/File:Cisco_OSPF_Request.PNG "wikilink")
 
-</div>
-</div>
+![Cisco_OSPF_Request.PNG](../img/Cisco_OSPF_Request.PNG)
+
+
+
 
 -   **Link-State Update:** Innehåller alla typer och detaljer om LSA:er
     och skickas på förfrågan eller vid topologiändring
@@ -113,12 +117,12 @@ Exempel:
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_OSPF_Update.PNG>](/File:Cisco_OSPF_Update.PNG "wikilink")
 
-</div>
-</div>
+![Cisco_OSPF_Update.PNG](../img/Cisco_OSPF_Update.PNG)
+
+
+
 
 -   **Link-State Acknowledgment:** LSU confirmation.
 
@@ -127,12 +131,12 @@ Exempel:
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_OSPF_Ack.PNG>](/File:Cisco_OSPF_Ack.PNG "wikilink")
 
-</div>
-</div>
+![Cisco_OSPF_Ack.PNG](../img/Cisco_OSPF_Ack.PNG)
+
+
+
 
 Grannskap
 ---------
@@ -183,8 +187,10 @@ De vanligaste LSAerna.
     arean. Floodas endast inom origin area. ABR sätter B-biten och ASBR
     sätter E-biten för att informera arean om sin roll.
 
-`show ip ospf database router`
-`show ip ospf database router | i Link`
+```
+show ip ospf database router
+show ip ospf database router | i Link
+```
 
 -   **Type 2, Network:**
     Dessa representerar transit subnät och skapas endast om det finns en
@@ -193,7 +199,9 @@ De vanligaste LSAerna.
     alla grannar till DR på det subnätet. Floodas endast inom origin
     area.
 
-`show ip ospf database network`
+```
+show ip ospf database network
+```
 
 Note: Typ 1 och 2 räcker för att alla routrar inom arean ska kunna känna
 till topologin och köra SPF för att bestämma bästa vägarna.
@@ -210,8 +218,10 @@ till topologin och köra SPF för att bestämma bästa vägarna.
     accepterar endast typ 3 LSA:er från backbone area, detta för att
     förhindra routingloopar.
 
-`show ip ospf border-routers`
-`show ip ospf database summary`
+```
+show ip ospf border-routers
+show ip ospf database summary
+```
 
 -   **Type 4, ASBR Summary:**
     När en ABR floodar vidare en typ 5 LSA in i sin area vet inte övriga
@@ -221,7 +231,9 @@ till topologin och köra SPF för att bestämma bästa vägarna.
     eftersom där berättar ASBR om sig själv med typ 1 LSA med E-biten
     satt utan dessa behövs i övriga areor.
 
-`show ip ospf database asbr-summary`
+```
+show ip ospf database asbr-summary
+```
 
 -   **Type 5, AS External:**
     När en ASBR skickar in en extern route skapar den en typ 5 LSA som
@@ -230,8 +242,10 @@ till topologin och köra SPF för att bestämma bästa vägarna.
     flera vägar som är lika används alla. Finns det flera ASBR används
     den som är närmast internt enligt SPF.
 
-`show ip ospf border-routers`
-`show ip ospf database external`
+```
+show ip ospf border-routers
+show ip ospf database external
+```
 
 Det finns två typer av externa routes, E1 (increment metric) och E2 (do
 not increment metric). Detta avgörs beroende på vad ASBR sätter för
@@ -252,15 +266,19 @@ nyckelordet **nssa-only**. Om man vill att trafiken alltid ska gå igenom
 translator kan man suppressa forward address, **area 1 nssa translate
 type7 suppress-fa**.
 
-`show ip ospf database nssa-external`
+```
+show ip ospf database nssa-external
+```
 
 **Show**
 
 Se alla LSA:er och RIB.
 
-`show ip ospf database`
-`show ip ospf rib`
-`show ip ospf topology-info`
+```
+show ip ospf database
+show ip ospf rib
+show ip ospf topology-info
+```
 
 Kolla vilka LSA:er en viss nod annonserar ut.
 
@@ -284,8 +302,10 @@ reducera overhead genom att ha areor där man endast skickar in LSA typ
 det komma en LSA 4/5 från någon så ignoreras den. För att hitta ut ur
 arean så skickar ABR:er in default route med en LSA typ 3.
 
-`router ospf 1`
-` area 1 stub`
+```
+router ospf 1
+ area 1 stub
+```
 
 *Stub bit is sent in hello packets*
 
@@ -295,11 +315,15 @@ förutom default routen. Inga LSA typ 3,4,5 gör att LSDB reduceras
 ytterligare.
 ABR
 
-`area 1 stub no-summary`
+```
+area 1 stub no-summary
+```
 
 Others
 
-`area 1 stub`
+```
+area 1 stub
+```
 
 **NSSA**
 Om man vill effektivisera OSPF samtidigt som man behöver injicera in
@@ -311,24 +335,30 @@ externa routes kan laddas upp till backbone-arean medans all information
 från övriga areor ej behöver tas in i arean. I en NSSA kommer inte
 default routen att annonseras default som i övriga stubby areas.
 
-`router ospf 1`
-` area 1 nssa`
-` area 1 nssa default-information-originate`
+```
+router ospf 1
+ area 1 nssa
+ area 1 nssa default-information-originate
+```
 
 **NSSA Totally Stubby**
 NSSA Totally Stubby är samma som NSSA fast alla LSA typ 3 blockas också
 förutom default routen, samt att default routen injiceras default. Inga
 LSA typ 3,4,5. Ett ben i area 0 krävs för detta kommando.
 
-`area 1 nssa no-summary`
+```
+area 1 nssa no-summary
+```
 
 **Transit**
 Non-backbone areas kan användas för inter-area transit om det finns en
 kortare väg igenom dem. Transit är på default men går att stänga av.
 
-`router ospf 1`
-` no capability transit`
-`show ip ospf | i transit`
+```
+router ospf 1
+ no capability transit
+show ip ospf | i transit
+```
 
 Nätverkstyper
 -------------
@@ -344,19 +374,25 @@ Point-to-multipoint interface annonseras som /32:or av effektivitetsskäl
 och lämpar sig väl om man kör OSPF över
 [Cisco_L2VPN\#VPLS](/Cisco_L2VPN#VPLS "wikilink").
 
-`show ip ospf interface | i protocol|Network Type`
+```
+show ip ospf interface | i protocol|Network Type
+```
 
 Ändra nätverkstyp på ett interface. Det behöver tekniskt sett inte vara
 samma på båda sidor sålänge det som behövs matchar, t.ex. timers.
 
-`interface gi0/0`
-` ip ospf network ?`
+```
+interface gi0/0
+ ip ospf network ?
+```
 
 Loopback annonseras default som stub endpoint (/32), detta ändras med
 nätverkstyp point-to-point.
 
-`interface lo0`
-` ip ospf network point-to-point`
+```
+interface lo0
+ ip ospf network point-to-point
+```
 
 ### Designated Router
 
@@ -405,8 +441,10 @@ kan bli DR. Det är viktigt att DR kan nå alla andra vilket inte är
 fallet i en hub-and-spoke-topologi där en spoke är DR, se även [Cisco
 DMVPN](/Cisco_DMVPN "wikilink").
 
-`interface gi0/0`
-` ip ospf priority 50`
+```
+interface gi0/0
+ ip ospf priority 50
+```
 
 Även om det inte upptäcks några grannar på ett interface där DR election
 vanligtvis hålls så kommer OSPF ändå hålla valet med sig själv som
@@ -432,23 +470,31 @@ utan alla interface jämförs. ID ändras endast när processen startas om.
 
 router-id for this OSPF process (in IPv4 address format)
 
-`router ospf 1`
-` router-id 1.1.1.1`
+```
+router ospf 1
+ router-id 1.1.1.1
+```
 
 **Administrative Distance**
 
-`router ospf 1`
-` distance ospf intra-area 110 inter-area 110 external 110`
-`show ip protocols | i Distance`
+```
+router ospf 1
+ distance ospf intra-area 110 inter-area 110 external 110
+show ip protocols | i Distance
+```
 
 Advertise a maximum metric so that other routers do not prefer the
 router as an intermediate hop for 60 seconds.
 
-`max-metric router-lsa on-startup 60`
+```
+max-metric router-lsa on-startup 60
+```
 
 **MTU mismatch**
 
-`ip ospf mtu-ignore`
+```
+ip ospf mtu-ignore
+```
 
 **Allmänna rekommendationer**
 
@@ -465,9 +511,11 @@ Om man kör OSPF kan man autoenablea LDP på alla OSPF-interface. Se även
 [Cisco MPLS](/Cisco_MPLS "wikilink") och [Segment
 Routing](/Cisco_SR "wikilink").
 
-`router ospf 1`
-` mpls ldp autoconfig `
-`show ip ospf mpls ldp interface`
+```
+router ospf 1
+ mpls ldp autoconfig 
+show ip ospf mpls ldp interface
+```
 
 **IP unnumbered**
 Man kan köra IP unnumbered med OSPF och det finns ett network statement
@@ -479,25 +527,31 @@ accepteras utan det ska komma från det subnät som det mottagande
 interfacet sitter i. Man kan ha loopback och fysiska interface i olika
 areor, dock kommer man att annonsera samma prefix i fler än en area.
 
-`interface gi0/1`
-` ip unnumbered Loopback0`
-` ip ospf network point-to-point`
-` ip ospf 1 area 1`
+```
+interface gi0/1
+ ip unnumbered Loopback0
+ ip ospf network point-to-point
+ ip ospf 1 area 1
+```
 
 Adjacency
 ---------
 
 Logga ändringar i neighbor state, detta är på default.
 
-`router ospf 1`
-` log-adjacency-changes`
-`show ip ospf events`
+```
+router ospf 1
+ log-adjacency-changes
+show ip ospf events
+```
 
 Styr grannskap/uppdateringar med passive-interface
 
-`passive-interface default`
-`no passive-interface [interface]`
-`show ip ospf interface | i Ethernet|Passive`
+```
+passive-interface default
+no passive-interface [interface]
+show ip ospf interface | i Ethernet|Passive
+```
 
 **Unicast**
 Specificera granne manuellt, detta måste göras på NBMA och
@@ -505,12 +559,16 @@ point-to-multipoint nonbroadcast. Det räcker att göra detta på ena sidan
 för att grannskap ska bildas men best practice är att köra detta på båda
 sidor.
 
-`router ospf 1`
-` neighbor 10.0.0.2`
+```
+router ospf 1
+ neighbor 10.0.0.2
+```
 
 Per neighbor cost/metric
 
-`neighbor 10.0.0.5 cost 1000`
+```
+neighbor 10.0.0.5 cost 1000
+```
 
 Man kan sätta prioritet på sina grannar om man kör unicast. Default är
 detta 0 men om man har flera neighbor statements och någon har icke-noll
@@ -519,20 +577,26 @@ election är klart så börjar det skickas Hellos till de övriga grannarna.
 Detta är en mekanism som ökar chansen att DR och BDR blir de routrar man
 vill. OBS detta har inget med vinnare av DR/BDR att göra.
 
-`router ospf 1`
-` neighbor 10.0.0.5 priority <0-255>`
+```
+router ospf 1
+ neighbor 10.0.0.5 priority <0-255>
+```
 
 **Verify**
 
-`show ip ospf neighbor`
-`show ip ospf interface brief`
-`show ip ospf neighbor detail | i interface`
-`ping 224.0.0.5`
+```
+show ip ospf neighbor
+show ip ospf interface brief
+show ip ospf neighbor detail | i interface
+ping 224.0.0.5
+```
 
 Clearing routing process
 
-`clear ip ospf process`
-`debug ip ospf adj`
+```
+clear ip ospf process
+debug ip ospf adj
+```
 
 **GTSM**
 TTL Security Check kan konfigureras per process eller per interface och
@@ -540,10 +604,12 @@ gäller både unicast och multicast. Dessa kommandon har ingen inverkan på
 virtual links eller sham links utan det görs med *area virtual-link
 ttl-security* och *area sham-link ttl-security*.
 
-`router ospf 1`
-` ttl-security all-interfaces`
-`interface gi2`
-` ip ospf ttl-security `
+```
+router ospf 1
+ ttl-security all-interfaces
+interface gi2
+ ip ospf ttl-security 
+```
 
 **Graceful restart**
 En router kan starta om OSPF-grannskap och ändå fortsätta forwarda paket
@@ -559,30 +625,40 @@ NSF-aware (helper support) finns på de flesta enheter och är på default,
 plattformar. GR/NSF utnyttjar att modernare enheter sköter data plane
 och control plane i olika hårdvara.
 
-`router ospf 1`
-` nsf ietf`
-` nsf cisco`
+```
+router ospf 1
+ nsf ietf
+ nsf cisco
+```
 
-`show ip ospf nsf`
+```
+show ip ospf nsf
+```
 
 NSR är en intern mekanism som låter standby RP ta över etablerade
 sessioner vid en switchover.
 
-` nsr`
-`show ip ospf nsr`
+```
+ nsr
+show ip ospf nsr
+```
 
 **Graceful shutdown**
 Droppa adjacencies, flusha LSA:er och skicka ut Hello med tom neighbor
 list för att trigga att grannens adjacency går direkt till Init state,
 kanske inte så graceful men det heter så ändå.
 
-`router ospf 1`
-` shutdown`
+```
+router ospf 1
+ shutdown
+```
 
 Per interface
 
-`int gi2`
-` ip ospf shutdown`
+```
+int gi2
+ ip ospf shutdown
+```
 
 ### Authentication
 
@@ -597,43 +673,55 @@ virtual links, se det stycket.
 
 Enable clear-text authentication on area 0
 
-`router ospf 1`
-` area 0 authentication`
-`interface gi0/1`
-` ip ospf authentication-key [password]`
+```
+router ospf 1
+ area 0 authentication
+interface gi0/1
+ ip ospf authentication-key [password]
+```
 
 Enable MD5 authentication on area 0.
 
-`router ospf 1`
-` area 0 authentication message-digest`
-`interface gi0/1`
-` ip ospf message-digest-key 10 md5 [password]`
+```
+router ospf 1
+ area 0 authentication message-digest
+interface gi0/1
+ ip ospf message-digest-key 10 md5 [password]
+```
 
 Enable MD5 authentication on an interface
 
-`interface gi0/1`
-` ip ospf authentication message-digest`
-` ip ospf message-digest-key 10 md5 [password]`
+```
+interface gi0/1
+ ip ospf authentication message-digest
+ ip ospf message-digest-key 10 md5 [password]
+```
 
 Verify
 
-` show ip ospf interface | i Ethernet|authentication`
+```
+ show ip ospf interface | i Ethernet|authentication
+```
 
 **Extended cryptographic authentication** (RFC 5709) finns i modernare
 implementationer av OSPF och har stöd för key-chains och SHA-HMAC.
 Nyckel med högst id används ifall det finns flera nycklar som är aktiva.
 Cryptographic algorithm + key bildar SA.
 
-`key chain HACKER`
-` key 1`
-`  key-string SECRET`
-`  cryptographic-algorithm hmac-sha-512`
+```
+key chain HACKER
+ key 1
+  key-string SECRET
+  cryptographic-algorithm hmac-sha-512
+```
 
 Per interface, det finns inget area-kommando som slår på key-chain auth
 på alla interface som vid klassisk konfiguration.
 
-`int gi2`
-` ip ospf authentication key-chain HACKER`
+```
+int gi2
+ ip ospf authentication key-chain HACKER
+```
 
 ### Multiarea Adjacency
 
@@ -647,25 +735,33 @@ det primära. Det går endast att konfigurera multiarea adjacency på
 interface som har två OSPF speakers, så på ethernet måste det
 konfigureras som network point-to-point.
 
-`interface gi2`
-` ip address 10.0.0.1 255.255.255.0`
-` ip ospf 1 area 0 `
-` ip ospf network point-to-point `
-` ip ospf multi-area 2`
+```
+interface gi2
+ ip address 10.0.0.1 255.255.255.0
+ ip ospf 1 area 0 
+ ip ospf network point-to-point 
+ ip ospf multi-area 2
+```
 
-`show ip ospf 2 multi-area`
+```
+show ip ospf 2 multi-area
+```
 
 Default Routing
 ---------------
 
 Kräver gateway of last resort.
 
-`default-information originate`
+```
+default-information originate
+```
 
 Om man inte har någon gateway of last resort kan man ändå annonsera ut
 en default route.
 
-`default-information originate always`
+```
+default-information originate always
+```
 
 **NSSA**
 En NSSA ABR genererar inte en default route by default (om den inte
@@ -674,13 +770,17 @@ resort ska vara i en annan area eller externt (type 7). En NSSA ASBR
 måste ha en default route i routingtabellen för att kunna skicka ut en
 default route. En NSSA ABR behöver inte det:
 
-`area 1 nssa default-information-originate`
+```
+area 1 nssa default-information-originate
+```
 
 **Conditional**
 Med hjälp av en route map kan man annonsera en default route när ett
 visst kriterie är uppfyllt.
 
-`default-information originate route-map TRACK_PREFIX`
+```
+default-information originate route-map TRACK_PREFIX
+```
 
 Summarization
 -------------
@@ -693,8 +793,10 @@ prefixen eller aggregeringen annonseras.
 
 **ABR**
 
-`router ospf 1`
-` area 10 range 10.10.0.0 255.255.252.0`
+```
+router ospf 1
+ area 10 range 10.10.0.0 255.255.252.0
+```
 
 Area 10 säger var summeringen kommer ifrån så denna aggregering skickas
 till alla andra areor. Cost för summeringen tas från den component route
@@ -702,8 +804,10 @@ med lägst metric om man inte anger något specifikt.
 
 **ASBR**
 
-`router ospf 1`
-` summary-address 10.10.0.0 255.255.252.0`
+```
+router ospf 1
+ summary-address 10.10.0.0 255.255.252.0
+```
 
 Konfigureras vid redistributionspunkt och summeringar ärver attribut
 från component routes.
@@ -713,7 +817,9 @@ Default installeras det en discard route när man summerar för att
 förhindra att det forwarderas trafik som man inte har någon specifik
 route för.
 
-`no discard-route external|internal`
+```
+no discard-route external|internal
+```
 
 Convergence
 -----------
@@ -727,17 +833,21 @@ Tuning protocol parameters per interface.
 
 Fast Hellos, dead-interval minimal = 1 sek.
 
-`ip ospf dead-interval minimal hello-multiplier 3`
+```
+ip ospf dead-interval minimal hello-multiplier 3
+```
 
 Timers: LSA & SPF
 
-`router ospf 1`
-` timers throttle spf 100 1000 10000`
-` timers pacing flood 50`
-` timers pacing retransmission 75`
-` timers throttle lsa all 10 4000 6000`
-` timers lsa arrival 2000`
-`show ip ospf | i msec`
+```
+router ospf 1
+ timers throttle spf 100 1000 10000
+ timers pacing flood 50
+ timers pacing retransmission 75
+ timers throttle lsa all 10 4000 6000
+ timers lsa arrival 2000
+show ip ospf | i msec
+```
 
 Med Group Pacing kan LSA:er "samåka" i refresh-paket.
 
@@ -745,15 +855,21 @@ Med Group Pacing kan LSA:er "samåka" i refresh-paket.
 Man kan välja vilka prefix som SPF-algoritm ska köra först. Man skapar
 en route-map som matchar på route-type, prefix-list eller route-tag.
 
-`route-map PREFIX-PRIORITY permit 10`
-` match tag 100`
+```
+route-map PREFIX-PRIORITY permit 10
+ match tag 100
+```
 
-`router ospf 1`
-` prefix-priority high route-map PREFIX-PRIORITY`
+```
+router ospf 1
+ prefix-priority high route-map PREFIX-PRIORITY
+```
 
 Verify
 
-`show ip ospf rib detail`
+```
+show ip ospf rib detail
+```
 
 **iSPF**
 SPF-algoritmen behöver inte köras för alla länkar varje gång det sker en
@@ -764,20 +880,26 @@ vara svårt att veta exakt hur mycket skillnad detta gör men generellt ju
 större topologi ju större skillnad. OBS iSPF är inte längre supporterat
 i IOS.
 
-`router ospf 1`
-` ispf`
-`show ip ospf | i Incremental`
+```
+router ospf 1
+ ispf
+show ip ospf | i Incremental
+```
 
 **BFD**
 Se även [BFD](/Cisco_BFD "wikilink").
 
-`router ospf 1`
-` bfd all-interfaces`
+```
+router ospf 1
+ bfd all-interfaces
+```
 
 Disable per interface
 
-`int gig2`
-` ip ospf bfd disable`
+```
+int gig2
+ ip ospf bfd disable
+```
 
 ### LSDB Optimization
 
@@ -788,25 +910,33 @@ OSPF-länknäten i RIB. Alla noder bör stödja detta.
 
 Global
 
-`router ospf 1`
-` prefix-suppression`
+```
+router ospf 1
+ prefix-suppression
+```
 
 Per interface
 
-`interface gi2`
-` ip ospf prefix-suppression`
+```
+interface gi2
+ ip ospf prefix-suppression
+```
 
 Verify
 
-`show ip ospf interface | i Ethernet|Prefix-suppression`
+```
+show ip ospf interface | i Ethernet|Prefix-suppression
+```
 
 **Flooding Reduction**
 OSPF flood reduction stoppar det normala floodandet av LSAer genom att
 sätta DoNotAge (DNA) biten vilket gör att de inte behöver refreshas med
 jämna mellanrum.
 
-`interface Gi2`
-` ip ospf flood-reduction`
+```
+interface Gi2
+ ip ospf flood-reduction
+```
 
 ### LFA
 
@@ -826,35 +956,47 @@ because they do not belong to an area.
 
 Single Hop LFA / IP FRR.
 
-`router ospf 1`
-` fast-reroute per-prefix enable prefix-priority low`
-` fast-reroute per-prefix enable area 0 prefix-priority high`
-` fast-reroute keep-all-paths`
+```
+router ospf 1
+ fast-reroute per-prefix enable prefix-priority low
+ fast-reroute per-prefix enable area 0 prefix-priority high
+ fast-reroute keep-all-paths
+```
 
-`show ip ospf fast-reroute`
-`show ip ospf fast-reroute prefix-summary`
-`show ip route repair-paths`
+```
+show ip ospf fast-reroute
+show ip ospf fast-reroute prefix-summary
+show ip route repair-paths
+```
 
 Med hjälp av Remote LFA Tunnel kan man tunnla trafik loopfritt (i nästan
 alla topologier) till routrar flera hop bort utifrån lokala beräkningar.
 Detta stöds endast i default VRF:en och kräver MPLS.
 
-`mpls ldp explicit-null`
-`mpls ldp discovery targeted-hello accept`
-`router ospf 1`
-` fast-reroute per-prefix remote-lfa tunnel mpls-ldp `
+```
+mpls ldp explicit-null
+mpls ldp discovery targeted-hello accept
+router ospf 1
+ fast-reroute per-prefix remote-lfa tunnel mpls-ldp 
+```
 
-`show ip ospf fast-reroute remote-lfa tunnels`
+```
+show ip ospf fast-reroute remote-lfa tunnels
+```
 
 Interface options:
 Om ett interface inte ska kunna användas för backup paths.
 
-`ip ospf fast-reroute per-prefix candidate disable`
+```
+ip ospf fast-reroute per-prefix candidate disable
+```
 
 Primary routes som pekar på detta interface kommer inte att bli
 skyddade.
 
-`ip ospf fast-reroute per-prefix protection disable`
+```
+ip ospf fast-reroute per-prefix protection disable
+```
 
 Filtering
 ---------
@@ -866,32 +1008,44 @@ Filtering påverkar inte LSDB eller flooding utan endast det som hamnar i
 RIB. Det går att göra med en distribute-list dock bör alla routrar vara
 konfade likadant annars kan det bli blackholing.
 
-`access-list 1 deny 172.16.3.1`
-`access-list 1 permit any`
-`router ospf 1`
-` distribute-list 1 in`
+```
+access-list 1 deny 172.16.3.1
+access-list 1 permit any
+router ospf 1
+ distribute-list 1 in
+```
 
 Alternativt
 
-`summary-address 10.0.0.0 255.255.255.0 not-advertise`
+```
+summary-address 10.0.0.0 255.255.255.0 not-advertise
+```
 
 Administrative Distance, filtrering kan göras på Advertising Router.
 
-`access-list 10 permit 10.0.0.0 0.0.0.255`
-`router ospf 1`
+```
+access-list 10 permit 10.0.0.0 0.0.0.255
+router ospf 1
+```
 ` distance 255 `<RID>` 0.0.0.0 10`
 
 LSA Type-3 Filtering
 
-`area 1 range 10.0.0.0 255.255.255.0 not-advertise`
+```
+area 1 range 10.0.0.0 255.255.255.0 not-advertise
+```
 
 **Inter-area**
 
-`ip prefix-list PFXLIST seq 5 deny 10.10.0.0/24`
-`ip prefix-list PFXLIST seq 10 permit 0.0.0.0/0 le 32`
+```
+ip prefix-list PFXLIST seq 5 deny 10.10.0.0/24
+ip prefix-list PFXLIST seq 10 permit 0.0.0.0/0 le 32
+```
 
-`router ospf 1`
-` area 1 filter-list prefix PFXLIST out|in`
+```
+router ospf 1
+ area 1 filter-list prefix PFXLIST out|in
+```
 
 out betyder att det som lämnar area 1 filtreras, in betyder filtrering
 av det som skickas in i area 1.
@@ -902,8 +1056,10 @@ network type point-to-multipoint och görs per interface alternativt
 neighbor. Det bör endast användas där all flooding är unnecessary, t.ex.
 NBMA subnets där det finns många routrar.
 
-`interface gi2`
-` ip ospf database-filter all out`
+```
+interface gi2
+ ip ospf database-filter all out
+```
 
 **Route-Map**
 Med en route-map kan man matcha på interface, ip-adress, ip next-hop, ip
@@ -913,14 +1069,20 @@ distribute-list påverkar detta endast lokala routingtabellen.
 `access-list 1 permit `<prefix>
 `access-list 2 permit `<RID>
 
-`route-map DENY_R2 deny 10`
-` match ip address 1`
-` match ip next-hop 2`
+```
+route-map DENY_R2 deny 10
+ match ip address 1
+ match ip next-hop 2
+```
 
-`route-map DENY_R2 permit 20`
+```
+route-map DENY_R2 permit 20
+```
 
-`router ospf 1`
-` distribute-list route-map DENY_R2 in`
+```
+router ospf 1
+ distribute-list route-map DENY_R2 in
+```
 
 Virtual Link
 ------------
@@ -943,51 +1105,67 @@ använda VL för att koppla ihop area 0 om den finns på flera ställen.
 
 **R1** ABR mellan area 0 och 1
 
-`router ospf 1`
-` network 10.0.1.0 0.0.0.255 area 1`
-` network 1.1.1.0 0.0.0.255 area 0`
-` area 1 virtual-link 3.3.3.3  #Router-ID`
+```
+router ospf 1
+ network 10.0.1.0 0.0.0.255 area 1
+ network 1.1.1.0 0.0.0.255 area 0
+ area 1 virtual-link 3.3.3.3  #Router-ID
+```
 
 **R3** ABR mellan area 1 och 2
 
-`router ospf 1`
-` network 10.0.1.0 0.0.0.255 area 1`
-` network 10.0.2.0 0.0.0.255 area 2`
-` network 3.3.3.0 0.0.0.255 area 2`
-` area 1 virtual-link 1.1.1.1  #Router-ID`
+```
+router ospf 1
+ network 10.0.1.0 0.0.0.255 area 1
+ network 10.0.2.0 0.0.0.255 area 2
+ network 3.3.3.0 0.0.0.255 area 2
+ area 1 virtual-link 1.1.1.1  #Router-ID
+```
 
 **Verify**
 
-`show ip ospf virtual-links`
-`show ip ospf border-routers`
+```
+show ip ospf virtual-links
+show ip ospf border-routers
+```
 
 **Authentication**
 
-`area 2 virtual-link 2.2.2.2 authentication message-digest message-digest-key 10 md5 CISCO`
+```
+area 2 virtual-link 2.2.2.2 authentication message-digest message-digest-key 10 md5 CISCO
+```
 
 Redistribution
 --------------
 
 Default seed metric: 1 för BGP, 20 för övrigt.
 
-`default-metric 20`
+```
+default-metric 20
+```
 
 Med OSPF behövs ordet subnets annars redistribueras endast classful
 networks. I nyare IOSer kan "subnets" auto-konfas i vissa lägen, man får
 kolla konfigurationen.
 
-`redistribute maximum-prefix 100`
+```
+redistribute maximum-prefix 100
+```
 
 **NSSA**
 En NSSA-redistribution kan man styra om den ska nå endast NSSA-arean
 eller får göras om och skickas vidare till andra areor. Routrar som är
 med i flera areor gör detta automatiskt.
 
-`redistribute isis nssa-only`
+```
+redistribute isis nssa-only
+```
 
 **Static**
 
-`redistribute static`
+```
+redistribute static
+```
 
 Notera att default route inte kan redistribueras med *redistribute
 static*, inte ens om en route-map används utan **default-information
@@ -995,20 +1173,26 @@ originate** bör användas.
 
 **[RIP](/Cisco_RIP "wikilink")**
 
-`router ospf 1`
-` redistribute rip subnets`
+```
+router ospf 1
+ redistribute rip subnets
+```
 
 **[EIGRP](/Cisco_EIGRP "wikilink")**
 
-`router ospf 1`
-` redistribute eigrp 1 subnets tag 90`
+```
+router ospf 1
+ redistribute eigrp 1 subnets tag 90
+```
 
 **[BGP](/Cisco_BGP "wikilink"),** seed metric för bgp är 1. När man
 redistribuerar prefix från BGP så sätts senaste AS i pathen som route
 tag i LSA:n.
 
-`router ospf 1`
-` redistribute bgp 100 subnets`
+```
+router ospf 1
+ redistribute bgp 100 subnets
+```
 
 NX-OS
 -----
@@ -1019,29 +1203,41 @@ default är 40Gbps, Loopback0 väljs som Router-ID oavsett IP, det finns
 inget network-kommando, loopbacks är passive default och man kan konfa
 flera VRF:er under samma OSPF-process.
 
-`feature ospf`
+```
+feature ospf
+```
 
-`router ospf 1`
-` log-adjacency-changes`
-` bfd`
+```
+router ospf 1
+ log-adjacency-changes
+ bfd
+```
 
-`interface loopback0`
-` ip router ospf 1`
+```
+interface loopback0
+ ip router ospf 1
+```
 
-`interface Ethernet1/1`
-` ip router ospf 1`
+```
+interface Ethernet1/1
+ ip router ospf 1
+```
 
 Maintenance mode
 
-`router ospf 1`
-` isolate`
+```
+router ospf 1
+ isolate
+```
 
 Verify and troubleshoot
 
-`show run ospf`
-`show ip ospf neighbors`
-`show ip ospf 1 event-history rib `
-`show ip ospf 1 event-history redistribution`
+```
+show run ospf
+show ip ospf neighbors
+show ip ospf 1 event-history rib 
+show ip ospf 1 event-history redistribution
+```
 
 IOS-XR
 ------
@@ -1051,37 +1247,39 @@ forwarding address inte är lärd av ospf.
 
 Här följer [IOS-XR](/Cisco_IOS-XR "wikilink")-specifik syntax.
 
-`router ospf 1`
-` log adjacency changes detail`
-` router-id 100.0.0.10`
-` bfd minimum-interval 100`
-` bfd fast-detect`
-` bfd multiplier 3`
-` mpls ldp sync`
-` mpls ldp auto-config`
-` max-lsa 12000`
-` security ttl`
-` auto-cost reference-bandwidth 1000000`
-` max-metric router-lsa on-startup 30`
-` max-metric router-lsa on-proc-restart 10`
-` area 0`
-`  authentication message-digest`
-`  message-digest-key 1 md5 encrypted 12411A1A0D13271D030A791111`
-`  fast-reroute per-prefix remote-lfa tunnel mpls-ldp`
-`  !`
-`  interface Loopback0`
-`   passive enable`
-`  !`
-`  interface HundredGigE0/0/0/0`
-`   network point-to-point`
-`   flood-reduction enable`
+```
+router ospf 1
+ log adjacency changes detail
+ router-id 100.0.0.10
+ bfd minimum-interval 100
+ bfd fast-detect
+ bfd multiplier 3
+ mpls ldp sync
+ mpls ldp auto-config
+ max-lsa 12000
+ security ttl
+ auto-cost reference-bandwidth 1000000
+ max-metric router-lsa on-startup 30
+ max-metric router-lsa on-proc-restart 10
+ area 0
+  authentication message-digest
+  message-digest-key 1 md5 encrypted 12411A1A0D13271D030A791111
+  fast-reroute per-prefix remote-lfa tunnel mpls-ldp
+  !
+  interface Loopback0
+   passive enable
+  !
+  interface HundredGigE0/0/0/0
+   network point-to-point
+   flood-reduction enable
+```
 
 Verify
 
-`show run router ospf`
-`show ospf`
-`show ospf neighbor`
-`show ospf interface brief`
-`show ospf database`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show run router ospf
+show ospf
+show ospf neighbor
+show ospf interface brief
+show ospf database
+```

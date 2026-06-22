@@ -8,18 +8,24 @@ T.ex. GParted inkluderar hdparm.
 
 Info om hårddisk
 
-`hdparm -i /dev/sda`
+```
+hdparm -i /dev/sda
+```
 
 Läsprestandatest
 
-`hdparm -tT /dev/sda`
+```
+hdparm -tT /dev/sda
+```
 
 Sänk ljudnivån på bekostnad av prestanda.
 
-`hdparm -M 128 /dev/sda`
+```
+hdparm -M 128 /dev/sda
+```
 
 Fabriksåterställning
 
-`hdparm --yes-i-know-what-i-am-doing --dco-restore /dev/sda`
-
-[Category:Tools](/Category:Tools "wikilink")
+```
+hdparm --yes-i-know-what-i-am-doing --dco-restore /dev/sda
+```

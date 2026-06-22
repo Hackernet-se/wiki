@@ -24,6 +24,3 @@ Ladda hem och packa upp piwik i din web-root.
 `wget `[`http://builds.piwik.org/piwik.zip`](http://builds.piwik.org/piwik.zip)` && unzip piwik.zip`
 
 Surfa sedan till `http://<ip>/piwik` och följ instruktionerna.
-
-[Category:Guider](/Category:Guider "wikilink")
-[Category:Sparco](/Category:Sparco "wikilink")

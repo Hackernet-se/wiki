@@ -60,7 +60,9 @@ Regelverk
 
 Kolla regelverk
 
-`sudo iptables -S`
+```
+sudo iptables -S
+```
 
 Skapa regelverk
 
@@ -90,8 +92,10 @@ EOF
 
 Rules activate!
 
-`sudo iptables-restore < /etc/iptables.firewall.rules`
-`sudo iptables -L -n -v --line-numbers`
+```
+sudo iptables-restore < /etc/iptables.firewall.rules
+sudo iptables -L -n -v --line-numbers
+```
 
 ### Persistent
 
@@ -107,8 +111,10 @@ sudo chmod +x /etc/network/if-pre-up.d/firewall
 
 Alternativt använd iptables-persistent
 
-`apt-get install iptables-persistent`
-`iptables-save > /etc/iptables/rules.v4`
+```
+apt-get install iptables-persistent
+iptables-save > /etc/iptables/rules.v4
+```
 
 Dynamisk IP
 ===========
@@ -117,8 +123,10 @@ Att ha dynamisk IP suger men så är det ibland. Som tur är kan iptables
 uppdatera sina regler automatiskt även om en IP-adress ändras. Det som
 behövs är ett DNS-namn mot IPn.
 
-`iptables -N DYNDNS`
-`iptables -A INPUT -p tcp -m tcp --dport 22 -j DYNDNS`
+```
+iptables -N DYNDNS
+iptables -A INPUT -p tcp -m tcp --dport 22 -j DYNDNS
+```
 
 Sedan ett script som körs enligt schemaläggning
 
@@ -143,19 +151,25 @@ t.ex. IP-adresser, nätverk och portar. Med grupper kan man få ner
 antalet regelrader vilket förenklar uppsättning och felsökning samt ökar
 skalbarhet och prestanda.
 
-`sudo apt-get install ipset`
-`sudo dnf install ipset`
+```
+sudo apt-get install ipset
+sudo dnf install ipset
+```
 
 Exempelanvändning, skapa ett set.
 
-`ipset -N myset nethash`
-`ipset -A myset 1.1.1.1`
-`ipset -A myset 2.2.2.2`
-`iptables -A INPUT -p tcp -m set --set myset src --dport 22 -j ACCEPT`
+```
+ipset -N myset nethash
+ipset -A myset 1.1.1.1
+ipset -A myset 2.2.2.2
+iptables -A INPUT -p tcp -m set --set myset src --dport 22 -j ACCEPT
+```
 
 Kolla grupper
 
-`sudo ipset list`
+```
+sudo ipset list
+```
 
 ### Exempelscript
 
@@ -210,5 +224,3 @@ ipset -A HTTPS 10.0.0.0/23
 ipset -A HTTPS 172.24.190.110
 ipset -A HTTPS 192.168.0.10
 ```
-
-[Category:Tools](/Category:Tools "wikilink")

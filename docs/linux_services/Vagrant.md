@@ -13,7 +13,9 @@ Installation
 
 Fedora
 
-`dnf install vagrant `
+```
+dnf install vagrant 
+```
 
 Providers
 ---------
@@ -28,7 +30,9 @@ ska användas. Installera virtualbox:
 Providers installeras som plugins och listas med. För virtualbox behövs
 ingen plugin.
 
-`vagrant plugin list`
+```
+vagrant plugin list
+```
 
 ##### VMware Workstation
 
@@ -44,7 +48,9 @@ ska användas för din Vagrantmiljö är alltid det första steget när du ska
 skapa en ny Vagrantfile. Tillgängliga boxes:
 <https://atlas.hashicorp.com/boxes/search>
 
-`vagrant box add ubuntu/trusty64 `
+```
+vagrant box add ubuntu/trusty64 
+```
 
 Boxes lagras i \~/.vagrant.d/boxes/
 
@@ -53,25 +59,35 @@ Konfiguration
 
 Generera Vagrantfile
 
-`mkdir vagrant && cd vagrant`
-`vagrant init ubuntu/trusty64`
+```
+mkdir vagrant && cd vagrant
+vagrant init ubuntu/trusty64
+```
 
 Starta environment. Detta kommando startar miljö utifrån den Vagrantfile
 som finns det directory du kör kommandot i.
 
-`vagrant up --provider virtualbox`
+```
+vagrant up --provider virtualbox
+```
 
 Anslut till den virtuella maskinen
 
-`vagrant ssh`
+```
+vagrant ssh
+```
 
 Städa
 
-`vagrant destroy`
+```
+vagrant destroy
+```
 
 Lista skapade vagrantmiljöer
 
-`vagrant global-status`
+```
+vagrant global-status
+```
 
 Plugins
 -------
@@ -81,5 +97,3 @@ Det finns många plugins till vagrant. <http://vagrant-lists.github.io/>
 ### vSphere
 
 Se <https://github.com/nsidc/vagrant-vsphere>
-
-[Category:Guider](/Category:Guider "wikilink")

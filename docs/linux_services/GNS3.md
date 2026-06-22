@@ -81,5 +81,3 @@ Om dynamips kraschar testa följande:
 -   Öka på mängden ram images har blivit tilldelad.
 -   Pröva en annan image.
 -   Byt platform.
-
-[Category:Guider](/Category:Guider "wikilink")

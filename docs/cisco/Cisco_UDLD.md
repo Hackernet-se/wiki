@@ -24,12 +24,12 @@ UDLD.
 
 UDLD-paket:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_UDLD.png>](/File:Cisco_UDLD.png "wikilink")
 
-</div>
-</div>
+![Cisco_UDLD.png](../img/Cisco_UDLD.png)
+
+
+
 
 ### Normal vs Aggressive mode
 
@@ -49,34 +49,46 @@ endast handlar om lokalt beteende vid avsaknad av UDLD-meddelanden.
 
 Global, gäller fiberportar.
 
-`udld enable|aggressive`
+```
+udld enable|aggressive
+```
 
 Per interface, gäller oavsett media.
 
-`interface gi0/20`
-` udld port [aggressive]`
+```
+interface gi0/20
+ udld port [aggressive]
+```
 
 Verify
 
-`show udld`
-`show udld neighbors`
+```
+show udld
+show udld neighbors
+```
 
 Restore alla interface som är error-disabled pga link failure.
 
-`udld reset`
+```
+udld reset
+```
 
 Auto Recovery
 
-`errdisable recovery cause udld`
-`show errdisable recovery`
+```
+errdisable recovery cause udld
+show errdisable recovery
+```
 
 På vissa plattformar kan man välja att UDLD endast ska rapportera errors
 istället för att err-disablea porten.
 
-`udld fast-hello error-reporting`
+```
+udld fast-hello error-reporting
+```
 
 Time in seconds between sending of messages in steady state.
 
-`udld message time <7-90>`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+udld message time <7-90>
+```

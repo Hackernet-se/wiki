@@ -25,8 +25,10 @@ Ladda ned mjukvaran från Ciscos hemsida,
 Ladda ner licens från cisco (http:/www.cisco.com/go/license) och lägg in
 på bootflash på enheten. Det finns 60 dagars eval-licens.
 
-`license install bootflash:lic25ax.lic`
-`show license detail`
+```
+license install bootflash:lic25ax.lic
+show license detail
+```
 
 Konfiguration
 -------------
@@ -37,7 +39,9 @@ IOS](/Cisco_IOS "wikilink").
 Nyare CSR har ett modernt webbgränssnitt som man kan använda för att
 managera och monitorera enheten.
 
-`ip http server`
+```
+ip http server
+```
 [`http://10.0.10.1/webui/`](http://10.0.10.1/webui/)
 
 ### Resurser
@@ -45,27 +49,39 @@ managera och monitorera enheten.
 **CPU**
 Show processes inside the IOS daemon.
 
-`show processes cpu sorted`
+```
+show processes cpu sorted
+```
 
 Show processes for the underlying operating system.
 
-`show processes cpu platform sorted`
+```
+show processes cpu platform sorted
+```
 
 Increase the control-plane CPU
 
-`platform resource control-plane-heavy`
+```
+platform resource control-plane-heavy
+```
 
 **Memory**
 
-`show memory platform`
+```
+show memory platform
+```
 
 Increase the Cisco IOS XE memory
 
-`platform memory add 3286`
+```
+platform memory add 3286
+```
 
 **NIC**
 
-`show platform software vnic-if interface-mapping`
+```
+show platform software vnic-if interface-mapping
+```
 
 ### Uppgradering
 
@@ -73,26 +89,34 @@ För att uppgradera en CSR laddar man ner nyare bin-fil och lägger på
 local storage.
 
 `copy `[`http://`](http://)*`fileserver`*`/csr1000v-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.bin bootflash:`
-`verify bootflash:csr1000v-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.bin`
+```
+verify bootflash:csr1000v-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.bin
+```
 
-`boot system flash bootflash:csr1000v-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.bin`
-`show bootvar`
-`reload`
+```
+boot system flash bootflash:csr1000v-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.bin
+show bootvar
+reload
+```
 
 REST API
 --------
 
 Standard port for IOS XE REST API: 55443
 
-`virtual-service csr_mgmt`
-` ip shared host-interface GigabitEthernet1`
-` activate`
+```
+virtual-service csr_mgmt
+ ip shared host-interface GigabitEthernet1
+ activate
+```
 
 Verify
 
-`show virtual-service`
-`show virtual-service detail | i API`
-`show remote-management status`
+```
+show virtual-service
+show virtual-service detail | i API
+show remote-management status
+```
 
 **URL-exempel**
 {\| class="wikitable" ! URL \|\| Method \|- \|
@@ -112,18 +136,24 @@ Tokens automatically expire after 15 minutes.
 
 Legacy NETCONF, port 22.
 
-`netconf ssh`
+```
+netconf ssh
+```
 
 Enable NETCONF/YANG support, port 830.
 
-`netconf-yang`
+```
+netconf-yang
+```
 
 Discover capabilities
 
-`from ncclient import manager`
-`m = manager.connect(host='192.168.1.21', port=830, username='cisco',`
-`                   password='cisco', device_params={'name': 'CSR'})`
-`print m.server_capabilities`
+```
+from ncclient import manager
+m = manager.connect(host='192.168.1.21', port=830, username='cisco',
+                   password='cisco', device_params={'name': 'CSR'})
+print m.server_capabilities
+```
 
 Hypervisor
 ----------
@@ -134,30 +164,40 @@ Virtualization.
 
 Förberedelser, lägga in OVA på routerns lokala storage samt:
 
-`virtual-service`
-` signing level unsigned`
+```
+virtual-service
+ signing level unsigned
+```
 
 Installera paket
 
-`virtual-service install name Fedora package bootflash:Fedora.ova`
-`show virtual-service list`
+```
+virtual-service install name Fedora package bootflash:Fedora.ova
+show virtual-service list
+```
 
 För att ge VM:en konnektivitet med outside world skapar man en Virtual
 Port Group.
 
-`int virtualportGroup 1`
-` ip add 10.0.10.1 255.255.255.0`
+```
+int virtualportGroup 1
+ ip add 10.0.10.1 255.255.255.0
+```
 
 Starta VM
 
-`activate`
+```
+activate
+```
 
 Anslut till console på VM
 
-`virtual-service connect name Fedora console`
+```
+virtual-service connect name Fedora console
+```
 
 Aktivera shell
 
-`guestshell enable`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+guestshell enable
+```

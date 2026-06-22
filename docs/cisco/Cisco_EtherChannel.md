@@ -22,14 +22,18 @@ Konfiguration
 
 Static
 
-`interface range gi0/1 - 2`
-` channel-group 1 mode on`
-`interface port-channel 1`
-` switchport mode trunk`
+```
+interface range gi0/1 - 2
+ channel-group 1 mode on
+interface port-channel 1
+ switchport mode trunk
+```
 
 Verify
 
-`show etherchannel summary`
+```
+show etherchannel summary
+```
 
 ### L3
 
@@ -39,19 +43,27 @@ interfacen till port-channel-interfacet. Det betyder att *no switchport*
 måste slås först annars blir port-channel-interfacet en switchport och
 detta går inte ändra i efterhand.
 
-`interface range gi0/1 - 2`
+```
+interface range gi0/1 - 2
+```
 ` `**`no`` ``switchport`**
-` channel-group 1 mode [mode]`
-`interface port-channel 1`
+```
+ channel-group 1 mode [mode]
+interface port-channel 1
+```
 ` `**`no`` ``switchport`**
-` ip address [ip address] [subnet mask]`
+```
+ ip address [ip address] [subnet mask]
+```
 
 ### Load-balancing
 
 Global inställning. EtherChannel tillhandahåller lastdelning per frame.
 
-`port-channel load-balance [method]`
-`show etherchannel load-balance`
+```
+port-channel load-balance [method]
+show etherchannel load-balance
+```
 
 Kolla vilket interface en viss frame skickas på.
 
@@ -66,8 +78,10 @@ alla BPDUer som kommer in har samma source MAC-adress. Detta är en
 global inställning som automatically error-disables alla portar som är
 felkopplade.
 
-`spanning-tree etherchannel guard misconfig`
-`show spanning-tree summary | i EtherChannel`
+```
+spanning-tree etherchannel guard misconfig
+show spanning-tree summary | i EtherChannel
+```
 
 LACP
 ----
@@ -87,41 +101,51 @@ fast**, men alla switchmodeller stödjer inte fast rate (1 sek interval).
 
 LACPDU
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_LACP.png>](/File:Cisco_LACP.png "wikilink")
 
-</div>
-</div>
+![Cisco_LACP.png](../img/Cisco_LACP.png)
+
+
+
 
 ### Konfiguration
 
 För att initiera LACP används nyckelordet active. Det finns också
 passive mode = speak when spoken to.
 
-`interface range gi0/1 - 2`
-` channel-group 1 mode active`
+```
+interface range gi0/1 - 2
+ channel-group 1 mode active
+```
 
 Enable LACP auto on interface.
 
-` channel-group auto`
+```
+ channel-group auto
+```
 
 Maximalt kan 16 interface konfigureras i en EtherChannel men endast 8
 kan vara aktiva samtidigt. Vilka länkar som ska vara aktiva bestäms av
 den switch med lägst LACP ID som utgörs av MAC-adress och prioritet. Den
 använder de portar med lägst prio i första hand, detta är lokala värden.
 
-`lacp system-mac 0011.2233.4455`
-`lacp system-priority 32768`
+```
+lacp system-mac 0011.2233.4455
+lacp system-priority 32768
+```
 
-`interface gi0/2`
-` lacp port-priority 0`
+```
+interface gi0/2
+ lacp port-priority 0
+```
 
 Verify
 
-`show etherchannel protocol`
-`show lacp ?`
-`show lacp neighbor`
+```
+show etherchannel protocol
+show lacp ?
+show lacp neighbor
+```
 
 #### PAgP
 
@@ -137,29 +161,39 @@ Man kan konfigurera portar mot servrar att disablas om uplink går ner.
 Detta är användbart om man har multihomed servers för då märker de att
 de ska sluta använda sitt primära NIC.
 
-`link state track 1`
+```
+link state track 1
+```
 
-`int range gi0/1 - 2`
-` switchport trunk encapsulation dot1q`
-` switchport mode trunk`
-` channel-group 1 mode active`
-` link state group 1 upstream`
+```
+int range gi0/1 - 2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
+ link state group 1 upstream
+```
 
-`int po1`
-` description Uplink`
-` switchport trunk encapsulation dot1q`
-` switchport mode trunk`
-` link state group 1 upstream`
+```
+int po1
+ description Uplink
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ link state group 1 upstream
+```
 
-`int gi0/10`
-` description Server`
-` switchport mode access`
-` switchport access vlan 10`
-` link state group 1 downstream`
+```
+int gi0/10
+ description Server
+ switchport mode access
+ switchport access vlan 10
+ link state group 1 downstream
+```
 
 Verify
 
-`show link state group detail`
+```
+show link state group detail
+```
 
 Flex Links
 ----------
@@ -170,16 +204,18 @@ dynamiska MAC entries flyttas till backupinterfacet och det hamnar i
 forwarding state. Inga BPDUer inblandade. Bör användas tillsammans med
 [UDLD](/Cisco_UDLD "wikilink").
 
-`interface po2`
-` switchport backup int gi0/5`
-` switchport backup int gi0/5 preemption mode forced`
-` switchport backup int gi0/5 preemption delay 10`
+```
+interface po2
+ switchport backup int gi0/5
+ switchport backup int gi0/5 preemption mode forced
+ switchport backup int gi0/5 preemption delay 10
+```
 
 Verify
 
-`show interface po2 switchport backup`
+```
+show interface po2 switchport backup
+```
 
 Antingen står det Backup Standby eller Backup Up beroende på status på
 port-channeln.
-
-[Category:Cisco](/Category:Cisco "wikilink")

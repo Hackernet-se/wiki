@@ -47,38 +47,40 @@ IP istället för IP till MAC.
 NHRP har stöd för autentisering, detta konfigureras under
 tunnel-interfacet.
 
-`ip nhrp authentication NHRP_AUTH_STRING`
+```
+ip nhrp authentication NHRP_AUTH_STRING
+```
 
 <div class="mw-collapsible mw-collapsed" style="width:310px">
 
 Registration request:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_NHRP_Registration_Request.png>](/File:Cisco_NHRP_Registration_Request.png "wikilink")
 
-</div>
-</div>
+![Cisco_NHRP_Registration_Request.png](../img/Cisco_NHRP_Registration_Request.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:310px">
 
 Registration reply:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_NHRP_Registration_Reply.png>](/File:Cisco_NHRP_Registration_Reply.png "wikilink")
 
-</div>
-</div>
+![Cisco_NHRP_Registration_Reply.png](../img/Cisco_NHRP_Registration_Reply.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:310px">
 
 Resolution request:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_NHRP_Resolution_Request.png>](/File:Cisco_NHRP_Resolution_Request.png "wikilink")
 
-</div>
-</div>
+![Cisco_NHRP_Resolution_Request.png](../img/Cisco_NHRP_Resolution_Request.png)
+
+
+
 
 Konfiguration
 =============
@@ -95,32 +97,42 @@ fördelen är något simplare konfiguration.
 **Static mapping**
 Hub
 
-`interface Tunnel0`
-` ip nhrp map multicast 172.16.15.X`
-` ip nhrp map 192.168.0.X 172.16.15.X`
+```
+interface Tunnel0
+ ip nhrp map multicast 172.16.15.X
+ ip nhrp map 192.168.0.X 172.16.15.X
+```
 
 Spoke
 
-`interface Tunnel0`
-` ip nhrp map 192.168.0.X 172.16.15.2`
-` tunnel destination 172.16.15.2`
+```
+interface Tunnel0
+ ip nhrp map 192.168.0.X 172.16.15.2
+ tunnel destination 172.16.15.2
+```
 
 **Dynamic mapping**
 Hub
 
-`interface Tunnel0`
-` ip nhrp map multicast dynamic`
+```
+interface Tunnel0
+ ip nhrp map multicast dynamic
+```
 
 Spoke
 
-`interface Tunnel0`
-` ip nhrp map 192.168.0.1 172.16.15.2`
-` ip nhrp nhs 192.168.0.1`
-` tunnel destination 172.16.15.2`
+```
+interface Tunnel0
+ ip nhrp map 192.168.0.1 172.16.15.2
+ ip nhrp nhs 192.168.0.1
+ tunnel destination 172.16.15.2
+```
 
 Verify
 
-`show dmvpn`
+```
+show dmvpn
+```
 
 Fas 2
 -----
@@ -134,28 +146,34 @@ manuellt.
 
 Hub
 
-`interface Tunnel0`
-` ip address 192.168.0.1 255.255.255.0`
-` ip nhrp map multicast dynamic`
-` ip nhrp network-id 1`
-` tunnel source 172.16.15.2`
-` tunnel mode gre multipoint`
+```
+interface Tunnel0
+ ip address 192.168.0.1 255.255.255.0
+ ip nhrp map multicast dynamic
+ ip nhrp network-id 1
+ tunnel source 172.16.15.2
+ tunnel mode gre multipoint
+```
 
 Spoke
 
-`interface Tunnel0`
-` ip address 192.168.0.2 255.255.255.0`
-` ip nhrp network-id 1`
-` ip nhrp nhs 192.168.0.1 nbma 172.16.15.2 multicast`
-` tunnel source 10.10.10.10`
-` tunnel mode gre multipoint`
+```
+interface Tunnel0
+ ip address 192.168.0.2 255.255.255.0
+ ip nhrp network-id 1
+ ip nhrp nhs 192.168.0.1 nbma 172.16.15.2 multicast
+ tunnel source 10.10.10.10
+ tunnel mode gre multipoint
+```
 
 Verify
 
-`show dmvpn`
-`show ip nhrp`
-`show ip nhrp nhs redundancy`
-`clear ip nhrp`
+```
+show dmvpn
+show ip nhrp
+show ip nhrp nhs redundancy
+clear ip nhrp
+```
 
 *Kolla ip nhrp registration timeout ifall recovery tar lång tid efter en
 clear*
@@ -175,30 +193,40 @@ Spoke: *ip nhrp shortcut*
 
 Hub
 
-`interface Tunnel0`
-` ip address 192.168.0.1 255.255.255.0`
-` ip nhrp map multicast dynamic`
-` ip nhrp network-id 1`
+```
+interface Tunnel0
+ ip address 192.168.0.1 255.255.255.0
+ ip nhrp map multicast dynamic
+ ip nhrp network-id 1
+```
 ` `**`ip`` ``nhrp`` ``redirect`**
-` tunnel source 172.16.15.2`
-` tunnel mode gre multipoint`
+```
+ tunnel source 172.16.15.2
+ tunnel mode gre multipoint
+```
 
 Spoke
 
-`interface Tunnel0`
-` ip address 192.168.0.2 255.255.255.0`
-` ip nhrp network-id 1`
-` ip nhrp nhs 192.168.0.1 nbma 172.16.15.2 multicast`
+```
+interface Tunnel0
+ ip address 192.168.0.2 255.255.255.0
+ ip nhrp network-id 1
+ ip nhrp nhs 192.168.0.1 nbma 172.16.15.2 multicast
+```
 ` `**`ip`` ``nhrp`` ``shortcut`**
-` tunnel source 10.10.10.10`
-` tunnel mode gre multipoint`
+```
+ tunnel source 10.10.10.10
+ tunnel mode gre multipoint
+```
 
 Verify
 
-`show dmvpn`
-`show ip nhrp`
-`show ip nhrp nhs redundancy`
-`clear ip nhrp`
+```
+show dmvpn
+show ip nhrp
+show ip nhrp nhs redundancy
+clear ip nhrp
+```
 
 *Kolla ip nhrp registration timeout ifall recovery tar lång tid efter en
 clear*
@@ -210,26 +238,32 @@ Både underlay och overlay kan köras med IPv6. Detta är oberoende av fas.
 
 Hub
 
-`interface Tunnel0`
-` ipv6 address 192:168:1::1/64`
-` ipv6 nhrp map multicast dynamic`
-` ipv6 nhrp network-id 1`
-` tunnel source 2000:192:168:1::1`
+```
+interface Tunnel0
+ ipv6 address 192:168:1::1/64
+ ipv6 nhrp map multicast dynamic
+ ipv6 nhrp network-id 1
+ tunnel source 2000:192:168:1::1
+```
 ` tunnel mode gre multipoint `**`ipv6`**
 
 Spoke
 
-`interface Tunnel0`
-` ipv6 address 192:168:1::2/64`
-` ipv6 nhrp network-id 1`
-` ipv6 nhrp nhs 192:168:1::1 nbma 2000:192:168:1::1 multicast`
-` tunnel source 2000:10:10::10`
+```
+interface Tunnel0
+ ipv6 address 192:168:1::2/64
+ ipv6 nhrp network-id 1
+ ipv6 nhrp nhs 192:168:1::1 nbma 2000:192:168:1::1 multicast
+ tunnel source 2000:10:10::10
+```
 ` tunnel mode gre multipoint `**`ipv6`**
 
 Verify
 
-`show dmvpn ipv6`
-`show ipv6 nhrp `
+```
+show dmvpn ipv6
+show ipv6 nhrp 
+```
 
 IPsec
 =====
@@ -237,29 +271,41 @@ IPsec
 Vill man skydda sin trafik kan man kryptera all tunneltrafik. Se även
 [Cisco IPsec](/Cisco_IPsec "wikilink").
 
-`crypto isakmp policy 10`
-` encryption aes 256`
-` authentication pre-share`
-` hash sha512`
-` group 14`
+```
+crypto isakmp policy 10
+ encryption aes 256
+ authentication pre-share
+ hash sha512
+ group 14
+```
 
-`crypto isakmp key SECRET address 0.0.0.0 0.0.0.0`
+```
+crypto isakmp key SECRET address 0.0.0.0 0.0.0.0
+```
 
-`crypto ipsec transform-set AES256_SHA512 esp-sha512-hmac esp-aes 256`
-` mode transport`
+```
+crypto ipsec transform-set AES256_SHA512 esp-sha512-hmac esp-aes 256
+ mode transport
+```
 
-`crypto ipsec profile DMVPN`
-` set transform-set AES256_SHA512`
+```
+crypto ipsec profile DMVPN
+ set transform-set AES256_SHA512
+```
 
-`interface Tunnel0`
-` tunnel protection ipsec profile DMVPN`
+```
+interface Tunnel0
+ tunnel protection ipsec profile DMVPN
+```
 
 Verify
 
-`show crypto isakmp sa`
-`show crypto ipsec sa`
-`show crypto socket`
-`show crypto map`
+```
+show crypto isakmp sa
+show crypto ipsec sa
+show crypto socket
+show crypto map
+```
 
 För att effektivisera krypteringen på en hub när man kör dual dmvpn kan
 man använda en delad socket för crypto-anslutningarna.
@@ -279,57 +325,83 @@ VPN](/Cisco_IPsec#GET_VPN "wikilink").
 
 Key Server
 
-`crypto key generate rsa general-keys label GDOI modulus 2048 exportable`
+```
+crypto key generate rsa general-keys label GDOI modulus 2048 exportable
+```
 
-`crypto isakmp policy 10`
-` authentication pre-share`
+```
+crypto isakmp policy 10
+ authentication pre-share
+```
 
-`crypto isakmp key 0 SECRET address 2.2.2.2`
-`crypto isakmp key 0 SECRET address 3.3.3.3`
+```
+crypto isakmp key 0 SECRET address 2.2.2.2
+crypto isakmp key 0 SECRET address 3.3.3.3
+```
 `crypto isakmp key 0 SECRET address `<next spoke>
 
-`crypto ipsec transform-set PHASE2 esp-aes esp-sha-hmac`
+```
+crypto ipsec transform-set PHASE2 esp-aes esp-sha-hmac
+```
 
-`crypto ipsec profile GDOI_PROFILE`
-` set transform-set PHASE2`
+```
+crypto ipsec profile GDOI_PROFILE
+ set transform-set PHASE2
+```
 
-`ip access-list extended ACL_GRE`
-` permit gre any any `
+```
+ip access-list extended ACL_GRE
+ permit gre any any 
+```
 
-`crypto gdoi group GDOI_GROUP`
-` identity number 123`
-` server local`
-`  rekey transport unicast`
-`  rekey authentication mypubkey rsa GDOI`
-`  rekey retransmit 60 number 2`
-`  sa ipsec 1`
-`   profile GDOI_PROFILE`
-`   match address ipv4 ACL_GRE`
-`   replay time window-size 5`
-`  address ipv4 1.1.1.1 `
+```
+crypto gdoi group GDOI_GROUP
+ identity number 123
+ server local
+  rekey transport unicast
+  rekey authentication mypubkey rsa GDOI
+  rekey retransmit 60 number 2
+  sa ipsec 1
+   profile GDOI_PROFILE
+   match address ipv4 ACL_GRE
+   replay time window-size 5
+  address ipv4 1.1.1.1 
+```
 
 Hubb och Spoke
 
-`crypto isakmp policy 10`
-` authentication pre-share`
+```
+crypto isakmp policy 10
+ authentication pre-share
+```
 
-`crypto isakmp key 0 SECRET address 1.1.1.1`
+```
+crypto isakmp key 0 SECRET address 1.1.1.1
+```
 
-`crypto gdoi group GDOI`
-` identity number 123`
-` server address ipv4 1.1.1.1 `
+```
+crypto gdoi group GDOI
+ identity number 123
+ server address ipv4 1.1.1.1 
+```
 
-`crypto map DMVPN local-address Loopback0`
-`crypto map DMVPN 10 gdoi`
-` set group GDOI`
+```
+crypto map DMVPN local-address Loopback0
+crypto map DMVPN 10 gdoi
+ set group GDOI
+```
 
-`interface Gi2`
-` description Tunnel Source`
-` crypto map DMVPN`
+```
+interface Gi2
+ description Tunnel Source
+ crypto map DMVPN
+```
 
 Verify
 
-`show crypto gdoi`
+```
+show crypto gdoi
+```
 
 Routingprotokoll
 ================
@@ -343,9 +415,11 @@ tunnel-interfacet för att uppdateringar och routing mellan spokes ska
 funka. Nackdelen är att man inte kan summera routes på hub utan att
 bryta spoke-to-spoke-kommunikation utan då måste allt gå igenom hub.
 
-`interface Tunnel0`
-` no ip next-hop-self eigrp 100`
-` no ip split-horizon eigrp 100`
+```
+interface Tunnel0
+ no ip next-hop-self eigrp 100
+ no ip split-horizon eigrp 100
+```
 
 Med fas 3 kommer endast det första paketet att gå via hub tack vare nhrp
 redirect/shortcut och man kan skicka ut aggregerade routes på hub utan
@@ -361,15 +435,19 @@ optimalt protokoll för DMVPN.
 
 Hub
 
-`interface Tunnel0`
-` ip ospf network broadcast`
-` ip ospf priority 255`
+```
+interface Tunnel0
+ ip ospf network broadcast
+ ip ospf priority 255
+```
 
 Spoke, ska inte vara med i DR-election.
 
-`interface Tunnel0`
-` ip ospf network broadcast`
-` ip ospf prio 0`
+```
+interface Tunnel0
+ ip ospf network broadcast
+ ip ospf prio 0
+```
 
 **BGP**
 Med Fas 1 och BGP måste next-hop-self användas på alla grannskap.
@@ -377,7 +455,9 @@ Med Fas 1 och BGP måste next-hop-self användas på alla grannskap.
 Fas 2 och BGP-konfiguration är som vanligt men för eBGP mellan spokes
 måste multihop användas.
 
-`neighbor 2.2.2.2 ebgp-multihop 2`
+```
+neighbor 2.2.2.2 ebgp-multihop 2
+```
 
 **RIP**
 Med Fas 1 och RIP behöver split horizon stängas av på hubb.
@@ -389,29 +469,39 @@ Others
 
 Man kan övervaka sitt DMVPN med hjälp av [SNMP](/Cisco_SNMP "wikilink").
 
-`snmp-server enable traps nhrp nhs`
-`snmp-server enable traps nhrp nhc`
-`snmp-server enable traps nhrp nhp`
+```
+snmp-server enable traps nhrp nhs
+snmp-server enable traps nhrp nhc
+snmp-server enable traps nhrp nhp
+```
 
 När man använder *if-state nhrp* på en spoke kan den kolla om
 NHRP-registreringen fungerar och på så sätt veta om interfacet ska vara
 up eller ej när man kör fas 2 eller 3. Detta fungerar ej på hub
 interface för det gör ingen registrering utan är alltid up.
 
-`interface tun0`
-` if-state nhrp `
+```
+interface tun0
+ if-state nhrp 
+```
 
 På nyare IOS (XE 16.3) kan man även använda [BFD](/Cisco_BFD "wikilink")
 för snabbare feldetektering och NHRP kan då registrera sig som klient
 till BFD-processen.
 
-`interface Tunnel0`
-` bfd interval 1000 min_rx 1000 multiplier 5`
+```
+interface Tunnel0
+ bfd interval 1000 min_rx 1000 multiplier 5
+```
 
-`router eigrp 1`
-` bfd interface Tunnel0`
+```
+router eigrp 1
+ bfd interface Tunnel0
+```
 
-`show nhrp interfaces   #hidden`
+```
+show nhrp interfaces   #hidden
+```
 
 ### NAT
 
@@ -425,8 +515,10 @@ PAT så kommer de ej att kunna upprätta någon spoke-to-spoke tunnel
 mellan varandra. När man kör NAT med DMVPN så måste IPsec transport mode
 användas. Se även [Cisco NAT](/Cisco_NAT "wikilink").
 
-`interface tun0`
-` ip nhrp registration no-unique`
+```
+interface tun0
+ ip nhrp registration no-unique
+```
 
 ### VRF
 
@@ -435,20 +527,28 @@ underlay och overlay i olika VRF:er (detta kallas också front door VRF).
 Detta möjliggör t.ex. att ha default route över DMVPN utan att få
 problem med recursive routing. I övrigt görs konfiguration som vanligt.
 
-`vrf definition UNDERLAY`
-` address-family ipv4`
-` exit`
+```
+vrf definition UNDERLAY
+ address-family ipv4
+ exit
+```
 
-`crypto keyring VRF_AWARE_PSK vrf UNDERLAY`
-` pre-shared-key address 0.0.0.0 0.0.0.0 key DMVPN`
+```
+crypto keyring VRF_AWARE_PSK vrf UNDERLAY
+ pre-shared-key address 0.0.0.0 0.0.0.0 key DMVPN
+```
 
-`interface Tunnel0`
-` tunnel vrf UNDERLAY`
+```
+interface Tunnel0
+ tunnel vrf UNDERLAY
+```
 
 Verify
 
-`show crypto session fvrf UNDERLAY`
-`show crypto session ivrf `
+```
+show crypto session fvrf UNDERLAY
+show crypto session ivrf 
+```
 
 ### MPLS
 
@@ -460,11 +560,15 @@ använda *next-hop-self all* för att säkerställa att MPLS VPN-trafik
 alltid går igenom hub. Man förlorar dynamiska tunnlar men man kan ha
 riktig PE-funkionalitet över DMVPN.
 
-`mpls ip`
-`mpls ldp router-id loopback0`
+```
+mpls ip
+mpls ldp router-id loopback0
+```
 
-`interface tunnel0`
-` mpls ip`
+```
+interface tunnel0
+ mpls ip
+```
 
 ### Per-Tunnel QoS
 
@@ -478,10 +582,12 @@ fungerande DMVPN-uppsättning.
 Class default shaper policy map får endast innehålla class class-default
 och shape-kommando.
 
-`policy-map Parent1`
-` class class-default`
-`  shape average 1000000   `
-`   service-policy Child1`
+```
+policy-map Parent1
+ class class-default
+  shape average 1000000   
+   service-policy Child1
+```
 
 Man kan använda NHRP för att bära information om vilken spoke som ska ha
 vilken QoS-policy. Definiera en NHRP-grupp på spokes och mappa sedan den
@@ -489,19 +595,23 @@ till en policy på hubb.
 
 Spoke 1
 
-`interface Tunnel0`
-` ip nhrp group GROUP1`
+```
+interface Tunnel0
+ ip nhrp group GROUP1
+```
 
 Hub
 
-`interface Tunnel0`
-` ip nhrp map group GROUP1 service-policy output Parent1`
-` ip nhrp map group GROUP2 service-policy output Parent2`
+```
+interface Tunnel0
+ ip nhrp map group GROUP1 service-policy output Parent1
+ ip nhrp map group GROUP2 service-policy output Parent2
+```
 
 Verify
 
-`show policy-map multipoint `
-`show dmvpn detail`
-`show tunnel endpoints | i Endpoint|QoS`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show policy-map multipoint 
+show dmvpn detail
+show tunnel endpoints | i Endpoint|QoS
+```

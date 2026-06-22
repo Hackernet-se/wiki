@@ -62,38 +62,40 @@ görs default för att ta reda på hur stora frames som kan skickas.
 
 L1 Hello:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_ISIS_Hello_L1.png>](/File:Cisco_ISIS_Hello_L1.png "wikilink")
 
-</div>
-</div>
+![Cisco_ISIS_Hello_L1.png](../img/Cisco_ISIS_Hello_L1.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:450px">
 
 L1L2 Hello:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_ISIS_Hello_L1L2.png>](/File:Cisco_ISIS_Hello_L1L2.png "wikilink")
 
-</div>
-</div>
+![Cisco_ISIS_Hello_L1L2.png](../img/Cisco_ISIS_Hello_L1L2.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:450px">
 
 P2P Hello: (finns ingen prio utan istället finns Local Circuit ID)
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_ISIS_Hello_P2P.png>](/File:Cisco_ISIS_Hello_P2P.png "wikilink")
 
-</div>
-</div>
+![Cisco_ISIS_Hello_P2P.png](../img/Cisco_ISIS_Hello_P2P.png)
+
+
+
 
 Timers ställs per interface. Default är 10 sekunder och multiplier är 3
 för hold time.
 
-`isis hello-interval 10 [level]`
-`isis hello-multiplier 3 [level]`
+```
+isis hello-interval 10 [level]
+isis hello-multiplier 3 [level]
+```
 
 **Link state PDU:** LSPs används för att skicka routing-information till
 andra IS. Det finns inte olika LSP-typer som OSPF har olika LSA-typer
@@ -121,9 +123,11 @@ någon annan känner till mer aktuell information, detta kallas LSP Purge.
 LSP headern hålls kvar i LSDB så länge som ZeroAgeLifetime är satt till,
 60 sekunder default men kan sparas 20 minuter på Cisco-routrar.
 
-`router isis`
-` max-lsp-lifetime 1200`
-` lsp-refresh-interval 900`
+```
+router isis
+ max-lsp-lifetime 1200
+ lsp-refresh-interval 900
+```
 
 Eftersom IS-IS paket enkapsuleras direkt i L2-frames måste IS-IS ha en
 egen fragmenteringsfunktion för LSPer som är större än MTU. Behöver man
@@ -136,18 +140,20 @@ till att MTU på alla interface inom arean måste vara identiskt. Annars
 får man manuellt ställa lsp-storlek på alla enheter så det inte
 överstiger lägsta MTU.
 
-`lsp-mtu 1400`
+```
+lsp-mtu 1400
+```
 
 <div class="mw-collapsible mw-collapsed" style="width:250px">
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_ISIS_LSP.png>](/File:Cisco_ISIS_LSP.png "wikilink")
 
-</div>
-</div>
+![Cisco_ISIS_LSP.png](../img/Cisco_ISIS_LSP.png)
+
+
+
 
 **Complete Sequence Numbers PDU:** CSNP används för att synkronisera
 LSDB mellan enheter (fungerar ungefär på samma sätt som DD i OSPF). CSNP
@@ -168,12 +174,12 @@ manuellt med interface-kommandot **isis csnp-interval <nonzero value>**
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_ISIS_CSNP.png>](/File:Cisco_ISIS_CSNP.png "wikilink")
 
-</div>
-</div>
+![Cisco_ISIS_CSNP.png](../img/Cisco_ISIS_CSNP.png)
+
+
+
 
 **Partial Sequence Numbers PDU:** PSNP skickas för att requesta eller
 acka en LSP (fungerar både som OSPF LSR och LSAck). En PSNP kan requesta
@@ -184,12 +190,12 @@ Request eftersom Ack görs av CSNP från DIS.
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_ISIS_PSNP.png>](/File:Cisco_ISIS_PSNP.png "wikilink")
 
-</div>
-</div>
+![Cisco_ISIS_PSNP.png](../img/Cisco_ISIS_PSNP.png)
+
+
+
 
 Levels
 ------
@@ -211,19 +217,25 @@ antingen på L1 eller L2. L1-LSPer beskriver grannskap i L1 och samma
 gäller för L2. Det går nästan likna vid separata routing-processer. Att
 ändra mellan L1, L2 och L1L2 görs per router.
 
-`router isis 1`
-` is-type level-1-2  #Default`
+```
+router isis 1
+ is-type level-1-2  #Default
+```
 
 Men det går att ändra per interface för att sluta skicka Hellos för en
 specifik level. T.ex. om man själv är L1L2 och vet man att andra sidan
 är en L1 only är det onödigt att skicka L2 Hellos.
 
-`interface gi2`
-` isis circuit-type {level-1 | level-2 | level-1-2}`
+```
+interface gi2
+ isis circuit-type {level-1 | level-2 | level-1-2}
+```
 
 Show
 
-`show isis protocol | i IS-Type`
+```
+show isis protocol | i IS-Type
+```
 
 **Backdoor**
 Default använder L1-routrar den närmaste L1L2-routern som gateway of
@@ -231,7 +243,9 @@ last resort. Det är inte alltid man vill ha det så, då kan man stänga av
 att L1L2-routern sätter attached bit i sina Hellos och övriga routrar
 kommer inte att installera en default route till den.
 
-`is-type level-1-2 backdoor `
+```
+is-type level-1-2 backdoor 
+```
 
 ### NET
 
@@ -272,9 +286,11 @@ inte OSPF DR kan.
 Den som väljs till DIS är den med högst prio (default 64), vid lika är
 högsta MAC-adress tie breaker.
 
-`interface gi2`
-` isis priority 100`
-`show clns interface | i DR`
+```
+interface gi2
+ isis priority 100
+show clns interface | i DR
+```
 
 Metrics
 -------
@@ -289,27 +305,35 @@ metric som i första hand jämförs vid path selection utan det är typ av
 route där L1 \> L2 \> external. Nedan visas det som kallas *narrow
 metrics*, det är legacy och är inte default på Cisco-routrar.
 
-`isis metric 1-63`
+```
+isis metric 1-63
+```
 
 **Wide metrics** togs fram för att man hade behov av större metrics och
 det har 24-bitars längd. Detta är alltid rekommenderat men alla enheter
 inom arean måste stödja det. T.ex. krävs det för MPLS traffic
 engineering över IS-IS.
 
-`router isis`
-` metric-style wide`
+```
+router isis
+ metric-style wide
+```
 
 Det går även att acceptera båda typerna av metric.
 
-`metric-style transition`
+```
+metric-style transition
+```
 
 Verify
 
-`R1# show isis protocol | i metrics`
-` Generate narrow metrics: none`
-` Accept narrow metrics:   none`
-` Generate wide metrics:   level-1-2`
-` Accept wide metrics:     level-1-2`
+```
+R1# show isis protocol | i metrics
+ Generate narrow metrics: none
+ Accept narrow metrics:   none
+ Generate wide metrics:   level-1-2
+ Accept wide metrics:     level-1-2
+```
 
 Konfiguration
 =============
@@ -319,68 +343,88 @@ IS-IS-process. Den första IS-IS instansen som konfigureras blir default
 L1L2 och därefter blir instanser L1. Det finns även RFC för
 defaultvärden för att underlätta interoperability (RFC 8196).
 
-`router isis [tag]`
-` is-type level-1-2`
-` log-adjacency-changes`
-` net 49.0001.0001.0001.0001.0001.00`
+```
+router isis [tag]
+ is-type level-1-2
+ log-adjacency-changes
+ net 49.0001.0001.0001.0001.0001.00
+```
 
-` address-family ipv4 unicast`
-` exit`
-` address-family ipv6 unicast`
-` exit`
+```
+ address-family ipv4 unicast
+ exit
+ address-family ipv6 unicast
+ exit
+```
 
 Passive interfaces, med passive interface default annonseras allt som är
 directly connected i isis men inga grannskap byggs förrens man tar bort
 passive på något interface. Det är även med passive interfaces man gör
 prefix suppression.
 
-` passive-interface default`
-` no passive-interface te0/1/1`
+```
+ passive-interface default
+ no passive-interface te0/1/1
+```
 
-` passive-interface lo0`
-` advertise passive-only`
+```
+ passive-interface lo0
+ advertise passive-only
+```
 
 För att skicka en default route i level 2
 
-`default-information originate`
+```
+default-information originate
+```
 
 Verify
 
-`show isis`
-`show isis database`
+```
+show isis
+show isis database
+```
 
 **Default konfiguration** när man drar igång IS-IS (kan skilja mellan
 IOS-versioner).
 
-`router isis`
-` no protocol shutdown`
-` max-area-addresses 3`
-` no fast-flood`
-` adjacency-check`
-` no use external-metrics`
-` metric 10 level-1`
-` metric 10 level-2`
-` hello padding`
-` no nsf cisco`
-` no nsf ietf`
-` maximum-paths 4  #Max är 32`
-` distance 115 ip`
-` no bfd all-interface`
-` no bfd check-ctrl-plane-failure`
+```
+router isis
+ no protocol shutdown
+ max-area-addresses 3
+ no fast-flood
+ adjacency-check
+ no use external-metrics
+ metric 10 level-1
+ metric 10 level-2
+ hello padding
+ no nsf cisco
+ no nsf ietf
+ maximum-paths 4  #Max är 32
+ distance 115 ip
+ no bfd all-interface
+ no bfd check-ctrl-plane-failure
+```
 
 Vänta med att använda en granne som nyss har bootat.
 
-`set-overload-bit on-startup 180`
+```
+set-overload-bit on-startup 180
+```
 
 **MPLS**
 [MPLS](/Cisco_MPLS "wikilink") LDP kan autokonfigureras med hjälp av
 IS-IS. Man kan även synka IS-IS mot LDP, dvs låta LDP bli klar innan
 länken får en normal (låg) IGP-metric och därmed börjar användas.
 
-`mpls ldp autoconfig`
-`mpls ldp sync`
+```
+mpls ldp autoconfig
+mpls ldp sync
+```
 
-`show isis mpls ldp`
+```
+show isis mpls ldp
+```
 
 IS-IS kan även användas för [Segment Routing](/Cisco_SR "wikilink") med
 MPLS.
@@ -394,18 +438,22 @@ detta behövdes inte förr men nu är checken på default. Går inte
 grannskap upp kan det också bero på duplicate system ID men det säger
 loggen tydligt.
 
-`interface te0/1/1`
-` ip router isis 1`
-` no isis hello padding`
-` isis network point-to-point  #effektivisera LSP-hantering`
-` no shut`
+```
+interface te0/1/1
+ ip router isis 1
+ no isis hello padding
+ isis network point-to-point  #effektivisera LSP-hantering
+ no shut
+```
 
 **Verify**
 
-`show isis hostname`
-`show isis neighbors/adjacency`
-`show isis topology`
-`show clns neighbor`
+```
+show isis hostname
+show isis neighbors/adjacency
+show isis topology
+show clns neighbor
+```
 
 ### Authentication
 
@@ -422,14 +470,18 @@ med.
 
 Hello-paket görs per interface oavsett level.
 
-`interface gi2`
-` isis authentication mode md5`
+```
+interface gi2
+ isis authentication mode md5
+```
 ` isis authentication key-chain `<key-chain-name>
 
 LSP authentication
 
-`router isis 1`
-` authentication mode md5`
+```
+router isis 1
+ authentication mode md5
+```
 ` authentication key-chain `<key-chain-name>
 
 Redistribution
@@ -443,10 +495,14 @@ satt kommer inte att skicka in den till L2.
 
 Redistribution into level 2. Redistribution into level 1
 
-`redistribute static ip`
-`redistribute static ip level-1`
+```
+redistribute static ip
+redistribute static ip level-1
+```
 
-`show isis ip rib redistribution`
+```
+show isis ip rib redistribution
+```
 
 Man kan läcka L2 routes till L1 med hjälp av redistribution.
 
@@ -457,7 +513,9 @@ Man kan läcka L2 routes till L1 med hjälp av redistribution.
 När routes går mellan areor eller redistribueras kan man summera (likt
 OSPF).
 
-`summary-address 10.1.0.0 255.255.0.0 [level]`
+```
+summary-address 10.1.0.0 255.255.0.0 [level]
+```
 
 -   level-1: endast routes redistribuerade in i Level 1 summeras.
 -   level-1-2: routes redistribuerade in i Level 1 summeras och routes
@@ -488,26 +546,32 @@ Den mesta av konfigurationen görs under adressfamiljen, till skillnad
 från IPv4. IS-IS kommer att skicka vidare IPv6-information men ej börja
 använda det förens man lagt in *address-family ipv6*.
 
-`router isis 1`
-` address-family ipv6 unicast`
-`  multi-topology [transition]`
-`  maximum-paths 16`
-` exit`
+```
+router isis 1
+ address-family ipv6 unicast
+  multi-topology [transition]
+  maximum-paths 16
+ exit
+```
 
 Verify
 
-`show ipv6 route isis`
-`show isis ipv6 topology  #Multi topology`
-`show isis ipv6 rib`
+```
+show ipv6 route isis
+show isis ipv6 topology  #Multi topology
+show isis ipv6 rib
+```
 
 Convergence
 -----------
 
 Timers
 
-`lsp-gen-interval 5 50 50`
-`prc-interval 5 50 50`
-`spf-interval 5 50 50`
+```
+lsp-gen-interval 5 50 50
+prc-interval 5 50 50
+spf-interval 5 50 50
+```
 
 **Nonstop Forwarding**
 När en router gör en RP switchover måste den nya snabbt få all info om
@@ -527,16 +591,20 @@ registrerat protokoll till BFD och kan dra nytta av de forwarding path
 detection failure messages som BFD tillhandahåller. Det kan antingen
 konfigureras under adressfamiljen eller per interface.
 
-`int te0/1/1`
-` bfd interval 50 min_rx 50 multiplier 5`
-` isis bfd`
+```
+int te0/1/1
+ bfd interval 50 min_rx 50 multiplier 5
+ isis bfd
+```
 
 IS-IS-klienten kan även utnyttja BFD C-biten för att veta om det är ett
 äkta data plane failure eller om det är resultatet av ett control plane
 failure t.ex. pga reboot, detta är på default.
 
-`router isis `
-` bfd check-control-plane-failure `
+```
+router isis 
+ bfd check-control-plane-failure 
+```
 
 **iSPF**
 SPF-algoritmen behöver inte köras för alla länkar varje gång det sker en
@@ -547,16 +615,20 @@ svårt att veta exakt hur mycket skillnad detta gör men generellt ju
 större topologi ju större skillnad. OBS iSPF är inte längre supporterat
 i IOS.
 
-`router isis 1`
-` ispf level-1-2 10`
-`show isis protocol | i Incremental`
+```
+router isis 1
+ ispf level-1-2 10
+show isis protocol | i Incremental
+```
 
 **Fast flood**
 Man kan välja att LSP:er ska floodas innan SPF-beräkningen påbörjas för
 att få snabbare konvergenstid. Detta är ej påslaget default.
 
-`router isis 1`
-` fast-flood`
+```
+router isis 1
+ fast-flood
+```
 
 ### Loop-Free Alternate Fast Reroute
 
@@ -588,10 +660,14 @@ efter att grannen har kört SPF. När man slår på remote LFA enableas
 microloop avoidance med delay 5000 ms. Alla IS-IS interface måste vara
 point-to-point.
 
-`router isis 1`
-` fast-reroute remote-lfa level-2 mpls-ldp`
+```
+router isis 1
+ fast-reroute remote-lfa level-2 mpls-ldp
+```
 
-`show isis fast-reroute remote-lfa tunnels`
+```
+show isis fast-reroute remote-lfa tunnels
+```
 
 **TI-LFA**
 Med Topology Independent LFA får man alltid post-konvergens routen och
@@ -601,70 +677,92 @@ skydda IP och MPLS-trafik samt undvika congestion och suboptimal routing
 genom att undvika high metric links. TI-LFA använder inte targeted LDP
 utan det bygger på Segment Routing.
 
-`router isis 1`
-` segment-routing mpls`
-` ip route priority high tag 1000`
-` fast-reroute per-prefix level-2 all`
-` fast-reroute ti-lfa level-2`
+```
+router isis 1
+ segment-routing mpls
+ ip route priority high tag 1000
+ fast-reroute per-prefix level-2 all
+ fast-reroute ti-lfa level-2
+```
 
 Verify
 
-`show isis fast-reroute summary`
-`show isis fast-reroute interfaces`
-`show isis fast-reroute ti-lfa tunnel`
-`show ip route repair-paths`
+```
+show isis fast-reroute summary
+show isis fast-reroute interfaces
+show isis fast-reroute ti-lfa tunnel
+show ip route repair-paths
+```
 
 NX-OS
 =====
 
 Grundkonfiguration
 
-`feature isis`
+```
+feature isis
+```
 
-`router isis IS`
-` net 49.0001.0001.0001.0001.0002.00`
-` is-type level-1`
-` passive-interface default level-1`
-` log-adjacency-changes`
+```
+router isis IS
+ net 49.0001.0001.0001.0001.0002.00
+ is-type level-1
+ passive-interface default level-1
+ log-adjacency-changes
+```
 
-` address-family ipv4 unicast`
-` exit`
+```
+ address-family ipv4 unicast
+ exit
+```
 
 NX-OS, några defaults
 
-`router isis IS`
-` graceful-restart`
-` maximum-paths 8`
-` max-lsp-lifetime 1200`
-` lsp-mtu 1492`
-` reference-bandwidth 40 Gbps`
+```
+router isis IS
+ graceful-restart
+ maximum-paths 8
+ max-lsp-lifetime 1200
+ lsp-mtu 1492
+ reference-bandwidth 40 Gbps
+```
 
 Fast convergence
 
-`spf-interval level-2 5000 50 50`
-`lsp-gen-interval level-2 5000 50 50`
+```
+spf-interval level-2 5000 50 50
+lsp-gen-interval level-2 5000 50 50
+```
 
 Authentication
 
-`authentication-type md5 level-2`
+```
+authentication-type md5 level-2
+```
 `authentication key-chain `<key-chain-name>` level-2`
 
 Vänta med att använda en granne som nyss har bootat.
 
-`set-overload-bit on-startup 180`
+```
+set-overload-bit on-startup 180
+```
 
 Interface
 
-`int lo0`
-` ip router isis IS`
+```
+int lo0
+ ip router isis IS
+```
 
-`interface e1/1`
-` no switchport`
-` ip router isis IS`
-` no isis passive-interface level-2`
-` no isis hello-padding`
-` isis network point-to-point`
-` isis authentication-type md5 level-2`
+```
+interface e1/1
+ no switchport
+ ip router isis IS
+ no isis passive-interface level-2
+ no isis hello-padding
+ isis network point-to-point
+ isis authentication-type md5 level-2
+```
 ` isis authentication key-chain `<key-chain-name>` level-2`
 
 Genom att använda network type p2p effektiviserar man LSP-hanteringen.
@@ -672,92 +770,102 @@ Det går även att använda kommandot "medium p2p" för att uppnå detta.
 
 [BFD](/Cisco_BFD#NX-OS "wikilink")
 
-`feature bfd`
-`interface e1/1`
-` bfd interval 50 min_rx 50 multiplier 3`
-` no bfd echo`
-` isis bfd`
+```
+feature bfd
+interface e1/1
+ bfd interval 50 min_rx 50 multiplier 3
+ no bfd echo
+ isis bfd
+```
 
 IOS-XR
 ======
 
 IOS-XR IS-IS kör default i Multi Topology mode.
 
-`router isis 1`
-` set-overload-bit on-startup 180`
-` is-type level-2-only`
-` net 49.0000.0000.0011.00`
-` nsr`
-` nsf cisco`
-` log adjacency changes`
-` lsp-refresh-interval 65000`
-` max-lsp-lifetime 65535`
-` lsp-password keychain ISIS-KEY`
-` address-family ipv4 unicast`
-`  metric-style wide`
-`  advertise passive-only`
-` !`
-` address-family ipv6 unicast`
-`  metric-style wide`
-`  advertise passive-only`
-` !`
-` interface Loopback0`
-`  passive`
-`  address-family ipv4 unicast`
-`  !`
-`  address-family ipv6 unicast`
-` !`
-` interface TenGigE0/0/0/10`
-`  point-to-point`
-`  hello-password keychain ISIS-KEY`
-`  address-family ipv4 unicast`
-`   fast-reroute per-prefix`
-`   fast-reroute per-prefix ti-lfa`
-`   metric 100`
+```
+router isis 1
+ set-overload-bit on-startup 180
+ is-type level-2-only
+ net 49.0000.0000.0011.00
+ nsr
+ nsf cisco
+ log adjacency changes
+ lsp-refresh-interval 65000
+ max-lsp-lifetime 65535
+ lsp-password keychain ISIS-KEY
+ address-family ipv4 unicast
+  metric-style wide
+  advertise passive-only
+ !
+ address-family ipv6 unicast
+  metric-style wide
+  advertise passive-only
+ !
+ interface Loopback0
+  passive
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+ !
+ interface TenGigE0/0/0/10
+  point-to-point
+  hello-password keychain ISIS-KEY
+  address-family ipv4 unicast
+   fast-reroute per-prefix
+   fast-reroute per-prefix ti-lfa
+   metric 100
+```
 
 **LFA**
 router isis 1
 
-` interface GigabitEthernet0/0/0/0`
-`  address-family ipv4 unicast`
-`   fast-reroute per-prefix`
-`   fast-reroute per-prefix ti-lfa`
-`  address-family ipv6 unicast`
-`   fast-reroute per-prefix`
-`   fast-reroute per-prefix ti-lfa`
+```
+ interface GigabitEthernet0/0/0/0
+  address-family ipv4 unicast
+   fast-reroute per-prefix
+   fast-reroute per-prefix ti-lfa
+  address-family ipv6 unicast
+   fast-reroute per-prefix
+   fast-reroute per-prefix ti-lfa
+```
 
 IOS-XR har även per-link LFA men det finns egentligen inget use case för
 det längre. Default märker ISIS /32-prefix som Medium priority och allt
 annat som Low priority.
 
-`show isis fast-reroute summary`
-`show cef fast-reroute`
+```
+show isis fast-reroute summary
+show cef fast-reroute
+```
 
 **Prefix Prioritization**
 
-`router isis 1`
-` address-family ipv4 unicast`
-`  spf prefix-priority level 2 high tag 100`
-` !`
-` interface Loopback0`
-`  address-family ipv4 unicast`
-`   tag 100`
+```
+router isis 1
+ address-family ipv4 unicast
+  spf prefix-priority level 2 high tag 100
+ !
+ interface Loopback0
+  address-family ipv4 unicast
+   tag 100
+```
 
 När man konfigurerar några prefix med high priority så får alla andra
 prefix (inklusive /32) low priority.
 
 **SRLG**
 
-`srlg`
-` interface GigabitEthernet0/0/0/1`
-`  8 value 10`
-` ! `
-` interface GigabitEthernet0/0/0/2`
-`  8 value 10`
-`!`
-`router isis 1`
-` address-family ipv4 unicast`
-`  fast-reroute per-prefix tiebreaker srlg-disjoint index 40`
-`  fast-reroute per-prefix tiebreaker lowest-backup-metric index 50`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+srlg
+ interface GigabitEthernet0/0/0/1
+  8 value 10
+ ! 
+ interface GigabitEthernet0/0/0/2
+  8 value 10
+!
+router isis 1
+ address-family ipv4 unicast
+  fast-reroute per-prefix tiebreaker srlg-disjoint index 40
+  fast-reroute per-prefix tiebreaker lowest-backup-metric index 50
+```

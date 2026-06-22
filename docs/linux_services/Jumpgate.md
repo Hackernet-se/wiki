@@ -54,7 +54,9 @@ __EOF__
 
 ### Tmux
 
-`sudo apt-get update && sudo apt-get upgrade && sudo apt-get -y install tmux`
+```
+sudo apt-get update && sudo apt-get upgrade && sudo apt-get -y install tmux
+```
 
 Attacha automatiskt till din tmux session vid inloggning.
 
@@ -75,7 +77,9 @@ fi
 Håll SSH-sessioner vid liv genom att skicka ett litet paket med jämna
 mellanrum.
 
-`echo "    ServerAliveInterval 120" | sudo tee -a /etc/ssh/ssh_config`
+```
+echo "    ServerAliveInterval 120" | sudo tee -a /etc/ssh/ssh_config
+```
 
 SSH Autentisering
 -----------------
@@ -87,17 +91,23 @@ av SSH-nycklar som autentisering. Och för att göra det mindre smidigt se
 Först måste man skaffa sig nyckelpar man kan distribuera till övriga
 hostar. Detta görs endast en gång.
 
-`ssh-keygen -t rsa -b 4096`
-`ssh-keygen -t ecdsa -b 521`
-`ssh-keygen -t ed25519`
+```
+ssh-keygen -t rsa -b 4096
+ssh-keygen -t ecdsa -b 521
+ssh-keygen -t ed25519
+```
 
 Sedan skicka ut nyckeln till hostarna med:
 
-`ssh-copy-id 192.168.0.10`
+```
+ssh-copy-id 192.168.0.10
+```
 
 *Om ssh-copy-id ej finns tillgängligt*
 
-`cat ~/.ssh/id_rsa.pub | ssh user@192.168.0.10 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"`
+```
+cat ~/.ssh/id_rsa.pub | ssh user@192.168.0.10 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+```
 
 Alternativt skicka med den vid automatiserad PXE-installation.
 
@@ -107,17 +117,23 @@ Användarnamn
 För att slippa skriva olika användarnamn beroende på host kan man lägga
 in dem så de autoanvänds vid anslutning.
 
-`dd of=~/.ssh/config << EOF`
-`Host server1`
-`User root`
+```
+dd of=~/.ssh/config << EOF
+Host server1
+User root
+```
 
-`Host 192.168.0.1`
-`User elnacho`
+```
+Host 192.168.0.1
+User elnacho
+```
 
-`Host fw02`
-`User admin`
-`ServerAliveInterval 60`
-`EOF`
+```
+Host fw02
+User admin
+ServerAliveInterval 60
+EOF
+```
 
 Login Notification
 ------------------
@@ -143,7 +159,9 @@ sudo chmod +x /usr/sbin/sshd-login_notify-slack.sh
 
 Testa
 
-`PAM_USER=test PAM_RHOST=1.2.3.4 PAM_TYPE=open_session /usr/sbin/sshd-login_notify-slack.sh`
+```
+PAM_USER=test PAM_RHOST=1.2.3.4 PAM_TYPE=open_session /usr/sbin/sshd-login_notify-slack.sh
+```
 
 Bastion
 -------
@@ -155,14 +173,18 @@ autentisering. DNS-uppslag på alla maskiner måste fungera.
 
 [500px](/File:ssh-bastion.png "wikilink")
 
-`nano ~/.ssh/config`
-`Host inside-server`
-` ProxyJump bastion`
+```
+nano ~/.ssh/config
+Host inside-server
+ ProxyJump bastion
+```
 
-`Host bastion`
-` User basse`
-` IdentityFile ~/.ssh/ed25519`
-` ForwardAgent yes`
+```
+Host bastion
+ User basse
+ IdentityFile ~/.ssh/ed25519
+ ForwardAgent yes
+```
 
 .bashrc
 -------
@@ -195,5 +217,3 @@ Skriv `extract `<filnamn> för att packa upp en fil.
     fi
   }
 ```
-
-[Category:Guider](/Category:Guider "wikilink")

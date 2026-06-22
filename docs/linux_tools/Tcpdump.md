@@ -11,7 +11,9 @@ Installation
 
 Debian/Ubuntu
 
-`apt-get install tcpdump`
+```
+apt-get install tcpdump
+```
 
 Vanliga Växlar
 ==============
@@ -40,5 +42,3 @@ Exempel
     -   Lyssnar efter paket med 10.20.30.40 som source address
 -   tcpdump -i eth0 host 10.20.30.40
     -   Lyssnar efter paket som innehåller 10.20.30.40
-
-[Category:Tools](/Category:Tools "wikilink")

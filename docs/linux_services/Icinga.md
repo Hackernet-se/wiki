@@ -41,18 +41,24 @@ Lägg till lite repon för att få senaste versionen.
 `wget -O - `[`http://packages.icinga.org/icinga.key`](http://packages.icinga.org/icinga.key)` | apt-key add -`
 `echo deb `[`http://packages.icinga.org/debian`](http://packages.icinga.org/debian)` icinga-jessie main >> /etc/apt/sources.list `
 `echo deb-src `[`http://packages.icinga.org/debian`](http://packages.icinga.org/debian)` icinga-jessie main >> /etc/apt/sources.list`
-`apt-get update`
+```
+apt-get update
+```
 
 **Debian backports repo**
 
 `echo deb `[`http://ftp.se.debian.org/debian/`](http://ftp.se.debian.org/debian/)` jessie-backports main >> /etc/apt/sources.list`
-`apt-get update`
+```
+apt-get update
+```
 
 **Debmon repo**
 
 `wget -O - `[`http://debmon.org/debmon/repo.key`](http://debmon.org/debmon/repo.key)` 2>/dev/null | apt-key add -`
 `echo 'deb `[`http://debmon.org/debmon`](http://debmon.org/debmon)` debmon-jessie main' >/etc/apt/sources.list.d/debmon.list`
-`apt-get update`
+```
+apt-get update
+```
 
 #### Ubuntu
 
@@ -61,12 +67,16 @@ Lägg till lite repon för att få senaste versionen.
 `wget -O - `[`http://packages.icinga.org/icinga.key`](http://packages.icinga.org/icinga.key)` | apt-key add -`
 `echo deb `[`http://packages.icinga.org/ubuntu`](http://packages.icinga.org/ubuntu)` icinga-trusty main >> /etc/apt/sources.list`
 `echo deb-src `[`http://packages.icinga.org/ubuntu`](http://packages.icinga.org/ubuntu)` icinga-trusty main >> /etc/apt/sources.list`
-`apt-get update`
+```
+apt-get update
+```
 
 **Icinga PPA repo**
 
-`add-apt-repository ppa:formorer/icinga`
-`apt-get update`
+```
+add-apt-repository ppa:formorer/icinga
+apt-get update
+```
 
 Installation
 ------------
@@ -75,12 +85,16 @@ Installation
 
 För att installera Icinga2 core skriv,
 
-`apt-get install icinga2`
+```
+apt-get install icinga2
+```
 
 Utan plugins vet inte Icinga hur den ska kolla en tjänst. Enklast är att
 tanka hem en färdig bundle med plugins.
 
-`apt-get install nagios-plugins`
+```
+apt-get install nagios-plugins
+```
 
 ### Icinga Data Out Database
 
@@ -88,21 +102,29 @@ Guiden utgår ifrån att du kommer köra en lokal MySQL databas.
 
 Installera MySQL
 
-`apt-get install mysql-server mysql-client`
+```
+apt-get install mysql-server mysql-client
+```
 
 Logga in och skapa en databas samt en användare med rättigheter.
 
-`mysql -u root -p`
-`CREATE DATABASE icinga;`
-`GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icinga.* TO 'icinga'@'localhost' IDENTIFIED BY 'icinga';`
+```
+mysql -u root -p
+CREATE DATABASE icinga;
+GRANT SELECT, INSERT, UPDATE, DELETE, DROP, CREATE VIEW, INDEX, EXECUTE ON icinga.* TO 'icinga'@'localhost' IDENTIFIED BY 'icinga';
+```
 
 Lägg sedan till MySQL ido paketet. Paketet har en wizard som du kan
 använda eller skippa och göra det manuellt om du vill.
 
-`apt-get install icinga2-ido-mysql`
+```
+apt-get install icinga2-ido-mysql
+```
 
 Om du vill få upp wizarden igen skriv
-`dpkg-reconfigure icinga2-ido-mysql`
+```
+dpkg-reconfigure icinga2-ido-mysql
+```
 
 För att ansluta manuellt använd conf filen
 `/etc/icinga2/features-available/ido-mysql.conf` [Exempel conf
@@ -110,15 +132,21 @@ MySQL](http://docs.icinga.org/icinga2/latest/doc/module/icinga2/chapter/object-t
 
 Importera MySQL schemat.
 
-`mysql -u root -p icinga < /usr/share/icinga2-ido-mysql/schema/mysql.sql`
+```
+mysql -u root -p icinga < /usr/share/icinga2-ido-mysql/schema/mysql.sql
+```
 
 Enabla featuren ido-mysql
 
-`icinga2 feature enable ido-mysql`
+```
+icinga2 feature enable ido-mysql
+```
 
 Starta om icinga2 för att det ska gälla.
 
-`service icinga2 restart`
+```
+service icinga2 restart
+```
 
 ### Icinga's user interface
 
@@ -137,15 +165,21 @@ fler steg själv.
 
 ##### Repo
 
-`apt-get install icingaweb2 icingacli`
+```
+apt-get install icingaweb2 icingacli
+```
 
 Skapa sedan en setup token med,
 
-`icingacli setup token create`
+```
+icingacli setup token create
+```
 
 För att visa den ifall du skulle glömma av den skriv,
 
-`icingacli setup token show`
+```
+icingacli setup token show
+```
 
 Surfa sedan till <http://ip/icingaweb2/setup> för att följa wizarden.
 
@@ -157,36 +191,50 @@ Börja med att klona repot.
 
 Flytta sedan repot och gå till dess plats.
 
-`mv icingaweb2 /usr/share/icingaweb2 && cd /usr/share/icingaweb2`
+```
+mv icingaweb2 /usr/share/icingaweb2 && cd /usr/share/icingaweb2
+```
 
 Skapa en konfigurationsfil till Apache eller Nginx.
 
 **Apache**
 
-`./bin/icingacli setup config webserver apache --document-root /usr/share/icingaweb2/public > /etc/apache2/sites-available/icingaweb2`
-`a2ensite icingaweb2`
-`service apache2 restart`
+```
+./bin/icingacli setup config webserver apache --document-root /usr/share/icingaweb2/public > /etc/apache2/sites-available/icingaweb2
+a2ensite icingaweb2
+service apache2 restart
+```
 
 **Nginx**
 
-`./bin/icingacli setup config webserver nginx --document-root /usr/share/icingaweb2/public`
+```
+./bin/icingacli setup config webserver nginx --document-root /usr/share/icingaweb2/public
+```
 
 Både webusern och cli usern måste ha tillgång till conf och loggar.
 Permissions sköter man med en special grupp.
 
-`addgroup --system icingaweb2 && usermod -a -G icingaweb2 www-data`
+```
+addgroup --system icingaweb2 && usermod -a -G icingaweb2 www-data
+```
 
 Skapa ett configuration directory. Default är `/etc/icingaweb2`
 
-`./bin/icingacli setup config directory`
+```
+./bin/icingacli setup config directory
+```
 
 Skapa en setup token med kommandot.
 
-`./bin/icingacli setup config directory`
+```
+./bin/icingacli setup config directory
+```
 
 Visa setup token ifall du glömmer bort den.
 
-`./bin/icingacli setup token show`
+```
+./bin/icingacli setup token show
+```
 
 Surfa sedan till <http://><ip>/icingaweb2/setup för att följa wizarden.
 
@@ -200,12 +248,16 @@ kommandon](http://docs.icinga.org/icinga2/latest/doc/module/icinga2/chapter/cli-
 
 Kolla vilka features som är enablat.
 
-`icinga2 feature list`
+```
+icinga2 feature list
+```
 
 ### systemctl/init
 
-`systemctl status icinga2`
-`/etc/init.d/icinga2 status`
+```
+systemctl status icinga2
+/etc/init.d/icinga2 status
+```
 
 |             |                                                                                                                                                             |
 |-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|

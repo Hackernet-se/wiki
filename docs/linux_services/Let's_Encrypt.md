@@ -51,7 +51,9 @@ utan att stoppa webbserverm. Plugin lägger en liten dold fil i document
 root på webbservern, den kan sedan läsas av Let's Encrypt CA för att
 verifiera domänen.
 
-`./letsencrypt-auto certonly -a webroot --agree-tos --renew-by-default --webroot-path=/var/www/html -d hackernet.se -d www.hackernet.se`
+```
+./letsencrypt-auto certonly -a webroot --agree-tos --renew-by-default --webroot-path=/var/www/html -d hackernet.se -d www.hackernet.se
+```
 
 ### Auto-renewal
 
@@ -72,7 +74,7 @@ webroot kan man i [apache](/apache "wikilink") göra att Let's encrypts
 anrop inte skickas vidare. Utan istället går till en lokal mapp där din
 Let's encrypt klient lagt den dolda filen.
 
-`Alias /.well-known /var/www/.well-known`
-`ProxyPass /.well-known !`
-
-[Category:Guider](/Category:Guider "wikilink")
+```
+Alias /.well-known /var/www/.well-known
+ProxyPass /.well-known !
+```

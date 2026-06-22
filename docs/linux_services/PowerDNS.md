@@ -89,35 +89,41 @@ Och skapa en autoprimary server som låter PowerDNS sköta replikeringen.
 
 Lägg in följande i `/etc/powerdns/pdns.conf`:
 
-`allow-recursion=0.0.0.0/0`
-`allow-axfr-ips=10.0.0.2/32,10.0.0.3/32`
-`also-notify=10.0.0.2,10.0.0.3`
-`config-dir=/etc/powerdns`
-`daemon=yes`
-`disable-axfr=no`
-`guardian=yes`
-`local-address=0.0.0.0`
-`local-port=53`
-`log-dns-details=on`
-`loglevel=3`
-`primary=yes`
-`secondary=no`
-`setgid=pdns`
-`setuid=pdns`
-`socket-dir=/var/run`
-`version-string=powerdns`
-`include-dir=/etc/powerdns/pdns.d`
-`launch=gmysql`
+```
+allow-recursion=0.0.0.0/0
+allow-axfr-ips=10.0.0.2/32,10.0.0.3/32
+also-notify=10.0.0.2,10.0.0.3
+config-dir=/etc/powerdns
+daemon=yes
+disable-axfr=no
+guardian=yes
+local-address=0.0.0.0
+local-port=53
+log-dns-details=on
+loglevel=3
+primary=yes
+secondary=no
+setgid=pdns
+setuid=pdns
+socket-dir=/var/run
+version-string=powerdns
+include-dir=/etc/powerdns/pdns.d
+launch=gmysql
+```
 
 I **/etc/powerdns/pdns.d** skapa filen `pdns.local.gmysql.conf`. Om
 filen redan fanns gå till nästa steg.
 
-`gmysql-host=localhost`
-`gmysql-port=`
-`gmysql-dbname=pdns`
-`gmysql-user=pdns`
+```
+gmysql-host=localhost
+gmysql-port=
+gmysql-dbname=pdns
+gmysql-user=pdns
+```
 `gmysql-password=`<PaSSw0RD>
-`gmysql-dnssec=yes`
+```
+gmysql-dnssec=yes
+```
 
 Om filen skulle finnas med ett lösenord redan i så är det troligt att
 under installationen så skapades det en databas och fylldes med default
@@ -219,40 +225,44 @@ CREATE TABLE tsigkeys (
 CREATE UNIQUE INDEX namealgoindex ON tsigkeys(name, algorithm);
 ```
 
-</div>
-</div>
+
+
 
 Ta bort `pdns.simplebind.conf` om du inte tänkt använda bind som
 backend.
 
 Starta sedan om PowerDNS tjänsten.
 
-`service pdns restart`
+```
+service pdns restart
+```
 
 ### Slave
 
 Gör exakt samma på slaven med databasen fast lägg in följande i
 `pdns.conf` istället:
 
-`allow-recursion=0.0.0.0/0`
-`config-dir=/etc/powerdns`
-`daemon=yes`
-`disable-axfr=yes`
-`guardian=yes`
-`local-address=0.0.0.0`
-`local-port=53`
-`log-dns-details=on`
-`loglevel=3`
-`module-dir=/usr/lib/x86_64-linux-gnu/pdns/`
-`master=no`
-`slave=yes`
-`slave-cycle-interval=60`
-`setgid=pdns`
-`setuid=pdns`
-`socket-dir=/var/run`
-`version-string=powerdns`
-`include-dir=/etc/powerdns/pdns.d`
-`launch=gmysql`
+```
+allow-recursion=0.0.0.0/0
+config-dir=/etc/powerdns
+daemon=yes
+disable-axfr=yes
+guardian=yes
+local-address=0.0.0.0
+local-port=53
+log-dns-details=on
+loglevel=3
+module-dir=/usr/lib/x86_64-linux-gnu/pdns/
+master=no
+slave=yes
+slave-cycle-interval=60
+setgid=pdns
+setuid=pdns
+socket-dir=/var/run
+version-string=powerdns
+include-dir=/etc/powerdns/pdns.d
+launch=gmysql
+```
 
 Slaven kommer fråga supermastern efter ny zone update var 60 sekund.
 Vanligast är att mastern skickar ut en notifikation till slaven men om
@@ -263,54 +273,76 @@ Lägg till en supermaster för slaven.
 
 Logga in på databasen med:
 
-`mysql -u pdns -p`
+```
+mysql -u pdns -p
+```
 
 Byt till databasen:
 
-`USE pdns;`
+```
+USE pdns;
+```
 
 Lägg in en rad i supermasters table:
 
-`insert into supermasters values ('10.0.0.1', 'supermaster.hackernet.se', 'admin');`
+```
+insert into supermasters values ('10.0.0.1', 'supermaster.hackernet.se', 'admin');
+```
 
 Lämna MySQL:
 
-`exit;`
+```
+exit;
+```
 
 Starta om PowerDNS:
 
-`service pdns restart`
+```
+service pdns restart
+```
 
 Skapa zone
 ----------
 
 Skapa en zone med hjälp av **pdnsutil**:
 
-`pdnsutil create-zone hackernet.se supermaster.hackernet.se`
+```
+pdnsutil create-zone hackernet.se supermaster.hackernet.se
+```
 
 Lägg till några **A** record:
 
-`pdnsutil add-record hackernet.se supermaster A 10.0.0.1`
-`pdnsutil add-record hackernet.se ns1 A 10.0.0.2`
-`pdnsutil add-record hackernet.se ns2 A 10.0.0.3`
+```
+pdnsutil add-record hackernet.se supermaster A 10.0.0.1
+pdnsutil add-record hackernet.se ns1 A 10.0.0.2
+pdnsutil add-record hackernet.se ns2 A 10.0.0.3
+```
 
 Lägg till fler **NS** record:
 
-`pdnsutil add-record hackernet.se @ NS ns1.hackernet.se`
-`pdnsutil add-record hackernet.se @ NS ns2.hackernet.se`
+```
+pdnsutil add-record hackernet.se @ NS ns1.hackernet.se
+pdnsutil add-record hackernet.se @ NS ns2.hackernet.se
+```
 
 Ändra zonen från native zone till master zone.
 
-`pdnsutil set-kind hackernet.se master`
+```
+pdnsutil set-kind hackernet.se master
+```
 
 Verifiera att zonen är master:
 
-`pdnsutil show-zone hackernet.se`
+```
+pdnsutil show-zone hackernet.se
+```
 
 Skicka ut en notifikation med mastern eller vänta tills slaven själv
 hämtar zonen:
 
-`pdns_control notify hackernet.se`
+```
+pdns_control notify hackernet.se
+```
 
 Säkra upp zonetransfer
 ----------------------
@@ -319,23 +351,33 @@ Man kan säkra upp zonetransfer med hjälp av en TSIG nykel.
 
 Börja med att generera en TSIG nyckel på master servern.
 
-`pdnsutil generate-tsig-key tsig-transfer hmac-sha512`
+```
+pdnsutil generate-tsig-key tsig-transfer hmac-sha512
+```
 
 Aktivera sedan nykel på det zoner du vill säkra upp.
 
-`pdnsutil activate-tsig-key hackernet.se tsig-transfer master`
+```
+pdnsutil activate-tsig-key hackernet.se tsig-transfer master
+```
 
 Lista sedan TSIG nykeln så du kan kopiera den till slaven.
 
-`pdnsutil list-tsig-keys`
+```
+pdnsutil list-tsig-keys
+```
 
 Importera nyckeln på slaven.
 
-`pdnsutil import-tsig-key tsig-transfer hmac-sha512 'Långsuperhackerkod'`
+```
+pdnsutil import-tsig-key tsig-transfer hmac-sha512 'Långsuperhackerkod'
+```
 
 Aktivera sedan TSIG nykeln på samma zoner som på mastern.
 
-`pdnsutil activate-tsig-key hackernet.se tsig-transfer slave`
+```
+pdnsutil activate-tsig-key hackernet.se tsig-transfer slave
+```
 
 **Att tänka på:** Det är viktigt att nyckeln har samma namn på både
 mastern och slaven.
@@ -350,7 +392,9 @@ Installation
 
 **Debian/Ubuntu**
 
-`apt-get install pdns-recursor`
+```
+apt-get install pdns-recursor
+```
 
 Konfiguration
 -------------
@@ -362,18 +406,24 @@ authoritative servern som den inte kan svara på.
 
 **recursor.conf**
 
-`forward-zones=8.8.8.8,8.8.4.4`
-`trace=on`
+```
+forward-zones=8.8.8.8,8.8.4.4
+trace=on
+```
 
 ### Recursor och authoritative
 
 Lägg till följande rad i **pdns.conf**:
 
-`recursor=127.0.0.1:5678`
+```
+recursor=127.0.0.1:5678
+```
 
 Och ändra vilken port recursor lyssnar på i **recursor.conf**:
 
-`local-port=5678`
+```
+local-port=5678
+```
 
 Var noga med att peka på rätt port så att du inte pekar tillbaka på
 authoritative servern för då kommer man få en loop.
@@ -388,22 +438,30 @@ annat cacheförgiftning och pharming som är dom vanligaste attackerna.
 
 För att sätta på DNSSEC:
 
-`pdnsutil secure-zone ZONE`
+```
+pdnsutil secure-zone ZONE
+```
 
 För att stänga av DNSSEC:
 
-`pdnsutil disable-dnssec ZONE`
+```
+pdnsutil disable-dnssec ZONE
+```
 
 Kör sedan följande kommando för visa dina DS record:
 
-`pdnsutil show-zone ZONE`
+```
+pdnsutil show-zone ZONE
+```
 
 Outputen du är intresserad av är i slutet och ser ut som följande:
 
-`...`
-`DS = hackernet.se. IN DS 17379 13 1 75a7f4a06792509298bfb0996df3614b129a6570 ; ( SHA1 digest )`
-`DS = hackernet.se. IN DS 17379 13 2 c72f7424c86a46866499ae284bec1b55095ca32e0f6955a9a9ba21df5d010d57 ; ( SHA256 digest )`
-`...`
+```
+...
+DS = hackernet.se. IN DS 17379 13 1 75a7f4a06792509298bfb0996df3614b129a6570 ; ( SHA1 digest )
+DS = hackernet.se. IN DS 17379 13 2 c72f7424c86a46866499ae284bec1b55095ca32e0f6955a9a9ba21df5d010d57 ; ( SHA256 digest )
+...
+```
 
 Formatet för ett DS record är:
 
@@ -435,36 +493,52 @@ DDNS stöds bara av följande backends
 Börja med att generera en TSIG nykel som kommer användas för att göra
 uppdateringen säkrare:
 
-`pdnsutil generate-tsig-key ddns_update hmac-sha512`
+```
+pdnsutil generate-tsig-key ddns_update hmac-sha512
+```
 
 Aktivera nykeln på dom domäner du vill uppdatera.
 
-` pdnsutil set-meta hackernet.se TSIG-ALLOW-DNSUPDATE ddns_update`
+```
+ pdnsutil set-meta hackernet.se TSIG-ALLOW-DNSUPDATE ddns_update
+```
 
 Tillåt enbart vissa nät att få uppdatera zonen.
 
-`pdnsutil set-meta hackernet.se ALLOW-DNSUPDATE-FROM 192.168.1.0/24`
-`pdnsutil set-meta hackernet.se ALLOW-DNSUPDATE-FROM 10.100.0.0/24`
+```
+pdnsutil set-meta hackernet.se ALLOW-DNSUPDATE-FROM 192.168.1.0/24
+pdnsutil set-meta hackernet.se ALLOW-DNSUPDATE-FROM 10.100.0.0/24
+```
 
 Se till så att mastern skickar en notification till slavarna vid varje
 uppdatering. Annars får man vänta tills slaven själv frågar mastern.
 
-`pdnsutil set-meta hackernet.se NOTIFY-DNSUPDATE 1`
+```
+pdnsutil set-meta hackernet.se NOTIFY-DNSUPDATE 1
+```
 
 Lägg sedan till följande rad i **pdns.conf**
 
-`dnsupdate=yes`
+```
+dnsupdate=yes
+```
 
 Starta om PowerDNS, för att verifiera att det funkar kan du köra
 följande kommando:
 
-`nsupdate <<!`
+```
+nsupdate <<!
+```
 `server `<ip>` `<port>
-`zone hackernet.se`
-`update add ddnstest.hackernet.se 3600 A 10.13.37.1`
+```
+zone hackernet.se
+update add ddnstest.hackernet.se 3600 A 10.13.37.1
+```
 `key ddns_update `<lång nykel>
-`send`
-`! `
+```
+send
+! 
+```
 
 Om det funkar kommer ett record i hackernet.se zonen att skapas som
 heter ddnstest. Repitera på fler domäner samt reverse zoner om sådana
@@ -480,30 +554,42 @@ Under här kommer ett exempel för [ISC_DHCP](/ISC_DHCP "wikilink").
 Skapa en fil som heter ddns.key med följande innehåll under
 **/etc/dhcp/**:
 
-`key "ddns_update" {`
-`        algorithm hmac-sha512;`
+```
+key "ddns_update" {
+        algorithm hmac-sha512;
+```
 `        secret "`<lång nykel>`";`
-`};`
+```
+};
+```
 
 Lägg sedan in följande rader i DHCP conf filen:
 
-`ddns-updates on;`
-`ddns-update-style interim;`
-`update-static-leases on;`
+```
+ddns-updates on;
+ddns-update-style interim;
+update-static-leases on;
+```
 
-`ddns-domainname "hackernet.se";`
-`ddns-rev-domainname "in-addr.arpa.";`
+```
+ddns-domainname "hackernet.se";
+ddns-rev-domainname "in-addr.arpa.";
+```
 
-`include "/etc/dhcp/ddns.key";`
-`zone hackernet.se {`
-`    primary 127.0.0.1;`
-`    key ddns_update;`
-`}`
+```
+include "/etc/dhcp/ddns.key";
+zone hackernet.se {
+    primary 127.0.0.1;
+    key ddns_update;
+}
+```
 
-`zone 0.168.192.in-addr.arpa. {`
-`    primary 127.0.0.1;`
-`    key ddns_update;`
-`}`
+```
+zone 0.168.192.in-addr.arpa. {
+    primary 127.0.0.1;
+    key ddns_update;
+}
+```
 
 Byt ut 127.0.0.1 mot din primära dns server.
 
@@ -543,44 +629,64 @@ benchmarka backend delen och mycket mer.
 
 **Skapa en native zone**:
 
-`pdnsutil create-zone hackernet.se`
+```
+pdnsutil create-zone hackernet.se
+```
 
 **Skapa en native zone med ett NS record**:
 
-`pdnsutil create-zone hackernet.se ns1.hackernet.se`
+```
+pdnsutil create-zone hackernet.se ns1.hackernet.se
+```
 
 **Skapa en slave zone där IP'n i slutet är master server**:
 
-`pdnsutil create-slave-zone hackernet.se 10.0.0.1`
+```
+pdnsutil create-slave-zone hackernet.se 10.0.0.1
+```
 
 **Editera en zone**:
 
-`pdnsutil edit-zone hackernet.se`
+```
+pdnsutil edit-zone hackernet.se
+```
 
 **Skapa ett NS record**:
 
-`pdnsutil add-record hackernet.se @ NS ns1.hackernet.se`
+```
+pdnsutil add-record hackernet.se @ NS ns1.hackernet.se
+```
 
 **Skapa ett record**:
 
-`pdnsutil add-record hackernet.se ns1 [A/AAAA/MX/CNAME/...] 10.0.0.2`
+```
+pdnsutil add-record hackernet.se ns1 [A/AAAA/MX/CNAME/...] 10.0.0.2
+```
 
 **Lista alla zoner**:
 
-`pdnsutil list-all-zones`
+```
+pdnsutil list-all-zones
+```
 
 **Ändra zone operation**:
 
-`pdnsutil set-kind hackernet.se master/native/slave`
+```
+pdnsutil set-kind hackernet.se master/native/slave
+```
 
 **Tillåt alla IP's som är inlagda som en namnserver för domänen att göra
 zone transfers**:
 
-`pdnsutil set-meta hackernet.se ALLOW-AXFR-FROM AUTO-NS`
+```
+pdnsutil set-meta hackernet.se ALLOW-AXFR-FROM AUTO-NS
+```
 
 **Öka SOA serial med 1**:
 
-`pdnsutil increase-serial hackernet.se`
+```
+pdnsutil increase-serial hackernet.se
+```
 
 pdnscat
 -------
@@ -593,7 +699,9 @@ username som root, admin och den användaren du är.
 **Curl** och **JQ** behövs för att scriptet ska fungera.
 
 `git clone `[`https://github.com/Hackernet-se/pdnscat`](https://github.com/Hackernet-se/pdnscat)
-`./pdnscat arg1 arg2 arg3 ... [f] [a|r|q] ..."`
+```
+./pdnscat arg1 arg2 arg3 ... [f] [a|r|q] ..."
+```
 
 #### Exempel
 

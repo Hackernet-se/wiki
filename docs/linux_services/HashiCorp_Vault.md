@@ -27,24 +27,32 @@ Server
 
 Starta server
 
-`vault server`
-`vault status`
+```
+vault server
+vault status
+```
 
 Klient
 ------
 
 `export VAULT_ADDR='`[`http://127.0.0.1:8200`](http://127.0.0.1:8200)`'`
-`export VAULT_TOKEN="s.Va50wjIqgl6zHReb4aLDb"`
+```
+export VAULT_TOKEN="s.Va50wjIqgl6zHReb4aLDb"
+```
 
 Write simple secret
 
-`vault kv put secret/hello foo=world`
+```
+vault kv put secret/hello foo=world
+```
 
 Read secret
 
-`vault secrets list`
-`vault kv get secret/hello`
-`vault kv get -format=json secret/hello | jq .`
+```
+vault secrets list
+vault kv get secret/hello
+vault kv get -format=json secret/hello | jq .
+```
 
 Konfiguration
 -------------
@@ -53,20 +61,28 @@ Konfiguration
 
 Enable LDAP login
 
-`vault auth enable ldap`
+```
+vault auth enable ldap
+```
 
 Konfa LDAP pluginet
 
-`vault write auth/ldap/config \`
+```
+vault write auth/ldap/config \
+```
 `    url="`[`ldaps://ad.hackernet.se`](ldaps://ad.hackernet.se)`" \`
-`    userattr="sAMAccountName" \`
-`    userdn="OU=users,DC=hackernet,DC=se" \`
-`    groupdn="OU=groups,DC=hackernet,DC=se" \`
-`    groupattr="cn" \`
+```
+    userattr="sAMAccountName" \
+    userdn="OU=users,DC=hackernet,DC=se" \
+    groupdn="OU=groups,DC=hackernet,DC=se" \
+    groupattr="cn" \
+```
 `    binddn="CN=`<binduser>`,DC=hackernet,DC=se" \`
 `    bindpass='`<secret password>`' \`
-`    insecure_tls=false \`
-`    starttls=true`
+```
+    insecure_tls=false \
+    starttls=true
+```
 
 Ge en AD/LDAP grupp login rättigheter samt default policyn.
 

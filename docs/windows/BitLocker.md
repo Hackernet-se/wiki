@@ -123,18 +123,24 @@ för en implementation.
 
 Generella BitLocker-inställningar
 
-`Choose drive encryption method and cipher strength`
-`Provide the unique identifiers for your organization`
+```
+Choose drive encryption method and cipher strength
+Provide the unique identifiers for your organization
+```
 
 TPM-inställningar
 
-`Turn on TPM backup to Active Directory Domain Services`
+```
+Turn on TPM backup to Active Directory Domain Services
+```
 
 Specifika inställningar för systemdiskkryptering.
 
-`Choose how BitLocker-protected operating system drives can be recovered`
-`Configure TPM platform validation profile`
-`Require additional authentication at startup`
+```
+Choose how BitLocker-protected operating system drives can be recovered
+Configure TPM platform validation profile
+Require additional authentication at startup
+```
 
 Författarens rekommendationer: Ställ in GPO så att det automatiskt tas
 backup på kryptonycklarna till AD:t, samt kryptera inte datorer som inte
@@ -179,5 +185,3 @@ administratörernas kännedom?
 
 En diskkryptering kan ta flera timmar, kan datorn stängas av och sättas
 på under tiden utan att det förstör något?
-
-[Category:Windows](/Category:Windows "wikilink")

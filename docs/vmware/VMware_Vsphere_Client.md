@@ -18,11 +18,10 @@ Kända Fel
 Fel som kan uppstå med vsphere client.
 
 **`Om`` ``man`` ``får`` ``felet`` ``VPXclient.exe`` ``har`` ``slutat`` ``svara`` ``vid`` ``start`` ``av`` ``programmet.`**
-`Länkplats C:\Program Files (x86)\VMware\Infrastructure\Virtual Infrastructure Client\Launcher (windows 10 Pro x64)`
-`   - Redigera fil VpxClient.exe.config och lägg till :`
+```
+Länkplats C:\Program Files (x86)\VMware\Infrastructure\Virtual Infrastructure Client\Launcher (windows 10 Pro x64)
+   - Redigera fil VpxClient.exe.config och lägg till :
+```
 `         `<startup useLegacyV2RuntimeActivationPolicy="true">
 `             `<supportedRuntime version="v4.0"/>
 `         `</startup>
-
-[Category:VMware](/Category:VMware "wikilink")
-[Category:Guider](/Category:Guider "wikilink")

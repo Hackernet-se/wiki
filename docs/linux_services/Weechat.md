@@ -3,23 +3,7 @@ title: Weechat
 permalink: /Weechat/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") WeeChat är en
-terminalbaserad Internet Relay Chat (IRC) klient. WeeChat är skriven i
-C, och är gjord för att vara flexibel och utbyggbar. WeeChat har alla
-möjliga plugins skrivna i olika språk t.ex.
-[Python](/Python "wikilink"), Perl, och Ruby.
-
-Installation
-------------
-
-Exempel: Ubuntu 18.04
-
-`sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 11E9DE8848F2B65222AA75B8D1820DB22A11534E`
-`sudo apt-get install apt-transport-https`
-`echo "deb `[`https://weechat.org/ubuntu`](https://weechat.org/ubuntu)` bionic main" | sudo tee /etc/apt/sources.list.d/weechat.list `
-`sudo apt-get update && sudo apt-get -y install weechat weechat-scripts`
-
-Använd [Tmux](/Tmux "wikilink") och [Systemd](/Systemd "wikilink") för
+ för
 att få weechat som en bakgrundstjänst med autostart.
 
 ``` bash
@@ -47,33 +31,45 @@ Starta Weechat och lägg in grundläggande konfiguration. Glöm inte att
 spara efter varje inställning du gör som du vill ska finnas kvar efter
 reboot.
 
-`sudo systemctl start weechat && tmux attach`
+```
+sudo systemctl start weechat && tmux attach
+```
 
-`/set irc.server_default.nicks "HorseBoy_92"`
-`/set irc.server_default.realname "John Smith"`
-`/save`
+```
+/set irc.server_default.nicks "HorseBoy_92"
+/set irc.server_default.realname "John Smith"
+/save
+```
 
 #### Anslut till irc-nätverk
 
 Basic exempel:
 
-`/server add freenode irc.freenode.net/6667 -autoconnect`
-`/set irc.server.freenode.autojoin "#FreeNAS,#cisco,#pfsense"`
+```
+/server add freenode irc.freenode.net/6667 -autoconnect
+/set irc.server.freenode.autojoin "#FreeNAS,#cisco,#pfsense"
+```
 
 Exempel med password och self-signed cert server side.
 
-`/server add hacker irc1.hacker.se/6667 -password=noes -ssl -autoconnect`
-`/set irc.server.hacker.ssl_verify off`
-`/save`
+```
+/server add hacker irc1.hacker.se/6667 -password=noes -ssl -autoconnect
+/set irc.server.hacker.ssl_verify off
+/save
+```
 
 Anslut till nästa IRC server.
 
-`/reconnect freenode -switch`
+```
+/reconnect freenode -switch
+```
 
 #### Script
 
-`/script`
-`/script install keepnick.py`
+```
+/script
+/script install keepnick.py
+```
 
 #### Ångra inställning
 
@@ -85,22 +81,30 @@ Alla kommandon som börjar med /set kan man köra /unset på.
 
 Relay behövs för tex glowing-bear, se nedan.
 
-`/set relay.network.password secretpw`
-`/relay add weechat 9001`
+```
+/set relay.network.password secretpw
+/relay add weechat 9001
+```
 
 Vet ej vilken av följande två som behövs för att tillåta klienter från
 ett annat nät än samma som weechatservern.
 
-`/set relay.network.allowed_ips *`
-`/set relay.network.websocket_allowed_origins *`
+```
+/set relay.network.allowed_ips *
+/set relay.network.websocket_allowed_origins *
+```
 
 Weechat relay lyssnar default efter IPv6. För att stänga av.
 
-`/set relay.network.ipv6 off`
+```
+/set relay.network.ipv6 off
+```
 
 #### Skicka ett kommando när du ansluter.
 
-`/set irc.server.quakenet.command "/MSG Q@CServe.quakenet.org AUTH USERNAME PASSWORD"`
+```
+/set irc.server.quakenet.command "/MSG Q@CServe.quakenet.org AUTH USERNAME PASSWORD"
+```
 
 #### Filter
 
@@ -109,22 +113,28 @@ meddelande.
 
 För att filtrera bort join/part/quit-meddelanden.
 
-`/set irc.look.smart_filter on`
-`/filter add joinquit *.freenode.* irc_join,irc_part,irc_quit *`
+```
+/set irc.look.smart_filter on
+/filter add joinquit *.freenode.* irc_join,irc_part,irc_quit *
+```
 
 Fish
 ----
 
-`aptitude install python-crypto`
-`/script install fish.py`
-`/set fish.look.mark_encrypted "."`
-`/set fish.look.mark_position off|begin|end`
+```
+aptitude install python-crypto
+/script install fish.py
+/set fish.look.mark_encrypted "."
+/set fish.look.mark_position off|begin|end
+```
 
-`DH1080:                    /blowkey exchange nick `
-`Set the key for a channel: /blowkey set -server freenet #blowfish key`
-`Remove the key:            /blowkey remove #blowfish`
-`Set the key for a query:   /blowkey set nick secret+key`
-`List all keys:             /blowkey `
+```
+DH1080:                    /blowkey exchange nick 
+Set the key for a channel: /blowkey set -server freenet #blowfish key
+Remove the key:            /blowkey remove #blowfish
+Set the key for a query:   /blowkey set nick secret+key
+List all keys:             /blowkey 
+```
 
 Glowing Bear
 ------------
@@ -146,27 +156,35 @@ använd SSL.
 
 #### Skapa eget cert
 
-`mkdir -p ~/.weechat/ssl && cd ~/.weechat/ssl`
-`openssl req -nodes -newkey rsa:4096 -keyout relay.pem -x509 -days 3650 -out relay.pem -subj "/CN=glowing.fu.se/"`
+```
+mkdir -p ~/.weechat/ssl && cd ~/.weechat/ssl
+openssl req -nodes -newkey rsa:4096 -keyout relay.pem -x509 -days 3650 -out relay.pem -subj "/CN=glowing.fu.se/"
+```
 
-`/set relay.network.password secretpw`
-`/relay sslcertkey`
-`/relay add ssl.weechat 9001`
+```
+/set relay.network.password secretpw
+/relay sslcertkey
+/relay add ssl.weechat 9001
+```
 
 #### Let's Encrypt
 
 Weechat kan använda cert som är signade med [Let's
 Encrypt](/Let's_Encrypt "wikilink").
 
-`mkdir -p ~/.weechat/ssl`
-`cat cert.pem > ~/.weechat/ssl/relay.pem && cat chain.pem >> ~/.weechat/ssl/relay.pem && cat privkey.pem >> ~/.weechat/ssl/relay.pem`
-`/set relay.network.password secretpw`
-`/relay sslcertkey`
-`/relay add ssl.weechat 9001`
+```
+mkdir -p ~/.weechat/ssl
+cat cert.pem > ~/.weechat/ssl/relay.pem && cat chain.pem >> ~/.weechat/ssl/relay.pem && cat privkey.pem >> ~/.weechat/ssl/relay.pem
+/set relay.network.password secretpw
+/relay sslcertkey
+/relay add ssl.weechat 9001
+```
 
 **För att ladda om SSL certet.**
 
-`/relay sslcertkey`
+```
+/relay sslcertkey
+```
 
 ### Bakom Reverse Proxy
 

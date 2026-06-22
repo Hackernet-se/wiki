@@ -19,12 +19,12 @@ MST använder en BPDU för att skicka information om alla instanser.
 
 Exempel
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_MST_BPDU.png>](/File:Cisco_MST_BPDU.png "wikilink")
 
-</div>
-</div>
+![Cisco_MST_BPDU.png](../img/Cisco_MST_BPDU.png)
+
+
+
 
 **Topology change**
 Den enda gång en topologiändring anses hända är när en non-edge port går
@@ -69,43 +69,55 @@ region:
 -   revision number
 -   instances
 
-`spanning-tree extend system-id`
-`spanning-tree mode mst`
-`spanning-tree mst configuration`
-` name Site1`
-` revision 1`
-` instance 1 vlan 1-2000`
-` instance 2 vlan 2001-4094`
-` show current`
+```
+spanning-tree extend system-id
+spanning-tree mode mst
+spanning-tree mst configuration
+ name Site1
+ revision 1
+ instance 1 vlan 1-2000
+ instance 2 vlan 2001-4094
+ show current
+```
 
 Root, priority 0 är det absolut lägsta medans root primary sätter prio
 till 24k förutsatt att det ger root-rollen, detta ändras inte dynamiskt.
 
-`spanning-tree mst 1 root primary`
-`spanning-tree mst 2 priority 0`
-`spanning-tree mst 0 root primary diameter 7 hello-time 2`
+```
+spanning-tree mst 1 root primary
+spanning-tree mst 2 priority 0
+spanning-tree mst 0 root primary diameter 7 hello-time 2
+```
 
 Port Cost & Priority
 
-`interface Gi0/1`
-` spanning-tree mst 1 cost 50`
-` spanning-tree mst 1 port-priority 128`
+```
+interface Gi0/1
+ spanning-tree mst 1 cost 50
+ spanning-tree mst 1 port-priority 128
+```
 
 **Verify**
 
-`show spanning-tree mst`
-`show spanning-tree mst interface`
+```
+show spanning-tree mst
+show spanning-tree mst interface
+```
 
-`spanning-tree logging `
-`test spanning-tree diameter 3`
-`test spanning-tree get configuration mst`
+```
+spanning-tree logging 
+test spanning-tree diameter 3
+test spanning-tree get configuration mst
+```
 
 Mappa alla secondary vlan till samma MST-instans som deras primary VLAN
 befinner sig i, se även [Private
 VLAN](/Cisco_VLAN#Private_VLAN "wikilink").
 
-`spanning-tree mst configuration`
-` private-vlan synchronize`
+```
+spanning-tree mst configuration
+ private-vlan synchronize
+```
 
 MST började implementeras av tillverkarna innan standarden var helt
 spikad vilket man bör tänka på om man kör gamla enheter. Dock säger
@@ -114,28 +126,36 @@ automatiskt av kompabilitetsskäl. I normalfallet märker man ingenting
 men om grannen är tyst, t.ex. en root port, kan man slå på det per
 interface.
 
-`interface gi0/7`
-` spanning-tree mst pre-standard`
+```
+interface gi0/7
+ spanning-tree mst pre-standard
+```
 
-`show spanning-tree mst configuration digest`
+```
+show spanning-tree mst configuration digest
+```
 
 Nexus
 -----
 
 Grundkonf för [NX-OS](/Cisco_Nexus "wikilink").
 
-`spanning-tree mode mst`
-`spanning-tree mst configuration`
-` name DC1`
-` revision 1`
-` exit`
+```
+spanning-tree mode mst
+spanning-tree mst configuration
+ name DC1
+ revision 1
+ exit
+```
 
-`spanning-tree mst 0 priority 32768`
-`spanning-tree pathcost method long`
-`spanning-tree port type edge default`
-`spanning-tree port type edge bpduguard default`
-`spanning-tree port type edge bpdufilter default`
-`spanning-tree loopguard default`
+```
+spanning-tree mst 0 priority 32768
+spanning-tree pathcost method long
+spanning-tree port type edge default
+spanning-tree port type edge bpduguard default
+spanning-tree port type edge bpdufilter default
+spanning-tree loopguard default
+```
 
 Extensions
 ==========
@@ -144,7 +164,9 @@ Det finns många tillägg till spanning-tree som kan öka stabilitet och
 säkerhet. Dessa agerar fristående från varandra förutom att de går att
 konfigurera ihop. Detta är tillägg för protokoll som kör Rapid ST.
 
-`show spanning-tree summary`
+```
+show spanning-tree summary
+```
 
 ### PortFast
 
@@ -164,20 +186,28 @@ forwarding.
 
 Globalt, aktiveras på alla portar i operational state: access
 
-`spanning-tree portfast default`
+```
+spanning-tree portfast default
+```
 
 Per interface, on/off
 
-`spanning-tree portfast`
-`spanning-tree portfast disable`
+```
+spanning-tree portfast
+spanning-tree portfast disable
+```
 
 Verify
 
-`show spanning-tree interface gi0/10 portfast`
+```
+show spanning-tree interface gi0/10 portfast
+```
 
 Vill man ha portfast på en trunk måste man ställa det per interface
 
-`spanning-tree portfast trunk`
+```
+spanning-tree portfast trunk
+```
 
 Kör aldrig portfast mot andra switchar! MST och RSTP har tekniker för
 att vara snabba ändå.
@@ -190,16 +220,22 @@ Po2, putting Gi0/8 in err-disable state*
 
 Globalt, skyddar alla PortFast-portar
 
-`spanning-tree bpduguard default`
+```
+spanning-tree bpduguard default
+```
 
 Per interface, on/off
 
-`spanning-tree bpduguard enable`
-`spanning-tree bpduguard disable`
+```
+spanning-tree bpduguard enable
+spanning-tree bpduguard disable
+```
 
 Auto recovery
 
-`errdisable recovery cause bpduguard `
+```
+errdisable recovery cause bpduguard 
+```
 
 ### Root Guard
 
@@ -213,7 +249,9 @@ GigabitEthernet0/8 on VLAN0002.*
 
 Per interface
 
-`spanning-tree guard root`
+```
+spanning-tree guard root
+```
 
 ### BPDU Filter
 
@@ -227,7 +265,9 @@ sätt att terminera sin STP-domän på.
 
 Globalt, gäller alla PortFast-portar
 
-`spanning-tree portfast bpdufilter default`
+```
+spanning-tree portfast bpdufilter default
+```
 
 Man kan också hårdställa BPDU-filter per interface om man t.ex. ska
 splita ett nätverk i olika STP-domäner. Inga BPDUer kommer att skickas
@@ -235,8 +275,10 @@ eller behandlas.
 
 Per interface, hard on/off
 
-`spanning-tree bpdufilter enable`
-`spanning-tree bpdufilter disable`
+```
+spanning-tree bpdufilter enable
+spanning-tree bpdufilter disable
+```
 
 ### Loop Guard
 
@@ -252,11 +294,15 @@ guard blocking port GigabitEthernet0/8 on VLAN0002.*
 
 Globalt, skyddar alla root- och alternate-portar
 
-`spanning-tree loopguard default`
+```
+spanning-tree loopguard default
+```
 
 Per interface
 
-`spanning-tree guard loop`
+```
+spanning-tree guard loop
+```
 
 ### Bridge Assurance
 
@@ -275,11 +321,15 @@ finns även i nyare versioner av IOS.
 
 Global
 
-`spanning-tree bridge assurance`
+```
+spanning-tree bridge assurance
+```
 
 Per interface
 
-`spanning-tree portfast network `
+```
+spanning-tree portfast network 
+```
 
 ### PVST Simulation
 
@@ -292,8 +342,10 @@ komma BPDUer. Rotbryggan för alla VLAN måste finnas på samma sida,
 antingen i MST eller i PVST+. Om man inte uppfyller detta kommer porten
 att hamna i PVST simulation-inconsistent state dvs forwarding stängs av.
 
-`interface Gi0/2`
-` spanning-tree mst simulate pvst`
+```
+interface Gi0/2
+ spanning-tree mst simulate pvst
+```
 
 ### Others
 
@@ -305,5 +357,3 @@ dock inte med de äldsta varianterna av STP.
 
 **UDLD**
 Se [Cisco UDLD](/Cisco_UDLD "wikilink")
-
-[Category:Cisco](/Category:Cisco "wikilink")

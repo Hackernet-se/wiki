@@ -50,5 +50,3 @@ suzieq-gui &
 ```
 
 Webgui når man sedan på port 8501.
-
-[Category:Network](/Category:Network "wikilink")

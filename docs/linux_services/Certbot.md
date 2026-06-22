@@ -3,9 +3,7 @@ title: Certbot
 permalink: /Certbot/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") Certbot används för att
-enkelt kunna automatisera nya cert ifrån [Let's
-Encrypt](/Let%27s_Encrypt "wikilink").
+.
 
 Installation
 ============
@@ -18,30 +16,38 @@ Installation
 
 Börja med att installera EPEL repot.
 
-`yum -y install epel-release yum-utils`
+```
+yum -y install epel-release yum-utils
+```
 
 Installera sedan Certbot
 
-`yum install certbot python2-certbot-nginx`
+```
+yum install certbot python2-certbot-nginx
+```
 
-</div>
+
 <div id="tab2" class="tab-pane fade">
 
 Börja med lägga till nya repon.
 
-`apt-get update`
-`apt-get install software-properties-common`
-`add-apt-repository universe`
-`add-apt-repository ppa:certbot/certbot`
-`apt-get update`
+```
+apt-get update
+apt-get install software-properties-common
+add-apt-repository universe
+add-apt-repository ppa:certbot/certbot
+apt-get update
+```
 
 Installera sedan certbot.
 
-`apt-get install certbot python-certbot-nginx`
-`  `
+```
+apt-get install certbot python-certbot-nginx
+  
+```
 
-</div>
-</div>
+
+
 
 Konfiguration
 -------------
@@ -59,11 +65,15 @@ Signera certifikat
 Om du en gång skapat ett certifikat och vill signa om det för att det är
 på väg att gå ut kan du köra:
 
-`certbot renew`
+```
+certbot renew
+```
 
 Om du vill göra en dry run gör du det med:
 
-`certbot renew --dry-run`
+```
+certbot renew --dry-run
+```
 
 Certifikat kommer inte renewas om det är mer än 30 dagar kvar tills dom
 går ut by default .
@@ -77,7 +87,9 @@ validera att domänen du vill signa för pekar mot dig och att det är du.
 Följande kommando kommer att signera ett cert för hackernet.se och
 www.hackernet.se.
 
-`certbot certonly --webroot --agree-tos --no-eff-email --email dinmail@hackernet.nu -w /path/to/webfolder -d hackernet.se, www.hackernet.se`
+```
+certbot certonly --webroot --agree-tos --no-eff-email --email dinmail@hackernet.nu -w /path/to/webfolder -d hackernet.se, www.hackernet.se
+```
 
 ### DNS-01
 
@@ -87,20 +99,30 @@ challenge kan man också signa wildcard certifikat.
 Börja med att skapa filen **/etc/letsencrypt/dns-01.ini** med följande
 innehåll:
 
-`# Target DNS server`
+```
+# Target DNS server
+```
 `dns_rfc2136_server = `<din dns server>
-`# Target DNS port`
-`dns_rfc2136_port = 53`
-`# TSIG key name`
+```
+# Target DNS port
+dns_rfc2136_port = 53
+# TSIG key name
+```
 `dns_rfc2136_name = `<namnet på din ddns nykel>`.`
-`# TSIG key secret`
+```
+# TSIG key secret
+```
 `dns_rfc2136_secret = `<din hashade nykel>
-`# TSIG key algorithm`
-`dns_rfc2136_algorithm = HMAC-SHA512`
+```
+# TSIG key algorithm
+dns_rfc2136_algorithm = HMAC-SHA512
+```
 
 Kör sedan följande kommando:
 
-`certbot certonly --agree-tos --no-eff-email --email dinmail@hackernet.nu --dns-rfc2136 --dns-rfc2136-credentials /etc/letsencrypt/dns-01.ini -d *.subdomain1.hackernet.se,*.subdomain2.hackernet.se,*.subdomain3.hackernet.se`
+```
+certbot certonly --agree-tos --no-eff-email --email dinmail@hackernet.nu --dns-rfc2136 --dns-rfc2136-credentials /etc/letsencrypt/dns-01.ini -d *.subdomain1.hackernet.se,*.subdomain2.hackernet.se,*.subdomain3.hackernet.se
+```
 
 Automatisera certifikat
 -----------------------
@@ -153,15 +175,21 @@ Eftersom certbot by default inte signerar nya cert om dom det är mer än
 
 Starta sedan timern:
 
-`systemctl start certbot-renewal.timer`
+```
+systemctl start certbot-renewal.timer
+```
 
 Enable timern så att den startas vid boot:
 
-`systemctl enable certbot-renewal.timer`
+```
+systemctl enable certbot-renewal.timer
+```
 
 För att visa alla aktiva timers körs:
 
-`systemctl list-timers`
+```
+systemctl list-timers
+```
 
 ### Hooks
 

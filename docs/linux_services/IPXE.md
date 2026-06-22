@@ -36,7 +36,9 @@ Installation
 Ladda hem senaste source koden från GIT.
 
 `git clone `[`git://git.ipxe.org/ipxe.git`](git://git.ipxe.org/ipxe.git)` && cd ipxe/src`
-`make`
+```
+make
+```
 
 Bootbar ISO
 -----------
@@ -62,12 +64,16 @@ iPXE har stöd för följande vmware nics.
 Börja med att välja en av dom supportade nics genom att ändra följande
 rad i din **.vmx** fil.
 
-`ethernet0.virtualDev = "e1000"`
+```
+ethernet0.virtualDev = "e1000"
+```
 
 Ladda hem source koden och bygg filerna med följande kommando.
 
 `git clone `[`git://git.ipxe.org/ipxe.git`](git://git.ipxe.org/ipxe.git)` && cd ipxe/src`
-`make bin/8086100f.mrom bin/808610d3.mrom bin/10222000.rom bin/15ad07b0.rom`
+```
+make bin/8086100f.mrom bin/808610d3.mrom bin/10222000.rom bin/15ad07b0.rom
+```
 
 Kopiera sedan över följande filer **8086100f.mrom, 808610d3.mrom,
 10222000.rom** och **15ad07b0.rom** till din vmware server och lägg dom
@@ -75,11 +81,11 @@ på tex ett datastore.
 
 Lägg sedan till följande rader i din **.vmx** fil.
 
-`ethernet0.opromsize = 262144`
-`e1000bios.filename = "/path/to/datastore/8086100f.mrom"`
-`e1000ebios.filename = "/path/to/datastore/808610d3.mrom"`
-`nbios.filename = "/path/to/datastore/10222000.rom"`
-`# nxbios.filename = ""`
-`nx3bios.filename = "/path/to/datastore/15ad07b0.rom"`
-
-[Category:Guider](/Category:Guider "wikilink")
+```
+ethernet0.opromsize = 262144
+e1000bios.filename = "/path/to/datastore/8086100f.mrom"
+e1000ebios.filename = "/path/to/datastore/808610d3.mrom"
+nbios.filename = "/path/to/datastore/10222000.rom"
+# nxbios.filename = ""
+nx3bios.filename = "/path/to/datastore/15ad07b0.rom"
+```

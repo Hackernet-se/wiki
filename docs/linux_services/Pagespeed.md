@@ -3,12 +3,7 @@ title: Pagespeed
 permalink: /Pagespeed/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") PageSpeed är ett program
-utvecklat av Google för att göra internet lite snabbare.
-(https://developers.google.com/speed/pagespeed/) Om man kollar på
-källkoden på Googles söksida ser man ett oläsligt hav av tecken, det är
-resultatet av PageSpeed på deras sida. Det finns moduler för
-[Nginx](/Nginx "wikilink") och [Apache](/Apache "wikilink"). (Pagespeed
+. (Pagespeed
 module is only available as source)
 
 Optimiseringsfilter
@@ -83,11 +78,13 @@ Nginx
 
 (Installation)
 
-`server {`
-`...`
-`pagespeed on;`
-`pagespeed RewriteLevel CoreFilters;`
-`pagespeed FileCachePath "/var/cache/ngx_pagespeed/";`
-`pagespeed EnableFilters combine_css,remove_comments,collapse_whitespace;`
-`...`
-`}`
+```
+server {
+...
+pagespeed on;
+pagespeed RewriteLevel CoreFilters;
+pagespeed FileCachePath "/var/cache/ngx_pagespeed/";
+pagespeed EnableFilters combine_css,remove_comments,collapse_whitespace;
+...
+}
+```

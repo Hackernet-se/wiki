@@ -30,16 +30,22 @@ när den kommer tillbaka.
 Installation
 ============
 
-`sudo dnf/apt-get install glusterfs-server`
-`systemctl status glusterfs-server`
+```
+sudo dnf/apt-get install glusterfs-server
+systemctl status glusterfs-server
+```
 
 **Klient**
 
-`sudo dnf/apt-get install glusterfs-client`
+```
+sudo dnf/apt-get install glusterfs-client
+```
 
 **Version**
 
-`glusterfsd --version`
+```
+glusterfsd --version
+```
 
 Konfiguration
 =============
@@ -47,29 +53,39 @@ Konfiguration
 För att klustra noder måste man peera och lägga till enheter till
 trusted server pool. Detta går även göra med hostnamn.
 
-`sudo gluster peer probe 10.0.0.11`
-`gluster peer status`
+```
+sudo gluster peer probe 10.0.0.11
+gluster peer status
+```
 
 ### Volym
 
 Replicated, 2 är antalet noder med datan.
 
-`sudo gluster volume create gluster-vol replica 2 10.0.0.10:/data 10.0.0.11:/data`
-`sudo gluster volume start gluster-vol`
+```
+sudo gluster volume create gluster-vol replica 2 10.0.0.10:/data 10.0.0.11:/data
+sudo gluster volume start gluster-vol
+```
 
 Vitlista klienter baserat på IP-adresser.
 
-`sudo gluster volume set gluster-vol auth.allow 10.0.0.*,10.5.5.10`
+```
+sudo gluster volume set gluster-vol auth.allow 10.0.0.*,10.5.5.10
+```
 
 Verify
 
-`sudo gluster volume status`
-`sudo gluster volume info  `
+```
+sudo gluster volume status
+sudo gluster volume info  
+```
 
 ### Klient
 
-`mount.glusterfs 10.0.0.10:/data /mnt/glusterfs`
-`df -h`
+```
+mount.glusterfs 10.0.0.10:/data /mnt/glusterfs
+df -h
+```
 
 Geo-replication
 ---------------
@@ -80,6 +96,6 @@ asynchronous och inkrementell replikering. Ena sidan är master och andra
 slave. Klockorna ska vara synkade och [NTP](/NTP "wikilink") bör
 användas.
 
-`gluster volume geo-replication [SOURCE_DATASTORE] [REMOTE_SERVER]:[REMOTE_PATH] start`
-
-[Category:Guider](/Category:Guider "wikilink")
+```
+gluster volume geo-replication [SOURCE_DATASTORE] [REMOTE_SERVER]:[REMOTE_PATH] start
+```

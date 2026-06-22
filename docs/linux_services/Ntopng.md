@@ -11,14 +11,18 @@ Installation
 14.04
 
 `wget `[`http://www.nmon.net/apt-stable/14.04/all/apt-ntop.deb`](http://www.nmon.net/apt-stable/14.04/all/apt-ntop.deb)` && sudo dpkg -i apt-ntop.deb`
-`sudo apt-get clean all && sudo apt-get update && sudo apt-get -y install ntopng ntopng-data nbox libzmq3 libhiredis0.10`
-`sudo service apache2 restart`
+```
+sudo apt-get clean all && sudo apt-get update && sudo apt-get -y install ntopng ntopng-data nbox libzmq3 libhiredis0.10
+sudo service apache2 restart
+```
 
 16.04
 
 `wget `[`http://packages.ntop.org/apt-stable/16.04/all/apt-ntop.deb`](http://packages.ntop.org/apt-stable/16.04/all/apt-ntop.deb)` && sudo dpkg -i apt-ntop.deb`
-`sudo apt-get clean all && sudo apt-get update && sudo apt-get -y install ntopng ntopng-data nbox nprobe`
-`sudo service apache2 restart`
+```
+sudo apt-get clean all && sudo apt-get update && sudo apt-get -y install ntopng ntopng-data nbox nprobe
+sudo service apache2 restart
+```
 
 Konfiguration
 -------------
@@ -42,8 +46,10 @@ Det finns olika sätt att få den speglade trafiken till ntop.
 
 Listener Port
 
-`echo "auto eth1" | sudo tee -a /etc/network/interfaces`
-`echo "iface eth1 inet manual" | sudo tee -a /etc/network/interfaces`
+```
+echo "auto eth1" | sudo tee -a /etc/network/interfaces
+echo "iface eth1 inet manual" | sudo tee -a /etc/network/interfaces
+```
 
 NetFlow
 -------
@@ -55,9 +61,9 @@ decouples ntopng from nProbe.
 OBS nprobe kräver licens, se även [Cisco
 NetFlow](/Cisco_NetFlow "wikilink").
 
-`sudo nprobe --zmq "tcp://*:5556" -i none [eth0] -n none --collector-port 2055 &`
-`sudo ntopng -i tcp://127.0.0.1:5556`
+```
+sudo nprobe --zmq "tcp://*:5556" -i none [eth0] -n none --collector-port 2055 &
+sudo ntopng -i tcp://127.0.0.1:5556
+```
 
 **nProbe modes** [left\|607x607px](/File:Nprobe.PNG "wikilink")
-
-[Category:Guider](/Category:Guider "wikilink")

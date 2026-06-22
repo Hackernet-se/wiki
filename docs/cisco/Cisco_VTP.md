@@ -53,12 +53,12 @@ advertisements.
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_VTP_Summary.png>](/File:Cisco_VTP_Summary.png "wikilink")
 
-</div>
-</div>
+![Cisco_VTP_Summary.png](../img/Cisco_VTP_Summary.png)
+
+
+
 
 **Subset advertisement**
 Skickas ut efter en VLAN-förändring och innehåller hela databasen. Kan
@@ -68,12 +68,12 @@ dock behövas flera paket ifall det är en stor databas.
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_VTP_Subset.png>](/File:Cisco_VTP_Subset.png "wikilink")
 
-</div>
-</div>
+![Cisco_VTP_Subset.png](../img/Cisco_VTP_Subset.png)
+
+
+
 
 **Advertisement requests**
 Skickas av server och client när de vill ha hela VLAN-databasen, t.ex.
@@ -84,12 +84,12 @@ Skickas även av klienter när de startas om eller blir client.
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_VTP_Request.png>](/File:Cisco_VTP_Request.png "wikilink")
 
-</div>
-</div>
+![Cisco_VTP_Request.png](../img/Cisco_VTP_Request.png)
+
+
+
 
 **VTP join messages**
 Skickas av server och client var 6 sekund om pruning är påslaget.
@@ -99,17 +99,19 @@ Berättar om vilka VLAN som är aktiva.
 
 Exempel:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_VTP_Join.png>](/File:Cisco_VTP_Join.png "wikilink")
 
-</div>
-</div>
+![Cisco_VTP_Join.png](../img/Cisco_VTP_Join.png)
+
+
+
 
 Konfiguration
 =============
 
-`vtp version [version]`
+```
+vtp version [version]
+```
 
 Vill man byta vlan.dat kan man göra det, det har bara lokal signifikans.
 
@@ -117,13 +119,17 @@ Vill man byta vlan.dat kan man göra det, det har bara lokal signifikans.
 
 VTP kan stängas av per interface
 
-`no vtp`
-`show vtp interface`
+```
+no vtp
+show vtp interface
+```
 
 Debug
 
-`debug sw-vlan vtp events`
-`debug sw-vlan vtp packets`
+```
+debug sw-vlan vtp events
+debug sw-vlan vtp packets
+```
 
 ### Domain
 
@@ -132,8 +138,10 @@ inget domännamn konfigurerat lånar man det som andra sidan skickar med i
 sina paket (v3 gör ej så). Byt namn på domän för att resetta revision
 number.
 
-`vtp domain [domain]`
-`show vtp status`
+```
+vtp domain [domain]
+show vtp status
+```
 
 Använd lösenord för att skydda din miljö annars kan t.ex. domäner
 propagera till switchar automatiskt. Detta skyddar ej mot eavesdropping
@@ -143,8 +151,10 @@ advertisement. Hidden password är VTPv3 only och då hashas lösenordet i
 vlan.dat också, v1/2 funkar inte ifall det finns ett hidden password
 konfigurerat.
 
-`vtp password SECRETZ {hidden|secret}`
-`show vtp password`
+```
+vtp password SECRETZ {hidden|secret}
+show vtp password
+```
 
 ### Modes
 
@@ -155,7 +165,9 @@ för Cisco IOS men uppdateringar skickas inte förrens VTP domain är
 konfigurerat. Uppdateringar accepteras från server och client och VLAN
 sparas i vlan.dat.
 
-`vtp mode server`
+```
+vtp mode server
+```
 
 **Client**
 Behöver ej ha VTP domain konfigurerat utan tar det från den första
@@ -164,7 +176,9 @@ Uppdateringar accepteras från server och client och VLAN sparas i
 vlan.dat. Eftersom klienter originerar uppdateringar kan en klient med
 högre revisionsnummer uppdatera databasen på en server.
 
-`vtp mode client`
+```
+vtp mode client
+```
 
 **Transparent**
 Enheter i VTP mode transparent släpper igenom VTP frames om VTP domain
@@ -173,12 +187,16 @@ packet received on trunk Gi0/2 - in TRANSPARENT MODE*. VLAN på dessa
 enheter sparas lokalt i running config och vlan.dat. OBS transparent
 mode forwarderar VTP om domain är NULL.
 
-`vtp mode transparent`
+```
+vtp mode transparent
+```
 
 **Off**
 Finns endast med VTPv3 och stänger av VTP-forwarding helt.
 
-`vtp mode off`
+```
+vtp mode off
+```
 
 ### Pruning
 
@@ -190,17 +208,23 @@ messages. VTP pruning kan läras av VTP-klienter, så om man slår på det
 på en VTP-server och den börjar skicka ut join messages så kommer också
 klienterna att slå på pruning automatiskt.
 
-`vtp pruning`
+```
+vtp pruning
+```
 
 By default är alla VLAN utom 1 prune eligible. Vill man att endast vissa
 VLAN ska vara med i VTP pruning kan man lägga dem per trunk i Prune
 Eligible List.
 
-`switchport trunk pruning vlan VLAN-RANGE`
+```
+switchport trunk pruning vlan VLAN-RANGE
+```
 
 Verify
 
-`show interface trunk`
+```
+show interface trunk
+```
 
 VTPv3
 =====
@@ -232,30 +256,40 @@ v3-domänen så allt i v2 bör vara client.
 
 Konfiguration
 
-`vtp domain hackernet.se`
-`vtp version 3`
+```
+vtp domain hackernet.se
+vtp version 3
+```
 
 Skapa VLAN
 
-`vtp mode server`
-`vlan 100`
+```
+vtp mode server
+vlan 100
+```
 *`VTP`` ``VLAN`` ``configuration`` ``not`` ``allowed`` ``when`` ``device`` ``is`` ``not`` ``the`` ``primary`` ``server`` ``for`` ``vlan`` ``database.`*
 
 För att bli primary krävs lösenordet. Primary är endast operational
 state, det är inget som sparas i running eller startup.
 
-`vtp primary`
+```
+vtp primary
+```
 
 Ta primary utan att först kontrollera efter conflicting devices (som
 annars kan ta lite tid).
 
-`vtp primary vlan force`
+```
+vtp primary vlan force
+```
 
 Verify
 
-`show vtp status`
-`show vtp devices  #Endast v3-enheter syns`
-`show vtp counters`
+```
+show vtp status
+show vtp devices  #Endast v3-enheter syns
+show vtp counters
+```
 
 ### Extended VLANs
 
@@ -268,16 +302,22 @@ switchar även om VTP fungerar som det ska, *"VLAN_CREATE_FAIL"* pga
 "VLAN 1007 currently in use by GigabitEthernet0/3". Vilka VLAN en switch
 använder till detta beror på global policy i switchen.
 
-`show vlan internal usage`
+```
+show vlan internal usage
+```
 
 Default är att starta allokering på VLAN 1006 och gå uppåt.
 
-`vlan internal allocation policy ascending`
+```
+vlan internal allocation policy ascending
+```
 
 På nyare switchar kan man ändra detta till att starta på vlan 4094 och
 gå neråt istället.
 
-`vlan internal allocation policy descending`
+```
+vlan internal allocation policy descending
+```
 
 ### MST
 
@@ -285,19 +325,23 @@ gå neråt istället.
 hjälp av VTPv3. Precis som för VLAN får endast ändringar göras på
 primary server (som ej behöver vara samma som för feature VLAN).
 
-`vtp mode server mst`
-`vtp mode client mst`
+```
+vtp mode server mst
+vtp mode client mst
+```
 
 *OBS att ändra VTP mode för MST påverkar spanning tree så det bör göras
 under kontrollerade former.*
 
 Ta primary-rollen
 
-`vtp primary mst `
-`vtp primary mst force`
+```
+vtp primary mst 
+vtp primary mst force
+```
 
 Verify
 
-`show vtp status`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show vtp status
+```

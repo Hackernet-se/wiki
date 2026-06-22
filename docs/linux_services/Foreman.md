@@ -35,37 +35,49 @@ Installation
   
   Ladda sedan hem Foreman.
   
-  `yum -y install foreman-installer`
+```
+yum -y install foreman-installer
+```
 
 === "Ubuntu 16.04"
   Börja med att lägga till Puppet 4.X repot som är det rekommenderade.
   
-  `apt-get -y install ca-certificates`
+```
+apt-get -y install ca-certificates
+```
   `wget `[`https://apt.puppetlabs.com/puppet5-release-xenial.deb`](https://apt.puppetlabs.com/puppet5-release-xenial.deb)
-  `dpkg -i puppet5-release-xenial.deb`
+```
+dpkg -i puppet5-release-xenial.deb
+```
   
   Lägg sedan till Foreman repot.
   
   `echo "deb `[`http://deb.theforeman.org/`](http://deb.theforeman.org/)` xenial 1.16" > /etc/apt/sources.list.d/foreman.list`
   `echo "deb `[`http://deb.theforeman.org/`](http://deb.theforeman.org/)` plugins 1.16" >> /etc/apt/sources.list.d/foreman.list`
-  `apt-get -y install ca-certificates`
+```
+apt-get -y install ca-certificates
+```
   `wget -q `[`https://deb.theforeman.org/pubkey.gpg`](https://deb.theforeman.org/pubkey.gpg)` -O- | apt-key add -`
   
   Ladda sedan hem Foreman.
   
-  `apt-get update && apt-get -y install foreman-installer`
+```
+apt-get update && apt-get -y install foreman-installer
+```
 
 Kör sedan Foreman installer.
 
-`foreman-installer -i \`
-`--enable-foreman-compute-vmware \`
-`--enable-foreman-plugin-templates \`
-`--enable-foreman-plugin-setup \`
-`--enable-foreman-cli \`
-`--enable-foreman \`
-`--enable-foreman-proxy \`
-`--enable-puppet \`
-`--foreman-proxy-tftp=true `
+```
+foreman-installer -i \
+--enable-foreman-compute-vmware \
+--enable-foreman-plugin-templates \
+--enable-foreman-plugin-setup \
+--enable-foreman-cli \
+--enable-foreman \
+--enable-foreman-proxy \
+--enable-puppet \
+--foreman-proxy-tftp=true 
+```
 
 Installationen körs i en non-interactive läge som standard. Men
 konfigurationen kan ändras genom att lägga till options från
@@ -80,7 +92,11 @@ pluginet för att kunna skapa VM's på en vmware miljö.
 När installern kört klart så ska man få upp liknande info ruta.
 
 `* Foreman is running at `[`https://foreman.hackernet.se`](https://foreman.hackernet.se)
-`       Initial credentials are admin / 3ekw5xtyXCoXxS29`
+```
+       Initial credentials are admin / 3ekw5xtyXCoXxS29
+```
 `* Foreman Proxy is running at `[`https://foreman.hackernet.se:8443`](https://foreman.hackernet.se:8443)
-`* Puppetmaster is running at port 8140`
-`The full log is at /var/log/foreman-installer/foreman-installer.log`
+```
+* Puppetmaster is running at port 8140
+The full log is at /var/log/foreman-installer/foreman-installer.log
+```

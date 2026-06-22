@@ -33,5 +33,3 @@ mediaconverter på en länk mellan 2st enheter som utbyter LACPDU så
 kommer den ena enheten känna till om den andra enheten skulle tappa
 kontakten med mediaconvertern på sin sida och därav sluta skicka trafik
 på det interfacet.
-
-[Category:Juniper](/Category:Juniper "wikilink")

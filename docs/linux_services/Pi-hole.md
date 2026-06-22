@@ -33,11 +33,15 @@ Uppgradera
 
 Kör följande kommando för att uppgradera Pi-hole:
 
-`pihole -up`
+```
+pihole -up
+```
 
 Dry-run
 
-`pihole -up --check-only`
+```
+pihole -up --check-only
+```
 
 Konfiguration
 =============
@@ -46,5 +50,3 @@ Pi-hole har ett webui för att kunna göra enklare inställningar. Det når
 man via:
 
 [`http://`](http://)<pi-hole IP>`/admin`
-
-[Category:Guider](/Category:Guider "wikilink")

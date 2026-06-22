@@ -41,38 +41,48 @@ Konfiguration
 Global enable. På vissa enheter är kommandot *ip multicast-routing
 distributed*
 
-`ip multicast-routing`
-`show ip multicast`
+```
+ip multicast-routing
+show ip multicast
+```
 
 **Default konfiguration** (detta kan skilja mellan IOS-version)
 
 Globalt
 
-`ip pim dm-fallback`
-`ip pim autorp`
-`ip pim bidir-offer-interval 100 msec`
-`ip pim bidir-offer-limit 3`
-`ip pim v1-rp-reachability`
-`ip pim log-neighbor-changes`
+```
+ip pim dm-fallback
+ip pim autorp
+ip pim bidir-offer-interval 100 msec
+ip pim bidir-offer-limit 3
+ip pim v1-rp-reachability
+ip pim log-neighbor-changes
+```
 
 Per interface
 
-`ip pim join-prune-interval 60`
-`ip pim dr-priority 1`
-`ip pim query-interval 30`
+```
+ip pim join-prune-interval 60
+ip pim dr-priority 1
+ip pim query-interval 30
+```
 
 Gå med i grupp manuellt
 
-`ip igmp join-group 224.10.0.10`
+```
+ip igmp join-group 224.10.0.10
+```
 
 Verify
 
-`show ip mroute`
-`show ip mroute active`
-`show ip mroute count`
-`show ip pim interface`
-`show ip pim neighbor`
-`show ip rpf x.x.x.x `
+```
+show ip mroute
+show ip mroute active
+show ip mroute count
+show ip pim interface
+show ip pim neighbor
+show ip rpf x.x.x.x 
+```
 
 **Limiting**
 Global multicast mroute limit
@@ -81,7 +91,9 @@ Global multicast mroute limit
 
 Maximum number of multicast routes, default är 2147483647.
 
-`ip multicast route-limit 100`
+```
+ip multicast route-limit 100
+```
 
 Multicast boundary feature tillåter att man begränsar multicast både
 control plane och data plane per interface. Med standard acl filtreras
@@ -89,7 +101,9 @@ grupp och med extended både grupp och källa. Detta filtrerar också
 Auto-RP announcements. Att begränsa multicast kan även göras med TTL
 scoping.
 
-`ip multicast boundary [ACL]`
+```
+ip multicast boundary [ACL]
+```
 
 **NBMA**
 Det finns inbyggd loop prevention för multicast i form av split horizon.
@@ -99,15 +113,19 @@ det ska fungera och det går att konfigurera per interface. PIM NBMA mode
 gör att PIM håller reda på OIL som interface + NBMA-adress, istället för
 bara interface. Detta är inte kompatibelt med PIM-DM.
 
-`ip pim nbma-mode`
+```
+ip pim nbma-mode
+```
 
 **Multipath**
 Att slå på ECMP Multicast Load Splitting gör att Joins till RP kommer
 att skickas på fler än ett interface och man måste använda en hash
 annars kommer RPF-check att faila.
 
-`ip multicast multipath`
-`ip multicast multipath s-g-hash`
+```
+ip multicast multipath
+ip multicast multipath s-g-hash
+```
 
 Dense Mode
 ==========
@@ -133,13 +151,17 @@ vilket sänker konvergeringstiden. Det ackas med Graft Ack. För Dense
 mode kan olika multicast-routingprotokoll användas. PIM Dense mode
 skalar inte superbra pga excessive flooding.
 
-`interface gi2`
-` ip pim dense-mode`
+```
+interface gi2
+ ip pim dense-mode
+```
 
 Verify
 
-`show ip pim interface`
-`show ip mroute`
+```
+show ip pim interface
+show ip mroute
+```
 
 Sparse Mode
 ===========
@@ -186,21 +208,27 @@ Ciscoroutrar gör detta byte direkt efter första paketet, detta går att
 
 På alla enheter (static RP):
 
-`ip multicast-routing`
-`ip pim rp-address 10.0.0.10 [override]`
+```
+ip multicast-routing
+ip pim rp-address 10.0.0.10 [override]
+```
 
-`interface gi2`
-` ip pim sparse-mode`
-`interface gi3`
-` ip pim sparse-mode`
+```
+interface gi2
+ ip pim sparse-mode
+interface gi3
+ ip pim sparse-mode
+```
 
 På Rendezvous Point utöver det ovan. En router vet om att den är RP om
 den har ett interface med den konfigurerade rp-adressen. Man måste kör
 PIM på det interface man annonserar som RP.
 
-`interface lo0`
-` ip address 10.0.0.10 255.255.255.0`
-` ip pim sparse-mode`
+```
+interface lo0
+ ip address 10.0.0.10 255.255.255.0
+ ip pim sparse-mode
+```
 
 För att förhindra att oönskade RPs och grupper blir aktiva i ens nät kan
 man skydda sig med filter. Man skriver standard-acler som listar de
@@ -208,21 +236,29 @@ grupper som är tillåtna, till exempel tillåt endast join och prune
 messages från RP 10.0.0.10 som har med grupp 224.4.4.4 att göra. Det
 räcker att konfigurera detta på RP men det bör göras överallt.
 
-`ip access-list standard ALLOWED_GROUPS`
-` permit 224.4.4.4`
+```
+ip access-list standard ALLOWED_GROUPS
+ permit 224.4.4.4
+```
 
-`ip pim accept-rp 10.0.0.10 ALLOWED_GROUPS`
+```
+ip pim accept-rp 10.0.0.10 ALLOWED_GROUPS
+```
 
 Verify
 
-`show ip mroute`
-`show ip pim rp mapping`
-`show derived-config interface tunnel0`
+```
+show ip mroute
+show ip pim rp mapping
+show derived-config interface tunnel0
+```
 
 På RP skapas två stycken tunnel interface, ett för att enkapsulera PIM
 Register messages och ett för att dekapsulera.
 
-`show ip pim tunnel`
+```
+show ip pim tunnel
+```
 
 ### Sparse Dense Mode
 
@@ -231,12 +267,16 @@ En “sparse” multicast-grupp är en som har RP definierat. När man kör *ip
 pim sparse-dense-mode* på ett interface så kommer det att forwardera
 trafik både för sparse och dense multicast groups ut på det interfacet.
 
-`interface gi2`
-` ip pim sparse-dense-mode`
+```
+interface gi2
+ ip pim sparse-dense-mode
+```
 
 Stänga av dense mode fallback.
 
-` no ip pim dm-fallback`
+```
+ no ip pim dm-fallback
+```
 
 Auto-RP
 -------
@@ -268,18 +308,26 @@ forwardar multicast utan RP så får man antingen köra sparse-dense-mode
 alternativt köra en inbyggd IOS feature som gör undantag för 224.0.1.39
 och 224.0.1.40, detta kallas Auto-RP Listener och konfigureras globalt.
 
-`ip pim autorp listener`
+```
+ip pim autorp listener
+```
 
 Candidate RP
 
-`ip access-list standard GROUPS`
-` permit 224.0.0.0 7.255.255.255`
+```
+ip access-list standard GROUPS
+ permit 224.0.0.0 7.255.255.255
+```
 
-`ip pim send-rp-announce Loopback0 scope 10 group-list GROUPS`
+```
+ip pim send-rp-announce Loopback0 scope 10 group-list GROUPS
+```
 
 Multicast mapping agent
 
-`ip pim send-rp-discovery Loopback0 scope 10`
+```
+ip pim send-rp-discovery Loopback0 scope 10
+```
 
 Filtrera announcements från RPs, görs på MA med standard-acler.
 
@@ -287,17 +335,23 @@ Filtrera announcements från RPs, görs på MA med standard-acler.
 
 Verify
 
-`show ip pim autorp`
-`show ip pim rp mapping`
+```
+show ip pim autorp
+show ip pim rp mapping
+```
 
-`clear ip pim rp-mapping`
+```
+clear ip pim rp-mapping
+```
 
 Auto-RP Cache Filtering
 Accept only (\*, G) join messages destined for the specified Auto-RP
 cached address. Accept join and prune messages only for RPs in Auto-RP
 cache.
 
-`ip pim accept-rp auto-rp`
+```
+ip pim accept-rp auto-rp
+```
 
 BSR
 ---
@@ -323,25 +377,33 @@ RPF-checkas.
 
 BSR (default prio är 0)
 
-`interface lo0`
-` ip pim sparse-mode`
+```
+interface lo0
+ ip pim sparse-mode
+```
 `ip pim bsr-candidate Loopback0 `<prio>
 
 RP
 
-`interface lo0`
-` ip pim sparse-mode`
-`ip pim rp-candidate Loopback0 `
+```
+interface lo0
+ ip pim sparse-mode
+ip pim rp-candidate Loopback0 
+```
 
 Border
 
-`interface gi3`
-` ip pim bsr-border`
+```
+interface gi3
+ ip pim bsr-border
+```
 
 Verify
 
-`show ip pim bsr-router `
-`show ip pim rp mapping `
+```
+show ip pim bsr-router 
+show ip pim rp mapping 
+```
 
 Anycast RP
 ----------
@@ -381,12 +443,16 @@ kommer inga tunnlar att skapas.
 
 Bidirectional PIM måste konfigureras på alla PIM-enheter.
 
-`ip pim bidir-enable`
+```
+ip pim bidir-enable
+```
 `ip pim rp-candidate Loopback0 group-list 10 `**`bidir`**
 
 Show designated forwarders
 
-`show ip pim interface df`
+```
+show ip pim interface df
+```
 
 **Phantom RP**
 För redundans kan man använda en RP-IP som faktiskt inte finns konfad på
@@ -397,12 +463,14 @@ innehåller RP-IP:n men har olika masklängd på olika enheter, på så sätt
 kan andra noder ta över RP (tack vare IGP-konvergens) när primären går
 ner.
 
-`interface Loopback1`
-` description Primary RP`
-` ip address 10.10.11.1 255.255.255.252     <- /30`
-` ip pim sparse-mode`
-` ip ospf network point-to-point`
-` ip router ospf 1 area 0.0.0.0`
+```
+interface Loopback1
+ description Primary RP
+ ip address 10.10.11.1 255.255.255.252     <- /30
+ ip pim sparse-mode
+ ip ospf network point-to-point
+ ip router ospf 1 area 0.0.0.0
+```
 
 `ip pim rp-address `**`10.10.11.2`**` group-list 225.0.0.0/24 bidir`
 
@@ -420,19 +488,25 @@ källan är känd.
 Source Specific Multicast kräver IGMPv3 samt någon variant av sparse
 mode.
 
-`interface gi2`
-` ip igmp version 3`
-` ip pim sparse-mode`
+```
+interface gi2
+ ip igmp version 3
+ ip pim sparse-mode
+```
 
 Sedan väljer man range som enheterna ska behandla som SSM, dvs droppa
 eventuella (\*,G). *Default* innebär 232.0.0.0-232.255.255.255 som är
 IANA assigned SSM range.
 
-`ip pim ssm default`
+```
+ip pim ssm default
+```
 
 Verify
 
-`show ip mroute`
+```
+show ip mroute
+```
 
 MSDP
 ====
@@ -450,8 +524,10 @@ grannskap måste konfigureras och unicast route till andra sidan måste
 finnas. [BGP](/Cisco_BGP "wikilink") eller [Multicast
 BGP](/Cisco_Multicast#BGP "wikilink") kan användas för detta.
 
-`ip msdp peer [peer_unique_address] connect-source loopback0 remote-as 100`
-`ip msdp originator-id [unique_address_interface]`
+```
+ip msdp peer [peer_unique_address] connect-source loopback0 remote-as 100
+ip msdp originator-id [unique_address_interface]
+```
 
 RPF checken kräver full routing information från andra domäner för att
 multicast ska fungera. Om man t.ex. har en stub multicast domain och
@@ -459,13 +535,17 @@ inte får in all information kan man konfigurera upstream RP som
 *default-peer* för RPF checkar används inte på default peers utan alla
 SA messages accepteras.
 
-`ip msdp default-peer`
+```
+ip msdp default-peer
+```
 
 Verify
 
-`show ip msdp summary`
-`show ip msdp peer`
-`show ip msdp sa-cache`
+```
+show ip msdp summary
+show ip msdp peer
+show ip msdp sa-cache
+```
 
 ### Mesh Group
 
@@ -478,10 +558,12 @@ group peers. Värt att notera är också att det inte görs någon RPF check
 på inkomna SA messages från mesh group peers utan de accepteras alltid
 när MSDP mesh group är konfigurerat.
 
-`ip msdp peer 10.1.1.1`
-`ip msdp peer 10.2.2.2`
-`ip msdp mesh-group mesh-group1 10.1.1.1`
-`ip msdp mesh-group mesh-group1 10.2.2.2`
+```
+ip msdp peer 10.1.1.1
+ip msdp peer 10.2.2.2
+ip msdp mesh-group mesh-group1 10.1.1.1
+ip msdp mesh-group mesh-group1 10.2.2.2
+```
 
 Convergence
 ===========
@@ -489,18 +571,24 @@ Convergence
 Multicast Subsecond Convergence är möjligt genom att använda flera olika
 tekniker.
 
-`ip multicast rpf interval 10`
-`ip pim register-rate-limit rate 10`
-`ip pim spt-threshold 0`
+```
+ip multicast rpf interval 10
+ip pim register-rate-limit rate 10
+ip pim spt-threshold 0
+```
 
-`interface gi2 `
-` ip pim query-interval 30`
+```
+interface gi2 
+ ip pim query-interval 30
+```
 
 **BFD**
 Konvergenstider går också att trimma med hjälp av
 [BFD](/Cisco_BFD "wikilink").
 
-`ip pim bfd`
+```
+ip pim bfd
+```
 
 LAN
 ===
@@ -538,12 +626,12 @@ köra PIM i NBMA mode.
 
 Assert message:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_PIM_Assert.PNG>](/File:Cisco_PIM_Assert.PNG "wikilink")
 
-</div>
-</div>
+![Cisco_PIM_Assert.PNG](../img/Cisco_PIM_Assert.PNG)
+
+
+
 
 ### Designated Router
 
@@ -553,22 +641,30 @@ källor till RP. Valet baseras på högsta prioritet och vid lika högsta
 IP-adress. Processen är preemptive så det är alltid den med bäst prio
 som är DR. Detta är en sparse-mode feature.
 
-`interface gi2`
-` ip pim sparse-mode`
-` ip pim dr-priority 100`
+```
+interface gi2
+ ip pim sparse-mode
+ ip pim dr-priority 100
+```
 
-`show ip pim neighbor`
+```
+show ip pim neighbor
+```
 
 På RP kan begränsa vem som får skicka PIM Register från olika segment
 med hjälp av en extended acl, dvs man kan vitlista vem som är en giltig
 DR.
 
-`ip access-list extended VLAN100`
-` permit ip host 100.0.100.10 any`
-` deny   ip 100.0.100.0 0.0.0.255 any`
-` permit ip any any`
+```
+ip access-list extended VLAN100
+ permit ip host 100.0.100.10 any
+ deny   ip 100.0.100.0 0.0.0.255 any
+ permit ip any any
+```
 
-`ip pim accept-register list VLAN100`
+```
+ip pim accept-register list VLAN100
+```
 
 ### PIM Snooping
 
@@ -587,12 +683,16 @@ att floodas.
 
 För att använda PIM snooping måste IGMP snooping vara på.
 
-`ip igmp snooping`
-`ip pim snooping`
+```
+ip igmp snooping
+ip pim snooping
+```
 
 Verify
 
-`show ip pim snooping`
+```
+show ip pim snooping
+```
 
 IPv6
 ====
@@ -605,19 +705,25 @@ adresser och det finns tre pakettyper: Query, Report och Done. DR väljs
 som vanligt och Hellos skickas var 30:e sekund. Multicast address range:
 FF00::/8.
 
-`ipv6 multicast-routing`
+```
+ipv6 multicast-routing
+```
 
-`interface gi2`
-` ipv6 mld access-group MLD_FILTER`
-` ipv6 mld query-max-response-time 10`
-` ipv6 mld query-timeout 255`
-` ipv6 mld query-interval 125`
-` ipv6 mld join-group ff08::10 `
+```
+interface gi2
+ ipv6 mld access-group MLD_FILTER
+ ipv6 mld query-max-response-time 10
+ ipv6 mld query-timeout 255
+ ipv6 mld query-interval 125
+ ipv6 mld join-group ff08::10 
+```
 
 Stänga av PIM
 
-`interface gi3`
-` no ipv6 pim`
+```
+interface gi3
+ no ipv6 pim
+```
 
 Static routes, dessa används endast av multicast.
 
@@ -625,10 +731,12 @@ Static routes, dessa används endast av multicast.
 
 Verify
 
-`show ipv6 pim neighbors`
-`show ipv6 pim interface`
-`show ipv6 pim tunnel`
-`show ipv6 mld groups `
+```
+show ipv6 pim neighbors
+show ipv6 pim interface
+show ipv6 pim tunnel
+show ipv6 mld groups 
+```
 
 ### RP
 
@@ -637,9 +745,13 @@ MSDP för IPv6.
 
 **Static**
 
-`ipv6 pim rp-address 2001:20::20`
+```
+ipv6 pim rp-address 2001:20::20
+```
 
-`show ipv6 pim range-list`
+```
+show ipv6 pim range-list
+```
 
 **BSR**
 BSR fungerar på samma sätt för IPv4 men nu konfigureras det med en
@@ -652,15 +764,21 @@ Man kan också konfigurera BSR med en lista på RP-kandidater genom att
 använda *ipv6 pim bsr announced rp <IPv6 Address>* och därmed behöver
 inte RPs annonsera sig själva som candidates.
 
-`ipv6 pim bsr candidate bsr 2001:20::20`
+```
+ipv6 pim bsr candidate bsr 2001:20::20
+```
 
 RP
 
-`ipv6 pim bsr candidate rp 2001:20::20`
+```
+ipv6 pim bsr candidate rp 2001:20::20
+```
 
 Verify
 
-`show ipv6 pim bsr election`
+```
+show ipv6 pim bsr election
+```
 
 **Embedded RP**
 Med IPv6 kan också övriga routrar ta reda på vem som är RP utifrån en
@@ -673,32 +791,44 @@ grupper i Embedded RP address range: FF70::/12.
 
 På default:
 
-`ipv6 pim rp embedded`
+```
+ipv6 pim rp embedded
+```
 
-`interface Tunnel0`
-` description Pim Register Tunnel (Encap) for Embedded RP`
-` no ip address`
-` ipv6 unnumbered Loopback0`
-` ipv6 enable`
-` tunnel source Loopback0`
-` tunnel destination ::`
-` tunnel ttl 65`
+```
+interface Tunnel0
+ description Pim Register Tunnel (Encap) for Embedded RP
+ no ip address
+ ipv6 unnumbered Loopback0
+ ipv6 enable
+ tunnel source Loopback0
+ tunnel destination ::
+ tunnel ttl 65
+```
 
 RP (loopback-adressen måste annonseras i IGP så alla kan hitta dit)
 
-`interface Loopback1`
-` ipv6 address 2006:6666::5/128`
+```
+interface Loopback1
+ ipv6 address 2006:6666::5/128
+```
 
-`ipv6 pim rp-address 2006:6666::5`
+```
+ipv6 pim rp-address 2006:6666::5
+```
 
 Receivers
 
-`ipv6 mld join-group FF7E:540:2006:6666::1`
+```
+ipv6 mld join-group FF7E:540:2006:6666::1
+```
 
 Verify
 
-`show ipv6 mroute`
-`show ipv6 pim group-map`
+```
+show ipv6 mroute
+show ipv6 pim group-map
+```
 
 **Anycast RP**
 Man kan använda anycast för att öka tillgängligheten på RP. Att
@@ -708,21 +838,27 @@ Loopback-adressen måste annonseras i IGP så alla kan hitta dit.
 
 RP1
 
-`ipv6 pim anycast-rp 2001:20::20 10::2`
-`interface Loopback1`
-` ipv6 add 10::1/128`
-` ipv6 add 2001:20::20/128`
+```
+ipv6 pim anycast-rp 2001:20::20 10::2
+interface Loopback1
+ ipv6 add 10::1/128
+ ipv6 add 2001:20::20/128
+```
 
 RP2
 
-`ipv6 pim anycast-rp 2001:20::20 10::1`
-`interface Loopback1`
-` ipv6 add 10::2/128`
-` ipv6 add 2001:20::20/128`
+```
+ipv6 pim anycast-rp 2001:20::20 10::1
+interface Loopback1
+ ipv6 add 10::2/128
+ ipv6 add 2001:20::20/128
+```
 
 Verify
 
-`show ipv6 pim anycast-rp`
+```
+show ipv6 pim anycast-rp
+```
 
 ### SSM
 
@@ -732,8 +868,10 @@ SSM mapping kan användas för hostar som inte stödjer MLDv2, då kan man
 antingen använda DNS eller static maps för att kolla upp källan i MLDv1
 report.
 
-`interface gi3`
-` ipv6 mld join-group FF36:10::10 2001:20::20`
+```
+interface gi3
+ ipv6 mld join-group FF36:10::10 2001:20::20
+```
 
 NX-OS
 =====
@@ -749,38 +887,52 @@ för NX-OS.
 
 ### Konfiguration
 
-`feature pim`
+```
+feature pim
+```
 
-`ip pim log-neighbor-changes`
-`ip pim rp-address 172.16.1.10 group-list 224.0.0.0/4`
-`ip pim bfd`
+```
+ip pim log-neighbor-changes
+ip pim rp-address 172.16.1.10 group-list 224.0.0.0/4
+ip pim bfd
+```
 
-`interface Ethernet1/1`
-` ip address 192.168.1.1/24`
-` ip pim sparse-mode`
+```
+interface Ethernet1/1
+ ip address 192.168.1.1/24
+ ip pim sparse-mode
+```
 
 **VRF**
 
-`vrf context Tenant1`
-` ip pim rp-address 172.16.1.10 group-list 224.0.0.0/4`
+```
+vrf context Tenant1
+ ip pim rp-address 172.16.1.10 group-list 224.0.0.0/4
+```
 
 **Auto-RP**
 
-`ip pim auto-rp rp-candidate loopback1 group-list 224.0.0.0/4`
-`ip pim auto-rp mapping-agent loopback1`
-`ip pim auto-rp forward listen`
+```
+ip pim auto-rp rp-candidate loopback1 group-list 224.0.0.0/4
+ip pim auto-rp mapping-agent loopback1
+ip pim auto-rp forward listen
+```
 
 **BSR**
 
-`ip pim bsr bsr-candidate loopback1`
-`ip pim bsr rp-candidate loopback1 group-list 224.0.0.0/4`
-`ip pim bsr forward listen`
+```
+ip pim bsr bsr-candidate loopback1
+ip pim bsr rp-candidate loopback1 group-list 224.0.0.0/4
+ip pim bsr forward listen
+```
 
 **Neighbor Authentication**
 
-`interface Ethernet1/1`
-` ip pim sparse-mode`
-` ip pim hello-authentication ah-md5 3 a667d47acc18ea6b`
+```
+interface Ethernet1/1
+ ip pim sparse-mode
+ ip pim hello-authentication ah-md5 3 a667d47acc18ea6b
+```
 
 **Anycast RP**
 Anycast-RP (RFC 4610) innebär att man assignar en grupp routrar till en
@@ -788,30 +940,38 @@ RP-adress som finns konfad på flera routrar. PIM messages skickas till
 den router som routingtabellen tycker är närmast. Detta ger lastdelning
 och redundans. Denna feature finns inte på IOS.
 
-`interface loopback10`
-` description Anycast-RP-Address`
-` ip address 172.16.1.10/32`
-` ip pim sparse-mode`
+```
+interface loopback10
+ description Anycast-RP-Address
+ ip address 172.16.1.10/32
+ ip pim sparse-mode
+```
 
-`ip pim rp-address 172.16.1.10`
-`ip pim anycast-rp 172.16.1.10 192.168.10.1`
-`ip pim anycast-rp 172.16.1.10 192.168.10.2`
+```
+ip pim rp-address 172.16.1.10
+ip pim anycast-rp 172.16.1.10 192.168.10.1
+ip pim anycast-rp 172.16.1.10 192.168.10.2
+```
 
 **Verify**
 
-`show running-configuration pim`
-`show ip mroute`
-`show ip pim interface`
-`show ip pim group-range`
-`show ip route rpf`
-`show ip static-route multicast`
+```
+show running-configuration pim
+show ip mroute
+show ip pim interface
+show ip pim group-range
+show ip route rpf
+show ip static-route multicast
+```
 
 Maintenance mode
 Man kan isolera routern (ur ett PIM-perspektiv) genom att skicka ut PIM
 Hello message med holdtime 0 (goodbye) till alla grannar, då rivs alla
 PIM-grannskap direkt.
 
-`ip pim isolate`
+```
+ip pim isolate
+```
 
 IOS-XR
 ======
@@ -820,23 +980,25 @@ IOS-XR har SSM group range 232.0.0.0/8 by default.
 
 **Konfiguration**
 
-`multicast-routing`
-` address-family ipv4`
-`  interface HundredGigE0/0/0/0`
-`   enable`
-`  !`
-` !`
-`!`
-`router pim`
-` address-family ipv4`
-`  rp-address 10.0.0.10`
-`  log neighbor changes`
+```
+multicast-routing
+ address-family ipv4
+  interface HundredGigE0/0/0/0
+   enable
+  !
+ !
+!
+router pim
+ address-family ipv4
+  rp-address 10.0.0.10
+  log neighbor changes
+```
 
 Verify
 
-`show pim group-map `
-`show mfib route`
-`show pim rpf 192.168.0.10`
-`show pim rpf hash`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show pim group-map 
+show mfib route
+show pim rpf 192.168.0.10
+show pim rpf hash
+```

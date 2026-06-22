@@ -82,51 +82,65 @@ Konfiguration
 
 Key chain måste skapas på alla enheter.
 
-`key chain PFR`
-` key 1`
-`  key-string SECRET`
+```
+key chain PFR
+ key 1
+  key-string SECRET
+```
 
-`show key chain`
+```
+show key chain
+```
 
 **MC**
 Det krävs minst 2 external interfaces (totalt) för att MC ska bli aktiv.
 
-`pfr master`
-` border 2.2.2.2 key-chain PFR`
-`  interface gi2 internal`
-`  interface gi3 external`
-` border 3.3.3.3 key-chain PFR`
-`  interface gi2 internal`
-`  interface gi3 external`
+```
+pfr master
+ border 2.2.2.2 key-chain PFR
+  interface gi2 internal
+  interface gi3 external
+ border 3.3.3.3 key-chain PFR
+  interface gi2 internal
+  interface gi3 external
+```
 
 Defaults
 
-`pfr master`
-` learn`
-`  throughput`
-`  periodic-interval 0`
-`  monitor-period 1`
+```
+pfr master
+ learn
+  throughput
+  periodic-interval 0
+  monitor-period 1
+```
 
-` border 2.2.2.2 key-chain PFR`
-`  interface GigabitEthernet3 external`
-`   max-xmit-utilization percentage 90`
-`   maximum utilization receive percentage 100`
+```
+ border 2.2.2.2 key-chain PFR
+  interface GigabitEthernet3 external
+   max-xmit-utilization percentage 90
+   maximum utilization receive percentage 100
+```
 
 Verify
 
-`show pfr master border`
-`show pfr master exits`
+```
+show pfr master border
+show pfr master exits
+```
 
 **Border**
 
-`pfr border`
-` master 1.1.1.1 key-chain PFR`
-` local loopback 0`
-` logging`
+```
+pfr border
+ master 1.1.1.1 key-chain PFR
+ local loopback 0
+ logging
+```
 
 Verify
 
-`show pfr border`
-`show ip sla summary`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show pfr border
+show ip sla summary
+```

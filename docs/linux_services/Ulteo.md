@@ -3,7 +3,7 @@ title: Ulteo
 permalink: /Ulteo/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") Ulteo Open Virtual
+ Ulteo Open Virtual
 Desktop är en FOSS-plattform för virtuella skrivbord. Ulteo kan använda
 både java och html5, webbläsare och native client.
 
@@ -20,14 +20,20 @@ Ulteo-arkitekturen:
 Referensguide:
 <http://archive.ulteo.com/ovd/4.0/docs/Support_Debian_Wheezy.html>
 
-`su -`
+```
+su -
+```
 `echo "deb `[`http://archive.ulteo.com/ovd/4.0/debian`](http://archive.ulteo.com/ovd/4.0/debian)` wheezy main" > /etc/apt/sources.list.d/ulteo_ovd.list && apt-get update && apt-get -y --force-yes install ulteo-keyring && apt-get update`
-`apt-get -y install mysql-server`
+```
+apt-get -y install mysql-server
+```
 
 Välj rootlösenord
 
-`mysql -u root -p -e 'create database ovd'`
-`apt-get -y install ulteo-ovd-session-manager ulteo-ovd-administration-console`
+```
+mysql -u root -p -e 'create database ovd'
+apt-get -y install ulteo-ovd-session-manager ulteo-ovd-administration-console
+```
 
 Konfiguration
 -------------
@@ -39,7 +45,9 @@ sattes tidigare.
 
 Fortsätt sedan i cli:t
 
-`apt-get -y install ulteo-ovd-subsystem && apt-get -y install ulteo-ovd-web-client`
+```
+apt-get -y install ulteo-ovd-subsystem && apt-get -y install ulteo-ovd-web-client
+```
 
 Man skiljer på dessa för att den med säkerhet ska ta en komponent i
 taget.
@@ -62,9 +70,11 @@ Vad vore en linuxmaskin utan terminalemulator. Det följer inte med någon
 default utan man får manuellt lägga till det. Här följer instruktioner
 för hur man lägger till terminator.
 
-`chroot /opt/ulteo`
-`apt-get update`
-`apt-get install terminator`
+```
+chroot /opt/ulteo
+apt-get update
+apt-get install terminator
+```
 
 Sedan kan man välja att publicera terminator som en applikation i
 webguit.

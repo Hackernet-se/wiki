@@ -16,13 +16,17 @@ clockrate.
 
 DCE eller DTE?
 
-`show controllers serial 0/0`
+```
+show controllers serial 0/0
+```
 
 HDLC är default.
 
-`interface serial 0/0`
-` encapsulation hdlc`
-`show interface serial 0/0`
+```
+interface serial 0/0
+ encapsulation hdlc
+show interface serial 0/0
+```
 
 PPP
 ===
@@ -40,50 +44,54 @@ och sett resultat av dessa tar NCP vid.
 
 LCP Request:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_WAN_LCP_Request.png>](/File:Cisco_WAN_LCP_Request.png "wikilink")
 
-</div>
-</div>
+![Cisco_WAN_LCP_Request.png](../img/Cisco_WAN_LCP_Request.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:270px">
 
 LCP Ack:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_WAN_LCP_Ack.png>](/File:Cisco_WAN_LCP_Ack.png "wikilink")
 
-</div>
-</div>
+![Cisco_WAN_LCP_Ack.png](../img/Cisco_WAN_LCP_Ack.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:270px">
 
 IPCP Request:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_WAN_IPCP_Request.png>](/File:Cisco_WAN_IPCP_Request.png "wikilink")
 
-</div>
-</div>
+![Cisco_WAN_IPCP_Request.png](../img/Cisco_WAN_IPCP_Request.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:270px">
 
 IPCP Ack:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_WAN_IPCP_Ack.png>](/File:Cisco_WAN_IPCP_Ack.png "wikilink")
 
-</div>
-</div>
+![Cisco_WAN_IPCP_Ack.png](../img/Cisco_WAN_IPCP_Ack.png)
 
-`interface serial 0/0`
-` encapsulation ppp`
-`show interface serial 0/0`
+
+
+
+```
+interface serial 0/0
+ encapsulation ppp
+show interface serial 0/0
+```
 
 LQM ställs med:
 
-`ppp quality <%>`
+```
+ppp quality <%>
+```
 
 Peer neighbor route är en PPP feature som låter connected interfaces som
 inte är på samma subnät att kommunicera. Detta är användbart t.ex. när
@@ -92,7 +100,9 @@ om interfacen befinner sig på samma subnät. Detta är påslaget default på
 Cisco IOS när man använder PPP-enkapsulering.
 
 `interface `<ppp-interface>
-` no peer neighbor-route`
+```
+ no peer neighbor-route
+```
 
 ### Authentication
 
@@ -100,28 +110,40 @@ PPP har bl.a. stöd för PAP, CHAP, MS-CHAPv1/v2 och EAP.
 
 PAP
 
-`username R2 password SECRET`
+```
+username R2 password SECRET
+```
 
-`interface serial 0/0`
-` ppp authentication pap`
-` ppp pap sent-username R1 password SECRET`
+```
+interface serial 0/0
+ ppp authentication pap
+ ppp pap sent-username R1 password SECRET
+```
 
 CHAP, default används routerns hostname som username.
 
-`username R2 password SECRET`
+```
+username R2 password SECRET
+```
 
-`interface serial 0/0`
-` ppp authentication chap`
-` ppp chap hostname R1`
-` ppp chap password SECRET`
+```
+interface serial 0/0
+ ppp authentication chap
+ ppp chap hostname R1
+ ppp chap password SECRET
+```
 
 Använd andra metoden som fallback genom att ange dem på samma rad.
 
-`ppp authentication chap pap`
+```
+ppp authentication chap pap
+```
 
 Troubleshoot
 
-`debug ppp authentication`
+```
+debug ppp authentication
+```
 
 ### Compression
 
@@ -131,21 +153,29 @@ paket medans header compression funkar bäst med små paket. L2 payload
 compression kan göras med *stacker*, *MPPC* eller *predictor*. De första
 två använder lite mer CPU men brukar resultera i bättre ratio.
 
-`compress predictor`
+```
+compress predictor
+```
 
 TCP Header. Detta är legacy-metoden för att konfigurera det, man kan
 också använda [MQC](/Cisco_QoS#MQC "wikilink").
 
-`ip tcp header-compression`
+```
+ip tcp header-compression
+```
 
 Encryption
 
-`ppp encrypt mppe 40 required`
+```
+ppp encrypt mppe 40 required
+```
 
 Verify
 
-`show compress details`
-`show ppp mppe`
+```
+show compress details
+show ppp mppe
+```
 
 ### MLPPP
 
@@ -153,20 +183,26 @@ Multilink PPP är en teknik för att L2-lastdela på två eller fler
 parallella seriella länkar. MLPPP fragmenterar frames och skickar dem
 över olika länkar.
 
-`interface multilink1`
-` encapsulation ppp`
-` ppp multilink`
-` ppp multilink group 1`
+```
+interface multilink1
+ encapsulation ppp
+ ppp multilink
+ ppp multilink group 1
+```
 
-`interface serial 0/0`
-` encapsulation ppp`
-` ppp multilink`
-` ppp multilink group 1`
+```
+interface serial 0/0
+ encapsulation ppp
+ ppp multilink
+ ppp multilink group 1
+```
 
 Verify
 
-`show ppp multilink`
-`show interface multilink1`
+```
+show ppp multilink
+show interface multilink1
+```
 
 **Interleaving**
 För att förhindra att små delay-känsliga paket hamnar bakom stora paket
@@ -174,9 +210,11 @@ som tar lång tid att serialisera kan man använda LFI. Det är ett Cisco
 QoS tool som gör att de små paketen kan skickas mellan fragmenten av de
 stora paketen.
 
-`interface multilink1`
-` ppp multilink fragment-delay 10`
-` ppp multilink interleave`
+```
+interface multilink1
+ ppp multilink fragment-delay 10
+ ppp multilink interleave
+```
 
 PPPoE
 =====
@@ -190,52 +228,52 @@ support för MLPPP.
 
 Initiation (broadcast):
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_WAN_PPPoE_PADI.png>](/File:Cisco_WAN_PPPoE_PADI.png "wikilink")
 
-</div>
-</div>
+![Cisco_WAN_PPPoE_PADI.png](../img/Cisco_WAN_PPPoE_PADI.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:270px">
 
 Offer:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_WAN_PPPoE_PADO.png>](/File:Cisco_WAN_PPPoE_PADO.png "wikilink")
 
-</div>
-</div>
+![Cisco_WAN_PPPoE_PADO.png](../img/Cisco_WAN_PPPoE_PADO.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:270px">
 
 Request:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_WAN_PPPoE_PADR.png>](/File:Cisco_WAN_PPPoE_PADR.png "wikilink")
 
-</div>
-</div>
+![Cisco_WAN_PPPoE_PADR.png](../img/Cisco_WAN_PPPoE_PADR.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:270px">
 
 Session-confirmation:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_WAN_PPPoE_PADS.png>](/File:Cisco_WAN_PPPoE_PADS.png "wikilink")
 
-</div>
-</div>
+![Cisco_WAN_PPPoE_PADS.png](../img/Cisco_WAN_PPPoE_PADS.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:270px">
 
 Termination:
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_WAN_PPPoE_PADT.png>](/File:Cisco_WAN_PPPoE_PADT.png "wikilink")
 
-</div>
-</div>
+![Cisco_WAN_PPPoE_PADT.png](../img/Cisco_WAN_PPPoE_PADT.png)
+
+
+
 
 När MAC-adressen för servern är känd och sessionen är upprättad kan PPP
 ta vid.
@@ -245,19 +283,27 @@ ta vid.
 På ethernet-interfacen behöver man inte ha någon IP-adress alls eftersom
 discovery-funktionen är ethernet-baserad.
 
-`bba-group pppoe global`
-` virtual-template 1`
-` sessions per-mac limit 2`
+```
+bba-group pppoe global
+ virtual-template 1
+ sessions per-mac limit 2
+```
 
-`interface gi2`
-` no ip address`
-` pppoe enable group global`
+```
+interface gi2
+ no ip address
+ pppoe enable group global
+```
 
-`interface virtual-template 1`
-` ip address 192.168.0.1 255.255.255.0`
-` peer default ip address pool PPPoE`
+```
+interface virtual-template 1
+ ip address 192.168.0.1 255.255.255.0
+ peer default ip address pool PPPoE
+```
 
-`ip local pool PPPoE 192.168.0.10 192.168.0.20`
+```
+ip local pool PPPoE 192.168.0.10 192.168.0.20
+```
 
 ### Klient
 
@@ -266,36 +312,46 @@ fragmentering på ethernet-interface eftersom PPPoE lägger på 8 bytes
 header. Man kan använda statiska ip-adresser, ip unnumbered eller
 dynamiska med hjälp av IPCP på PPP-interfacet.
 
-`interface Fa0/1`
-` no shut`
-` pppoe enable `
-` pppoe-client dial-pool-number 1`
+```
+interface Fa0/1
+ no shut
+ pppoe enable 
+ pppoe-client dial-pool-number 1
+```
 
-`interface Dialer1`
-` ip mtu 1492`
-` ip tcp adjust-mss 1452`
-` encapsulation ppp`
+```
+interface Dialer1
+ ip mtu 1492
+ ip tcp adjust-mss 1452
+ encapsulation ppp
+```
 ` ip address negotiated   `*`#IPCP`*
-` dialer pool 1`
+```
+ dialer pool 1
+```
 
 Verify
 
-`show pppoe summary`
-`show ppp all`
-`show pppoe session`
-`show derived-config interface virtual-access1.1`
+```
+show pppoe summary
+show ppp all
+show pppoe session
+show derived-config interface virtual-access1.1
+```
 
 **Default route**
 PPP kan dynamiskt installera en default route när IPCP-förhandlingen
 lyckas och ta bort den igen när dialer-interfacet går ner. Denna route
 är en static route och får därmed AD 1 så det går ej att trumfa den.
 
-`interface Dialer1`
-` encapsulation ppp`
-` ppp ipcp route default`
+```
+interface Dialer1
+ encapsulation ppp
+ ppp ipcp route default
+```
 
 **SNMP**
 
-`snmp-server enable traps pppoe`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+snmp-server enable traps pppoe
+```

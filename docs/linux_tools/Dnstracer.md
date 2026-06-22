@@ -10,7 +10,9 @@ Installation
 
 Debian/Ubuntu
 
-`apt-get install dnstracer`
+```
+apt-get install dnstracer
+```
 
 Växlar
 ======
@@ -40,6 +42,6 @@ Växlar
 Exempel
 =======
 
-`dnstracer -o4s . hackernet.se`
-
-[Category:Tools](/Category:Tools "wikilink")
+```
+dnstracer -o4s . hackernet.se
+```

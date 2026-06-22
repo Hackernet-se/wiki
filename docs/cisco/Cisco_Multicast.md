@@ -19,7 +19,7 @@ För konfiguration se [Cisco PIM](/Cisco_PIM "wikilink"), [Cisco
 IGMP](/Cisco_IGMP "wikilink") och [Cisco MLDP](/Cisco_MLDP "wikilink").
 Även om framtiden kanske stavas Bit Indexed Explicit Replication.
 
-[<File:Cisco_Multicast.png>](/File:Cisco_Multicast.png "wikilink")
+![Cisco_Multicast.png](../img/Cisco_Multicast.png)
 
 Multicast Addressing
 --------------------
@@ -84,8 +84,10 @@ neighbor IP att vinna, detta gör att RPF är deterministiskt. I nyare
 versioner av IOS används alltid longest match av RPF vilket inte var
 fallet förr.
 
-`ip mroute 10.0.0.0 255.255.255.0 gi2`
-`ipv6 route 1000::/64 gi2 multicast`
+```
+ip mroute 10.0.0.0 255.255.255.0 gi2
+ipv6 route 1000::/64 gi2 multicast
+```
 
 Verify. Notera att endast routes med next-hop över interface där det
 finns PIM neighbors genererar RPF entries och därmed syns med dessa
@@ -97,39 +99,53 @@ kommandon.
 **CEF**
 Såhär fungerar CEF default
 
-`224.0.0.0/4          drop`
-`224.0.0.0/24         receive`
+```
+224.0.0.0/4          drop
+224.0.0.0/24         receive
+```
 
 Troubleshooting
 ---------------
 
 Active IP Multicast Sources sending \>= 4 kbps.
 
-`show ip mroute active`
+```
+show ip mroute active
+```
 
 **mtrace**
 Show the multicast path from the source to the receiver. Detta är en
 IGMP-baserad trace.
 
-`mtrace 10.0.0.10 20.0.0.20 224.1.4.4`
+```
+mtrace 10.0.0.10 20.0.0.20 224.1.4.4
+```
 
 **mstat**
 Show the multicast path, användbart för att upptäcka congestion.
 
-`mstat 10.0.0.10 20.0.0.20 224.1.4.4`
+```
+mstat 10.0.0.10 20.0.0.20 224.1.4.4
+```
 
 **mrinfo**
 Show multicast neighbor router information (legacy-kommando).
 
-`mrinfo`
+```
+mrinfo
+```
 
 **Packet Debugging**
 
-`interface gi2`
-` no ip mfib cef input`
-` no ip mfib cef output`
+```
+interface gi2
+ no ip mfib cef input
+ no ip mfib cef output
+```
 
-`debug ip mfib pak 239.1.1.10`
+```
+debug ip mfib pak 239.1.1.10
+```
 
 Multicast Helper
 ----------------
@@ -145,14 +161,18 @@ Ingress router
 
 `ip forward-protocol udp `<port-number>
 
-`interface gi2`
+```
+interface gi2
+```
 ` ip multicast helper-map broadcast `<mcast-address>` `<acl>
 
 Egress router
 
 `ip forward-protocol udp `<port-number>
 
-`interface gi2`
+```
+interface gi2
+```
 ` ip multicast helper-map `<mcast-group>` `<directed-broadcast-IP>` `<acl>
 
 Default så skickas broadcasten ut till 255.255.255.255 oavsett vad man
@@ -168,9 +188,11 @@ Routern som konfas med detta kommer att skicka PIM Join request upstream
 för att ta del av strömmen och sedan forwardera ut det på de interface
 med den statiska gruppen.
 
-`interface gi2`
-` ip pim sparse-mode`
-` ip igmp static-group 232.1.1.1 source 10.1.1.3`
+```
+interface gi2
+ ip pim sparse-mode
+ ip igmp static-group 232.1.1.1 source 10.1.1.3
+```
 
 BGP
 ---
@@ -189,12 +211,14 @@ unicast routes för multicast-källorna för att alla multicast routrarna
 ska kunna använda RPF. Se även [Cisco
 MP-BGP](/Cisco_BGP#Multiprotocol_BGP "wikilink").
 
-`router bgp 100`
-` address-family ipv4 multicast`
-`  neighbor 10.0.0.20 activate`
+```
+router bgp 100
+ address-family ipv4 multicast
+  neighbor 10.0.0.20 activate
+```
 
 Verify
 
-`show bgp ipv4 multicast summary`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+show bgp ipv4 multicast summary
+```

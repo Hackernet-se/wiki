@@ -3,7 +3,7 @@ title: HPE BL460c G7
 permalink: /HPE_BL460c_G7/
 ---
 
-[Category:Hardware](/Category:Hardware "wikilink") Detta är den äldre
+ Detta är den äldre
 versionen av HPE's bladservrar
 
 Problem

@@ -3,7 +3,7 @@ title: NFS
 permalink: /NFS/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") Network File System (NFS)
+ Network File System (NFS)
 är ett filsystem som tillåter datorer att komma åt filer över ett
 nätverk på ungefär samma sätt som de kan komma åt filer på lokal
 lagring. Detta är användbart för att dela filer mellan flera servrar.
@@ -15,27 +15,35 @@ Installation
 
 ### Server
 
-`sudo apt-get update && sudo apt-get -y install nfs-kernel-server`
+```
+sudo apt-get update && sudo apt-get -y install nfs-kernel-server
+```
 
 ### Klient
 
-`sudo apt-get update && sudo apt-get -y install nfs-common`
+```
+sudo apt-get update && sudo apt-get -y install nfs-common
+```
 
 Konfiguration
 -------------
 
 ### Server
 
-`sudo mkdir /nfsroot`
-`sudo sh -c 'echo "/nfsroot 192.168.1.16/30(rw,root_squash,subtree_check)" >> /etc/exports'`
-`sudo exportfs -a`
-`sudo service nfs-kernel-server start`
+```
+sudo mkdir /nfsroot
+sudo sh -c 'echo "/nfsroot 192.168.1.16/30(rw,root_squash,subtree_check)" >> /etc/exports'
+sudo exportfs -a
+sudo service nfs-kernel-server start
+```
 
 ### Klient
 
-`sudo mkdir /nfsroot`
-`sudo sh -c 'echo "192.168.1.50:/nfsroot /nfsroot nfs rw,async,hard,intr 0 0" >> /etc/fstab'`
-`sudo mount /nfsroot`
+```
+sudo mkdir /nfsroot
+sudo sh -c 'echo "192.168.1.50:/nfsroot /nfsroot nfs rw,async,hard,intr 0 0" >> /etc/fstab'
+sudo mount /nfsroot
+```
 
 Options
 -------

@@ -14,27 +14,37 @@ Det är rekommenderat att alltid ha SELinux påslaget för att sedan
 whitelista de avstängda funktioner du vill åt. För att modifiera SELinux
 kan man använda sig av det enkla verktyget: semanage.
 
-`# semanage (# yum install policycoreutils-python)`
+```
+# semanage (# yum install policycoreutils-python)
+```
 
 Slå av och på SELinux manuellt
 
-`setenforce 0/1`
-`getenforce`
+```
+setenforce 0/1
+getenforce
+```
 
 Byt SELinux-läge till nästa reboot (persistent)
 
-`sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config`
+```
+sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+```
 
 Status
 
-`sestatus -v`
+```
+sestatus -v
+```
 
 Show labels, exempelkommandon
 
-`ls -lhZ`
-`ps -eZ`
-`ss -Z`
-`semanage fcontext --list`
+```
+ls -lhZ
+ps -eZ
+ss -Z
+semanage fcontext --list
+```
 
 ### Exempel på funktioner som är satta och avstängda av SELinux
 
@@ -55,41 +65,57 @@ kommandot **sealert**
 
 För att installera:
 
-`yum -y install setroubleshoot-server`
+```
+yum -y install setroubleshoot-server
+```
 
 Starta sedan om audit
 
-`systemctl restart audit`
+```
+systemctl restart audit
+```
 
 Loggar från SELinux ska nu hamna i **/var/log/messages**.
 
 Om du redan har en fil med loggar du vill analysera kan du använda dig
 av **sealert**.
 
-`sealert -a /var/log/audit/audit.log > /var/log/audit/audit_human_readable.log`
+```
+sealert -a /var/log/audit/audit.log > /var/log/audit/audit_human_readable.log
+```
 
 #### Skapa egna selinux med grep och audit2allow.
 
 Kommando
 
-`cat /var/log/audit/audit.log |grep postgres_expo |grep denied |audit2allow`
+```
+cat /var/log/audit/audit.log |grep postgres_expo |grep denied |audit2allow
+```
 
 Resultat som visar vad det är du skapar en regel på
 
-`#============= init_t ==============`
-`allow init_t postgresql_port_t:tcp_socket name_connect;`
+```
+#============= init_t ==============
+allow init_t postgresql_port_t:tcp_socket name_connect;
+```
 
 Kommando
 
-`cat /var/log/audit/audit.log |grep postgres_expo |grep denied |audit2allow -M postgres`
+```
+cat /var/log/audit/audit.log |grep postgres_expo |grep denied |audit2allow -M postgres
+```
 
 Resultat som bara visar vad du skall köra för att implementera selinux
 regeln ovan
 
-`******************** IMPORTANT ***********************`
-`To make this policy package active, execute:`
-`semodule -i postgres.pp`
+```
+******************** IMPORTANT ***********************
+To make this policy package active, execute:
+semodule -i postgres.pp
+```
 
 kommando
 
-`semodule -i postgres.pp`
+```
+semodule -i postgres.pp
+```

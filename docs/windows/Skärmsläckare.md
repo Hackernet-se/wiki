@@ -16,5 +16,3 @@ OBS antivirus kan klaga pga unproven och very few users.
 
 Skannad av
 [VirusTotal](https://www.virustotal.com/en/url/1e12824c046724b77756e4f0830df50b11bd9d2df677e0bb8f84cbee26d80639/analysis/1468437913/).
-
-[Category:Windows](/Category:Windows "wikilink")

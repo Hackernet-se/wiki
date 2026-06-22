@@ -20,5 +20,3 @@ Du kan ta bort multiarchs med "dpkg --remove-architecture i386"
 
 Ett vanligt fel meddelande som kommer upp när man försöker köra en fil
 men inte har rätt arkitektur är "No such file or directory"
-
-[Category:Guider](/Category:Guider "wikilink")

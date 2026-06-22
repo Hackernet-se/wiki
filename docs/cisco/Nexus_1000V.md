@@ -51,17 +51,23 @@ Manage Plug-ins -\> New Plug-in -\> xml file -\> Register Plug-in
 
 Kan göras i L2 eller L3 mode.
 
-`svs connection vCenterName `
-` protocol vmware-vim`
+```
+svs connection vCenterName 
+ protocol vmware-vim
+```
 ` remote ip address `<vCenter-IP>
 ` vmware dvs datacenter-name `<name>
-` max-ports 8192`
-` connect`
+```
+ max-ports 8192
+ connect
+```
 
 Verify
 
-`show svs connections`
-`show module`
+```
+show svs connections
+show module
+```
 
 VEM
 ---
@@ -69,34 +75,42 @@ VEM
 Linjekort, ett per esxi-host. Default sätts ID dynamiskt men man kan
 binda det till uuid.
 
-`vem 3`
-`  host vmware id 8f862310-4c63-11e2-0000-00000000000f`
-`vem 4`
-`  host vmware id 8f862310-4c63-11e2-0000-00000000001f`
+```
+vem 3
+  host vmware id 8f862310-4c63-11e2-0000-00000000000f
+vem 4
+  host vmware id 8f862310-4c63-11e2-0000-00000000001f
+```
 
 Show
 
-`show module`
+```
+show module
+```
 
 Port Profile
 ============
 
 Fysiska NICs konfas med "type ethernet".
 
-`port-profile type ethernet vMotion-Uplink`
-` vmware port-group`
-` switchport mode trunk`
-` switchport trunk allowed vlan 99`
-` no shutdown`
-` state enabled`
+```
+port-profile type ethernet vMotion-Uplink
+ vmware port-group
+ switchport mode trunk
+ switchport trunk allowed vlan 99
+ no shutdown
+ state enabled
+```
 
-`port-profile type ethernet VM-Guests-Uplink`
-` vmware port-group`
-` switchport mode trunk`
-` switchport trunk allowed vlan 100,110,111,112,120,121`
-` no shutdown`
-` system vlan 100,120,121`
-` state enabled`
+```
+port-profile type ethernet VM-Guests-Uplink
+ vmware port-group
+ switchport mode trunk
+ switchport trunk allowed vlan 100,110,111,112,120,121
+ no shutdown
+ system vlan 100,120,121
+ state enabled
+```
 
 System VLAN är speciella vlan som får kommunicera innan VEM:en har lagts
 i vDS. Det betyder att forwarding på VEM kan göras innan VSM har
@@ -104,54 +118,64 @@ programmerat forwarding tables.
 
 Management network.
 
-`port-profile type vethernet VMKernel`
-` capability l3control`
-` vmware port-group`
-` switchport mode access`
-` switchport access vlan 100`
-` no shutdown`
-` system vlan 100`
-` state enabled`
+```
+port-profile type vethernet VMKernel
+ capability l3control
+ vmware port-group
+ switchport mode access
+ switchport access vlan 100
+ no shutdown
+ system vlan 100
+ state enabled
+```
 
 Port profiles "type vethernet" är motsvarigheten till port groups i
 VMware och för varje port profile i Nexus 1000v skapas en portgrupp i
 VMware.
 
-`port-profile type vethernet vMotion`
-` vmware port-group`
-` switchport mode access`
-` switchport access vlan 116`
-` no shutdown`
-` state enabled`
+```
+port-profile type vethernet vMotion
+ vmware port-group
+ switchport mode access
+ switchport access vlan 116
+ no shutdown
+ state enabled
+```
 
-`port-profile type vethernet VM-110`
-` vmware port-group`
-` switchport mode access`
-` switchport access vlan 110`
-` no shutdown`
-` state enabled`
+```
+port-profile type vethernet VM-110
+ vmware port-group
+ switchport mode access
+ switchport access vlan 110
+ no shutdown
+ state enabled
+```
 
-`port-profile type vethernet VM-111`
-` vmware port-group`
-` switchport mode access`
-` switchport access vlan 111`
-` no shutdown`
-` state enabled`
+```
+port-profile type vethernet VM-111
+ vmware port-group
+ switchport mode access
+ switchport access vlan 111
+ no shutdown
+ state enabled
+```
 
-`port-profile type vethernet N1Kv-Control`
-` vmware port-group`
-` switchport mode access`
-` switchport access vlan 120`
-` no shutdown`
-` system vlan 120`
-` state enabled`
+```
+port-profile type vethernet N1Kv-Control
+ vmware port-group
+ switchport mode access
+ switchport access vlan 120
+ no shutdown
+ system vlan 120
+ state enabled
+```
 
-`port-profile type vethernet N1Kv-Management`
-` vmware port-group`
-` switchport mode access`
-` switchport access vlan 121`
-` no shutdown`
-` system vlan 121`
-` state enabled`
-
-[Category:Cisco](/Category:Cisco "wikilink")
+```
+port-profile type vethernet N1Kv-Management
+ vmware port-group
+ switchport mode access
+ switchport access vlan 121
+ no shutdown
+ system vlan 121
+ state enabled
+```

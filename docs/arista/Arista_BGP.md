@@ -9,27 +9,35 @@ Se även [Cisco BGP](../cisco/Cisco_BGP.md)
 Konfiguration
 =============
 
-`router bgp 65001`
-`  neighbor 20.20.20.20 remote-as 65001`
-`  neighbor 20.20.20.20 description vEOS20`
-`  neighbor 20.20.20.20 password 7 gqWjIYItRuw=`
-`  neighbor 20.20.20.20 maximum-routes 12000`
-`  network 210.210.210.0/24`
+```
+router bgp 65001
+  neighbor 20.20.20.20 remote-as 65001
+  neighbor 20.20.20.20 description vEOS20
+  neighbor 20.20.20.20 password 7 gqWjIYItRuw=
+  neighbor 20.20.20.20 maximum-routes 12000
+  network 210.210.210.0/24
+```
 
 **ECMP**
 
-`router bgp 65001`
-` maximum-paths 4 ecmp 4`
+```
+router bgp 65001
+ maximum-paths 4 ecmp 4
+```
 
 **Show**
 
-`show ip bgp summary`
-`show ip bgp neighbor`
+```
+show ip bgp summary
+show ip bgp neighbor
+```
 
 **Reset**
 
-`clear ip bgp *`
-`clear ip bgp `
+```
+clear ip bgp *
+clear ip bgp 
+```
 
 ### BGP-LU
 
@@ -39,14 +47,20 @@ backbones och på så sätt binda ihop multipla IGP-instancer över
 stitchade LSP paths. BGP-LU advertisements påverkar endast edge/border
 routers och inte P routers.
 
-`router bgp 65001`
-` neighbor 2.2.2.2 remote-as 65001`
-` neighbor 2.2.2.2 update-source Loopback0`
-` neighbor 2.2.2.2 maximum-routes 12000`
+```
+router bgp 65001
+ neighbor 2.2.2.2 remote-as 65001
+ neighbor 2.2.2.2 update-source Loopback0
+ neighbor 2.2.2.2 maximum-routes 12000
+```
 
-` address-family ipv4 labeled-unicast`
-`  neighbor 2.2.2.2 activate`
+```
+ address-family ipv4 labeled-unicast
+  neighbor 2.2.2.2 activate
+```
 
 Verify
 
-`show ip bgp labeled-unicast`
+```
+show ip bgp labeled-unicast
+```

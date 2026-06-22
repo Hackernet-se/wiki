@@ -32,24 +32,32 @@ För varje [VRF](/Cisco_Routing#VRF "wikilink") skapas det nya tabeller,
 
 RIB
 
-`show ip route`
-`show ip route vrf NAME`
+```
+show ip route
+show ip route vrf NAME
+```
 
 LIB, innehåller all labels known to LSR
 
-`show mpls ldp bindings`
-`show mpls ldp binding summary`
-`show mpls ldp bindings vrf NAME`
+```
+show mpls ldp bindings
+show mpls ldp binding summary
+show mpls ldp bindings vrf NAME
+```
 
 FIB, används för paket utan label
 
-`show ip cef`
-`show ip cef vrf NAME`
+```
+show ip cef
+show ip cef vrf NAME
+```
 
 LFIB, används för paket med label
 
-`show mpls forwarding-table`
-`show mpls forwarding-table vrf NAME`
+```
+show mpls forwarding-table
+show mpls forwarding-table vrf NAME
+```
 
 LDP
 ===
@@ -77,12 +85,12 @@ unicast som skickas på TCP 646.
 
 **LDP Hello:**
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_MPLS_LDP_Hello.PNG>](/File:Cisco_MPLS_LDP_Hello.PNG "wikilink")
 
-</div>
-</div>
+![Cisco_MPLS_LDP_Hello.PNG](../img/Cisco_MPLS_LDP_Hello.PNG)
+
+
+
 
 MPLS-nätet måste använda något routingprotokoll för att lära sig routes
 och dra nytta av label-annonsering, vanligtvis används ett IGP för
@@ -103,9 +111,11 @@ försök.
 
 Global
 
-`mpls label protocol ldp  #Default`
-`mpls ldp router-id loopback0 [force]`
-`show mpls ldp parameters `
+```
+mpls label protocol ldp  #Default
+mpls ldp router-id loopback0 [force]
+show mpls ldp parameters 
+```
 
 Man kan per interface slå på MPLS, höja MTU för att stödja MPLS-headers
 och ändra vilken adress som ldp ska bygga grannskap med. Om man har
@@ -113,25 +123,33 @@ flera länkar till samma LSR och ska sätta upp flera parallella
 LDP-sessioner måste man använda samma transport address på alla
 interface. LDP RID används default som transport address.
 
-`interface gi1/1`
-` mpls ip`
-` mpls mtu 1508`
-` mpls ldp discovery transport-address interface`
+```
+interface gi1/1
+ mpls ip
+ mpls mtu 1508
+ mpls ldp discovery transport-address interface
+```
 
 **Verify**
 
-`show mpls interfaces [vrf NAME]`
-`show mpls ldp neighbor`
-`show mpls ldp discovery`
+```
+show mpls interfaces [vrf NAME]
+show mpls ldp neighbor
+show mpls ldp discovery
+```
 
 Graceful restart
 
-`mpls ldp graceful-restart`
-`show mpls ldp graceful-restart`
+```
+mpls ldp graceful-restart
+show mpls ldp graceful-restart
+```
 
 Allow MPLS forwarding for ip default route
 
-`mpls ip default-route `
+```
+mpls ip default-route 
+```
 
 ### Labels
 
@@ -150,33 +168,45 @@ beroende på modell). Att byta label range tar effekt när MPLS startas
 om, det görs snabbast med de globala kommadona *no mpls ip* -\> *mpls
 ip*.
 
-`mpls label range 200-299`
-`show mpls label range`
+```
+mpls label range 200-299
+show mpls label range
+```
 
 **Advertisments**
 Default på Cisco IOS allokeras och annonseras labels för allt, detta går
 att ändra.
 
-`no mpls ldp advertise-label`
+```
+no mpls ldp advertise-label
+```
 `mpls ldp advertise-lable for `<dest prefix>` to `<ldp peer>
 
 För att slippa hålla koll på prefix-listor kan man konfigurera att det
 endast ska allokeras (och därmed annonseras) labels för /32-routes i
 RIB:en.
 
-`mpls ldp label`
-` allocate global host-routes`
+```
+mpls ldp label
+ allocate global host-routes
+```
 
 Label space
 
-`show mpls ldp discovery`
+```
+show mpls ldp discovery
+```
 `10.0.0.10:`**`0`**
-`0 betyder platform wide label space`
-`1 betyder interface label space`
+```
+0 betyder platform wide label space
+1 betyder interface label space
+```
 
 Disable PHP
 
-`mpls ldp explicit-null`
+```
+mpls ldp explicit-null
+```
 
 ### TTL
 
@@ -188,7 +218,9 @@ E-LSR kopieras MPLS-TTLen till IP TTL och skickas vidare. Detta går att
 ingress E-LSR för att hela MPLS-nätet verkligen ska vara som ett router
 hop. Detta behöver endast konfigureras på PE.
 
-`no mpls ip propagate-ttl`
+```
+no mpls ip propagate-ttl
+```
 
 ### Session Protection
 
@@ -205,11 +237,15 @@ konfigureras på båda sidor annars kommer inte andra sidan acceptera
 targeted hellos. Max hops är 255 och för Hello och Hold time gäller 10
 sekunder respektive 90 sekunder default.
 
-`mpls ldp session protection`
-`mpls ldp discovery targeted-hello accept`
-`mpls ldp discovery targeted-hello holdtime 30`
+```
+mpls ldp session protection
+mpls ldp discovery targeted-hello accept
+mpls ldp discovery targeted-hello holdtime 30
+```
 
-`show mpls ldp neighbor detail | i Targeted|Session `
+```
+show mpls ldp neighbor detail | i Targeted|Session 
+```
 
 Både session protection och accept unicast hellos kan begränsas med ACL.
 Med show mpls ldp neighbor kommandot ser man att det finns en lista på
@@ -223,22 +259,28 @@ holdtime - Hello interval) \* 3
 Med tcp-autentisering kan man säkra LDP-kommunikationen. ACL ska träffa
 LDP ID som andra sidan har och måste vara standard.
 
-`ip access-list standard LDP-PEERS`
-` permit host 10.0.0.5`
-` permit host 10.0.0.6`
-`mpls ldp password required for LDP-PEERS`
-`mpls ldp neighbor 10.0.0.5 password SECRET`
+```
+ip access-list standard LDP-PEERS
+ permit host 10.0.0.5
+ permit host 10.0.0.6
+mpls ldp password required for LDP-PEERS
+mpls ldp neighbor 10.0.0.5 password SECRET
+```
 
 Kräv lösenord för alla LDP-grannskap. Om man inte har angett något
 lösenord för en specifik granne kommer fallback att användas om det
 finns konfigurerat.
 
-`mpls ldp password required`
-`mpls ldp password fallback SECRET`
+```
+mpls ldp password required
+mpls ldp password fallback SECRET
+```
 
 Verify
 
-`show mpls ldp discovery detail | i Ethernet|Password`
+```
+show mpls ldp discovery detail | i Ethernet|Password
+```
 
 ### IGP
 
@@ -248,8 +290,10 @@ och [OSPF](/Cisco_OSPF "wikilink"), dvs slå på LDP på de interface som
 routingprocessen. Man kan även använda *prefix suppression* så kommer
 det inte att genereras lika många labels för ens core-nätverk.
 
-`router ospf/isis 1`
-` mpls ldp autoconfig`
+```
+router ospf/isis 1
+ mpls ldp autoconfig
+```
 
 **Synchronization**
 Länkkostnaden för nyetablerade grannskap sätts till max tills LDP är
@@ -265,24 +309,32 @@ uppfyllda.
 
 Slå på det under IGP-processen.
 
-`router ospf/isis 1`
-` mpls ldp sync`
+```
+router ospf/isis 1
+ mpls ldp sync
+```
 
 Alternativt per interface.
 
-`interface gi2`
-` mpls ldp igp sync`
+```
+interface gi2
+ mpls ldp igp sync
+```
 
 På IOS-XE är det rekommenderat att sätta IGP sync holddown timer till
 något non-infinite för att undvika device isolation som kan uppstå vid
 vissa felscenarion.
 
-`mpls ldp igp sync holddown 120000`
+```
+mpls ldp igp sync holddown 120000
+```
 
 Verify
 
-`show mpls ldp igp sync`
-`show mpls interface detail | i Interface|IGP`
+```
+show mpls ldp igp sync
+show mpls interface detail | i Interface|IGP
+```
 
 VPN
 ===
@@ -300,7 +352,9 @@ VPLS](/Cisco_VPLS "wikilink") och för multicast se [Cisco
 MLDP](/Cisco_MLDP "wikilink"). Det går även att integrera
 [NAT](/Cisco_NAT#MPLS_VPN "wikilink") med MPLS VPN.
 
-`ip bgp-community new-format`
+```
+ip bgp-community new-format
+```
 `show ip bgp community ?  #`*`Så`` ``står`` ``det`` ``antingen`` ``aa:nn`` ``eller`` ``1-4294967295`*
 
 **Route Distinguisher:** är ett 64-bitars nummer som skickas med
@@ -317,20 +371,26 @@ BGP.
 Add IBGP neighbor. Man konfar inte next-hop-self eftersom VPNv4 sätter
 det default.
 
-`router bgp 100`
-` neighbor 10.0.0.10 remote-as 100`
-` address-family vpnv4 unicast`
-`  send-community extended`
+```
+router bgp 100
+ neighbor 10.0.0.10 remote-as 100
+ address-family vpnv4 unicast
+  send-community extended
+```
 
 Default är att droppa VPNv4 updates för RTs som det inte finns någon
 lokal vrf för. Detta kan man ändra på.
 
-`router bgp 100`
-` no bgp default route-target filter`
+```
+router bgp 100
+ no bgp default route-target filter
+```
 
 Man kan dölja MPLS-nätet endast för VPN-kunder.
 
-`no mpls ip propagate-ttl forwarded `
+```
+no mpls ip propagate-ttl forwarded 
+```
 
 Label Mode avgör hur det ska allokeras labels. Har man VPN-kunder med
 många routes kan man av effektivitetsskäl byta till per-vrf mode och då
@@ -341,15 +401,19 @@ oavsett var de ska. Det finns därför en mellanvariant som kallas per-ce
 där det allokeras en label per next-hop per vrf och man sparar minne
 samtidigt som man slipper routing lookup.
 
-`mpls label mode all-vrfs protocol all-afs per-prefix  #Default`
-`mpls label mode all-vrfs protocol bgp-vpnv6 per-vrf`
-`mpls label mode vrf INTERNET protocol bgp-vpnv4 per-ce`
+```
+mpls label mode all-vrfs protocol all-afs per-prefix  #Default
+mpls label mode all-vrfs protocol bgp-vpnv6 per-vrf
+mpls label mode vrf INTERNET protocol bgp-vpnv4 per-ce
+```
 
 Man kan partitionera upp nätverket genom att skapa RR-grupper som
 filtrerar på route-targets.
 
-`address-family vpnv4`
-` bgp rr-group EXTCOM-LIST`
+```
+address-family vpnv4
+ bgp rr-group EXTCOM-LIST
+```
 
 ### 6VPE
 
@@ -360,10 +424,12 @@ genom MPLS-nätet och en IPv4 LSP finns mellan PEs. Next-hop-adressen
 måste finns i IPv4-routingtabellen och en LSP måste existera för
 destinationen.
 
-`router bgp 100`
-` address-family vpnv6`
-`  neighbor 10.0.0.10 activate`
-`  neighbor 10.0.0.10 send-community extended`
+```
+router bgp 100
+ address-family vpnv6
+  neighbor 10.0.0.10 activate
+  neighbor 10.0.0.10 send-community extended
+```
 
 Inter-AS MPLS VPN
 -----------------
@@ -387,20 +453,26 @@ eBGP-grannar autoläggs in i RIB och därmed möjliggör label forwarding,
 så fungerar ej IOS XR utan där måste man lägga till statiska routes
 manuellt.
 
-`interface GigabitEthernet1/0`
-` description Connection to other AS`
+```
+interface GigabitEthernet1/0
+ description Connection to other AS
+```
 ` `**`mpls`` ``bgp`` ``forwarding`**
 
-`router bgp 100`
-` no bgp default route-target filter`
-` neighbor 2.2.2.2 remote-as 200`
-` neighbor 10.0.0.10 description iBGP`
-` address-family vpnv4`
-`  neighbor 2.2.2.2 activate`
-`  neighbor 10.0.0.10 activate`
-`  neighbor 10.0.0.10 next-hop-self`
+```
+router bgp 100
+ no bgp default route-target filter
+ neighbor 2.2.2.2 remote-as 200
+ neighbor 10.0.0.10 description iBGP
+ address-family vpnv4
+  neighbor 2.2.2.2 activate
+  neighbor 10.0.0.10 activate
+  neighbor 10.0.0.10 next-hop-self
+```
 
-`show bgp vpnv4 unicast all labels`
+```
+show bgp vpnv4 unicast all labels
+```
 
 **VPNv4 between RRs** *Option 10C*
 (eller PEs using multihop eBGP)
@@ -416,26 +488,30 @@ om det däremot inte är uppsatt så måste det trippel labelas. En för
 kundens IP till egress PE, en satt av ASBR för egress PE och en för IGP
 next-hop. Använder man RR är detta ett väldigt skalbart alternativ.
 
-`router bgp 100`
-` neighbor 10.0.0.10 description eBGP`
-` address-family vpnv4`
-`  neighbor 10.0.0.10 next-hop-unchanged`
+```
+router bgp 100
+ neighbor 10.0.0.10 description eBGP
+ address-family vpnv4
+  neighbor 10.0.0.10 next-hop-unchanged
+```
 
 **Option AB**
 Control plane: BGP VPNv4
 Data plane: subinterfaces / back-to-back VRF
 Notera att option AB ej är supporterat på IOS-XR.
 
-`vrf definition VRF1`
-` address-family ipv4`
-`  inter-as-hybrid next-hop 10.0.0.2`
-`!`
-`router bgp 100`
-` no bgp default route-target filter`
-` neighbor 2.2.2.2 remote-as 200`
-` address-family vpnv4`
-`  neighbor 2.2.2.2 activate`
-`  neighbor 2.2.2.2 inter-as-hybrid`
+```
+vrf definition VRF1
+ address-family ipv4
+  inter-as-hybrid next-hop 10.0.0.2
+!
+router bgp 100
+ no bgp default route-target filter
+ neighbor 2.2.2.2 remote-as 200
+ address-family vpnv4
+  neighbor 2.2.2.2 activate
+  neighbor 2.2.2.2 inter-as-hybrid
+```
 
 BGP-LU
 ------
@@ -447,15 +523,19 @@ edge routrar och transport-routrarna i mitten märker inget. De
 vanligaste use casen för BGP-LU är Inter-AS MPLS VPN Option C,
 Seamless/Unified MPLS, CSC VPN och IGP free data center.
 
-`router bgp 100`
-` address-family ipv4`
-`  neighbor 10.0.0.10 send-community both`
-`  neighbor 10.0.0.10 next-hop-self`
-`  neighbor 10.0.0.10 send-label `
+```
+router bgp 100
+ address-family ipv4
+  neighbor 10.0.0.10 send-community both
+  neighbor 10.0.0.10 next-hop-self
+  neighbor 10.0.0.10 send-label 
+```
 
 Show
 
-`show bgp ipv4 unicast labels`
+```
+show bgp ipv4 unicast labels
+```
 
 Notera att man på IOS måste ha med **set mpls-label** i sina route-map
 entries om ska använda route-maps för policy med BGP-LU.
@@ -470,33 +550,37 @@ MPLS Echo skickas unicast till LDP-grannen med L3 destination address
 
 **Echo Request:**
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_MPLS_Echo_Request.png>](/File:Cisco_MPLS_Echo_Request.png "wikilink")
 
-</div>
-</div>
+![Cisco_MPLS_Echo_Request.png](../img/Cisco_MPLS_Echo_Request.png)
+
+
+
 <div class="mw-collapsible mw-collapsed" style="width:240px">
 
 **Echo Reply:**
 
-<div class="mw-collapsible-content">
 
-[<File:Cisco_MPLS_Echo_Reply.png>](/File:Cisco_MPLS_Echo_Reply.png "wikilink")
 
-</div>
-</div>
+![Cisco_MPLS_Echo_Reply.png](../img/Cisco_MPLS_Echo_Reply.png)
+
+
+
 
 Man kan med MPLS-ping testa konnektivitet till en FEC, så detta funkar
 endast ifrån en LSR samt inga VPN-prefix fungerar heller utan endast det
 man lärt sig med LDP.
 
-`ping mpls ipv4 10.1.1.1/32 `
+```
+ping mpls ipv4 10.1.1.1/32 
+```
 
 Med MPLS-traceroute kan man få ut mer information jämfört med vanlig
 traceroute eftersom det skickas mer data i payloaden.
 
-`traceroute mpls ipv4 10.1.1.1/32`
+```
+traceroute mpls ipv4 10.1.1.1/32
+```
 
 6PE
 ===
@@ -511,55 +595,67 @@ behöver konfigurera next-hop-self. Däremot om IPv4-adressen inte finns i
 routingtabellen eller om det inte finns någon LSP kommer IPv6-prefixet
 att stå som inaccessible.
 
-`router bgp 100`
-` address-family ipv6`
-`  neighbor 10.0.0.10 activate`
-`  neighbor 10.0.0.10 send-label`
+```
+router bgp 100
+ address-family ipv6
+  neighbor 10.0.0.10 activate
+  neighbor 10.0.0.10 send-label
+```
 
-`show bgp ipv6 unicast labels`
+```
+show bgp ipv6 unicast labels
+```
 
 IOS-XR
 ======
 
-`mpls ldp`
-` log`
-`  hello-adjacency`
-`  neighbor`
-`  graceful-restart`
-`  session-protection`
-` !`
-` graceful-restart`
-` discovery`
-`  targeted-hello holdtime 30`
-`  targeted-hello interval 10`
-` !`
-` router-id 10.10.0.101`
-` neighbor`
-`  password encrypted 10422A2A0D33371D030A796571`
-` !`
-` session protection`
-` address-family ipv4`
-`  discovery targeted-hello accept`
-`  label`
-`   local`
-`    allocate for host-routes`
-`    advertise`
-`     explicit-null`
+```
+mpls ldp
+ log
+  hello-adjacency
+  neighbor
+  graceful-restart
+  session-protection
+ !
+ graceful-restart
+ discovery
+  targeted-hello holdtime 30
+  targeted-hello interval 10
+ !
+ router-id 10.10.0.101
+ neighbor
+  password encrypted 10422A2A0D33371D030A796571
+ !
+ session protection
+ address-family ipv4
+  discovery targeted-hello accept
+  label
+   local
+    allocate for host-routes
+    advertise
+     explicit-null
+```
 
-`router isis 1`
-` address-family ipv4 unicast`
-`  mpls ldp auto-config`
+```
+router isis 1
+ address-family ipv4 unicast
+  mpls ldp auto-config
+```
 
 Verify
 
-`show mpls interfaces`
-`show isis mpls ldp`
+```
+show mpls interfaces
+show isis mpls ldp
+```
 
 **Unified MPLS**
 ABR/RR, för att next-hop-self ska funka.
 
-`router bgp 100`
-` ibgp policy out enforce-modifications`
+```
+router bgp 100
+ ibgp policy out enforce-modifications
+```
 
 RR (som måste finnas i data path) kan stå för att stoppa in alla
 PE-prefix (/32) i bgp-tabellen.
@@ -569,33 +665,43 @@ NX-OS
 
 Förutsättningar
 
-`install feature-set mpls`
-`feature-set mpls`
-`feature mpls l3vpn`
-`feature mpls ldp`
+```
+install feature-set mpls
+feature-set mpls
+feature mpls l3vpn
+feature mpls ldp
+```
 
-`interface loopback 1`
-` ip address 10.0.0.1/24`
+```
+interface loopback 1
+ ip address 10.0.0.1/24
+```
 
-`mpls ldp configuration`
-` session protection`
-` router-id loopback 1`
+```
+mpls ldp configuration
+ session protection
+ router-id loopback 1
+```
 
 Aktivera på interface
 
-`interface e1/1`
-` mpls ip`
+```
+interface e1/1
+ mpls ip
+```
 
 Synk med routing protokoll
 
-`router isis P1`
-` mpls ldp sync`
+```
+router isis P1
+ mpls ldp sync
+```
 
 Authentication
 
 `ip prefix-list `<namn>` permit `<granne1>`/32`
-`mpls ldp configuration`
+```
+mpls ldp configuration
+```
 ` password required for `<prefix-list>
 ` password option 1 for `<prefix-list>` key-chain `<key-chain-name>
-
-[Category:Cisco](/Category:Cisco "wikilink")

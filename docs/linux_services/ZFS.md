@@ -11,79 +11,109 @@ Installation
 
 *Ubuntu 16.04 onwards*
 
-`sudo apt-get update && sudo apt-get -y install zfs`
+```
+sudo apt-get update && sudo apt-get -y install zfs
+```
 
 *Fedora*
 
 `sudo dnf install --nogpgcheck `[`http://archive.zfsonlinux.org/fedora/zfs-release$(rpm`](http://archive.zfsonlinux.org/fedora/zfs-release$(rpm)` -E %dist).noarch.rpm`
-`sudo dnf install kernel-devel zfs `
-`sudo /sbin/modprobe zfs`
+```
+sudo dnf install kernel-devel zfs 
+sudo /sbin/modprobe zfs
+```
 
 *Debian*
 
-`su -`
-`apt-get install lsb-release`
+```
+su -
+apt-get install lsb-release
+```
 `wget `[`http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_6_all.deb`](http://archive.zfsonlinux.org/debian/pool/main/z/zfsonlinux/zfsonlinux_6_all.deb)
-`dpkg -i zfsonlinux_6_all.deb`
-`apt-get update && apt-get install debian-zfs`
+```
+dpkg -i zfsonlinux_6_all.deb
+apt-get update && apt-get install debian-zfs
+```
 
 Konfiguration
 =============
 
 ### Pool
 
-`zpool create POOL raidz1 \`
-`        /dev/disk/by-id/ata-WDC_WD.. \`
-`        /dev/disk/by-id/ata-WDC_WD.. \`
-`        /dev/disk/by-id/ata-WDC_WD.. \`
-`        -o ashift=12 -o failmode=continue`
+```
+zpool create POOL raidz1 \
+        /dev/disk/by-id/ata-WDC_WD.. \
+        /dev/disk/by-id/ata-WDC_WD.. \
+        /dev/disk/by-id/ata-WDC_WD.. \
+        -o ashift=12 -o failmode=continue
+```
 
 Lägg till -f om det inte finns någon EFI label.
 
-` zfs set atime=off POOL`
+```
+ zfs set atime=off POOL
+```
 
 Show-kommandon.
 
-`zpool list`
-`zpool status`
-`zfs get all`
-`zpool iostat -v POOL`
+```
+zpool list
+zpool status
+zfs get all
+zpool iostat -v POOL
+```
 
 Radera en pool.
 
-`zpool destroy POOL`
+```
+zpool destroy POOL
+```
 
 Återställ raderad pool.
 
-`zpool import -D POOL`
+```
+zpool import -D POOL
+```
 
 ### Mount point
 
-`zfs set mountpoint=/path/pool POOL`
-`chown -R user:user /path/pool`
+```
+zfs set mountpoint=/path/pool POOL
+chown -R user:user /path/pool
+```
 
 ### Dataset
 
-`zfs create POOL/test`
+```
+zfs create POOL/test
+```
 
 Kompression.
 
-`zfs set compression=on POOL/test`
+```
+zfs set compression=on POOL/test
+```
 
 Deduplicering.
 
-`zfs set dedup=on POOL/test`
+```
+zfs set dedup=on POOL/test
+```
 
 Radera dataset.
 
-`zfs destroy POOL/test`
+```
+zfs destroy POOL/test
+```
 
 ### L2ARC
 
 Level 2 Adjustable Replacement Cache (L2ARC), är en utökning av den read
 cache (ARC) som finns i RAM.
 
-`zpool add -f POOL cache sdf`
+```
+zpool add -f POOL cache sdf
+```
 
 ### ZIL & SLOG
 
@@ -96,13 +126,17 @@ dataförlust, den enda prestandaökningen rör synkrona skrivningar som
 utan en SLOG hade skrivits två gånger till samma disk då ZIL befunnit
 sig inuti den pool dit data skrivs.
 
-`zpool add -f POOL log sdg`
+```
+zpool add -f POOL log sdg
+```
 
 Om man är extra rädd om sin data kan man tvinga alla skrivningar att gå
 genom ZIL med kommandot nedan. Det går att ställa på enskilda dataset
 eller hela pooler om så önskas.
 
-`zfs set sync=always POOL/test`
+```
+zfs set sync=always POOL/test
+```
 
 Det går även att stänga av ZIL helt om man inte bryr sig om
 dataintegritet (samma syntax som ovan fast disable istället för always,
@@ -119,7 +153,9 @@ utan måste triggas, cronjob rekommenderas starkt. Rekommendationen som
 finns för frekvens av scrubbing på Solaris för enterprise- och
 konsumentdiskar är en gång i månaden resp. en gång i veckan.
 
-`zpool scrub`
+```
+zpool scrub
+```
 
 *IO intensive*
 
@@ -130,23 +166,33 @@ unikt namn.
 
 Dataset snapshot.
 
-`zfs snapshot POOL/test@NAME`
+```
+zfs snapshot POOL/test@NAME
+```
 
 Pool snapshot.
 
-`zfs snapshot POOL@NAME`
+```
+zfs snapshot POOL@NAME
+```
 
 Lista snapshots.
 
-`zfs list -t snapshot`
+```
+zfs list -t snapshot
+```
 
 Rollback till snapshot.
 
-`zfs rollback POOL/test@NAME`
+```
+zfs rollback POOL/test@NAME
+```
 
 Ta bort snapshot.
 
-`zfs destroy POOL/test@NAME`
+```
+zfs destroy POOL/test@NAME
+```
 
 **Automatiska snapshots**
 Det finns ett antal olika paket/skript för att sköta automatisering av
@@ -194,7 +240,9 @@ måste dock den nya disken specificeras med sin path. Poolens namn på
 disken ändras då disken är frånvarande, för att ta reda på vad *disk1*
 heter istället används i vanlig ordning `zpool status`.
 
-`zpool replace POOL disk1 disk2`
+```
+zpool replace POOL disk1 disk2
+```
 
 Får du ett felmeddelande som säger "*disk2* does not contain an EFI
 label but it may contain partition information in the MBR" bör det räcka
@@ -213,13 +261,15 @@ finns en enkel lösning, helt utan dataförlust. Gör såhär:
 Exportera din pool, poolen tas nu bort från systemet i förberedelse för
 "flytten".
 
-`zpool export POOL`
+```
+zpool export POOL
+```
 
 Importera poolen från /dev/disk/by-id.
 
-`zpool import -d /dev/disk/by-id POOL`
+```
+zpool import -d /dev/disk/by-id POOL
+```
 
 Verifiera att poolen är tillbaks och att diskarna i poolen refereras med
 sitt ID istället för "sdX" med `zpool status`.
-
-[Category:Guider](/Category:Guider "wikilink")

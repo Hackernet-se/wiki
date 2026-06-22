@@ -21,59 +21,67 @@ behov
 Supporterade Språk
 ------------------
 
-`*Haskell`
-`*Java`
-`*JavaScript`
-`*.NET`
-`*Perl`
-`*PHP`
-`*Python`
-`*Ruby`
+```
+*Haskell
+*Java
+*JavaScript
+*.NET
+*Perl
+*PHP
+*Python
+*Ruby
+```
 
 Supporterade Databaser
 ----------------------
 
-`*Microsoft SQL Server`
-`*MongoDB`
-`*MySQL`
-`*PostgreSQL`
+```
+*Microsoft SQL Server
+*MongoDB
+*MySQL
+*PostgreSQL
+```
 
 Supporterade Applikationer
 --------------------------
 
-`*Node.js för JavaScript`
-`*PSGI för Perl`
-`*Rack för Ruby`
-`*WSGI för Python`
+```
+*Node.js för JavaScript
+*PSGI för Perl
+*Rack för Ruby
+*WSGI för Python
+```
 
 Några ramverk som fungerar omodifierade på openstack
 
-`*CakePHP`
-`*Codelgniter`
-`*Django`
-`*Flask`
-`*Laravel`
-`*Perl Dancer`
-`*Ruby on Rails`
-`*Sinatra`
-`*Tornado`
-`*Vert.x`
-`*web2py`
+```
+*CakePHP
+*Codelgniter
+*Django
+*Flask
+*Laravel
+*Perl Dancer
+*Ruby on Rails
+*Sinatra
+*Tornado
+*Vert.x
+*web2py
+```
 
 Konkurenter
 -----------
 
-`*Cloud Foundry`
-`*Google App Engine`
-`*Heroku`
-`*Jelastic`
-`*Bluemix`
-`*Tsuru (PaaS)`
+```
+*Cloud Foundry
+*Google App Engine
+*Heroku
+*Jelastic
+*Bluemix
+*Tsuru (PaaS)
+```
 
 Installation
 ------------
 
 Konfiguration
 -------------
-
-[Category:Linux](/Category:Linux "wikilink")

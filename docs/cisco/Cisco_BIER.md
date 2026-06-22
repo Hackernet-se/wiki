@@ -15,5 +15,3 @@ Några fördelar med BIER:
 -   State is in the packet and not in the network.
 
 Se även [Cisco Multicast](/Cisco_Multicast "wikilink").
-
-[Category:Cisco](/Category:Cisco "wikilink")

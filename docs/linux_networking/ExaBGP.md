@@ -10,7 +10,9 @@ BGP](/Arista_BGP "wikilink").
 Installation
 ============
 
-`pip install exabgp`
+```
+pip install exabgp
+```
 
 Konfiguration
 =============
@@ -20,11 +22,15 @@ Exempel där man kan skicka in väldigt mycket routes till BGP.
 Script för att generera prefix:
 [bs-prefixes.py](http://www.blackhole-networks.com/OSPF_overload/bs-prefixes.py)
 
-`chmod +x bs-prefixes.py`
+```
+chmod +x bs-prefixes.py
+```
 
 Script för att annonsera prefix
 
-`touch announce.sh && chmod +x announce.sh`
+```
+touch announce.sh && chmod +x announce.sh
+```
 
 cat announce.sh
 
@@ -57,23 +63,29 @@ done
 
 Konfigurationsfil för exaBGP, edit *exabgp.conf*
 
-`neighbor 10.0.0.11 {`
-` description "R2";`
-` router-id 66.66.66.66;`
-` local-address 10.0.0.10;`
-` local-as 666;`
-` peer-as 101;`
-` hold-time 600;`
-` graceful-restart;`
+```
+neighbor 10.0.0.11 {
+ description "R2";
+ router-id 66.66.66.66;
+ local-address 10.0.0.10;
+ local-as 666;
+ peer-as 101;
+ hold-time 600;
+ graceful-restart;
+```
 
-`  # advertise prefixes`
-`  process service-1 {`
-`       run /path/to/announce.sh;`
-`  }`
+```
+  # advertise prefixes
+  process service-1 {
+       run /path/to/announce.sh;
+  }
+```
 
 Kör
 
-`exabgp exabgp.conf`
+```
+exabgp exabgp.conf
+```
 
 Segment Routing
 ---------------
@@ -88,24 +100,24 @@ SR](/Cisco_SR "wikilink").
 
 cat ./config/exabgp
 
-`neighbor 172.16.0.20 { `
-`   group-updates true; `
-`   local-address 172.16.0.10; `
-`   peer-as 65000; `
-`   local-as 65000; `
-`   family { `
-`      ipv4 nlri-mpls;`
-`   }`
-`   static {`
-`      route 10.1.1.15/32 {  `
-`         next-hop 10.0.0.2;  `
-`         label [ 800005 800007 800006 800008 ];`
-`      }`
-`      route 10.1.1.15/32 {          #egress PE loopback`
-`         next-hop 10.0.0.3;         #physical next-hop in core to get towards egress PE`
-`         label [ 800005 800006 800008 ];`
-`      }`
-`   }`
-`}`
-
-[Category:Network](/Category:Network "wikilink")
+```
+neighbor 172.16.0.20 { 
+   group-updates true; 
+   local-address 172.16.0.10; 
+   peer-as 65000; 
+   local-as 65000; 
+   family { 
+      ipv4 nlri-mpls;
+   }
+   static {
+      route 10.1.1.15/32 {  
+         next-hop 10.0.0.2;  
+         label [ 800005 800007 800006 800008 ];
+      }
+      route 10.1.1.15/32 {          #egress PE loopback
+         next-hop 10.0.0.3;         #physical next-hop in core to get towards egress PE
+         label [ 800005 800006 800008 ];
+      }
+   }
+}
+```

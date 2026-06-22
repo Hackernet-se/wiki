@@ -10,5 +10,3 @@ problemen. InSSIDer 3.1.2.1 är den senaste freeware-varianten.
 Redaktionen rekommenderar.
 
 [`http://ds.karen.hj.se/~cameljoe/resources/inSSIDer-free.msi`](http://ds.karen.hj.se/~cameljoe/resources/inSSIDer-free.msi)
-
-[Category:Windows](/Category:Windows "wikilink")

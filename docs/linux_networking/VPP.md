@@ -16,38 +16,52 @@ Installation
 Ubuntu 16.04
 
 `echo "deb `[`https://nexus.fd.io/content/repositories/fd.io.ubuntu.xenial.main/`](https://nexus.fd.io/content/repositories/fd.io.ubuntu.xenial.main/)` ./" | sudo tee -a /etc/apt/sources.list.d/99fd.io.list`
-`sudo apt update && sudo apt install vpp vpp-lib vpp-dpdk-dkms`
+```
+sudo apt update && sudo apt install vpp vpp-lib vpp-dpdk-dkms
+```
 
 Fedora
 
 `sudo curl -o /etc/yum.repos.d/fdio.repo `[`https://paste.fedoraproject.org/355177/60579220/raw/`](https://paste.fedoraproject.org/355177/60579220/raw/)
-`sudo dnf update && sudo dnf install vpp`
+```
+sudo dnf update && sudo dnf install vpp
+```
 
 Konfiguration
 -------------
 
-`cat /etc/vpp/startup.conf`
+```
+cat /etc/vpp/startup.conf
+```
 
 Service
 
-`sudo systemctl start vpp`
-`sudo systemctl status vpp`
+```
+sudo systemctl start vpp
+sudo systemctl status vpp
+```
 
 VPP lyssnar default på tcp port 5000
 
-`telnet 0 5000`
+```
+telnet 0 5000
+```
 
 VPP shell
 
-`show interface`
+```
+show interface
+```
 
 Bash
 
-`sudo vppctl show ip arp`
+```
+sudo vppctl show ip arp
+```
 
 **Honeycomb** är en agent man kan köra på samma host som tillhandahåller
 yang models via netconf/restconf för remote management.
 
-`sudo yum install honeycomb`
-
-[Category:Network](/Category:Network "wikilink")
+```
+sudo yum install honeycomb
+```
