@@ -9115,15 +9115,15 @@
 <p>PE routers redistribuerar routes till BGP och konverterar dem till VPNv4
 NLRI. Denna NLRI annonseras till andra PE med hjälp av MP-BGP. Dessa PE
 konverterar tillbaka VPNv4 routes och skickar det vidare till CE.
-Se även <a href="/Cisco_BGP" title="wikilink">Cisco BGP</a>, <a href="/Cisco_Routing" title="wikilink">Cisco
-Routing</a> och <a href="/Cisco_MPLS" title="wikilink">Cisco
+Se även <a href="../Cisco_BGP/">Cisco BGP</a>, <a href="../Cisco_Routing/">Cisco
+Routing</a> och <a href="../Cisco_MPLS/">Cisco
 MPLS</a>.</p>
 <h2 id="rip">RIP</h2>
 <p>RIP är det simplaste protokollet och om man använder <strong>transparent</strong> så
 kommer RIPs metric att tas ifrån BGP MED attribute som är en kopia av
 RIP metricen från andra sidan. Detta gör att man kan få till bra path
 selection även om det finns backdoor links. RIPv1 stöds inte. Se även
-<a href="/Cisco_RIP" title="wikilink">Cisco RIP</a>.</p>
+<a href="../Cisco_RIP/">Cisco RIP</a>.</p>
 <div class="highlight"><pre><span></span><code>router&nbsp;rip
 &nbsp;version&nbsp;2
 &nbsp;address-family&nbsp;ipv4&nbsp;vrf&nbsp;Cust_A
@@ -9136,7 +9136,7 @@ selection även om det finns backdoor links. RIPv1 stöds inte. Se även
 &nbsp;exit-address-family
 </code></pre></div>
 <h2 id="ospf">OSPF</h2>
-<p>OSPF för PE-CE (RFC 4577), se även <a href="/Cisco_OSPF" title="wikilink">Cisco OSPF</a>.
+<p>OSPF för PE-CE (RFC 4577), se även <a href="../Cisco_OSPF/">Cisco OSPF</a>.
 MPLS-nätet skickar OSPF VRF routing information i MP-BGP-uppdateringar
 och det kommer att agera som en OSPF super-backbone vilket gör att man
 faktiskt inte behöver köra med area 0 någonstans men man kan såklart
@@ -9216,7 +9216,7 @@ communities. Detta gör att när man kör EIGRP \&lt;-&gt; BGP (VPN) \&lt;-&gt; 
 blir routsen internal, däremot om routsen har kommit från något annat än
 EIGRP, dvs saknar dessa communities, blir de external ur EIGRPs
 perspektiv. EIGRP-prefix som redistribueras in i BGP kommer också att ha
-ett Cost value som används för path selection. Se även <a href="/Cisco_EIGRP" title="wikilink">Cisco
+ett Cost value som används för path selection. Se även <a href="../Cisco_EIGRP/">Cisco
 EIGRP</a>.</p>
 <div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;100
 &nbsp;address-family&nbsp;ipv4&nbsp;vrf&nbsp;Cust_A&nbsp;autonomous-system&nbsp;200
@@ -9319,7 +9319,7 @@ för sina L3 VPN:er.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     

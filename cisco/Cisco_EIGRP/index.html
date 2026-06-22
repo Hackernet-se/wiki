@@ -10212,7 +10212,7 @@ tie-breaking rules.</p>
 <div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;eigrp&nbsp;topology&nbsp;frr&nbsp;
 </code></pre></div>
 <h3 id="bfd">BFD</h3>
-<p>Se <a href="/Cisco_BFD" title="wikilink">BFD</a></p>
+<p>Se <a href="../Cisco_BFD/">BFD</a></p>
 <div class="highlight"><pre><span></span><code>router&nbsp;eigrp&nbsp;100
 &nbsp;bfd&nbsp;interface&nbsp;gi2&nbsp;&nbsp;&nbsp;#Enable&nbsp;BFD&nbsp;on&nbsp;specific&nbsp;interface
 &nbsp;bfd&nbsp;all-interfaces&nbsp;&nbsp;#Enable&nbsp;BFD&nbsp;on&nbsp;all&nbsp;interfaces
@@ -10289,10 +10289,10 @@ blockera ut externa routes vid redistribution för att undvika loopar.</p>
 Med static och connected behövs ingen seed metric.</p>
 <div class="highlight"><pre><span></span><code>redistribute&nbsp;static
 </code></pre></div>
-<p><strong><a href="/Cisco_RIP" title="wikilink">RIP</a></strong></p>
+<p><strong><a href="../Cisco_RIP/">RIP</a></strong></p>
 <div class="highlight"><pre><span></span><code>redistribute&nbsp;rip&nbsp;metric&nbsp;1500&nbsp;100&nbsp;255&nbsp;1&nbsp;1500
 </code></pre></div>
-<p><strong><a href="/Cisco_OSPF" title="wikilink">OSPF</a></strong></p>
+<p><strong><a href="../Cisco_OSPF/">OSPF</a></strong></p>
 <div class="highlight"><pre><span></span><code>redistribute&nbsp;ospf&nbsp;1
 </code></pre></div>
 <p>Route flapping kan upptäckas genom att kolla events, 500 lines hålls i
@@ -10316,7 +10316,7 @@ utan man måste sätta något mer realistiskt.</p>
 Man måste no shuta EIGRP-processen för att den ska starta. Default route
 kan endast annonseras med hjälp summarization eller redistribution.
 Unequal-cost load balancing stöds för närvarande inte med IPv6 EIGRP pga
-<a href="/Cisco_CEF" title="wikilink">CEF</a>-begränsningar. Defualt så sätter routern
+<a href="../Cisco_CEF/">CEF</a>-begränsningar. Defualt så sätter routern
 alltid sig själv som next-hop, även när routes annonseras ut på samma
 interface som de kom in på, detta går att stänga av med <em>no ipv6
 next-hop-self eigrp</em>.</p>
@@ -10402,7 +10402,7 @@ inställningen: <strong>route-tag notation dotted-decimal</strong></p>
 <p>Fr.o.m. IOS 15.3(2)T har EIGRP stöd för tillägget Add-Path som låter en
 router skicka ut uppdateringar som innehåller flera equal-cost vägar
 till samma destination. Detta är användbart i
-<a href="/Cisco_DMVPN" title="wikilink">DMVPN</a>-setuper där flera branch offices är
+<a href="../Cisco_DMVPN/">DMVPN</a>-setuper där flera branch offices är
 dual homed. För att kunna skicka ut multipla routes måste de finnas i
 routingtabellen samt att Split Horizon är avstängt på multipoint
 tunnel-interfacet mot alla spokes.</p>
@@ -10429,7 +10429,7 @@ någonting annat än maximum-paths.</p>
 <p>Är rekommenderat om huben använder flera tunnel-interface för att nå
 spokes.</p>
 <h3 id="ipv6-vrf-lite">IPv6 VRF-Lite</h3>
-<p>EIGRP IPv6 <a href="/Cisco_Routing#VRF" title="wikilink">VRF-Lite</a> är endast
+<p>EIGRP IPv6 <a href="../Cisco_Routing/#VRF#VRF#VRF#VRF#VRF#VRF#VRF#VRF">VRF-Lite</a> är endast
 tillgängligt med Named configurations.</p>
 <div class="highlight"><pre><span></span><code>vrf&nbsp;definition&nbsp;VRF1
 &nbsp;rd&nbsp;100:1
@@ -10442,13 +10442,13 @@ tillgängligt med Named configurations.</p>
 <h1 id="over-the-top">Over the ToP</h1>
 <p>EIGRP Over the ToP (OTP) gör att man kan skapa multipoint overlay VPN:er
 över vanlig L3/L3 VPN. Nyckeln är att
-<a href="/Cisco_LISP" title="wikilink">LISP</a>-enkapsulering (UDP port 4343) används men
+<a href="../Cisco_LISP/">LISP</a>-enkapsulering (UDP port 4343) används men
 EIGRP används för control plane istället för LISPs vanliga mapping
 service. Man uppnår en del liknande funktionalitet som med
-<a href="/Cisco_DMVPN" title="wikilink">DMVPN</a> men det fungerar inte på samma sätt. Om
+<a href="../Cisco_DMVPN/">DMVPN</a> men det fungerar inte på samma sätt. Om
 man kör OTP över MPLS VPN behöver man inte köra någon dynamisk routing
 med Provider däremot måste alla CE kunna nå varandra. OTP-trafik kan
-krypteras med <a href="/Cisco_IPsec#GET_VPN" title="wikilink">GET VPN</a>. Eftersom
+krypteras med <a href="../Cisco_IPsec/#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN">GET VPN</a>. Eftersom
 grannskap måste konfigureras manuellt blir det omständigt när miljön
 växer lite. Detta har lett till att man tagit fram Route Reflector även
 för EIGRP, som ger samma funktionalitet som i BGP.</p>
@@ -10529,7 +10529,7 @@ show&nbsp;ip&nbsp;eigrp&nbsp;neighbors
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     

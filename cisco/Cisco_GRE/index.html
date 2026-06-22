@@ -9203,13 +9203,13 @@ utvecklat av Cisco, det är IP-protokoll 47. Enkapsulering görs genom att
 sätta på en 4 byte GRE-header på L3-paketen och sedan sätts en ny
 IPv4/IPv6-header på det så att det kan routas till andra änden av
 tunneln och dekapsuleras. Diverse protokoll kan tunnlas, t.ex.
-<a href="/Cisco_MPLS" title="wikilink">MPLS</a> och <a href="/Cisco_IPsec" title="wikilink">IPsec</a>.
+<a href="../Cisco_MPLS/">MPLS</a> och <a href="../Cisco_IPsec/">IPsec</a>.
 Eftersom det är enkapsulering påverkas MTU så det bör man hålla koll på.
 Däremot om man ändrar tunnel mode till "IPIP" så reducerar man
 overheaden litegrann för då läggs det endast på en header istället för
 två. Och vill man öka overhead kan man köra tunnel i tunnel, man kan
 enkapsulera ett paket upp till fyra gånger. GRE kan även köras
-multipoint, t.ex. i <a href="/Cisco_DMVPN" title="wikilink">DMVPN</a>.</p>
+multipoint, t.ex. i <a href="../Cisco_DMVPN/">DMVPN</a>.</p>
 <h3 id="tunnel-key">Tunnel Key</h3>
 <p>GRE Tunnel Key feature kan användas för att logiskt särskilja mellan
 flera tunnlar mellan samma noder. Det gör att encapsulation router
@@ -9284,7 +9284,7 @@ med lägre AD.</p>
 original-headern och klassificera det korrekt eftersom VPN och tunnel
 operations appliceras innan QoS policy. Med QoS pre-classify för VPN:er
 ändrar man denna ordning och paket kan klassificeras innan de tunnlas.
-Man kan även klassa på annat än IP-prec eller DSCP. Se även <a href="/Cisco_QoS" title="wikilink">Cisco
+Man kan även klassa på annat än IP-prec eller DSCP. Se även <a href="../Cisco_QoS/">Cisco
 QoS</a>.</p>
 <p>Enable QoS for VPNs feature:</p>
 <div class="highlight"><pre><span></span><code>interface&nbsp;Tunnel0
@@ -9445,7 +9445,7 @@ interface&nbsp;GigabitEthernet1
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     

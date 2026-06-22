@@ -9147,7 +9147,7 @@
 <p>Overlay Transport Virtualization är en tunnlingsteknik för att sträcka
 L2-domäner över ett L3-nät med hjälp av enkapsulering. Det är routing
 baserat på mac-adress och för control plane används IP-enkapsulerad
-<a href="/Cisco_IS-IS" title="wikilink">IS-IS</a>. OTV lär sig MAC-IP par genom MAC
+<a href="../Cisco_IS-IS/">IS-IS</a>. OTV lär sig MAC-IP par genom MAC
 address learning på internal interface, IGMP snooping och OTV control
 plane (IS-IS) updates. Alla MAC-adresser sparas i OTV Routing
 Information Base (ORIB) med VLAN ID och associerad remote IP.</p>
@@ -9156,7 +9156,7 @@ unicast droppas vid edge istället för att floodas över tunneln. ARP
 optimeras också genom att Edge Devices kan svara på ARP-frågor för
 enheter som finns på andra sidan, detta genom att lyssna på ARP-trafik
 på den lokala siten och cachea den. OTV går även att kombinera med en
-krypterad transport, t.ex. <a href="/Cisco_IPsec#GET_VPN" title="wikilink">GET VPN</a>.
+krypterad transport, t.ex. <a href="../Cisco_IPsec/#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN">GET VPN</a>.
 IPsec kan då terminera i samma box som OTV och det funkar både ihop med
 OTV unicast och multicast mode.</p>
 <h3 id="termer">Termer</h3>
@@ -9262,8 +9262,8 @@ OBS alla edge devices i overlayen bör supportera reassembly in hardware.</p>
 <h3 id="enkapsulering">Enkapsulering</h3>
 <p>I nya versioner av hårdvara/mjukvara kan man välja vilken enkapsulering
 man ska använda, default används
-<a href="/Cisco_GRE" title="wikilink">GRE</a>/<a href="/Cisco_MPLS" title="wikilink">MPLS</a> men nu kan
-man även använda <a href="/Cisco_VXLAN" title="wikilink">UDP/VXLAN</a>. Väljer man den
+<a href="../Cisco_GRE/">GRE</a>/<a href="../Cisco_MPLS/">MPLS</a> men nu kan
+man även använda <a href="../Cisco_VXLAN/">UDP/VXLAN</a>. Väljer man den
 VXLAN blir det overhead 50 Bytes per paket.</p>
 <div class="highlight"><pre><span></span><code>otv&nbsp;encapsulation-format&nbsp;ip&nbsp;gre&nbsp;|&nbsp;udp
 </code></pre></div>
@@ -9329,7 +9329,7 @@ The site VLAN must not be extended into the OTV.</p>
 &nbsp;no&nbsp;shut
 </code></pre></div>
 <p><strong>BFD</strong>
-Man kan köra <a href="/Cisco_BFD" title="wikilink">BFD</a> över site-vlan:et för att
+Man kan köra <a href="../Cisco_BFD/">BFD</a> över site-vlan:et för att
 snabbt upptäcka forwarderingsproblem inom siten.</p>
 <div class="highlight"><pre><span></span><code>interface&nbsp;vlan1000
 &nbsp;no&nbsp;ip&nbsp;redirects
@@ -9379,7 +9379,7 @@ Upplänkar och loopback ska köra PIM för att detta ska funka. Unicast
 &nbsp;otv&nbsp;join-interface&nbsp;loopback1
 </code></pre></div>
 <h3 id="pvlan">PVLAN</h3>
-<p>I nyare releaser av NX-OS kan man sträcka <a href="/Cisco_VLAN#Private_VLAN" title="wikilink">Private
+<p>I nyare releaser av NX-OS kan man sträcka <a href="../Cisco_VLAN/#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN">Private
 VLAN</a> över OTV och därmed behålla
 segmenteringen.</p>
 <div class="highlight"><pre><span></span><code>feature&nbsp;pvlan
@@ -9422,7 +9422,7 @@ vlan&nbsp;103
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     

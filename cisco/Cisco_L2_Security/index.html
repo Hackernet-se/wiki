@@ -9122,8 +9122,8 @@
 
   <h1>Cisco L2 Security</h1>
 
-<p>Se även <a href="/Cisco_VLAN#Private_VLAN" title="wikilink">Private VLANs</a>, <a href="/Cisco_DHCP#Snooping" title="wikilink">DHCP
-Snooping</a> och <a href="/Cisco_L3_Security" title="wikilink">Cisco L3
+<p>Se även <a href="../Cisco_VLAN/#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN">Private VLANs</a>, <a href="../Cisco_DHCP/#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping">DHCP
+Snooping</a> och <a href="../Cisco_L3_Security/">Cisco L3
 Security</a>.</p>
 <h3 id="frame-block">Frame Block</h3>
 <p>Ändra beteende på en switch så att unknown unicast droppas. Fungerar som
@@ -9146,7 +9146,7 @@ config. En till grej som port-security gör är att kolla att MAC-adresser
 som är säkrade inte kommer in på någon annan port i VLANet än där de är
 säkrade (oavsett learning method). Port-security fungerar endast på
 portar som är statiskt konfigurerade som access eller trunk. Ska port
-security kombineras med <a href="/Cisco_HSRP" title="wikilink">HSRP</a> bör BIA MAC
+security kombineras med <a href="../Cisco_HSRP/">HSRP</a> bör BIA MAC
 användas.</p>
 <div class="highlight"><pre><span></span><code>interface&nbsp;[interface]
 &nbsp;switchport&nbsp;mode&nbsp;access
@@ -9192,7 +9192,7 @@ vlan&nbsp;access-log&nbsp;threshold&nbsp;0
 <p>Storm control är teknik för att låta administratörer dämpa unicast-,
 multicast- eller broadcast-trafik på L2-interface. Det kan användas för
 att reducera skadan vid broadcast-stormar. Olika switchmodeller fungerar
-olika när det gäller <a href="/Cisco_EtherChannel" title="wikilink">EtherChannels</a>
+olika när det gäller <a href="../Cisco_EtherChannel/">EtherChannels</a>
 kontra fysiska interface för Storm control. För att konfigurera Storm
 control måste man ange gränsvärde (rising) men falling är optional.</p>
 <div class="highlight"><pre><span></span><code>interface&nbsp;gi0/7
@@ -9235,7 +9235,7 @@ porten agerar vanlig port (alltså tillåter trafik på access vlan).</p>
 </code></pre></div>
 <p>Man kan slå på att alla andra får prata ut genom porten men inkommande
 frames accepteras endast om auth går igenom. Detta är t.ex. användbart
-för <a href="/PXE-Deploy" title="wikilink">PXE</a>.</p>
+för <a href="../../linux_services/PXE-Deploy/">PXE</a>.</p>
 <div class="highlight"><pre><span></span><code>interface&nbsp;gi0/5
 &nbsp;authentication&nbsp;control-direction&nbsp;in&nbsp;
 </code></pre></div>
@@ -9244,7 +9244,7 @@ för <a href="/PXE-Deploy" title="wikilink">PXE</a>.</p>
 </code></pre></div>
 <h2 id="dai">DAI</h2>
 <p>För att skydda sitt L2-nätverk mot MITM-attacker som använder G-ARP kan
-man använda Dynamic ARP inspection. DAI kräver <a href="/Cisco_DHCP#Snooping" title="wikilink">DHCP
+man använda Dynamic ARP inspection. DAI kräver <a href="../Cisco_DHCP/#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping">DHCP
 Snooping</a> eftersom inkomna
 ARP-meddelanden valideras mot snooping-databasen. Om inte ARP:en stämmer
 överens mot det som står i databasen kommer frames att droppas,
@@ -9324,7 +9324,7 @@ och man får lite tid på sig att fixa problemet.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     

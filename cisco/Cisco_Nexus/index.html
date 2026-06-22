@@ -9124,13 +9124,13 @@
 
 <p>Cisco Nexus switchar är designade för datacenter. De kör NX-OS som
 bygger på en nedbantad variant av Linux kernel. De har stöd för tekniker
-som <a href="/Nexus_FabricPath" title="wikilink">FabricPath</a> och
-<a href="/Nexus_vPC" title="wikilink">vPC</a> och går att konfigurera med CLI
+som <a href="../Nexus_FabricPath/">FabricPath</a> och
+<a href="../Nexus_vPC/">vPC</a> och går att konfigurera med CLI
 (SSH/console) eller XML baserat på NETCONF. För virtuell instans se
-<a href="/Nexus_VDC" title="wikilink">Nexus VDC</a> och för virtuell switch se <a href="/Nexus_1000V" title="wikilink">Nexus
+<a href="../Nexus_VDC/">Nexus VDC</a> och för virtuell switch se <a href="../Nexus_1000V/">Nexus
 1000V</a> och Nexus 9000v (nedan).</p>
 <h3 id="nexus-9000-taxonomy">Nexus 9000 Taxonomy</h3>
-<p><a href="/File:CiscoNexusTaxonomy.jpg" title="wikilink">790px</a></p>
+<p><a href="File:CiscoNexusTaxonomy.jpg">790px</a></p>
 <h2 id="konfiguration">Konfiguration</h2>
 <div class="highlight"><pre><span></span><code>hostname&nbsp;Nexus-01
 service&nbsp;password-encryption
@@ -9175,7 +9175,7 @@ cli&nbsp;alias&nbsp;name&nbsp;changeto&nbsp;switchto&nbsp;vdc
 Detta gäller för L2 interface. Vill man vara någorlunda granulär kan man
 köra jumbo frames per vlan. Show interface visar inte rätt eftersom
 Nexus 5k inte har stöd för per interface MTU utan man får använda show
-queuing. Se även <a href="/Cisco_QoS#NX-OS" title="wikilink">QoS</a> för NX-OS för mer
+queuing. Se även <a href="../Cisco_QoS/#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS">QoS</a> för NX-OS för mer
 info.</p>
 <div class="highlight"><pre><span></span><code>policy-map&nbsp;type&nbsp;network-qos&nbsp;JUMBO-MTU
 &nbsp;class&nbsp;type&nbsp;network-qos&nbsp;class-default
@@ -9314,7 +9314,7 @@ tac-pac&nbsp;bootflash:$(SWITCHNAME)-$(TIMESTAMP)-show-tech-all.gz
 <h3 id="ptp">PTP</h3>
 <p>PTP är ett time synchronization protocol för noder i ett nätverk.
 Hardware timestamps används för att ge bättre noggrannhet än andra
-protokoll som t.ex. <a href="/Cisco_Services#NTP" title="wikilink">NTP</a>. PTP är ett
+protokoll som t.ex. <a href="../Cisco_Services/#NTP#NTP#NTP#NTP#NTP#NTP#NTP#NTP">NTP</a>. PTP är ett
 distribuerat protokoll och ett PTP-system kan bestå av en kombination av
 PTP och icke-PTP devices. Ordinary clocks organiseras i en master-slave
 synchronization hierarki med en grandmaster clock på toppen som
@@ -9368,15 +9368,15 @@ Host Interface skickas alltid till parent även om t.ex. destination är
 en annan port på samma FEX.</p>
 <p>FEXar har INTE stöd för:</p>
 <ul>
-<li><a href="/Cisco_STP" title="wikilink">STP</a>, (BPDUGuard enabled by default)</li>
-<li><a href="/Cisco_VTP" title="wikilink">VTP</a></li>
+<li><a href="../Cisco_STP/">STP</a>, (BPDUGuard enabled by default)</li>
+<li><a href="../Cisco_VTP/">VTP</a></li>
 <li>QinQ</li>
 <li>CDP, (Upplänkar undantag)</li>
 </ul>
 <p><strong>Supported Topologies</strong>
 Man kan koppla in FEXar single homed eller dual homed beroende på om det
 som ska ansluta till FEXarna ska vara single eller dual homed.</p>
-<p><a href="/File:Cisco_Nexus_FEX.PNG" title="wikilink">600px</a></p>
+<p><a href="File:Cisco_Nexus_FEX.PNG">600px</a></p>
 <p><strong>Konfiguration</strong>
 Notera att dual-homed FEXes måste ha identisk konfiguration, dvs
 Nexus-switcharna ska ha matchande FEX-relaterad konfig. Detta kan
@@ -9518,7 +9518,7 @@ skall börja gälla.</p>
 <h2 id="nexus-9000v">Nexus 9000v</h2>
 <p>Nexus 9000v Switch är en virtuell maskin som man kan använda för att
 testa NX-OS features. Nexus 9000v funkar t.ex. i
-<a href="/EVE-NG" title="wikilink">EVE-NG</a>. Dock funkar inte alla features, t.ex. QoS,
+<a href="../../linux_virt/EVE-NG/">EVE-NG</a>. Dock funkar inte alla features, t.ex. QoS,
 BFD, Storm-control, FCoE och MACsec.</p>
 <p>Man måste lägga in i startup-config vilken image switchen ska boota
 ifrån. Här följer lite grundkonfig.</p>
@@ -9588,7 +9588,7 @@ stdout_callback&nbsp;=&nbsp;yaml
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     

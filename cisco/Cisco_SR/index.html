@@ -9055,10 +9055,10 @@ routing, det är inget routingprotokoll utan ett koncept. Den första
 noden väljer path och kodar det i packet header genom en ordnad lista av
 "segment". Det går att använda MPLS data plane (labels) eller IPv6 data
 plane (header extensions), denna artikel fokuserar på
-<a href="/Cisco_MPLS" title="wikilink">MPLS</a>. Segment Routing integrerar med dom
+<a href="../Cisco_MPLS/">MPLS</a>. Segment Routing integrerar med dom
 multi-service capabilities som finns med MPLS, inklusive L3VPN,
-<a href="/Cisco_L2VPN#EoMPLS.2FAToM" title="wikilink">VPWS</a>,
-<a href="/Cisco_L2VPN#VPLS" title="wikilink">VPLS</a> och <a href="/Cisco_EVPN" title="wikilink">EVPN</a>.</p>
+<a href="../Cisco_L2VPN/#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM">VPWS</a>,
+<a href="../Cisco_L2VPN/#VPLS#VPLS#VPLS#VPLS#VPLS#VPLS#VPLS#VPLS">VPLS</a> och <a href="../Cisco_EVPN/">EVPN</a>.</p>
 <p>Segment representerar subpaths som en router kan kombinera för att få
 fram en komplett route till destination. Varje segment har en identifier
 (Segment Identifier) som distribueras genom nätverket med hjälp av
@@ -9066,7 +9066,7 @@ extensions till IGP (IS-IS/OSPF). Segment routing tillåter därmed att
 man väljer hela pathen från ingress port till egress port utan att
 förlita sig på t.ex. IGP shortest path table. Det är samtidigt simplare
 än de flesta andra typer av traffic engineering. SR gör även ECMP till
-skillnad från <a href="/Cisco_MPLS#Traffic_Engineering" title="wikilink">RSVP-TE</a>. För
+skillnad från <a href="../Cisco_MPLS/#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering">RSVP-TE</a>. För
 att tunea en path så används lokal TE policy alternativt BGP-LU, man
 annonserar en unicast route med en associerad MPLS label. SR kräver
 inget label distribution protocol så det behövs t.ex. ingen
@@ -9108,8 +9108,8 @@ annonseras i IGP.</p>
 </code></pre></div>
 <p>Sedan går man in under IGP och slår på segment-routing, detta enablear
 MPLS på alla IGP-interface och lägger in MPLS labels för forwarding. För
-övrig konfiguration se <a href="/Cisco_IS-IS#Konfiguration" title="wikilink">IS-IS</a>
-och <a href="/Cisco_OSPF#Konfiguration" title="wikilink">OSPF</a>.</p>
+övrig konfiguration se <a href="../Cisco_IS-IS/#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration">IS-IS</a>
+och <a href="../Cisco_OSPF/#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration">OSPF</a>.</p>
 <div class="highlight"><pre><span></span><code>router&nbsp;ospf&nbsp;1
 &nbsp;segment-routing&nbsp;mpls
 </code></pre></div>
@@ -9129,7 +9129,7 @@ router ospf 1</p>
 </code></pre></div>
 <h3 id="bgp-sr">BGP-SR</h3>
 <p>Man kan även göra segment routing med hjälp av BGP-SR, då används
-BGP-LU. Se även <a href="/Cisco_BGP" title="wikilink">Cisco BGP</a>.</p>
+BGP-LU. Se även <a href="../Cisco_BGP/">Cisco BGP</a>.</p>
 <div class="highlight"><pre><span></span><code>router&nbsp;bgp&nbsp;1
 &nbsp;neighbor&nbsp;10.1.1.2&nbsp;remote-as&nbsp;2
 &nbsp;!
@@ -9227,7 +9227,7 @@ vilket gör det lätt att se vilka labels som kommer ifrån mapping server.</p>
 &nbsp;&nbsp;segment-routing&nbsp;mpls&nbsp;sr-prefer
 </code></pre></div>
 <h2 id="nx-os">NX-OS</h2>
-<p>Se även <a href="/Cisco_MPLS#NX-OS" title="wikilink">NX-OS MPLS</a>.</p>
+<p>Se även <a href="../Cisco_MPLS/#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS">NX-OS MPLS</a>.</p>
 <div class="highlight"><pre><span></span><code>install&nbsp;feature-set&nbsp;mpls
 feature-set&nbsp;mpls
 feature&nbsp;mpls&nbsp;segment-routing
@@ -9251,7 +9251,7 @@ låter en extern källa räkna på required paths genom nätverket lättar man
 lasten för övriga routrar.</p>
 <p>För att styra en path så används lokal TE policy alternativt BGP-LU, man
 annonserar en unicast route med en associerad MPLS labelstack. Se
-exempel med <a href="/ExaBGP#Segment_Routing" title="wikilink">ExaBGP</a>.</p>
+exempel med <a href="../../linux_networking/ExaBGP/#Segment_Routing#Segment_Routing#Segment_Routing#Segment_Routing#Segment_Routing#Segment_Routing#Segment_Routing#Segment_Routing">ExaBGP</a>.</p>
 <div class="highlight"><pre><span></span><code>segment-routing
 &nbsp;traffic-eng
 &nbsp;&nbsp;segment-list&nbsp;SIDLIST1
@@ -9292,7 +9292,7 @@ show&nbsp;segment-routing&nbsp;traffic-eng&nbsp;forwarding&nbsp;policy&nbsp;
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     

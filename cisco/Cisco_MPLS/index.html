@@ -9268,7 +9268,7 @@
 använda för att forwardera paket baserat på labels istället för
 destination IP address. Routrarna kallas då LSR, Label Switch Router.
 Genom att separera forwarding decision från destination IP address kan
-besluten baseras på andra faktorer såsom <a href="/Cisco_QoS" title="wikilink">QoS</a>
+besluten baseras på andra faktorer såsom <a href="../Cisco_QoS/">QoS</a>
 eller Traffic Engineering. Det kan användas för vanlig unicast IP
 forwarding men också annat som t.ex. VPN-tjänster. En grupp av paket som
 skall till ett visst destinationsnät kommer vanligtvis att skickas samma
@@ -9278,13 +9278,13 @@ skickas med samma label. En MPLS-header är 4 bytes och innehåller bl.a.
 ett 20-bitars fält som är den unika labeln. Bottom-of-stack bit, QoS
 marking och TTL finns också i headern. Olika protokoll kan användas för
 control plane, t.ex. LDP,
-<a href="/Cisco_BGP#Multiprotocol_BGP" title="wikilink">MP-BGP</a> eller <a href="/Cisco_SR" title="wikilink">Segment
+<a href="../Cisco_BGP/#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP">MP-BGP</a> eller <a href="../Cisco_SR/">Segment
 Routing</a>. MPLS på Cisco-enheter använder sig av
-<a href="/Cisco_CEF" title="wikilink">CEF</a>. MPLS går även att tunnla över IP (RFC
-4023), se <a href="/Cisco_GRE" title="wikilink">Cisco GRE</a>.</p>
-<p>Se även <a href="/Cisco_MPLS-TE" title="wikilink">MPLS-TE</a>.</p>
+<a href="../Cisco_CEF/">CEF</a>. MPLS går även att tunnla över IP (RFC
+4023), se <a href="../Cisco_GRE/">Cisco GRE</a>.</p>
+<p>Se även <a href="../Cisco_MPLS-TE/">MPLS-TE</a>.</p>
 <h2 id="tables">Tables</h2>
-<p>För varje <a href="/Cisco_Routing#VRF" title="wikilink">VRF</a> skapas det nya tabeller,
+<p>För varje <a href="../Cisco_Routing/#VRF#VRF#VRF#VRF#VRF#VRF#VRF#VRF">VRF</a> skapas det nya tabeller,
 <strong>show cef table | begin active</strong></p>
 <p>RIB</p>
 <div class="highlight"><pre><span></span><code>show&nbsp;ip&nbsp;route
@@ -9329,7 +9329,7 @@ detta. När en ny lokal label skapas, pga nylärd route från IGP,
 annonseras det till alla LDP-grannarna (även den man fick
 route-uppdateringen ifrån, frame-mode MPLS har inte hört talas om split
 horizon :). Detta händer för alla routes på alla LSR. Router-ID väljs på
-exakt samma sätt som för <a href="/Cisco_OSPF#Konfiguration" title="wikilink">OSPF</a>.
+exakt samma sätt som för <a href="../Cisco_OSPF/#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration">OSPF</a>.
 Om man har en LSR med LDP-grannskap till säg 5 andra enheter så kommer
 alla grannskap gå ner om man stänger ett av sina 5 interface eftersom
 LDP skapar sitt ID utifrån tillgängliga IGP interface. Det ändras om ett
@@ -9460,8 +9460,8 @@ mpls&nbsp;ldp&nbsp;password&nbsp;fallback&nbsp;SECRET
 <div class="highlight"><pre><span></span><code>show&nbsp;mpls&nbsp;ldp&nbsp;discovery&nbsp;detail&nbsp;|&nbsp;i&nbsp;Ethernet|Password
 </code></pre></div>
 <h3 id="igp">IGP</h3>
-<p>LDP går att autokonfa tillsammans med <a href="/Cisco_IS-IS" title="wikilink">IS-IS</a>
-och <a href="/Cisco_OSPF" title="wikilink">OSPF</a>, dvs slå på LDP på de interface som
+<p>LDP går att autokonfa tillsammans med <a href="../Cisco_IS-IS/">IS-IS</a>
+och <a href="../Cisco_OSPF/">OSPF</a>, dvs slå på LDP på de interface som
 är aktiva i IGPn, detta kan antingen göras per interface eller under
 routingprocessen. Man kan även använda <em>prefix suppression</em> så kommer
 det inte att genereras lika många labels för ens core-nätverk.</p>
@@ -9500,15 +9500,15 @@ show&nbsp;mpls&nbsp;interface&nbsp;detail&nbsp;|&nbsp;i&nbsp;Interface|IGP
 <p>MPLS VPN (RFC 4364) är en populär MPLS-applikation och det räknas som
 trusted VPN. PHP för transport label används default för att slippa en
 lookup. För PE-PE label utbyten används
-<a href="/Cisco_BGP#Multiprotocol_BGP" title="wikilink">MP-BGP</a>, det kan dock gå via
+<a href="../Cisco_BGP/#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP">MP-BGP</a>, det kan dock gå via
 route reflector precis som vanligt för ökad skalbarhet. För att
 VPN-trafik ska fungera måste PE ha en route till next-hop PE, det går ej
 med en default route. Control plane kommer att fungera men ej data plane
 eftersom forwardering med labels lärda från BGP endast fungerar om det
-finns en /32-route i RIB. För L2 VPN se <a href="/Cisco_VPLS" title="wikilink">Cisco
-VPLS</a> och för multicast se <a href="/Cisco_MLDP" title="wikilink">Cisco
+finns en /32-route i RIB. För L2 VPN se <a href="Cisco_VPLS">Cisco
+VPLS</a> och för multicast se <a href="Cisco_MLDP">Cisco
 MLDP</a>. Det går även att integrera
-<a href="/Cisco_NAT#MPLS_VPN" title="wikilink">NAT</a> med MPLS VPN.</p>
+<a href="../Cisco_NAT/#MPLS_VPN#MPLS_VPN#MPLS_VPN#MPLS_VPN#MPLS_VPN#MPLS_VPN#MPLS_VPN#MPLS_VPN">NAT</a> med MPLS VPN.</p>
 <p></p><div class="highlight"><pre><span></span><code>ip&nbsp;bgp-community&nbsp;new-format
 </code></pre></div>
 <code>show&nbsp;ip&nbsp;bgp&nbsp;community&nbsp;?&nbsp;&nbsp;#</code><em><code>Så`` ``står`` ``det`` ``antingen`` ``aa:nn`` ``eller`` ``1-4294967295</code></em><p></p>
@@ -9771,7 +9771,7 @@ feature&nbsp;mpls&nbsp;ldp
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     

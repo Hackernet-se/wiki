@@ -9243,7 +9243,7 @@ grannen svara med uppdateringar för de nät som står speccade i
 Requesten, dvs partial update, dock är inte partial requests
 implementerat på IOS. Full update frågas efter när en Ciscorouter bootar
 upp, ett RIP-interface kommer upp eller <em>clear ip route *</em> körs.
-<a href="/Cisco_CSR" title="wikilink">CSR</a>:er verkar inte använda sig av Requests
+<a href="../Cisco_CSR/">CSR</a>:er verkar inte använda sig av Requests
 överhuvudtaget.</p>
 <p>Response packet:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../images/Cisco_RIP_Update.PNG" data-desc-position="bottom"><img alt="Cisco_RIP_Update.PNG" src="../../images/Cisco_RIP_Update.PNG"></a></p>
@@ -9259,7 +9259,7 @@ om denna routen med en metric satt till infinity då propagerar
 uppdateringen till alla routrar och de slutar använda den failade
 routen, detta kallas route poisoning. Däremot sparas routen i den
 interna RIP-databasen men markeras som possibly down. En skillnad med
-RIP kontra <a href="/Cisco_EIGRP" title="wikilink">EIGRP</a> och RIPng är att metric
+RIP kontra <a href="../Cisco_EIGRP/">EIGRP</a> och RIPng är att metric
 läggs på när en route skickas iväg istället för när den kommer in. Finns
 det flera väger till en destination med samma metric installeras det
 default upp till 4 routes i routingtabellen. Detta går att ändra med
@@ -9281,7 +9281,7 @@ en uppdatering om routen på de interface där det finns RIP-routrar.
 Secondary addresses kommer inte heller att annonseras om man inte
 stänger av split horizon. Det går att stänga av split horizon men det är
 inte rekommenderat. Det kan dock behövas stängas av på
-<a href="/Cisco_DMVPN" title="wikilink">DMVPN</a>-hubb.</p>
+<a href="../Cisco_DMVPN/">DMVPN</a>-hubb.</p>
 <div class="highlight"><pre><span></span><code>no&nbsp;ip&nbsp;split-horizon
 </code></pre></div>
 <p>Om två routergrannar ser sig själva som next-hop för samma nätverk (kan
@@ -9421,7 +9421,7 @@ show&nbsp;ip&nbsp;protocols&nbsp;|&nbsp;include&nbsp;seconds
 <p>Per interface</p>
 <p><code>ip&nbsp;rip&nbsp;advertise</code><seconds></seconds></p>
 <p><strong>BFD</strong>
-<a href="/Cisco_BFD" title="wikilink">BFD</a> kan användas med RIP unicast.</p>
+<a href="../Cisco_BFD/">BFD</a> kan användas med RIP unicast.</p>
 <div class="highlight"><pre><span></span><code>router&nbsp;rip
 &nbsp;bfd&nbsp;all-interfaces
 &nbsp;neighbor&nbsp;1.1.1.1&nbsp;bfd
@@ -9544,7 +9544,7 @@ används om man inte manipulerar metricen.</p>
 <div class="highlight"><pre><span></span><code>default-metric&nbsp;5
 </code></pre></div>
 <p>Om man redistribuerar mellan t.ex. RIP och
-<a href="/Cisco_OSPF" title="wikilink">OSPF</a> på flera punkter måste man förhindra
+<a href="../Cisco_OSPF/">OSPF</a> på flera punkter måste man förhindra
 suboptimal routing. Ett sätt att göra detta är genom att flagga
 redistribuerade routes med högre AD lokalt på redistributionsnoderna.
 RIP kan inte skilja på internal och external routes så det andra
@@ -9574,7 +9574,7 @@ annonsering istället för skickandet som i tidigare versioner. Allt
 loopundvikande sker på samma sätt. En uppdatering kan innehålla så många
 entries som får plats i packetet vars max storlek avgörs av IPv6 MTU på
 länken. RIPng har inte stöd för autentisering utan precis som med
-<a href="/Cisco_OSPFv3" title="wikilink">OSPFv3</a> sköts detta av IPsec, däremot har
+<a href="../Cisco_OSPFv3/">OSPFv3</a> sköts detta av IPsec, däremot har
 inte Ciscos implementation stöd för detta. Passive interfaces och static
 neighbors finns inte heller men nyheter är Route Poisoning (utökning av
 Split Horizon) och multipla RIPng-processer.</p>
@@ -9617,7 +9617,7 @@ Default metric för denna är 1.</p>
 <div class="highlight"><pre><span></span><code>ipv6&nbsp;router&nbsp;rip&nbsp;1
 &nbsp;distribute-list&nbsp;prefix-list&nbsp;FILTER&nbsp;in
 </code></pre></div>
-<p>Slå på <a href="/Cisco_Routing#VRF" title="wikilink">VRF</a>-stöd.</p>
+<p>Slå på <a href="../Cisco_Routing/#VRF#VRF#VRF#VRF#VRF#VRF#VRF#VRF">VRF</a>-stöd.</p>
 <div class="highlight"><pre><span></span><code>ipv6&nbsp;rip&nbsp;vrf-mode&nbsp;enable
 </code></pre></div>
 
@@ -9642,7 +9642,7 @@ Default metric för denna är 1.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     

@@ -9141,12 +9141,12 @@
 <p>IPsec (RFC 4301) är en teknik för att skydda datakommunikation och
 räknas som en secure VPN. Det finns i tunnel och transport mode beroende
 på om det ska tunnlas och krypteras eller endast krypteras. IPsec funkar
-med IPv4/IPv6 och kan köras över en <a href="/Cisco_GRE" title="wikilink">GRE</a>-tunnel.
+med IPv4/IPv6 och kan köras över en <a href="../Cisco_GRE/">GRE</a>-tunnel.
 Virtual Tunnel Interface (VTI) är routebara interface som används för
 att terminera IPsec-tunnlar, detta gör IPsec flexibelt och det kan
-användas både för unicast och <a href="/Cisco_Multicast" title="wikilink">multicast</a>.</p>
-<p>Se även <a href="/Cisco_Security" title="wikilink">Cisco Security</a>, <a href="/Cisco_DMVPN" title="wikilink">Cisco
-DMVPN</a> och <a href="/Cisco_ASA_VPN" title="wikilink">ASA
+användas både för unicast och <a href="../Cisco_Multicast/">multicast</a>.</p>
+<p>Se även <a href="../Cisco_Security/">Cisco Security</a>, <a href="../Cisco_DMVPN/">Cisco
+DMVPN</a> och <a href="../Cisco_ASA_VPN/">ASA
 VPN</a>.</p>
 <p><strong>MTU</strong>
 IPsec påverkar MTU, detta bör man ta med i beräkningarna. Notera att
@@ -9221,7 +9221,7 @@ show&nbsp;crypto&nbsp;session
 <div class="highlight"><pre><span></span><code>show&nbsp;crypto&nbsp;route
 </code></pre></div>
 <h2 id="gre-over-ipsec-with-profile">GRE over IPsec with Profile</h2>
-<p>En fördel med att tunnla trafiken med <a href="/Cisco_GRE" title="wikilink">GRE</a> är
+<p>En fördel med att tunnla trafiken med <a href="../Cisco_GRE/">GRE</a> är
 att routingprotokoll kan användas över tunneln. Trafiken krypteras efter
 att det har enkapsulerats med GRE. Man bör manuellt ange <strong>ip mtu</strong> på
 tunnel-interfacet för det tar ej hänsyn till ESP-enkapsuleringen som
@@ -9392,7 +9392,7 @@ peer-adresser i sin crypto-map.</p>
 &nbsp;set&nbsp;peer&nbsp;3.3.3.3
 </code></pre></div>
 <p><strong>Stateless IPsec redundancy</strong>
-Det finns inget samspel mellan IPSec och <a href="/Cisco_HSRP" title="wikilink">HSRP</a>,
+Det finns inget samspel mellan IPSec och <a href="../Cisco_HSRP/">HSRP</a>,
 dvs HSRP kan inte hålla koll på IPSec's SA state och IPSec vet inte när
 HSRP gör en failover. Men det går att konfigurera crypto-mapen att
 sourcea IKE fas 1 och 2 från HSRP VIP och HSRP group names bör matcha på
@@ -9400,7 +9400,7 @@ båda enheterna. Även om HSRP konvergerar snabbt kan det ta en stund
 innan IPsec-tunnlar är uppsatta på nytt efter en failover pga
 renegotiation. Därför är denna metod inte optimal utan det man t.ex. kan
 göra istället är att ha uppe två tunnlar parallellt och sedan styra
-routingen med <a href="/Cisco_Routing#IP_SLA" title="wikilink">IP SLA</a>.</p>
+routingen med <a href="../Cisco_Routing/#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA">IP SLA</a>.</p>
 <div class="highlight"><pre><span></span><code>crypto&nbsp;dynamic-map&nbsp;VPNMAP&nbsp;10
 &nbsp;set&nbsp;transform-set&nbsp;PHASE2
 &nbsp;match&nbsp;address&nbsp;ACL
@@ -9437,7 +9437,7 @@ show&nbsp;crypto&nbsp;ha
 <h2 id="qos">QoS</h2>
 <p>Eftersom trafiken är enkapsulerad och krypterad måste
 QoS-markeringar/beslut fattas innan, man kan använda QoS pre-classify på
-crypto map. Se även <a href="/Cisco_QoS" title="wikilink">Cisco QoS</a>.</p>
+crypto map. Se även <a href="../Cisco_QoS/">Cisco QoS</a>.</p>
 <div class="highlight"><pre><span></span><code>crypto&nbsp;map&nbsp;VPNMAP&nbsp;10&nbsp;ipsec-isakmp&nbsp;
 &nbsp;qos&nbsp;pre-classify
 </code></pre></div>
@@ -9467,7 +9467,7 @@ endpoints i den nya IP-headern återanvänds orginal-IP. Detta gör att GET
 VPN inte passar bra att köra över internet eftersom där kan inte privata
 adresser routas. Därför är GET VPN bäst lämpat för privata nät, t.ex.
 som gör över MPLS VPN eller VPLS. Vill man däremot köra det över
-internet kan man kombinera det med <a href="/Cisco_DMVPN" title="wikilink">DMVPN</a>.</p>
+internet kan man kombinera det med <a href="../Cisco_DMVPN/">DMVPN</a>.</p>
 <p>GDOI Payloads</p>
 <ul>
 <li>GDOI SA</li>
@@ -9568,7 +9568,7 @@ KS konfigurera de säkra algoritmer som ska användas.</p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:01:04 CEST"><span class="timeago" datetime="2026-06-22T17:01:04+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:01:04 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     

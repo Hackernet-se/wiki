@@ -9225,8 +9225,8 @@ och konvergerar snabbt. Man kan konfigurera så många topologier som man
 vill ha. Alla VLAN som inte specificeras i någon instans hamnar i
 instans 0 som default. Pathcost method behöver inte konfigureras utan
 operational value är alltid long till skillnad från andra STP-varianter.
-Se <a href="/Cisco_STP" title="wikilink">Cisco STP</a>. MST-konfiguration går även att
-distribuera med hjälp av <a href="/Cisco_VTP#VTPv3" title="wikilink">VTPv3</a>.</p>
+Se <a href="../Cisco_STP/">Cisco STP</a>. MST-konfiguration går även att
+distribuera med hjälp av <a href="../Cisco_VTP/#VTPv3#VTPv3#VTPv3#VTPv3#VTPv3#VTPv3#VTPv3#VTPv3">VTPv3</a>.</p>
 <h3 id="mst-bpdu">MST BPDU</h3>
 <p>MST använder en BPDU för att skicka information om alla instanser.</p>
 <p>Exempel</p>
@@ -9258,7 +9258,7 @@ finnas flera CIST Regional Root Switches men det kan endast finnas en
 CIST Root. Den med bäst Bridge ID av alla switchar i alla regioner blir
 CIST. Alla andra regionala root väljs utifrån lägst cost till CIST och
 inte BID.</p>
-<p><a href="/File:Cisco_MST_Regions.jpg" title="wikilink">650px</a></p>
+<p><a href="File:Cisco_MST_Regions.jpg">650px</a></p>
 <h1 id="konfiguration">Konfiguration</h1>
 <p>Följande element måste vara identiska på alla switchar inom samma MST
 region:</p>
@@ -9296,7 +9296,7 @@ test&nbsp;spanning-tree&nbsp;diameter&nbsp;3
 test&nbsp;spanning-tree&nbsp;get&nbsp;configuration&nbsp;mst
 </code></pre></div>
 <p>Mappa alla secondary vlan till samma MST-instans som deras primary VLAN
-befinner sig i, se även <a href="/Cisco_VLAN#Private_VLAN" title="wikilink">Private
+befinner sig i, se även <a href="../Cisco_VLAN/#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN">Private
 VLAN</a>.</p>
 <div class="highlight"><pre><span></span><code>spanning-tree&nbsp;mst&nbsp;configuration
 &nbsp;private-vlan&nbsp;synchronize
@@ -9313,7 +9313,7 @@ interface.</p>
 <div class="highlight"><pre><span></span><code>show&nbsp;spanning-tree&nbsp;mst&nbsp;configuration&nbsp;digest
 </code></pre></div>
 <h2 id="nexus">Nexus</h2>
-<p>Grundkonf för <a href="/Cisco_Nexus" title="wikilink">NX-OS</a>.</p>
+<p>Grundkonf för <a href="../Cisco_Nexus/">NX-OS</a>.</p>
 <div class="highlight"><pre><span></span><code>spanning-tree&nbsp;mode&nbsp;mst
 spanning-tree&nbsp;mst&nbsp;configuration
 &nbsp;name&nbsp;DC1
@@ -9345,7 +9345,7 @@ skickar ut BDPUer men förväntar sig inga tillbaks. Om det kommer in en
 BPDU slutar porten vara edge port och återgår till normal tills
 interfacet går down/up. Används för anslutningar ut till servrar och
 andra end hosts. Ibland är PortFast ett måste pga att
-<a href="/Cisco_DHCP" title="wikilink">DHCP</a> hinner timea ut innan porten blivit
+<a href="../Cisco_DHCP/">DHCP</a> hinner timea ut innan porten blivit
 forwarding.</p>
 <p>Globalt, aktiveras på alla portar i operational state: access</p>
 <div class="highlight"><pre><span></span><code>spanning-tree&nbsp;portfast&nbsp;default
@@ -9432,7 +9432,7 @@ någon BPDU hamnar porten i BA-inconsistent blocking state tills BPDU
 Assurance. Detta skyddar mot unidirectional links eftersom de error
 disableas men även vid loopar orsakade av switchar som slutat prata STP
 men ändå forwarderar frames. BA prunear också onödiga VLAN på
-trunklänkar. Detta är en <a href="/Cisco_Nexus" title="wikilink">Nexus</a>-feature men
+trunklänkar. Detta är en <a href="../Cisco_Nexus/">Nexus</a>-feature men
 finns även i nyare versioner av IOS.</p>
 <p>Global</p>
 <div class="highlight"><pre><span></span><code>spanning-tree&nbsp;bridge&nbsp;assurance
@@ -9442,7 +9442,7 @@ finns även i nyare versioner av IOS.</p>
 </code></pre></div>
 <h3 id="pvst-simulation">PVST Simulation</h3>
 <p>MST kan samköras med Rapid PVST+ utan någon speciell konfiguration.
-Detta är en feature på <a href="/Cisco_Nexus" title="wikilink">Nexus</a>-switchar och
+Detta är en feature på <a href="../Cisco_Nexus/">Nexus</a>-switchar och
 nyare IOS och det slåss på när man konfigurerar MST. Man kan stänga av
 PVST simulation globalt eller per port, det som händer då är att en port
 som får in en Rapid PVST+ BPDU hamnar i blocking state tills det slutar
@@ -9459,7 +9459,7 @@ designated port på en designated port. Då hamnar porten i discarding
 state. Detta är påslaget default och behöver inte konfigureras. Fungerar
 dock inte med de äldsta varianterna av STP.</p>
 <p><strong>UDLD</strong>
-Se <a href="/Cisco_UDLD" title="wikilink">Cisco UDLD</a></p>
+Se <a href="../Cisco_UDLD/">Cisco UDLD</a></p>
 
 
 
@@ -9482,7 +9482,7 @@ Se <a href="/Cisco_UDLD" title="wikilink">Cisco UDLD</a></p>
     <span class="md-icon" title="Senast uppdaterad">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"></path></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:20:25 CEST"><span class="timeago" datetime="2026-06-22T17:20:25+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:20:25 CEST">2026-06-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="22 juni 2026 17:44:22 CEST"><span class="timeago" datetime="2026-06-22T17:44:22+02:00" locale="sv"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="22 juni 2026 17:44:22 CEST">2026-06-22</span>
   </span>
 
     
