@@ -44,4 +44,4 @@ Tips'n'Trix
 -----------
 
 Emby kan inte spela upp filmer som ligger i rar arkiv. Använd därför
-[rar2fs](/rar2fs "wikilink").
+[rar2fs](Rar2fs.md).

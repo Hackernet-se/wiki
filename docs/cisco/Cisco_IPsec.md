@@ -6,14 +6,14 @@ permalink: /Cisco_IPsec/
 IPsec (RFC 4301) är en teknik för att skydda datakommunikation och
 räknas som en secure VPN. Det finns i tunnel och transport mode beroende
 på om det ska tunnlas och krypteras eller endast krypteras. IPsec funkar
-med IPv4/IPv6 och kan köras över en [GRE](/Cisco_GRE "wikilink")-tunnel.
+med IPv4/IPv6 och kan köras över en [GRE](Cisco_GRE.md)-tunnel.
 Virtual Tunnel Interface (VTI) är routebara interface som används för
 att terminera IPsec-tunnlar, detta gör IPsec flexibelt och det kan
-användas både för unicast och [multicast](/Cisco_Multicast "wikilink").
+användas både för unicast och [multicast](Cisco_Multicast.md).
 
-Se även [Cisco Security](/Cisco_Security "wikilink"), [Cisco
-DMVPN](/Cisco_DMVPN "wikilink") och [ASA
-VPN](/Cisco_ASA_VPN "wikilink").
+Se även [Cisco Security](Cisco_Security.md), [Cisco
+DMVPN](Cisco_DMVPN.md) och [ASA
+VPN](Cisco_ASA_VPN.md).
 
 **MTU**
 IPsec påverkar MTU, detta bör man ta med i beräkningarna. Notera att
@@ -135,7 +135,7 @@ show crypto route
 GRE over IPsec with Profile
 ---------------------------
 
-En fördel med att tunnla trafiken med [GRE](/Cisco_GRE "wikilink") är
+En fördel med att tunnla trafiken med [GRE](Cisco_GRE.md) är
 att routingprotokoll kan användas över tunneln. Trafiken krypteras efter
 att det har enkapsulerats med GRE. Man bör manuellt ange **ip mtu** på
 tunnel-interfacet för det tar ej hänsyn till ESP-enkapsuleringen som
@@ -395,7 +395,7 @@ crypto map VPNMAP 10 ipsec-isakmp
 ```
 
 **Stateless IPsec redundancy**
-Det finns inget samspel mellan IPSec och [HSRP](/Cisco_HSRP "wikilink"),
+Det finns inget samspel mellan IPSec och [HSRP](Cisco_HSRP.md),
 dvs HSRP kan inte hålla koll på IPSec's SA state och IPSec vet inte när
 HSRP gör en failover. Men det går att konfigurera crypto-mapen att
 sourcea IKE fas 1 och 2 från HSRP VIP och HSRP group names bör matcha på
@@ -403,7 +403,7 @@ båda enheterna. Även om HSRP konvergerar snabbt kan det ta en stund
 innan IPsec-tunnlar är uppsatta på nytt efter en failover pga
 renegotiation. Därför är denna metod inte optimal utan det man t.ex. kan
 göra istället är att ha uppe två tunnlar parallellt och sedan styra
-routingen med [IP SLA](/Cisco_Routing#IP_SLA "wikilink").
+routingen med [IP SLA](Cisco_Routing.md#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA).
 
 ```
 crypto dynamic-map VPNMAP 10
@@ -457,7 +457,7 @@ QoS
 
 Eftersom trafiken är enkapsulerad och krypterad måste
 QoS-markeringar/beslut fattas innan, man kan använda QoS pre-classify på
-crypto map. Se även [Cisco QoS](/Cisco_QoS "wikilink").
+crypto map. Se även [Cisco QoS](Cisco_QoS.md).
 
 ```
 crypto map VPNMAP 10 ipsec-isakmp 
@@ -493,7 +493,7 @@ endpoints i den nya IP-headern återanvänds orginal-IP. Detta gör att GET
 VPN inte passar bra att köra över internet eftersom där kan inte privata
 adresser routas. Därför är GET VPN bäst lämpat för privata nät, t.ex.
 som gör över MPLS VPN eller VPLS. Vill man däremot köra det över
-internet kan man kombinera det med [DMVPN](/Cisco_DMVPN "wikilink").
+internet kan man kombinera det med [DMVPN](Cisco_DMVPN.md).
 
 GDOI Payloads
 

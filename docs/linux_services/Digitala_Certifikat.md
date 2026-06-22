@@ -37,7 +37,7 @@ Let’s Encrypt är en certificate authority som är gratis, automatiserad
 och öppen. Det är ett initiativ av Internet Security Research Group som
 backas upp av en mängd stora företag där målet är att tillhandahålla TLS
 helt gratis.
-Läs mer på [Let's Encrypt](/Let%27s_Encrypt "wikilink") hur du kan skapa
+Läs mer på [Let's Encrypt](Let%27s_Encrypt) hur du kan skapa
 dina egna godkända certifikat.
 
 Self-signed

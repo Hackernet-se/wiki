@@ -52,7 +52,7 @@ Både Debian och Ubuntu tillhandahåller flera pakethanterare.
 
 ### Apt
 
-Se [Apt](/Apt "wikilink")
+Se [Apt](../linux_tools/Apt.md)
 
 ### dpkg
 

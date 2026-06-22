@@ -6,10 +6,10 @@ permalink: /Cisco_VSS/
 Virtual Switching System används för att göra två stycken fysiska
 switchar till en logisk enhet. Fysiskt är det två switchar och man kan
 dra allt kablage redundant. Med detta behöver man inte använda
-[HSRP](/Cisco_HSRP "wikilink") eller [VRRP](/Cisco_FHRP "wikilink") samt
+[HSRP](Cisco_HSRP.md) eller [VRRP](Cisco_FHRP.md) samt
 att L2-topologin går att hålla loopfri. En fördel är att det blir färre
 manageringspunkter, en nackdel att ett fel kan få större blast radius.
-VSS har stöd för [EtherChannel](/Cisco_EtherChannel "wikilink") så detta
+VSS har stöd för [EtherChannel](Cisco_EtherChannel.md) så detta
 är en variant av MLAG. När switcharna bootar upp använder de Link
 Management Protocol (LMP) och Role Resolution Protocol (RRP) för att
 förhandla om vem som ska vara active och således blir den andra standby.

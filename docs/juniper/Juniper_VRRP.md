@@ -4,7 +4,7 @@ permalink: /Juniper_VRRP/
 ---
 
 Virtual Router Redundancy Protocol (RFC 3768) är ett öppet FHRP. Det
-fungerar väldigt likt [HSRP](/Cisco_HSRP "wikilink") men med några
+fungerar väldigt likt [HSRP](../cisco/Cisco_HSRP.md) men med några
 skillnader. Source-IP för VRRP-paket är interface IP, destination-IP är
 224.0.0.18 och protokoll är 112. Hellos skickas default varje sekund.
 Man kan till skillnad från HSRP ha samma virtual ip som interface ip.

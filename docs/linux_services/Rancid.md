@@ -45,7 +45,7 @@ Filer
 -   /var/lib/rancid/\[gruppnamn\]/router.db \#Devices list
 
 Byt från cvs till subversion samt skapa grupper för dina enheter. Det
-går även använda [Git](/Git "wikilink").
+går även använda [Git](Git.md).
 
 ```
 sudo sed -i.bak 's/RCSSYS=cvs; export RCSSYS/RCSSYS=svn; export RCSSYS/g' /etc/rancid/rancid.conf

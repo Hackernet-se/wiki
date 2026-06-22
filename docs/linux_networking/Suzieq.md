@@ -34,7 +34,7 @@ namespaces:
   device: nxos
 ```
 
-Sätt upp Suzieq med [Docker](/Docker "wikilink")
+Sätt upp Suzieq med [Docker](../linux_services/Docker.md)
 
 ``` Bash
 docker volume create suzieq-storage

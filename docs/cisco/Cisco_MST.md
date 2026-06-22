@@ -8,8 +8,8 @@ och konvergerar snabbt. Man kan konfigurera så många topologier som man
 vill ha. Alla VLAN som inte specificeras i någon instans hamnar i
 instans 0 som default. Pathcost method behöver inte konfigureras utan
 operational value är alltid long till skillnad från andra STP-varianter.
-Se [Cisco STP](/Cisco_STP "wikilink"). MST-konfiguration går även att
-distribuera med hjälp av [VTPv3](/Cisco_VTP#VTPv3 "wikilink").
+Se [Cisco STP](Cisco_STP.md). MST-konfiguration går även att
+distribuera med hjälp av [VTPv3](Cisco_VTP.md#VTPv3#VTPv3#VTPv3#VTPv3#VTPv3#VTPv3#VTPv3#VTPv3).
 
 ### MST BPDU
 
@@ -57,7 +57,7 @@ CIST Root. Den med bäst Bridge ID av alla switchar i alla regioner blir
 CIST. Alla andra regionala root väljs utifrån lägst cost till CIST och
 inte BID.
 
-[650px](/File:Cisco_MST_Regions.jpg "wikilink")
+[650px](File:Cisco_MST_Regions.jpg)
 
 Konfiguration
 =============
@@ -112,7 +112,7 @@ test spanning-tree get configuration mst
 
 Mappa alla secondary vlan till samma MST-instans som deras primary VLAN
 befinner sig i, se även [Private
-VLAN](/Cisco_VLAN#Private_VLAN "wikilink").
+VLAN](Cisco_VLAN.md#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN).
 
 ```
 spanning-tree mst configuration
@@ -138,7 +138,7 @@ show spanning-tree mst configuration digest
 Nexus
 -----
 
-Grundkonf för [NX-OS](/Cisco_Nexus "wikilink").
+Grundkonf för [NX-OS](Cisco_Nexus.md).
 
 ```
 spanning-tree mode mst
@@ -181,7 +181,7 @@ skickar ut BDPUer men förväntar sig inga tillbaks. Om det kommer in en
 BPDU slutar porten vara edge port och återgår till normal tills
 interfacet går down/up. Används för anslutningar ut till servrar och
 andra end hosts. Ibland är PortFast ett måste pga att
-[DHCP](/Cisco_DHCP "wikilink") hinner timea ut innan porten blivit
+[DHCP](Cisco_DHCP.md) hinner timea ut innan porten blivit
 forwarding.
 
 Globalt, aktiveras på alla portar i operational state: access
@@ -316,7 +316,7 @@ någon BPDU hamnar porten i BA-inconsistent blocking state tills BPDU
 Assurance. Detta skyddar mot unidirectional links eftersom de error
 disableas men även vid loopar orsakade av switchar som slutat prata STP
 men ändå forwarderar frames. BA prunear också onödiga VLAN på
-trunklänkar. Detta är en [Nexus](/Cisco_Nexus "wikilink")-feature men
+trunklänkar. Detta är en [Nexus](Cisco_Nexus.md)-feature men
 finns även i nyare versioner av IOS.
 
 Global
@@ -334,7 +334,7 @@ spanning-tree portfast network 
 ### PVST Simulation
 
 MST kan samköras med Rapid PVST+ utan någon speciell konfiguration.
-Detta är en feature på [Nexus](/Cisco_Nexus "wikilink")-switchar och
+Detta är en feature på [Nexus](Cisco_Nexus.md)-switchar och
 nyare IOS och det slåss på när man konfigurerar MST. Man kan stänga av
 PVST simulation globalt eller per port, det som händer då är att en port
 som får in en Rapid PVST+ BPDU hamnar i blocking state tills det slutar
@@ -356,4 +356,4 @@ state. Detta är påslaget default och behöver inte konfigureras. Fungerar
 dock inte med de äldsta varianterna av STP.
 
 **UDLD**
-Se [Cisco UDLD](/Cisco_UDLD "wikilink")
+Se [Cisco UDLD](Cisco_UDLD.md)

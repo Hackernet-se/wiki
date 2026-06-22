@@ -4,7 +4,7 @@ permalink: /Cisco_Logging/
 ---
 
 Ciscoenheter kan logga meddelanden lokalt och/eller remote. Se även
-[Cisco IOS](/Cisco_IOS "wikilink").
+[Cisco IOS](Cisco_IOS.md).
 
 ### Format
 
@@ -33,7 +33,7 @@ efter datetime-kommandona.
 *Feb  8 18:24:02:355 %LINK-3-UPDOWN: Interface Port-channel1, changed state to up
 ```
 
-[NX-OS](/Cisco_Nexus "wikilink") har lite annan struktur på syslog
+[NX-OS](Cisco_Nexus.md) har lite annan struktur på syslog
 
 ```
 2016 Feb  8 18:41:55.911853  DC01-SW02  %BGP-3-UNEXPECT:  the-message...
@@ -111,7 +111,7 @@ Syslog
 Syslog är en standard för message logging, även om inte strukturen på
 meddelandena är standardiserad. Syslog använder default UDP port 514.
 Syslog-meddelanden går även att skicka med
-[SNMP](/Cisco_SNMP "wikilink")-traps, först skickas det lokalt till en
+[SNMP](Cisco_SNMP.md)-traps, först skickas det lokalt till en
 speciell history buffer och sedan replikerar SNMP agenten det till
 traps.
 

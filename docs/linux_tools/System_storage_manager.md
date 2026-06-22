@@ -5,7 +5,7 @@ permalink: /System_storage_manager/
 
 System storage manager aka ssm, är ett CLI program som ska vara enkelt
 att använda. Det har stöd för bla BTRFS, RAID och krypterade volymer.
-SSM använder flera verktyg, bl.a. [Mdadm](/Mdadm "wikilink"),
+SSM använder flera verktyg, bl.a. [Mdadm](Mdadm.md),
 Cryptsetup, device-mapper och LVM2.
 
 Installera

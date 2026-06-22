@@ -10,9 +10,9 @@ vilka grupper utan endast om gruppen är aktiv eller ej. Hostar använder
 det för att joina och lämna multicastgrupper. Switchar kan lyssna på det
 för att ta reda på vilka switchportar som ska ha vilken trafik. IGMP
 slås på när man konfar multicast routing och
-[PIM](/Cisco_PIM "wikilink") på routrar.
+[PIM](Cisco_PIM.md) på routrar.
 
-Se även [Cisco Multicast](/Cisco_Multicast "wikilink").
+Se även [Cisco Multicast](Cisco_Multicast.md).
 
 Versioner
 ---------
@@ -423,11 +423,11 @@ ipv6 mld limit 100
 NX-OS
 =====
 
-Här följer [Nexus](/Cisco_Nexus "wikilink")-specifik information. En
+Här följer [Nexus](Cisco_Nexus.md)-specifik information. En
 skillnad mot IOS är att det saknas stöd för IGMP version 1 och Version 3
 Lite. IGMP Snooping är på default och gör IP lookups default. En annan
 skillnad är att IGMP snooping querier inte konfas på L3 interface utan
-under VLAN:et. Se även [PIM](/Cisco_PIM#NX-OS "wikilink") för NX-OS.
+under VLAN:et. Se även [PIM](Cisco_PIM.md#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS) för NX-OS.
 
 ```
 interface Ethernet1/1

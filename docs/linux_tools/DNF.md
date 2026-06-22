@@ -42,7 +42,7 @@ Uppgradera operativsystemet med hjälp av dnf.
 sudo dnf update --refresh
 sudo dnf install dnf-plugin-system-upgrade
 ```
-`sudo dnf system-upgrade download --releasever=23  #`[`Fedora`](/Fedora "wikilink")
+`sudo dnf system-upgrade download --releasever=23  #`[`Fedora`](../linux_os/Fedora.md)
 ```
 sudo dnf system-upgrade reboot
 ```

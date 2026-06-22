@@ -5,7 +5,7 @@ permalink: /Cisco_FHRP/
 
 First Hop Redundancy Protocol används för att skydda
 gateway-tillgängligheten genom att låta flera enheter agera backup för
-varandra. Se även [Cisco HSRP](/Cisco_HSRP "wikilink").
+varandra. Se även [Cisco HSRP](Cisco_HSRP.md).
 
 VRRP
 ====
@@ -126,5 +126,5 @@ glbp 1 authentication md5 key-string GLBP-Key
 
 **Stateful NAT**
 Om GLBP används i kombination med
-[SNAT](/Cisco_NAT#Stateful_NAT "wikilink") måste load-balancing vara
+[SNAT](Cisco_NAT.md#Stateful_NAT#Stateful_NAT#Stateful_NAT#Stateful_NAT#Stateful_NAT#Stateful_NAT#Stateful_NAT#Stateful_NAT) måste load-balancing vara
 satt till host-dependent.

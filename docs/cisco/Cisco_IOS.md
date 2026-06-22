@@ -4,8 +4,8 @@ permalink: /Cisco_IOS/
 ---
 
 IOS är den mjukvara som används av de flesta routrar och switchar av
-märket Cisco. Se även [NX-OS](/Cisco_Nexus "wikilink") och [IOS
-XR](/Cisco_IOS-XR "wikilink").
+märket Cisco. Se även [NX-OS](Cisco_Nexus.md) och [IOS
+XR](Cisco_IOS-XR.md).
 
 **IOS-XE**
 IOS är ett monolithic operativsystem som är till åren därför har IOS-XE
@@ -14,7 +14,7 @@ botten och sedan ligger IOS som en daemon. Sedan kan ytterliggare
 processer köras för sig. Denna moduläritet gör systemet mer feltolerant,
 t.ex. ett fel i en process behöver inte påverka kärnan. IOS-XE har även
 APIer för control plane processer. Se även [Cisco
-CSR](/Cisco_CSR#Konfiguration "wikilink").
+CSR](Cisco_CSR.md#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration).
 
 Konfiguration
 =============
@@ -30,9 +30,9 @@ no ip domain lookup
 no ip http server
 ```
 
-Se även Cisco [Logging](/Cisco_Logging "wikilink"),
-[Services](/Cisco_Services "wikilink") och
-[Security](/Cisco_Security "wikilink").
+Se även Cisco [Logging](Cisco_Logging.md),
+[Services](Cisco_Services.md) och
+[Security](Cisco_Security.md).
 
 Slå på loggmeddelanden i SSH terminal.
 
@@ -183,7 +183,7 @@ show parser view
 **Auto-install**
 Auto-install är en feature som kan hämta konfiguration från en filserver
 första gången en enhet startar. Det går att göra med
-[DHCP](/Cisco_DHCP "wikilink") eller RARP, preference är: sname, option
+[DHCP](Cisco_DHCP.md) eller RARP, preference är: sname, option
 66, option 150, siaddr. Det försöker på alla tillgängliga interface. OBS
 för att auto-install ska triggas måste NVRAM vara helt tomt på
 konfigurationsfiler, **erase nvram:**.

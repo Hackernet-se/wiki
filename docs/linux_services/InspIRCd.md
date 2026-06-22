@@ -126,5 +126,5 @@ Medans InspIRCd har många moduler och features så saknar den vissa saker
 som att kunna registrera sitt nickname, skydda sin kanal mot takeovers
 och andra bra och ha IRC tjänster.
 
-Därför kan man behöva använda sig av [Shaltúre](/Shaltúre "wikilink")
+Därför kan man behöva använda sig av [Shaltúre](Shaltúre.md)
 IRC services.

@@ -10,7 +10,7 @@ switcharna är ett måste. VTP annonserar VLAN ID, namn, typ och tillstånd
 men dock inget om vilka portar som tillhör vilket VLAN. VTP jobbar med
 revisionsnummer för att veta vilka databas som är korrekt uppdaterad,
 högre revisionsnummer vinner. Se även [Cisco
-VLAN](/Cisco_VLAN "wikilink").
+VLAN](Cisco_VLAN.md).
 
 *OBS* VTP har potentialen att sänka en hel L2-miljö på några enstaka
 sekunder, förstå hur det fungerar och räkna med riskerna.
@@ -243,9 +243,9 @@ Skillnader mellan v2 och v3.
 -   Stöd för private och extended vlan, dvs över 1005.
 -   Off mode, alla VTP-meddelanden droppas, globalt eller per interface.
 -   Stöd för mer än bara VLAN-databassynk, det finns även en instans för
-    [MST](/Cisco_MST "wikilink")-konfiguration samt forwarda VTP-frames
+    [MST](Cisco_MST.md)-konfiguration samt forwarda VTP-frames
     för UNKNOWN features ifall det hittas på något i framtiden.
--   Stöd för att flagga VLAN som [RSPAN](/Cisco_SPAN#RSPAN "wikilink"),
+-   Stöd för att flagga VLAN som [RSPAN](Cisco_SPAN.md#RSPAN#RSPAN#RSPAN#RSPAN#RSPAN#RSPAN#RSPAN#RSPAN),
     dvs disables MAC learning i VLANet på alla switchar.
 -   Serverrollen, se nedan.
 
@@ -321,7 +321,7 @@ vlan internal allocation policy descending
 
 ### MST
 
-[MST](/Cisco_MST "wikilink")-konfiguration kan också distribueras med
+[MST](Cisco_MST.md)-konfiguration kan också distribueras med
 hjälp av VTPv3. Precis som för VLAN får endast ändringar göras på
 primary server (som ej behöver vara samma som för feature VLAN).
 

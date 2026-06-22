@@ -7,7 +7,7 @@ Multiprotocol Label Switching (RFC 3031) är protokoll som routrar kan
 använda för att forwardera paket baserat på labels istället för
 destination IP address. Routrarna kallas då LSR, Label Switch Router.
 Genom att separera forwarding decision från destination IP address kan
-besluten baseras på andra faktorer såsom [QoS](/Cisco_QoS "wikilink")
+besluten baseras på andra faktorer såsom [QoS](Cisco_QoS.md)
 eller Traffic Engineering. Det kan användas för vanlig unicast IP
 forwarding men också annat som t.ex. VPN-tjänster. En grupp av paket som
 skall till ett visst destinationsnät kommer vanligtvis att skickas samma
@@ -17,17 +17,17 @@ skickas med samma label. En MPLS-header är 4 bytes och innehåller bl.a.
 ett 20-bitars fält som är den unika labeln. Bottom-of-stack bit, QoS
 marking och TTL finns också i headern. Olika protokoll kan användas för
 control plane, t.ex. LDP,
-[MP-BGP](/Cisco_BGP#Multiprotocol_BGP "wikilink") eller [Segment
-Routing](/Cisco_SR "wikilink"). MPLS på Cisco-enheter använder sig av
-[CEF](/Cisco_CEF "wikilink"). MPLS går även att tunnla över IP (RFC
-4023), se [Cisco GRE](/Cisco_GRE "wikilink").
+[MP-BGP](Cisco_BGP.md#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP) eller [Segment
+Routing](Cisco_SR.md). MPLS på Cisco-enheter använder sig av
+[CEF](Cisco_CEF.md). MPLS går även att tunnla över IP (RFC
+4023), se [Cisco GRE](Cisco_GRE.md).
 
-Se även [MPLS-TE](/Cisco_MPLS-TE "wikilink").
+Se även [MPLS-TE](Cisco_MPLS-TE.md).
 
 Tables
 ------
 
-För varje [VRF](/Cisco_Routing#VRF "wikilink") skapas det nya tabeller,
+För varje [VRF](Cisco_Routing.md#VRF#VRF#VRF#VRF#VRF#VRF#VRF#VRF) skapas det nya tabeller,
 **show cef table \| begin active**
 
 RIB
@@ -98,7 +98,7 @@ detta. När en ny lokal label skapas, pga nylärd route från IGP,
 annonseras det till alla LDP-grannarna (även den man fick
 route-uppdateringen ifrån, frame-mode MPLS har inte hört talas om split
 horizon :). Detta händer för alla routes på alla LSR. Router-ID väljs på
-exakt samma sätt som för [OSPF](/Cisco_OSPF#Konfiguration "wikilink").
+exakt samma sätt som för [OSPF](Cisco_OSPF.md#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration).
 Om man har en LSR med LDP-grannskap till säg 5 andra enheter så kommer
 alla grannskap gå ner om man stänger ett av sina 5 interface eftersom
 LDP skapar sitt ID utifrån tillgängliga IGP interface. Det ändras om ett
@@ -284,8 +284,8 @@ show mpls ldp discovery detail | i Ethernet|Password
 
 ### IGP
 
-LDP går att autokonfa tillsammans med [IS-IS](/Cisco_IS-IS "wikilink")
-och [OSPF](/Cisco_OSPF "wikilink"), dvs slå på LDP på de interface som
+LDP går att autokonfa tillsammans med [IS-IS](Cisco_IS-IS.md)
+och [OSPF](Cisco_OSPF.md), dvs slå på LDP på de interface som
 är aktiva i IGPn, detta kan antingen göras per interface eller under
 routingprocessen. Man kan även använda *prefix suppression* så kommer
 det inte att genereras lika många labels för ens core-nätverk.
@@ -342,15 +342,15 @@ VPN
 MPLS VPN (RFC 4364) är en populär MPLS-applikation och det räknas som
 trusted VPN. PHP för transport label används default för att slippa en
 lookup. För PE-PE label utbyten används
-[MP-BGP](/Cisco_BGP#Multiprotocol_BGP "wikilink"), det kan dock gå via
+[MP-BGP](Cisco_BGP.md#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP), det kan dock gå via
 route reflector precis som vanligt för ökad skalbarhet. För att
 VPN-trafik ska fungera måste PE ha en route till next-hop PE, det går ej
 med en default route. Control plane kommer att fungera men ej data plane
 eftersom forwardering med labels lärda från BGP endast fungerar om det
 finns en /32-route i RIB. För L2 VPN se [Cisco
-VPLS](/Cisco_VPLS "wikilink") och för multicast se [Cisco
-MLDP](/Cisco_MLDP "wikilink"). Det går även att integrera
-[NAT](/Cisco_NAT#MPLS_VPN "wikilink") med MPLS VPN.
+VPLS](Cisco_VPLS) och för multicast se [Cisco
+MLDP](Cisco_MLDP). Det går även att integrera
+[NAT](Cisco_NAT.md#MPLS_VPN#MPLS_VPN#MPLS_VPN#MPLS_VPN#MPLS_VPN#MPLS_VPN#MPLS_VPN#MPLS_VPN) med MPLS VPN.
 
 ```
 ip bgp-community new-format

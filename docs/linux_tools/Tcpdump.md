@@ -31,7 +31,7 @@ Uttryck
 =======
 
 tcpdump visar alla paket som matchar det angivna uttrycket och använder
-samma syntax som [pcap-filter](/pcap-filter "wikilink")
+samma syntax som [pcap-filter](pcap-filter)
 
 Exempel
 =======

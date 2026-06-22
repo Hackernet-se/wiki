@@ -3,8 +3,8 @@ title: Cisco ASA VPN
 permalink: /Cisco_ASA_VPN/
 ---
 
-Huvudartikel: [Cisco ASA](/Cisco_ASA "wikilink").
-Se även [Cisco IPsec](/Cisco_IPsec "wikilink").
+Huvudartikel: [Cisco ASA](Cisco_ASA.md).
+Se även [Cisco IPsec](Cisco_IPsec.md).
 
 Site-to-site
 ============

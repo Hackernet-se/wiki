@@ -5,7 +5,7 @@ permalink: /Cisco_MPLS-TE/
 
 Det finns olika tekniker för att göra TE i ett MPLS-nät. Det mest
 flexibla och skalbara är Segment Routing, se [egen
-artikel](/Cisco_SR "wikilink").
+artikel](Cisco_SR.md).
 
 RSVP
 ----
@@ -16,10 +16,10 @@ nätverk. Hostar/routrar kan begära att få vissa QoS-nivåer av nätverket.
 RSVP reserverar resurser men det är upp till varje enhet att ha en
 QoS-teknik för att leverera bandbredden. Till skillnad från vanlig QoS
 som är per frame/paket är detta per flöde, se även [Cisco
-QoS](/Cisco_QoS "wikilink").
+QoS](Cisco_QoS.md).
 
 Resource Reservation Protocol - Traffic Engineering (RFC 3209) är en
-extension till [RSVP](/Cisco_RSVP "wikilink") som används för Traffic
+extension till [RSVP](Cisco_RSVP) som används för Traffic
 Engineering i MPLS-nät. Det fungerar både som MPLS label distribution
 protocol och MPLS signaling protocol. En ingress LSR kan använda RSVP-TE
 för att notifiera alla LSR:er längs pathen till egress att den vill

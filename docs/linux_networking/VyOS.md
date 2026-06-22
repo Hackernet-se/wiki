@@ -5,7 +5,7 @@ permalink: /VyOS/
 
 VyOS är ett Linux-baserat network operating system med mjukvaru-routing,
 firewall och VPN funktionalitet. Det är en community fork av Vyatta Core
-med [JunOS](/Juniper_JunOS "wikilink")-liknande syntax och bygger på
+med [JunOS](../juniper/Juniper_JunOS.md)-liknande syntax och bygger på
 Debian och Quagga routing engine. Det har bl.a. stöd för
 [DMVPN](http://vyos.net/wiki/DMVPN),
 [VXLAN](http://vyos.net/wiki/VXLAN),
@@ -13,7 +13,7 @@ Debian och Quagga routing engine. Det har bl.a. stöd för
 [BGP](http://vyos.net/wiki/User_Guide#BGP) och
 [IPv6](http://vyos.net/wiki/IPv6). Men saknar tyvärr stöd för Multicast
 routing och MPLS. Det finns möjlighet att installera
-[FastNetMon](/FastNetMon "wikilink") direkt på en VyOS-router, se länk
+[FastNetMon](../linux_services/FastNetMon.md) direkt på en VyOS-router, se länk
 [1](https://github.com/pavel-odintsov/fastnetmon/blob/master/docs/VyOS_INSTALL.md)
 
 Installation

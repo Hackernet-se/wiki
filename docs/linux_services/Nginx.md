@@ -331,7 +331,7 @@ Naxsi
 -----
 
 Third party Nginx-modul, motsvarighet till
-[ModSecurity](/ModSecurity "wikilink"). Går att köra i learning mode.
+[ModSecurity](ModSecurity.md). Går att köra i learning mode.
 
 ```
 sudo apt-get install nginx-naxsi

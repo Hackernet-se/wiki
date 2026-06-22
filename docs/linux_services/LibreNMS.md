@@ -4,13 +4,13 @@ permalink: /LibreNMS/
 ---
 
 LibreNMS är ett övervaknings verktyg för nätverks tjänster. LibreNMS går
-att intergrera med bla [Rancid](/Rancid "wikilink") och
-[Oxidized](/Oxidized "wikilink"). LibreNMS har auto-discovery, plugins,
+att intergrera med bla [Rancid](Rancid.md) och
+[Oxidized](Oxidized.md). LibreNMS har auto-discovery, plugins,
 API, och en IRC bot för att ta reda på status via IRC. Du kan autha dig
 mot bla MySQL(Default), LDAP eller HTTP för att få SSO stöd. LibreNMS
 övervakar enheter med hjälp av SNMP ,ping, check_mk_agent eller med
 hjälp av Nagios plugins. LibreNMS är en fork av
-[Observium](/Observium "wikilink").
+[Observium](Observium).
 
 Förberedelser
 =============

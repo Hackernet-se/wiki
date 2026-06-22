@@ -3,11 +3,11 @@ title: Cisco Routing
 permalink: /Cisco_Routing/
 ---
 
-För dynamiska routingprotokoll se: [BGP](/Cisco_BGP "wikilink"),
-[OSPF](/Cisco_OSPF "wikilink"), [EIGRP](/Cisco_EIGRP "wikilink"),
-[IS-IS](/Cisco_IS-IS "wikilink") och [RIP](/Cisco_RIP "wikilink"). Se
-även: [Cisco PfR](/Cisco_PfR "wikilink") och [Cisco
-PE-CE](/Cisco_PE-CE "wikilink").
+För dynamiska routingprotokoll se: [BGP](Cisco_BGP.md),
+[OSPF](Cisco_OSPF.md), [EIGRP](Cisco_EIGRP.md),
+[IS-IS](Cisco_IS-IS.md) och [RIP](Cisco_RIP.md). Se
+även: [Cisco PfR](Cisco_PfR.md) och [Cisco
+PE-CE](Cisco_PE-CE.md).
 
 ### RIB
 
@@ -110,7 +110,7 @@ VRF
 ===
 
 Man kan se VRF:er som virtuella routrar fast med delat management.
-VRF:er utan [MPLS](/Cisco_MPLS "wikilink") kallas VRF Lite.
+VRF:er utan [MPLS](Cisco_MPLS.md) kallas VRF Lite.
 
 ```
 show vrf
@@ -204,9 +204,9 @@ show ip sla statistics
 
 För att andra processer ska kunna utnyttja IP SLA binder man IP
 SLA-objekten via tracking-processen. Tracking kan göras med
-[CDP](/Cisco_IOS#CDP "wikilink") och IP SLA och polling interval går att
+[CDP](Cisco_IOS.md#CDP#CDP#CDP#CDP#CDP#CDP#CDP#CDP) och IP SLA och polling interval går att
 konfigurera globalt med **track timer**. Tracking kan t.ex. användas av
-[HSRP](/Cisco_HSRP#Tracking "wikilink").
+[HSRP](Cisco_HSRP.md#Tracking#Tracking#Tracking#Tracking#Tracking#Tracking#Tracking#Tracking).
 
 Object Tracking
 
@@ -341,7 +341,7 @@ route-map POLICY_ROUTING permit 10
 ```
 
 CDP, reachability verifieras genom att kolla att det finns någon
-[CDP](/Cisco_IOS#CDP "wikilink")-granne som har 100.0.1.5. Detta går
+[CDP](Cisco_IOS.md#CDP#CDP#CDP#CDP#CDP#CDP#CDP#CDP)-granne som har 100.0.1.5. Detta går
 också att använda ihop med *set ip default next-hop*. Alla kommandon som
 ändrar routing programmeras i hårdvara utom *set ip next-hop verify
 availability* eftersom CDP-info ej finns i linecards.

@@ -5,8 +5,8 @@ permalink: /Grafana/
 
 Grafana är webbaserat grafverktyg. Grafana behöver hämta datan som ska
 grafas ifrån någonstans. Detta kan göras från bl.a. influxDB,
-Elasticsearch, [Graphite](/Graphite "wikilink") eller
-[Prometheus](/Prometheus "wikilink").
+Elasticsearch, [Graphite](Graphite) eller
+[Prometheus](Prometheus.md).
 
 Installation
 ------------

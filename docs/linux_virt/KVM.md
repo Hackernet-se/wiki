@@ -51,4 +51,3 @@ Requirements: CPU type, time sync, shared storage
 
 `virsh migrate --live TestVM qemu+ssh://test2.example.com/system`
 
-[Category:Guider](/Category:Guider "wikilink")

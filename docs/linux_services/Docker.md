@@ -177,8 +177,8 @@ Central hantering
 
 Central Dockerhantering gör det möjligt att managera images, containers,
 hostar och övriga Dockerresurser från ett och samma ställe. Exempel på
-detta är [Shipyard](/Shipyard "wikilink"), Swarm och
-[Rancher](/Rancher "wikilink")
+detta är [Shipyard](Shipyard), Swarm och
+[Rancher](Rancher)
 
 Network
 -------

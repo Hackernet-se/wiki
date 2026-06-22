@@ -34,7 +34,7 @@ Write
 ```
 dd if=/dev/urandom of=/home/$USER/DDfile bs=1M count=4096 oflag=direct #urandom flaskar
 ```
-`dd if=/dev/`[`frandom`](/frandom "wikilink")` of=/home/$USER/DDfile bs=1M count=4096 oflag=direct`
+`dd if=/dev/`[`frandom`](Frandom.md)` of=/home/$USER/DDfile bs=1M count=4096 oflag=direct`
 
 ```
 dd if=/dev/zero of=/home/$USER/DDfile bs=1M count=4096 oflag=direct

@@ -6,9 +6,9 @@ permalink: /Cisco_PE-CE/
 PE routers redistribuerar routes till BGP och konverterar dem till VPNv4
 NLRI. Denna NLRI annonseras till andra PE med hjälp av MP-BGP. Dessa PE
 konverterar tillbaka VPNv4 routes och skickar det vidare till CE.
-Se även [Cisco BGP](/Cisco_BGP "wikilink"), [Cisco
-Routing](/Cisco_Routing "wikilink") och [Cisco
-MPLS](/Cisco_MPLS "wikilink").
+Se även [Cisco BGP](Cisco_BGP.md), [Cisco
+Routing](Cisco_Routing.md) och [Cisco
+MPLS](Cisco_MPLS.md).
 
 RIP
 ---
@@ -17,7 +17,7 @@ RIP är det simplaste protokollet och om man använder **transparent** så
 kommer RIPs metric att tas ifrån BGP MED attribute som är en kopia av
 RIP metricen från andra sidan. Detta gör att man kan få till bra path
 selection även om det finns backdoor links. RIPv1 stöds inte. Se även
-[Cisco RIP](/Cisco_RIP "wikilink").
+[Cisco RIP](Cisco_RIP.md).
 
 ```
 router rip
@@ -37,7 +37,7 @@ router bgp 100
 OSPF
 ----
 
-OSPF för PE-CE (RFC 4577), se även [Cisco OSPF](/Cisco_OSPF "wikilink").
+OSPF för PE-CE (RFC 4577), se även [Cisco OSPF](Cisco_OSPF.md).
 MPLS-nätet skickar OSPF VRF routing information i MP-BGP-uppdateringar
 och det kommer att agera som en OSPF super-backbone vilket gör att man
 faktiskt inte behöver köra med area 0 någonstans men man kan såklart
@@ -146,7 +146,7 @@ blir routsen internal, däremot om routsen har kommit från något annat än
 EIGRP, dvs saknar dessa communities, blir de external ur EIGRPs
 perspektiv. EIGRP-prefix som redistribueras in i BGP kommer också att ha
 ett Cost value som används för path selection. Se även [Cisco
-EIGRP](/Cisco_EIGRP "wikilink").
+EIGRP](Cisco_EIGRP.md).
 
 ```
 router eigrp 100

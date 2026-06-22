@@ -193,4 +193,4 @@ Systemd service
 ---------------
 
 Vill du veta mer om hur systemd templates fungerar kan du läsa
-[här](/Systemd#Template_unit "wikilink").
+[här](../linux_tools/Systemd.md#Template_unit#Template_unit#Template_unit#Template_unit#Template_unit#Template_unit#Template_unit#Template_unit).

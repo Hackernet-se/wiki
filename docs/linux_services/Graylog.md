@@ -6,7 +6,7 @@ permalink: /Graylog/
 Graylog är en syslogserver för att man ska kunna analysera syslog, göra
 sökningar och se trender på ett ställe. Det är open source och är
 baserat på Elasticsearch, Java och MongoDB. Autentisering kan kopplas
-till AD eller [LDAP](/OpenLDAP "wikilink").
+till AD eller [LDAP](OpenLDAP.md).
 
 Dokumentation: <http://docs.graylog.org/en/2.0/>
 
@@ -82,7 +82,7 @@ Konfiguration
 [`http://`](http://)<graylog_IP>`:9000/`
 
 Vill man ha web ui med HTTPS kan man t.ex. lägga det bakom en [Nginx
-proxy](/Nginx "wikilink").
+proxy](Nginx.md).
 
 ### Input
 

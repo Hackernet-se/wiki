@@ -6,7 +6,7 @@ permalink: /MySQL/
 MySQL är en relational database management system(RDBMS). MySQL var den
 näst största RDBMS databasen och den den mest använda open-source RDBMS
 databasen förr. MySQL är en av programmen du får när du installerar
-[LAMP](/LAMP "wikilink").
+[LAMP](LAMP.md).
 
 Installation
 ------------

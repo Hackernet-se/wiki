@@ -7,7 +7,7 @@ Network Address Translation används för att skriva om adresser i
 IP-paket. Det är inte säkert att NAT fungerar tillsammans med ACL:er som
 använder **log** så det bör man ha i åtanke. För att accelerera
 NAT-processen finns **ip nat create flow-entries** som är påslaget
-default i [IOS](/Cisco_IOS "wikilink")-routrar.
+default i [IOS](Cisco_IOS.md)-routrar.
 
 Generell metod för att testa om NAT fungerar.
 
@@ -252,7 +252,7 @@ show ip nat translations
 Stateful NAT
 ------------
 
-Stateful NAT with [HSRP](/Cisco_HSRP "wikilink"). During failovers, NAT
+Stateful NAT with [HSRP](Cisco_HSRP.md). During failovers, NAT
 translated IP addresses on devices may be different from the IP address
 before the failover, because no state information is exchanged between
 active and standby devices. HSRP Virtual IP Address (VIP) cannot be used
@@ -386,7 +386,7 @@ NAT-integration med MPLS VPN tillåter flera MPLS VPN att konfigureras
 att fungera tillsammans på samma enhet. NAT kan skilja på vilken VPN den
 får in trafik på även om alla använder samma IP-adresser. Detta låter
 flera kunder använda samma services men ändå vara skiljda logiskt. Se
-även [Cisco MPLS](/Cisco_MPLS "wikilink").
+även [Cisco MPLS](Cisco_MPLS.md).
 
 ```
 interface Gi0/1

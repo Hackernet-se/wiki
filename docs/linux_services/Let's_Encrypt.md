@@ -70,7 +70,7 @@ konfigurations exemplar för olika tjänster med säkerhet i fokus.
 ### Signa bakom reverse proxy
 
 Om du använder dig av en reverse proxy och vill signa med hjälp av
-webroot kan man i [apache](/apache "wikilink") göra att Let's encrypts
+webroot kan man i [apache](Apache.md) göra att Let's encrypts
 anrop inte skickas vidare. Utan istället går till en lokal mapp där din
 Let's encrypt klient lagt den dolda filen.
 

@@ -3,12 +3,12 @@ title: Cisco Security
 permalink: /Cisco_Security/
 ---
 
-[Cisco IOS](/Cisco_IOS "wikilink") har stöd för många
+[Cisco IOS](Cisco_IOS.md) har stöd för många
 säkerhetsmekanismer och protokoll. Se även [L2
-Security](/Cisco_L2_Security "wikilink"), [L3
-Security](/Cisco_L3_Security "wikilink"),
-[DMVPN](/Cisco_DMVPN "wikilink") och [Cisco
-IPsec](/Cisco_IPsec "wikilink").
+Security](Cisco_L2_Security.md), [L3
+Security](Cisco_L3_Security.md),
+[DMVPN](Cisco_DMVPN.md) och [Cisco
+IPsec](Cisco_IPsec.md).
 
 Device Security
 ===============
@@ -93,7 +93,7 @@ Det är viktigt att skydda CPU i sina enheter, man kan styra accessen
 (Control-Plane Protection). CoPP skyddar route processor genom att
 behandla det som en separat enhet med eget ingress interface. Man kan
 styra trafik till control plane med hjälp av ACL:er och
-[QoS](/Cisco_QoS "wikilink")-filter.
+[QoS](Cisco_QoS.md)-filter.
 
 ```
 class-map match-all COPP-IN-IP

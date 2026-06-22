@@ -63,7 +63,7 @@ Några bra plugins som denna sidan använder är.
 | [Wiki Editor](https://www.mediawiki.org/wiki/Extension:WikiEditor)                        | För att få en lite bättre source editor.                                                                                                          |
 | [SyntaxHighlight](https://www.mediawiki.org/wiki/Extension:SyntaxHighlight_GeSHi)         | För att kunna få tex php,html,python kod på en sida mer lättläst.                                                                                 |
 | [MsUpload](https://www.mediawiki.org/wiki/Extension:MsUpload)                             | Enkelt kunna ladda upp filer när man editerar.                                                                                                    |
-| [Dynamic Page List](https://www.mediawiki.org/wiki/Extension:Intersection)                | För att kunna skapa dynamiska listor från tex kategorier eller namespaces. Tools på [Linux sidan](/Linux#Tools "wikilink") använder detta plugin. |
+| [Dynamic Page List](https://www.mediawiki.org/wiki/Extension:Intersection)                | För att kunna skapa dynamiska listor från tex kategorier eller namespaces. Tools på [Linux sidan](../linux.md#Tools#Tools) använder detta plugin. |
 | [Contribution Scores](https://www.mediawiki.org/wiki/Extension:Contribution_Scores)       | För att få fram en tabel om vem som bidragit med mest på wikin.                                                                                   |
 
 Backup

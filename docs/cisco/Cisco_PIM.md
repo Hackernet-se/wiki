@@ -15,8 +15,8 @@ medans de andra protokollen bygger sina egna tabeller och kör RPF mot.
 Med IPv6 körs PIM default på alla interface när man slår igång ipv6
 multicast-routing.
 
-Se även [Cisco Multicast](/Cisco_Multicast "wikilink"). Man kan även
-använda PIM över [GRE](/Cisco_GRE "wikilink")-tunnlar.
+Se även [Cisco Multicast](Cisco_Multicast.md). Man kan även
+använda PIM över [GRE](Cisco_GRE.md)-tunnlar.
 
 ### Neighbor
 
@@ -107,7 +107,7 @@ ip multicast boundary [ACL]
 
 **NBMA**
 Det finns inbyggd loop prevention för multicast i form av split horizon.
-I vissa topologier (t.ex. [DMVPN](/Cisco_DMVPN "wikilink")) måste
+I vissa topologier (t.ex. [DMVPN](Cisco_DMVPN.md)) måste
 multicast-paket skickas ut på samma interface som det kom in på för att
 det ska fungera och det går att konfigurera per interface. PIM NBMA mode
 gör att PIM håller reda på OIL som interface + NBMA-adress, istället för
@@ -521,8 +521,8 @@ källa för varje grupp, enheter på andra sidan kan då bygga SPT för
 respektive sender. Meddelandena skickas var 60:e sekund med TCP över
 unicast mellan peers och blir besvarade med SA response paket. Detta
 grannskap måste konfigureras och unicast route till andra sidan måste
-finnas. [BGP](/Cisco_BGP "wikilink") eller [Multicast
-BGP](/Cisco_Multicast#BGP "wikilink") kan användas för detta.
+finnas. [BGP](Cisco_BGP.md) eller [Multicast
+BGP](Cisco_Multicast.md#BGP#BGP#BGP#BGP#BGP#BGP#BGP#BGP) kan användas för detta.
 
 ```
 ip msdp peer [peer_unique_address] connect-source loopback0 remote-as 100
@@ -584,7 +584,7 @@ interface gi2 
 
 **BFD**
 Konvergenstider går också att trimma med hjälp av
-[BFD](/Cisco_BFD "wikilink").
+[BFD](Cisco_BFD.md).
 
 ```
 ip pim bfd
@@ -876,13 +876,13 @@ interface gi3
 NX-OS
 =====
 
-Här följer [Nexus](/Cisco_Nexus "wikilink")-specifik information.
+Här följer [Nexus](Cisco_Nexus.md)-specifik information.
 Beroende på skillnader i hårdvara mellan de olika Nexusplattformarna
 finns det stöd för olika multicast capabilities, referera alltid till
 Ciscos dokumentation. Några grundläggande skillnader mot IOS är att det
 saknas stöd för IGMP version 1 och Version 3 Lite, PIM version 1 och
 dense mode operation. PIM har även SSM group range 232.0.0.0/8 by
-default (även i VRF:er). Se även [IGMP](/Cisco_IGMP#NX-OS "wikilink")
+default (även i VRF:er). Se även [IGMP](Cisco_IGMP.md#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS)
 för NX-OS.
 
 ### Konfiguration

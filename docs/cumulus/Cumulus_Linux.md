@@ -4,7 +4,7 @@ permalink: /Cumulus_Linux/
 ---
 
 Cumulus Linux är ett öppet Network OS som man kan köra på white-box
-switches. Det är baserat på [Debian](/Debian "wikilink") och man har
+switches. Det är baserat på [Debian](../linux_os/Debian.md) och man har
 tillgång till allt som Debian är kapabelt till. Cumulus står för en
 switch daemon, asic drivers och Network Command Line Utility (NCLU) och
 kan bootstrapas med ONIE. Routingmotorn i Cumulus Linux är Free Range
@@ -15,8 +15,8 @@ men det krävs en licens för att aktivera front-panel interfaces.
 ### Cumulus VX
 
 Cumulus Linux finns som free virtual appliance att ladda ner från
-Cumulus Networks hemsida. Det finns image för [KVM](/KVM "wikilink") och
-[VMware](/VMware_ESXi "wikilink"). Se även [EVE-NG](/EVE-NG "wikilink").
+Cumulus Networks hemsida. Det finns image för [KVM](../linux_virt/KVM.md) och
+[VMware](../vmware/VMware_ESXi.md). Se även [EVE-NG](../linux_virt/EVE-NG.md).
 
 ### Architecture
 
@@ -128,7 +128,7 @@ finns. På så sätt kan man upptäcka om något har kopplats fel.
 
 ZTP görs genom att mgmt-porten (eth0) vid boot ropar efter DHCP option
 239. Man pekar ut ett shell script som ska tankas ner och exekveras.
-Detta kan vara bash, [python](/Python "wikilink"), perl, ruby vilket ger
+Detta kan vara bash, [python](../scripting/Python.md), perl, ruby vilket ger
 flexibilitet.
 
 Exempel:

@@ -4,18 +4,18 @@ permalink: /Nexus_vPC/
 ---
 
 Virtual Port-Channel är Ciscos MLAG-variant för
-[Nexus](/Cisco_Nexus "wikilink")-switchar. Båda switchar i paret är
+[Nexus](Cisco_Nexus.md)-switchar. Båda switchar i paret är
 aktiva för data plane men den ena noden står för control plane och tar
 därmed hand om BPDUer och LACPDUer. Det är inte delad management plane,
-som t.ex. [Cisco VSS](/Cisco_VSS "wikilink"). För att avgöra om noderna
+som t.ex. [Cisco VSS](Cisco_VSS.md). För att avgöra om noderna
 i paret har kompatibel konfiguration (consistency validation) skickas en
 kopia med Cisco Fabric Services över peer-länken. Alla mac-adresser och
 IGMP snooping som switcharna lär sig synkroniseras också mha CFS över
-peer-länken. Peer-länken är med i [STP](/Cisco_STP "wikilink") men
+peer-länken. Peer-länken är med i [STP](Cisco_STP.md) men
 BPDU-hanteringen är modifierad så peer link kommer aldrig att bli
 blocking/discarding. Icke-vPC portar kommer att hanteras av den lokala
 STP-processen på varje switch. Se även [Cisco
-EtherChannel](/Cisco_EtherChannel "wikilink").
+EtherChannel](Cisco_EtherChannel.md).
 
 Det går att köra dynamisk routing över vPC men generellt sett är det
 inte rekommenderat samt att det endast går på vissa releaser. Det
@@ -77,7 +77,7 @@ Default-värden för keepalive: udp-port 3200, vrf management, interval
 
 "system-priority" och "system-mac" bestämmer vilken LACP system priority
 och actor system som ska användas i LACPDU:er. System MAC används även
-för BPDU:er. Om man kör [FabricPath](/Nexus_FabricPath "wikilink") lägg
+för BPDU:er. Om man kör [FabricPath](Nexus_FabricPath.md) lägg
 även till: *fabricpath switch-id <id>* under domänkonfigurationen.
 Auto-recovery är på default och det bör det vara, det ser till att man
 kan bli forwarding trots att peer aldrig kommer upp, t.ex. om man endast
@@ -140,7 +140,7 @@ Portar som inte får in LACPDU:er räknas som "individual". Man kan välja
 om portar som inte lyckas med LACP-förhandling ska fallbacka till
 individuella switchportar eller suspendas. Detta är t.ex. användbart om
 man har servrar med multipla NIC som ska
-[PXE](/PXE-Deploy "wikilink")-boota. Individuella switchportarna kommer
+[PXE](../linux_services/PXE-Deploy.md)-boota. Individuella switchportarna kommer
 att fortsätta skicka LACPDU:er för att försöka etablera LACP
 negotiation. Standardparametrarna för hanteringen av individuella portar
 inom en PortChannel skiljer sig mellan Nexus 7000 och Nexus 5000. När
@@ -274,7 +274,7 @@ vpc domain 1
 ```
 
 Detta används för att förbättra konvergens av Layer 2
-[EVPN](/Cisco_EVPN "wikilink") VXLAN.
+[EVPN](Cisco_EVPN.md) VXLAN.
 
 ```
 interface port-channel 10

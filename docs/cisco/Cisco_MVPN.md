@@ -4,7 +4,7 @@ permalink: /Cisco_MVPN/
 ---
 
 Multicast VPN (MVPN) möjliggör multicast över
-[L3VPN](/Cisco_MPLS#VPN "wikilink"). En viktig komponent för MVPN är
+[L3VPN](Cisco_MPLS.md#VPN#VPN#VPN#VPN#VPN#VPN#VPN#VPN). En viktig komponent för MVPN är
 BGP, safi MVPN kan göra två saker: Auto-Discovery routes och C-mcast
 signaling. PE-CE är alltid PIM men underlay i core kan göras på en mängd
 olika sätt och stäm därför alltid av med Ciscos dokumentation över
@@ -15,7 +15,7 @@ MVPN-profilerna.
 -   **IOS-XR:**
     <https://www.cisco.com/c/en/us/support/docs/ip/multicast/200512-Configure-mVPN-Profiles-within-Cisco-IOS.html>
 
-[Cisco_MVPN.PNG](/Cisco_MVPN.PNG "wikilink")
+[Cisco_MVPN.PNG](Cisco_MVPN.PNG)
 
 MLDP
 ====

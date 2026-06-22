@@ -4,10 +4,10 @@ permalink: /Quagga/
 ---
 
 Quagga är en network routing software suite och har stöd för
-[OSPF](/Cisco_OSPF "wikilink"), [BGP](/Cisco_BGP "wikilink"),
-[RIP](/Cisco_RIP "wikilink") och [IS-IS](/Cisco_IS-IS "wikilink").
+[OSPF](../cisco/Cisco_OSPF.md), [BGP](../cisco/Cisco_BGP.md),
+[RIP](../cisco/Cisco_RIP.md) och [IS-IS](../cisco/Cisco_IS-IS.md).
 Konfigurationsyntaxen är generellt väldigt lik [Cisco
-IOS](/Cisco_IOS "wikilink"). Quagga har en core daemon som heter zebra
+IOS](../cisco/Cisco_IOS.md). Quagga har en core daemon som heter zebra
 och sedan klienter till det, ospfd, isisd, ripd, ospf6d, ripngd och
 bgpd. Zebra är en IP-routing manager som står för kommunikation med
 kernel, interface och redistribution mellan olika routingprotokoll.
@@ -75,7 +75,7 @@ wr för att spara
 OSPF
 ----
 
-Se [Cisco OSPF](/Cisco_OSPF "wikilink") för mer info om OSPF.
+Se [Cisco OSPF](../cisco/Cisco_OSPF.md) för mer info om OSPF.
 
 ```
 sudo cp /usr/share/doc/quagga/examples/ospfd.conf.sample /etc/quagga/ospfd.conf
@@ -96,7 +96,7 @@ wr för att spara
 BGP
 ---
 
-Se [Cisco BGP](/Cisco_BGP "wikilink") för mer info om BGP.
+Se [Cisco BGP](../cisco/Cisco_BGP.md) för mer info om BGP.
 
 ```
 sudo cp /usr/share/doc/quagga/examples/bgpd.conf.sample /etc/quagga/bgpd.conf
@@ -121,7 +121,7 @@ wr för att spara
 Ethernet VPN (RFC 7432) är en modernare variant än VPLS för att
 tillhandahålla Ethernet multipoint services över MPLS eller IP. Det är
 öppet så det finns interoperability med andra network vendors, se t.ex.
-[Cisco VXLAN](/Cisco_VXLAN "wikilink").
+[Cisco VXLAN](../cisco/Cisco_VXLAN.md).
 
 OBS detta finns än sålänge endast i en community fork av Quagga som
 heter FRR.

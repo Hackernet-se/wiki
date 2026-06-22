@@ -61,8 +61,8 @@ Network
 -------
 
 ODL kan prata med nätverksutrustning med många olika protokoll, t.ex.
-OpenFlow, NETCONF, BGP och OVSDB. Se [Mininet](/Mininet "wikilink").
-För [Open_vSwitch](/Open_vSwitch "wikilink"):
+OpenFlow, NETCONF, BGP och OVSDB. Se [Mininet](Mininet.md).
+För [Open_vSwitch](Open_vSwitch.md):
 
 ```
 ovs-vsctl set-controller br0 tcp:10.0.0.20:6633

@@ -4,9 +4,9 @@ permalink: /Arista_EVPN/
 ---
 
 Ethernet VPN (RFC 7432) är en modernare variant än
-[VPLS](/Cisco_VPLS "wikilink") för att tillhandahålla Ethernet
-multipoint services över IP ([VXLAN](/Arista_VXLAN "wikilink")) eller
-MPLS (med eller utan [SR](/Arista_SR "wikilink")). BGP EVPN är en ny
+[VPLS](Cisco_VPLS) för att tillhandahålla Ethernet
+multipoint services över IP ([VXLAN](Arista_VXLAN.md)) eller
+MPLS (med eller utan [SR](Arista_SR)). BGP EVPN är en ny
 adressfamilj som används för att distribuera lokala MAC-adresser och
 MAC/IP bindings till VTEP:s. Next-hop i EVPN-uppdateringarna är antingen
 egress Label Switch Router eller VXLAN Tunnel Endpoint. EVPN har bl.a.
@@ -14,9 +14,9 @@ features för att hålla koll på hostar som flyttar mellan datacenter
 (sekvensnummer i annonseringarna) och kan då konvergera snabbt. Ett
 EVPN-nätverk kan göra både bridging och routing och har inbyggd support
 för multi-tenancy. Protokollet är öppet så det finns interoperability
-med andra network vendors, se t.ex. [Cisco](/Cisco_EVPN "wikilink"),
-[Cumulus](/Cumulus_EVPN "wikilink") och
-[Quagga](/Quagga#EVPN "wikilink") EVPN.
+med andra network vendors, se t.ex. [Cisco](../cisco/Cisco_EVPN.md),
+[Cumulus](../cumulus/Cumulus_EVPN.md) och
+[Quagga](../linux_networking/Quagga.md#EVPN#EVPN#EVPN#EVPN#EVPN#EVPN#EVPN#EVPN) EVPN.
 
 **Route types**
 \# Ethernet Auto-Discovery Route

@@ -17,7 +17,7 @@ Foremans arkitektur
 
 Foreman agerar frontend mot användarna. Smart-Proxyn förser tjänster med
 ett API som foreman kan agera mot.
-[790px](/File:Foreman_architecture.png "wikilink")
+[790px](File:Foreman_architecture.png)
 
 Installation
 ============

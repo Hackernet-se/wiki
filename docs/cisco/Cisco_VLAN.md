@@ -5,9 +5,9 @@ permalink: /Cisco_VLAN/
 
 Virtual LAN är alla broadcastdomäner som är partitionerade och isolerade
 på lager 2 i ett nätverk. Vill man managera VLAN på många Cisco-switchar
-centralt kan man använda [VTP](/Cisco_VTP "wikilink"). Det kan maximalt
+centralt kan man använda [VTP](Cisco_VTP.md). Det kan maximalt
 finnas 4094 VLAN, för att skala förbi det se [Cisco
-VXLAN](/Cisco_VXLAN "wikilink").
+VXLAN](Cisco_VXLAN.md).
 
 **Standard:** 1-1005 (1002-1005 är reserverade)
 
@@ -33,7 +33,7 @@ show vlan internal usage
 
 **Layer 2 Traceroute**
 Man kan tracea mac-adresser i ett vlan. OBS
-[CDP](/Cisco_IOS#CDP "wikilink") är ett prereq för detta annars blir det
+[CDP](Cisco_IOS.md#CDP#CDP#CDP#CDP#CDP#CDP#CDP#CDP) är ett prereq för detta annars blir det
 *Unable to send a l2trace request*. Max hops är 10.
 
 ```
@@ -207,7 +207,7 @@ Source Guard på primary VLANet enablear det även på secondary VLANs.
 vtp mode transparent
 ```
 
-Alternativt kan [VTP](/Cisco_VTP "wikilink") version 3 användas.
+Alternativt kan [VTP](Cisco_VTP.md) version 3 användas.
 
 VLAN
 
@@ -261,7 +261,7 @@ interface g0/5
 ```
 
 Notera att primary vlan ska vara med i allowed vlan list. Om man har
-t.ex. en [ASA](/Cisco_ASA "wikilink") kan man köra med en vanlig
+t.ex. en [ASA](Cisco_ASA.md) kan man köra med en vanlig
 switchport mode trunk om man vill för ASA har native stöd för PVLAN.
 
 SVI
@@ -324,7 +324,7 @@ switch fungerar. För IOS-XE se längre ner.
 
 **Transparent**
 Routern blir precis som en L2-switch, dvs ingen IP routing och
-[STP](/Cisco_STP "wikilink") används för loop prevention.
+[STP](Cisco_STP.md) används för loop prevention.
 
 ```
 no ip routing

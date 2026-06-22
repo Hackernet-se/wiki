@@ -8,7 +8,7 @@ source DNS som skapades i slutet av 1990 talet. PowerDNS är väldigt
 anpassningsbart för man är inte bunden att använda enbart text filer
 utan man kan ha sina records i databaser också. Det har gjort att
 PowerDNS har blivit enkelt att integrera i andra tjänster som tex
-[PhpIPAM](/PhpIPAM "wikilink") och det finns ännu fler olika web
+[PhpIPAM](PhpIPAM.md) och det finns ännu fler olika web
 interface på nätet. PowerDNS har också något dom kallar för en
 supermaster, som gör att nya zoner som skapas automatiskt finns på alla
 slavar. PowerDNS har också ett väldigt bra DNSSEC stöd och driver 90% av
@@ -549,7 +549,7 @@ finns. Samma nykel kan användas på alla zoner om man vill.
 Konfigurera din DHCP server att använda nykeln och det namn du valt på
 nykeln i detta fallet **ddns_update**.
 
-Under här kommer ett exempel för [ISC_DHCP](/ISC_DHCP "wikilink").
+Under här kommer ett exempel för [ISC_DHCP](ISC_DHCP.md).
 
 Skapa en fil som heter ddns.key med följande innehåll under
 **/etc/dhcp/**:
@@ -606,7 +606,7 @@ PDNS Manager
 
 Ett enkelt webinterface där du kan skapa nya zoner, records och som har
 stöd för att signa certifikat med [Let's
-Encrypt](/Let's_Encrypt "wikilink") och ett API.
+Encrypt](Let's_Encrypt.md) och ett API.
 
 <https://pdnsmanager.lmitsystems.de/>
 

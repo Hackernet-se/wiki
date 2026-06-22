@@ -14,7 +14,7 @@ SR-PCE är en IOS-XR multi-domain stateful SR Path Computation Element
 Controller). XTC kan prata ISIS, OSPF och BGP-LS för att få
 topologi-information ifrån flera domäner. SR-PCE är SR-optimerat och kan
 updatera SRTE-policys allt eftersom. Man deployar det likt RR. Se även
-[Segment Routing](/Cisco_SR "wikilink").
+[Segment Routing](Cisco_SR.md).
 
 Konfiguration
 -------------

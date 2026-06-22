@@ -12,7 +12,7 @@ Installation
 ------------
 
 [Ladda hem
-Xming.](/sourceforge:projects/xming/files/latest/download "wikilink")
+Xming.](sourceforge:projects/xming/files/latest/download)
 
 Default på allt fungerar bra. Jag väljer att installera utan SSH klient.
 Välj sedan att starta Xming.

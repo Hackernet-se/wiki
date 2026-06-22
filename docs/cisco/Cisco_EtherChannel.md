@@ -8,14 +8,14 @@ Linkaggregering motverkar två problem som medföljer en ensam kabel,
 bandbreddsbegränsning och brist på feltolerans. EtherChannel
 tillhandahåller lastdelning per frame och adderar bandbredd för de
 aktiva interfacen, t.ex. med tre aktiva 100 mbps members blir
-interface-bandbredden 300 mbps. För [STP](/Cisco_STP "wikilink") är en
+interface-bandbredden 300 mbps. För [STP](Cisco_STP.md) är en
 etherchannel en länk och BPDUer skickas på en av member ports. För en
 etherchannel måste alla interface ha samma speed, duplex och STP port
 cost. Är det en VLAN-trunk måste också native och allowed
-[VLAN](/Cisco_VLAN "wikilink") vara samma. För access port-channel måste
+[VLAN](Cisco_VLAN.md) vara samma. För access port-channel måste
 access-vlan vara samma.
 
-Se även [vPC](/Nexus_vPC "wikilink")
+Se även [vPC](Nexus_vPC.md)
 
 Konfiguration
 -------------
@@ -202,7 +202,7 @@ Tekniskt sett inte etherchannel men kan användas istället för det i
 vissa situationer. Det som händer när primären går ner är att alla
 dynamiska MAC entries flyttas till backupinterfacet och det hamnar i
 forwarding state. Inga BPDUer inblandade. Bör användas tillsammans med
-[UDLD](/Cisco_UDLD "wikilink").
+[UDLD](Cisco_UDLD.md).
 
 ```
 interface po2

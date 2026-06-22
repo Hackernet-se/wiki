@@ -8,10 +8,10 @@ routing, det är inget routingprotokoll utan ett koncept. Den första
 noden väljer path och kodar det i packet header genom en ordnad lista av
 "segment". Det går att använda MPLS data plane (labels) eller IPv6 data
 plane (header extensions), denna artikel fokuserar på
-[MPLS](/Cisco_MPLS "wikilink"). Segment Routing integrerar med dom
+[MPLS](Cisco_MPLS.md). Segment Routing integrerar med dom
 multi-service capabilities som finns med MPLS, inklusive L3VPN,
-[VPWS](/Cisco_L2VPN#EoMPLS.2FAToM "wikilink"),
-[VPLS](/Cisco_L2VPN#VPLS "wikilink") och [EVPN](/Cisco_EVPN "wikilink").
+[VPWS](Cisco_L2VPN.md#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM#EoMPLS.2FAToM),
+[VPLS](Cisco_L2VPN.md#VPLS#VPLS#VPLS#VPLS#VPLS#VPLS#VPLS#VPLS) och [EVPN](Cisco_EVPN.md).
 
 Segment representerar subpaths som en router kan kombinera för att få
 fram en komplett route till destination. Varje segment har en identifier
@@ -20,7 +20,7 @@ extensions till IGP (IS-IS/OSPF). Segment routing tillåter därmed att
 man väljer hela pathen från ingress port till egress port utan att
 förlita sig på t.ex. IGP shortest path table. Det är samtidigt simplare
 än de flesta andra typer av traffic engineering. SR gör även ECMP till
-skillnad från [RSVP-TE](/Cisco_MPLS#Traffic_Engineering "wikilink"). För
+skillnad från [RSVP-TE](Cisco_MPLS.md#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering). För
 att tunea en path så används lokal TE policy alternativt BGP-LU, man
 annonserar en unicast route med en associerad MPLS label. SR kräver
 inget label distribution protocol så det behövs t.ex. ingen
@@ -76,8 +76,8 @@ segment-routing mpls
 
 Sedan går man in under IGP och slår på segment-routing, detta enablear
 MPLS på alla IGP-interface och lägger in MPLS labels för forwarding. För
-övrig konfiguration se [IS-IS](/Cisco_IS-IS#Konfiguration "wikilink")
-och [OSPF](/Cisco_OSPF#Konfiguration "wikilink").
+övrig konfiguration se [IS-IS](Cisco_IS-IS.md#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration)
+och [OSPF](Cisco_OSPF.md#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration).
 
 ```
 router ospf 1
@@ -110,7 +110,7 @@ router ospf 1
 ### BGP-SR
 
 Man kan även göra segment routing med hjälp av BGP-SR, då används
-BGP-LU. Se även [Cisco BGP](/Cisco_BGP "wikilink").
+BGP-LU. Se även [Cisco BGP](Cisco_BGP.md).
 
 ```
 router bgp 1
@@ -254,7 +254,7 @@ router isis 1
 NX-OS
 -----
 
-Se även [NX-OS MPLS](/Cisco_MPLS#NX-OS "wikilink").
+Se även [NX-OS MPLS](Cisco_MPLS.md#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS).
 
 ```
 install feature-set mpls
@@ -288,7 +288,7 @@ lasten för övriga routrar.
 
 För att styra en path så används lokal TE policy alternativt BGP-LU, man
 annonserar en unicast route med en associerad MPLS labelstack. Se
-exempel med [ExaBGP](/ExaBGP#Segment_Routing "wikilink").
+exempel med [ExaBGP](../linux_networking/ExaBGP.md#Segment_Routing#Segment_Routing#Segment_Routing#Segment_Routing#Segment_Routing#Segment_Routing#Segment_Routing#Segment_Routing).
 
 ```
 segment-routing

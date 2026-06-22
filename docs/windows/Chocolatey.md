@@ -3,7 +3,7 @@ title: Chocolatey
 permalink: /Chocolatey/
 ---
 
-Chocolatey är en pakethanterare för Windows, som [apt](/apt "wikilink")
+Chocolatey är en pakethanterare för Windows, som [apt](../linux_tools/Apt.md)
 och yum.
 
 Installation

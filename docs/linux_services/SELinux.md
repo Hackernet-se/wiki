@@ -8,7 +8,7 @@ gör det möjligt att säkra upp både hård- och mjukvara. Kärnan i SELinux
 är labels. Man sätter SELinux labels på allt ifrån filer till portar,
 sedan applyar man policy på labels. Detta är en standardmodul sedan
 kernel 2.6 och går t.ex. att konfigurera med
-[Ansible](/Ansible "wikilink") eller [Puppet](/Puppet "wikilink").
+[Ansible](Ansible.md) eller [Puppet](Puppet.md).
 
 Det är rekommenderat att alltid ha SELinux påslaget för att sedan
 whitelista de avstängda funktioner du vill åt. För att modifiera SELinux

@@ -107,8 +107,8 @@ sudo a2enmod ssl && sudo a2enmod headers && sudo service apache2 rest
 
 **Certifikat**
 Fixa ett certifikat, antingen från en CA (t.ex. [Let's
-Encrypt](/Let%27s_Encrypt "wikilink")) eller
-[self-signed](/Digitala_Certifikat#Self-signed "wikilink").
+Encrypt](Let%27s_Encrypt)) eller
+[self-signed](Digitala_Certifikat.md#Self-signed#Self-signed#Self-signed#Self-signed#Self-signed#Self-signed#Self-signed#Self-signed).
 
 Konfiguration med säkerhet i fokus.
 

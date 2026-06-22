@@ -5,8 +5,8 @@ permalink: /Cisco_L2VPN/
 
 Provider-provisioned Layer-2 Virtual Private Network. Att sträcka L2 är
 aldrig häftigt men man får göra så gott man kan med
-[STP](/Cisco_STP "wikilink") alternativt ha routrar direkt på andra
-sidan. Se även [Cisco MPLS](/Cisco_MPLS "wikilink").
+[STP](Cisco_STP.md) alternativt ha routrar direkt på andra
+sidan. Se även [Cisco MPLS](Cisco_MPLS.md).
 
 ### Ethernet Virtual Circuit
 
@@ -58,7 +58,7 @@ MPLS. Multipla siter kopplas ihop med hjälp av full mesh pseudowires.
 VPLS använder Virtual Forwarding Instance (VFI) för att hosta alla
 pseudowires för en tjänst. Den vanligaste bäraren är MPLS och för
 control plane (Auto-Discovery/Signaling) kan LDP eller
-[BGP](/Cisco_BGP "wikilink") användas. Det finns inbyggd loop prevention
+[BGP](Cisco_BGP.md) användas. Det finns inbyggd loop prevention
 i form av att frames som kommer ifrån en VPLS aldrig får skickas vidare
 inom VPLS (split-horizon). En begränsande faktor för VPLS är
 minnesmängden på Edge devices eftersom de måste lära sig kundens
@@ -304,7 +304,7 @@ L2TPv3
 ------
 
 Layer 2 Tunneling Protocol (RFC 3931, RFC 4719) kräver
-[CEF](/Cisco_CEF "wikilink") och IP-konnektivitet end-to-end. Det är
+[CEF](Cisco_CEF.md) och IP-konnektivitet end-to-end. Det är
 endast point-to-point. IP protocol: 115.
 
 ```

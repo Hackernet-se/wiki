@@ -31,4 +31,4 @@ Tunnlar
 -------
 
 IPv6 går att tunnla på diverse olika sätt, se [Cisco
-IPv6](/Cisco_GRE#IPv6 "wikilink").
+IPv6](../cisco/Cisco_GRE.md#IPv6#IPv6#IPv6#IPv6#IPv6#IPv6#IPv6#IPv6).

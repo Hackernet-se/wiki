@@ -13,18 +13,18 @@ kontrollplansprotokoll agera på ett problem snabbare. BFD är en viktig
 komponent för att sänka konvergenstider (recovery) inom ett nätverk. Det
 har en gemensam interface-down-event-detection-mekanism som andra
 protokoll kan utnyttja för sin feldetektering, exempel på detta är
-routingprotokollen (även [IS-IS](/Cisco_IS-IS "wikilink") som inte är
-IP-baserat), [PIM](/Cisco_PIM "wikilink"), HSRP och MPLS
-[pseudowires](/Cisco_VPLS "wikilink"). Samtidigt som det är mindre
+routingprotokollen (även [IS-IS](Cisco_IS-IS.md) som inte är
+IP-baserat), [PIM](Cisco_PIM.md), HSRP och MPLS
+[pseudowires](Cisco_VPLS). Samtidigt som det är mindre
 CPU-krävande än andra tekniker för feldetektering, t.ex. det
 traditionella att skicka och behandla Hello-paket.
 
 Beroende på IOS-version finns det stöd för BFD forwarding på
-point-to-point IPv4, IPv6 och [GRE](/Cisco_GRE "wikilink")-tunnlar. Det
-är ej supporterat på [VTI](/Cisco_IPsec#VTI "wikilink") och det bör ej
+point-to-point IPv4, IPv6 och [GRE](Cisco_GRE.md)-tunnlar. Det
+är ej supporterat på [VTI](Cisco_IPsec.md#VTI#VTI#VTI#VTI#VTI#VTI#VTI#VTI) och det bör ej
 köras på virtual-template eller dialer interfaces. BFD-paket matchar ej
-på [QoS](/Cisco_QoS "wikilink")-policy för self-generated packets. BFD
-är alltid unicast och [CEF](/Cisco_CEF "wikilink") är ett krav på de
+på [QoS](Cisco_QoS.md)-policy för self-generated packets. BFD
+är alltid unicast och [CEF](Cisco_CEF.md) är ett krav på de
 inblandade enheterna.
 
 ### Paket
@@ -62,8 +62,8 @@ interface gi2
 
 Sedan måste man registrera det protokoll som ska dra nytta av BFD. Detta
 görs per protokoll, se t.ex. BFD-konfiguration för
-[HSRP](/Cisco_HSRP#BFD "wikilink"), [OSPF](/Cisco_OSPF#BFD "wikilink")
-och [BGP](/Cisco_BGP#BFD "wikilink"). Det är på så sätt BFD får reda på
+[HSRP](Cisco_HSRP.md#BFD#BFD#BFD#BFD#BFD#BFD#BFD#BFD), [OSPF](Cisco_OSPF.md#BFD#BFD#BFD#BFD#BFD#BFD#BFD#BFD)
+och [BGP](Cisco_BGP.md#BFD#BFD#BFD#BFD#BFD#BFD#BFD#BFD). Det är på så sätt BFD får reda på
 vad andra sidan har för adress så ett grannskap är möjligt. Efter att
 detta är gjort drar BFD igång och upprättar grannskap. Om andra sidan
 inte har slagit på BFD kommer varje BFD Control message besvaras med en
@@ -210,7 +210,7 @@ down neighbor session tills BFD session är uppe.
 
 ### NX-OS
 
-Det mesta av ovan gäller [Nexus](/Cisco_Nexus "wikilink")-switchar också
+Det mesta av ovan gäller [Nexus](Cisco_Nexus.md)-switchar också
 (med eventuell syntaxskillnad) men det finns funktioner som är unika.
 BFD timers kan konfas globalt och det finns default-värden, 50ms x 3. På
 vissa linjekort kan man ställa intervall ner till 15ms.

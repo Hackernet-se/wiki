@@ -161,7 +161,7 @@ Regenerate certificates
 -----------------------
 
 För att skapa nya cert eller lägga in ett eget cert från tex [Let's
-Encrypt](/Let's_Encrypt "wikilink") så använder man certificate manager.
+Encrypt](../linux_services/Let's_Encrypt.md) så använder man certificate manager.
 
 ```
 /usr/lib/vmware-vmca/bin/certificate-manager

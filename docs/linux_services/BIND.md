@@ -407,7 +407,7 @@ rndc reload - För att ladda om alla zone filer.
 
 ### dnstracer
 
-[Dnstracer](/Dnstracer "wikilink") följer alla dns servrar tills man
+[Dnstracer](../linux_tools/Dnstracer.md) följer alla dns servrar tills man
 hittar den servern man letar efter.
 
 ```

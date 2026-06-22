@@ -118,8 +118,8 @@ ip link add vxlan0 type vxlan id 10 group 239.1.1.1 dev eth0 dstport
 ```
 
 Vxlan-interfacet kopplas sedan till en [Open
-vSwitch](/Open_vSwitch "wikilink") eller [Linux
-Bridge](/Bridge "wikilink").
+vSwitch](../linux_networking/Open_vSwitch.md) eller [Linux
+Bridge](../linux_networking/Bridge.md).
 
 ```
 brctl addif br0 vxlan0
@@ -209,10 +209,10 @@ ip link set eth1.20 up
 ### MAC VLAN
 
 Med MAC VLAN kan man assigna flera MAC-adresser till samma interface.
-Man kan uppnå samma resultat som med [Bridge](/Bridge "wikilink") men
+Man kan uppnå samma resultat som med [Bridge](../linux_networking/Bridge.md) men
 det är mer light-weight. Det kan skapas i 4 modes: private, vepa, bridge
 eller passthru beroende på säkerhetskraven. Det går att köra MAC VLAN
-tillsammans med [KVM](/KVM "wikilink").
+tillsammans med [KVM](../linux_virt/KVM.md).
 
 ```
 ip link add link eth0 mac0 type macvlan

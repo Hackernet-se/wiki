@@ -123,7 +123,7 @@ update settings set prettyLinks='Yes/No' where settings.id=1;
 
 Inlogg mot AD.
 
-### [HTTPS](/Apache#SSL "wikilink")
+### [HTTPS](Apache.md#SSL#SSL#SSL#SSL#SSL#SSL#SSL#SSL)
 
 Aldrig fel med SSL.
 
@@ -136,7 +136,7 @@ sudo a2enmod ssl && sudo a2ensite default-ssl && sudo systemctl restar
 Backup
 ------
 
-DB-backup kan schemaläggas med [cron](/cron "wikilink")
+DB-backup kan schemaläggas med [cron](../linux_tools/Cron.md)
 
 ```
 # Backup IP address table, remove backups older than 30 days

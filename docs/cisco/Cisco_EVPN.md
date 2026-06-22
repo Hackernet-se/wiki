@@ -4,10 +4,10 @@ permalink: /Cisco_EVPN/
 ---
 
 Ethernet VPN (RFC 8365) är en modernare variant än
-[VPLS](/Cisco_VPLS "wikilink") för att tillhandahålla Ethernet
-multipoint services över IP ([VXLAN](/Cisco_VXLAN "wikilink")) eller
-[MPLS](/Cisco_MPLS "wikilink") (RFC 7432) utan att behöva en central
-controller. EVPN är en adressfamilj i [BGP](/Cisco_BGP "wikilink") som
+[VPLS](Cisco_VPLS) för att tillhandahålla Ethernet
+multipoint services över IP ([VXLAN](Cisco_VXLAN.md)) eller
+[MPLS](Cisco_MPLS.md) (RFC 7432) utan att behöva en central
+controller. EVPN är en adressfamilj i [BGP](Cisco_BGP.md) som
 används för peer discovery och för att distribuera lokala MAC-adresser
 och MAC/IP bindings till andra tunnel endpoints. Man använder både L2
 och L3 forwarding information och det fungerar ihop med externa
@@ -17,13 +17,13 @@ features för att hålla koll på hostar som flyttar mellan datacenter
 (sekvensnummer-community i annonseringarna) och kan då konvergera
 snabbt. Ett EVPN-nätverk kan göra både bridging och routing och har
 inbyggd support för multi-tenancy (VPN). [DHCP
-Snooping](/Cisco_DHCP#Snooping "wikilink") supporteras inte på VXLAN
+Snooping](Cisco_DHCP.md#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping) supporteras inte på VXLAN
 VLAN.
 
 EVPN är ett öppet protokoll så det finns interoperability med andra
-network vendors, se t.ex. [Arista](/Arista_EVPN "wikilink"),
-[Cumulus](/Cumulus_EVPN "wikilink") och
-[Quagga](/Quagga#EVPN "wikilink") EVPN.
+network vendors, se t.ex. [Arista](../arista/Arista_EVPN.md),
+[Cumulus](../cumulus/Cumulus_EVPN.md) och
+[Quagga](../linux_networking/Quagga.md#EVPN#EVPN#EVPN#EVPN#EVPN#EVPN#EVPN#EVPN) EVPN.
 
 **Route types**
 \# Ethernet Auto-Discovery Route
@@ -245,7 +245,7 @@ show system internal l2fwder mac     #Nexus 9000v
 
 ### vPC
 
-Om man kör [vPC](/Nexus_vPC "wikilink") får man sätta upp sina
+Om man kör [vPC](Nexus_vPC.md) får man sätta upp sina
 VTEP-interface (loopback) med dubbla IP-adresser där secondary IP
 address används för all VXLAN-trafik. Secondary ska vara samma på både
 vPC-peers och det är så dom presenterar sig själva som en enda VTEP till
@@ -302,7 +302,7 @@ Default annonseras alla Layer-3 routes med secondary IP address (VIP) på
 VTEP. Prefix routes och leaf switch generated routes synkas ej mellan
 vPC leaf switches. Om t.ex. vPC-switch och dennes peer har asymmetric
 external Layer-3 connections och vissa routes endast är nåbara via den
-ena eller om man ska agera [DHCP Relay](/Cisco_DHCP#Relay "wikilink") åt
+ena eller om man ska agera [DHCP Relay](Cisco_DHCP.md#Relay#Relay#Relay#Relay#Relay#Relay#Relay#Relay) åt
 tenants så kan traffic blackholing uppstå med default beteendet. Man kan
 därför konfa att route type 5 routes ska annonseras med primary IP
 address så det blir next-hop för fabricen.
@@ -488,7 +488,7 @@ show ip arp suppression-cache detail
 
 OBS på vissa plattformar måste man karva TCAM för att kunna konfigurera
 arp-suppression. Här är ett exempel för [Nexus
-9000v](/Cisco_Nexus#Nexus_9000v "wikilink").
+9000v](Cisco_Nexus.md#Nexus_9000v#Nexus_9000v#Nexus_9000v#Nexus_9000v#Nexus_9000v#Nexus_9000v#Nexus_9000v#Nexus_9000v).
 
 ```
 show run all | inc "hardware access-list tcam region"
@@ -556,7 +556,7 @@ DHCP Relay
 
 VXLAN EVPN har stöd för DHCP relay-funktionalitet. I en
 multi-tenant-lösning används tre suboptions av [Option
-82](/Cisco_DHCP#Option_82 "wikilink").
+82](Cisco_DHCP.md#Option_82#Option_82#Option_82#Option_82#Option_82#Option_82#Option_82#Option_82).
 
 -   Sub-option 151 - Virtual Subnet Selection
 -   Sub-option 11 - Server ID Override
@@ -605,7 +605,7 @@ Multicast
 
 EVPN kan lösa IPv4 routed multicast för tenants (TRM). Man kör MVPN
 ovanpå vxlan-fabricen för att förhindra onödig multicast-forwardering,
-samma som i MPLS-nät fast utan [PIM](/Cisco_PIM "wikilink"). Man
+samma som i MPLS-nät fast utan [PIM](Cisco_PIM.md). Man
 använder ngMVPN, det behövs ingen RP och designated router är
 distribuerad (Anchor DR). Inga PIM- eller IGMP-paket skickas alltså över
 fabricen utan BGP gör jobbet. PIM ASM och PIM SSM funkar i overlay men

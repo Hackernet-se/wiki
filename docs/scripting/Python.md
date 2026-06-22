@@ -219,4 +219,3 @@ lyssnar på port 8000 på alla interface:
 
 `python -m http.server`
 
-[Category:Guider](/Category:Guider "wikilink")

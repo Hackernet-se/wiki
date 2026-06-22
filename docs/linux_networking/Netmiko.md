@@ -3,7 +3,7 @@ title: Netmiko
 permalink: /Netmiko/
 ---
 
-Netmiko är ett open-source [Python](/Python "wikilink") library som
+Netmiko är ett open-source [Python](../scripting/Python.md) library som
 används för att SSHa till nätverksenheter. Det är baserat på paramiko
 och har stöd för flera olika plattformar från olika tillverkare. Målet
 är att förenkla användandet av show och conf-kommandon mot
@@ -30,7 +30,7 @@ sudo pip install netmiko
 Getting started
 ===============
 
-[Python](/Python "wikilink")
+[Python](../scripting/Python.md)
 
 ```
 from netmiko import ConnectHandler

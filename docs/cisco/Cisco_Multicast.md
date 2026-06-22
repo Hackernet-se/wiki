@@ -15,8 +15,8 @@ signaleringsprotokoll (control plane), DVMRP, MOSPF eller PIM. För loop
 prevention används RPF, inga paket forwarderas utan att klara denna
 check. IP Multicast fungerar för protokoll som är connectionless.
 
-För konfiguration se [Cisco PIM](/Cisco_PIM "wikilink"), [Cisco
-IGMP](/Cisco_IGMP "wikilink") och [Cisco MLDP](/Cisco_MLDP "wikilink").
+För konfiguration se [Cisco PIM](Cisco_PIM.md), [Cisco
+IGMP](Cisco_IGMP.md) och [Cisco MLDP](Cisco_MLDP).
 Även om framtiden kanske stavas Bit Indexed Explicit Replication.
 
 ![Cisco_Multicast.png](../images/Cisco_Multicast.png)
@@ -67,7 +67,7 @@ som helst. Det ger också fördelar med att överlappande grupp-adresser
 kommer att fungera eftersom olika källor gör strömmarna unika. Det finns
 inga shared trees med SSM utan allt hanteras som source trees. SSM har
 232.0.0.0/8 IANA-reserverat. Se
-[SSM-konfiguration](/Cisco_PIM#Source_Specific_Multicast "wikilink").
+[SSM-konfiguration](Cisco_PIM.md#Source_Specific_Multicast#Source_Specific_Multicast#Source_Specific_Multicast#Source_Specific_Multicast#Source_Specific_Multicast#Source_Specific_Multicast#Source_Specific_Multicast#Source_Specific_Multicast).
 
 Multicast Routes
 ----------------
@@ -209,7 +209,7 @@ unicast-protokoll. Man måste köra PIM mellan domänerna för att shared
 och shortest-path trees ska kunna signaleras. Man måste även utbyta
 unicast routes för multicast-källorna för att alla multicast routrarna
 ska kunna använda RPF. Se även [Cisco
-MP-BGP](/Cisco_BGP#Multiprotocol_BGP "wikilink").
+MP-BGP](Cisco_BGP.md#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP#Multiprotocol_BGP).
 
 ```
 router bgp 100

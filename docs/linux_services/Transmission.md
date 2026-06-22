@@ -47,10 +47,10 @@ Tips n Trix
 
 **3th Party tools**
 
-[Flexget](/Flexget "wikilink"), RSS feed downloader. Väldigt användbart
+[Flexget](Flexget.md), RSS feed downloader. Väldigt användbart
 för serier.
 
-[Couchpotato](/Couchpotato "wikilink"), Program som laddar hem filmer åt
+[Couchpotato](Couchpotato), Program som laddar hem filmer åt
 dig med hjälp av transmission.
 
 **Script done.**

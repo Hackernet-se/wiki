@@ -4,7 +4,7 @@ permalink: /Cumulus_EVPN/
 ---
 
 Ethernet VPN (RFC 7432) är en modernare variant än
-[VPLS](/Cisco_VPLS "wikilink") för att tillhandahålla Ethernet
+[VPLS](Cisco_VPLS) för att tillhandahålla Ethernet
 multipoint services över IP (VXLAN) eller MPLS utan att behöva en
 central controller. EVPN är en adressfamilj i BGP som används för peer
 discovery och för att distribuera lokala MAC-adresser och MAC/IP
@@ -18,8 +18,8 @@ snabbt. Ett EVPN-nätverk kan göra både bridging och routing och har
 inbyggd support för multi-tenancy (VPN).
 
 Protokollet är öppet så det finns interoperability med andra network
-vendors, se t.ex. [Arista](/Arista_EVPN "wikilink"),
-[Cisco](/Cisco_EVPN "wikilink") och [Quagga](/Quagga#EVPN "wikilink")
+vendors, se t.ex. [Arista](../arista/Arista_EVPN.md),
+[Cisco](../cisco/Cisco_EVPN.md) och [Quagga](../linux_networking/Quagga.md#EVPN#EVPN#EVPN#EVPN#EVPN#EVPN#EVPN#EVPN)
 EVPN.
 
 Konfiguration

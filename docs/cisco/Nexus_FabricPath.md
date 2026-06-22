@@ -7,10 +7,10 @@ FabricPath är en Ethernet fabric-teknologi framtagen av Cisco för
 Nexus-plattformen. Det är designat för att ge hög skalbarhet och
 flexibilitet inom ett datacenter genom att kombinera funktioner från
 både lager 2 och lager 3. Det är MAC-in-MAC overlay som ersätter
-[Spanning-tree protocol](/Cisco_STP "wikilink") med fördelen att inte
+[Spanning-tree protocol](Cisco_STP.md) med fördelen att inte
 behöva några blockerade länkar i ett switchat core (L2MP).
 FabricPath-enheterna nyttjar protokollet Intermediate System to
-Intermediate System ([IS-IS](/Cisco_IS-IS "wikilink")) för att utbyta
+Intermediate System ([IS-IS](Cisco_IS-IS.md)) för att utbyta
 information om hur miljön ser ut (vilka switch ID som finns var) och
 bygger ett SPT (Shortest Path Tree) baserat på den informationen. Ingen
 STP körs inom FabricPath-nätverket men alla FabricPath Layer 2 gateway
@@ -29,13 +29,13 @@ FTAG:ar används en extension till FabricPath IS-IS som heter DRAP
 assigna unika switch ID:n inom FP-domänen men detta går även att konfa
 manuellt.
 
-När man ska spegla portar ([SPAN](/Cisco_SPAN "wikilink")) kan man välja
+När man ska spegla portar ([SPAN](Cisco_SPAN.md)) kan man välja
 om man ska strippa fabricpath-headern eller inte.
-[BFD](/Cisco_BFD "wikilink") kan man använda om man kör fabricpath som
+[BFD](Cisco_BFD.md) kan man använda om man kör fabricpath som
 DCI-lösning för att snabba upp konvergens. När man kör vPC i kombination
 med FabricPath skapas en logisk switch genom att samma FP switch-id
 annonseras ut från båda noderna i vPC-domänen, detta kallas vPC+. Se
-även [Nexus vPC](/Nexus_vPC "wikilink").
+även [Nexus vPC](Nexus_vPC.md).
 
 Wireshark kan inte avkoda FabricPath-frames.
 ![Cisco_FabricPath.PNG](../images/Cisco_FabricPath.PNG)

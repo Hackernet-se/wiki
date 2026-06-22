@@ -4,8 +4,8 @@ permalink: /JQ/
 ---
 
 jq är en command-line JSON parser. Som kan användas precis lika enkelt
-som [sed](/sed "wikilink"),[awk](/awk "wikilink") och
-[grep](/grep "wikilink") används för text.
+som [sed](sed),[awk](awk) och
+[grep](grep) används för text.
 
 Installation
 ============

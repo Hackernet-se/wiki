@@ -11,7 +11,7 @@ Open vSwitch har stöd för de flesta traditionella tekniker inklusive
 STP, VLAN, LACP, GRE, VXLAN, BFD, QoS och net/sflow. Open vSwitch består
 i huvudsak av VSWITCHD, OVSDB-server och en kernel-modul. Det går även
 köra distribuerat över flera hostar likt VMwares vDS och Cisco [Nexus
-1000V](/Nexus_1000V "wikilink").
+1000V](../cisco/Nexus_1000V.md).
 
 **Tools**
 

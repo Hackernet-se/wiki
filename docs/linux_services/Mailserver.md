@@ -308,7 +308,7 @@ hostnamn.
 
 
 Temporärt kommentera ut följande rader eftersom att
-[Dovecot](/Dovecot "wikilink") och TLS inte är konfigurerat i main.cf:
+[Dovecot](Dovecot) och TLS inte är konfigurerat i main.cf:
 
 -   dovecot_destination_recipient_limit = 1
 -   smtpd_tls_security_level = may
@@ -651,7 +651,7 @@ Klient
 ======
 
 Du kan nu ansluta nån mail klient tex Thunderbird eller Outlook mot
-servern och autentisera med ditt [OpenLDAP](/OpenLDAP "wikilink") login.
+servern och autentisera med ditt [OpenLDAP](OpenLDAP.md) login.
 
-Man kan också sätta upp [Roundcube](/Roundcube "wikilink") för att
+Man kan också sätta upp [Roundcube](Roundcube.md) för att
 enkelt skicka och läsa din mail från en dator med en webbläsare.

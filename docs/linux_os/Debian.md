@@ -38,7 +38,7 @@ dpkg-reconfigure tzdata
 Pakethanterare
 ==============
 
-[Apt](/Apt "wikilink")
+[Apt](../linux_tools/Apt.md)
 
 Goodies
 =======

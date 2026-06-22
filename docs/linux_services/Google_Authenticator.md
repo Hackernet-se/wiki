@@ -5,7 +5,7 @@ permalink: /Google_Authenticator/
 
 Med Google Authenticator kan man använda time-based one-time password
 (TOTP) tillsammans med sitt vanliga lösenord på sin
-[SSH-server](/Jumpgate "wikilink") för att få 2-faktors-autentisering.
+[SSH-server](Jumpgate.md) för att få 2-faktors-autentisering.
 Allt sker mellan server och mobil som båda vet när nycklar är giltiga.
 
 Installation

@@ -85,7 +85,7 @@ En torport kan vara en fysisk port eller ett nätverk som sätter allt som
 eller inte. Detta är ingen Transparent Proxy utan en Isolating proxy.
 Man behöver en maskin med två interface. Det ena behöver internetaccess
 och kan vara DHCP-klient. Det andra är DHCP-server för det som ska
-torifieras, [ISC_DHCP](/ISC_DHCP "wikilink"). Stäng även av
+torifieras, [ISC_DHCP](ISC_DHCP.md). Stäng även av
 IP-forwardering för att undvika eventuella IP-läckor.
 
 ```

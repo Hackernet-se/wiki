@@ -54,7 +54,7 @@ Konfiguration
 -------------
 
 Konfigurationen är verifierad och funkar på
-[InspIRCd](/InspIRCd "wikilink"), men det bör vara samma för andra IRC
+[InspIRCd](InspIRCd.md), men det bör vara samma för andra IRC
 servrar.
 
 Börja med att kopiera exempel filen.

@@ -9,7 +9,7 @@ paket som man vill att intermediate systems ska prioritera och skicka
 iväg i första hand. IP/ATM/Frame Relay-headers har fält som kan användas
 för detta, t.ex. IP DSCP (RFC 3260). QoS är endast aktivt när det är
 överbelastat. QoS går att ha time based genom att matcha mot time based
-ACLer. Se även [Cisco RSVP](/Cisco_RSVP "wikilink").
+ACLer. Se även [Cisco RSVP](Cisco_RSVP).
 
 **QoS Features**
 
@@ -23,7 +23,7 @@ MQC
 ---
 
 Modular QoS CLI togs fram för att skapa en homogen syntax för QoS på
-[IOS](/Cisco_IOS "wikilink")-enheter. Det förenar QoS features under ett
+[IOS](Cisco_IOS.md)-enheter. Det förenar QoS features under ett
 gränsnitt och man kan konfigurera allt som har med classification,
 congestion management, traffic metering, marking och traffic shaping att
 göra. Man kan även använda en route-map för att sätta markeringar på
@@ -79,7 +79,7 @@ show run | i interface|service-policy
 ```
 
 Om service-policy rejectas kan det bero på avsaknad av
-[CEF](/Cisco_CEF "wikilink") på enheten.
+[CEF](Cisco_CEF.md) på enheten.
 
 Packet Marking
 --------------
@@ -582,7 +582,7 @@ MPLS
 
 När man gör label imposition är default beteende att kopiera IP
 Precedence till MPLS EXP på alla labels som impose:as. Se även [Cisco
-MPLS](/Cisco_MPLS "wikilink").
+MPLS](Cisco_MPLS.md).
 
 ### Pipe mode
 
@@ -712,7 +712,7 @@ fördefinierad QoS-konfiguration utifrån Ciscos rekommendationer. Man kan
 använda det för VoIP och Enterprise. VoIP är gjort för video och voice
 och finns både på routrar och switchar. Man slår på det per interface
 men det genererar konfiguration både på interface och globalt. På
-accessportar används [CDP](/Cisco_IOS#CDP "wikilink") för att kolla om
+accessportar används [CDP](Cisco_IOS.md#CDP#CDP#CDP#CDP#CDP#CDP#CDP#CDP) för att kolla om
 det finns telefoner och ställer då in QoS, finns ingen telefon blir det
 DSCP 0. På trunkar litas det på DSCP och COS värden som kommer in.
 Ingress och egress köer konfigureras på interfacen samt class-maps och

@@ -52,7 +52,7 @@ lista.
 `apt-get install `<paket>
 
 Installera en specifik version av ett program. Mer info på [apt-cache
-show](/Apt#show "wikilink") om hur du ser vilka versioner som finns.
+show](Apt.md#show#show#show#show#show#show#show#show) om hur du ser vilka versioner som finns.
 
 `apt-get install `<paket>`=`<version>
 
@@ -186,7 +186,7 @@ sudo nano /etc/apt/apt.conf
 Ansible
 -------
 
-[Ansible](/Ansible "wikilink") update-playbook
+[Ansible](../linux_services/Ansible.md) update-playbook
 
 ``` yaml
 ---

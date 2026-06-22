@@ -170,7 +170,7 @@ openssl req -nodes -newkey rsa:4096 -keyout relay.pem -x509 -days 3650�
 #### Let's Encrypt
 
 Weechat kan använda cert som är signade med [Let's
-Encrypt](/Let's_Encrypt "wikilink").
+Encrypt](Let's_Encrypt.md).
 
 ```
 mkdir -p ~/.weechat/ssl
@@ -189,7 +189,7 @@ cat cert.pem > ~/.weechat/ssl/relay.pem && cat chain.pem >> ~/.weechat/s
 ### Bakom Reverse Proxy
 
 För att köra glowing bear genom en
-[Nginx](/Nginx "wikilink")/[Apache](/Apache "wikilink") HTTP reverse
+[Nginx](Nginx.md)/[Apache](Apache.md) HTTP reverse
 proxy måste man köra det som en websocket, inte en HTTP-anslutning
 ("Upgrade").
 

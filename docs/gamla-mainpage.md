@@ -64,8 +64,8 @@ Wishlist
 
 </h2>
 
-**[Varnish](/Varnish "wikilink")**
-**[OpenCanary](/OpenCanary "wikilink")**
-**[HAProxy](/HAProxy "wikilink")**
-**[Wazuh](/Wazuh "wikilink")**
+**[Varnish](Varnish)**
+**[OpenCanary](OpenCanary)**
+**[HAProxy](HAProxy)**
+**[Wazuh](Wazuh)**
 

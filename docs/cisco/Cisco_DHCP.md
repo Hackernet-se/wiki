@@ -245,8 +245,8 @@ i DHCP-paketet matchar adressen det kommer ifrån samt kollar om release
 och decline kommer in på rätt portar enligt binding database. Paket som
 inte kommer från rätt port filtreras. Vissa andra säkerhetsmekanismer
 använder sig av informationen i snooping binding database, se [IP Source
-Guard](/Cisco_L3_Security#IPSG "wikilink") och [Dynamic ARP
-Inspection](/Cisco_L2_Security#DAI "wikilink").
+Guard](Cisco_L3_Security.md#IPSG#IPSG#IPSG#IPSG#IPSG#IPSG#IPSG#IPSG) och [Dynamic ARP
+Inspection](Cisco_L2_Security.md#DAI#DAI#DAI#DAI#DAI#DAI#DAI#DAI).
 
 Man måste slå på Switch DHCP snooping och sedan DHCP snooping för varje
 vlan man vill skydda.

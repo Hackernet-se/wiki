@@ -15,9 +15,9 @@ Om man vill och det är rekomenderat är följande,
 -   Att man använder HTTPS för att logga in på Rattic.
 -   Filsystemet där din databas lagras bör vara krypterat.
 -   Access loggarna bör vara skyddade.
--   Program som [OSSEC](/OSSEC "wikilink") är bra att använda.
+-   Program som [OSSEC](OSSEC.md) är bra att använda.
 
-En fungerande [LAMP](/LAMP "wikilink") och en databas skapad åt rattic
+En fungerande [LAMP](LAMP.md) och en databas skapad åt rattic
 samt följande paket.
 
 -   python

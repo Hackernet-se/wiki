@@ -6,16 +6,16 @@ permalink: /Cisco_SPAN/
 Switch Port Analyzer är Ciscos namn på att spegla trafik, antingen
 mellan portar på samma switch eller till en remote switch. Alla typer av
 portar kan speglas. SPAN består av source (portar eller
-[VLAN](/Cisco_VLAN "wikilink")) och destination port/ar. Med RSPAN
+[VLAN](Cisco_VLAN.md)) och destination port/ar. Med RSPAN
 fungerar source på samma sätt men destination port finns på en annan
 switch så det skickas i ett RSPAN VLAN till den andra switchen. ERSPAN
 (Encapsulated Remote SPAN) är samma som RSPAN men att det kapslas in med
-[GRE](/Cisco_GRE "wikilink") så att det kan routas till en annan switch.
+[GRE](Cisco_GRE.md) så att det kan routas till en annan switch.
 Man kan även ha Wireshark som endpoint för GRE-tunneln. Man kan välja om
 rx, tx eller att både och ska speglas, default är all rx och tx med
 undantag vissa control plane frames (t.ex. CDP, BPDU, VTP, DTP, PAgP).
 SPAN ligger före trafikmodifikation för receive, t.ex.
-[VACL](/Cisco_Security#VACL "wikilink"), [QoS](/Cisco_QoS "wikilink")
+[VACL](Cisco_Security.md#VACL#VACL#VACL#VACL#VACL#VACL#VACL#VACL), [QoS](Cisco_QoS.md)
 och ingress policing. För tx ligger det efter så med andra ord SPAN
 händer längst ut. På vissa low-end switchar måste man låna en asic från
 en oanvänd port för att switchen ska kunna spegla trafik.
@@ -24,12 +24,12 @@ en oanvänd port för att switchen ska kunna spegla trafik.
 
 -   All konfigurationen på en port inaktiveras när den blir konfad som
     destination port för SPAN. Inklusive
-    [EtherChannel](/Cisco_EtherChannel "wikilink").
+    [EtherChannel](Cisco_EtherChannel.md).
 -   Destination port har inte stöd för
-    [802.1x](/Cisco_Security#802.1x "wikilink"), [Private
-    VLAN](/Cisco_VLAN#Private_VLAN "wikilink"),
-    [CDP](/Cisco_IOS#CDP "wikilink"), [STP](/Cisco_STP "wikilink"),
-    [VTP](/Cisco_VTP "wikilink"), [DTP](/Cisco_VLAN#DTP "wikilink"),
+    [802.1x](Cisco_Security.md#802.1x#802.1x#802.1x#802.1x#802.1x#802.1x#802.1x#802.1x), [Private
+    VLAN](Cisco_VLAN.md#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN),
+    [CDP](Cisco_IOS.md#CDP#CDP#CDP#CDP#CDP#CDP#CDP#CDP), [STP](Cisco_STP.md),
+    [VTP](Cisco_VTP.md), [DTP](Cisco_VLAN.md#DTP#DTP#DTP#DTP#DTP#DTP#DTP#DTP),
     etc.
 -   Som source går det ej att mixa portar och VLAN.
 -   Destinationporten är best effort, dvs överflöd slängs.
@@ -216,7 +216,7 @@ Ethanalyzer
 ===========
 
 Ethanalyzer är ett protocol analyzer-verktyg för
-[NX-OS](/Cisco_Nexus "wikilink"). Det är en CLI-variant av Wireshark med
+[NX-OS](Cisco_Nexus.md). Det är en CLI-variant av Wireshark med
 stöd för filter.
 
 -   capture-filter: tcpdump capture filter syntax

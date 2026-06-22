@@ -3,7 +3,7 @@ title: Keepalived
 permalink: /Keepalived/
 ---
 
-[BFD](/BFD "wikilink") [vrrp](/vrrp "wikilink") [lvs](/lvs "wikilink")
+[BFD](BFD) [vrrp](vrrp) [lvs](lvs)
 
 misc_dynamic
 -------------

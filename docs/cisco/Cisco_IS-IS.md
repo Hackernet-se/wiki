@@ -21,10 +21,10 @@ Services
 ([CLNS](https://en.wikipedia.org/wiki/Connectionless-mode_Network_Service)),
 de andra två är CLNP och ES-IS. Numera används det vanligare för IP IGP
 och är bl.a. en del i klassisk [MPLS Traffic
-Engineering](/Cisco_MPLS#Traffic_Engineering "wikilink"). Level 3
+Engineering](Cisco_MPLS.md#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering#Traffic_Engineering). Level 3
 routing är routing mellan domäner (AS) och det var tänkt att göras med
 protokollet IDRP men numera görs det fördelaktigt med
-[BGP](/Cisco_BGP "wikilink"), som kan bära NSAP-adresser.
+[BGP](Cisco_BGP.md), som kan bära NSAP-adresser.
 
 **Type:** Link State
 
@@ -202,7 +202,7 @@ Levels
 
 En IS-IS router konfigureras med nivå som anger systemtyp - antingen
 Level 1, Level 2 eller Level 1-2. Se en Level 2 router som motsvarande
-area 0 (backbone area) i [OSPF](/Cisco_OSPF "wikilink") och Level 1 som
+area 0 (backbone area) i [OSPF](Cisco_OSPF.md) och Level 1 som
 en area som är ”NSSA Totally Stubby ”, d.v.s. det enda som injiceras i
 arean är en default route samt att redistribution från andra
 routingprotokoll är tillåtet, och en Level 1-2 som en ABR.
@@ -413,7 +413,7 @@ set-overload-bit on-startup 180
 ```
 
 **MPLS**
-[MPLS](/Cisco_MPLS "wikilink") LDP kan autokonfigureras med hjälp av
+[MPLS](Cisco_MPLS.md) LDP kan autokonfigureras med hjälp av
 IS-IS. Man kan även synka IS-IS mot LDP, dvs låta LDP bli klar innan
 länken får en normal (låg) IGP-metric och därmed börjar användas.
 
@@ -426,7 +426,7 @@ mpls ldp sync
 show isis mpls ldp
 ```
 
-IS-IS kan även användas för [Segment Routing](/Cisco_SR "wikilink") med
+IS-IS kan även användas för [Segment Routing](Cisco_SR.md) med
 MPLS.
 
 Adjacency
@@ -586,7 +586,7 @@ adjacencies och en synkad LSDB. IS-IS NSF kan möjligöras på två sätt.
     är NSF-aware.
 
 **BFD**
-När IS-IS konfigureras med [BFD](/Cisco_BFD "wikilink") blir det ett
+När IS-IS konfigureras med [BFD](Cisco_BFD.md) blir det ett
 registrerat protokoll till BFD och kan dra nytta av de forwarding path
 detection failure messages som BFD tillhandahåller. Det kan antingen
 konfigureras under adressfamiljen eller per interface.
@@ -768,7 +768,7 @@ interface e1/1
 Genom att använda network type p2p effektiviserar man LSP-hanteringen.
 Det går även att använda kommandot "medium p2p" för att uppnå detta.
 
-[BFD](/Cisco_BFD#NX-OS "wikilink")
+[BFD](Cisco_BFD.md#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS)
 
 ```
 feature bfd

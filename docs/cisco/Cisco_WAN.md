@@ -158,7 +158,7 @@ compress predictor
 ```
 
 TCP Header. Detta är legacy-metoden för att konfigurera det, man kan
-också använda [MQC](/Cisco_QoS#MQC "wikilink").
+också använda [MQC](Cisco_QoS.md#MQC#MQC#MQC#MQC#MQC#MQC#MQC#MQC).
 
 ```
 ip tcp header-compression

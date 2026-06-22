@@ -6,11 +6,11 @@ permalink: /Cisco_DMVPN/
 Dynamic Multipoint VPN är en skalbar VPN-teknik som kan bygga tunnlar
 dynamiskt. Målet är att tillhandahålla any-to-any kommunikation utan att
 behöva en manuellt konfigurerad full-mesh av point-to-point tunnels.
-Tekniker som används är [mGRE](/Cisco_GRE "wikilink"), NHRP och
-[CEF](/Cisco_CEF "wikilink") som används i kombination med
-routingprotokoll och [IPsec](/Cisco_IPsec "wikilink"). Det har bl.a.
-stöd för [VRF](/Cisco_Routing#VRF "wikilink"),
-[Multicast](/Cisco_Multicast "wikilink"), [QoS](/Cisco_QoS "wikilink")
+Tekniker som används är [mGRE](Cisco_GRE.md), NHRP och
+[CEF](Cisco_CEF.md) som används i kombination med
+routingprotokoll och [IPsec](Cisco_IPsec.md). Det har bl.a.
+stöd för [VRF](Cisco_Routing.md#VRF#VRF#VRF#VRF#VRF#VRF#VRF#VRF),
+[Multicast](Cisco_Multicast.md), [QoS](Cisco_QoS.md)
 och load balancing. Det går köra IPv6 över tunnlar som byggs med IPv4,
 dvs private address = IPv6, NBMA address = IPv4.
 
@@ -269,7 +269,7 @@ IPsec
 =====
 
 Vill man skydda sin trafik kan man kryptera all tunneltrafik. Se även
-[Cisco IPsec](/Cisco_IPsec "wikilink").
+[Cisco IPsec](Cisco_IPsec.md).
 
 ```
 crypto isakmp policy 10
@@ -321,7 +321,7 @@ sätts upp blir det lite delay pga IPSec negotiation, för att slippa det
 kan man använda GDOI. Då är hubb och spokes Group Members. Group Keys
 och security policies distribueras till GMs av Key Server som t.ex. kan
 vara en separat IOS-router bakom hubb. Se även [GET
-VPN](/Cisco_IPsec#GET_VPN "wikilink").
+VPN](Cisco_IPsec.md#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN).
 
 Key Server
 
@@ -467,7 +467,7 @@ Others
 
 ### Monitoring
 
-Man kan övervaka sitt DMVPN med hjälp av [SNMP](/Cisco_SNMP "wikilink").
+Man kan övervaka sitt DMVPN med hjälp av [SNMP](Cisco_SNMP.md).
 
 ```
 snmp-server enable traps nhrp nhs
@@ -485,7 +485,7 @@ interface tun0
  if-state nhrp 
 ```
 
-På nyare IOS (XE 16.3) kan man även använda [BFD](/Cisco_BFD "wikilink")
+På nyare IOS (XE 16.3) kan man även använda [BFD](Cisco_BFD.md)
 för snabbare feldetektering och NHRP kan då registrera sig som klient
 till BFD-processen.
 
@@ -513,7 +513,7 @@ spoke vilket gör att den registrerade NBMA-adressen får ändras i
 efterhand vilket inte är fallet default. Befinner sig två spokes bakom
 PAT så kommer de ej att kunna upprätta någon spoke-to-spoke tunnel
 mellan varandra. När man kör NAT med DMVPN så måste IPsec transport mode
-användas. Se även [Cisco NAT](/Cisco_NAT "wikilink").
+användas. Se även [Cisco NAT](Cisco_NAT.md).
 
 ```
 interface tun0
@@ -552,7 +552,7 @@ show crypto session ivrf 
 
 ### MPLS
 
-Man kan köra [MPLS](/Cisco_MPLS "wikilink") över DMVPN och därmed MPLS
+Man kan köra [MPLS](Cisco_MPLS.md) över DMVPN och därmed MPLS
 VPN, detta kallas 2547oDMVPN. Det man ska tänka på är att label switch
 path måste vara hub-to-spoke, dvs om man vill ha kommunikation mellan
 två spokes måste det gå spoke-hub-spoke. T.ex. om man kör BGP får man

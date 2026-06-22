@@ -145,7 +145,7 @@ YAML Lint
 ---------
 
 Pipeline som kollar att du har skrivit rätt YAML syntax i ditt repo.
-Funkar bra tillsammans med tex [Puppet](/Puppet#Hiera "wikilink") hiera
+Funkar bra tillsammans med tex [Puppet](Puppet.md#Hiera#Hiera#Hiera#Hiera#Hiera#Hiera#Hiera#Hiera) hiera
 config.
 
 ``` json

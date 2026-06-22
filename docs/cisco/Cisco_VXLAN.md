@@ -15,17 +15,17 @@ EVPN eller flood and learn. Vid det senare så kommer L2 flooding
 (unknown unicast, broadcast) att emuleras med multicast och VTEP:arna
 kommer på så sätt att lära sig vilka MAC-adresser som finns på andra
 sidan. Detta leder till att VXLAN i sig har ingen inbyggd felisolering
-så som t.ex. [OTV](/Cisco_OTV "wikilink") har. VXLAN har inte stöd för
+så som t.ex. [OTV](Cisco_OTV.md) har. VXLAN har inte stöd för
 service tags så som t.ex. Geneve har. Ska NX-OS manageras av en
 third-party controller måste man slå på NXDB. Se även [Cisco
-VLAN](/Cisco_VLAN "wikilink").
+VLAN](Cisco_VLAN.md).
 
 Flood and Learn
 ---------------
 
 VXLAN Gateway använder sig av Network Virtualization Endpoint (NVE)
 Interface. För att kunna använda multicast måste man köra
-[PIM](/Cisco_PIM "wikilink") på underlay network. Om man ska enkapsulera
+[PIM](Cisco_PIM.md) på underlay network. Om man ska enkapsulera
 frames som är VLAN-taggade måste man ta bort taggen när det skickas VLAN
 -\> VXLAN och sätta på den igen i andra riktningen, se exemplet
 (BD-oriented mode).
@@ -148,7 +148,7 @@ show switching-mode
 
 #### vPC
 
-När man kör [vPC](/Nexus_vPC "wikilink") med VXLAN måste man sätta en
+När man kör [vPC](Nexus_vPC.md) med VXLAN måste man sätta en
 secondary IP address på det loopback som är source för NVE. Denna ska
 vara samma på både vPC-peers och det är så dom presenterar sig själva
 som en enda VTEP till remote NVE peers. CFS dubbelkollar att man har
@@ -190,7 +190,7 @@ interface vlan10
 EVPN
 ----
 
-Se [Cisco EVPN](/Cisco_EVPN "wikilink").
+Se [Cisco EVPN](Cisco_EVPN.md).
 
 GPE
 ---
@@ -210,7 +210,7 @@ interface Tunnel1 
 FHRP över VXLAN
 ---------------
 
-Man kan använda [FHRP](/Cisco_FHRP "wikilink")-protokoll tillsammans med
+Man kan använda [FHRP](Cisco_FHRP.md)-protokoll tillsammans med
 VXLAN. De skickar hello packets som då floodas över VXLAN overlayet. Man
 måste ge tcam till detta, *hardware access-list tcam region arp-ether
 256*. Detta funkar endast med flood and learn VXLAN.

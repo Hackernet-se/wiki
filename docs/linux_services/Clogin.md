@@ -4,7 +4,7 @@ permalink: /Clogin/
 ---
 
 Clogin är ett script som används för inloggning på Ciscoenheter. Det är
-en komponent för [Rancid](/Rancid "wikilink").
+en komponent för [Rancid](Rancid.md).
 
 Installation
 ============

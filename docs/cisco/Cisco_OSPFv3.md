@@ -3,7 +3,7 @@ title: Cisco OSPFv3
 permalink: /Cisco_OSPFv3/
 ---
 
-För huvudartikel, se [Cisco OSPF](/Cisco_OSPF "wikilink"). OSPF Version
+För huvudartikel, se [Cisco OSPF](Cisco_OSPF.md). OSPF Version
 3 (RFC 5340) togs fram för att stödja IPv6. Man använder termen link
 istället för network. De flesta features som finns i v2 finns i v3 och
 fungerar i princip likadant men kan konfigureras lite annorlunda. För
@@ -12,7 +12,7 @@ virtual links). Största anledningen till skillnaderna mellan OSPFv2 och
 v3 är pga att IPv4 och IPv6 fungerar på lite olika sätt. Från och med
 IOS 15.1(3)S och 15.2(1)T har OSPFv3 stöd för adressfamiljer och man kan
 använda det både för IPv4 och IPv6, dock är control plane alltid IPv6
-med v3. [IOS-XR](/Cisco_IOS-XR "wikilink") har inte stöd för OSPFv3
+med v3. [IOS-XR](Cisco_IOS-XR.md) har inte stöd för OSPFv3
 IPv4.
 
 ### LSA types
@@ -137,8 +137,8 @@ Multi AF Mode
 -------------
 
 Denna konfigurationen är mer homogen med [BGP
-AFI-format](/Cisco_BGP#Konfiguration "wikilink") och [EIGRP Named
-mode](/Cisco_EIGRP#Named_mode "wikilink").
+AFI-format](Cisco_BGP.md#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration#Konfiguration) och [EIGRP Named
+mode](Cisco_EIGRP.md#Named_mode#Named_mode#Named_mode#Named_mode#Named_mode#Named_mode#Named_mode#Named_mode).
 
 ```
 router ospfv3 1
@@ -231,7 +231,7 @@ OSPFv3 control plane görs med link-local-adresser.
 ### BFD
 
 BFD-support för OSPFv3 kan konfigureras på två sätt, under processen
-eller interface. Se även [Cisco BFD](/Cisco_BFD "wikilink").
+eller interface. Se även [Cisco BFD](Cisco_BFD.md).
 
 ```
 address-family ipv4 unicast

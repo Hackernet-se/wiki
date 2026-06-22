@@ -4,11 +4,11 @@ permalink: /FastNetMon/
 ---
 
 High performance DoS/DDoS load analyzer. Kan lyssna på bl.a.
-[Netflow](/Cisco_NetFlow "wikilink"), IPFIX, sFLOW, PCAP,
-[SPAN](/Cisco_SPAN "wikilink") och [PF_RING](/Ntopng "wikilink"). Om en
+[Netflow](../cisco/Cisco_NetFlow.md), IPFIX, sFLOW, PCAP,
+[SPAN](../cisco/Cisco_SPAN.md) och [PF_RING](Ntopng.md). Om en
 överbelastningsattack upptäcks exekveras ett script. Vad scriptet gör
 avgör man själv, t.ex. maila/SMSa admin eller null routa prefix med
-[ExaBGP](/ExaBGP "wikilink").
+[ExaBGP](../linux_networking/ExaBGP.md).
 
 Installation
 ============
@@ -80,8 +80,8 @@ netflow_sampling_ratio = 1
 
 ### Graphite
 
-Det finns även integration med [Graphite](/Graphite "wikilink") (och
-således [Grafana](/Grafana "wikilink"))
+Det finns även integration med [Graphite](Graphite) (och
+således [Grafana](Grafana.md))
 
 ```
 graphite = on

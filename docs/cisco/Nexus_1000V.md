@@ -7,15 +7,15 @@ Nexus 1000V är en distribuerad virtuell switch som sträcker sig över
 många hypervisor-hostar. Varje server i datacentret representeras som
 ett linjekort i Nexusen och kan hanteras som om det vore ett linjekort i
 en fysisk Cisco switch. N1Kv har bl.a. stöd för
-[NetFlow](/Cisco_NetFlow "wikilink"), [IGMP
-Snooping](/Cisco_IGMP#IGMP_Snooping "wikilink"),
-[SPAN](/Cisco_SPAN "wikilink"), [VXLAN](/Cisco_VXLAN "wikilink"),
-[Private VLAN](/Cisco_VLAN#Private_VLAN "wikilink"), [DHCP
-Snooping](/Cisco_DHCP#Snooping "wikilink"),
-[DAI](/Cisco_L2_Security#DAI "wikilink") och
-[IPSG](/Cisco_L3_Security#IPSG "wikilink"). Nexus 1000V kan köras
-tillsammans med [vSphere](/VMware_ESXi "wikilink"), Hyper-V eller
-[KVM](/KVM "wikilink").
+[NetFlow](Cisco_NetFlow.md), [IGMP
+Snooping](Cisco_IGMP.md#IGMP_Snooping#IGMP_Snooping#IGMP_Snooping#IGMP_Snooping#IGMP_Snooping#IGMP_Snooping#IGMP_Snooping#IGMP_Snooping),
+[SPAN](Cisco_SPAN.md), [VXLAN](Cisco_VXLAN.md),
+[Private VLAN](Cisco_VLAN.md#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN), [DHCP
+Snooping](Cisco_DHCP.md#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping),
+[DAI](Cisco_L2_Security.md#DAI#DAI#DAI#DAI#DAI#DAI#DAI#DAI) och
+[IPSG](Cisco_L3_Security.md#IPSG#IPSG#IPSG#IPSG#IPSG#IPSG#IPSG#IPSG). Nexus 1000V kan köras
+tillsammans med [vSphere](../vmware/VMware_ESXi.md), Hyper-V eller
+[KVM](../linux_virt/KVM.md).
 
 **Virtual Ethernet Module** (VEM) är ett virtuellt linjekort och körs
 som en del av ESXi-kärnan (VEM agent) och ersätter vSwitcharna.

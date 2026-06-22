@@ -34,7 +34,7 @@ echo "
 cp -R /[location to extracted folder]/mini /var/www/
 ```
 
-[400px](/File:asdf.JPG "wikilink")
+[400px](File:asdf.JPG)
 
 Byt namn på index-php.html filen till index.html och lämna dem
 resterande orörda.
@@ -47,4 +47,4 @@ mv index-php.html index.html 
 Du skall nu kunna komma åt din speedtestserver via webbläsaren på
 "<http://dinserverip/mini>"
 
-[400px](/File:speedtest.JPG "wikilink")
+[400px](File:speedtest.JPG)

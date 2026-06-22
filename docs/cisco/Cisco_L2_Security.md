@@ -3,11 +3,11 @@ title: Cisco L2 Security
 permalink: /Cisco_L2_Security/
 ---
 
-Huvudartikel: [Cisco Security](/Cisco_Security "wikilink").
+Huvudartikel: [Cisco Security](Cisco_Security.md).
 
-Se även [Private VLANs](/Cisco_VLAN#Private_VLAN "wikilink"), [DHCP
-Snooping](/Cisco_DHCP#Snooping "wikilink") och [Cisco L3
-Security](/Cisco_L3_Security "wikilink").
+Se även [Private VLANs](Cisco_VLAN.md#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN), [DHCP
+Snooping](Cisco_DHCP.md#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping) och [Cisco L3
+Security](Cisco_L3_Security.md).
 
 ### Frame Block
 
@@ -36,7 +36,7 @@ config. En till grej som port-security gör är att kolla att MAC-adresser
 som är säkrade inte kommer in på någon annan port i VLANet än där de är
 säkrade (oavsett learning method). Port-security fungerar endast på
 portar som är statiskt konfigurerade som access eller trunk. Ska port
-security kombineras med [HSRP](/Cisco_HSRP "wikilink") bör BIA MAC
+security kombineras med [HSRP](Cisco_HSRP.md) bör BIA MAC
 användas.
 
 ```
@@ -113,7 +113,7 @@ Storm Control
 Storm control är teknik för att låta administratörer dämpa unicast-,
 multicast- eller broadcast-trafik på L2-interface. Det kan användas för
 att reducera skadan vid broadcast-stormar. Olika switchmodeller fungerar
-olika när det gäller [EtherChannels](/Cisco_EtherChannel "wikilink")
+olika när det gäller [EtherChannels](Cisco_EtherChannel.md)
 kontra fysiska interface för Storm control. För att konfigurera Storm
 control måste man ange gränsvärde (rising) men falling är optional.
 
@@ -178,7 +178,7 @@ interface gi0/5
 
 Man kan slå på att alla andra får prata ut genom porten men inkommande
 frames accepteras endast om auth går igenom. Detta är t.ex. användbart
-för [PXE](/PXE-Deploy "wikilink").
+för [PXE](../linux_services/PXE-Deploy.md).
 
 ```
 interface gi0/5
@@ -196,7 +196,7 @@ DAI
 
 För att skydda sitt L2-nätverk mot MITM-attacker som använder G-ARP kan
 man använda Dynamic ARP inspection. DAI kräver [DHCP
-Snooping](/Cisco_DHCP#Snooping "wikilink") eftersom inkomna
+Snooping](Cisco_DHCP.md#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping) eftersom inkomna
 ARP-meddelanden valideras mot snooping-databasen. Om inte ARP:en stämmer
 överens mot det som står i databasen kommer frames att droppas,
 *SW_DAI-4-DHCP_SNOOPING_DENY*. Man slår på DAI per VLAN man vill

@@ -5,7 +5,7 @@ permalink: /SSH/
 
 SSH kan användas för mer än bara SSHa till en server. Du kan använda det
 för att tunnla trafik till saker du inte har direkt åtkomst mot och köra
-program med hjälp av tex [Xming](/Xming "wikilink").
+program med hjälp av tex [Xming](Xming.md).
 
 Fingerprint
 -----------
@@ -112,4 +112,4 @@ SSH-Key
 
 Läs följande del hur man kan autentisera sig med RSA nykel utan att
 behöva skriva lösenord, [SSH
-Autentisering](/Jumpgate#SSH_Autentisering "wikilink").
+Autentisering](Jumpgate.md#SSH_Autentisering#SSH_Autentisering#SSH_Autentisering#SSH_Autentisering#SSH_Autentisering#SSH_Autentisering#SSH_Autentisering#SSH_Autentisering).

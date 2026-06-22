@@ -11,8 +11,8 @@ och mgmt plane innebär detta en viss grad av fault isolation däremot kan
 inte olika VDC:er köra olika versioner av NX-OS. Det fysiska mgmt0
 interface delas dock men varje VDC får ha egen IP-adress. Varje VDC har
 även egna unika MAC-adresser, detta tas ifrån backplanet (show sprom
-backplane). Notera att [FCoE](/Cisco_FCoE "wikilink") kräver sin egna
-VDC. Se även [Cisco Nexus](/Cisco_Nexus "wikilink").
+backplane). Notera att [FCoE](Cisco_FCoE.md) kräver sin egna
+VDC. Se även [Cisco Nexus](Cisco_Nexus.md).
 
 **User rights**
 Default-VDC
@@ -32,9 +32,9 @@ Konfiguration
 
 Skapa Admin VDC, denna kontrollerar övriga VDC:er. Denna har t.ex. hand
 om VDC creation, resource allocation, NX-OS upgrade,
-[Ethanalyzer](/Cisco_SPAN#Ethanalyzer "wikilink"), System wide
-[QoS](/Cisco_QoS "wikilink"), Port Channel load balancing hash,
-[EEM](/Cisco_IOS#EEM "wikilink") applets. Inga line cards tillåtna.
+[Ethanalyzer](Cisco_SPAN.md#Ethanalyzer#Ethanalyzer#Ethanalyzer#Ethanalyzer#Ethanalyzer#Ethanalyzer#Ethanalyzer#Ethanalyzer), System wide
+[QoS](Cisco_QoS.md), Port Channel load balancing hash,
+[EEM](Cisco_IOS.md#EEM#EEM#EEM#EEM#EEM#EEM#EEM#EEM) applets. Inga line cards tillåtna.
 
 ```
 conf

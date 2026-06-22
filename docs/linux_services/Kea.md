@@ -4,7 +4,7 @@ permalink: /Kea/
 ---
 
 Kea är den nya DHCPv4/DHCPv6-servern från ISC och är en ersättare för
-[ISC DHCP](/ISC_DHCP "wikilink"). Målet är att skapa en dhcp server med
+[ISC DHCP](ISC_DHCP.md). Målet är att skapa en dhcp server med
 hög performance och utbyggbar med extensions för enterprises eller
 service providers.
 

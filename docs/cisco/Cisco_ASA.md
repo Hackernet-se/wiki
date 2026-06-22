@@ -238,12 +238,12 @@ snmp-server host inside 10.0.0.50 community PUBLIC version 2c
 show snmp-server oidlist   #"hidden command"
 ```
 
-Se även [Cisco SNMP](/Cisco_SNMP "wikilink").
+Se även [Cisco SNMP](Cisco_SNMP.md).
 
 DHCP
 ----
 
-[Cisco DHCP](/Cisco_DHCP "wikilink")
+[Cisco DHCP](Cisco_DHCP.md)
 
 ### Klient
 
@@ -280,7 +280,7 @@ show dhcpd state
 NAT
 ---
 
-Se även [Cisco NAT](/Cisco_NAT "wikilink").
+Se även [Cisco NAT](Cisco_NAT.md).
 
 ### PAT
 
@@ -357,7 +357,7 @@ object network hackernet.se
 Routing
 -------
 
-Se även [Cisco Routing](/Cisco_Routing "wikilink").
+Se även [Cisco Routing](Cisco_Routing.md).
 
 ### Static
 
@@ -465,7 +465,7 @@ Service Policy
 service-policy inside-policy interface inside
 ```
 
-Se även [Cisco QoS](/Cisco_QoS "wikilink").
+Se även [Cisco QoS](Cisco_QoS.md).
 
 ### Tweaking Connections
 
@@ -522,7 +522,7 @@ exit
 EtherChannel
 ------------
 
-Se även [Cisco EtherChannel](/Cisco_EtherChannel "wikilink").
+Se även [Cisco EtherChannel](Cisco_EtherChannel.md).
 
 ```
 interface e0/2
@@ -544,8 +544,8 @@ interface port-channel1
 ### Redundancy
 
 Samma som etherchannel fast endast ett ben är aktivt i taget. Användbart
-om asan är kopplad till 2 switchar utan [MLAG](/Arista_MLAG "wikilink")
-(t.ex. [vPC](/Nexus_vPC "wikilink")).
+om asan är kopplad till 2 switchar utan [MLAG](Arista_MLAG)
+(t.ex. [vPC](Nexus_vPC.md)).
 
 ```
 interface e0/4
@@ -723,7 +723,7 @@ track 1 rtr 10 reachability
 VPN
 ---
 
-Se [ASA VPN](/Cisco_ASA_VPN "wikilink")
+Se [ASA VPN](Cisco_ASA_VPN.md)
 
 REST API
 --------
@@ -737,7 +737,7 @@ rest-api agent
 ```
 
 Sedan behöver webbservern konfigureras om inte det är gjort, se
-[ASDM](/Cisco_ASA#ASDM "wikilink")
+[ASDM](Cisco_ASA.md#ASDM#ASDM#ASDM#ASDM#ASDM#ASDM#ASDM#ASDM)
 
 Använd en REST-klient (Firefox/Chrome)
 

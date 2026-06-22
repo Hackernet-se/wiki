@@ -204,7 +204,7 @@ esxcli network vswitch standard set --cdp-status both|listen --vswitch-na
 
 **Iperf**
 Fr.o.m. ESXi 6.0 finns iperf inbyggt. Se även
-[Iperf](/Iperf "wikilink").
+[Iperf](../linux_tools/Iperf.md).
 
 Server
 

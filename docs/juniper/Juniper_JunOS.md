@@ -211,8 +211,8 @@ Backup
 
 ### Configuration
 
-Man kan använda system som [Rancid](/Rancid "wikilink") eller
-[Oxidized](/Oxidized "wikilink") för att backa upp sin JunOS device. Om
+Man kan använda system som [Rancid](../linux_services/Rancid.md) eller
+[Oxidized](../linux_services/Oxidized.md) för att backa upp sin JunOS device. Om
 man inte har något sånt system uppsatt så kan man sätta
 **transfer-on-commit** eller **transfer-interval**.
 

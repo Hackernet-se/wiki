@@ -776,7 +776,7 @@ show ip eigrp topology frr 
 
 ### BFD
 
-Se [BFD](/Cisco_BFD "wikilink")
+Se [BFD](Cisco_BFD.md)
 
 ```
 router eigrp 100
@@ -900,13 +900,13 @@ Med static och connected behövs ingen seed metric.
 redistribute static
 ```
 
-**[RIP](/Cisco_RIP "wikilink")**
+**[RIP](Cisco_RIP.md)**
 
 ```
 redistribute rip metric 1500 100 255 1 1500
 ```
 
-**[OSPF](/Cisco_OSPF "wikilink")**
+**[OSPF](Cisco_OSPF.md)**
 
 ```
 redistribute ospf 1
@@ -944,7 +944,7 @@ Det finns några skillnader mot klassiska IPv4-EIGRP värda att notera.
 Man måste no shuta EIGRP-processen för att den ska starta. Default route
 kan endast annonseras med hjälp summarization eller redistribution.
 Unequal-cost load balancing stöds för närvarande inte med IPv6 EIGRP pga
-[CEF](/Cisco_CEF "wikilink")-begränsningar. Defualt så sätter routern
+[CEF](Cisco_CEF.md)-begränsningar. Defualt så sätter routern
 alltid sig själv som next-hop, även när routes annonseras ut på samma
 interface som de kom in på, detta går att stänga av med *no ipv6
 next-hop-self eigrp*.
@@ -1070,7 +1070,7 @@ eigrp default-route-tag 1.2.3.4
 Fr.o.m. IOS 15.3(2)T har EIGRP stöd för tillägget Add-Path som låter en
 router skicka ut uppdateringar som innehåller flera equal-cost vägar
 till samma destination. Detta är användbart i
-[DMVPN](/Cisco_DMVPN "wikilink")-setuper där flera branch offices är
+[DMVPN](Cisco_DMVPN.md)-setuper där flera branch offices är
 dual homed. För att kunna skicka ut multipla routes måste de finnas i
 routingtabellen samt att Split Horizon är avstängt på multipoint
 tunnel-interfacet mot alla spokes.
@@ -1108,7 +1108,7 @@ spokes.
 
 ### IPv6 VRF-Lite
 
-EIGRP IPv6 [VRF-Lite](/Cisco_Routing#VRF "wikilink") är endast
+EIGRP IPv6 [VRF-Lite](Cisco_Routing.md#VRF#VRF#VRF#VRF#VRF#VRF#VRF#VRF) är endast
 tillgängligt med Named configurations.
 
 ```
@@ -1128,13 +1128,13 @@ Over the ToP
 
 EIGRP Over the ToP (OTP) gör att man kan skapa multipoint overlay VPN:er
 över vanlig L3/L3 VPN. Nyckeln är att
-[LISP](/Cisco_LISP "wikilink")-enkapsulering (UDP port 4343) används men
+[LISP](Cisco_LISP.md)-enkapsulering (UDP port 4343) används men
 EIGRP används för control plane istället för LISPs vanliga mapping
 service. Man uppnår en del liknande funktionalitet som med
-[DMVPN](/Cisco_DMVPN "wikilink") men det fungerar inte på samma sätt. Om
+[DMVPN](Cisco_DMVPN.md) men det fungerar inte på samma sätt. Om
 man kör OTP över MPLS VPN behöver man inte köra någon dynamisk routing
 med Provider däremot måste alla CE kunna nå varandra. OTP-trafik kan
-krypteras med [GET VPN](/Cisco_IPsec#GET_VPN "wikilink"). Eftersom
+krypteras med [GET VPN](Cisco_IPsec.md#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN). Eftersom
 grannskap måste konfigureras manuellt blir det omständigt när miljön
 växer lite. Detta har lett till att man tagit fram Route Reflector även
 för EIGRP, som ger samma funktionalitet som i BGP.

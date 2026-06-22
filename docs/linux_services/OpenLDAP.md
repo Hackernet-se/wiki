@@ -315,7 +315,7 @@ Starta sedan om datorn och prova att logga in med ett domänkonto.
 Styr Sudo med LDAP grupp
 ------------------------
 
-Skapa en [posixGroup](/OpenLDAP#posixGroup "wikilink") som heter sudo.
+Skapa en [posixGroup](OpenLDAP.md#posixGroup#posixGroup#posixGroup#posixGroup#posixGroup#posixGroup#posixGroup#posixGroup) som heter sudo.
 Lägg sedan till användarna som du vill ska få sudo rättigheter i den.
 Verifiera att din användare finns med i sudo gruppen genom att logga in
 och skriva groups.

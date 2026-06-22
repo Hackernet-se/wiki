@@ -4,7 +4,7 @@ permalink: /Cisco_CSR/
 ---
 
 Cisco Cloud Services Router 1000V är en mjukvarurouter. CSR har DPDK
-integrerat i dataplane och kör [IOS-XE](/Cisco_IOS "wikilink"), samma OS
+integrerat i dataplane och kör [IOS-XE](Cisco_IOS.md), samma OS
 som ASR 1000. Unlicensed Cisco IOS XE 3.13S och senare har en throughput
 begränsad till 100 kbps (**show platform hardware throughput level**).
 
@@ -14,11 +14,11 @@ Installation
 Ladda ned mjukvaran från Ciscos hemsida,
 [download](https://software.cisco.com/download/type.html?mdfid=284364978&flowid=39582)
 
--   **[VMware ESXi](/VMware_ESXi "wikilink"):** Deploy OVF template.
+-   **[VMware ESXi](../vmware/VMware_ESXi.md):** Deploy OVF template.
 
 <!-- -->
 
--   **[KVM](/KVM "wikilink"):** Qemu image (.qcow2) finns att ladda ner
+-   **[KVM](../linux_virt/KVM.md):** Qemu image (.qcow2) finns att ladda ner
     direkt.
 
 **Licens**
@@ -34,7 +34,7 @@ Konfiguration
 -------------
 
 Här listas CSR-specifik info, för övrig konfiguration se [Cisco
-IOS](/Cisco_IOS "wikilink").
+IOS](Cisco_IOS.md).
 
 Nyare CSR har ett modernt webbgränssnitt som man kan använda för att
 managera och monitorera enheten.

@@ -3,7 +3,7 @@ title: Arista OSPF
 permalink: /Arista_OSPF/
 ---
 
-Open Shortest Path First. Se även [Cisco OSPF](/Cisco_OSPF "wikilink")
+Open Shortest Path First. Se även [Cisco OSPF](../cisco/Cisco_OSPF.md)
 
 Konfiguration
 -------------

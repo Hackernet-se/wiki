@@ -18,7 +18,7 @@ Varenda port på varenda switch i STP sparar superior BPDUn på det
 segmentet. Non-designated portar sparar BPDU från andra sidan och
 Designated portar sparar sin egen BPDU.
 
-Se även [Cisco MST](/Cisco_MST "wikilink").
+Se även [Cisco MST](Cisco_MST.md).
 
 STP
 ===
@@ -264,7 +264,7 @@ Legacy Extensions
 
 Det finns många tillägg till Spanning-tree som bör användas, de hjälper
 till att öka stabilitet, säkerhet och kompabilitet. Se även [MST
-Extensions](/Cisco_MST#Extensions "wikilink").
+Extensions](Cisco_MST.md#Extensions#Extensions#Extensions#Extensions#Extensions#Extensions#Extensions#Extensions).
 
 **UplinkFast**
 Cisco-proprietary teknik som låter en alternate port gå direkt till

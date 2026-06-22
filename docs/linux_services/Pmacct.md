@@ -4,14 +4,14 @@ permalink: /Pmacct/
 ---
 
 Pmacct är ett verktyg för att samla ihop och aggregera data om
-IP-trafik, som t.ex. [Ntopng](/Ntopng "wikilink"). Det kan (med dess
-underkomponenter) samla in [interface-trafik](/Cisco_SPAN "wikilink")
-(libpcap), [NetFlow](/Cisco_NetFlow "wikilink"), IPFIX, sFlow och ULOG.
+IP-trafik, som t.ex. [Ntopng](Ntopng.md). Det kan (med dess
+underkomponenter) samla in [interface-trafik](../cisco/Cisco_SPAN.md)
+(libpcap), [NetFlow](../cisco/Cisco_NetFlow.md), IPFIX, sFlow och ULOG.
 Man kan spara datan i minne, flat-files eller diverse databaser, t.ex.
-[MySQL](/MySQL "wikilink"), PgSQL, SQLite, MongoDB. pmacct kan användas
+[MySQL](MySQL.md), PgSQL, SQLite, MongoDB. pmacct kan användas
 för att skicka data till bl.a. RRDtool, Net-SNMP, MRTG och
-[Cacti](/Cacti "wikilink"). Det går även att peera med routrar med
-[BGP](/Cisco_BGP "wikilink") eller [IS-IS](/Cisco_IS-IS "wikilink") för
+[Cacti](Cacti.md). Det går även att peera med routrar med
+[BGP](../cisco/Cisco_BGP.md) eller [IS-IS](../cisco/Cisco_IS-IS.md) för
 att få ut routinginformation (passiv granne, dvs annonserar aldrig
 något).
 

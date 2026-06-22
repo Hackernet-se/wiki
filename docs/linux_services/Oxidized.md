@@ -4,13 +4,13 @@ permalink: /Oxidized/
 ---
 
 [Oxidized](https://github.com/ytti/oxidized) är ett backup tool för
-nätverk devices. Alltså en ersättare till [Rancid](/Rancid "wikilink").
+nätverk devices. Alltså en ersättare till [Rancid](Rancid.md).
 Oxidized bygger också på perl men är lite mer modernare än Rancid.
 Oxidized har ett eget webinterface med REST API stöd för att kunna söka,
-diffa och visa config. Medans [Rancid](/Rancid "wikilink") enbart kan
+diffa och visa config. Medans [Rancid](Rancid.md) enbart kan
 använda en csv fil som source vad den ska backupa kan Oxidized även
 använda samma sorts fil, en SQL databas eller en websida med JSON tex
-[LibreNMS](/LibreNMS "wikilink") API.
+[LibreNMS](LibreNMS.md) API.
 
 Supportade OS
 =============
@@ -393,7 +393,7 @@ RESTful web API
 Service
 -------
 
-Skapa en service med hjälp av [Systemd](/Systemd "wikilink"). Om du
+Skapa en service med hjälp av [Systemd](../linux_tools/Systemd.md). Om du
 installera Oxidized enligt denna guiden för CentOS använd isåfall
 systemd filen som angetts där.
 

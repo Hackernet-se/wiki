@@ -11,7 +11,7 @@ Grundläggande
 -------------
 
 Grundläggande för en jumpgate är att ha en kompetent terminal
-multiplexer, t.ex [Tmux](/Tmux "wikilink").
+multiplexer, t.ex [Tmux](../linux_tools/Tmux.md).
 
 ### Screen
 
@@ -86,7 +86,7 @@ SSH Autentisering
 
 För att göra inloggning mot andra maskiner smidigare kan man använda sig
 av SSH-nycklar som autentisering. Och för att göra det mindre smidigt se
-[Google Authenticator](/Google_Authenticator "wikilink").
+[Google Authenticator](Google_Authenticator.md).
 
 Först måste man skaffa sig nyckelpar man kan distribuera till övriga
 hostar. Detta görs endast en gång.
@@ -171,7 +171,7 @@ som behövs är SSH Agent Forwarding och finns inbyggt i OpenSSH. För att
 göra hoppet genom proxyn transparent måste SSH-nycklar användas för
 autentisering. DNS-uppslag på alla maskiner måste fungera.
 
-[500px](/File:ssh-bastion.png "wikilink")
+[500px](File:ssh-bastion.png)
 
 ```
 nano ~/.ssh/config

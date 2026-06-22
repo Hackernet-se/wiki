@@ -9,7 +9,7 @@ interface som kallas LAG. Med hjälp av ett ae interface kan man få högre
 redundans och även högre hastighet eftersom att man kan last balansera
 trafiken på flera portar.
 
-Ciscos motsvarighet heter [EtherChannel](/Cisco_EtherChannel "wikilink")
+Ciscos motsvarighet heter [EtherChannel](../cisco/Cisco_EtherChannel.md)
 
 Link Aggregation Control Protocol
 =================================

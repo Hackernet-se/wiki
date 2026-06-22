@@ -8,7 +8,7 @@ och hantering av honeypots. Med honeypots kan man upptäcka om man har
 [Hackers](http://www.imdb.com/title/tt0113243/) i sitt nätverk.
 Projektets hemsida: <http://www.beeswarm-ids.org/>
 
-[Image:Beeswarm_overview.png](/Image:Beeswarm_overview.png "wikilink")
+[Image:Beeswarm_overview.png](Image:Beeswarm_overview.png)
 
 -   **Server:** Managerar och tar in rapporter från honeypots och
     klienter.

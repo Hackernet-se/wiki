@@ -44,7 +44,7 @@ grannen svara med uppdateringar för de nät som står speccade i
 Requesten, dvs partial update, dock är inte partial requests
 implementerat på IOS. Full update frågas efter när en Ciscorouter bootar
 upp, ett RIP-interface kommer upp eller *clear ip route \** körs.
-[CSR](/Cisco_CSR "wikilink"):er verkar inte använda sig av Requests
+[CSR](Cisco_CSR.md):er verkar inte använda sig av Requests
 överhuvudtaget.
 
 
@@ -71,7 +71,7 @@ om denna routen med en metric satt till infinity då propagerar
 uppdateringen till alla routrar och de slutar använda den failade
 routen, detta kallas route poisoning. Däremot sparas routen i den
 interna RIP-databasen men markeras som possibly down. En skillnad med
-RIP kontra [EIGRP](/Cisco_EIGRP "wikilink") och RIPng är att metric
+RIP kontra [EIGRP](Cisco_EIGRP.md) och RIPng är att metric
 läggs på när en route skickas iväg istället för när den kommer in. Finns
 det flera väger till en destination med samma metric installeras det
 default upp till 4 routes i routingtabellen. Detta går att ändra med
@@ -96,7 +96,7 @@ en uppdatering om routen på de interface där det finns RIP-routrar.
 Secondary addresses kommer inte heller att annonseras om man inte
 stänger av split horizon. Det går att stänga av split horizon men det är
 inte rekommenderat. Det kan dock behövas stängas av på
-[DMVPN](/Cisco_DMVPN "wikilink")-hubb.
+[DMVPN](Cisco_DMVPN.md)-hubb.
 
 ```
 no ip split-horizon
@@ -304,7 +304,7 @@ Per interface
 `ip rip advertise `<seconds>
 
 **BFD**
-[BFD](/Cisco_BFD "wikilink") kan användas med RIP unicast.
+[BFD](Cisco_BFD.md) kan användas med RIP unicast.
 
 ```
 router rip
@@ -506,7 +506,7 @@ default-metric 5
 ```
 
 Om man redistribuerar mellan t.ex. RIP och
-[OSPF](/Cisco_OSPF "wikilink") på flera punkter måste man förhindra
+[OSPF](Cisco_OSPF.md) på flera punkter måste man förhindra
 suboptimal routing. Ett sätt att göra detta är genom att flagga
 redistribuerade routes med högre AD lokalt på redistributionsnoderna.
 RIP kan inte skilja på internal och external routes så det andra
@@ -546,7 +546,7 @@ annonsering istället för skickandet som i tidigare versioner. Allt
 loopundvikande sker på samma sätt. En uppdatering kan innehålla så många
 entries som får plats i packetet vars max storlek avgörs av IPv6 MTU på
 länken. RIPng har inte stöd för autentisering utan precis som med
-[OSPFv3](/Cisco_OSPFv3 "wikilink") sköts detta av IPsec, däremot har
+[OSPFv3](Cisco_OSPFv3.md) sköts detta av IPsec, däremot har
 inte Ciscos implementation stöd för detta. Passive interfaces och static
 neighbors finns inte heller men nyheter är Route Poisoning (utökning av
 Split Horizon) och multipla RIPng-processer.
@@ -621,7 +621,7 @@ ipv6 router rip 1
  distribute-list prefix-list FILTER in
 ```
 
-Slå på [VRF](/Cisco_Routing#VRF "wikilink")-stöd.
+Slå på [VRF](Cisco_Routing.md#VRF#VRF#VRF#VRF#VRF#VRF#VRF#VRF)-stöd.
 
 ```
 ipv6 rip vrf-mode enable

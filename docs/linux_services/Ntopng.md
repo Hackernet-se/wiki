@@ -42,7 +42,7 @@ Det finns olika sätt att få den speglade trafiken till ntop.
 
 -   **vSwitch:** Promiscuous mode
 -   **dvSwitch:** Distributed Port Mirroring
--   **Fysisk switch:** [SPAN](/Cisco_SPAN "wikilink")/RSPAN/ERSPAN
+-   **Fysisk switch:** [SPAN](../cisco/Cisco_SPAN.md)/RSPAN/ERSPAN
 
 Listener Port
 
@@ -59,11 +59,11 @@ The communication between nProbe and ntopng happens though ZeroMQ that
 decouples ntopng from nProbe.
 
 OBS nprobe kräver licens, se även [Cisco
-NetFlow](/Cisco_NetFlow "wikilink").
+NetFlow](../cisco/Cisco_NetFlow.md).
 
 ```
 sudo nprobe --zmq "tcp://*:5556" -i none [eth0] -n none --collector-port 2055 &
 sudo ntopng -i tcp://127.0.0.1:5556
 ```
 
-**nProbe modes** [left\|607x607px](/File:Nprobe.PNG "wikilink")
+**nProbe modes** [left\|607x607px](File:Nprobe.PNG)

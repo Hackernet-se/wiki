@@ -3,7 +3,7 @@ title: Golang
 permalink: /Golang/
 ---
 
-[Category:Guider](/Category:Guider "wikilink") **Intro**
+ **Intro**
 Golang är det nya hippa språket som Google har utvecklat. Det är enkelt
 att läsa som Python, snabbt och low level som C.
 

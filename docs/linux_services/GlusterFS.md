@@ -11,7 +11,7 @@ bygger man volymer. Volymer kan spänna över flera servrar och
 kommunikation görs med TCP (eller
 [InfiniBand](https://en.wikipedia.org/wiki/InfiniBand)). Det finns
 Gluster Native Client för t.ex. linuxhostar annars går det att dela ut
-en volym med klassiska protokoll som [NFS](/NFS "wikilink").
+en volym med klassiska protokoll som [NFS](NFS.md).
 
 Det finns olika typer av volymer. Dessa går även att kombinera för att
 skapa en distributed-replicated volume.
@@ -93,7 +93,7 @@ Geo-replication
 GlusterFS är designat för datacenter men vill man över t.ex. ett WAN
 (high latency) bör man använda geo-replication. Då används istället
 asynchronous och inkrementell replikering. Ena sidan är master och andra
-slave. Klockorna ska vara synkade och [NTP](/NTP "wikilink") bör
+slave. Klockorna ska vara synkade och [NTP](../linux_tools/NTP.md) bör
 användas.
 
 ```

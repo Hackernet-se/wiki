@@ -3,7 +3,7 @@ title: Cisco Services
 permalink: /Cisco_Services/
 ---
 
-[Cisco IOS](/Cisco_IOS "wikilink") har stöd för diverse protokoll för
+[Cisco IOS](Cisco_IOS.md) har stöd för diverse protokoll för
 mgmt och filöverföring.
 
 Kontrollera vilka portar som är aktiva: **show control-plane host
@@ -250,7 +250,7 @@ show ntp status
 show ntp peers
 ```
 
-Notera att det endast är en [VDC](/Nexus_VDC "wikilink") som synkar
+Notera att det endast är en [VDC](Nexus_VDC.md) som synkar
 klockan i switchen.
 
 `clock protocol ntp vdc `<vdc-id>

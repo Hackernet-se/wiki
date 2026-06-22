@@ -15,7 +15,7 @@ släpper också patcher oftare och snabbare än vad Nagios gjorde.
 Arkitektur
 ----------
 
-[200px\|Arkitekturen\|thumb](/File:Icinga_Architecture_v1.5.png "wikilink")
+[200px\|Arkitekturen\|thumb](File:Icinga_Architecture_v1.5.png)
 Icinga är uppdelat i tre olika delar.
 
 **Core** sköter all övervakning sparar alla resultat och data på IDO
@@ -153,7 +153,7 @@ service icinga2 restart
 Icinga erbjuder tre st web interface, Icinga Web 2, Icinga Web och
 Classic UI.
 
-Guiden utgår ifrån att du har färdig [LAMP](/LAMP "wikilink") server.
+Guiden utgår ifrån att du har färdig [LAMP](LAMP.md) server.
 Vill du LDAP/AD koppla inlogget krävs PHP LDAP library.
 
 #### Icinga Web 2

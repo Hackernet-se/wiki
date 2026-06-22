@@ -58,7 +58,7 @@ nätverk så man kan peka och klicka lite.
 
 ### OpenDaylight
 
-Se [OpenDaylight](/OpenDaylight "wikilink")
+Se [OpenDaylight](OpenDaylight.md)
 
 ### Floodlight
 

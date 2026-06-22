@@ -11,8 +11,8 @@ vEOS
 ====
 
 vEOS fungerar på de flesta virtualiseringsplattformar inklusive
-[EVE-NG](/EVE-NG "wikilink"), [KVM](/KVM "wikilink"), VirtualBox,
-[ESXi](/VMware_ESXi "wikilink") och Hyper-V. vEOS-lab har en drivrutin
+[EVE-NG](../linux_virt/EVE-NG.md), [KVM](../linux_virt/KVM.md), VirtualBox,
+[ESXi](../vmware/VMware_ESXi.md) och Hyper-V. vEOS-lab har en drivrutin
 som heter Elba, den emulerar hårdvara. En del features saknar vEOS-lab
 stöd för, t.ex. storm-control och IPsec.
 
@@ -203,7 +203,7 @@ Begränsa på IP vad som ska speglas.
 
 ### Iperf
 
-[Iperf](/Iperf "wikilink") finns inbyggt i EOS. Dock tillåts inte tcp
+[Iperf](../linux_tools/Iperf.md) finns inbyggt i EOS. Dock tillåts inte tcp
 5001 default.
 
 ```

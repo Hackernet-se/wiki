@@ -6,7 +6,7 @@ permalink: /Cisco_OTV/
 Overlay Transport Virtualization är en tunnlingsteknik för att sträcka
 L2-domäner över ett L3-nät med hjälp av enkapsulering. Det är routing
 baserat på mac-adress och för control plane används IP-enkapsulerad
-[IS-IS](/Cisco_IS-IS "wikilink"). OTV lär sig MAC-IP par genom MAC
+[IS-IS](Cisco_IS-IS.md). OTV lär sig MAC-IP par genom MAC
 address learning på internal interface, IGMP snooping och OTV control
 plane (IS-IS) updates. Alla MAC-adresser sparas i OTV Routing
 Information Base (ORIB) med VLAN ID och associerad remote IP.
@@ -16,7 +16,7 @@ unicast droppas vid edge istället för att floodas över tunneln. ARP
 optimeras också genom att Edge Devices kan svara på ARP-frågor för
 enheter som finns på andra sidan, detta genom att lyssna på ARP-trafik
 på den lokala siten och cachea den. OTV går även att kombinera med en
-krypterad transport, t.ex. [GET VPN](/Cisco_IPsec#GET_VPN "wikilink").
+krypterad transport, t.ex. [GET VPN](Cisco_IPsec.md#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN#GET_VPN).
 IPsec kan då terminera i samma box som OTV och det funkar både ihop med
 OTV unicast och multicast mode.
 
@@ -169,8 +169,8 @@ otv fragmentation join-interface port-channel 1
 
 I nya versioner av hårdvara/mjukvara kan man välja vilken enkapsulering
 man ska använda, default används
-[GRE](/Cisco_GRE "wikilink")/[MPLS](/Cisco_MPLS "wikilink") men nu kan
-man även använda [UDP/VXLAN](/Cisco_VXLAN "wikilink"). Väljer man den
+[GRE](Cisco_GRE.md)/[MPLS](Cisco_MPLS.md) men nu kan
+man även använda [UDP/VXLAN](Cisco_VXLAN.md). Väljer man den
 VXLAN blir det overhead 50 Bytes per paket.
 
 ```
@@ -267,7 +267,7 @@ int Overlay1
 ```
 
 **BFD**
-Man kan köra [BFD](/Cisco_BFD "wikilink") över site-vlan:et för att
+Man kan köra [BFD](Cisco_BFD.md) över site-vlan:et för att
 snabbt upptäcka forwarderingsproblem inom siten.
 
 ```
@@ -348,7 +348,7 @@ interface Overlay1
 ### PVLAN
 
 I nyare releaser av NX-OS kan man sträcka [Private
-VLAN](/Cisco_VLAN#Private_VLAN "wikilink") över OTV och därmed behålla
+VLAN](Cisco_VLAN.md#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN#Private_VLAN) över OTV och därmed behålla
 segmenteringen.
 
 ```

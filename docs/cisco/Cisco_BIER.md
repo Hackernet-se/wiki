@@ -14,4 +14,4 @@ Några fördelar med BIER:
 -   No receiver driven tree building
 -   State is in the packet and not in the network.
 
-Se även [Cisco Multicast](/Cisco_Multicast "wikilink").
+Se även [Cisco Multicast](Cisco_Multicast.md).

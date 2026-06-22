@@ -5,7 +5,7 @@ permalink: /Cisco_FC/
 
 Fibre channel är ett data transport protocol som ger in-order och
 lossless transfer av blockdata. FC lämpar sig bra för block based
-storage. Se även [Cisco FCoE](/Cisco_FCoE "wikilink").
+storage. Se även [Cisco FCoE](Cisco_FCoE.md).
 
 **Termer**
 
@@ -42,7 +42,7 @@ Switchportar som kopplas ihop med varandra kallas Expansion (E) Ports,
 det är på dessa som FSPF körs. Default räknas FSPF cost: 1000 delat med
 link speed i Gbps, t.ex. 10G = 100. FSPF har default stöd för ECMP. Har
 man t.ex. Ciscoswitchar finns det stöd för VSAN (motsvarigheten till
-[VLAN](/Cisco_VLAN "wikilink") + VRF) kan man trunka dem över dessa E
+[VLAN](Cisco_VLAN.md) + VRF) kan man trunka dem över dessa E
 ports, då kallas det Trunking Expansion Ports (TE Ports).
 
 Det första som händer när man kopplar in en server är att den skickar en

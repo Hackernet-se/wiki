@@ -234,7 +234,7 @@ bind -n C-k clear-history
 #### Problem att piltangenterna inte fungerar?
 
 Upptäckte problemet när jag var ansluten till senare versioner av
-[JunOS](/Juniper_JunOS "wikilink"). Att jag var tvungen att skriva om
+[JunOS](../juniper/Juniper_JunOS.md). Att jag var tvungen att skriva om
 alla kommandon igen för att jag inte kunde trycka fram det senast körda
 kommandona. Efter att ha lagt till följande i min **.tmux.conf** fil så
 fungera det igen.

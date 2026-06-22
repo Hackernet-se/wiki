@@ -11,8 +11,8 @@ senare kan göras både symmetriskt och asymmetriskt, dvs om samma VNI
 används i båda trafikriktninger eller ej. Default för enkapsulerade
 paket mellan VTEP:ar används UDP port 4789. Däremot kan control plane
 göras på olika sätt, se nedan. Aristas VXLAN går att kombinera med
-[MLAG](/Arista_MLAG "wikilink"). Se även [Cisco
-VXLAN](/Cisco_VXLAN "wikilink").
+[MLAG](Arista_MLAG). Se även [Cisco
+VXLAN](../cisco/Cisco_VXLAN.md).
 
 Konfiguration
 =============
@@ -122,7 +122,7 @@ show vxlan controller address-table received
 EVPN
 ----
 
-Se [Arista EVPN](/Arista_EVPN "wikilink").
+Se [Arista EVPN](Arista_EVPN.md).
 
 Multitenancy routing
 ====================
@@ -159,7 +159,7 @@ NSX
 ===
 
 Arista-switchar kan agera VTEP:s för
-[VMware](/VMware_vCenter "wikilink") NSX. Ta certet och importera i NSX
+[VMware](../vmware/VMware_vCenter.md) NSX. Ta certet och importera i NSX
 Manager.
 
 ```

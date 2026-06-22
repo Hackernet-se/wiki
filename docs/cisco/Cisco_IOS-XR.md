@@ -14,7 +14,7 @@ använder liknande modell som tex. Cisco Nexus där med distribuerad
 modell där man kan aktivera de delar man önskar tex. multicast eller
 MPLS.
 
-IOS XR är likt Juniper's [JunOS](/Juniper_JunOS "wikilink") uppdelat i
+IOS XR är likt Juniper's [JunOS](../juniper/Juniper_JunOS.md) uppdelat i
 två lägen, admin-läge och "operations"-läge och XR har ett inbyggt
 system för hantera användare och grupper. Även i XR behöver man använda
 commit precis som i JunOS.

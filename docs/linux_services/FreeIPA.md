@@ -7,7 +7,7 @@ FreeIPA är ett open source projekt för centraliserad Identity, Policy
 och Auditing (IPA) för unix/linux-system, likt Microsofts Active
 Directory. I botten används 389 Directory Server för LDAP, MIT's
 Kerberos 5 för authentication och single sign-on,
-[BIND](/BIND "wikilink") för integrerad DNS och Samba för integration
+[BIND](BIND.md) för integrerad DNS och Samba för integration
 mot Active Directory. Man sparar lösenord och SSH-nycklar centralt som
 autentisering på övriga maskiner kan kolla mot. Man kan skapa
 användargrupper och styra sudo policy centralt. Det är sponsrat av Red
@@ -154,7 +154,7 @@ nsIdleTimeout: 0
 
 GroupOfUniqueNames är en objectclass som finns i grupper, vissa program
 söker i LDAP databasen efter denna class. Bland annat [VMware
-vCenter](/VMware_vCenter "wikilink").
+vCenter](../vmware/VMware_vCenter.md).
 
 Logga in på **IPA WebUI** gå till **IPA Server** ---\> **Configuration**
 --\> **Group Options** --\> **Add** --\> Fyll i **GroupOfUniqueNames**

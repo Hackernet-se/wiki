@@ -16,8 +16,8 @@ ifrån unidirectional link. Kommer det in UDLD med sig själv som
 originator betyder det self-looped port. Om något av detta händer blir
 interfacet error disabled (oavsett mode). UDLD är good guy protocol som
 kan användas i kombination med
-[STP](/Cisco_STP "wikilink")/[MST](/Cisco_MST "wikilink"). Om man inte
-kör Bridge Assurance eller [BFD](/Cisco_BFD "wikilink") bör man köra
+[STP](Cisco_STP.md)/[MST](Cisco_MST.md). Om man inte
+kör Bridge Assurance eller [BFD](Cisco_BFD.md) bör man köra
 UDLD.
 
 

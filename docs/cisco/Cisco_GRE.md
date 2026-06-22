@@ -8,13 +8,13 @@ utvecklat av Cisco, det är IP-protokoll 47. Enkapsulering görs genom att
 sätta på en 4 byte GRE-header på L3-paketen och sedan sätts en ny
 IPv4/IPv6-header på det så att det kan routas till andra änden av
 tunneln och dekapsuleras. Diverse protokoll kan tunnlas, t.ex.
-[MPLS](/Cisco_MPLS "wikilink") och [IPsec](/Cisco_IPsec "wikilink").
+[MPLS](Cisco_MPLS.md) och [IPsec](Cisco_IPsec.md).
 Eftersom det är enkapsulering påverkas MTU så det bör man hålla koll på.
 Däremot om man ändrar tunnel mode till "IPIP" så reducerar man
 overheaden litegrann för då läggs det endast på en header istället för
 två. Och vill man öka overhead kan man köra tunnel i tunnel, man kan
 enkapsulera ett paket upp till fyra gånger. GRE kan även köras
-multipoint, t.ex. i [DMVPN](/Cisco_DMVPN "wikilink").
+multipoint, t.ex. i [DMVPN](Cisco_DMVPN.md).
 
 ### Tunnel Key
 
@@ -123,7 +123,7 @@ original-headern och klassificera det korrekt eftersom VPN och tunnel
 operations appliceras innan QoS policy. Med QoS pre-classify för VPN:er
 ändrar man denna ordning och paket kan klassificeras innan de tunnlas.
 Man kan även klassa på annat än IP-prec eller DSCP. Se även [Cisco
-QoS](/Cisco_QoS "wikilink").
+QoS](Cisco_QoS.md).
 
 Enable QoS for VPNs feature:
 

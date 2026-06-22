@@ -11,8 +11,8 @@ vägar till samma destination. Bästa vägen väljs utifrån en ökänd
 [algoritm](http://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html).
 Den bästa pathen markeras valid/best och blir en kandidat till
 routingtabellen. Om next hop inte är reachable så blir aldrig en route
-best. Se även [BGP Multicast](/Cisco_Multicast#BGP "wikilink") och
-[ExaBGP](/ExaBGP "wikilink").
+best. Se även [BGP Multicast](Cisco_Multicast.md#BGP#BGP#BGP#BGP#BGP#BGP#BGP#BGP) och
+[ExaBGP](../linux_networking/ExaBGP.md).
 
 **Type:** Path Vector
 
@@ -1101,7 +1101,7 @@ neighbor 1.1.1.1 fall-over
 
 #### BFD
 
-Se även [Cisco BFD](/Cisco_BFD "wikilink").
+Se även [Cisco BFD](Cisco_BFD.md).
 
 ```
 neighbor 1.1.1.1 fall-over bfd
@@ -1277,7 +1277,7 @@ Multiprotocol Unreachable NLRI (MP_UNREACH_NLRI) drar tillbaka
 MP-routes. Dessa innehåller AFI, Next-hop och NLRI. NLRI står för lägga
 till eller ta bort routes och next-hop. MP-BGP listas som capability i
 Open-paketen och körs för det mesta inom samma AS. Se även [Cisco
-MPLS](/Cisco_MPLS "wikilink").
+MPLS](Cisco_MPLS.md).
 
 
 
@@ -1553,8 +1553,8 @@ till klienterna, detta säger vad som ska göras med vilken trafik. Ju
 fler och ju mer avancerade regler man skjuter ut ju mer TCAM går åt.
 
 Det finns flera mjukvaror som kan agera controller, t.ex.
-[IOS-XR](/Cisco_IOS-XR "wikilink"), GoBGP eller
-[ExaBGP](/ExaBGP "wikilink").
+[IOS-XR](Cisco_IOS-XR.md), GoBGP eller
+[ExaBGP](../linux_networking/ExaBGP.md).
 
 IOS XE
 

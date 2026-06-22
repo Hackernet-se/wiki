@@ -4,8 +4,8 @@ permalink: /ExaBGP/
 ---
 
 ExaBGP är en BGP route announcer som det går att scripta mot. Se även
-[Cisco BGP](/Cisco_BGP "wikilink") och [Arista
-BGP](/Arista_BGP "wikilink").
+[Cisco BGP](../cisco/Cisco_BGP.md) och [Arista
+BGP](../arista/Arista_BGP.md).
 
 Installation
 ============
@@ -95,8 +95,8 @@ engineering. ExaBGP kan också parsea IS-IS segment routing extensions
 genom BGP-LS. Detta betyder att man kan ta emot segment identifiers
 (node och adjacency id:s) genom samma BGP-LS session. Med
 label-informationen kan man programera LSP:er via BGP-LU sessionen till
-PE. Se även [Arista SR](/Arista_SR "wikilink") och [Cisco
-SR](/Cisco_SR "wikilink").
+PE. Se även [Arista SR](Arista_SR) och [Cisco
+SR](../cisco/Cisco_SR.md).
 
 cat ./config/exabgp
 

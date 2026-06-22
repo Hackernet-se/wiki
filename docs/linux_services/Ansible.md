@@ -44,11 +44,11 @@ listar och grupperar man alla hostar som man ska jobba med, se nästa
 stycke. Förslagsvis använder man inte IP-adresser utan namn i
 DNS/hosts-fil för att hitta rätt. Det behöver också fixas SSH-nycklar på
 alla hostar så att ansible kan autentisera sig på hostarna utan
-lösenord. Se [Jumpgate](/Jumpgate "wikilink") för hur man genererar
+lösenord. Se [Jumpgate](Jumpgate.md) för hur man genererar
 nycklar och skickar ut. Har man olika användarnamn på maskinerna man ska
 in på kan man specificera det i sin inventory-fil men för att hålla den
 så ren som möjligt kan det också göras i \~/.ssh/config, se
-[Jumpgate](/Jumpgate "wikilink").
+[Jumpgate](Jumpgate.md).
 
 Konfiguration
 -------------

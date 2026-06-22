@@ -46,7 +46,7 @@ Verktyg
 Kali är utrustat med väldigt många verktyg. Här listas några och vad de
 används till.
 
-**[Nmap](/Nmap "wikilink")**
+**[Nmap](Nmap)**
 Security Scanner
 
 **Yersinia**
@@ -87,13 +87,13 @@ Password cracker
 **Maltego**
 Gather information about ip addresses and domains
 
-**[Metasploit](/Metasploit "wikilink")**
+**[Metasploit](Metasploit)**
 Vulnerability testing
 
 **Burp Suite**
 Proxy/Spider
 
-**[Scapy](/Scapy "wikilink")**
+**[Scapy](../linux_tools/Scapy.md)**
 Packet Manipulation Tool
 
 **Hping3** - TCP Ping

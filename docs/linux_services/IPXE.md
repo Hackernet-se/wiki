@@ -14,7 +14,7 @@ PXE fast med en del extra features som:
 
 Man kan flasha in iPXE ROM filen på sitt nätverkskort. Vill man inte det
 kan man ladda iPXE över TFTP med PXE. Se även
-[PXE-Deploy](/PXE-Deploy "wikilink")
+[PXE-Deploy](PXE-Deploy.md)
 
 Förberedelse
 ============

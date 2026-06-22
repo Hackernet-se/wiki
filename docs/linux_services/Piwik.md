@@ -13,7 +13,7 @@ Hackernet's egna [Piwik](https://piwik.hackernet.se).
 Förberedelse
 ------------
 
-Du behöver [LAMP](/LAMP "wikilink") och en databas som Piwik kan
+Du behöver [LAMP](LAMP.md) och en databas som Piwik kan
 använda.
 
 Installation

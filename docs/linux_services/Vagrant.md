@@ -5,7 +5,7 @@ permalink: /Vagrant/
 
 Vagrant är program som skapar och konfigurerar virtuella
 utvecklingsmiljöer. Det kan ses som en högre nivå av virtualisering än
-VirtualBox, VMware, [KVM](/KVM "wikilink") och Linux Containers (LXC).
+VirtualBox, VMware, [KVM](../linux_virt/KVM.md) och Linux Containers (LXC).
 Sedan version 1.6 har Vagrant inbyggt stöd för Docker containers.
 
 Installation

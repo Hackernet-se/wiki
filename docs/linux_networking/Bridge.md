@@ -6,8 +6,8 @@ permalink: /Bridge/
 Linux Bridge är en kernel-modul som introducerades i kernel 2.2 och
 administreras med kommandot brctl. Man kan göra om portar på en
 Linuxmaskin till switchportar. Se även [Open
-vSwitch](/Open_vSwitch "wikilink") och [Linux
-VXLAN](/Iproute2#VXLAN "wikilink").
+vSwitch](Open_vSwitch.md) och [Linux
+VXLAN](../linux_tools/Iproute2.md#VXLAN#VXLAN#VXLAN#VXLAN#VXLAN#VXLAN#VXLAN#VXLAN).
 
 Installation
 ------------

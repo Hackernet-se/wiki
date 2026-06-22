@@ -5,9 +5,9 @@ permalink: /EVE-NG/
 
 EVE-NG (Emulated Virtual Environment New Generation) är en uppdaterad
 variant av Unetlab som det tidigare hette. EVE-NG fungerar precis som
-[GNS3](/GNS3 "wikilink") där man kan virtualisera sin nätverksmiljö med
+[GNS3](../linux_services/GNS3.md) där man kan virtualisera sin nätverksmiljö med
 routrar, brandväggar, switchar men även klienter och servrar som
-Windows, [Linux](/Linux "wikilink") och [ESXi](/VMware_ESXi "wikilink").
+Windows, [Linux](../linux.md) och [ESXi](../vmware/VMware_ESXi.md).
 
 EVE-NG är clientless så det enda som behövs är en webbläsare för att
 kunna nå sina enheter.
@@ -51,7 +51,7 @@ lite minne vilket gör att netd krashar.
 
 `sed -i 's/= 256/= 512/' /opt/unetlab/html/templates/cumulus.php`
 
-### [Extreme](/Network#Extreme_Networks "wikilink")
+### [Extreme](../linux_services/Network.md#Extreme_Networks#Extreme_Networks#Extreme_Networks#Extreme_Networks#Extreme_Networks#Extreme_Networks#Extreme_Networks#Extreme_Networks)
 
 Download URL:
 [EXOS-VM_v21.1.1.4-disk1.qcow2](https://stackingtool.extremenetworks.com/github/EXOS-VM_v21.1.1.4-disk1.qcow2)
@@ -61,4 +61,3 @@ Extreme Network har även lagt upp några images på deras
 [GitHub](https://github.com/extremenetworks/Virtual_EXOS) som man kan
 använda.
 
-[Category:Guider](/Category:Guider "wikilink")

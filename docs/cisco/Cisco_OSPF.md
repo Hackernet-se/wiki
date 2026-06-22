@@ -9,7 +9,7 @@ innebär att enheterna känner till alla länkar i topologin och deras
 *operational states* och lagrar detta i en LSDB. OSPF konvergerar snabbt
 och har bra skalbarhet. Det kommunicerar med multicast som har ttl satt
 till 1 alternativt unicast på vissa nätverkstyper. OSPF använder IP
-protokoll \#89. Se även [Cisco OSPFv3](/Cisco_OSPFv3 "wikilink") för
+protokoll \#89. Se även [Cisco OSPFv3](Cisco_OSPFv3.md) för
 IPv6-stöd.
 
 **Type:** Link State
@@ -37,7 +37,7 @@ show ip ospf interface | i Cost
 ```
 
 Om man stänger av auto-cost får alla länkar samma cost (10) oavsett
-bandbredd, så som [IS-IS](/Cisco_IS-IS "wikilink") fungerar.
+bandbredd, så som [IS-IS](Cisco_IS-IS.md) fungerar.
 
 **Preferens**
 Det är viktigt att känna till att olika typer av routes har olika
@@ -372,7 +372,7 @@ BROADCAST. Beroende på nätverkstyp behövs **neighbor**-kommandot
 användas eller ej, regel är non-broadcast needs neighbors.
 Point-to-multipoint interface annonseras som /32:or av effektivitetsskäl
 och lämpar sig väl om man kör OSPF över
-[Cisco_L2VPN\#VPLS](/Cisco_L2VPN#VPLS "wikilink").
+[Cisco_L2VPN\#VPLS](Cisco_L2VPN.md#VPLS#VPLS#VPLS#VPLS#VPLS#VPLS#VPLS#VPLS).
 
 ```
 show ip ospf interface | i protocol|Network Type
@@ -439,7 +439,7 @@ Alla routrar med OSPF priority 1-255 är med i election, 1 är default och
 sätter man 0 ignoreras DR/BDR election på den enheten som därmed aldrig
 kan bli DR. Det är viktigt att DR kan nå alla andra vilket inte är
 fallet i en hub-and-spoke-topologi där en spoke är DR, se även [Cisco
-DMVPN](/Cisco_DMVPN "wikilink").
+DMVPN](Cisco_DMVPN.md).
 
 ```
 interface gi0/0
@@ -508,8 +508,8 @@ ip ospf mtu-ignore
 
 **MPLS**
 Om man kör OSPF kan man autoenablea LDP på alla OSPF-interface. Se även
-[Cisco MPLS](/Cisco_MPLS "wikilink") och [Segment
-Routing](/Cisco_SR "wikilink").
+[Cisco MPLS](Cisco_MPLS.md) och [Segment
+Routing](Cisco_SR.md).
 
 ```
 router ospf 1
@@ -887,7 +887,7 @@ show ip ospf | i Incremental
 ```
 
 **BFD**
-Se även [BFD](/Cisco_BFD "wikilink").
+Se även [BFD](Cisco_BFD.md).
 
 ```
 router ospf 1
@@ -946,7 +946,7 @@ granne som rot. Detta gör att man kan hitta alternativa loopfria vägar
 även i komplexa topologier. Man kan specificera flera kriterier för
 vilka alternate path som ska väljas, t.ex. använd ej de som använder
 samma interface, next-hop eller SRLG. Man måste använda
-[MPLS](/Cisco_MPLS "wikilink") för att kunna dra nytta av Loop-Free
+[MPLS](Cisco_MPLS.md) för att kunna dra nytta av Loop-Free
 Alternate Fast Reroute och IOS supporterar endast per-link LFA. The high
 priority enables FRR for /32 prefixes only, the low priority enables FRR
 for all prefixes. The fast-reroute keep-all-paths option keeps all
@@ -1171,21 +1171,21 @@ Notera att default route inte kan redistribueras med *redistribute
 static*, inte ens om en route-map används utan **default-information
 originate** bör användas.
 
-**[RIP](/Cisco_RIP "wikilink")**
+**[RIP](Cisco_RIP.md)**
 
 ```
 router ospf 1
  redistribute rip subnets
 ```
 
-**[EIGRP](/Cisco_EIGRP "wikilink")**
+**[EIGRP](Cisco_EIGRP.md)**
 
 ```
 router ospf 1
  redistribute eigrp 1 subnets tag 90
 ```
 
-**[BGP](/Cisco_BGP "wikilink"),** seed metric för bgp är 1. När man
+**[BGP](Cisco_BGP.md),** seed metric för bgp är 1. När man
 redistribuerar prefix från BGP så sätts senaste AS i pathen som route
 tag i LSA:n.
 
@@ -1197,7 +1197,7 @@ router ospf 1
 NX-OS
 -----
 
-Här följer [Nexus](/Cisco_Nexus "wikilink")-specifik syntax. Några
+Här följer [Nexus](Cisco_Nexus.md)-specifik syntax. Några
 grundläggande skillnader mot IOS är att referensbandbredden för cost
 default är 40Gbps, Loopback0 väljs som Router-ID oavsett IP, det finns
 inget network-kommando, loopbacks är passive default och man kan konfa
@@ -1245,7 +1245,7 @@ IOS-XR
 En skillnad emot IOS är att External LSA:er installeras i RIB även fast
 forwarding address inte är lärd av ospf.
 
-Här följer [IOS-XR](/Cisco_IOS-XR "wikilink")-specifik syntax.
+Här följer [IOS-XR](Cisco_IOS-XR.md)-specifik syntax.
 
 ```
 router ospf 1

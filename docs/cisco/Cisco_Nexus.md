@@ -5,15 +5,15 @@ permalink: /Cisco_Nexus/
 
 Cisco Nexus switchar är designade för datacenter. De kör NX-OS som
 bygger på en nedbantad variant av Linux kernel. De har stöd för tekniker
-som [FabricPath](/Nexus_FabricPath "wikilink") och
-[vPC](/Nexus_vPC "wikilink") och går att konfigurera med CLI
+som [FabricPath](Nexus_FabricPath.md) och
+[vPC](Nexus_vPC.md) och går att konfigurera med CLI
 (SSH/console) eller XML baserat på NETCONF. För virtuell instans se
-[Nexus VDC](/Nexus_VDC "wikilink") och för virtuell switch se [Nexus
-1000V](/Nexus_1000V "wikilink") och Nexus 9000v (nedan).
+[Nexus VDC](Nexus_VDC.md) och för virtuell switch se [Nexus
+1000V](Nexus_1000V.md) och Nexus 9000v (nedan).
 
 ### Nexus 9000 Taxonomy
 
-[790px](/File:CiscoNexusTaxonomy.jpg "wikilink")
+[790px](File:CiscoNexusTaxonomy.jpg)
 
 Konfiguration
 -------------
@@ -83,7 +83,7 @@ cli alias name changeto switchto vdc
 Detta gäller för L2 interface. Vill man vara någorlunda granulär kan man
 köra jumbo frames per vlan. Show interface visar inte rätt eftersom
 Nexus 5k inte har stöd för per interface MTU utan man får använda show
-queuing. Se även [QoS](/Cisco_QoS#NX-OS "wikilink") för NX-OS för mer
+queuing. Se även [QoS](Cisco_QoS.md#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS#NX-OS) för NX-OS för mer
 info.
 
 ```
@@ -301,7 +301,7 @@ tac-pac bootflash:$(SWITCHNAME)-$(TIMESTAMP)-show-tech-all.gz
 
 PTP är ett time synchronization protocol för noder i ett nätverk.
 Hardware timestamps används för att ge bättre noggrannhet än andra
-protokoll som t.ex. [NTP](/Cisco_Services#NTP "wikilink"). PTP är ett
+protokoll som t.ex. [NTP](Cisco_Services.md#NTP#NTP#NTP#NTP#NTP#NTP#NTP#NTP). PTP är ett
 distribuerat protokoll och ett PTP-system kan bestå av en kombination av
 PTP och icke-PTP devices. Ordinary clocks organiseras i en master-slave
 synchronization hierarki med en grandmaster clock på toppen som
@@ -385,8 +385,8 @@ en annan port på samma FEX.
 
 FEXar har INTE stöd för:
 
--   [STP](/Cisco_STP "wikilink"), (BPDUGuard enabled by default)
--   [VTP](/Cisco_VTP "wikilink")
+-   [STP](Cisco_STP.md), (BPDUGuard enabled by default)
+-   [VTP](Cisco_VTP.md)
 -   QinQ
 -   CDP, (Upplänkar undantag)
 
@@ -394,7 +394,7 @@ FEXar har INTE stöd för:
 Man kan koppla in FEXar single homed eller dual homed beroende på om det
 som ska ansluta till FEXarna ska vara single eller dual homed.
 
-[600px](/File:Cisco_Nexus_FEX.PNG "wikilink")
+[600px](File:Cisco_Nexus_FEX.PNG)
 
 **Konfiguration**
 Notera att dual-homed FEXes måste ha identisk konfiguration, dvs
@@ -608,7 +608,7 @@ Nexus 9000v
 
 Nexus 9000v Switch är en virtuell maskin som man kan använda för att
 testa NX-OS features. Nexus 9000v funkar t.ex. i
-[EVE-NG](/EVE-NG "wikilink"). Dock funkar inte alla features, t.ex. QoS,
+[EVE-NG](../linux_virt/EVE-NG.md). Dock funkar inte alla features, t.ex. QoS,
 BFD, Storm-control, FCoE och MACsec.
 
 Man måste lägga in i startup-config vilken image switchen ska boota

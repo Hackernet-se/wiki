@@ -6,7 +6,7 @@ permalink: /Cisco_FCoE/
 Fibre Channel over Ethernet är en teknik för att enkapsulera Fibre
 Channel frames över lossless Ethernet. FCoE fungerar som vanlig FC men
 FC0 och FC1 görs av ethernet istället. Se även [Cisco
-FC](/Cisco_FC "wikilink"). Genom att konsolidera nätverk och storage
+FC](Cisco_FC.md). Genom att konsolidera nätverk och storage
 behövs inte lika mycket kablage i datacentret. Servrar som ska nyttja
 FCoE behöver converged network adapters dvs de har fysiska
 ethernet-portar men de innehåller funktionsmässigt både HBA och NIC.

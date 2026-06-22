@@ -93,7 +93,7 @@ int gi2
  snmp trap ip verify drop-rate
 ```
 
-Det går att skicka traps med [Syslog](/Cisco_Logging "wikilink"). Först
+Det går att skicka traps med [Syslog](Cisco_Logging.md). Först
 skickas det lokalt till en speciell history buffer och sedan replikerar
 SNMP agenten det till traps.
 

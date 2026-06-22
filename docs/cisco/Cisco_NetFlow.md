@@ -11,14 +11,14 @@ MPLS. Samt att v5-paket har ett fixerat paketformat. Paket för version 9
 kan se olika ut och man kan ändra det med templates. Det finns även
 IETF-standard,
 [IPFIX](https://en.wikipedia.org/wiki/IP_Flow_Information_Export). Se
-även [Cisco SPAN](/Cisco_SPAN "wikilink").
+även [Cisco SPAN](Cisco_SPAN.md).
 
 Komponenter:
 
 -   Flow exporter, t.ex. en router
--   Flow collector, t.ex. [Pmacct](/Pmacct "wikilink")
--   Analysis application, t.ex. [Ntopng](/Ntopng "wikilink"),
-    [FastNetMon](/FastNetMon "wikilink")
+-   Flow collector, t.ex. [Pmacct](../linux_services/Pmacct.md)
+-   Analysis application, t.ex. [Ntopng](../linux_services/Ntopng.md),
+    [FastNetMon](../linux_services/FastNetMon.md)
 
 ### Paket
 

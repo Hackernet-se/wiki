@@ -37,7 +37,7 @@ maskiner. Det behövs ett konto för att logga in på webguit.
 nipap-passwd add --user user1 --password mypasswort --name "the man"
 ```
 
-### [Apache](/Apache "wikilink")
+### [Apache](Apache.md)
 
 ```
 apt-get -y install apache2 && apt-get -y install libapache2-mod-wsgi
@@ -92,7 +92,7 @@ rw_group = cn=nipap,dc=hackernet,dc=se
 ```
 
 Skapa sedan en grupp som heter nipap och som har stöd för
-[memberOf](/OpenLDAP#memberOf "wikilink"). Användare i denna gruppen får
+[memberOf](OpenLDAP.md#memberOf#memberOf#memberOf#memberOf#memberOf#memberOf#memberOf#memberOf). Användare i denna gruppen får
 read/write rättigheter.
 
 CLI

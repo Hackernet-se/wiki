@@ -6,13 +6,13 @@ permalink: /Fedora/
 Fedora är en RPM-baserad linuxdistribution främst utvecklad av Red Hat.
 Hela distributionen är fri programvara och används som en bas (läs PoC)
 för den kommersiella distributionen Red Hat Enterprise Linux.
-Kickstartfil: [Fedora](/Kickstart_Fedora "wikilink").
+Kickstartfil: [Fedora](../linux_kickstart/Kickstart_Fedora.md).
 
 Pakethanterare
 --------------
 
-Se [Yum](/Yum "wikilink")
-Se [DNF](/DNF "wikilink")
+Se [Yum](Yum)
+Se [DNF](../linux_tools/DNF.md)
 
 Network
 -------

@@ -3,9 +3,9 @@ title: Cisco L3 Security
 permalink: /Cisco_L3_Security/
 ---
 
-Huvudartikel: [Cisco Security](/Cisco_Security "wikilink")
+Huvudartikel: [Cisco Security](Cisco_Security.md)
 
-Se även [Cisco L2 Security](/Cisco_L2_Security "wikilink").
+Se även [Cisco L2 Security](Cisco_L2_Security.md).
 
 ### Routing
 
@@ -163,13 +163,13 @@ ZFW
 
 Zone-based policy firewall är stateful packet inspection som är en
 vidareutveckling av CBAC. Det är
-[VRF](/Cisco_Routing#VRF "wikilink")-aware och man skapar zoner som man
+[VRF](Cisco_Routing.md#VRF#VRF#VRF#VRF#VRF#VRF#VRF#VRF)-aware och man skapar zoner som man
 binder ett eller flera interface till. Default skapas det en "self"-zon
 som allt till och från tillåts samt att trafik mellan interface i samma
 zon tillåts. Konfigurationssyntaxen som används kallas Cisco Policy
 Language. ZFW kan inte inspektera
-[multicast](/Cisco_Multicast "wikilink") eller
-[MPLS](/Cisco_MPLS "wikilink")-trafik men det går att att köra ZFW i
+[multicast](Cisco_Multicast.md) eller
+[MPLS](Cisco_MPLS.md)-trafik men det går att att köra ZFW i
 transparent mode samt att man kan policea trafiken.
 
 ```
@@ -257,7 +257,7 @@ Unicast Reverse Path Forwarding är en mekanism som förhindrar spoofing
 attacks. Source-adressen på paket som kommer in kollas och jämförs mot
 den egna FIB:en för att säkerställa att paketen kommer in på det
 interface som routern själv hade använt för att nå den adressen.
-[CEF](/Cisco_CEF "wikilink") är därför ett prereq för uRPF. uRPF finns i
+[CEF](Cisco_CEF.md) är därför ett prereq för uRPF. uRPF finns i
 två modes och tar hänsyn till equal och unequal cost load sharing. Om
 default-routen också ska användas vid kontrollen måste **allow-default**
 sättas efter interface-kommandot.
@@ -301,7 +301,7 @@ IPSG
 
 IP Source Guard hjälper till att skydda mot IP spoofing. Det
 konfigureras på access-lagret och använder sig av [DHCP
-Snooping](/Cisco_DHCP#Snooping "wikilink")-databasen för att dynamiskt
+Snooping](Cisco_DHCP.md#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping#Snooping)-databasen för att dynamiskt
 skapa IP/MAC ACL:er per switchport och allt som inte träffar ACL:en
 droppas silently. Det enda som tillåts är paket med den source som
 matchar den DHCP snooping binding som finns för porten. Man kan också

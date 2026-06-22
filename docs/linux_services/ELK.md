@@ -89,4 +89,4 @@ sudo service nginx restart
 <http://IP>
 
 **Logstash**
-Se [Logstash](/Logstash "wikilink")
+Se [Logstash](Logstash.md)

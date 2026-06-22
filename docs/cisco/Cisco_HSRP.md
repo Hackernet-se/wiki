@@ -15,8 +15,8 @@ Den router med högst prioritet blir aktiv, 100 är default för IOS, och
 vid lika avgör högsta interface IP-adress. Preempt är inte påslaget
 default. Autentisering går att göra med clear-text eller MD5.
 
-HSRP går att använda tillsammans med [NAT](/Cisco_NAT#HSRP "wikilink").
-Se även [FHRP](/Cisco_FHRP "wikilink").
+HSRP går att använda tillsammans med [NAT](Cisco_NAT.md#HSRP#HSRP#HSRP#HSRP#HSRP#HSRP#HSRP#HSRP).
+Se även [FHRP](Cisco_FHRP.md).
 
 ### Version
 
@@ -56,7 +56,7 @@ Packets
 
 
 
-[<File:Cisco_HSRP_Advertise.png>‎](/File:Cisco_HSRP_Advertise.png‎ "wikilink")
+[<File:Cisco_HSRP_Advertise.png>‎](File:Cisco_HSRP_Advertise.png‎)
 
 
 
@@ -66,7 +66,7 @@ Packets
 
 
 
-[<File:Cisco_HSRP_Speak.png>‎](/File:Cisco_HSRP_Speak.png‎ "wikilink")
+[<File:Cisco_HSRP_Speak.png>‎](File:Cisco_HSRP_Speak.png‎)
 
 
 
@@ -76,7 +76,7 @@ Packets
 
 
 
-[<File:Cisco_HSRP_Standby.png>‎](/File:Cisco_HSRP_Standby.png‎ "wikilink")
+[<File:Cisco_HSRP_Standby.png>‎](File:Cisco_HSRP_Standby.png‎)
 
 
 
@@ -86,7 +86,7 @@ Packets
 
 
 
-[<File:Cisco_HSRP_Active.png>‎](/File:Cisco_HSRP_Active.png‎ "wikilink")
+[<File:Cisco_HSRP_Active.png>‎](File:Cisco_HSRP_Active.png‎)
 
 
 
@@ -99,7 +99,7 @@ Packets
 
 
 
-[<File:Cisco_HSRP_v2_Advertise.png>‎](/File:Cisco_HSRP_v2_Advertise.png‎ "wikilink")
+[<File:Cisco_HSRP_v2_Advertise.png>‎](File:Cisco_HSRP_v2_Advertise.png‎)
 
 
 
@@ -109,7 +109,7 @@ Packets
 
 
 
-[<File:Cisco_HSRP_v2_Speak.png>‎](/File:Cisco_HSRP_v2_Speak.png‎ "wikilink")
+[<File:Cisco_HSRP_v2_Speak.png>‎](File:Cisco_HSRP_v2_Speak.png‎)
 
 
 
@@ -119,7 +119,7 @@ Packets
 
 
 
-[<File:Cisco_HSRP_v2_Standby.png>‎](/File:Cisco_HSRP_v2_Standby.png‎ "wikilink")
+[<File:Cisco_HSRP_v2_Standby.png>‎](File:Cisco_HSRP_v2_Standby.png‎)
 
 
 
@@ -129,7 +129,7 @@ Packets
 
 
 
-[<File:Cisco_HSRP_v2_Active.png>‎](/File:Cisco_HSRP_v2_Active.png‎ "wikilink")
+[<File:Cisco_HSRP_v2_Active.png>‎](File:Cisco_HSRP_v2_Active.png‎)
 
 
 
@@ -140,7 +140,7 @@ vid preemption.
 
 
 
-[<File:Cisco_HSRP_v2_Coup.png>‎](/File:Cisco_HSRP_v2_Coup.png‎ "wikilink")
+[<File:Cisco_HSRP_v2_Coup.png>‎](File:Cisco_HSRP_v2_Coup.png‎)
 
 
 
@@ -151,7 +151,7 @@ message så att standby kan bli active direkt.
 
 
 
-[<File:Cisco_HSRP_v2_Resign.png>‎](/File:Cisco_HSRP_v2_Resign.png‎ "wikilink")
+[<File:Cisco_HSRP_v2_Resign.png>‎](File:Cisco_HSRP_v2_Resign.png‎)
 
 
 
@@ -245,7 +245,7 @@ show standby | i Track
 ```
 
 **IP SLA**
-Allt som går att tracka med [IP SLA](/Cisco_Routing#IP_SLA "wikilink")
+Allt som går att tracka med [IP SLA](Cisco_Routing.md#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA)
 kan HSRP använda sig av. Man kan även ha flera objekt som man trackar
 och med decrement valus styra att flera saker måste vara nere för att
 aktiv enhet ska bytas.
@@ -270,7 +270,7 @@ interface gi2
 BFD
 ---
 
-HSRP [BFD](/Cisco_BFD "wikilink")
+HSRP [BFD](Cisco_BFD.md)
 
 Global
 
@@ -294,7 +294,7 @@ kan inte alla hostar i subnätet ha samma default gateway utan några
 måste använda den ena virtuella IPn och några mot en för en annan
 HSRP-grupp, dock fortfarande i samma subnät. På Nexus-plattformen går
 det att lösa så att alla enheter är aktiva för samma VIP, se [Anycast
-HSRP](/Nexus_FabricPath#Anycast_HSRP "wikilink").
+HSRP](Nexus_FabricPath.md#Anycast_HSRP#Anycast_HSRP#Anycast_HSRP#Anycast_HSRP#Anycast_HSRP#Anycast_HSRP#Anycast_HSRP#Anycast_HSRP).
 
 NX-OS
 -----

@@ -10,13 +10,13 @@ time, path availability och traffic load distribution för att fatta
 beslut. Det PfR också tar hänsyn till är application type och
 application performance requirements. PfR kan klassificera trafik
 utifrån IP-adresser, protokoll, portnummer, DSCP och i nyare versioner
-av IOS även [NBAR](/Cisco_QoS#NBAR "wikilink"). Man behöver en Master
+av IOS även [NBAR](Cisco_QoS.md#NBAR#NBAR#NBAR#NBAR#NBAR#NBAR#NBAR#NBAR). Man behöver en Master
 Controller (som fattar besluten) och en eller flera Border Routers.
 Authentication är inbyggt för all kommunikation till och från MC och man
 måste använda sig av key-chains (t.o.m. om MC och BR finns på samma
 router). Kommunikation mellan MC och BR görs med TCP och performance
-metrics samlas med [NetFlow](/Cisco_NetFlow "wikilink") and [IP
-SLA](/Cisco_Routing#IP_SLA "wikilink") probes som konfigureras
+metrics samlas med [NetFlow](Cisco_NetFlow.md) and [IP
+SLA](Cisco_Routing.md#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA#IP_SLA) probes som konfigureras
 automatiskt. PfR route-maps sätts på Internal Interface och för att
 dynamiska route-maps ska fungera krävs L3-konnektivitet mellan BRs
 annars möts inte PfR's PBR requirement och dynamiska route-maps fungerar

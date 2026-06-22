@@ -34,7 +34,7 @@ Installation
 ------------
 
 För att installera Owncloud krävs en webbserver med PHP och
-[MySQL](/MySQL "wikilink") förkonfat. Man kan använda sig av MariaDB,
+[MySQL](MySQL.md) förkonfat. Man kan använda sig av MariaDB,
 SQLite och PostgreSQL också.
 
 Gå till <https://owncloud.org/install/#instructions-server> för att få
