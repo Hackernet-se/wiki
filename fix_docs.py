@@ -5,6 +5,8 @@ def process_content(content):
     # 1. Fix image links
     # [<File:Cisco_BGP_Open.PNG>](/File:Cisco_BGP_Open.PNG "wikilink") -> ![Cisco_BGP_Open.PNG](../images/Cisco_BGP_Open.PNG)
     content = re.sub(r'\[<File:([^>]+)>\]\(/File:[^>]+ "wikilink"\)', r'![\1](../images/\1)', content)
+    # Fix relative img/ links to ../images/
+    content = re.sub(r'\(img/([^)]+)\)', r'(../images/\1)', content)
 
     # 2. Remove Category links
     # [Category:Cisco](/Category:Cisco "wikilink") -> 

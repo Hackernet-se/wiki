@@ -47,9 +47,9 @@ Core tree types. Ciscos namn kontra RFC:
 -   Data MDT = Selective PMSI
 -   Partitioned MDT = Multi-directional selective PMSI
 
-![Cisco_mLDP.PNG](img/Cisco_mLDP.PNG)
+![Cisco_mLDP.PNG](../images/Cisco_mLDP.PNG)
 
-![Cisco_MVPN_in-band.PNG](img/Cisco_MVPN_in-band.PNG)
+![Cisco_MVPN_in-band.PNG](../images/Cisco_MVPN_in-band.PNG)
 
 IOS
 ---
@@ -149,4 +149,4 @@ IOS-XR
 mpls ldp mldp address-family ipv4 recursive-fec
 ```
 
-![Cisco_MPLS_Seamless.PNG](img/Cisco_MPLS_Seamless.PNG)
+![Cisco_MPLS_Seamless.PNG](../images/Cisco_MPLS_Seamless.PNG)
